@@ -9,6 +9,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="CharSheet">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
 <script>
 if('serviceWorker' in navigator){
   window.addEventListener('load',function(){
@@ -75,10 +77,9 @@ async function saveToFile(){
   var json=JSON.stringify(parsed);
   var fileName=getFileName(parsed);
 
-  // Chrome/Edge: File System Access API
-  if(window.showSaveFilePicker){
+  // Chrome/Edge desktop: File System Access API
+  if(window.showSaveFilePicker&&!isWebView()){
     try{
-      // If we have a handle already, use it directly (like Word's Ctrl+S)
       var handle=__fileHandle;
       if(!handle){
         handle=await window.showSaveFilePicker({
@@ -93,45 +94,74 @@ async function saveToFile(){
       ss('Saved to '+handle.name);
       return;
     }catch(e){
-      if(e.name==='AbortError') return; // user cancelled
-      // If handle is stale (file moved/deleted), clear it and retry with picker
-      if(__fileHandle){
-        __fileHandle=null;
-        saveToFile();
-        return;
-      }
-      // Fall through to legacy download
+      if(e.name==='AbortError') return;
+      if(__fileHandle){__fileHandle=null;saveToFile();return;}
     }
   }
 
-  // Safari / Firefox fallback: classic download
-  var b=new Blob([json],{type:'application/json'});
-  var u=URL.createObjectURL(b);
+  // Android Share API (works in WebView apps and Chrome Android)
+  var blob=new Blob([json],{type:'application/json'});
+  if(navigator.share&&navigator.canShare&&navigator.canShare({files:[new File([blob],fileName,{type:'application/json'})]})){
+    try{
+      await navigator.share({
+        files:[new File([blob],fileName,{type:'application/json'})],
+        title:fileName,
+      });
+      ss('Shared!');
+      return;
+    }catch(e){
+      if(e.name==='AbortError') return;
+    }
+  }
+
+  // Fallback: open JSON in new tab so user can save manually
+  var u=URL.createObjectURL(blob);
   var a=document.createElement('a');
-  a.href=u; a.download=fileName; a.click(); URL.revokeObjectURL(u);
+  a.href=u;a.download=fileName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(u);},1000);
   ss('Downloaded!');
+}
+
+function isWebView(){
+  var ua=navigator.userAgent||'';
+  return /wv\b/.test(ua)||/Android.*Version\/[\d.]+.*Chrome\/[\d.]+ Mobile/.test(ua);
 }
 function loadFromFile(e){
   var f=e.target.files[0];if(!f)return;
   __fileHandle=null;
-  if(f.size===0){alert('File appears to be empty (0 bytes). Try moving it to Downloads and loading from there.');e.target.value='';return;}
+  if(f.size===0){
+    // Some Android browsers report 0 before the file is ready — try anyway
+    // alert('File appears to be empty (0 bytes). Try moving it to Downloads and loading from there.');
+    // e.target.value='';return;
+  }
   var r=new FileReader();
   r.onload=function(ev){
-    var text=ev.target.result;
-    if(!text||text.length===0){alert('File was read but contained no data. Please try again.');return;}
+    var result=ev.target.result;
+    var text;
+    // Handle both ArrayBuffer and string results
+    if(result instanceof ArrayBuffer){
+      try{text=new TextDecoder('utf-8').decode(result);}
+      catch(de){text=String.fromCharCode.apply(null,new Uint8Array(result));}
+    } else {
+      text=result;
+    }
+    if(!text||text.length===0){
+      alert('File was read but contained no data (size reported: '+f.size+' bytes). Please try again.');
+      return;
+    }
     var parsed;
     try{parsed=JSON.parse(text);}
     catch(err){alert('Could not parse file: '+err.message+'\n\nFile size read: '+text.length+' chars');e.target.value='';return;}
-    // Store portrait separately to avoid quota issues
     if(parsed.portrait&&parsed.portrait.length>100){
       try{localStorage.setItem(LS+'_portrait',parsed.portrait);}catch(pe){}
       parsed.portrait='__stored_separately__';
     }
-    // Try localStorage, fall back to in-memory only
     var saved=false;
     try{localStorage.setItem(LS,JSON.stringify(parsed));saved=true;}catch(se){}
     if(!saved){
-      // localStorage full or blocked — load directly into memory
       window.__characterLoad=function(){return parsed;};
       ss('Loaded (no local save) - reloading...');
       setTimeout(function(){location.reload();},500);
@@ -140,8 +170,10 @@ function loadFromFile(e){
     ss('Loaded - reloading...');
     setTimeout(function(){location.reload();},500);
   };
-  r.onerror=function(){alert('Error reading file. Please try again.');};
-  r.readAsText(f);
+  r.onerror=function(){alert('FileReader error: '+r.error+'\nFile size: '+f.size);};
+  // Try ArrayBuffer first — more reliable on Android
+  try{r.readAsArrayBuffer(f);}
+  catch(e2){r.readAsText(f);}
   e.target.value='';
 }
 function newCharacter(){
