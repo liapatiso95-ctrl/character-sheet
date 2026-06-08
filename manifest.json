@@ -1,0 +1,24 @@
+{
+  "name": "D&D Character Sheet",
+  "short_name": "CharSheet",
+  "description": "A D&D 5e character sheet app",
+  "start_url": "./character_sheet.html",
+  "display": "standalone",
+  "background_color": "#0e0a05",
+  "theme_color": "#0e0a05",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
