@@ -76,8 +76,9 @@ async function saveToFile(){
   if(!parsed) return;
   var json=JSON.stringify(parsed);
   var fileName=getFileName(parsed);
+  var blob=new Blob([json],{type:'application/json'});
 
-  // Chrome/Edge desktop: File System Access API
+  // Chrome/Edge desktop: File System Access API (folder picker, overwrite prompt)
   if(window.showSaveFilePicker&&!isWebView()){
     try{
       var handle=__fileHandle;
@@ -94,30 +95,29 @@ async function saveToFile(){
       ss('Saved to '+handle.name);
       return;
     }catch(e){
-      if(e.name==='AbortError') return;
-      if(__fileHandle){__fileHandle=null;saveToFile();return;}
+      if(e.name==='AbortError') return; // user cancelled picker
+      if(__fileHandle){__fileHandle=null;saveToFile();return;} // stale handle, retry
+      // fall through to share/download
     }
   }
 
-  // Android Share API (works in WebView apps and Chrome Android)
-  var blob=new Blob([json],{type:'application/json'});
-  if(navigator.share&&navigator.canShare&&navigator.canShare({files:[new File([blob],fileName,{type:'application/json'})]})){
+  // iOS Safari + Android Chrome/WebView: Web Share API with file
+  var shareFile=new File([blob],fileName,{type:'application/json'});
+  if(navigator.share&&navigator.canShare&&navigator.canShare({files:[shareFile]})){
     try{
-      await navigator.share({
-        files:[new File([blob],fileName,{type:'application/json'})],
-        title:fileName,
-      });
-      ss('Shared!');
+      await navigator.share({files:[shareFile],title:fileName});
+      ss('Saved!');
       return;
     }catch(e){
-      if(e.name==='AbortError') return;
+      if(e.name==='AbortError'||e.name==='NotAllowedError') return; // user cancelled
+      // share failed for other reason — fall through to download
     }
   }
 
-  // Fallback: open JSON in new tab so user can save manually
+  // Firefox, desktop Safari, fallback: classic <a download>
   var u=URL.createObjectURL(blob);
   var a=document.createElement('a');
-  a.href=u;a.download=fileName;
+  a.href=u; a.download=fileName;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
