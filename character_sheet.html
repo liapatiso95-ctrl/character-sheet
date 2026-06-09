@@ -1933,7 +1933,24 @@ function Page2({c,s}){
 
 
   // Drag handlers
-  const onDragStart=(src,idx)=>setDrag({src,idx});
+  const onDragStart=(src,idx)=>{
+    setDrag({src,idx});
+    if(window.__dragScrollRAF) cancelAnimationFrame(window.__dragScrollRAF);
+    window.__dragScrollActive=true;
+    window.__dragScrollY=0;
+    const trackY=(e)=>{window.__dragScrollY=e.clientY;};
+    window.addEventListener('dragover',trackY);
+    window.__dragScrollTracker=trackY;
+    const zone=80,maxSpeed=18;
+    function loop(){
+      if(!window.__dragScrollActive) return;
+      const my=window.__dragScrollY||0,wh=window.innerHeight;
+      if(my<zone) window.scrollBy(0,-Math.round(maxSpeed*(1-my/zone)));
+      else if(my>wh-zone) window.scrollBy(0,Math.round(maxSpeed*(1-(wh-my)/zone)));
+      window.__dragScrollRAF=requestAnimationFrame(loop);
+    }
+    window.__dragScrollRAF=requestAnimationFrame(loop);
+  };
   const getCoinPouch=(src)=>{
     if(src==="on_person") return c.cur||{};
     if(src&&src.startsWith("bag_")){const bid=src.slice(4);const bag=bags.find(b=>b.id===bid);return bag?(bag.cur||{}):{};} 
@@ -1946,7 +1963,12 @@ function Page2({c,s}){
     e.dataTransfer.effectAllowed="move";
     setDrag({src,idx:-1,isCoin:true,pouch});
   };
-  const onDragEnd=()=>{setSplitDragModal(prev=>{if(!prev){setDrag(null);}return prev;});setDragOver(null);};
+  const onDragEnd=()=>{
+    window.__dragScrollActive=false;
+    if(window.__dragScrollRAF){cancelAnimationFrame(window.__dragScrollRAF);window.__dragScrollRAF=null;}
+    if(window.__dragScrollTracker){window.removeEventListener('dragover',window.__dragScrollTracker);window.__dragScrollTracker=null;}
+    setSplitDragModal(prev=>{if(!prev){setDrag(null);}return prev;});setDragOver(null);
+  };
 
   // Helper: get item and source list from a drag source key
   const getItemFromSrc=(src,idx)=>{
