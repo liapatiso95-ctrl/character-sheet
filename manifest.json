@@ -1,6 +1,6 @@
 {
-  "name": "D&D Character Sheet",
-  "short_name": "CharSheet",
+  "name": "D&D 5e Character Record",
+  "short_name": "Character Sheet",
   "description": "A D&D 5e character sheet app",
   "start_url": "./character_sheet.html",
   "display": "standalone",
