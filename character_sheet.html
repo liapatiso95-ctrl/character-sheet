@@ -2337,7 +2337,7 @@ function Page2({c,s}){
             {sortItems(c.inv,invSort).map(({item:it,i})=>(
               [
                 <tr key={i+"a"} draggable onDragStart={()=>onDragStart("inv",i)} onDragEnd={onDragEnd} style={rowStyle(drag&&drag.src==="inv"&&drag.idx===i)}>
-                  <td style={{textAlign:"center",cursor:bags.length>0?"grab":"default",color:"rgba(184,154,240,.3)",fontSize:12}}>{bags.length>0?"::":""}</td>
+                  <td style={{textAlign:"center",cursor:"grab",color:"rgba(184,154,240,.3)",fontSize:12}}>::</td>
                   <td style={{textAlign:"center"}}>
                     <div className={"tog tog-eq"+(it.eq?" on":"")} onClick={()=>ui("inv",i,"eq",!it.eq)} title="Equipped" />
                   </td>
