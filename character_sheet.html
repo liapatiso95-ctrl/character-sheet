@@ -1208,15 +1208,19 @@ function Page1({c,s}){
             {(()=>{
               const base=parseInt(c.spdBase||30)||30;
               const bon=parseInt(c.spdBon||0)||0;
-              // Encumbrance speed penalty (mirrors Page2 logic)
               const str=parseInt(c.statsBase&&c.statsBase.STR)||0;
               const carryMult2=parseFloat(c.carryMult)||1;
               const carryFlat2=parseFloat(c.carryBonus)||0;
-              const invW=(c.inv||[]).filter(function(it){return !it.wl&&!it.eq2;}).reduce(function(t,it){return t+(parseFloat(it.wt)||0)*(parseFloat(it.qt)||1);},0);
+              // Total weight: main inv + attuned + bags + coins
+              const invW=(c.inv||[]).reduce(function(t,it){return t+(!it.wl?(parseFloat(it.wt)||0)*(parseFloat(it.qt)||1):0);},0);
+              const attW=(c.attuned_inv||[]).reduce(function(t,it){return t+(!it.wl?(parseFloat(it.wt)||0)*(parseFloat(it.qt)||1):0);},0);
+              const bagW=(c.bags||[]).reduce(function(t,b){return t+(b.inv||[]).reduce(function(t2,it){return t2+(!it.wl?(parseFloat(it.wt)||0)*(parseFloat(it.qt)||1):0);},0);},0);
+              const coinW=Object.values(c.cur||{}).reduce(function(t,v){return t+(parseFloat(v)||0)/50;},0);
+              const totalW=invW+attW+bagW+coinW;
               const enc1=(str*5+carryFlat2)*carryMult2;
               const enc2=(str*10+carryFlat2)*carryMult2;
               const cap2=(str*15+carryFlat2)*carryMult2;
-              const encPen2=invW>=cap2?"overcap":invW>=enc2?-20:invW>=enc1?-10:0;
+              const encPen2=totalW>=cap2?"overcap":totalW>=enc2?-20:totalW>=enc1?-10:0;
               const total=encPen2==="overcap"?Math.max(0,5+exhSpeedPen):Math.max(0,base+bon+exhSpeedPen+encPen2);
               return total;
             })()}
@@ -5866,7 +5870,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.03</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.031</div>
 
 </script>
 </body>
