@@ -4132,6 +4132,12 @@ function ExploitPage({c,s}){
               <span style={{fontFamily:"'Cinzel Decorative',serif",fontSize:16,color:col,width:28,textAlign:"center",flexShrink:0}}>{deg}</span>
               <span style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,color:col,opacity:.85,textTransform:"uppercase"}}>{degNames[""+deg]}</span>
               <span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.3)",fontStyle:"italic",letterSpacing:0,textTransform:"none",marginLeft:4}}>{degNotes[""+deg]}</span>
+              <div style={{marginLeft:"auto",display:"flex",gap:4}}>
+                <div onClick={function(){const expl2=c.expl[deg]||[];s("expl",{...c.expl,[deg]:expl2.map(function(x){return {...x,showDesc:true};})});}}
+                  style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Expand all">+</div>
+                <div onClick={function(){const expl2=c.expl[deg]||[];s("expl",{...c.expl,[deg]:expl2.map(function(x){return {...x,showDesc:false};})});}}
+                  style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Collapse all">−</div>
+              </div>
             </div>
             {groups.map(function(group,gi){
               const cnt=group.exploits.length;
@@ -4148,23 +4154,32 @@ function ExploitPage({c,s}){
                       <SortableTh label="Exploit Name" col="nm" sort={exploitSorts[deg+"-"+gi]||null} onSort={(col)=>onExploitSort(deg,gi,col)} style={{width:"25%"}} />
                       <SortableTh label="Dice Cost" col="uses" sort={exploitSorts[deg+"-"+gi]||null} onSort={(col)=>onExploitSort(deg,gi,col)} style={{width:"12%"}} />
                       {hasUsed&&<th style={{width:"4%",textAlign:"center"}} title="Used this rest">U</th>}
-                      <th>Description / Notes</th>
+                      <th>Notes</th>
+                      <th style={{width:"3%"}}></th>
                       <th style={{width:"3%"}}></th>
                     </tr></thead>
                     <tbody>
                       {sortItems(group.exploits.map(function(item){return {...item.ex,__i:item.i};}),exploitSorts[deg+"-"+gi]||null).map(function(sorted){
                         const ex=sorted.item; const i=sorted.item.__i;
-                        return (
-                          <tr key={i} style={{opacity:(hasUsed&&ex.used)?0.45:1,transition:"opacity .2s"}}>
+                        return [
+                          <tr key={i+"a"} style={{opacity:(hasUsed&&ex.used)?0.45:1,transition:"opacity .2s"}}>
                             <td><TipInput value={ex.nm||""} onChange={e=>ue(deg,i,"nm",e.target.value)} placeholder="Exploit name..." style={{width:"100%",background:"transparent",border:"none",color:col,fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px",fontWeight:600}} /></td>
                             <td><TipInput value={ex.uses||""} onChange={e=>ue(deg,i,"uses",e.target.value)} placeholder="1 die" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px"}} /></td>
                             {hasUsed&&<td style={{textAlign:"center"}}>
                               <div style={{width:14,height:14,borderRadius:2,border:"1px solid "+(ex.used?col:"rgba(201,74,42,.3)"),background:ex.used?col:"rgba(0,0,0,.35)",cursor:"pointer",display:"inline-block",transition:"all .15s"}} onClick={()=>ue(deg,i,"used",!ex.used)} title="Mark as used" />
                             </td>}
-                            <td><textarea value={ex.nt||""} onChange={e=>ue(deg,i,"nt",e.target.value)} placeholder="Describe what this exploit does..." rows={2} style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",resize:"vertical",minHeight:42,padding:"2px 4px"}} /></td>
+                            <td><TipInput value={ex.nt||""} onChange={e=>ue(deg,i,"nt",e.target.value)} placeholder="note..." style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px"}} /></td>
                             <td><button className="db" onClick={()=>window.__confirm("Delete this exploit?",()=>de(deg,i))}>x</button></td>
+                            <td><button onClick={()=>ue(deg,i,"showDesc",!ex.showDesc)}
+                              style={{background:"transparent",border:"none",color:ex.showDesc?"var(--arcane-l)":"rgba(184,154,240,.25)",cursor:"pointer",fontSize:12,padding:0,lineHeight:1,fontFamily:"'Cinzel',serif"}}>{ex.showDesc?"−":"+"}</button></td>
+                          </tr>,
+                          ex.showDesc&&<tr key={i+"b"} style={{borderBottom:"1px solid rgba(123,79,207,.1)"}}>
+                            <td colSpan={hasUsed?6:5} style={{padding:"2px 4px 6px"}}>
+                              <AutoTextarea value={ex.desc||""} onChange={e=>ue(deg,i,"desc",e.target.value)} placeholder="Describe what this exploit does..."
+                                style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 4px"}} />
+                            </td>
                           </tr>
-                        );
+                        ];
                       })}
                     </tbody>
                   </table></div>
@@ -5870,7 +5885,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.031</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.041</div>
 
 </script>
 </body>
