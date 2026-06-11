@@ -913,9 +913,28 @@ function Page1({c,s}){
   })();
   const iniBonVal=c.iniFormula?(parseInt((c.iniFormula.flat||"").replace("+",""))||0):0;
   const iniAblSum2=iniAblArrActual.reduce(function(t,a){return t+getStatMod(a);},0);
+  // Level component from formula (new lvlEntries array, legacy lvlType fallback)
+  const iniLvlSum=(()=>{
+    const f=c.iniFormula; if(!f) return 0;
+    const entries=f.lvlEntries&&f.lvlEntries.length>0?f.lvlEntries:(f.lvlType&&f.lvlType!=="none"?[{type:f.lvlType,cls:f.lvlClass||""}]:[]);
+    if(entries.length===0) return 0;
+    const totalLv=levelFromCls();
+    return entries.reduce(function(t,e){
+      var type=e.type||"none";
+      if(type==="total-full") return t+totalLv;
+      if(type==="total-half-down") return t+Math.floor(totalLv/2);
+      if(type==="total-half-up") return t+Math.ceil(totalLv/2);
+      var cl=allClasses.find(function(x){return x.nm===e.cls;});
+      var clLv=cl?parseInt(cl.lv)||0:0;
+      if(type==="class-full") return t+clLv;
+      if(type==="class-half-down") return t+Math.floor(clLv/2);
+      if(type==="class-half-up") return t+Math.ceil(clLv/2);
+      return t;
+    },0);
+  })();
   // halfProfChecks toggle only applies if initiative has no prof from any source
   const iniHalfProf=(c.halfProfChecks&&iniOwnProfBon===0&&!checkHasAnyProf("DEX"))?Math.floor(pb/2):0;
-  const iniTotal=iniAblSum2+iniBonVal+iniOwnProfBon+iniHalfProf+abilChkBon+dexAblBon+exhPenalty;
+  const iniTotal=iniAblSum2+iniBonVal+iniOwnProfBon+iniLvlSum+iniHalfProf+abilChkBon+dexAblBon+exhPenalty;
 
   const fmtN=n=>n>=0?"+"+n:""+n;
   const skAbil=(sk)=>c.skAbil&&c.skAbil[sk.n]?c.skAbil[sk.n]:sk.a;
@@ -1191,6 +1210,7 @@ function Page1({c,s}){
           <div style={{fontFamily:"'Cinzel',serif",fontSize:8,color:"rgba(184,154,240,.45)",marginTop:5,letterSpacing:0.5,textAlign:"center",minHeight:14}}>
             {iniAblArrActual.join("+")}
             {(()=>{var pr=c.iniFormula&&c.iniFormula.profs&&c.iniFormula.profs.length>0?c.iniFormula.profs:(c.iniFormula&&c.iniFormula.prof&&c.iniFormula.prof!=="none"?[c.iniFormula.prof]:[]);return pr.length>0?"+"+pr.map(function(p){return p==="full"?"PROF":p==="half-up"?"½↑P":"½↓P";}).join("+"):"";})()}
+            {iniLvlSum!==0?"+LVL("+iniLvlSum+")":""}
             {iniBonVal!==0?fmtN(iniBonVal):""}
           </div>
           <div className="cl">Initiative</div>
@@ -1698,12 +1718,16 @@ function Page1({c,s}){
             const atkProfBon=atkProfMode==="full"?pb:atkProfMode==="half"?Math.floor(pb/2):atkProfMode==="half-up"?Math.ceil(pb/2):0;
             const atkFlat=parseInt((w.atkFlat||"").replace("+",""))||0;
             const ablSum=atkAbls.reduce(function(t,a){return t+getStatMod(a);},0);
-            const atkTotal=atkProfBon+ablSum+atkFlat+exhPenalty;
+            // Full formula (incl. levels & stacked profs) takes precedence; legacy fields are the fallback
+            const atkFormulaBon=w.atkFormula?computeBonusFromFormula(w.atkFormula,c):null;
+            const atkTotal=(atkFormulaBon!==null?atkFormulaBon:atkProfBon+ablSum+atkFlat)+exhPenalty;
             const atkTotalStr=atkTotal>=0?"+"+atkTotal:""+atkTotal;
             const dmgAbls=Array.isArray(w.dmgAbls)?w.dmgAbls:[];
             const dmgAblSum=dmgAbls.reduce(function(t,a){return t+getStatMod(a);},0);
             const dmgProfMode=w.dmgProfMode||(w.dmgProf?"full":"none");
             const dmgProfBon=dmgProfMode==="full"?pb:dmgProfMode==="half"?Math.floor(pb/2):dmgProfMode==="half-up"?Math.ceil(pb/2):0;
+            const dmgFormulaBon=w.dmgFormula?computeBonusFromFormula(w.dmgFormula,c):null;
+            const dmgBonTotal=dmgFormulaBon!==null?dmgFormulaBon:dmgAblSum+dmgProfBon+(parseInt((w.dmgFlat||"").replace("+",""))||0);
             const atkIsOpen=wpnOpen&&wpnOpen.idx===i&&wpnOpen.mode==="atk";
             const dmgIsOpen=wpnOpen&&wpnOpen.idx===i&&wpnOpen.mode==="dmg";
             return (
@@ -1714,7 +1738,7 @@ function Page1({c,s}){
                     <div onClick={function(e){e.stopPropagation();setWpnOpen(atkIsOpen?null:{idx:i,mode:"atk"});}}
                       title="Click to configure attack bonus"
                       style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,
-                              color:atkAbls.length>0||atkProfMode!=="none"||atkFlat?"var(--gold-l)":"rgba(232,213,176,.3)",
+                              color:w.atkFormula||atkAbls.length>0||atkProfMode!=="none"||atkFlat?"var(--gold-l)":"rgba(232,213,176,.3)",
                               borderBottom:"1px solid rgba(201,150,42,.2)",padding:"1px 5px",minWidth:32,textAlign:"center"}}>
                       {atkTotalStr}
                     </div>
@@ -1729,17 +1753,15 @@ function Page1({c,s}){
                     <div onClick={function(e){e.stopPropagation();setWpnOpen(dmgIsOpen?null:{idx:i,mode:"dmg"});}}
                       title="Click to configure damage bonus"
                       style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:11,fontWeight:700,
-                              color:dmgAbls.length>0||dmgProfMode!=="none"||parseInt((w.dmgFlat||"").replace("+",""))?"var(--ember)":"rgba(232,213,176,.3)",
+                              color:w.dmgFormula||dmgAbls.length>0||dmgProfMode!=="none"||parseInt((w.dmgFlat||"").replace("+",""))?"var(--ember)":"rgba(232,213,176,.3)",
                               borderBottom:"1px solid rgba(201,74,42,.2)",padding:"1px 4px",minWidth:24,textAlign:"center"}}>
-                      {(()=>{const f=parseInt((w.dmgFlat||"").replace("+",""))||0;const t=dmgAblSum+dmgProfBon+f;return t>=0?"+"+t:""+t;})()}
+                      {dmgBonTotal>=0?"+"+dmgBonTotal:""+dmgBonTotal}
                     </div>
                     {/* Full damage display */}
                     {(()=>{
                       const base=w.dmgBase||w.dmg;
                       if(!base) return null;
-                      const f=parseInt((w.dmgFlat||"").replace("+",""))||0;
-                      const total=dmgAblSum+dmgProfBon+f;
-                      const totalStr=total!==0?(total>=0?"+"+total:""+total):"";
+                      const totalStr=dmgBonTotal!==0?(dmgBonTotal>=0?"+"+dmgBonTotal:""+dmgBonTotal):"";
                       return <span style={{fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"var(--ember)",marginLeft:2,flexShrink:0,lineHeight:1}}>{base+totalStr}</span>;
                     })()}
                   </div>
@@ -1757,20 +1779,29 @@ function Page1({c,s}){
       {wpnOpen&&(
         <FormulaModal c={c}
           initialFormula={(function(){
-            const w2=c.wpn[wpnOpen.idx];if(!w2)return {flat:"",abls:[],prof:"none",lvlType:"none",lvlClass:""};
+            const w2=c.wpn[wpnOpen.idx];if(!w2)return {flat:"",abls:[],profs:[],lvlEntries:[]};
             const isAtk=wpnOpen.mode==="atk";
+            // Prefer the stored full formula
+            const stored=isAtk?w2.atkFormula:w2.dmgFormula;
+            if(stored) return stored;
+            // Legacy fields fallback
             const abls=isAtk?(Array.isArray(w2.atkAbls)?w2.atkAbls:[]):(Array.isArray(w2.dmgAbls)?w2.dmgAbls:[]);
             const profMode=isAtk?(w2.atkProfMode||(w2.atkProf?"full":"none")):(w2.dmgProfMode||(w2.dmgProf?"full":"none"));
             const flat=isAtk?(w2.atkFlat||""):(w2.dmgFlat||"");
-            return {flat,abls,prof:profMode,lvlType:"none",lvlClass:""};
+            const profs=profMode!=="none"?[profMode]:[];
+            return {flat,abls,profs,lvlEntries:[]};
           })()}
           title={wpnOpen.mode==="atk"?"Attack Bonus":"Damage Bonus"}
           onApply={function(total,formula){
             const a=[...c.wpn];const w2={...a[wpnOpen.idx]};
+            // Keep legacy fields in sync for backward compat, store the full formula for levels/stacked profs
+            const firstProf=formula.profs&&formula.profs.length>0?formula.profs[0]:"none";
             if(wpnOpen.mode==="atk"){
-              w2.atkAbls=formula.abls;w2.atkProfMode=formula.profs&&formula.profs.length>0?formula.profs[0]:(formula.prof||"none");w2.atkProf=(formula.profs&&formula.profs.length>0)||(formula.prof&&formula.prof!=="none");w2.atkFlat=formula.flat;
+              w2.atkFormula=formula;
+              w2.atkAbls=formula.abls;w2.atkProfMode=firstProf;w2.atkProf=firstProf!=="none";w2.atkFlat=formula.flat;
             }else{
-              w2.dmgAbls=formula.abls;w2.dmgProfMode=formula.profs&&formula.profs.length>0?formula.profs[0]:(formula.prof||"none");w2.dmgProf=(formula.profs&&formula.profs.length>0)||(formula.prof&&formula.prof!=="none");w2.dmgFlat=formula.flat;
+              w2.dmgFormula=formula;
+              w2.dmgAbls=formula.abls;w2.dmgProfMode=firstProf;w2.dmgProf=firstProf!=="none";w2.dmgFlat=formula.flat;
             }
             a[wpnOpen.idx]=w2;s("wpn",a);setWpnOpen(null);
           }}
@@ -1778,8 +1809,10 @@ function Page1({c,s}){
           onClear={function(){
             const a=[...c.wpn];const w2={...a[wpnOpen.idx]};
             if(wpnOpen.mode==="atk"){
+              w2.atkFormula=null;
               w2.atkAbls=[];w2.atkProfMode="none";w2.atkProf=false;w2.atkFlat="";
             }else{
+              w2.dmgFormula=null;
               w2.dmgAbls=[];w2.dmgProfMode="none";w2.dmgProf=false;w2.dmgFlat="";
             }
             a[wpnOpen.idx]=w2;s("wpn",a);setWpnOpen(null);
@@ -2793,6 +2826,14 @@ function formulaHasProf(formula) {
   return formula.prof&&formula.prof!=="none";
 }
 
+// Short label(s) for prof component — handles both new profs[] and legacy prof
+function formulaProfLabel(formula) {
+  if(!formula) return "";
+  const lbl=function(p){return p==="full"?"PROF":p==="half-up"?"½↑PROF":p==="half"?"½↓PROF":"";};
+  if(formula.profs&&formula.profs.length>0) return formula.profs.map(lbl).filter(Boolean).join("+");
+  return lbl(formula.prof||"none");
+}
+
 // Kept for backward compat — returns total prof value (not used for stacking logic anymore)
 function formulaProfVal(formula, c) {
   if(!formula) return 0;
@@ -3270,8 +3311,30 @@ function LimitBlock({lim,idx,onChange,onDelete,isOnly,c}){
     const getMod2=function(abl){var base=parseInt((c.statsBase&&c.statsBase[abl])||c.stats[abl])||10;var bon=parseInt((c.statsBon&&c.statsBon[abl])||0)||0;return Math.floor((base+bon-10)/2);};
     const flat=parseInt((formula.flat||"").replace("+",""))||0;
     const ablSum=(formula.abls||[]).reduce(function(t,a){return t+getMod2(a);},0);
-    const profVal=formula.prof==="full"?pb2:formula.prof==="half"?Math.floor(pb2/2):formula.prof==="half-up"?Math.ceil(pb2/2):0;
-    const lvlVal=(function(){
+    // Support both new profs[] array and legacy prof string
+    const profSum=(function(){
+      if(formula.profs&&formula.profs.length>0){
+        return formula.profs.reduce(function(t,p){return t+(p==="full"?pb2:p==="half-up"?Math.ceil(pb2/2):p==="half"?Math.floor(pb2/2):0);},0);
+      }
+      var p=formula.prof||"none";
+      return p==="full"?pb2:p==="half-up"?Math.ceil(pb2/2):p==="half"?Math.floor(pb2/2):0;
+    })();
+    // Support both new lvlEntries[] array and legacy lvlType/lvlClass
+    const lvlSum=(function(){
+      if(formula.lvlEntries&&formula.lvlEntries.length>0){
+        return formula.lvlEntries.reduce(function(t,e){
+          var type=e.type||"none";
+          if(type==="total-full") return t+totalLv;
+          if(type==="total-half-down") return t+Math.floor(totalLv/2);
+          if(type==="total-half-up") return t+Math.ceil(totalLv/2);
+          var cl=allCls.find(function(x){return x.nm===e.cls;});
+          var clLv=cl?parseInt(cl.lv)||0:0;
+          if(type==="class-full") return t+clLv;
+          if(type==="class-half-down") return t+Math.floor(clLv/2);
+          if(type==="class-half-up") return t+Math.ceil(clLv/2);
+          return t;
+        },0);
+      }
       if(formula.lvlType==="total-full") return totalLv;
       if(formula.lvlType==="total-half-down") return Math.floor(totalLv/2);
       if(formula.lvlType==="total-half-up") return Math.ceil(totalLv/2);
@@ -3280,7 +3343,7 @@ function LimitBlock({lim,idx,onChange,onDelete,isOnly,c}){
       if(formula.lvlType==="class-half-up"){var cl3=allCls.find(function(x){return x.nm===formula.lvlClass;});return cl3?Math.ceil((parseInt(cl3.lv)||0)/2):0;}
       return 0;
     })();
-    return Math.max(1,flat+ablSum+profVal+lvlVal);
+    return Math.max(1,flat+ablSum+profSum+lvlSum);
   };
 
   const formulaResult=lim.usesFormula?computeFromFormula(lim.usesFormula):null;
@@ -3447,7 +3510,17 @@ function Page3({c,s}){
       })}
       <button className="arb" onClick={()=>s("feat",[...c.feat,{nm:"",src:"",ds:"",limited:false,limits:[{name:"",uses:"",exp:"",die:"NO",recharge:""}]}])}>+ Add Feature</button>
 
-      <div className="sh">Feats</div>
+      <div className="sh">Feats
+        {(function(){
+          var st=_featCache.status;
+          var col=st==="ready"?"rgba(74,156,92,.6)":st==="loading"?"rgba(201,150,42,.5)":"rgba(201,74,42,.5)";
+          var lbl=st==="ready"?"Feat compendium loaded":st==="loading"?"Loading feat compendium…":"Feat compendium unavailable — check feats.md in repo";
+          return <span title={lbl} style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:col,userSelect:"none",marginLeft:10,fontWeight:"normal",textTransform:"uppercase"}}>
+            <span style={{width:6,height:6,borderRadius:"50%",background:col,display:"inline-block",flexShrink:0}} />
+            Compendium
+          </span>;
+        })()}
+      </div>
       {(c.fts||[]).map((f,i)=>{
         const limited=!!f.limited;
         const limits=f.limits||[{name:"",uses:"",exp:"",die:"NO",recharge:""}];
@@ -3461,7 +3534,20 @@ function Page3({c,s}){
               <div style={{flex:1}}>
                 <div style={{display:"flex",gap:8,alignItems:"flex-end",marginBottom:4}}>
                   <div style={{flex:1}}>
-                    <input type="text" value={f.nm||""} onChange={e=>updFts(i,"nm",e.target.value)} placeholder="Feat name..." style={{width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.2)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:600,letterSpacing:1,outline:"none",padding:"2px 0 4px"}} />
+                    <FeatNameInput
+                      value={f.nm||""}
+                      onChange={e=>updFts(i,"nm",e.target.value)}
+                      placeholder="Feat name..."
+                      style={{width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.2)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:600,letterSpacing:1,outline:"none",padding:"2px 0 4px"}}
+                      onAutofill={function(feat){
+                        const a=[...c.fts];
+                        a[i]={...a[i],nm:feat.name,ds:feat.desc};
+                        s("fts",a);
+                        // Also open the description
+                        const nd={...(c.dsOpen||{}),["fts-"+i]:true};
+                        s("dsOpen",nd);
+                      }}
+                    />
                   </div>
                   <div style={{flexShrink:0}}>
                     <label className="fl" style={{fontSize:8}}>Level Gained</label>
@@ -3632,6 +3718,120 @@ function SpellNameInput({value, onChange, onAutofill, placeholder, style, spellL
                 <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"var(--gold-l)",fontWeight:600,flex:1}}>{sp.name}</span>
                 <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.6)",whiteSpace:"nowrap"}}>{sp.level===0?"Cantrip":"Lv "+sp.level}</span>
                 <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,color:"rgba(232,213,176,.35)",whiteSpace:"nowrap"}}>{sp.school}</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+// ──────────────────────────────────────────────────────────────────────────────
+
+// ─── Feat Compendium ──────────────────────────────────────────────────────────
+const FEAT_MD_URL="https://raw.githubusercontent.com/liapatiso95-ctrl/character-sheet/main/feats.md";
+const _featCache={data:null,status:"idle"};
+const _featListeners=[];
+function _notifyFeatListeners(){_featListeners.forEach(function(fn){fn();});}
+
+function parseFeatMarkdown(md){
+  var feats={};
+  var blocks=md.split(/^###\s+/m).slice(1);
+  blocks.forEach(function(block){
+    var lines=block.split("\n");
+    var name=(lines[0]||"").trim();
+    if(!name) return;
+    var descLines=[];
+    for(var li=1;li<lines.length;li++){
+      var ln=lines[li].trim();
+      if(!ln) continue;
+      // Skip layout artifacts
+      if(/^\\?(column|page)$/i.test(ln)||/^\{\{/.test(ln)) continue;
+      // Strip ***Prerequisites...*** markers but keep the text
+      var cleaned=ln.replace(/\*\*\*([^*]+)\*\*\*/g,"$1").replace(/\*\*([^*]+)\*\*/g,"$1").replace(/\*([^*]+)\*/g,"$1");
+      if(!cleaned) continue;
+      // Convert **Label.** text → - Label. text
+      var boldLabel=ln.match(/^\*\*([^*]+)\*\*\.?\s*(.*)$/);
+      if(boldLabel){
+        var label=boldLabel[1].replace(/\.$/,"").trim();
+        var rest=boldLabel[2].trim();
+        descLines.push("- "+label+". "+rest);
+      } else {
+        descLines.push(cleaned);
+      }
+    }
+    // Insert blank line before each "- " entry (except first)
+    var formatted=[];
+    descLines.forEach(function(ln2,idx){
+      if(ln2.startsWith("- ")&&idx>0&&!descLines[idx-1].startsWith("- ")&&descLines[idx-1]!==""){
+        formatted.push("");
+      }
+      formatted.push(ln2);
+    });
+    feats[name.toLowerCase()]={name,desc:formatted.join("\n").trim()};
+  });
+  return feats;
+}
+
+function useFeatCompendium(){
+  const [tick,setTick]=React.useState(0);
+  React.useEffect(function(){
+    function onUpdate(){setTick(function(t){return t+1;});}
+    _featListeners.push(onUpdate);
+    if(_featCache.status==="idle"){
+      _featCache.status="loading";
+      fetch(FEAT_MD_URL)
+        .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
+        .then(function(text){_featCache.data=parseFeatMarkdown(text);_featCache.status="ready";_notifyFeatListeners();})
+        .catch(function(){_featCache.status="error";_notifyFeatListeners();});
+    }
+    return function(){var idx=_featListeners.indexOf(onUpdate);if(idx>=0)_featListeners.splice(idx,1);};
+  },[]);
+  return _featCache;
+}
+
+function FeatNameInput({value, onChange, onAutofill, placeholder, style}){
+  const cache=useFeatCompendium();
+  const [open,setOpen]=React.useState(false);
+  const pickingRef=React.useRef(false);
+
+  var suggestions=[];
+  if(cache.status==="ready"&&cache.data&&(value||"").length>=2){
+    var q=(value||"").toLowerCase();
+    suggestions=Object.values(cache.data).filter(function(f){
+      return f.name.toLowerCase().includes(q);
+    }).slice(0,8);
+  }
+
+  function applyFeat(f){
+    pickingRef.current=false;
+    setOpen(false);
+    onAutofill(f);
+  }
+
+  return (
+    <div style={{position:"relative",display:"flex",alignItems:"center",width:"100%"}}>
+      <input
+        value={value||""}
+        onChange={onChange}
+        onFocus={function(){setOpen(true);}}
+        onBlur={function(){if(!pickingRef.current) setOpen(false);}}
+        placeholder={placeholder}
+        style={style}
+      />
+      {open&&suggestions.length>0&&(
+        <div
+          onMouseDown={function(){pickingRef.current=true;}}
+          onMouseUp={function(){pickingRef.current=false;}}
+          style={{position:"absolute",top:"100%",left:0,zIndex:10000,background:"#1a1208",border:"1px solid rgba(201,150,42,.4)",boxShadow:"0 4px 20px rgba(0,0,0,.8)",minWidth:220,maxWidth:360,width:"max-content"}}
+        >
+          {suggestions.map(function(f){
+            return (
+              <div key={f.name}
+                onClick={function(){applyFeat(f);}}
+                style={{padding:"6px 10px",cursor:"pointer",borderBottom:"1px solid rgba(201,150,42,.08)"}}
+              >
+                <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"var(--gold-l)",fontWeight:600}}>{f.name}</span>
               </div>
             );
           })}
@@ -4450,7 +4650,7 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
     const lbl=custName.trim()||diceExpr+(bonus!==0?fmtBonus(bonus):"");
     const noteParts=custFormula?[
       (custFormula.abls||[]).map(function(a){return a+"("+fmtBonus(getStatMod2(a))+")";}).join(" "),
-      custFormula.prof&&custFormula.prof!=="none"?formulaProfLabel(custFormula)+"(+"+formulaProfVal(custFormula,c)+")":"",
+      formulaHasProf(custFormula)?formulaProfLabel(custFormula)+"(+"+formulaProfVal(custFormula,c)+")":"",
       parseInt(custFormula.flat||0)?fmtBonus(parseInt(custFormula.flat||0)):""
     ].filter(Boolean):[];
     if(groups.length===1){
@@ -4475,7 +4675,7 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
     });
     const formula=sr.formula||{flat:""+( sr.bonus||0),abls:sr.abls||[],prof:sr.prof?"full":"none",lvlType:"none",lvlClass:""};
     const bonus=calcCustBonus(formula);
-    const noteParts=[(formula.abls||[]).map(function(a){return a+"("+fmtBonus(getStatMod2(a))+")";}).join(" "),formula.prof&&formula.prof!=="none"?formulaProfLabel(formula)+"(+"+formulaProfVal(formula,c)+")":"",parseInt(formula.flat||0)?fmtBonus(parseInt(formula.flat||0)):""].filter(Boolean);
+    const noteParts=[(formula.abls||[]).map(function(a){return a+"("+fmtBonus(getStatMod2(a))+")";}).join(" "),formulaHasProf(formula)?formulaProfLabel(formula)+"(+"+formulaProfVal(formula,c)+")":"",parseInt(formula.flat||0)?fmtBonus(parseInt(formula.flat||0)):""].filter(Boolean);
     if(groups.length===1){
       addResult(sr.nm,groups[0].dice,bonus,noteParts.join(" "));
     } else {
@@ -4489,7 +4689,7 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
     const formula=sr.formula;
     if(!formula) return diceStr;
     const parts=[diceStr];
-    if(formula.prof&&formula.prof!=="none") parts.push(formulaProfLabel(formula));
+    if(formulaHasProf(formula)) parts.push(formulaProfLabel(formula));
     (formula.abls||[]).forEach(function(a){parts.push(a);});
     if(parseInt(formula.flat||0)) parts.push(fmtBonus(parseInt(formula.flat)));
     return parts.join("+").replace(/\+\+/g,"+").replace(/\+-/g,"-");
@@ -4934,7 +5134,7 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
         {custFormulaOpen&&<FormulaModal c={c}
           initialFormula={custFormula||{flat:"",abls:[],prof:"none",lvlType:"none",lvlClass:""}}
           title="Roll Bonus"
-          onApply={function(total,frm){setCustFormula(frm&&(frm.abls.length>0||frm.prof!=="none"||parseInt(frm.flat||0)||frm.lvlType!=="none")?frm:null);setCustFormulaOpen(false);}}
+          onApply={function(total,frm){setCustFormula(frm&&((frm.abls||[]).length>0||formulaHasProf(frm)||parseInt(frm.flat||0)||(frm.lvlEntries&&frm.lvlEntries.length>0)||(frm.lvlType&&frm.lvlType!=="none"))?frm:null);setCustFormulaOpen(false);}}
           onClose={function(){setCustFormulaOpen(false);}}
           onClear={custFormula?function(){setCustFormula(null);setCustFormulaOpen(false);}:null}
         />}
@@ -6063,7 +6263,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.058</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.064</div>
 
 </script>
 </body>
