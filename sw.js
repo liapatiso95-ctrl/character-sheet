@@ -1,4 +1,4 @@
-const CACHE = 'dnd-sheet-v2';
+const CACHE = 'dnd-sheet-v3';
 const FILES = [
   './character_sheet.html',
   './manifest.json',
@@ -13,7 +13,7 @@ self.addEventListener('install', e => {
   );
 });
 
-// Activate: delete old caches
+// Activate: delete old caches, take control immediately
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
@@ -22,18 +22,37 @@ self.addEventListener('activate', e => {
   );
 });
 
-// Fetch: serve from cache, update in background (stale-while-revalidate)
+// Fetch: network-first for HTML, cache-first for everything else
 self.addEventListener('fetch', e => {
-  e.respondWith(
-    caches.open(CACHE).then(cache =>
-      cache.match(e.request).then(cached => {
-        const fetchPromise = fetch(e.request).then(response => {
-          if(response && response.status === 200)
-            cache.put(e.request, response.clone());
-          return response;
-        }).catch(() => null);
-        return cached || fetchPromise;
-      })
-    )
-  );
+  const url = new URL(e.request.url);
+  const isHTML = url.pathname.endsWith('.html') || url.pathname.endsWith('/');
+
+  if (isHTML) {
+    // Always try network first for the main page
+    e.respondWith(
+      fetch(e.request).then(response => {
+        if (response && response.status === 200) {
+          caches.open(CACHE).then(c => c.put(e.request, response.clone()));
+        }
+        return response;
+      }).catch(() =>
+        // Offline fallback
+        caches.match(e.request)
+      )
+    );
+  } else {
+    // Cache-first for icons, manifest etc
+    e.respondWith(
+      caches.open(CACHE).then(cache =>
+        cache.match(e.request).then(cached => {
+          const fetchPromise = fetch(e.request).then(response => {
+            if (response && response.status === 200)
+              cache.put(e.request, response.clone());
+            return response;
+          }).catch(() => null);
+          return cached || fetchPromise;
+        })
+      )
+    );
+  }
 });
