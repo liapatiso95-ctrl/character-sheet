@@ -3496,6 +3496,148 @@ function Page3({c,s}){
   );
 }
 
+// ─── Spell Compendium ─────────────────────────────────────────────────────────
+const SPELL_MD_URL="https://raw.githubusercontent.com/liapatiso95-ctrl/character-sheet/main/spells.md";
+const _spellCache={data:null,status:"idle"}; // "idle"|"loading"|"ready"|"error"
+const _spellListeners=[];
+function _notifySpellListeners(){_spellListeners.forEach(function(fn){fn();});}
+
+function parseSpellMarkdown(md){
+  var spells={};
+  // Split on #### headings
+  var blocks=md.split(/^####\s+/m).slice(1);
+  blocks.forEach(function(block){
+    var lines=block.split("\n");
+    var name=(lines[0]||"").trim();
+    if(!name) return;
+    // Parse italic line: *3rd-level Abjuration* or *Evocation Cantrip*
+    // Also handle ritual tag: *1st-level Divination (ritual)*
+    var level=0, school="", ritual=false;
+    var italicLine=(lines[1]||"").trim().replace(/^\*|\*$/g,"");
+    // Extract (ritual) from anywhere in the italic line
+    if(/\(ritual\)/i.test(italicLine)){ritual=true;italicLine=italicLine.replace(/\s*\(ritual\)/i,"").trim();}
+    var cantrip=italicLine.match(/^(\w+)\s+Cantrip$/i);
+    var leveled=italicLine.match(/^(\d+)(?:st|nd|rd|th)[- ]level\s+(.+)$/i);
+    if(cantrip){school=cantrip[1];level=0;}
+    else if(leveled){level=parseInt(leveled[1]);school=leveled[2].trim();}
+    // Parse key: value fields — handle both **Key:** Value and plain Key Value
+    var castingTime="",range="",components="",duration="",conc=false;
+    var descLines=[];
+    var pastDuration=false;
+    for(var li=2;li<lines.length;li++){
+      var ln=lines[li].trim();
+      if(!pastDuration){
+        // Match **Key:** Value OR plain Key Value (for keys we know)
+        var kv=ln.match(/^\*\*([^*]+)\*\*[:\s]+(.+)$/)||ln.match(/^(Casting Time|Range|Components|Duration|Classes)[:\s]+(.+)$/i);
+        if(kv){
+          var k=kv[1].toLowerCase().trim(), v=kv[2].trim();
+          if(k==="casting time"){
+            if(/ritual/i.test(v)){ritual=true;v=v.replace(/\s*or\s+ritual|\s*\(?ritual\)?/gi,"").trim();}
+            castingTime=v;
+          }
+          else if(k==="range"){range=v;}
+          else if(k==="components"){components=v;}
+          else if(k==="duration"){
+            if(/concentration/i.test(v)){conc=true;v=v.replace(/concentration,?\s*(up\s+to\s+)?/i,"").trim();}
+            duration=v;
+            pastDuration=true;
+          }
+          // "classes" line — skip, not a spell field we store
+          continue;
+        }
+        // If line is non-empty and not a field we recognise, and we've seen at least casting time, treat as description start
+        if(ln&&castingTime&&!pastDuration){pastDuration=true;}
+      }
+      if(pastDuration){
+        var cleaned=ln.replace(/\*\*\*([^*]+)\*\*\*/g,"$1").replace(/\*\*([^*]+)\*\*/g,"$1").replace(/\*([^*]+)\*/g,"$1");
+        // Skip layout artifacts like "column", "page", "{{...}}"
+        if(cleaned&&!/^(column|page)$/i.test(cleaned)&&!/^\{\{/.test(cleaned)) descLines.push(cleaned);
+      }
+    }
+    var desc=descLines.join("\n").trim();
+    spells[name.toLowerCase()]={name,level,school,castingTime,range,components,duration,conc,ritual,desc};
+  });
+  return spells;
+}
+
+function useSpellCompendium(){
+  const [tick,setTick]=React.useState(0);
+  React.useEffect(function(){
+    function onUpdate(){setTick(function(t){return t+1;});}
+    _spellListeners.push(onUpdate);
+    // Trigger fetch if idle
+    if(_spellCache.status==="idle"){
+      _spellCache.status="loading";
+      fetch(SPELL_MD_URL)
+        .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
+        .then(function(text){_spellCache.data=parseSpellMarkdown(text);_spellCache.status="ready";_notifySpellListeners();})
+        .catch(function(){_spellCache.status="error";_notifySpellListeners();});
+    }
+    return function(){var idx=_spellListeners.indexOf(onUpdate);if(idx>=0)_spellListeners.splice(idx,1);};
+  },[]);
+  return _spellCache;
+}
+
+function SpellNameInput({value, onChange, onAutofill, placeholder, style, spellLevel}){
+  const cache=useSpellCompendium();
+  const [open,setOpen]=React.useState(false);
+  const inputRef=React.useRef(null);
+  const pickingRef=React.useRef(false); // true while mouse is down on dropdown
+
+  // Build suggestion list
+  var suggestions=[];
+  if(cache.status==="ready"&&cache.data&&(value||"").length>=2){
+    var q=(value||"").toLowerCase();
+    suggestions=Object.values(cache.data).filter(function(sp){
+      return sp.name.toLowerCase().includes(q)&&(spellLevel===undefined||sp.level===spellLevel);
+    }).slice(0,8);
+  }
+
+  function applySpell(sp){
+    pickingRef.current=false;
+    setOpen(false);
+    onAutofill(sp);
+  }
+
+  return (
+    <div style={{position:"relative",display:"flex",alignItems:"center",width:"100%"}}>
+      <input
+        ref={inputRef}
+        value={value||""}
+        onChange={onChange}
+        onFocus={function(){setOpen(true);}}
+        onBlur={function(){
+          // Only close if we're not in the middle of picking
+          if(!pickingRef.current) setOpen(false);
+        }}
+        placeholder={placeholder}
+        style={style}
+      />
+      {open&&suggestions.length>0&&(
+        <div
+          onMouseDown={function(){pickingRef.current=true;}}
+          onMouseUp={function(){pickingRef.current=false;}}
+          style={{position:"absolute",top:"100%",left:0,zIndex:10000,background:"#1a1208",border:"1px solid rgba(201,150,42,.4)",boxShadow:"0 4px 20px rgba(0,0,0,.8)",minWidth:220,maxWidth:360,width:"max-content"}}
+        >
+          {suggestions.map(function(sp){
+            return (
+              <div key={sp.name}
+                onClick={function(){applySpell(sp);}}
+                style={{padding:"6px 10px",cursor:"pointer",borderBottom:"1px solid rgba(201,150,42,.08)",display:"flex",alignItems:"baseline",gap:8}}
+              >
+                <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"var(--gold-l)",fontWeight:600,flex:1}}>{sp.name}</span>
+                <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.6)",whiteSpace:"nowrap"}}>{sp.level===0?"Cantrip":"Lv "+sp.level}</span>
+                <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,color:"rgba(232,213,176,.35)",whiteSpace:"nowrap"}}>{sp.school}</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+// ──────────────────────────────────────────────────────────────────────────────
+
 function SpellPage({c,s,from,to}){
   const {useState:us2}=React;
   const [maxPrepModal,setMaxPrepModal]=us2(null); // spellClass index
@@ -3584,7 +3726,21 @@ function SpellPage({c,s,from,to}){
           </div>
         </td>
         {lv>0&&!(group&&group.sc&&group.sc.known)&&<td style={{textAlign:"center",verticalAlign:"middle"}}><input type="checkbox" className="pc" checked={!!(sp.bonus||sp.prep)} disabled={!!sp.bonus} onChange={e=>us(lv,i,"prep",e.target.checked)} title={sp.bonus?"Bonus spells are always prepared":undefined} /></td>}
-        <td style={{verticalAlign:"middle"}}><TipInput value={sp.nm||""} onChange={e=>us(lv,i,"nm",e.target.value)} placeholder="Spell name..." style={{width:"100%",background:"transparent",border:"none",color:(sp.prep||sp.bonus||(group&&group.sc&&group.sc.known)||lv===0)?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px",fontWeight:600}} /></td>
+        <td style={{verticalAlign:"middle"}}>
+          <SpellNameInput
+            value={sp.nm||""}
+            onChange={e=>us(lv,i,"nm",e.target.value)}
+            placeholder="Spell name..."
+            spellLevel={lv}
+            style={{width:"100%",background:"transparent",border:"none",color:(sp.prep||sp.bonus||(group&&group.sc&&group.sc.known)||lv===0)?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px",fontWeight:600}}
+            onAutofill={function(sp2){
+              const cp={...c.sp};
+              cp[lv]=[...(cp[lv]||[])];
+              cp[lv][i]={...cp[lv][i],nm:sp2.name,sc:sp2.school,ti:sp2.castingTime,rng:sp2.range,cmp:sp2.components,dur:sp2.duration,conc:sp2.conc,ritual:sp2.ritual,nt:sp2.desc};
+              s("sp",cp);
+            }}
+          />
+        </td>
         <td><TipInput value={sp.sc||""} onChange={e=>us(lv,i,"sc",e.target.value)} placeholder="Evoc." style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:11,outline:"none",padding:"3px 4px"}} /></td>
         <td><TipInput value={sp.ti||""} onChange={e=>us(lv,i,"ti",e.target.value)} placeholder="1 action" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px"}} /></td>
         <td style={{textAlign:"center",verticalAlign:"middle"}}><input type="checkbox" className="cc" checked={!!sp.ritual} onChange={e=>us(lv,i,"ritual",e.target.checked)} title="Ritual" /></td>
@@ -3629,7 +3785,16 @@ function SpellPage({c,s,from,to}){
 
       {/* Per-class info cards */}
       <div style={{marginBottom:20,marginTop:32}}>
-        <div style={{display:"flex",justifyContent:"flex-end",marginBottom:10}}>
+        <div style={{display:"flex",justifyContent:"flex-end",alignItems:"center",gap:10,marginBottom:10}}>
+          {(function(){
+            var st=_spellCache.status;
+            var col=st==="ready"?"rgba(74,156,92,.6)":st==="loading"?"rgba(201,150,42,.5)":"rgba(201,74,42,.5)";
+            var lbl=st==="ready"?"Spell compendium loaded":st==="loading"?"Loading spell compendium…":"Spell compendium unavailable — check spells.md in repo";
+            return <span title={lbl} style={{display:"flex",alignItems:"center",gap:4,fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:col,userSelect:"none"}}>
+              <span style={{width:6,height:6,borderRadius:"50%",background:col,display:"inline-block",flexShrink:0}} />
+              Compendium
+            </span>;
+          })()}
           <div onClick={rechargeAll}
             style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(74,156,92,.8)",border:"1px solid rgba(74,156,92,.35)",padding:"4px 12px",borderRadius:2,transition:"all .15s",userSelect:"none"}}
             title="Reset all spell slots and spell points to full">↺ Recharge All</div>
@@ -5894,7 +6059,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.042</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.055</div>
 
 </script>
 </body>
