@@ -2324,7 +2324,8 @@ function Page2({c,s}){
                   <td style={{textAlign:"center",cursor:"grab",color:"rgba(201,150,42,.4)",fontSize:12}}>::</td>
                   <td style={{textAlign:"center"}}><div className={"tog tog-eq"+(it.eq?" on":"")} onClick={()=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],eq:!it.eq};s("attuned_inv",a);}} /></td>
                   <td style={{textAlign:"center"}}><div className={"tog tog-wl"+(it.wl?" on":"")} onClick={()=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],wl:!it.wl};s("attuned_inv",a);}} /></td>
-                  <td><TipInput value={it.nm||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],nm:e.target.value};s("attuned_inv",a);}} placeholder="Item..." style={{width:"100%",background:"transparent",border:"none",color:it.eq?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px",fontWeight:it.eq?"600":"400"}} /></td>
+                  <td><ItemNameInput value={it.nm||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],nm:e.target.value};s("attuned_inv",a);}} placeholder="Item..." style={{width:"100%",background:"transparent",border:"none",color:it.eq?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px",fontWeight:it.eq?"600":"400"}}
+                    onAutofill={function(item){const a=[...(c.attuned_inv||[])];const ch=parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("attuned_inv",a);}} /></td>
                   <td><TipInput value={it.qt||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],qt:e.target.value};s("attuned_inv",a);}} placeholder="1" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                   <td><TipInput value={it.wt||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],wt:e.target.value};s("attuned_inv",a);}} placeholder="0" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                   <td style={{fontFamily:"'Cinzel',serif",fontSize:11,color:it.wl?"var(--teal)":"var(--gold-l)",textAlign:"center",opacity:.8}}>{it.wl?"0":itemWeight(it)>0?itemWeight(it).toFixed(2):"-"}</td>
@@ -2390,7 +2391,8 @@ function Page2({c,s}){
                   <td style={{textAlign:"center"}}>
                     <div className={"tog tog-wl"+(it.wl?" on":"")} onClick={()=>ui("inv",i,"wl",!it.wl)} title="Weightless" />
                   </td>
-                  <td><TipInput value={it.nm||""} onChange={e=>ui("inv",i,"nm",e.target.value)} placeholder="Item..." style={{width:"100%",background:"transparent",border:"none",color:it.eq?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px",fontWeight:it.eq?"600":"400",opacity:it.wl?0.7:1}} /></td>
+                  <td><ItemNameInput value={it.nm||""} onChange={e=>ui("inv",i,"nm",e.target.value)} placeholder="Item..." style={{width:"100%",background:"transparent",border:"none",color:it.eq?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px",fontWeight:it.eq?"600":"400",opacity:it.wl?0.7:1}}
+                    onAutofill={function(item){const a=[...c.inv];const ch=parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("inv",a);}} /></td>
                   <td><TipInput value={it.qt||""} onChange={e=>ui("inv",i,"qt",e.target.value)} placeholder="1" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                   <td><TipInput value={it.wt||""} onChange={e=>ui("inv",i,"wt",e.target.value)} placeholder="0" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                   <td style={{fontFamily:"'Cinzel',serif",fontSize:11,color:it.wl?"var(--teal)":"var(--gold-l)",textAlign:"center",opacity:.8}}>{it.wl?"0":itemWeight(it)>0?itemWeight(it).toFixed(2):"-"}</td>
@@ -2530,7 +2532,8 @@ function Page2({c,s}){
                       <td style={{textAlign:"center",cursor:"grab",color:"rgba(184,154,240,.3)",fontSize:12}}>::</td>
                       <td style={{textAlign:"center"}}><div className={"tog tog-eq"+(it.eq?" on":"")} onClick={()=>{const a=[...bagInv];a[i]={...a[i],eq:!it.eq};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} /></td>
                       <td style={{textAlign:"center"}}><div className={"tog tog-wl"+(it.wl?" on":"")} onClick={()=>{const a=[...bagInv];a[i]={...a[i],wl:!it.wl};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} /></td>
-                      <td><TipInput value={it.nm||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],nm:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="Item..." style={{width:"100%",background:"transparent",border:"none",color:it.eq?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px",fontWeight:it.eq?"600":"400",opacity:it.wl?0.7:1}} /></td>
+                      <td><ItemNameInput value={it.nm||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],nm:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="Item..." style={{width:"100%",background:"transparent",border:"none",color:it.eq?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px",fontWeight:it.eq?"600":"400",opacity:it.wl?0.7:1}}
+                        onAutofill={function(item){const a=[...bagInv];const ch=parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} /></td>
                       <td><TipInput value={it.qt||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],qt:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="1" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                       <td><TipInput value={it.wt||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],wt:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="0" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                       <td style={{fontFamily:"'Cinzel',serif",fontSize:11,color:it.wl?"var(--teal)":"var(--gold-l)",textAlign:"center",opacity:.8}}>{it.wl?"0":itemWeight(it)>0?itemWeight(it).toFixed(2):"-"}</td>
@@ -3670,20 +3673,110 @@ function useSpellCompendium(){
   return _spellCache;
 }
 
+// Returns true if a result's document slug/key indicates official SRD content (2014 or 2024).
+// Lenient: accepts known SRD slugs AND anything that isn't a recognised third-party publisher,
+// because Open5e's various endpoints tag SRD content with inconsistent slugs (srd / wotc-srd / srd-2014 / srd-2024).
+function isSrdDoc(slug){
+  slug=(""+(slug||"")).toLowerCase();
+  if(!slug) return true; // no slug → assume SRD rather than silently dropping
+  // Explicit third-party publishers to exclude
+  var thirdParty=["tob","toh","kp","vom","cc","menagerie","a5e","bfrd","dmag","warlock","blackflag","kp-","deepm","tob2","tob3","tob-"];
+  for(var i=0;i<thirdParty.length;i++){
+    if(slug.indexOf(thirdParty[i])>=0) return false;
+  }
+  return true;
+}
+
+// Open5e SRD spell search — pulls from both v1 (2014 SRD) and v2 (2024 SRD), merged & deduped.
+function open5eSpellSearch(query){
+  var q=encodeURIComponent(query);
+  var v1=fetch("https://api.open5e.com/v1/spells/?search="+q+"&limit=15").then(function(r){return r.ok?r.json():{results:[]};}).catch(function(){return {results:[]};})
+    .then(function(json){
+      return (json.results||[]).filter(function(sp){return isSrdDoc(sp.document__slug);}).map(function(sp){
+        var lvl=parseInt(sp.level_int!==undefined?sp.level_int:sp.level)||0;
+        var desc=(sp.desc||"").toString();
+        if(sp.higher_level) desc+="\n\nAt Higher Levels. "+sp.higher_level;
+        return {name:sp.name,level:lvl,school:sp.school||"",castingTime:sp.casting_time||"",range:sp.range||"",components:sp.components||"",duration:sp.duration||"",conc:!!sp.concentration&&sp.concentration!=="no",ritual:!!sp.ritual&&sp.ritual!=="no",desc:desc,src:"srd",srdVer:"14"};
+      });
+    });
+  var v2=fetch("https://api.open5e.com/v2/spells/?name__icontains="+q+"&document__key=srd-2024&limit=15").then(function(r){return r.ok?r.json():{results:[]};}).catch(function(){return {results:[]};})
+    .then(function(json){
+      // Fallback: if the document__key filter yields nothing, try just name filter + client-side SRD filter
+      if(!json.results||json.results.length===0){
+        return fetch("https://api.open5e.com/v2/spells/?name__icontains="+q+"&limit=20").then(function(r){return r.ok?r.json():{results:[]};}).catch(function(){return {results:[]};})
+          .then(function(j2){
+            return (j2.results||[]).filter(function(sp){
+              var dk=(sp.key||"")+"|"+(sp.document&&(sp.document.key||sp.document.slug)||sp.document||"");
+              return dk.toLowerCase().indexOf("2024")>=0;
+            });
+          });
+      }
+      return json.results;
+    })
+    .then(function(results){
+      return (results||[]).map(function(sp){
+        var lvl=typeof sp.level==="number"?sp.level:(parseInt(sp.level_int!==undefined?sp.level_int:sp.level)||0);
+        var school=sp.school&&sp.school.name?sp.school.name:(typeof sp.school==="string"?sp.school:"");
+        var desc=(sp.desc||"").toString();
+        if(sp.higher_level) desc+="\n\nAt Higher Levels. "+sp.higher_level;
+        var comp=[];if(sp.verbal)comp.push("V");if(sp.somatic)comp.push("S");if(sp.material)comp.push("M"+(sp.material_specified?" ("+sp.material_specified+")":""));
+        var compStr=comp.length?comp.join(", "):(typeof sp.components==="string"?sp.components:"");
+        return {name:sp.name,level:lvl,school:school,castingTime:sp.casting_time||"",range:sp.range_text||sp.range||"",components:compStr,duration:sp.duration||"",conc:!!sp.concentration,ritual:!!sp.ritual,desc:desc,src:"srd",srdVer:"24"};
+      });
+    });
+  return Promise.all([v1,v2]).then(function(arrs){
+    // Dedup within each version only; keep both 2014 and 2024 versions of the same spell
+    function dedup(arr){var seen={};return arr.filter(function(sp){var k=sp.name.toLowerCase();if(seen[k])return false;seen[k]=true;return true;});}
+    return dedup(arrs[0]).concat(dedup(arrs[1]));
+  });
+}
+
 function SpellNameInput({value, onChange, onAutofill, placeholder, style, spellLevel}){
   const cache=useSpellCompendium();
   const [open,setOpen]=React.useState(false);
+  const [rect,setRect]=React.useState(null);
   const inputRef=React.useRef(null);
   const pickingRef=React.useRef(false); // true while mouse is down on dropdown
+  const [srdResults,setSrdResults]=React.useState([]);
+  const [srdLoading,setSrdLoading]=React.useState(false);
+  const debounceRef=React.useRef(null);
 
-  // Build suggestion list
-  var suggestions=[];
+  const updateRect=React.useCallback(function(){
+    if(inputRef.current){var r=inputRef.current.getBoundingClientRect();setRect({left:r.left,top:r.bottom,width:r.width});}
+  },[]);
+
+  // Local (spells.md) matches take priority
+  var localMatches=[];
   if(cache.status==="ready"&&cache.data&&(value||"").length>=2){
     var q=(value||"").toLowerCase();
-    suggestions=Object.values(cache.data).filter(function(sp){
+    localMatches=Object.values(cache.data).filter(function(sp){
       return sp.name.toLowerCase().includes(q)&&(spellLevel===undefined||sp.level===spellLevel);
-    }).slice(0,8);
+    }).map(function(sp){return Object.assign({},sp,{src:"file"});}).slice(0,8);
   }
+
+  // Debounced SRD fallback
+  React.useEffect(function(){
+    if((value||"").length<2){setSrdResults([]);return;}
+    if(debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current=setTimeout(function(){
+      setSrdLoading(true);
+      open5eSpellSearch(value).then(function(res){setSrdResults(res);setSrdLoading(false);}).catch(function(){setSrdResults([]);setSrdLoading(false);});
+    },350);
+    return function(){if(debounceRef.current) clearTimeout(debounceRef.current);};
+  },[value]);
+
+  // Merge: file first, then SRD not already in file (filtered by level if specified)
+  // Show both File and SRD results, even when names match — tags distinguish them
+  var srdExtra=srdResults.filter(function(sp){return (spellLevel===undefined||sp.level===spellLevel);}).slice(0,8);
+  var suggestions=localMatches.concat(srdExtra);
+
+  React.useEffect(function(){
+    if(!open) return;
+    updateRect();
+    function onMove(){updateRect();}
+    window.addEventListener("scroll",onMove,true);window.addEventListener("resize",onMove);
+    return function(){window.removeEventListener("scroll",onMove,true);window.removeEventListener("resize",onMove);};
+  },[open,updateRect]);
 
   function applySpell(sp){
     pickingRef.current=false;
@@ -3691,13 +3784,15 @@ function SpellNameInput({value, onChange, onAutofill, placeholder, style, spellL
     onAutofill(sp);
   }
 
+  var showDrop=open&&((value||"").length>=2)&&(suggestions.length>0||srdLoading)&&rect;
+
   return (
     <div style={{position:"relative",display:"flex",alignItems:"center",width:"100%"}}>
       <input
         ref={inputRef}
         value={value||""}
         onChange={onChange}
-        onFocus={function(){setOpen(true);}}
+        onFocus={function(){updateRect();setOpen(true);}}
         onBlur={function(){
           // Only close if we're not in the middle of picking
           if(!pickingRef.current) setOpen(false);
@@ -3705,24 +3800,25 @@ function SpellNameInput({value, onChange, onAutofill, placeholder, style, spellL
         placeholder={placeholder}
         style={style}
       />
-      {open&&suggestions.length>0&&(
+      {showDrop&&(
         <div
           onMouseDown={function(){pickingRef.current=true;}}
           onMouseUp={function(){pickingRef.current=false;}}
-          style={{position:"absolute",top:"100%",left:0,zIndex:10000,background:"#1a1208",border:"1px solid rgba(201,150,42,.4)",boxShadow:"0 4px 20px rgba(0,0,0,.8)",minWidth:220,maxWidth:360,width:"max-content"}}
+          style={{position:"fixed",top:rect.top,left:rect.left,zIndex:99999,background:"#1a1208",border:"1px solid rgba(201,150,42,.4)",boxShadow:"0 4px 24px rgba(0,0,0,.9)",minWidth:Math.max(rect.width,220),maxWidth:360,maxHeight:280,overflowY:"auto"}}
         >
-          {suggestions.map(function(sp){
+          {suggestions.map(function(sp,idx){
             return (
-              <div key={sp.name}
+              <div key={sp.name+idx}
                 onClick={function(){applySpell(sp);}}
                 style={{padding:"6px 10px",cursor:"pointer",borderBottom:"1px solid rgba(201,150,42,.08)",display:"flex",alignItems:"baseline",gap:8}}
               >
                 <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"var(--gold-l)",fontWeight:600,flex:1}}>{sp.name}</span>
                 <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.6)",whiteSpace:"nowrap"}}>{sp.level===0?"Cantrip":"Lv "+sp.level}</span>
-                <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,color:"rgba(232,213,176,.35)",whiteSpace:"nowrap"}}>{sp.school}</span>
+                <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:.5,color:sp.src==="file"?"rgba(74,156,92,.6)":"rgba(96,180,196,.55)",whiteSpace:"nowrap",textTransform:"uppercase"}}>{sp.src==="file"?"File":("SRD"+(sp.srdVer||""))}</span>
               </div>
             );
           })}
+          {srdLoading&&<div style={{padding:"6px 10px",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(201,150,42,.5)",textTransform:"uppercase"}}>Searching SRD…</div>}
         </div>
       )}
     </div>
@@ -3794,18 +3890,88 @@ function useFeatCompendium(){
   return _featCache;
 }
 
+// Open5e SRD feat search — pulls from both v1 and v2, filtered to SRD documents.
+function open5eFeatSearch(query){
+  var q=encodeURIComponent(query);
+  function fmtFeatDesc(prereq,body){
+    var desc="";
+    if(prereq&&(""+prereq).toLowerCase()!=="none"&&(""+prereq).trim()) desc+="Prerequisites: "+prereq+"\n";
+    body=(""+(body||"")).replace(/\*\*\*([^*]+)\*\*\*/g,"$1").replace(/^\s*\*\*([^*]+?)\.?\*\*\.?\s*/gm,"- $1. ").replace(/\*\*([^*]+)\*\*/g,"$1").replace(/\*([^*]+)\*/g,"$1");
+    return (desc+body).trim();
+  }
+  var v1=fetch("https://api.open5e.com/v1/feats/?search="+q+"&limit=15").then(function(r){return r.ok?r.json():{results:[]};}).catch(function(){return {results:[]};})
+    .then(function(json){
+      return (json.results||[]).filter(function(ft){return isSrdDoc(ft.document__slug);}).map(function(ft){
+        var body=ft.effects_desc&&ft.effects_desc.length?ft.effects_desc.join("\n"):(ft.desc||"");
+        return {name:ft.name,desc:fmtFeatDesc(ft.prerequisite,body),src:"srd",srdVer:"14"};
+      });
+    });
+  var v2=fetch("https://api.open5e.com/v2/feats/?name__icontains="+q+"&document__key=srd-2024&limit=15").then(function(r){return r.ok?r.json():{results:[]};}).catch(function(){return {results:[]};})
+    .then(function(json){
+      if(!json.results||json.results.length===0){
+        return fetch("https://api.open5e.com/v2/feats/?name__icontains="+q+"&limit=20").then(function(r){return r.ok?r.json():{results:[]};}).catch(function(){return {results:[]};})
+          .then(function(j2){return (j2.results||[]).filter(function(ft){var dk=(ft.key||"")+"|"+(ft.document&&(ft.document.key||ft.document.slug)||ft.document||"");return dk.toLowerCase().indexOf("2024")>=0;});});
+      }
+      return json.results;
+    })
+    .then(function(results){
+      return (results||[]).map(function(ft){
+        var body="";
+        if(ft.benefits&&ft.benefits.length){body=ft.benefits.map(function(b){return (b.name?"**"+b.name+".** ":"")+(b.desc||b.description||"");}).join("\n");}
+        else body=ft.desc||ft.description||"";
+        var pre=ft.prerequisite||(ft.prerequisites&&ft.prerequisites.length?ft.prerequisites.join(", "):"");
+        return {name:ft.name,desc:fmtFeatDesc(pre,body),src:"srd",srdVer:"24"};
+      });
+    });
+  return Promise.all([v1,v2]).then(function(arrs){
+    function dedup(arr){var seen={};return arr.filter(function(ft){var k=ft.name.toLowerCase();if(seen[k])return false;seen[k]=true;return true;});}
+    return dedup(arrs[0]).concat(dedup(arrs[1]));
+  });
+}
+
 function FeatNameInput({value, onChange, onAutofill, placeholder, style}){
   const cache=useFeatCompendium();
   const [open,setOpen]=React.useState(false);
+  const [rect,setRect]=React.useState(null);
+  const inputRef=React.useRef(null);
   const pickingRef=React.useRef(false);
+  const [srdResults,setSrdResults]=React.useState([]);
+  const [srdLoading,setSrdLoading]=React.useState(false);
+  const debounceRef=React.useRef(null);
 
-  var suggestions=[];
+  const updateRect=React.useCallback(function(){
+    if(inputRef.current){var r=inputRef.current.getBoundingClientRect();setRect({left:r.left,top:r.bottom,width:r.width});}
+  },[]);
+
+  var localMatches=[];
   if(cache.status==="ready"&&cache.data&&(value||"").length>=2){
     var q=(value||"").toLowerCase();
-    suggestions=Object.values(cache.data).filter(function(f){
+    localMatches=Object.values(cache.data).filter(function(f){
       return f.name.toLowerCase().includes(q);
-    }).slice(0,8);
+    }).map(function(f){return Object.assign({},f,{src:"file"});}).slice(0,8);
   }
+
+  React.useEffect(function(){
+    if((value||"").length<2){setSrdResults([]);return;}
+    if(debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current=setTimeout(function(){
+      setSrdLoading(true);
+      open5eFeatSearch(value).then(function(res){setSrdResults(res);setSrdLoading(false);}).catch(function(){setSrdResults([]);setSrdLoading(false);});
+    },350);
+    return function(){if(debounceRef.current) clearTimeout(debounceRef.current);};
+  },[value]);
+
+  // Show both File and SRD results, even when names match — tags distinguish them
+  var srdExtra=srdResults.slice(0,8);
+  var suggestions=localMatches.concat(srdExtra);
+
+  React.useEffect(function(){
+    if(!open) return;
+    updateRect();
+    function onMove(){updateRect();}
+    window.addEventListener("scroll",onMove,true);window.addEventListener("resize",onMove);
+    return function(){window.removeEventListener("scroll",onMove,true);window.removeEventListener("resize",onMove);};
+  },[open,updateRect]);
 
   function applyFeat(f){
     pickingRef.current=false;
@@ -3816,29 +3982,266 @@ function FeatNameInput({value, onChange, onAutofill, placeholder, style}){
   return (
     <div style={{position:"relative",display:"flex",alignItems:"center",width:"100%"}}>
       <input
+        ref={inputRef}
         value={value||""}
         onChange={onChange}
-        onFocus={function(){setOpen(true);}}
+        onFocus={function(){updateRect();setOpen(true);}}
         onBlur={function(){if(!pickingRef.current) setOpen(false);}}
         placeholder={placeholder}
         style={style}
       />
-      {open&&suggestions.length>0&&(
+      {open&&(suggestions.length>0||srdLoading)&&rect&&(
         <div
           onMouseDown={function(){pickingRef.current=true;}}
           onMouseUp={function(){pickingRef.current=false;}}
-          style={{position:"absolute",top:"100%",left:0,zIndex:10000,background:"#1a1208",border:"1px solid rgba(201,150,42,.4)",boxShadow:"0 4px 20px rgba(0,0,0,.8)",minWidth:220,maxWidth:360,width:"max-content"}}
+          style={{position:"fixed",top:rect.top,left:rect.left,zIndex:99999,background:"#1a1208",border:"1px solid rgba(201,150,42,.4)",boxShadow:"0 4px 24px rgba(0,0,0,.9)",minWidth:Math.max(rect.width,220),maxWidth:360,maxHeight:280,overflowY:"auto"}}
         >
-          {suggestions.map(function(f){
+          {suggestions.map(function(f,idx){
             return (
-              <div key={f.name}
+              <div key={f.name+idx}
                 onClick={function(){applyFeat(f);}}
-                style={{padding:"6px 10px",cursor:"pointer",borderBottom:"1px solid rgba(201,150,42,.08)"}}
+                style={{padding:"6px 10px",cursor:"pointer",borderBottom:"1px solid rgba(201,150,42,.08)",display:"flex",alignItems:"baseline",gap:8}}
               >
-                <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"var(--gold-l)",fontWeight:600}}>{f.name}</span>
+                <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"var(--gold-l)",fontWeight:600,flex:1}}>{f.name}</span>
+                <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:.5,color:f.src==="file"?"rgba(74,156,92,.6)":"rgba(96,180,196,.55)",whiteSpace:"nowrap",textTransform:"uppercase"}}>{f.src==="file"?"File":("SRD"+(f.srdVer||""))}</span>
               </div>
             );
           })}
+          {srdLoading&&<div style={{padding:"6px 10px",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(201,150,42,.5)",textTransform:"uppercase"}}>Searching SRD…</div>}
+        </div>
+      )}
+    </div>
+  );
+}
+// ──────────────────────────────────────────────────────────────────────────────
+
+// ─── Item Compendium (items.md first, Open5e API fallback) ────────────────────
+const ITEM_MD_URL="https://raw.githubusercontent.com/liapatiso95-ctrl/character-sheet/main/items.md";
+const _itemCache={data:null,status:"idle"}; // local items.md
+const _itemListeners=[];
+function _notifyItemListeners(){_itemListeners.forEach(function(fn){fn();});}
+
+// Detect "has N charges" and "regains XdY+Z charges" in an item description.
+// Returns {enabled,max,used,restore} ready for the charge tracker, or null.
+function parseChargesFromDesc(desc){
+  if(!desc) return null;
+  var text=desc.toLowerCase();
+  var maxMatch=text.match(/(?:has|maximum of|with|holds|contains)\s+(\d+)\s+charges/)
+            || text.match(/(\d+)\s+charges\b/);
+  if(!maxMatch) return null;
+  var max=parseInt(maxMatch[1]);
+  if(!max||max<=0) return null;
+  var restore="";
+  var resMatch=text.match(/(?:regains?|recovers?|restores?)\s+(\d*d\d+\s*(?:[+-]\s*\d+)?|\d+)\s+(?:expended\s+)?charges/);
+  if(resMatch) restore=resMatch[1].replace(/\s+/g,"");
+  return {enabled:true,max:String(max),used:"0",restore:restore,msg:null};
+}
+
+// Parse items.md — same #### heading style. Fields: Weight, Cost (optional), then description.
+function parseItemMarkdown(md){
+  var items={};
+  var blocks=md.split(/^####\s+/m).slice(1);
+  blocks.forEach(function(block){
+    var lines=block.split("\n");
+    var name=(lines[0]||"").trim();
+    if(!name) return;
+    var weight="",cost="",descLines=[],attune=null,type="",rarity="";
+    var pastFields=false;
+    for(var li=1;li<lines.length;li++){
+      var ln=lines[li].trim();
+      if(/^#/.test(ln)) break; // stop at next heading
+      if(!pastFields){
+        var kv=ln.match(/^\*\*([^*]+)\*\*[:\s]+(.+)$/)||ln.match(/^(Weight|Cost|Type|Rarity|Attunement)[:\s]+(.+)$/i);
+        if(kv){
+          var k=kv[1].toLowerCase().trim().replace(/:$/,""),v=kv[2].trim();
+          if(k==="weight") weight=v.replace(/\s*(lb\.?|lbs\.?|pounds?)\s*$/i,"").trim();
+          else if(k==="cost") cost=v;
+          else if(k==="type") type=v;
+          else if(k==="rarity") rarity=v;
+          else if(k==="attunement") attune=/^(yes|true|required|requires)/i.test(v)?v:(/^(no|none|false)/i.test(v)?false:v);
+          continue;
+        }
+        if(ln) pastFields=true;
+      }
+      if(pastFields){
+        if(/^\\?(column|page)$/i.test(ln)||/^\{\{/.test(ln)) continue;
+        var cleaned=ln.replace(/\*\*\*([^*]+)\*\*\*/g,"$1").replace(/\*\*([^*]+)\*\*/g,"$1").replace(/\*([^*]+)\*/g,"$1");
+        if(cleaned) descLines.push(cleaned);
+      }
+    }
+    var fullDesc=descLines.join("\n").trim();
+    // Build header: "Type, Rarity" on first line, attunement on the next, then the description
+    var headerLines=[];
+    var meta=[type,rarity].filter(Boolean).join(", ");
+    if(meta) headerLines.push(meta);
+    if(attune===false) headerLines.push("(No Attunement Required)");
+    else if(attune) headerLines.push("(Requires Attunement"+(typeof attune==="string"&&attune.replace(/^(yes|true|required|requires attunement?)/i,"").trim()?" "+attune.replace(/^(yes|true|required|requires attunement?)/i,"").trim():"")+")");
+    if(headerLines.length>0) fullDesc=headerLines.join("\n")+(fullDesc?"\n"+fullDesc:"");
+    items[name.toLowerCase()]={name,weight,cost,desc:fullDesc,src:"local"};
+  });
+  return items;
+}
+
+function useItemCompendium(){
+  const [tick,setTick]=React.useState(0);
+  React.useEffect(function(){
+    function onUpdate(){setTick(function(t){return t+1;});}
+    _itemListeners.push(onUpdate);
+    if(_itemCache.status==="idle"){
+      _itemCache.status="loading";
+      fetch(ITEM_MD_URL)
+        .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
+        .then(function(text){_itemCache.data=parseItemMarkdown(text);_itemCache.status="ready";_notifyItemListeners();})
+        .catch(function(){_itemCache.status="error";_itemCache.data={};_notifyItemListeners();});
+    }
+    return function(){var idx=_itemListeners.indexOf(onUpdate);if(idx>=0)_itemListeners.splice(idx,1);};
+  },[]);
+  return _itemCache;
+}
+
+// Open5e live search across weapons, armor, magic items. Returns normalized items.
+function open5eSearch(query){
+  var q=encodeURIComponent(query);
+  var endpoints=[
+    {url:"https://api.open5e.com/v1/weapons/?search="+q+"&limit=12",kind:"weapon",ver:"v1"},
+    {url:"https://api.open5e.com/v1/armor/?search="+q+"&limit=12",kind:"armor",ver:"v1"},
+    {url:"https://api.open5e.com/v1/magicitems/?search="+q+"&limit=12",kind:"magic",ver:"v1"},
+    {url:"https://api.open5e.com/v2/items/?name__icontains="+q+"&document__key=srd-2024&limit=12",kind:"item24",ver:"v2"},
+    {url:"https://api.open5e.com/v2/magicitems/?name__icontains="+q+"&document__key=srd-2024&limit=12",kind:"magic24",ver:"v2"}
+  ];
+  return Promise.all(endpoints.map(function(ep){
+    return fetch(ep.url).then(function(r){return r.ok?r.json():{results:[]};}).catch(function(){return {results:[]};})
+      .then(function(json){
+        return (json.results||[]).filter(function(it){return ep.ver==="v2"||isSrdDoc(it.document__slug);}).map(function(it){
+          // ── v2 SRD-2024 items ──
+          if(ep.ver==="v2"){
+            var w2=(it.weight!==undefined&&it.weight!==null?(""+it.weight):"").replace(/\s*(lb\.?|lbs\.?|pounds?)\s*$/i,"").trim();
+            var d2="";
+            if(ep.kind==="magic24"){
+              var ra2=(it.requires_attunement||it.attunement_detail||"").toString().trim();
+              var att2=ra2?("(Requires Attunement"+(ra2.replace(/^requires attunement/i,"").trim()?" "+ra2.replace(/^requires attunement/i,"").trim():"")+")"):"(No Attunement Required)";
+              var meta2=[it.type&&it.type.name?it.type.name:it.type,it.rarity&&it.rarity.name?it.rarity.name:it.rarity].filter(Boolean).join(", ");
+              d2=[meta2,att2,(it.desc||it.description||"").toString()].filter(Boolean).join("\n");
+            } else {
+              d2=(it.desc||it.description||"").toString();
+            }
+            return {name:it.name,weight:w2,cost:it.cost!==undefined?(""+it.cost):"",desc:d2,src:"open5e",kind:ep.kind==="magic24"?"magic":"item",srdVer:"24",attune:ep.kind==="magic24"?((it.requires_attunement||it.attunement_detail||"").toString().trim()?true:false):null};
+          }
+          // ── v1 (2014 SRD) items ──
+          var weight=(it.weight||"").toString().replace(/\s*(lb\.?|lbs\.?|pounds?)\s*$/i,"").trim();
+          var desc="";
+          if(ep.kind==="weapon"){
+            desc=[it.category,it.damage_dice?it.damage_dice+" "+(it.damage_type||""):"",it.properties&&it.properties.length?"Properties: "+it.properties.join(", "):""].filter(Boolean).join(". ");
+          } else if(ep.kind==="armor"){
+            desc=[it.category,it.ac_string?"AC: "+it.ac_string:"",it.strength_requirement?"Str req: "+it.strength_requirement:"",it.stealth_disadvantage?"Stealth disadvantage":""].filter(Boolean).join(". ");
+          } else {
+            var attune="";
+            var ra=(it.requires_attunement||"").toString().trim();
+            if(ra){attune="(Requires Attunement"+(ra.replace(/^requires attunement/i,"").trim()?" "+ra.replace(/^requires attunement/i,"").trim():"")+")";}
+            else{attune="(No Attunement Required)";}
+            var meta=[it.type,it.rarity].filter(Boolean).join(", ");
+            desc=[meta,attune,(it.desc||"").toString()].filter(Boolean).join("\n");
+          }
+          return {name:it.name,weight:weight,cost:it.cost||"",desc:desc,src:"open5e",kind:ep.kind,srdVer:"14",attune:ep.kind==="magic"?((it.requires_attunement||"").toString().trim()?true:false):null};
+        });
+      });
+  })).then(function(arrs){
+    var merged=[];arrs.forEach(function(a){merged=merged.concat(a);});
+    // Dedup within each SRD version separately so both 14 and 24 versions can show
+    var seen={};return merged.filter(function(it){var k=it.srdVer+":"+it.name.toLowerCase();if(seen[k])return false;seen[k]=true;return true;});
+  });
+}
+
+function ItemNameInput({value, onChange, onAutofill, placeholder, style}){
+  const local=useItemCompendium();
+  const [open,setOpen]=React.useState(false);
+  const [apiResults,setApiResults]=React.useState([]);
+  const [apiLoading,setApiLoading]=React.useState(false);
+  const [rect,setRect]=React.useState(null); // input bounding rect for fixed dropdown
+  const pickingRef=React.useRef(false);
+  const debounceRef=React.useRef(null);
+  const inputRef=React.useRef(null);
+
+  const updateRect=React.useCallback(function(){
+    if(inputRef.current){
+      var r=inputRef.current.getBoundingClientRect();
+      setRect({left:r.left,top:r.bottom,width:r.width});
+    }
+  },[]);
+
+  // Local matches (items.md) take priority
+  var localMatches=[];
+  if(local.status==="ready"&&local.data&&(value||"").length>=2){
+    var q=(value||"").toLowerCase();
+    localMatches=Object.values(local.data).filter(function(it){return it.name.toLowerCase().includes(q);}).slice(0,6);
+  }
+
+  // Debounced Open5e fallback
+  React.useEffect(function(){
+    if((value||"").length<2){setApiResults([]);return;}
+    if(debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current=setTimeout(function(){
+      setApiLoading(true);
+      open5eSearch(value).then(function(res){
+        setApiResults(res);setApiLoading(false);
+      }).catch(function(){setApiResults([]);setApiLoading(false);});
+    },350);
+    return function(){if(debounceRef.current) clearTimeout(debounceRef.current);};
+  },[value]);
+
+  // Reposition the fixed dropdown on scroll/resize while open
+  React.useEffect(function(){
+    if(!open) return;
+    updateRect();
+    function onMove(){updateRect();}
+    window.addEventListener("scroll",onMove,true);
+    window.addEventListener("resize",onMove);
+    return function(){window.removeEventListener("scroll",onMove,true);window.removeEventListener("resize",onMove);};
+  },[open,updateRect]);
+
+  // Merge: local first, then API items not already in local
+  // Show both File and SRD results, even when names match — tags distinguish them
+  var apiExtra=apiResults.slice(0,8);
+  var suggestions=localMatches.concat(apiExtra);
+
+  function applyItem(it){
+    pickingRef.current=false;
+    setOpen(false);
+    onAutofill(it);
+  }
+
+  var showDrop=open&&((value||"").length>=2)&&(suggestions.length>0||apiLoading)&&rect;
+
+  return (
+    <div style={{position:"relative",display:"flex",alignItems:"center",width:"100%"}}>
+      <input
+        ref={inputRef}
+        value={value||""}
+        onChange={onChange}
+        onFocus={function(){updateRect();setOpen(true);}}
+        onBlur={function(){if(!pickingRef.current) setOpen(false);}}
+        placeholder={placeholder}
+        style={style}
+      />
+      {showDrop&&(
+        <div
+          onMouseDown={function(){pickingRef.current=true;}}
+          onMouseUp={function(){pickingRef.current=false;}}
+          style={{position:"fixed",top:rect.top,left:rect.left,zIndex:99999,background:"#1a1208",border:"1px solid rgba(201,150,42,.4)",boxShadow:"0 4px 24px rgba(0,0,0,.9)",minWidth:Math.max(rect.width,240),maxWidth:380,maxHeight:280,overflowY:"auto"}}
+        >
+          {suggestions.map(function(it,idx){
+            return (
+              <div key={it.name+idx}
+                onClick={function(){applyItem(it);}}
+                style={{padding:"6px 10px",cursor:"pointer",borderBottom:"1px solid rgba(201,150,42,.08)",display:"flex",alignItems:"baseline",gap:8}}
+              >
+                <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"var(--gold-l)",fontWeight:600,flex:1}}>{it.name}</span>
+                {it.weight?<span style={{fontFamily:"'EB Garamond',serif",fontSize:10,color:"rgba(232,213,176,.4)",whiteSpace:"nowrap"}}>{it.weight} lb</span>:null}
+                <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:.5,color:it.src==="local"?"rgba(74,156,92,.6)":"rgba(96,180,196,.55)",whiteSpace:"nowrap",textTransform:"uppercase"}}>{it.src==="local"?"File":("SRD"+(it.srdVer||""))}</span>
+              </div>
+            );
+          })}
+          {apiLoading&&<div style={{padding:"6px 10px",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(201,150,42,.5)",textTransform:"uppercase"}}>Searching SRD…</div>}
         </div>
       )}
     </div>
@@ -6267,7 +6670,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.065</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.113</div>
 
 </script>
 </body>
