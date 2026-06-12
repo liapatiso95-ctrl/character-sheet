@@ -1,4 +1,4 @@
-const CACHE = 'dnd-sheet-v4';
+const CACHE = 'dnd-sheet-v5';
 const FILES = [
   './character_sheet.html',
   './manifest.json',
