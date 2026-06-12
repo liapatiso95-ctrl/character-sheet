@@ -1,4 +1,4 @@
-const CACHE = 'dnd-sheet-v3';
+const CACHE = 'dnd-sheet-v4';
 const FILES = [
   './character_sheet.html',
   './manifest.json',
@@ -6,14 +6,14 @@ const FILES = [
   './icon-512.png'
 ];
 
-// Install: cache all files
+// Install: cache all files, activate immediately
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())
   );
 });
 
-// Activate: delete old caches, take control immediately
+// Activate: delete old caches, take control of open pages
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
@@ -22,37 +22,52 @@ self.addEventListener('activate', e => {
   );
 });
 
-// Fetch: network-first for HTML, cache-first for everything else
+// Network-first for HTML/navigation, cache-first for static assets
 self.addEventListener('fetch', e => {
-  const url = new URL(e.request.url);
-  const isHTML = url.pathname.endsWith('.html') || url.pathname.endsWith('/');
+  const req = e.request;
+  const url = new URL(req.url);
+  const isHTML =
+    req.mode === 'navigate' ||
+    url.pathname.endsWith('.html') ||
+    url.pathname.endsWith('/');
 
   if (isHTML) {
-    // Always try network first for the main page
     e.respondWith(
-      fetch(e.request).then(response => {
-        if (response && response.status === 200) {
-          caches.open(CACHE).then(c => c.put(e.request, response.clone()));
+      (async () => {
+        try {
+          const response = await fetch(req);
+          if (response && response.status === 200) {
+            // AWAIT the cache write so the fresh version is saved
+            // before the SW can be terminated.
+            const cache = await caches.open(CACHE);
+            await cache.put(req, response.clone());
+            // Also update the canonical HTML key so the PWA launch
+            // (start_url) always reads the same fresh copy.
+            await cache.put('./character_sheet.html', response.clone());
+          }
+          return response;
+        } catch (err) {
+          // Offline: serve whatever was last saved.
+          const cached =
+            (await caches.match(req)) ||
+            (await caches.match('./character_sheet.html'));
+          return cached || Response.error();
         }
-        return response;
-      }).catch(() =>
-        // Offline fallback
-        caches.match(e.request)
-      )
+      })()
     );
   } else {
-    // Cache-first for icons, manifest etc
     e.respondWith(
-      caches.open(CACHE).then(cache =>
-        cache.match(e.request).then(cached => {
-          const fetchPromise = fetch(e.request).then(response => {
-            if (response && response.status === 200)
-              cache.put(e.request, response.clone());
+      (async () => {
+        const cache = await caches.open(CACHE);
+        const cached = await cache.match(req);
+        const fetchPromise = fetch(req)
+          .then(response => {
+            if (response && response.status === 200) cache.put(req, response.clone());
             return response;
-          }).catch(() => null);
-          return cached || fetchPromise;
-        })
-      )
+          })
+          .catch(() => null);
+        return cached || fetchPromise;
+      })()
     );
   }
 });
