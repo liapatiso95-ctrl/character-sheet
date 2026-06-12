@@ -4118,14 +4118,22 @@ function open5eSearch(query){
             var w2=(it.weight!==undefined&&it.weight!==null?(""+it.weight):"").replace(/\s*(lb\.?|lbs\.?|pounds?)\s*$/i,"").trim();
             var d2="";
             if(ep.kind==="magic24"){
-              var ra2=(it.requires_attunement||it.attunement_detail||"").toString().trim();
-              var att2=ra2?("(Requires Attunement"+(ra2.replace(/^requires attunement/i,"").trim()?" "+ra2.replace(/^requires attunement/i,"").trim():"")+")"):"(No Attunement Required)";
+              var raRaw=it.requires_attunement;
+              var hasAttune=raRaw===true||raRaw==="true"||(typeof raRaw==="string"&&raRaw.trim()&&raRaw.toLowerCase()!=="false"&&raRaw.toLowerCase()!=="no");
+              // attunement_detail holds the qualifier text like "by a spellcaster"; the boolean just means yes/no
+              var detail=(it.attunement_detail||"").toString().replace(/^requires attunement/i,"").replace(/^(true|yes)$/i,"").trim();
+              // If requires_attunement itself is descriptive text (not a bool), use it as the detail
+              if(typeof raRaw==="string"&&raRaw.toLowerCase()!=="true"&&raRaw.toLowerCase()!=="false"&&raRaw.toLowerCase()!=="yes"&&raRaw.toLowerCase()!=="no"){
+                var fromRa=raRaw.replace(/^requires attunement/i,"").trim();
+                if(fromRa) detail=fromRa;
+              }
+              var att2=hasAttune?("(Requires Attunement"+(detail?" "+detail:"")+")"):"(No Attunement Required)";
               var meta2=[it.type&&it.type.name?it.type.name:it.type,it.rarity&&it.rarity.name?it.rarity.name:it.rarity].filter(Boolean).join(", ");
               d2=[meta2,att2,(it.desc||it.description||"").toString()].filter(Boolean).join("\n");
             } else {
               d2=(it.desc||it.description||"").toString();
             }
-            return {name:it.name,weight:w2,cost:it.cost!==undefined?(""+it.cost):"",desc:d2,src:"open5e",kind:ep.kind==="magic24"?"magic":"item",srdVer:"24",attune:ep.kind==="magic24"?((it.requires_attunement||it.attunement_detail||"").toString().trim()?true:false):null};
+            return {name:it.name,weight:w2,cost:it.cost!==undefined?(""+it.cost):"",desc:d2,src:"open5e",kind:ep.kind==="magic24"?"magic":"item",srdVer:"24",attune:ep.kind==="magic24"?(function(){var r=it.requires_attunement;return r===true||r==="true"||(typeof r==="string"&&r.trim()&&r.toLowerCase()!=="false"&&r.toLowerCase()!=="no")?true:false;})():null};
           }
           // ── v1 (2014 SRD) items ──
           var weight=(it.weight||"").toString().replace(/\s*(lb\.?|lbs\.?|pounds?)\s*$/i,"").trim();
@@ -6670,7 +6678,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.113</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.114</div>
 
 </script>
 </body>
