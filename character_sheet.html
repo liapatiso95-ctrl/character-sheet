@@ -5839,6 +5839,7 @@ function CompendiumPage({c,s}){
   const [page,setPage]=us(0);
   const [confirmAdd,setConfirmAdd]=us(null); // the result object pending confirmation
   const [addCls,setAddCls]=us(""); // selected class when adding a spell
+  const [confirmAddAll,setConfirmAddAll]=us(false); // confirm modal for "add all" spells
   const [srdResults,setSrdResults]=us([]);
   const [srdLoading,setSrdLoading]=us(false);
   const [includeSrd,setIncludeSrd]=us(true);
@@ -5945,6 +5946,17 @@ function CompendiumPage({c,s}){
     setConfirmAdd(null);
   }
 
+  function doAddAll(clsName){
+    // Add all current filtered results (all pages) to the spell list
+    var newSp=Object.assign({},c.sp);
+    results.forEach(function(r){
+      var lv=r.level||0;
+      newSp[lv]=(newSp[lv]||[]).concat([{nm:r.name||"",ti:r.castingTime||"",rng:r.range||"",cmp:r.components||"",dur:r.duration||"",conc:!!r.conc,prep:false,nt:r.desc||"",cls:clsName||"",sc:r.school||"",ritual:!!r.ritual}]);
+    });
+    s("sp",newSp);
+    setConfirmAddAll(false);
+  }
+
   return (
     <div>
       <div className="orn">Compendium</div>
@@ -6026,6 +6038,12 @@ function CompendiumPage({c,s}){
         </label>
         {srdLoading&&<span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(201,150,42,.5)",textTransform:"uppercase"}}>Searching SRD…</span>}
         <span style={{marginLeft:"auto",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.35)"}}>{totalResults} result{totalResults===1?"":"s"}{totalPages>1?" · showing "+(curPage*PER_PAGE+1)+"–"+Math.min(curPage*PER_PAGE+PER_PAGE,totalResults):""}</span>
+        {kind==="spells"&&totalResults>0&&(
+          <div onClick={function(){var spc=c.spellClasses||[];setAddCls(spc.length>0?(spc[0].nm||""):"");setConfirmAddAll(true);}}
+            style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",padding:"4px 10px",borderRadius:2,userSelect:"none",border:"1px solid rgba(123,79,207,.4)",color:"rgba(184,154,240,.85)",background:"rgba(123,79,207,.1)",whiteSpace:"nowrap",flexShrink:0}}>
+            + Add All ({totalResults})
+          </div>
+        )}
       </div>
 
       {/* Results */}
@@ -6106,6 +6124,34 @@ function CompendiumPage({c,s}){
                 style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(232,213,176,.2)",color:"rgba(232,213,176,.5)"}}>Cancel</div>
               <div onClick={function(){doAdd(confirmAdd,addCls);}}
                 style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(74,156,92,.5)",color:"rgba(74,156,92,.9)",background:"rgba(74,156,92,.12)"}}>Add</div>
+            </div>
+          </div>
+        </div>
+      )}
+      {confirmAddAll&&kind==="spells"&&(
+        <div onClick={function(){setConfirmAddAll(false);}}
+          style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+          <div onClick={function(e){e.stopPropagation();}}
+            style={{background:"#1a1410",border:"1px solid rgba(123,79,207,.5)",borderRadius:4,padding:"22px 26px",maxWidth:400,boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+            <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--arcane-l)",marginBottom:10}}>Add All {totalResults} Spell{totalResults===1?"":"s"} to Spell List?</div>
+            <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.6)",marginBottom:18,lineHeight:1.6}}>
+              This will add all <span style={{color:"var(--arcane-l)",fontWeight:600}}>{totalResults} spell{totalResults===1?"":"s"}</span> from your current search results to your spell list. Duplicates will be added as additional entries.
+            </div>
+            {(c.spellClasses||[]).length>0&&(
+              <div style={{marginBottom:18}}>
+                <div style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.45)",textTransform:"uppercase",marginBottom:6}}>Add under class</div>
+                <select value={addCls} onChange={function(e){setAddCls(e.target.value);}}
+                  style={{width:"100%",background:"rgba(0,0,0,.3)",border:"1px solid rgba(123,79,207,.3)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"6px 8px",borderRadius:2,cursor:"pointer"}}>
+                  {(c.spellClasses||[]).map(function(sc,i){var nm=sc.nm||("Spellcasting "+(i+1));return <option key={i} value={sc.nm||""}>{nm}</option>;})}
+                  <option value="">Other Spells</option>
+                </select>
+              </div>
+            )}
+            <div style={{display:"flex",gap:10,justifyContent:"flex-end"}}>
+              <div onClick={function(){setConfirmAddAll(false);}}
+                style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(232,213,176,.2)",color:"rgba(232,213,176,.5)"}}>Cancel</div>
+              <div onClick={function(){doAddAll(addCls);}}
+                style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(123,79,207,.6)",color:"rgba(184,154,240,.9)",background:"rgba(123,79,207,.15)"}}>Add All</div>
             </div>
           </div>
         </div>
@@ -7136,7 +7182,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.20</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.21</div>
 
 </script>
 </body>
