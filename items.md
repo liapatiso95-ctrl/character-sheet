@@ -6023,3 +6023,555 @@ This ceramic jug appears to be able to hold a gallon of liquid and weighs 12 pou
 You can use an action and name one liquid from the table below to cause the jug to produce the chosen liquid. Afterward, you can uncork the jug as an action and pour that liquid out, up to 2 gallons per minute. The maximum amount of liquid the jug can produce depends on the liquid you named.
 
 Once the jug starts producing a liquid, it can't produce a different one, or more of one that has reached its maximum, until the next dawn.
+
+#### Alcoholock
+**Type:** Wondrous Item, Common
+**Rarity:** Common
+**Weight:** 1 lb
+This lock looks like a small metal tankard, using its handle as the shackle. While it has a keyhole, it doesn't open with a key and can't be picked using thieves' tools. Instead, the lock only opens when at least 1 ounce of a particular kind of alcohol is poured into the keyhole.
+
+You can bind an alcoholock to an alcohol by submerging it in the drink for 1 hour. The drink can be made of one or several kinds of alcohol, potentially complicating the lock. Once bound, the lock can't be bound to a different kind of drink. You can identify what drink the lock is bound to with a successful DC 15 Wisdom (Perception) check, using your sense of smell to detect what's been poured into the lock. The DC increases by 2 for each additional kind of alcohol used to bind the lock after the first, up to a maximum DC of 25. An identify spell also determines what drink the lock is bound to. Alternatively, the lock can be broken with a successful DC 25 Strength check.
+
+The poured drink needn't match the exact age, ingredients, or maker of the bound one. For example, if the lock is bound to mead, any mead of the same or similar flavor that's poured into the lock will open. If the bound drink is a mixture of two or more ingredients, a close approximation of the mixture will open the lock (at the GM's discretion).
+
+#### Ale Seed
+**Type:** Wondrous Item, Common
+**Rarity:** Common
+**Weight:** 0.2 lb
+When thrown, this illusion seed turns into a small cask of wholesome ale, roughly 4 gallons worth, together with 4 tankards. It is often used by shadow goblins or porters to avoid carrying heavy, full-sized casks.
+
+Illusion Seeds. Illusion seeds are wondrous items first created in the Shadow Realm and reliant on a supply of shadow matter to power their effects—each such seed generates an illusion and those illusions can take quite powerful forms. While illusion seeds are fairly permanent in the Shadow Realm, where there is shadow matter to empower and sustain the illusions, they are notably less permanent anywhere else. In the mortal world and on other planes, the effects of illusion seeds last for 2d12 hours and then crumble away in a small burst of glittering light and shadows.
+
+To use an illusion seed, its owner merely needs to throw it 5 feet or more from themselves (to avoid being caught in the magical effect). Once expended, their effects are permanent (in the Shadow Realm), though they can be unraveled using dispel magic (DC 13).
+
+#### Alluring Dye
+**Type:** Potion, Common
+**Rarity:** Common
+**Weight:** 0.5 lb
+This dye is available in many different colors, from the brightest of hues seen on bright gallus to more subtle brown, black, and green shades. Applying this thick paste to your feathers, fur, or hair permanently dyes it the color of the dye. You gain +2 to Charisma saving throws for 24 hours after first applying the dye and cannot benefit from this effect again unless you use a dye of a different color. If you re-dye yourself more than once in ten days, roll a d4. On a 1, your fur, feathers, or hair turn a shocking yellow as the dyes interact disastrously, and you have disadvantage on Charisma checks for 1d6 days, after which the color fades to your natural shade.
+
+#### Amber Birdcage
+**Type:** Wondrous Item, Very Rare, Cursed Curio
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 18 lb
+This birdcage, shaped from amber, physically replaces your torso while you are attuned to it. When your Attunement ends, it separates from you, and your torso returns to its previous state. The birdcage has the following properties.
+
+Sense Fiends. As a Bonus Action, you can sense the location of Fiends or magical effects created by Fiends within 60 feet of yourself.
+
+Capture Fiend. As a Magic action, choose one Bloodied Fiend that you can see within 60 feet of yourself. It must succeed on a DC 15 Charisma saving throw or be transformed into an amber songbird and trapped in the birdcage. The songbird is an inert object until removed from the cage and released. You can remove one songbird from the cage as a Bonus Action. If you stop holding the bird, the Fiend reverts to its true form with all its Hit Points, and it is Hostile to you.
+
+Consume Songbird. As a Magic action, you can consume one amber songbird you are holding. The Fiend dies, and you can either regain one expended spell slot with a level up to half the Fiend's CR, or you can gain Temporary Hit Points equal to the Fiend's CR.
+
+Amber Curse. You have a -1 penalty to Wisdom saving throws. Each time you use the Capture Fiend or Consume Songbird properties, this penalty increases by 1.
+
+Lingering Curses. Ending your Attunement to one of these items removes its curse, but the power of a Cursed Curio doesn't release its hold on the user easily. If you attune to it again within 28 days, the progression of its curse returns to where it was before you ended your Attunement.
+
+#### Amber Runestone
+**Type:** Wondrous Item, Uncommon
+**Rarity:** Uncommon
+**Weight:** 1 lb
+This piece of polished amber is engraved with many tiny runes. As a bonus action, you can mentally command the stone to shed bright light in a 15-foot radius and dim light for an additional 15 feet. The light is sunlight. While the light persists, you can also use a bonus action to expand or reduce its radius of bright and dim light by 5 feet each, to a maximum of 30 feet each or a minimum of 10 feet each.
+
+#### Amberblood Heart
+**Type:** Wondrous Item, Very Rare
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 4 lb
+This stone sculpture of a heart flows with slow-moving liquid amber. At its center is a crystalline amber core. As part of attuning to the heart, you must hold it against your chest for the duration. Once you attune to it, it magically vanishes into your chest to reinforce your heart and body; faint amber cracks then line your skin.
+
+While attuned to the heart, you gain the following benefits:
+
+You have resistance to acid and poison damage.
+You can't become diseased, petrified, or poisoned.
+For every 10 years that pass, your body ages only 1 year.
+Your weight doubles.
+
+If your attunement to the heart ends, it magically appears in your open hand or in the nearest unoccupied space.
+
+#### Ambitious Medic's Box
+**Type:** Wondrous Item, Uncommon
+**Rarity:** Uncommon
+**Attunement:** yes
+**Weight:** 3 lb
+This wooden box has two halves which are magically locked by ornamental clasps that can only be opened during certain times of the day. The box is 1 foot wide, 2 feet long, and weighs 3 pounds. You can open and use the box as normal, as described below, even if you aren't attuned to it.
+
+The left side is locked by a metal clasp decorated with a sun. From dawn until dusk, you can open the left side of the box, which contains the same contents and functions identically to a healer's kit. Each day at dusk, the left side of the box magically closes and regains all expended uses of its healer's kit.
+
+The right side is locked by a metal clasp decorated with a moon smoking a pipe. From dusk until dawn, you can open the right side of the box, which contains three pewter steins, a flask, and a wooden pipe. While holding the flask, you can use an action to speak its command word followed by either "beer", "wine", or "whiskey". When you do, the flask magically fills with up to 4 gallons of beer, 1 gallon of wine, or 8 ounces of liquor, depending on the chosen drink, which can be poured out as an action, up to 1 gallon per minute. Once this property of the flask has been used, it can't be used again until the next dusk. The wooden pipe is magically refilled with tobacco daily at dusk. Each day at dawn, the right side of the box magically closes, and anything removed from the box is magically returned to it.
+
+While attuned to the box, you are proficient in the Medicine skill and can open either side of the box at any time. If you're already proficient in the Medicine skill, your proficiency bonus is doubled for any ability check you make that uses that skill.
+
+#### Amethyst Die
+**Type:** Wondrous Item, Rare
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 0.1 lb
+This gaming die is carved from a fragment of powerful psionic crystal and resonates with a remnant of its power. This die has 3 charges and regains all expended charges daily at dawn. When you make an ability check, attack roll, or saving throw, you can expend 1 charge to roll a d6 and add the number rolled to the d20 roll. Immediately after the ability check, attack roll, or saving throw is resolved, you take psychic damage equal to twice the number you rolled on the d6.
+
+#### Amethyst Lodestone
+**Type:** Wondrous Item, Very Rare
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 2 lb
+This fist-sized chunk of amethyst is infused with an amethyst dragon's ability to bend gravitational forces. While you are carrying the lodestone, you have advantage on Strength saving throws.
+
+The lodestone has 6 charges for the following properties, which you can use while you are holding the stone. The stone regains 1d6 expended charges daily at dawn.
+
+Flight. As a bonus action, you can expend 1 charge to gain the power of flight for 10 minutes. For the duration, you gain a flying speed equal to your walking speed, and you can hover.
+
+Gravitational Thrust. As an action, you can expend 1 charge to focus gravity around a creature you can see within 60 feet of you. The target must succeed on a DC 18 Strength saving throw or be pushed up to 20 feet in a direction of your choice.
+
+Reverse Gravity. As an action, you can expend 3 charges to cast reverse gravity from the stone (save DC 18).
+
+#### Amethyst Revolver
+**Type:** Weapon (Pistol), Rare, Martial Weapon, Ranged Weapon, Firearm
+**Rarity:** Rare
+**Weight:** 3 lb
+
+Damage: 1d10 Piercing
+Range 30/90 ft.
+
+This pistol has a shimmering geode of amethyst at its center, which rotates a few degrees whenever it's fired. You gain a +1 bonus to attack and damage rolls made with this magic weapon. The weapon lacks loading and creates its own ammunition; it can't be loaded with any other ammunition. Instead of a bullet, it fires a shard of amethyst each time it's shot—the shards regrow within the central geode. The weapon can have a maximum of 6 shards at a time, and it regains 1 shard at the start of each round (or every 6 seconds). Hit or miss, the fired shard is shattered and destroyed immediately after attacking with it.
+
+Shattershot. You can use an action to fire all of the remaining amethyst shards in the pistol at once. When you do, each creature in a 30-foot cone, originating from you, must make a DC 15 Dexterity saving throw; a creature more than 15 feet away from you has advantage on this save. A creature takes 1d6 piercing damage for each shard fired on a failed save, or half as much damage on a successful one. This property can't be used again until the next dawn.
+
+Range. A weapon that can be used to make a ranged attack has a range shown in parentheses after the ammunition or thrown property. The range lists two numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's maximum range. When attacking a target beyond normal range, you have disadvantage on the attack roll. You can't attack a target beyond the weapon's long range.
+
+#### Ammunition of Fireworks
+**Type:** Generic Variant, Rare
+**Rarity:** Rare
+**Weight:**
+This ammunition has a magical fuse that ignites with a hiss once it's fired. When you make a ranged attack with it, the ammunition explodes at the target's location in an impressive display of colorful fireworks, destroying the ammunition before hitting or missing the target. Each creature within 20 feet of the explosion must make a DC 15 Dexterity saving throw; the target of the attack has disadvantage on the save. On a failed save, a creature takes fire damage equal to 1d4 + 1d6 + 1d8 + 1d10 + 1d12 and is deafened for 1 minute. On a successful save, a creature takes half as much fire damage and isn't deafened.
+
+Grand Finale. When you roll damage for the explosion, a separate firework flies off from it if you roll the same number on two of the damage dice and each time you roll the highest number on a damage die. When this happens, the firework streaks towards a different target of your choice within 40 feet of the explosion. That target must then succeed on a DC 15 Dexterity saving throw or take 1d20 fire damage.
+
+#### Ammunition of Slaying
+
+**Type:** Ammunition, Generic Variant
+**Rarity:** Very Rare
+**Cost:**
+
+This magic ammunition is meant to slay creatures of a particular type, which the DM chooses or determines randomly by rolling on the table below. If a creature of that type takes damage from the ammunition, the creature makes a DC 17 Constitution saving throw, taking an extra 6d10 Force damage on a failed save or half as much extra damage on a successful one.
+
+After dealing its extra damage to a creature, the ammunition becomes nonmagical.
+
+| 1d100 | Creature Type |
+| ----- | ------------- |
+| 01-10 | Aberrations   |
+| 11-15 | Beasts        |
+| 16-20 | Celestials    |
+| 21-25 | Constructs    |
+| 26-35 | Dragons       |
+| 36-45 | Elementals    |
+| 46-50 | Humanoids     |
+| 51-60 | Fey           |
+| 61-70 | Fiends        |
+| 71-75 | Giants        |
+| 76-80 | Monstrosities |
+| 81-85 | Oozes         |
+| 86-90 | Plants        |
+| 91-00 | Undead        |
+
+#### Amulet of Appearance
+
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+
+Your armor, weapons, and other equipment always shine as if just polished. Even if you're wounded, your wounds do not appear to others. You're immune to the frightened and poisoned conditions, as these would otherwise ruin your elegant appearance. However, whenever you would otherwise have been affected by one of these conditions, a random non-evil Humanoid on the Material Plane whom you have previously met gets the condition instead. You know this.
+
+#### Amulet of Beginner's Luck
+
+**Type:** Wondrous Item
+**Rarity:** Common
+**Attunement:** no
+**Weight:** 0.2
+**Cost:**
+
+When you make an ability check using a skill with which you aren't proficient while wearing this amulet, you can reroll the check if you roll a 1 or 2 on the d20. You must use the new roll. Once this property has been used, it can't be used again until the next dawn.
+
+#### Amulet of Betrayal
+
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+
+You can use a bonus action to move one of the following conditions from yourself to an ally within 60 feet of you: blinded, deafened, frightened, poisoned, stunned, exhaustion. When transferring exhaustion, move all your exhaustion levels. If the chosen ally is immune to a transferred condition, the transfer fails.
+
+#### Amulet of Buoyancy
+
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 0.2
+**Cost:**
+
+This well-worn necklace is adorned with the bow of a ship and a crashing wave of blue glass. While wearing this amulet, you can use your reaction to immediately stand up when you're knocked prone. When you do, your speed is halved until the end of your next turn. In addition, if you start your turn underwater with 0 hit points, you immediately rise 60 feet toward the surface.
+
+#### Amulet of Curse Suppression
+
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+
+This glittering amulet of ivory and silver can be used to temporarily fend off the effects of curses. While attuned to the amulet, the effects of any curses on you are nullified, as though they had been removed by the Remove Curse spell.
+
+However, this relief is only temporary. When the amulet is removed or you end your Attunement to it, any curses it was suppressing return with full force.
+
+#### Amulet of Divine Protection
+
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** By a Cleric or Paladin
+**Weight:** 0.2
+**Cost:**
+
+While wearing this amulet, you gain the effect of the shield of faith spell, granting you a +2 to bonus to AC. Whenever you take damage for the first time on a turn while wearing it, you must make a Constitution saving throw (as if you were concentrating on a spell). On a failed save, the amulet's effect is suppressed for 1 minute. Maintaining the effect of this amulet does not prevent you from concentrating on a different spell.
+
+#### Amulet of Duplicity
+
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+
+When you die, you're transported to an extradimensional space where you're stabilized at 0 hit points and kept in that state. The amulet creates a perfect copy of your corpse and places it where you were just before you died, but without any of your worn or carried items. After 24 hours, you regain 1 hit point and are returned to the location of your near-death. Everything about you is the same, except that your facial features are entirely different from before. Only a Wish spell can restore your true identity.
+
+Until then, you have disadvantage on any Charisma (Persuasion) checks to attempt to reveal who you really are.
+
+Curse. An Identify spell or similar reveals only that the amulet can prevent death. Once you attune to the amulet, you can't describe its ability to any other creature, and if unattuned, you immediately forget what the amulet does. A Remove Curse spell reveals the details of the curse but does not remove it from the amulet.
+
+#### Amulet of Equilibrium
+
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+
+This spiraling pendant is made of three magic-sensitive panes of colorful crystal. Each piece of crystal is attuned to a different arcane element. If you can cast spells, you can use the amulet as a Spellcasting Focus while you're attuned to it.
+
+The amulet has 4 charges and regains 2 expended charges daily at dawn. When you deal Cold, Fire, or Lightning damage to only one creature while wearing the amulet, you can expend any number of charges to reroll the same number of damage dice. You must use the new rolls.
+
+Whenever you take Cold, Fire, or Lightning damage from an enemy, the amulet regains 1 expended charge.
+
+#### Amulet of Harmony
+
+**Type:** Wondrous Item
+**Rarity:** Legendary
+**Attunement:** yes
+**Weight:** 0.5
+**Cost:**
+
+The amulet is a golden disk about 4 inches across. There are symbols etched into its surface and there are six bezels that hold the Gems of Power.
+
+The Amulet of Harmony has the following properties:
+
+While attuned to this amulet, you feel a pull in the direction of the Prismatic Well.
+
+If the Prismatic Well is dormant, you can restore its power by expending your own energy. You must be within 10-feet of the well to restore its power and you must say the words, "I invoke the power of the Prismatic Well and restore the colors of Harmony for all." If you do so, roll a d6. On a 2-6, the power of the well is restored. On a 1, the well is restored but you fall into a deep, magical slumber for 1 year and cannot be roused except by a remove curse spell or similar magic.
+
+You can turn off the power of the Prismatic Well, plunging all of Harmony into a polarized world where everything is horribly black and white. To do this, you must be within 10-feet of the well and you must say the words, "I revoke the power of the Prismatic Well and withhold the colors of Harmony to all." If you do so, roll a d6. On a 3-6, the well is turned off. On 1-2, the power of the well remains and you turn into a statue of black stone.
+
+Only a wish spell can undo this effect.
+
+#### Amulet of Health
+
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 1
+**Cost:**
+
+Your Constitution score is 19 while you wear this amulet. It has no effect on you if your Constitution is already 19 or higher without it.
+#### Amulet of Ideals
+
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** By a Cleric or Paladin
+**Weight:** 0.2
+**Cost:**
+
+This hollow silver locket depicts a pair of heavy temple doors. Pressing the button at its center opens the locket. As part of attuning to the item, you must place a trinket within the hollow space. The trinket must be representative in some way, either to you or to your deity, of your cleric domain or paladin oath. While wearing the amulet, the first time you use your Channel Divinity, it doesn't expend a use of that feature. This property can't be used again until the next dawn.
+
+The amulet has 5 charges. It regains all expended charges daily at dawn. While wearing the amulet, whenever you cast a spell from your domain or oath spell list, you can expend 1 or more of the amulet's charges to reduce the spell slot level required to cast it by 1 for each charge spent; a spell reduced below 1st level in this way doesn't require you to expend a spell slot. This property can't be used to cast a spell of a level for which you don't have spell slots, nor can it be used to cast a spell of 6th level or higher.
+
+#### Amulet of Immutability
+
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+
+This adamantine amulet protects you from magic that would threaten to alter your form against your will. While wearing the amulet, you have advantage on saving throws against transmutation spells of 5th level or lower that would transform or control you, such as enlarge/reduce, levitate, or slow.
+
+In addition, when you are targeted by the polymorph spell, you can choose to automatically succeed on the saving throw.
+
+#### Amulet of Initiative
+
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+
+This amulet is actually a small gong-like bell. It emits a loud ring whenever you roll initiative, which is audible out to a range of 100 feet. You have advantage on initiative rolls while wearing the amulet. Further, your speed increases by 10 feet until the start of your second turn of combat, and you gain the following special reaction:
+
+Knockout Parry. The first time you're hit with an attack before the start of your second turn of each combat, you can use your reaction to immediately make a single weapon attack against the attacker. This reaction can be used even if you're surprised, and allows you to draw a stowed weapon as part of it. If the total of your attack roll is equal to or lower than the attacker's, the triggering attack hits you, and yours misses; if yours is higher, the triggering attack misses you, and you hit the attacker instead. If you hit it with a melee attack, the attack deals an extra damage die of the weapon's type, and the target must succeed on a DC 15 Constitution saving throw or be stunned until the end of your next turn.
+
+#### Amulet of Primal Wisdom
+
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+
+Crafted from the dried leaves of magical plants and imbued with their dust, this amulet is decorated with a singular dried flower and then encased in sap. The pendant glows softly with the light of springtime and smells of floral fields in bloom.
+
+Your Wisdom score is 19 while you wear this magic amulet. It has no effect on you if your Wisdom is 19 or higher without it.
+
+#### Amulet of Proof against Detection and Location
+
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** yes
+**Weight:** 1
+**Cost:**
+
+While wearing this amulet, you can't be targeted by Divination spells or perceived through magical scrying sensors unless you allow it.
+
+#### Amulet of Protection from Turning
+
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 1
+**Cost:**
+
+While you wear this amulet of silver and turquoise, you have advantage on saving throws against effects that turn undead.
+
+If you fail a saving throw against such an effect, you can choose to succeed instead. You can do so three times, and expended uses recharge daily at dawn. Each time an effect that turns undead is used against you, the amulet glows with silvery blue light for a few seconds.
+
+#### Amulet of Radiant Protection
+
+**Type:** Wondrous Item
+**Rarity:** Legendary
+**Attunement:** By a Cleric or Paladin
+**Weight:** 0.2
+**Cost:**
+
+This amulet is decorated with polished platinum, gold, and stained temple glass. While wearing it, it creates an aura in a 10-foot radius around you. You and all creatures friendly to you in the aura gain a +1 bonus to AC and saving throws. If you have 17 or more levels in the paladin class, the radius of the aura increases to 30 feet. You can also use the amulet as a holy symbol.
+
+The amulet has 7 charges and regains 1d4 + 3 expended charges daily at dawn. While wearing the amulet, you can use a bonus action to expend up to 4 of its charges. Roll a d8 for each charge you expend and choose up to 4 creatures within the aura. Each of those creatures then gains a number of temporary hit points equal to the total of the roll plus your spellcasting ability modifier.
+
+#### Amulet of Retributive Healing
+
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+
+This amulet has 3 charges and regains 1d3 expended charges daily at dawn. When you restore Hit Points to one other creature, you can expend 1 charge to regain the same amount of Hit Points.
+
+#### Amulet of the Black Skull
+
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 1
+**Cost:**
+
+This amulet is carved from obsidian and shaped like a screaming humanoid skull, with ruby eyes and emeralds for teeth. It hangs from an iron chain necklace.
+
+The amulet has 6 charges and regains 1d6 charges daily at dawn. While wearing the amulet, you can use an action to expend 1 of its charges to transport yourself and anything you are wearing or carrying to a location within 100 feet of you. The destination you choose doesn't need to be in your line of sight, but it must be familiar to you (in other words, a place you have seen or visited), and it must be on the same plane of existence as you. This effect isn't subject to the magic restrictions placed on the Tomb of the Nine Gods; thus, the amulet can be used to enter and exit the tomb.
+
+If you aren't undead, you must make a DC 16 Constitution saving throw each time you use the amulet to teleport. On a failed saving throw, the black skull cackles as you are transformed in transit. The transformation takes effect as soon as you arrive at the destination, and is determined randomly by rolling percentile dice and consulting the Black Skull Transformation table.
+
+Black Skull Transformation
+
+| d100  | Transformation                                                                                                                                                                                   |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 01-20 | The symbol of Acererak is burned into your flesh, a curse that can only be removed with a remove curse spell or similar magic. Until the curse ends, your hit points can't be restored by magic. |
+| 21-35 | You grow larger as if affected by an enlarge/reduce spell, except the effect lasts for 1 hour.                                                                                                   |
+| 36-50 | You grow smaller as if affected by an enlarge/reduce spell, except the effect lasts for 1 hour.                                                                                                  |
+| 51-70 | You arrive at the destination wearing nothing but the amulet of the black skull. Everything else that you were wearing or carrying appears in a random unoccupied space within 100 feet of you.  |
+| 71-95 | You are paralyzed for 1 minute or until this effect is ended with a lesser restoration spell or similar magic.                                                                                   |
+| 96-00 | You become petrified. This effect can be ended only with a greater restoration spell or similar magic.                                                                                           |
+
+#### Amulet of the Coldfire Phoenix
+
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+
+A blue pendant in the shape of a phoenix clutching a shimmering blue orb hangs from this leather cord. While wearing the necklace, you emit a frigid aura that grants you and creatures of your choice within 10 feet of you resistance to cold damage.
+
+In addition, when you are reduced to 0 hit points while wearing the necklace but not killed outright, you can drop to 1 hit point instead. When you do, you gain 25 temporary hit points. If a creature hits you with a melee attack while you have these hit points, that creature takes 25 cold damage. Once this property has been used, it can't be used again until 3 days have passed.
+
+#### Amulet of the Crypt Keeper
+
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** By a Spellcaster
+**Weight:** 0.2
+**Cost:**
+
+This silver amulet is in the shape of a mausoleum. An eerie fog seeps from its interior. While wearing it, you have resistance to necrotic damage.
+
+The amulet can have up to 20 charges at a time. When found, it has 1d10 + 10 charges. You can use an action while wearing it to touch a creature's corpse and speak the amulet's command word. If the corpse isn't that of a construct or undead, the corpse is magically reduced to ash, and the amulet gains a number of charges equal to the creature's Challenge Rating or level (rounded up; maximum of 10).
+
+Spells. While wearing this amulet, you can use an action to expend 5 of its charges to cast one of the following spells from it as a 5th-level spell, using your spell save DC or spell attack bonus: false life, fear, inflict wounds, or speak with dead.
+
+Summon Flesh Golem. While wearing the amulet, you can use an action to expend 20 of its charges to magically summon a flesh golem. The golem appears in an unoccupied space within 10 feet of you. This golem has resistance to necrotic damage, is undead, and has features reminiscent of the corpses used to generate the charges used for this property. The golem is friendly to you and your companions, and takes its turn immediately after you. It obeys your verbal commands (no action required). If you don't issue it any commands, it defends itself from hostile creatures, but otherwise takes no actions. This golem can't be calmed down once it goes berserk. The golem turns to ash and is destroyed when it drops to 0 hit points, when this property is used again, or once it's gone berserk for 1 hour; the golem immediately goes berserk if you are no longer attuned to or wearing the amulet. Once this property has been used, it can't be used again until the next dawn.
+
+#### Amulet of the Drunkard
+
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 0.2
+**Cost:**
+
+This amulet smells of old, ale-stained wood. While wearing it, you can regain 4d4 + 4 hit points when you drink a pint of beer, ale, mead, or wine. Once the amulet has restored hit points, it can't do so again until the next dawn.
+
+#### Amulet of the Guiding Eye
+
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+
+This amulet features two eye-like pendants: one humanoid and one bestial. If you're within 5 feet of a friendly beast, such as a beast companion or familiar (including one created by the find familiar spell), you ignore the effects of being blinded, provided the beast isn't also blinded.
+
+You can use an action to charm a Small or smaller beast that you're touching or that you can see within 30 feet of you, provided that it isn't hostile towards you. The beast is charmed by you for 24 hours, and it is friendly to you and your companions for the duration. This effect ends early if you use this feature again or if you or your companions do anything harmful to it. You can use an action to see through the beast's eyes while it's within 30 feet of you, and continue to do so until you use your action to return to your normal sight. While seeing through the beast's eyes, you gain the benefits of any special senses that rely on sight possessed by that creature, though you are blinded to your own surroundings. Unless you have another way to command or control the beast, it shares your initiative in combat and uses its movement to remain within 5 feet of you. On its turn, it takes either the Dash or Dodge action.
+#### Amulet of the Inferno
+
+**Type:** Wondrous Item
+**Rarity:** Artifact
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+When Fierna was born, petitioners and devils from all over came to celebrate her birth. Many brought gifts and treasures, including a powerful infernal warlock. Recognizing the strength and inner fire of Fierna, the warlock gifted her with the Amulet of the Inferno, and it has been around her neck ever since.
+
+The Amulet of the Inferno is a magic necklace that grants a +3 bonus to spell save DC and spell attack bonus.
+
+Random Properties. The Amulet of the Inferno has the following random properties:
+
+3 major beneficial properties
+
+2 major detrimental properties
+
+Infernal Fire. While worn, the amulet augments any magical flames created by you, transforming normal fire into Hellfire. Hellfire ignores resistances and immunities to fire damage and deals double damage to creatures vulnerable to either fire or necrotic damage. It is also capable of melting stone, as well as igniting flammable objects.
+
+Raging Inferno. While attuned to the Amulet of the Inferno, you may use a bonus action to cast Fire Bolt or Produce Flame. The cantrips scale based on your total character level and use Intelligence as a spellcasting modifier if you're normally incapable of casting spells.
+
+Everburning. The Amulet of the Inferno grants resistance to cold damage and the ability to breathe underwater. Any magical flames you conjure are similarly augmented: they can be used underwater, can't be extinguished through any means, and can exude any temperature. While the casting of a fire spell can still be interrupted with Counterspell, once the spell has been cast, any lingering flames can't be removed.
+
+Destroying the Amulet. The only creature capable of destroying the amulet is the warlock that created it. Nobody living knows the warlock's identity, making destroying the amulet almost impossible.
+
+#### Amulet of the Lycanthrope
+
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+This rounded amulet depicts a harrowing crescent moon with blood-red claw marks running through its center. The markings emit a dim red light on the day of a full moon.
+
+If you're not a lycanthrope, you can use a bonus action while wearing the amulet to assume a more bestial appearance, taking on the claws and defining features of either a bear, rat, tiger, or wolf (your choice). This transformation lasts for 1 minute or until you drop to 0 hit points or use a bonus action to revert to your normal form. For the duration, you can use your claws as natural weapons when making unarmed strikes. If you hit with them, you deal slashing damage equal to 1d8 + your Strength modifier, instead of the bludgeoning damage normal for an unarmed strike. In addition, you have advantage on Wisdom (Perception) checks that rely on hearing or smell for the duration of the transformation. This property can't be used again for 12 hours or until the next dusk, whichever comes first. Alternatively, if it's within 24 hours of a full moon, this property can be used again after 6 hours, instead of 12.
+
+If you're already a lycanthrope and are wearing the amulet, your claw and bite attacks while in your animal or hybrid forms deal an extra 1d8 necrotic damage and count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage. In addition, your bite attack save DC increases by 3.
+
+Curse. This amulet is cursed, and becoming attuned to it extends the curse to you. As long as you remain cursed, you have disadvantage on saving throws made to resist becoming cursed by lycanthropy.
+
+#### Amulet of the Planes
+
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 1
+**Cost:**
+While wearing this amulet, you can take a Magic action to name a location that you are familiar with on another plane of existence. Then make a DC 15 Intelligence (Arcana) check. On a successful check, you cast Plane Shift. On a failed check, you and each creature and object within 15 feet of you travel to a random destination determined by rolling 1d100 and consulting the following table.
+
+| 1d100 | Destination                                                                                                                                                                                                           |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 01-60 | Random location on the plane you named                                                                                                                                                                                |
+| 61-70 | Random location on an Inner Plane determined by rolling 1d6: on a 1, the Plane of Air; on a 2, the Plane of Earth; on a 3, the Plane of Fire; on a 4, the Plane of Water; on a 5, the Feywild; on a 6, the Shadowfell |
+| 71-80 | Random location on an Outer Plane determined by rolling 1d8: on a 1, Arborea; on a 2, Arcadia; on a 3, the Beastlands; on a 4, Bytopia; on a 5, Elysium; on a 6, Mechanus; on a 7, Mount Celestia; on an 8, Ysgard    |
+| 81-90 | Random location on an Outer Plane determined by rolling 1d8: on a 1, the Abyss; on a 2, Acheron; on a 3, Carceri; on a 4, Gehenna; on a 5, Hades; on a 6, Limbo; on a 7, the Nine Hells; on an 8, Pandemonium         |
+| 91-00 | Random location on the Astral Plane                                                                                                                                                                                   |
+
+#### Amulet of the Platinum Fang
+
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+A single fang said to be from a deific dragon hangs on this platinum necklace. The tooth itself is cracked but repaired with molten platinum, sealing it together and retaining its inherent magic. You have resistance to radiant damage while wearing this amulet. In addition, whenever a spell restores hit points to you, you also gain 1d6 + 4 temporary hit points.
+
+Platinum Aspect. While wearing the amulet, you can use an action to call forth an instantaneous, spectral maw of a platinum dragon. Make a melee spell attack with the maw against a target within 15 feet of you, using a +10 spell attack bonus. On a hit, the target takes 2d10 + 10 force damage plus 4d6 radiant damage. Once you've used this property, you can't do so again until the next dawn.
+
+If you're a dragonborn, you can choose to use this property in place of your breath weapon. When you do, it can't be used again until you finish a short or long rest, instead of the next dawn. If you use your normal breath weapon, you can choose for it to deal radiant damage, instead of its normal damage type.
+
+#### Amulet of the Sentinel
+
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+This golden amulet of an eye has a large ruby embedded in its center and eight smaller gems around it. The amulet has 8 charges and regains 1d6 + 2 expended charges daily at dawn. While wearing this amulet, you can expend 1 or more of its charges to use one of the following properties:
+
+Alertness. When you roll for initiative, you can use your reaction to expend 1 charge to add your proficiency bonus to the roll.
+
+Protection. When a creature that you can see within 30 feet of you suffers a critical hit, you can use your reaction to expend 2 charges to turn that hit into a normal hit. Any effects triggered by a critical hit are canceled.
+
+Vigilance. When one or more creatures that you can see within 30 feet of you are forced to make a saving throw, you can use your reaction to expend 2 or more charges. For 2 charges, you grant one affected creature of your choice advantage on the saving throw. For each additional charge you expend, you grant one more affected creature of your choice advantage on the saving throw. You make this choice after you see the roll, but before the GM says whether the roll succeeds or fails.
+
+#### Amulet of the Spirit Naga
+
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+While wearing this platinum pendant, you are immune to the poisoned condition and have immunity to poison damage.
+
+In addition, if you die while wearing the pendant, you immediately return to life with half your hit points. This property restores any missing body parts, neutralizes any poisons, and cures normal diseases afflicting you when you died, but has no effect if you die of old age. Once you're returned to life in this way, the amulet loses this property.
+
+#### Amulet of the Unknown
+
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** by a Warlock
+**Weight:** 0.2
+**Cost:**
+The design of this swirling amulet shifts to match the aesthetic likeness of your patron when you attune to it. While attuned to it, you have one additional Warlock spell slot, which is the same level as your other ones. Once this spell slot has been used to cast a spell, it can't be used again until the next dawn.
+
+Curse. This item is cursed, and attuning to it extends the curse to you. If your attunement to the item ends, the amulet is destroyed. While you remain cursed, you can't speak of, mention, or otherwise refer to your patron in any way—even a roundabout one. When you do, you're immediately stopped and take 1d10 psychic damage, which can't be reduced in any way.
+
+#### Amulet of the Wagoneer
+
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 0.2
+**Cost:**
+You're considered to be proficient with land vehicles while wearing this amulet, and you can add your proficiency bonus to any check you make to perform either repairs or routine maintenance on such a vehicle. In addition, traveling by way of a land vehicle at a normal pace doesn't prevent you from using stealth, nor does traveling at a fast pace in one give you a penalty to your passive Wisdom (Perception) score. You have advantage on Wisdom (Animal Handling) checks made with any mount pulling the vehicle.
+
+Lastly, while wearing this amulet, any mount that's pulling a land vehicle you control gains a +2 bonus to any Constitution saving throw it makes to endure a forced march.
