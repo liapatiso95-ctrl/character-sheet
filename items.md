@@ -2183,15 +2183,11 @@ As psiactive weapons channel your own latent energy, they aren't considered magi
 Damage: 1d6 Psychic
 Heavy, Psiactive, two-handed, range 30/120 ft.
 
-Range. A weapon that can be used to make a ranged attack has a range shown in parentheses after the ammunition or thrown property. The range lists two numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's maximum range. When attacking a target beyond normal range, you have disadvantage on the attack roll. You can't attack a target beyond the weapon's long range.
+Psiactive. A psiactive ranged weapon draws its power from your innate psionic potential, whether or not you're trained to use it. When attacking with a psiactive weapon, you use your choice of your Intelligence or Charisma modifier for the attack and damage rolls.
 
-Psiactive. Same rules as above.
+You can fire psiactive weapons a number of times equal to twice your proficiency bonus. After that, your psionic potential is temporarily expended and you can't fire another psiactive weapon until you regain your psionic focus by using an action or a bonus action (your choice). Your psionic focus is shared between all psiactive weapons; whenever you make an attack with any psiactive weapon, you expend one of your uses.
 
-Two-Handed. This weapon requires two hands to use.
-
-Heavy. Creatures that are Small or Tiny have disadvantage on attack rolls with heavy weapons.
-
-
+As psiactive weapons channel your own latent energy, they aren't considered magic weapons and they can't be sensed with the detect magic spell or similar magic. However, they don't function in an antimagic field.
 
 #### Hematite
 
@@ -5639,11 +5635,6 @@ Once on each of your turns when you expend a spell slot to use your Divine Smite
 - The next attack made against the target is made with advantage.  
 - The target can't regain hit points.
 
-Heavy. Creatures that are Small or Tiny have disadvantage on attack rolls with heavy weapons. A heavy weapon's size and bulk make it too large for a Small or Tiny creature to use effectively.
-
-Reach. This weapon adds 5 feet to your reach when you attack with it. This property also determines your reach for opportunity attacks with a reach weapon.
-
-Two-Handed. This weapon requires two hands to use. This property is relevant only when you attack with the weapon, not when you simply hold it.
 
 #### Acorn Charm
 **Type:** Wondrous Item, Uncommon
@@ -7068,16 +7059,6 @@ Jumpstart. You can use an action to deduct 5 or more minutes from the bow's rema
 
 Quicklaunch. You can use a bonus action to deduct 2 minutes from the bow's remaining time to make a single ranged weapon attack with it. If you already hit the target with the bow on this turn, you have advantage on the attack roll, and on a hit, the target takes an extra 1d6 lightning damage.
 
-Range. A weapon that can be used to make a ranged attack has a range shown in parentheses after the ammunition or thrown property. The range lists two numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's maximum range. When attacking a target beyond normal range, you have disadvantage on the attack roll. You can't attack a target beyond the weapon's long range.
-
-Ammunition. You can use a weapon that has the ammunition property to make a ranged attack only if you have ammunition to fire from the weapon. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack. Loading a one-handed weapon requires a free hand. At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.
-
-If you use a weapon that has the ammunition property to make a melee attack, you treat the weapon as an improvised weapon. A sling must be loaded to deal any damage when used in this way.
-
-Heavy. Creatures that are Small or Tiny have disadvantage on attack rolls with heavy weapons. A heavy weapon's size and bulk make it too large for a Small or Tiny creature to use effectively.
-
-Two-Handed. This weapon requires two hands to use. This property is relevant only when you attack with the weapon, not when you simply hold it.
-
 #### Arkanorod
 **Type:** Rod
 **Rarity:** Very Rare
@@ -7967,9 +7948,6 @@ This axe's mighty twin blades are edged with ruby and sapphire. You gain a +2 bo
 
 **Inversion.** When you reduce a celestial or fiend to 0 hit points using the axe, you can expend 1 of its charges to force the target to make a DC 17 Charisma saving throw. On a failed save, the target's sense of self is shattered; it drops to 1 hit point instead, and its alignment is changed. Lawful becomes chaotic, good becomes evil, and vice versa. If its alignment is true neutral or unaligned, or if the target has legendary actions, this property has no effect on it.
 
-**Heavy.** Creatures that are Small or Tiny have disadvantage on attack rolls with heavy weapons.
-
-**Two-Handed.** This weapon requires two hands to use.
 
 #### Axe of Hurricanes
 **Type:** Generic Variant
@@ -8561,3 +8539,322 @@ While magical, the stone emits a clear bell-like ringing audible out to 60 feet 
 - Touches a surface
 
 The effect ends at the end of the turn.
+
+#### Bag of Continual Embers
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Weight:** 1
+**Cost:**
+This leather bag has 3d6 glimmering red beads inside it when found. A bead feels pleasantly warm while held. You can use an action to withdraw a bead from the bag and place it in an unlit brazier (or similar vessel), causing a continual flame to sputter to life within the brazier and destroying the bead.
+
+#### Bag of Devouring
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Weight:** 5
+**Cost:**
+This bag resembles a Bag of Holding but is a feeding orifice for a gigantic extradimensional creature. Turning the bag inside out closes the orifice.
+
+The extradimensional creature attached to the bag can sense whatever is placed inside the bag. Animal or vegetable matter placed wholly in the bag is devoured and lost forever. When part of a living creature is placed in the bag, as happens when someone reaches inside it, there is a 50 percent chance that the creature is pulled inside the bag. A creature inside the bag can take an action to try to escape, doing so with a successful DC 15 Strength (Athletics) check. Another creature can take an action to reach into the bag to pull a creature out, doing so with a successful DC 20 Strength (Athletics) check, provided the puller isn't pulled inside the bag first. Any creature that starts its turn inside the bag is devoured, its body destroyed.
+
+Inanimate objects can be stored in the bag, which can hold a cubic foot of such material. However, once each day, the bag swallows any objects inside it and spits them out into another plane of existence. The DM determines the time and plane.
+
+If the bag is pierced or torn, it is destroyed, and anything contained within it is transported to a random location on the Astral Plane.
+
+#### Bag of Forging Coals
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Weight:** 2
+**Cost:**
+When found, this leather bag is filled with 1d6 + 2 smoldering coals. They remain hot within the bag, keeping it warm to the touch on the outside. When a coal is placed in a fire, such as a campfire or forge, the fire remains at its optimal temperature (based on its original intended use) for the next 8 hours without having to add any additional fuel to it. At the end of the 8 hours or when the coal is removed from the fire, roll a d4: on a 1, the coal sputters out and ceases to be magical. A creature that finishes a short or long rest within 15 feet of such a fire gains 2d4 temporary hit points.
+
+Alternatively, you can use an action to drag a coal across a nonmagical weapon. For the next 8 hours, that weapon deals an extra 1d4 fire damage to any target it hits. When you use the coal in this way, it then ceases to be magical.
+
+#### Bag of Gifts
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Weight:** 12
+**Cost:**
+This soft bag is decorated with tiny illustrations of small trinkets and gifts. Striped ribbons line its side and an empty paper tag hangs from its drawstring. The bag is 6 inches across but weighs just over 12 pounds, even if nothing is kept inside it.
+
+While holding the empty bag, you can use an action to cinch its top closed and lightly shake it. When you do, the bag magically feels full. When a creature other than you opens the bag, roll a d12 and use the table below to determine what the gift is inside.
+
+d12 Gift
+1 A small bottle of sweet berry juice that is irresistible to mundane insects when poured out.
+2 A palm-sized lantern that magically glows in a variety of colors to reflect your mood while held.
+3 A bag of 10 seeds that, when grown, produce flowers that emit a beautiful, melodic chorus in the wind. The flowers have a 50 percent chance to regrow each year, but never produce new seeds.
+4 A decorative teacup that magically prevents tea from being oversteeped in it.
+5 A pair of eyeglasses that create a loud popping sound whenever you cross your eyes while wearing them.
+6 A fist-sized ball that bounces back up exactly as high as it was dropped, up to 10 feet high.
+7 A pair of nondescript socks that are always dry when worn and smell of lavender.
+8 A paper fan that shows a different painted landscape each time it's opened.
+9 A chunk of waxy honeycomb that never loses its sweet flavor when chewed.
+10 A silk scarf that flutters dramatically in even the slightest breeze.
+11 An empty snowglobe whose snow changes to pollen in the spring, petals in the summer, and leaves in the autumn.
+12 A brass bracelet with a timepiece attached that can only tell the time while outside.
+
+Each time that a gift is received from the bag, the bag becomes 1 pound lighter, and the item is removed from the list. If you roll an item on the list that's already been received by a creature, you instead get the item listed in the nearest available row. Once a creature opens a bag of gifts, it can't open another one in this way until it gives the bag to a different creature that hasn't yet opened it. When the last gift has been given, it becomes a nonmagical bag.
+
+#### Bag of Goodberry Gummy Fish
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Weight:** 0.5
+**Cost:**
+Goodberry gummy fish are gooey sweets that look like Tiny, gelatinous fish. When found, they typically come in bags of 1d6 + 10 gummies, which are almost always red.
+
+A goodberry gummy fish functions like a single berry from the goodberry spell, except that eating a gummy also grants you a swimming speed of 30 feet for 1 hour.
+
+Alternatively, you can use an action to submerge a gummy in water to magically animate it, using the quipper's statistics. If you submerge 5 or more gummies in water at the same time, they function as a group, using the swarm of quippers' statistics instead. The quippers are friendly to you, but aren't magically compelled to obey any of your commands. After 1 hour, the animated gummies dissolve and are destroyed.
+
+#### Bag of Holding
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Weight:** 5
+**Cost:**
+This bag has an interior space considerably larger than its outside dimensions—roughly 2 feet square and 4 feet deep on the inside. The bag can hold up to 500 pounds, not exceeding a volume of 64 cubic feet. The bag weighs 5 pounds, regardless of its contents. Retrieving an item from the bag requires a Utilize action.
+
+If the bag is overloaded, pierced, or torn, it is destroyed, and its contents are scattered in the Astral Plane. If the bag is turned inside out, its contents spill forth unharmed, but the bag must be put right before it can be used again. The bag holds enough air for 10 minutes of breathing, divided by the number of breathing creatures inside.
+
+Placing a Bag of Holding inside an extradimensional space created by a Heward's Handy Haversack, Portable Hole, or similar item instantly destroys both items and opens a gate to the Astral Plane. The gate originates where the one item was placed inside the other. Any creature within a 10-foot-radius Sphere centered on the gate is sucked through it to a random location on the Astral Plane. The gate then closes. The gate is one-way and can't be reopened.
+
+#### Bag of Irresistible Leaves
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Weight:** 1
+**Cost:**
+This small bag sounds like it's filled with an impossible number of crunchy, fallen leaves. You can use an action to open the bag and upend it on the ground into an unoccupied space within 5 feet of you. A pile of leaves then falls from the bag, filling a 5-foot cube in that space. A creature that starts its turn within 20 feet of the leaves and can see them must succeed on a DC 13 Wisdom saving throw or be compelled to leap into the pile until the end of the turn. The compelled creature must use its movement to reach and leap into the pile, taking the Dash action if necessary, and remain in that space for the rest of the turn. A creature that succeeds on the saving throw or is no longer compelled by the pile of leaves is immune to the effect for the next 24 hours. A creature automatically succeeds on the saving throw if it can't be charmed or if moving to the leaves would be directly harmful to it.
+
+The pile of leaves dissipates after 1 hour. It dissipates early if a creature leaps into it or if it's blown away by a moderate wind of 10 miles per hour or greater. The bag can hold enough leaves to make 3 piles, and it regains enough leaves for 1d3 new ones daily at dawn.
+
+#### Bag of Magic Blocks
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Weight:** 8
+**Cost:**
+This leather bag is filled with magic wooden blocks, which are painted with vibrant colors. There are six types of blocks that can be found in the bag. The GM decides the number of each type of block in the bag or determines it randomly. When found, the bag has 2d6 + 10 blocks inside it.
+
+d6 Block Shape Dimensions  
+1 Cylinder, long 2 in. diameter, 8 in. tall  
+2 Cylinder, short 2 in. diameter, 1 in. tall  
+3 Plank, long 1 in. wide, ¼ in. tall, 8 in. long  
+4 Plank, short 1 in. wide, ¼ in. tall, 2 in. long  
+5 Square 1 in. tall, 8 in. wide, 8 in. long  
+6 Triangle 3 in. on a side, 1 in. tall
+
+You can assemble these blocks into various constructions, creating stacks of blocks representative of creatures or objects. You can use an action to tap a Small or smaller construction using the blocks and speak their command word, animating the construction as if by the animate objects spell (no concentration required). The animated blocks can't attack, but are capable of performing simple tasks.
+
+Alternatively, when you tap the blocks, you can cause them to transform into a larger assembled form, with no one side measuring more than 10 feet. At the GM's discretion, the blocks function in a semblance that you'd expect based on the constructed form. For example, four small cylinders beneath a square block would function as a make-shift cart when transformed, despite it not having any axles. A player could also add sides to the cart using planks, but you would need to find a means to pull it separately.
+
+A block remains animated or transformed in this way for up to 4 hours, at which point it loses its magic until the next dawn. You can end the effect on any single block or construction of blocks by using an action to speak the blocks' command word again, provided that you're also touching it. Only one construction of blocks can be animated or transformed in this way at a time. Each construction has AC 13 and a total number of hit points equal to the number of blocks used to create it.
+
+If a block is left outside the bag and more than 100 feet away from it for 24 hours, it permanently loses its magic and becomes a normal wooden block.
+
+#### Bag of Sundrops
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Weight:** 0.5
+**Cost:**
+This small, colorful bag is filled with 1d6 + 4 golden, marble-like orbs, called sundrops, that glow softly when held. As a Magic action, you can throw a sundrop at a point you can see within 30 feet of you. When you do, the orb explodes into a dazzling pillar of light at that point, which lasts until the start of your next turn. The pillar is a 5-foot-radius, 40-foot-high Cylinder of Bright Light centered on the point where the sundrop shattered. The light is sunlight.
+
+A Dispel Magic spell targeting the light ends the effect early.
+
+#### Bag of Tricks, Gray
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Weight:** 0.5
+**Cost:**
+This bag made from gray cloth appears empty. Reaching inside the bag, however, reveals the presence of a small, fuzzy object.
+
+You can take a Magic action to pull the fuzzy object from the bag and throw it up to 20 feet. When the object lands, it transforms into a creature you determine by rolling on the table below. See the Monster Manual for the creature's stat block. The creature vanishes at the next dawn or when it is reduced to 0 Hit Points.
+
+The creature is Friendly to you and your allies, and it acts immediately after you on your Initiative count. You can take a Bonus Action to command how the creature moves and what action it takes on its next turn, such as attacking an enemy. In the absence of such orders, the creature acts in a fashion appropriate to its nature.
+
+Once three fuzzy objects have been pulled from the bag, the bag can't be used again until the next dawn.
+
+1d8 Creature  
+1 Weasel  
+2 Giant Rat  
+3 Badger  
+4 Boar  
+5 Panther  
+6 Giant Badger  
+7 Dire Wolf  
+8 Giant Elk
+
+#### Bag of Tricks, Rust
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Weight:** 0.5
+**Cost:**
+This bag made from rust cloth appears empty. Reaching inside the bag, however, reveals the presence of a small, fuzzy object.
+
+You can take a Magic action to pull the fuzzy object from the bag and throw it up to 20 feet. When the object lands, it transforms into a creature you determine by rolling on the table below. See the Monster Manual for the creature's stat block. The creature vanishes at the next dawn or when it is reduced to 0 Hit Points.
+
+The creature is Friendly to you and your allies, and it acts immediately after you on your Initiative count. You can take a Bonus Action to command how the creature moves and what action it takes on its next turn, such as attacking an enemy. In the absence of such orders, the creature acts in a fashion appropriate to its nature.
+
+Once three fuzzy objects have been pulled from the bag, the bag can't be used again until the next dawn.
+
+1d8 Creature  
+1 Rat  
+2 Owl  
+3 Mastiff  
+4 Goat  
+5 Giant Goat  
+6 Giant Boar  
+7 Lion  
+8 Brown Bear
+
+#### Bag of Tricks, Tan
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Weight:** 0.5
+**Cost:**
+This bag made from tan cloth appears empty. Reaching inside the bag, however, reveals the presence of a small, fuzzy object.
+
+You can take a Magic action to pull the fuzzy object from the bag and throw it up to 20 feet. When the object lands, it transforms into a creature you determine by rolling on the table below. See the Monster Manual for the creature's stat block. The creature vanishes at the next dawn or when it is reduced to 0 Hit Points.
+
+The creature is Friendly to you and your allies, and it acts immediately after you on your Initiative count. You can take a Bonus Action to command how the creature moves and what action it takes on its next turn, such as attacking an enemy. In the absence of such orders, the creature acts in a fashion appropriate to its nature.
+
+Once three fuzzy objects have been pulled from the bag, the bag can't be used again until the next dawn.
+
+1d8 Creature  
+1 Jackal  
+2 Ape  
+3 Baboon  
+4 Axe Beak  
+5 Black Bear  
+6 Giant Weasel  
+7 Giant Hyena  
+8 Tiger
+
+#### Balance Card
+**Type:** Wondrous Item
+**Rarity:** Legendary
+**Weight:** 0.05
+**Cost:**
+As an action, you can brandish this card at one creature you can see within 30 feet of yourself and drain its life force. The target must succeed on a DC 17 Constitution saving throw or take 4d8 necrotic damage. You then regain a number of hit points equal to the necrotic damage the target takes.
+
+#### Balance of Harmony
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Weight:** 1
+**Cost:**
+This scale bears celestial symbols on one pan and fiendish symbols on the other. You can use the scale to cast detect evil and good as a ritual. Doing so requires you to place the scale on a solid surface, then sprinkle the pans with holy water or place a transparent gem worth 100 gp in each pan. The scale remains motionless if it detects nothing, tips to one side or the other for good (consecrated) or evil (desecrated), and fluctuates slightly if it detects a creature appropriate to the spell but neither good nor evil. By touching the scales after casting the ritual, you instantly learn any information the spell can normally convey, and then the effect ends.
+
+#### Baleful Talon
+**Type:** Weapon
+**Rarity:** Very Rare
+**Weight:** 1
+**Cost:**
+Damage: 1d4 Piercing
+
+Simple Weapon, Melee Weapon
+
+Finesse, light, thrown (20/60 ft.)
+
+You gain a +1 bonus to attack and damage rolls made with this hooked, obsidian dagger.
+
+When you hit a creature with this magic weapon and roll a 19 or 20 on the attack roll, the creature must make a DC 15 Constitution saving throw as the dagger flares with sickly light. The creature takes 6d6 necrotic damage on a failed save, or half as much on a successful one. If this damage reduces the creature to 0 hit points, the creature disintegrates into dust.
+
+Finesse. When making an attack with a finesse weapon, you use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.
+
+Light. A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons.
+
+Thrown. If a weapon has the thrown property, you can throw the weapon to make a ranged attack. If the weapon is a melee weapon, you use the same ability modifier for that attack roll and damage roll that you would use for a melee attack with the weapon. For example, if you throw a handaxe, you use your Strength, but if you throw a dagger, you can use either your Strength or your Dexterity, since the dagger has the finesse property.
+
+#### Ball of Giant Spiderweb
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Weight:** 0.2
+**Cost:**
+This three-inch-diameter ball of magical web is especially strong. Upon closer scrutiny, countless spiderlings skitter around inside it. You can use this ball of web as a material component when casting the web spell. After doing so, the ball unravels and disappears.
+
+When you cast the spell in this way, its area becomes a 30-foot cube, and a giant spider appears in a space of your choice that's covered by the web. The spider is friendly to you and your allies and vanishes when the spell ends, taking its turns on initiative count 20. On its turn, the spider moves and attacks the nearest non-friendly creature within 30 feet of the web, using the webbing to its advantage as best it can.
+
+#### Ball of Wild Earth
+**Type:** Wondrous Item
+**Rarity:** Common
+**Weight:** 0.1
+**Cost:**
+This Tiny, sentient pebble is covered in dirt and is likely a remnant of a charmed earth elemental. It rolls about on its own in search of new and unique sources of dirt. When it finds a patch of particularly rich soil, the ball rolls around in it to incorporate the dirt into its form. The ball carries captured moisture inside itself, allowing it to make its form either dusty or clay-like in texture, as well as hard or soft to the touch. A friendly ball of wild earth can magically reshape the dirt it's covered in to form a variety of shapes at will, such as a tiny figurine or a large die, provided that the dirt continues to cover the pebble at its center by doing so.
+
+The ball of wild earth is considered a magical object and is not a creature. It has a speed of 10 feet and can only move by rolling across the ground. It has AC 10, 15 hit points, and has resistance to all damage. The ball regains all its hit points if it's left buried underground for at least 1 hour.
+
+Sentience. The ball of wild earth is a sentient neutral item with an Intelligence of 2, a Wisdom of 6, and a Charisma of 4. It has hearing and darkvision out to a range of 60 feet. It can't speak or read, but understands Common and Terran.
+
+Personality. The ball of wild earth is most happy when rolling through rich, healthy soil. Most can be found, at least initially, in mountainous farmlands, but even urban ones can enjoy the dust and traces of weird, foreign dirt that are ever-present in well-traveled cities. The quickest way to make a ball of wild earth happy is to give it gemstone dust to roll in, whereas removing the dirt and mud that surround its central pebble is certain to upset it. By reforming the dirt covering its form, the ball can make vague facial expressions based on the emotions its seen other creatures make.
+
+#### Ballatar's Buckler
+**Type:** Shield
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 6
+**Cost:**
+AC +2
+
+This flat metal buckler has a bladed edge that encircles it. Three prongs support the blade, which can be separated from the face of the shield. While the blade is attached to the shield, you can use a reaction whenever a creature misses you with an attack while within 5 feet of you to make a single attack with the shield, treating it as if it were a scimitar with which you're proficient.
+
+You can use an action while holding the shield to speak its command word, causing the blade to lift from the surface of the shield and rapidly spin. It then flies off the face of the shield in a direction of your choice. Choose a path for the spinning blade to move, which has a flying speed of 90 feet. The blade only moves in straight lines and can bounce from objects to change course. It costs the blade 10 feet of movement each time it strikes a target. Any creature in the path of the spinning blade must make a DC 15 Dexterity saving throw the first time it passes through the creature's space, taking slashing damage equal to 1d6 + your Strength or Dexterity modifier (your choice) on a failed save.
+
+If the spinning blade flies back into your space, you can choose for it to reattach to the shield or catch it in your free hand; otherwise, it falls to the ground at the end of its movement. The blade can be reattached to the shield as an action. Until the blade is reattached, you can use it as a magic scimitar with thrown (30/90). You're proficient with this weapon. If the blade remains detached from the shield for 24 hours, it magically reappears on the shield if you're both on the same plane of existence.
+
+#### Ballista Pike
+**Type:** Weapon
+**Rarity:** Uncommon
+**Weight:** 18
+**Cost:**
+Damage: 1d10 Piercing
+
+Martial Weapon, Melee Weapon
+
+Heavy, reach, two-handed
+
+This sturdy, adamantine pike was once a ballista bolt. If the pike hits an object or structure, the hit is a critical hit.
+
+When you make an attack with the pike you can speak its command word to throw it, using a normal range of 120 feet and a long range of 480 feet. When you do, the pike hurtles through the air toward the target, as if it were launched from a ballista. On a hit, the target takes an extra 2d10 piercing damage, in addition to the pike's normal damage.
+
+Once this property of the pike has been used, it can't be used again until the next dawn.
+
+#### Ballista Prosthesis
+**Type:** Weapon
+**Rarity:** Uncommon
+**Attunement:** by a Creature Missing an Arm, Forearm, or Hand
+**Weight:** 3
+**Cost:**
+Damage: 1d6 Piercing
+
+Martial Weapon, Ranged Weapon
+
+Ammunition (30/120 ft.), light, loading
+
+A ballista prosthesis is a magical weapon composed of numerous complex mechanical pieces that allow it to act as a functional prosthetic arm. You gain a +1 bonus to attack and damage rolls made with this magic weapon. This crossbow has an internal magazine that can hold up to 20 bolts. While there are bolts in the magazine, the crossbow does not have the loading property. It takes 1 minute to reload the magazine.
+
+The prosthesis attaches to your arm at the elbow or the shoulder, and it can't be removed against your will as long as you're attuned to it. To attune to this item, you must hold it against your arm for the entire attunement period. While attuned to the prosthesis, you can use an action to remove or reattach it.
+
+As a bonus action, you can retract the crossbow's limbs to the side of your hand or extend them from there. While retracted, the crossbow is concealed and functions identically to a normal hand. A creature can use an action to make a DC 13 Intelligence (Investigation) check, identifying its crossbow components and determining that it's a concealed weapon on a success. While extended, you can use the weapon as if you were holding it, and you can't use that hand for other purposes.
+
+#### Balloon Pack
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Weight:** 5
+**Cost:**
+This backpack contains the spirit of an air elemental and a compact leather balloon. While you're wearing the backpack, you can deploy the balloon as an action and gain the effect of the levitate spell for 10 minutes, targeting yourself and requiring no concentration. Alternatively, you can use a reaction to deploy the balloon when you're falling and gain the effect of the feather fall spell for yourself.
+
+When either spell ends, the balloon slowly deflates as the elemental spirit escapes and returns to the Elemental Plane of Air. As the balloon deflates, you descend gently toward the ground for up to 60 feet. If you are still in the air at the end of this distance, you fall if you have no other means of staying aloft.
+
+After the spirit departs, the backpack's property is unusable unless the backpack is recharged for 1 hour in an elemental air node, which binds another spirit to the backpack.
+
+#### Band of Mirrored Essence
+**Type:** Ring
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 0.05
+**Cost:**
+This unassuming platinum ring is polished to a mirror finish. When you reduce a Small or larger enemy to 0 Hit Points while wearing the ring, you can take a Reaction to cause the ring to capture a portion of that creature's essence. Looking into the ring shows the reflection of the creature whose essence is held inside. Once you capture an essence with the ring, it can't do so again for 1d8 hours. The ring can only have one essence at a time. If you capture an essence when the ring already has one, you replace the original.
+
+As a Magic action, you can release the captured essence and assume either the creature's appearance or one of its features, as detailed below.
+
+Assume Appearance. The creature must be no more than one size larger or smaller than you for you to take on its appearance. When you do, you don't physically change in size or shape, but your body is shrouded in a convincing illusion. Your voice changes to match the creature's, and you can understand any of its known languages but can neither read nor speak any language that you don't already know. Another creature can see through the illusion by succeeding on a DC 16 Intelligence (Investigation) check.
+
+Physical interaction with this illusory form reveals it to be an illusion, because things can pass through it. The illusion lasts for 8 hours. It ends early if you dismiss it as a Bonus Action or if you have the Unconscious condition or die.
+
+Assume Feature. If you assume one of the creature's features, your body or mind temporarily changes to accommodate the new ability. You can choose to gain one skill or saving throw proficiency, Damage Resistance, Condition Immunity, special sense, or language known that the creature had. If the creature could breathe underwater, you can choose to gain that feature instead. You retain this feature for 8 hours. You lose it early if you dismiss it as a Bonus Action or if you have the Unconscious condition or die.
