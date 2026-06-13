@@ -5573,8 +5573,8 @@ This is a magic tome that functions as a spellbook and arcane focus. You have a 
 
 Random Properties. The Accounting and Valuation of All Things has the following random properties:
 
-    1 major beneficial property
-    1 major detrimental property
+	1 major beneficial property
+	1 major detrimental property
 
 The Soul Trade. One section of the book is dedicated to negotiating and valuing mortal souls. When the book is opened within 10 feet of a creature with a soul, that creature must make a DC 22 Wisdom saving throw. On a failed save, the tome analyzes their greatest desires and calculates exactly what they would need to give up their soul. That information is then displayed within the tome, such that the user can offer a trade to acquire a soul. Creatures that succeed on the saving throw simply show up as a question mark in the book's pages and are immune to further valuations.
 
@@ -5684,7 +5684,7 @@ This suit of armor is reinforced with adamantine, one of the hardest substances 
 
 #### Adamantine Weapon
 **Type:** Generic Variant, Uncommon
-**Weight:** 
+**Weight:**
 **Cost:**
 This weapon or piece of ammunition is made of adamantine, one of the hardest substances in existence. Whenever this weapon or piece of ammunition hits an object, the hit is a Critical Hit.
 
@@ -6159,19 +6159,19 @@ After dealing its extra damage to a creature, the ammunition becomes nonmagical.
 | 1d100 | Creature Type |
 | ----- | ------------- |
 | 01-10 | Aberrations   |
-| 11-15 | Beasts        |
-| 16-20 | Celestials    |
-| 21-25 | Constructs    |
-| 26-35 | Dragons       |
-| 36-45 | Elementals    |
-| 46-50 | Humanoids     |
-| 51-60 | Fey           |
-| 61-70 | Fiends        |
-| 71-75 | Giants        |
+| 11-15 | Beasts    	|
+| 16-20 | Celestials	|
+| 21-25 | Constructs	|
+| 26-35 | Dragons   	|
+| 36-45 | Elementals	|
+| 46-50 | Humanoids 	|
+| 51-60 | Fey       	|
+| 61-70 | Fiends    	|
+| 71-75 | Giants    	|
 | 76-80 | Monstrosities |
-| 81-85 | Oozes         |
-| 86-90 | Plants        |
-| 91-00 | Undead        |
+| 81-85 | Oozes     	|
+| 86-90 | Plants    	|
+| 91-00 | Undead    	|
 
 #### Amulet of Appearance
 
@@ -6400,14 +6400,14 @@ If you aren't undead, you must make a DC 16 Constitution saving throw each time 
 
 Black Skull Transformation
 
-| d100  | Transformation                                                                                                                                                                                   |
+| d100  | Transformation                                                                                                                                                                               	|
 | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | 01-20 | The symbol of Acererak is burned into your flesh, a curse that can only be removed with a remove curse spell or similar magic. Until the curse ends, your hit points can't be restored by magic. |
-| 21-35 | You grow larger as if affected by an enlarge/reduce spell, except the effect lasts for 1 hour.                                                                                                   |
-| 36-50 | You grow smaller as if affected by an enlarge/reduce spell, except the effect lasts for 1 hour.                                                                                                  |
+| 21-35 | You grow larger as if affected by an enlarge/reduce spell, except the effect lasts for 1 hour.                                                                                               	|
+| 36-50 | You grow smaller as if affected by an enlarge/reduce spell, except the effect lasts for 1 hour.                                                                                              	|
 | 51-70 | You arrive at the destination wearing nothing but the amulet of the black skull. Everything else that you were wearing or carrying appears in a random unoccupied space within 100 feet of you.  |
-| 71-95 | You are paralyzed for 1 minute or until this effect is ended with a lesser restoration spell or similar magic.                                                                                   |
-| 96-00 | You become petrified. This effect can be ended only with a greater restoration spell or similar magic.                                                                                           |
+| 71-95 | You are paralyzed for 1 minute or until this effect is ended with a lesser restoration spell or similar magic.                                                                               	|
+| 96-00 | You become petrified. This effect can be ended only with a greater restoration spell or similar magic.                                                                                       	|
 
 #### Amulet of the Coldfire Phoenix
 
@@ -6507,13 +6507,13 @@ Curse. This amulet is cursed, and becoming attuned to it extends the curse to yo
 **Cost:**
 While wearing this amulet, you can take a Magic action to name a location that you are familiar with on another plane of existence. Then make a DC 15 Intelligence (Arcana) check. On a successful check, you cast Plane Shift. On a failed check, you and each creature and object within 15 feet of you travel to a random destination determined by rolling 1d100 and consulting the following table.
 
-| 1d100 | Destination                                                                                                                                                                                                           |
+| 1d100 | Destination                                                                                                                                                                                                       	|
 | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 01-60 | Random location on the plane you named                                                                                                                                                                                |
+| 01-60 | Random location on the plane you named                                                                                                                                                                            	|
 | 61-70 | Random location on an Inner Plane determined by rolling 1d6: on a 1, the Plane of Air; on a 2, the Plane of Earth; on a 3, the Plane of Fire; on a 4, the Plane of Water; on a 5, the Feywild; on a 6, the Shadowfell |
-| 71-80 | Random location on an Outer Plane determined by rolling 1d8: on a 1, Arborea; on a 2, Arcadia; on a 3, the Beastlands; on a 4, Bytopia; on a 5, Elysium; on a 6, Mechanus; on a 7, Mount Celestia; on an 8, Ysgard    |
-| 81-90 | Random location on an Outer Plane determined by rolling 1d8: on a 1, the Abyss; on a 2, Acheron; on a 3, Carceri; on a 4, Gehenna; on a 5, Hades; on a 6, Limbo; on a 7, the Nine Hells; on an 8, Pandemonium         |
-| 91-00 | Random location on the Astral Plane                                                                                                                                                                                   |
+| 71-80 | Random location on an Outer Plane determined by rolling 1d8: on a 1, Arborea; on a 2, Arcadia; on a 3, the Beastlands; on a 4, Bytopia; on a 5, Elysium; on a 6, Mechanus; on a 7, Mount Celestia; on an 8, Ysgard	|
+| 81-90 | Random location on an Outer Plane determined by rolling 1d8: on a 1, the Abyss; on a 2, Acheron; on a 3, Carceri; on a 4, Gehenna; on a 5, Hades; on a 6, Limbo; on a 7, the Nine Hells; on an 8, Pandemonium     	|
+| 91-00 | Random location on the Astral Plane                                                                                                                                                                               	|
 
 #### Amulet of the Platinum Fang
 
@@ -6575,3 +6575,635 @@ Curse. This item is cursed, and attuning to it extends the curse to you. If your
 You're considered to be proficient with land vehicles while wearing this amulet, and you can add your proficiency bonus to any check you make to perform either repairs or routine maintenance on such a vehicle. In addition, traveling by way of a land vehicle at a normal pace doesn't prevent you from using stealth, nor does traveling at a fast pace in one give you a penalty to your passive Wisdom (Perception) score. You have advantage on Wisdom (Animal Handling) checks made with any mount pulling the vehicle.
 
 Lastly, while wearing this amulet, any mount that's pulling a land vehicle you control gains a +2 bonus to any Constitution saving throw it makes to endure a forced march.
+#### Angelic Plate
+
+**Type:** Armor, Heavy Armor, Plate Armor
+**Rarity:** Legendary
+**Attunement:** yes
+**Weight:** 65
+**Cost:**
+AC: 18
+This shimmering silver armor seems to resist even the shadows cast on it. While wearing it, you have resistance to necrotic and radiant damage.
+
+The armor produces a faint halo above your head while you wear it, which sheds bright light in a 5-foot radius and dim light for an additional 5 feet. The light is sunlight.
+
+You can use a bonus action to move the halo to the head of another willing creature that you can see within 60 feet of you. The halo remains there until it's moved more than 120 feet from you or until you use another bonus action to return it to your head.
+
+While the halo is over a creature's head, the creature gains the following benefits:
+
+It gains a +1 bonus to AC.
+
+Any fiend or undead within the halo's light makes attack rolls against the creature with disadvantage.
+
+Angelic Avatar. While wearing the armor, you can use an action to transform into a hulking, metal angel for 1 minute. Your size becomes Large, gaining the "enlarge" effect of the enlarge/reduce spell when you do (no concentration required). You also grow a pair of metal wings, granting you a flying speed of 30 feet. For the duration, your melee weapon attacks deal an extra 1d4 radiant damage, in addition to the extra damage from enlarge/reduce, and you can roll a d4 and add it to the total of any saving throw you make. The effect ends early if you're reduced to 0 hit points or if you use a bonus action to end it early. If you have 17 or more levels in the paladin class, you can use a bonus action to transform into the metal angel, instead of an action. Once this property of the armor has been used, it can't be used again until the next dawn.
+
+The wearer has Disadvantage on Dexterity (Stealth) checks.
+
+If the wearer has a Strength score lower than 15, their speed is reduced by 10 feet.
+
+#### Angler's Armor
+
+**Type:** Armor, Medium Armor, Scale Mail
+**Rarity:** Uncommon
+**Attunement:** yes
+**Weight:** 45
+**Cost:**
+AC: 14 + Dex (max 2)
+This magic armor was hand-made by a clan of proud fishers. The armor is made of countless hardened scales lining a reinforced leather jacket, making it a sturdy and weather proof option for sailors. While wearing this armor, you gain a swimming speed of 30 feet, and the normal and long ranges of nets are doubled for you. In addition, when you fish while wearing this armor, you catch twice as many fish as you normally would.
+
+The wearer has Disadvantage on Dexterity (Stealth) checks.
+
+#### Angler's Wand
+
+**Type:** Wand
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 0.1
+**Cost:**
+While holding this wand, you can use an action to speak its command word to transform it into a fishing rod, complete with line and tackle. It remains in this form until you use an action to speak its command word again to transform it back into the wand.
+
+The wand has 7 charges for the following properties. The number of charges remaining are represented by the amount of spectral fish that swim around you while holding it.
+
+Fish Slap. While holding the wand, you can use an action to expend 1 of the wand's charges to send one of the spectral fish toward a target that you can see within 60 feet of you. The fish then grows in size, swims through the air to the target, and smacks the target with its oversized tail or fins. Make a ranged spell attack against the target, using an attack bonus of +5. On a hit, the target takes 1d12 + 3 force damage. The fish then swims away and disappears.
+
+Reel In. While holding the wand, you can use an action to point it at a target that you can see within 60 feet of you and expend 1 of its charges. The target must succeed on a DC 13 Strength saving throw. On a failed save, it's pulled up to 30 feet toward you and is considered hooked for 1 minute or until the target is more than 120 feet away from you. For the duration, you can use a bonus action on each of your turns to force the hooked creature to repeat the saving throw, pulling it up to 30 feet toward you again on a failed save, or ending the effect early on a successful one. You can only have one creature hooked at a time in this way. The effect ends early if you are no longer holding the wand.
+
+The wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand dissolves into water and is destroyed.
+
+#### Angler's Worldly Fisher
+
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 2
+**Cost:**
+This magic fishing rod can be used anywhere on the Material Plane to fish from the world's waters. While holding this fishing rod, you can use an action to speak its command word and cast it at a point you can see within 30 feet of you. When you do, the end of the line vanishes at the point and magically reappears somewhere else in the Material Plane in a random body of water. Despite not being able to see the end of the rod's line, you can still feel it being tugged at by the water's currents. Any fish you catch in this way reappear at the point where you cast the line. You have advantage on ability checks to catch fish while using this fishing rod.
+
+#### Animated Shield
+
+**Type:** Shield
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 6
+**Cost:**
+AC: +2
+While holding this Shield, you can take a Bonus Action to cause it to animate. The Shield leaps into the air and hovers in your space to protect you as if you were wielding it, leaving your hands free. The Shield remains animate for 1 minute, until you take a Bonus Action to end this effect, or until you die or have the Incapacitated condition, at which point the Shield falls to the ground or into your hand if you have one free.
+
+#### Ankh of Anointment
+
+**Type:** Potion
+**Rarity:** Rare
+**Weight:** 0.5
+**Cost:**
+The oil within this ankh-shaped vial is rich with the smell of clove and myrrh. You can use an action to pour the entirety of the vial over a Medium or smaller creature or object. For the next hour, that target is under the effects of the protection from evil and good spell (no concentration required), and it regains the maximum number of hit points possible from any healing. An undead that hits a target under the effects of this oil with a melee attack immediately takes 1d8 radiant damage.
+
+The oil feels warm to the touch, and magically evaporates once the ankh is finished being poured.
+
+#### Ankylosaurus Flail
+**Type:** Weapon, Flail
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** 2
+**Cost:**
+Damage: 1d12 Bludgeoning
+This magic flail's head and chain are the skeletal remains of an ankylosaurus's tail. It uses a d12 for its damage die, instead of a d8, and deals double damage to an object or structure it hits. When you hit a target with the weapon and roll a 12 on the damage die, it's also knocked prone if it's Large or smaller; if it's a dinosaur, it's instead knocked prone if it's Huge or smaller.
+
+#### Antimagic Armor
+**Type:** Armor, Generic Variant
+**Rarity:** Very Rare
+**Attunement:** yes
+**Cost:**
+While wearing this armor, you can use your reaction to give yourself advantage on a saving throw you make against a spell. Once this property is used, it can't be used again until the next dawn.
+
+In addition, while you wear this armor, you can use it to cast Antimagic Field, requiring no spell components. Once this property is used, it can't be used again until the next dawn.
+
+#### Ao Hai's Fang
+**Type:** Weapon, Longsword
+**Rarity:** Legendary
+**Attunement:** by a Monk
+**Weight:** 3
+**Cost:**
+Damage: 1d8 Slashing
+This ancient sword was forged in a kingdom ruled by a tyrannical dragon that has long since sunken to the bottom of the ocean. While attuned to Ao Hai's fang, you are proficient with it. You gain a +3 bonus to attack and damage rolls made with this magic weapon, which is a monk weapon for you.
+
+Dragon King's Wrath. As a bonus action, you can spend 4 ki points to channel the fury of a powerful dragon and enter a magical rage. While raging in this way, you gain the following benefits:
+
+If you aren't wearing armor, dragon-like scales cover your body, granting you a +1 bonus to AC.
+
+You can't be charmed or frightened.
+
+You can make one attack with this weapon as a bonus action on each of your turns, and when you use your Flurry of Blows, you can make two attacks with this weapon instead of two unarmed strikes.
+
+When a creature within 5 feet of you hits or misses you with an attack, you can use your reaction to make an attack with this weapon against that creature immediately after its attack.
+
+This rage lasts for 1 minute and ends early if you are knocked unconscious. You can also end your rage on your turn as a bonus action. This property can't be used again until the next dawn.
+
+#### Apparatus of Kwalish
+**Type:** Wondrous Item
+**Rarity:** Legendary
+**Attunement:** no
+**Weight:** 500
+**Cost:**
+This item first appears to be a sealed iron barrel weighing 500 pounds. The barrel has a hidden catch, which can be found with a successful DC 20 Intelligence (Investigation) check. Releasing the catch unlocks a hatch at one end of the barrel, allowing two Medium or smaller creatures to crawl inside. Ten levers are set in a row at the far end, each in a neutral position, able to move up or down. When certain levers are used, the apparatus transforms to resemble a giant lobster.
+
+The Apparatus of Kwalish is a Large object with the following statistics: AC 20; HP 200; Speed 30 ft., Swim 30 ft. (or 0 ft. for both if the legs aren't extended); Immunity to Poison and Psychic damage.
+
+To be used as a vehicle, the apparatus requires one pilot. While the apparatus's hatch is closed, the compartment is airtight and watertight. The compartment holds enough air for 10 hours of breathing, divided by the number of breathing creatures inside.
+
+The apparatus floats on water. It can also go underwater to a depth of 900 feet. Below that, the vehicle takes 2d6 Bludgeoning damage each minute from pressure.
+
+A creature in the compartment can take a Utilize action to move as many as two of the apparatus's levers up or down. After each use, a lever goes back to its neutral position. Each lever, from left to right, functions as shown in the Apparatus of Kwalish Levers table.
+
+Lever | Up | Down
+--- | --- | ---
+1 | Legs extend, allowing the apparatus to walk and swim. | Legs retract, reducing the apparatus's Speed and Swim Speed to 0 and making it unable to benefit from bonuses to speed.
+2 | Forward window shutter opens. | Forward window shutter closes.
+3 | Side window shutters open (two per side). | Side window shutters close (two per side).
+4 | Two claws extend from the front side of the apparatus. | The claws retract.
+5 | Each extended claw makes the following melee attack: +8 to hit, reach 5 ft. Hit: 7 (2d6) Bludgeoning damage. | Each extended claw makes the following melee attack: +8 to hit, reach 5 ft. Hit: The target has the Grappled condition (escape DC 15).
+6 | The apparatus walks or swims forward provided its legs are extended. | The apparatus walks or swims backward provided its legs are extended.
+7 | The apparatus turns 90 degrees counterclockwise provided its legs are extended. | The apparatus turns 90 degrees clockwise provided its legs are extended.
+8 | Eyelike fixtures emit Bright Light in a 30-foot radius and Dim Light for an additional 30 feet. | The light turns off.
+9 | The apparatus sinks up to 20 feet if it's in liquid. | The apparatus rises up to 20 feet if it's in liquid.
+10 | The rear hatch unseals and opens. | The rear hatch closes and seals.
+
+#### Appraiser's Eye
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** by a Creature Missing an Eye
+**Weight:** 0.05
+**Cost:**
+This golden sphere is the size of an eyeball with a bejeweled iris. Its weight is negligible. The sphere has 3 charges and regains 1d3 expended charges daily at dawn. Even if you aren't attuned to the sphere, you can use it and its charges for the following properties.
+
+While holding the eye, you can use an action to expend 1 of its charges to cast the identify spell from it. Alternatively, you can use the eye as the material component required for the legend lore spell. When you do, there is only a cumulative 10 percent chance that the sphere is consumed by the spell.
+
+While you're attuned to the sphere, it also functions like a normal eye while it's in your socket, and you have advantage on Intelligence checks you make to determine an item's value, as well as on Wisdom (Perception) checks that rely on sight. In addition, if you cast legend lore and use the sphere as the material component for the spell while you're attuned to it, the 10 percent chance that the sphere is consumed by the spell isn't cumulative, and in the event that the sphere is consumed by the spell, it loses this property and can no longer be used as a component for the spell, but isn't destroyed.
+
+#### Arachnic Grappler
+**Type:** Weapon, Pistol
+**Rarity:** Uncommon
+**Attunement:** yes
+**Weight:** 3
+**Cost:**
+Damage: 1d10 Piercing
+This magic pistol doesn't fire bullets. Instead, it launches a specialized, eight-pronged grappling hook when fired. The grappling hook is also equipped with an optional, sharpened point. As a result, a target hit with the fired hook still takes piercing damage from the attack as normal (unless you choose for it to be harmless). The grappling hook is connected to the weapon by a translucent silk rope, which the weapon magically produces when fired.
+
+When you hit a point or target within 30 feet of you with a ranged attack using the weapon, the grappling hook magically contracts to grip it tightly. You can then either pull yourself to the nearest unoccupied space within 5 feet of the target (if it's Medium or larger) or pull it to the nearest unoccupied space within 5 feet of you (if it's Medium or smaller). If the target is unwilling, it must succeed on a DC 13 Strength saving throw or be pulled. On a miss or at the end of the turn, the grappling hook magically returns to the pistol by skittering (like a spider) and retracting the rope. If at any point the hook becomes untethered to the pistol, it magically reappears on the front of the pistol the following dawn.
+
+The pistol has 4 charges and regains 1d4 expended charges daily at dawn. When you hit a creature with the grappling hook, you can choose to expend 1 of its charges to attempt to restrain that creature, as if by the web spell (save DC 13), which targets only that creature (instead of a point) and doesn't require concentration. This effect lasts for 1 minute or until the restrained creature breaks free.
+
+#### Arborguard Shield
+**Type:** Shield
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 6
+**Cost:**
+AC: +2
+This massive wooden shield was made using the bark of an ancient treant. While holding it, you have a +1 bonus to AC. This bonus is in addition to the shield's normal bonus to AC.
+
+While holding this shield, you can speak its command word as an action to create a wall of up to twelve trees on a solid surface within 120 feet of you. Each tree is 5 feet across at its base, up to 20 feet tall, and must be contiguous with another tree. Alternatively, you can create a ringed wall of trees up to 25 feet in diameter centered on your space. The trees grow tightly next to each other, preventing movement between them and providing total cover to anything behind them. A tree only grows a canopy if there is room for it.
+
+If the wall cuts through a creature's space when it appears, the creature within its area is pushed to one side of the wall and must make a DC 16 Dexterity saving throw. On a failed save, the creature takes 8d6 bludgeoning or piercing damage (your choice), or half as much damage on a successful save.
+
+The wall is an object that can be damaged and thus breached. Each tree has AC 13, 20 hit points, and is vulnerable to fire damage. A tree disappears when it drops to 0 hit points or when the effect ends.
+
+While you're within 30 feet of the wall, you can see through a tree's space (no action required) using your senses. When you make a melee weapon attack while within 30 feet of one or more of the trees, you can make the attack as if you were in one of the trees' spaces. When you do, the tree magically forms a wooden copy of you and any weapon you're holding to make the attack: duplicating any of its effects.
+
+The wall lasts as long as you concentrate (as if concentrating on a spell), to a maximum of 1 minute, or until it's dispelled by a dispel magic spell of 6th-level or higher, or until you are no longer holding the shield. Once this property of the shield has been used, it can't be used again until the next dawn.
+
+#### Arc of the Alicorn
+**Type:** Weapon, Longbow
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 2
+**Cost:**
+Damage: 1d10 Piercing
+This magic ivory bow is sculpted to look like a pair of curved unicorn horns and is strung with the finely braided hair of a pegasus' mane. This bow's damage die is a d10 instead of a d8.
+
+The bow has 4 charges for the following properties. It regains all expended charges daily at dawn.
+
+Flight. While holding the bow, you can use a bonus action to expend 1 of its charges to cause small wings to appear on your feet that last until the end of your turn. For the duration, you have a flying speed of 90 feet. While the wings remain, you can choose to expend another charge from the bow at the end of each of your turns (no action required) to extend the wings' duration until the end of your next turn.
+
+Healing Horn. While holding the bow, you can use a bonus action to expend 1 of its charges to fire a magical arrow of pure light at a creature that you can see within 60 feet of you, causing that creature to regain 2d6 + 2 hit points.
+
+Trampling Arrow. When you make a ranged attack with the bow, you can expend 1 of its charges to cause the fired arrow to transform into a spectral, charging pegasus. On a hit, the target takes an extra 3d6 force damage and must succeed on a DC 16 Strength saving throw or be knocked prone. If the target of the attack is already prone, you ignore the normal disadvantage imposed on ranged attack rolls against prone creatures and make the roll with advantage instead.
+
+#### Arc Rifle
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** no
+**Weight:** 8
+**Cost:**
+In the unforgiving lands of Etharis, having reliable and efficient weapons is as essential as carrying water and food. In that regard, skilled inventors are highly sought after, and among them gnomes are the most renowned. However, innovation can sometimes go too far, and the arc rifle is the perfect example of how. Invented by a team of famous gnome engineers, it literally shoots lightning, hitting the target faster than any other ranged weapon and reducing flesh to ashes in mere seconds, regardless of armor. Due in part to this tremendous efficiency, this weapon was quickly declared illegal in most regions of Etharis. It is also believed to destroy the target's soul when it kills them.
+
+This part-science, part-arcane contraption is a rifle-like weapon housing glass tubes of sparking electricity and powered by a small perpetualmotion device.
+
+The arc rifle has 4 charges. It regains 1d4 expended charges daily at dawn.
+
+Lightning Torrent. You can expend 1 charge as an action to launch a torrent of lightning in a 60-foot line, 5 feet wide. Each creature that the lightning passes through must make a Dexterity saving throw with a DC equal to your proficiency bonus plus your Dexterity modifier. On a failed save a creature takes 6d6 lightning damage, or half as much on a successful save.
+
+Whenever you expend the last charge of the arc rifle, roll a d20. On a result of 1 the arc rifle has fried its mechanisms and becomes useless.
+
+#### Arcanaloth's Music Box
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 3
+**Cost:** 750 gp
+This music box is made of dark wood with gold filigree. Each of its five sides is sculpted with the image of a horned woman playing a different musical instrument: a dulcimer, a flute, a harp, a lyre, and a viol. While touching the box, you can use an action to make it play music featuring one of the instruments shown, which can be heard up to 60 feet away. You can also use an action to stop the music.
+
+#### Arcane Battery
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 0.5
+**Cost:**
+This smooth, oval stone is etched with faintly glowing, magical symbols. While holding the battery, you can take a Magic action to touch the battery to one magic item. If that magic item normally regains expended charges daily, it immediately regains 1d4 + 1 expended charges, and the battery loses its magic.
+
+#### Arcane Cannon
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** no
+**Weight:** 500
+**Cost:**
+This Large cannon is imbued with magic. It requires no ammunition and doesn't need to be loaded. It takes one action to aim the cannon and one action to fire it. After the cannon has fired, it must recharge for 5 minutes before it can be fired again.
+
+The creature firing the cannon chooses the effect from the following options:
+
+Acid Jet. The cannon discharges acid in a line 300 feet long and 5 feet wide. Each creature in that line must make a DC 15 Dexterity saving throw, taking 22 (4d10) acid damage on a failed save, or half as much on a successful one. In addition, a creature that fails its saving throw takes 11 (2d10) acid damage at the start of each of its turns; a creature can end this damage by using its action to wash off the acid with a pint or more of water.
+
+Fire Jet. The cannon discharges fire in a line 300 feet long and 5 feet wide. Each creature in the area must make a DC 15 Dexterity saving throw, taking 33 (6d10) fire damage on a failed save, or half as much damage on a successful one. The fire ignites any flammable objects in the area that aren't being worn or carried.
+
+Frost Shot. The cannon shoots a ball of frost to a point you can see within 1,200 feet of the cannon. The ball then expands to form a 30-foot-radius sphere centered on that point. Each creature in that area must make a DC 15 Constitution saving throw. On a failed save, a creature takes 22 (4d10) cold damage, and its speed is reduced by 10 feet for 1 minute. On a successful save, the creature takes half as much damage, and its speed isn't reduced. A creature whose speed is reduced by this effect can repeat the save at the end of each of its turns, ending the effect on itself on a success.
+
+Lightning Shot. The cannon shoots a ball of lightning to a point you can see within 1,200 feet of the cannon. The lightning then expands to form a 20-foot-radius sphere centered on that point. Each creature in that area must make a DC 15 Dexterity saving throw, taking 33 (6d10) lightning damage on a failed save, or half as much damage on a successful one. Creatures wearing metal armor have disadvantage on the save.
+
+Poison Spray. The cannon expels poison gas in a 60-foot cone. Each creature in that area must make a DC 15 Constitution saving throw. On a failed save, the creature takes 22 (4d10) poison damage and is poisoned for 1 minute. On a successful save, the creature takes half as much damage and isn't poisoned. A creature poisoned in this way can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.
+
+#### Arcane Mirror
+**Type:** Shield
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 6
+**Cost:**
+AC: +2
+This mirror-like Shield is enchanted with Abjuration magic that can reflect spells back at their source. While holding the Shield, you can take a Reaction when you're hit by an attack to cast the Shield spell from it. You can't use this property again until you finish a Short or Long Rest.
+
+The Shield has 10 charges and regains 1d6 + 4 expended charges daily at dawn. When you succeed on a saving throw against a spell that targets only you or a spell attack roll misses you, you can take a Reaction to learn the level of the triggering spell. As part of this Reaction, you can expend a number of the Shield's charges equal to the spell's level to reflect that spell back at its source; you can't reflect a spell of level 7 or higher in this way. When you do, the caster of the spell must make a DC 16 Dexterity saving throw. On a failed save, the caster takes 1d8 Radiant damage for each charge you expended as a bolt of reflected arcane energy hits it. On a successful save, the caster takes half as much damage. If you reflect a spell in this way that would cause you to take half damage on a successful save, you take no damage instead.
+
+#### Arcane Propulsion Arm
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** by a Creature Missing a Hand or an Arm
+**Weight:** 3
+**Cost:**
+Damage: 1d8 Force
+This prosthetic appendage was developed by artificers of House Cannith. To attune to this item, you must attach it to your arm at the wrist, elbow, or shoulder, at which point the prosthetic magically forms a copy of the appendage it's replacing.
+
+While attached, the prosthetic provides these benefits:
+
+The prosthetic is a fully capable part of your body.
+
+You can take an action to remove the prosthetic, and it removes itself if your attunement to it ends. It can't be removed against your will.
+
+The prosthetic is a magic melee weapon with which you're proficient. It deals 1d8 force damage on a hit and has the thrown property, with a normal range of 20 feet and a long range of 60 feet. When thrown, the prosthetic detaches and flies at the target of the attack, then immediately returns to you and reattaches.
+
+Thrown. If a weapon has the thrown property, you can throw the weapon to make a ranged attack. If the weapon is a melee weapon, you use the same ability modifier for that attack roll and damage roll that you would use for a melee attack with the weapon. For example, if you throw a handaxe, you use your Strength, but if you throw a dagger, you can use either your Strength or your Dexterity, since the dagger has the finesse property.
+
+#### Arcanist Gauntlets
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** by a Spellcaster
+**Weight:** 1
+**Cost:**
+This pair of rich silk gloves is guarded by an enchanted mithral shell that sporadically releases arcane power. You can use the gauntlets as a spellcasting focus while wearing them, and when you cast a spell using a spell slot of 5th level or lower, you can choose to roll a d6. If you roll a number on the d6 equal to or greater than the spell's slot level, the spell draws on the magic within the gauntlets, instead of your own, and is cast without expending a spell slot. The slot must be of a level you can normally cast. The gauntlets can provide up to 5 levels worth of spell slots in this way each day, and no two slots can be the same level.
+
+If the number rolled on the d6 is less than the spell slot's level, you cast the spell as normal and expend the spell slot. If you don't have the spell slot to cast the spell, the spell fails and the slot is counted toward the gauntlets' daily provided spell slots.
+
+For example, a 9th-level wizard can use the gauntlets to provide either one 5th-level spell slot or a 4th- and 1st-level spell slot over the course of a day, but not two 2nd- or 3rd-level spell slots.
+
+#### Arcanist's Belt of Resiliency
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 1
+**Cost:**
+This supple leather belt has seven small crystals placed along its length and a large, domed one set in its buckle. While wearing it, you can use an action to press the buckle to cast the resilient sphere spell from it, targeting only yourself. This version of the spell doesn't require concentration and lasts for 1 hour, instead of 1 minute, but creates a sphere that isn't immune to all damage; instead, the spell's remaining duration is reduced by an amount of minutes equal to the damage it takes (AC 15). The sphere has resistance to damage from spells and magical effects. You can end the spell early using a bonus action. Once this property of the belt has been used, it can't be used again until the next dawn.
+
+Alternatively, you can use a bonus action while wearing the belt to press one of its 7 smaller crystals. When you do, you release a pulse of arcane energy from the belt. Each creature within 10 feet of you must succeed on a DC 15 Strength saving throw or be pushed up to 10 feet away from you. Each smaller crystal can be pressed once in this way, expending its magic; 1d6 + 1 of these crystals regain their use daily at dawn. While you're under the effects of the resilient sphere spell, the pulse's radius is doubled, and a creature within 5 feet of the sphere makes the saving throw with disadvantage.
+
+#### Arcanist's Bowstaff
+**Type:** Weapon, Quarterstaff
+**Rarity:** Very Rare
+**Attunement:** by a Creature with an Intelligence of 17+
+**Weight:** 4
+**Cost:**
+Damage: 1d6 Bludgeoning
+When you attune to this Quarterstaff, it remains solid in your grip but feels pliable within your mind. Whenever you make an attack with this magic weapon, you can choose to make the attack at range. When you do, you use your mind to telekinetically curve the Quarterstaff into the form of a Longbow. While using it in this form, you're proficient with the Longbow and it doesn't have the Heavy property. The bow is strung with an arcane energy that arcs between the rings on either end of the weapon. A glowing, magical arrow forms whenever the arcing energy is drawn back and fired. After the arrow hits or misses its target, it disappears and the Longbow reverts to its Quarterstaff form. This Longbow can only use the ammunition that it generates.
+
+You gain a +2 bonus to attack rolls and damage rolls made with this magic weapon, and you can use your Intelligence modifier instead of Strength or Dexterity for those rolls.
+
+In addition, this Quarterstaff has 8 charges and regains 1d6 + 2 expended charges daily at dawn. Immediately after you make an attack roll with this weapon as part of the Attack action, you can expend 1 charge to cast the Magic Missile spell from it as a Bonus Action. When you do, the darts are fired from either the Longbow or the Quarterstaff's embossed faces.
+
+Versatile. A Versatile weapon can be used with one or two hands. A damage value in parentheses appears with the property. The weapon deals that damage when used with two hands to make a melee attack.
+
+Mastery: Topple. If you hit a creature with this weapon, you can force the creature to make a Constitution saving throw (DC 8 plus the ability modifier used to make the attack roll and your Proficiency Bonus). On a failed save, the creature has the Prone condition.
+
+#### Arcanist's Lens
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** 0.1
+**Cost:**
+This padded lens is meant to fit over one of your eyes. When you cast a spell that creates an area of effect in the shape of a circle, cone, cube, sphere, or square, you can change the shape of that area to a different one of those shapes using the same size, provided the effects continue to make sense with the new area. The point of origin for the spell remains the same.
+
+For example, if you cast the burning hands spell, you could transform the area from a 15-foot cone to a 15-foot cube, potentially increasing the number of targets affected by the spell. For the purposes of circles and spheres, use the area's diameter to determine the size of the new one, or vice versa.
+
+Once this property of the lens has been used, it shouldn't be used again until the next dawn. Each time the lens is used again before then, it has a cumulative 20 percent chance of not working and shattering, becoming nonmagical.
+
+#### Arcanist's Magnificent Magnifier
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 0.2
+**Cost:**
+This magical magnifying glass helps deduce the arcane nature of items. While looking through the glass at an object within 1 foot of you, your proficiency bonus is doubled for any Intelligence (Arcana) or Intelligence (Investigation) check you make regarding that object's magical properties. In addition, you can speak the glass's command word as an action to cast the identify spell from it, targeting an object with the spell that you can see through the glass within 1 foot of you. Each time you do, there is a cumulative 5 percent chance that the glass shatters and is destroyed after casting the spell.
+
+#### Arcanist's Scribing Wand
+**Type:** Wand
+**Rarity:** Rare
+**Attunement:** by a Wizard
+**Weight:** 0.1
+**Cost:**
+This wand's handle has a fountain pen nib at its end that releases its own magical ink. When you use this pen to copy a spell into your spellbook, the gold it takes to do so is halved. Swinging the wand causes tiny droplets of illusory ink to trail behind it.
+
+The wand has 7 charges for the following properties:
+
+Spells. While holding the wand, you can use an action to expend 1 of its charges to cast one of the following spells from it: comprehend languages (written language only) or illusory script.
+
+Cloudscript. While holding the wand, you can use an action to expend 2 of its charges to cause up to 10 words to appear in the sky. The words are formed from wisps of clouds or smoke (your choice) and remain in place as long as you concentrate (as if concentrating on a spell), to a maximum of 1 hour, or until a wind of moderate or greater speed (at least 10 miles per hour) disperses them.
+
+The wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand dissolves into a puddle of mundane ink and is destroyed.
+
+#### Architect's Disdain
+**Type:** Weapon, War Pick
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 2
+**Cost:**
+Damage: 1d8 Piercing
+This adamantine War Pick is specially designed to tear down walls. You gain a +2 bonus to attack rolls and damage rolls made with this magic weapon. Whenever the War Pick hits an object or structure, the hit is a Critical Hit. In addition, if you hit a magically created object or structure, such as a Wall of Ice, with the War Pick, you can choose to dispel that object or structure as if by the Dispel Magic spell (level 6 version). This effect fails if the spell or magical effect that created the object or structure was cast with a level 7+ spell slot. Once the War Pick has dispelled an object or structure in this way, this property can't be used again until the next dawn.
+
+Versatile. A Versatile weapon can be used with one or two hands. A damage value in parentheses appears with the property. The weapon deals that damage when used with two hands to make a melee attack.
+
+Mastery: Sap. If you hit a creature with this weapon, that creature has Disadvantage on its next attack roll before the start of your next turn.
+
+#### Archivist's Key
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** no
+**Weight:** 0.1
+**Cost:**
+This magical key is one of several made by a secret order of historians and archivists. While holding the key, you can use an action to twist the key, as if you were unlocking a door. When you do, a magical, spectral door slowly appears in front of you over the course of 1 minute, duplicating the effect of the magnificent mansion spell with the following change. The dwelling always includes a large library that magically includes copies of books, scrolls, maps, and more. The library does not count toward the total amount of space created by the spell. Its contents are strangely organized and seemingly change each time the key is used. A creature can visit the library and attempt to uncover a piece of knowledge, such as ancient poetry, the history of a forgotten kingdom, or the family lineage of a tyrannical king. The GM determines the checks and DCs needed to locate a given piece of information. For example, a book of foreign nursery rhymes may be easy to find, but a copy of necromantic research documents would be extremely difficult, if not impossible.
+
+When the spell ends, the key can't be used this way again for 24 hours.
+
+#### Ardor
+**Type:** Weapon, Battleaxe
+**Rarity:** Artifact
+**Attunement:** by a Creature of Evil Alignment
+**Weight:** 4
+**Cost:**
+Damage: 1d8 Slashing
+The blades of this axe smolder with an inner light. The dark wooden handle is accented with silver.
+
+When the celestial realm turned back yet another assault from the forces of evil, a fiendish forge master received a vision, allowing them to craft a battleaxe like no other. With the might of Ardor, the fiends now possess a weapon capable of striking down the celestial forces.
+
+Ardor now lies in the fiendish realm's hidden vaults, waiting to be wielded when the forces of darkness make their ultimate strike to consume the world. The fiends don't realize that an equally powerful weapon rests in the hands of the celestials who wage eternal war against them. The fates who inspired the forge master to craft Ardor also sent a vision to a smith of heaven in the interest of maintaining the balance of power.
+
+Axe of Hell. This magic battleaxe grants a +3 bonus to attack and damage rolls made with it. When you hit with an attack using it, the target takes an extra 3d10 necrotic damage.
+
+Champion of Evil. While holding the battleaxe, you are immune to the charmed, frightened, paralyzed, poisoned, and stunned conditions.
+
+Ardor's Pursuit. As a bonus action, you can release Ardor to hover magically in an unoccupied space within 5 feet of you. If you can see the battleaxe, you can mentally command it as a bonus action to fly up to 50 feet and either make one attack against a target or return to your hands. If any effect targets the hovering axe, you are considered to be holding it. The hovering axe falls if the attuned user dies.
+
+Spells. While the axe is on your person, you can use an action to cast one of the following spells (save DC 18): bane, banishment, bestow curse, branding smite, or incendiary cloud. Once you use the axe to cast a spell, that spell can't be cast again from it until the next dawn.
+
+Destroying the Axe. The only thing capable of damaging the battleaxe is its celestial twin Zeal. A creature wielding Zeal can choose to attack Ardor, which has an AC of 21 and 300 hit points. No other creature or object can damage Ardor.
+
+Versatile. This weapon can be used with one or two hands. A damage value in parentheses appears with the property—the damage when the weapon is used with two hands to make a melee attack.
+
+#### Arista, Wand of the Spire
+**Type:** Wand
+**Rarity:** Artifact
+**Attunement:** by a Spellcaster
+**Weight:** 1
+**Cost:**
+This elegant silver and gold wand was crafted by the archmages that first arrived in Orostead centuries ago, well before the magical fallout of the Upheaval. It has been carefully used by only the extremely powerful or clever for generations. The wand has 7 charges for some of the following properties. It regains all expended charges daily at dawn. If you expend the wand's last charge and are not a wizard, roll a d20. On a 1, the wand vanishes and returns to a secret vault within The Spire of Aristaeus, the legendary wizarding tower in Orostead.
+
+Variant Properties. Some properties of this artifact are locked behind layers of dormant magic. As you grow stronger and reach certain milestones, these properties may become available to you. This wand can have up to 3 of the following properties active at a time. When you attune to Arista, you can choose to activate up to 3 of its variant properties whose prerequisites you meet. Whenever you finish a long rest, you can replace any of the activated properties with another one.
+
+While holding the wand, you can use an action to cast one of the following spells from it, using your spell save DC: create or destroy water, floating disk, fog cloud, gaseous form, identify, or sanctuary. Once the wand has been used to cast a spell, it can't be used to cast that spell again until the next dawn.
+
+While holding the wand, you can use an action to expend 1 of its charges to cast the magic missile spell. When you reach 9th level, this spell is cast at 2nd level instead, and is cast at 3rd level once you reach 13th.
+
+(Prerequisite: 5th level) You gain a +1 bonus to spell attack rolls and spell save DC. This bonus increases to +2 when you reach 9th level, and +3 when you each 17th.
+
+(Prerequisite: 5th-level wizard) While holding the wand, you can use an action to cast the unseen servant spell.
+
+(Prerequisite: 9th level) While holding the wand, you can use an action to expend 2 of its charges to create one of the following effects, using your spell save DC:
+
+Drilling Gust. You harness the ever-present winds of Lake Ils and tighten them into a magic, twisting spear. The spear flies from the wand and forms a line 60 feet long and 5 feet wide, piercing through any creature in the area. Each creature in the line must make a Constitution saving throw. On a failed save, a creature takes 3d6 piercing damage and 3d6 cold damage and is pushed 15 feet away from you. If a creature fails the saving throw by 5 or more, it is also knocked prone. On a successful save, a creature takes half as much damage from the effect and isn't pushed.
+
+Siphoning Vortex. You conjure the strange undercurrents of Lake Ils and create a magical whirlpool in a 15-foot-radius circle at a point on the ground you can see within 60 feet of you. Each creature in the area must succeed on a Strength saving throw. On a failed save, a creature takes 4d6 bludgeoning damage and is pulled up to 10 feet toward the point. If a creature fails the saving throw by 5 or more, it is also knocked prone and spends its action on its next turn coughing and sputtering water. On a successful save, a creature takes half as much bludgeoning damage and isn't pulled. The water spreads out across the ground, extinguishing unprotected flames in its area, and then it vanishes.
+
+(Prerequisite: 9th-level wizard) While holding the wand, you can expend 3 of its charges to cast the banishment spell, using your spell save DC. In addition, you are always under the effects of the see invisibility spell.
+
+(Prerequisite: 13th level) While holding the wand, you gain truesight out to a range of 10 feet.
+
+(Prerequisite: 13th-level wizard) While holding the wand, you can use an action to expend 1 or more of its charges to cast one of the following spells, using your spell save DC: arcanist's magic aura (1 charge), dimension door (2 charges), etherealness (5 charges), fog cloud (4 charges; 1 mile-radius sphere that remains for the duration of the spell), guards and wards (4 charges), private sanctum (2 charges), teleport (5 charges).
+
+(Prerequisite: 20th-level wizard) You gain the benefits of all of this wand's variant properties.
+
+Destroying Arista. The only way to destroy Arista, Wand of the Spire is to leave it in an antimagic field on the Ethereal Plane for 100 years, at which point it finally succumbs and becomes nonmagical, allowing it to be easily snapped in two.
+
+#### Arkano Elite Visor
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** no
+**Weight:** 1
+**Cost:**
+This visor is a strange device from a far-flung age and can sometimes be found in the lairs of sphinxes that have traveled through time. The visor is made of pitch-dark glass that can be seen through from only one side.
+
+While wearing the visor, you have darkvision out to a range of 60 feet. If you already have darkvision, wearing the visor increases its range by 60 feet. Glowing, eye-like illusions appear on the front of the visor while you wear it, duplicating the expression you make with your actual eyes.
+
+The visor runs on a power source that's fueled by magic. The visor can be used for up to 8 hours before the power source is empty. Deduct the time you use it in increments of 10 minutes from the power source's total time. You know how much remaining time the source has while holding the visor. Any creature can use an action to expend a spell slot level of 1st level or higher into the power source, adding to its total remaining time, by touching the visor as the spell slot is expended. The power source regains a number of hours of power equal to the spell slot level that was expended into it. When found, the visor has 1d6 + 2 hours of power remaining, and it can't have more than 8 hours at a time.
+
+Three Buttons. While wearing the visor, you can press one of the buttons on its side using a bonus action to grant you a unique effect. Each effect lasts for 10 minutes, ending early if you remove the visor. Each effect deducts a number of hours from the visor's remaining time, as described below.
+
+If you press button 1, you can use an action for the duration of the effect to fire a beam of energy from the visor's eyes. Each time you do, 1 hour is deducted from the visor. Make a ranged spell attack for the beam, which has a range of 60 feet, using a spell attack bonus of +8. On a hit, the target takes 4d8 lightning damage.
+
+If you press button 2, 3 hours of power are deducted, and you gain blindsight out to a range of 60 feet.
+
+If you press button 3, 5 hours of power are deducted, and you gain truesight out to a range of 60 feet.
+
+#### Arkanobow
+**Type:** Weapon, Longbow
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 2
+**Cost:**
+Damage: 1d8 Lightning
+Arkanobows are weapons from a far-flung age and can sometimes be found in the lairs of sphinxes that have traveled through time. You can use the bow as described below, even if you aren't attuned to it.
+
+The item appears to be a bow handle. While grasping it, you can use a bonus action to cause a pair of bow arms to spring into existence, one from either end of the riser, or make them disappear. The bow's crackling arms emit bright light in a 15-foot radius and dim light for an additional 15 feet. If you are proficient with shortbows or longbows, you are proficient with the arkanobow.
+
+You gain a +2 bonus to attack and damage rolls made with this magic weapon. If you draw the bow without an arrow, the bow magically creates its own. The created arrow is already nocked, made of pure electricity, and disappears if you don't make an attack with it. On a hit, the weapon deals lightning damage, instead of piercing, and if the target is made of metal or wearing metal armor, you have advantage on the attack roll.
+
+The weapon runs on a power source that's fueled by magic. The bow's arms can persist for up to 1 hour before the power source is empty. Deduct the time it persists in increments of 1 minute from the power source's total time. You know how much remaining time the source has while holding the weapon. Any creature can use an action to expend a spell slot level of 1st level or higher into the power source, adding to its total remaining time, by touching the bow as the spell slot is expended. The power source regains a number of minutes of power equal to the spell slot level that was expended into it. When found, an arkanobow has 3d20 minutes of power remaining, and it can't have more than 60 minutes of power at a time.
+
+If you're attuned to the bow, you can use the following properties by deducting additional minutes from the bow's remaining time. The number of minutes you deduct depends on the property you use.
+
+Jumpstart. You can use an action to deduct 5 or more minutes from the bow's remaining time to fire a special arrow from it, which harmlessly hits a creature that you can see within the bow's normal range. That creature can immediately use its reaction to move up to its speed, without provoking opportunity attacks. If the creature had 0 hit points, it first regains a number of them equal to 1d8 plus the number of minutes you deducted, up to 20 minutes. Once a creature regains hit points in this way, it can't do so again until it finishes a short or long rest.
+
+Quicklaunch. You can use a bonus action to deduct 2 minutes from the bow's remaining time to make a single ranged weapon attack with it. If you already hit the target with the bow on this turn, you have advantage on the attack roll, and on a hit, the target takes an extra 1d6 lightning damage.
+
+Range. A weapon that can be used to make a ranged attack has a range shown in parentheses after the ammunition or thrown property. The range lists two numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's maximum range. When attacking a target beyond normal range, you have disadvantage on the attack roll. You can't attack a target beyond the weapon's long range.
+
+Ammunition. You can use a weapon that has the ammunition property to make a ranged attack only if you have ammunition to fire from the weapon. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack. Loading a one-handed weapon requires a free hand. At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.
+
+If you use a weapon that has the ammunition property to make a melee attack, you treat the weapon as an improvised weapon. A sling must be loaded to deal any damage when used in this way.
+
+Heavy. Creatures that are Small or Tiny have disadvantage on attack rolls with heavy weapons. A heavy weapon's size and bulk make it too large for a Small or Tiny creature to use effectively.
+
+Two-Handed. This weapon requires two hands to use. This property is relevant only when you attack with the weapon, not when you simply hold it.
+
+#### Arkanorod
+**Type:** Rod
+**Rarity:** Very Rare
+**Attunement:** no
+**Weight:** 2
+**Cost:**
+This rod is a strange device from a far-flung age and can sometimes be found in the lairs of sphinxes that have traveled through time. The rod has two halves with markings along their edge. You can use a bonus action to twist the two halves to align the markings in one the four ways detailed below.
+
+Barrier. The rod emits a magical shield from it, allowing you to wield it by holding the rod. Treat it as a +2 shield. Whenever a creature makes a melee attack against you while you're holding the shield, that creature takes 2 lightning damage.
+
+Baton. The rod emits a magical baton from its end. Treat the baton as a +2 club, except it uses a d8 damage die and deals lightning damage instead of bludgeoning. If you hit a creature with the baton and roll a 8 on the damage die, the target can't make opportunity attacks until the end of your next turn.
+
+Blaster. The rod emits a magical blast of electricity from its end. Treat the blaster as a +2 light crossbow, except it doesn't have the two-handed or loading properties, creates its own ammunition, and uses a d6 damage die and deals lightning damage instead of piercing. If you hit a creature with the blaster and roll an 6 on the damage die, the target can't make opportunity attacks until the end of your next turn.
+
+Off. The rod is turned off, preventing it from using any time from its power source until the rod's halves are switched to a different option.
+
+The rod runs on a power source that's fueled by magic. The rod can be used for up to 4 hours before the power source is empty. Deduct the time you use it in increments of 10 minutes from the power source's total time. You know how much remaining time the source has while holding the rod. Any creature can use an action to expend a spell slot level of 1st level or higher into the power source, adding to its total remaining time, by touching the rod as the spell slot is expended. The power source regains a number of hours of power equal to the spell slot level that was expended into it. When found, the rod has 1d4 hours of power remaining, and it can't have more than 4 hours at a time.
+
+Overcharge. Once per turn when you deal lightning damage to a creature using the rod, you can deduct 2 hours of time from its power source to force that creature to make a DC 15 Constitution saving throw. On a failed save, the creature is stunned until the end of your next turn.
+
+#### Arkanotana
+**Type:** Weapon, Longsword
+**Rarity:** Very Rare
+**Attunement:** no
+**Weight:** 3
+**Cost:**
+Damage: 1d8 Slashing
+Arkanotanas are blades from a far-flung age and can sometimes be found in the lairs of sphinxes that have traveled through time.
+
+The item appears to be a longsword hilt. While grasping the hilt, you can use a bonus action to cause a blade of electrical force to spring into existence, or make the blade disappear. The sword's crackling blade emits bright light in a 15-foot radius and dim light for an additional 15 feet. While the blade exists, this magic longsword has the finesse property. If you are proficient with shortswords or longswords, you are proficient with the arkanotana.
+
+You gain a +2 bonus to attack and damage rolls made with this magic weapon, which deals lightning damage instead of slashing damage. When a creature made of metal or wearing metal armor is hit by the sword, it takes an extra 1d6 lightning damage. When the sword deals this extra lightning damage, you can choose to shock the target. A shocked target's speed is reduced by 10 feet until the start of your next turn, and it can't take reactions for the duration. Once the sword shocks a creature in this way, it can't do so again until the start of your next turn.
+
+The weapon runs on a power source that's fueled by magic. The blade can persist for up to 1 hour before the power source is empty. Deduct the time it persists in increments of 1 minute from the power source's total time. You know how much remaining time the source has while holding the weapon. Any creature can use an action to expend a spell slot level of 1st level or higher into the power source, adding to its total remaining time, by touching the sword as the spell slot is expended. The power source regains a number of minutes of power equal to the spell slot level that was expended into it. When found, an arkanotana has 3d20 minutes of power remaining, and can't have more than 60 minutes of power at a time.
+
+Versatile. This weapon can be used with one or two hands. A damage value in parentheses appears with the property—the damage when the weapon is used with two hands to make a melee attack.
+
+Finesse. When making an attack with a finesse weapon, you use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.
+
+#### Arkanotars
+**Type:** Weapon, Dagger
+**Rarity:** Very Rare
+**Attunement:** no
+**Weight:** 1
+**Cost:**
+Damage: 1d4 Lightning
+Arkanotars are weapons from a far-flung age and can sometimes be found in the lairs of sphinxes that have traveled through time. They always come in pairs, and can only be used when worn together. It takes an action to don or doff the arkanotars.
+
+The item appears to be a pair of gauntlet-like devices. While wearing them on your hands, you can use a bonus action to cause an electrical blade to spring forth from them, or make them disappear. For the duration, the blade only persists while your hands are clenched into fists. The blades emit bright light in a 15-foot radius and dim light for an additional 15 feet.
+
+You gain a +1 bonus to attack and damage rolls made with these magic weapons, which deal lightning damage instead of piercing damage. Due to their worn nature, these weapons lack the thrown property. For the first time on each of your turns when you hit the same target twice using the blades, that target also takes an extra 2d6 lightning damage. When a target takes this extra lightning damage, you can choose to overload it with electrical force: doing so causes tendrils of lightning to lash out at other creatures within 10 feet of the target. Each creature within that area (excluding yourself) must succeed on a DC 16 Dexterity saving throw or take 2d6 lightning damage. If a creature is made of metal or is wearing metal armor, it makes the saving throw with disadvantage.
+
+The weapon runs on a power source that's fueled by magic. The weapons' blades can persist for up to 1 hour before the power source is empty. Deduct the time it persists in increments of 1 minute from the power source's total time. You know how much remaining time the source has while holding the weapons. Any creature can use an action to expend a spell slot level of 1st level or higher into the power source, adding to its total remaining time, by touching either arkanotar as the spell slot is expended. The power source regains a number of minutes of power equal to the spell slot level that was expended into it. When found, a pair of arkanotars have 3d20 minutes of power remaining, and it can't have more than 60 minutes of power at a time.
+
+Lightning Bolt. You can use an action to rub the two weapons together and use them to punch forwards, duplicating the effects of the lightning bolt spell when you do (save DC 16). Doing so deducts 10 minutes from the weapons' remaining time, and this property can't be used again until the next dawn.
+
+Finesse. When making an attack with a finesse weapon, you use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.
+
+Light. A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons.
+
+#### Arm of Balaria
+**Type:** Weapon, Quarterstaff
+**Rarity:** Uncommon
+**Attunement:** by a Monk
+**Weight:** 4
+**Cost:**
+Damage: 1d6 Bludgeoning
+The ends of this quarterstaff are topped with brass hands. Whenever you would make an unarmed strike, you can make a special attack with the weapon instead; this special attack counts as an unarmed strike and uses the damage die for your unarmed strikes as normal. When you make this special attack using the quarterstaff, your reach with the weapon is increased by 5 feet.
+
+The staff's hands can change into different positions or gestures. Each position allows you to change your unarmed strike's damage type with it: bludgeoning damage (clenched fist), piercing damage (finger point), or slashing damage (hand chop). Whenever you make an unarmed strike with the staff, you can change the gesture of the respective hand as part of the attack.
+
+Versatile. This weapon can be used with one or two hands. A damage value in parentheses appears with the property—the damage when the weapon is used with two hands to make a melee attack.
+
+#### Arm of the Grey Knight (rare)
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 8
+**Cost:**
+Component: undead arm of the grey knight
+
+A shining beacon of tenacity and unwavering resolve, this amputated arm fights on with the strength of many men no matter how many times it's cut down or crushed into a pulp. Stubborn to a fault, it refuses to listen to anyone but the creature attuned to it, and occasionally makes rude gestures at passersby behind its owner's back, attempting to goad them into a fight.
+
+Helping Hand. The arm is an object with AC 14 and 20 hit points. If it's ever more than 30 feet away from you, it moves 20 feet towards you at the start of each of your turns by crawling along the ground, walls, and ceilings. As a bonus action, you can command it to move up to 20 feet and perform one of the following tasks:
+
+The arm manipulates an object in the same way as the mage hand cantrip.
+
+The arm punches a creature within 5 feet of it, making an attack roll against it (+7 to hit) and dealing 1d6 + 5 (or 1d8 + 5 if it's wielding a longsword) bludgeoning damage on a hit.
+
+The arm attempts to grab a creature within 5 feet of it, which must make a DC 15 Dexterity saving throw. On a failed save, the arm latches on to it, reducing its speed by 20 feet. A creature can use its action to make a DC 15 Strength check, pulling the arm off of it or a creature within its reach on a success. The arm can't perform other tasks while holding onto a creature.
+
+Just a Flesh Wound. If the arm is reduced to 0 hit points, it can't move or be commanded, but its remarkable resilience and regenerative abilities ensure that this doesn't last for long. The arm recovers all its hit points after 1d4 hours. A spellcaster can also use an action to touch the arm and spend a spell slot of any level to cause the arm to recover all of its hit points.
+
+#### Arm of the Grey Knight (uncommon)
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** yes
+**Weight:** 8
+**Cost:**
+Component: undead arm of the grey knight
+
+A shining beacon of tenacity and unwavering resolve, this amputated arm fights on with the strength of many men no matter how many times it's cut down or crushed into a pulp. Stubborn to a fault, it refuses to listen to anyone but the creature attuned to it, and occasionally makes rude gestures at passersby behind its owner's back, attempting to goad them into a fight.
+
+Helping Hand. The arm is an object with AC 14 and 20 hit points. If it's ever more than 30 feet away from you, it moves 20 feet towards you at the start of each of your turns by crawling along the ground. As a bonus action, you can command it to move up to 20 feet and perform one of the following tasks:
+
+The arm manipulates an object in the same way as the mage hand cantrip.
+
+The arm punches a creature within 5 feet of it, making an attack roll against it (+5 to hit) and dealing 1d6 + 3 bludgeoning damage on a hit.
+
+The arm attempts to grab a creature within 5 feet of it, which must make a DC 13 Dexterity saving throw. On a failed save, the arm latches on to it, reducing its speed by 10 feet. A creature can use its action to make a DC 13 Strength check, pulling the arm off of it or a creature within its reach on a success. The arm can't perform other tasks while holding onto a creature.
+
+Just a Flesh Wound. If the arm is reduced to 0 hit points, it can't move or be commanded, but its remarkable resilience and regenerative abilities ensure that this doesn't last for long. The arm recovers all its hit points after 1d4 hours. A spellcaster can also use an action to touch the arm and spend a spell slot of any level to cause the arm to recover all of its hit points.
+
+#### Armblade
+**Type:** Weapon, Generic Variant
+**Rarity:** Common
+**Attunement:** by a Warforged
+**Cost:**
+An armblade is a magic weapon that attaches to your arm, becoming inseparable from you as long as you're attuned to it. To attune to this item, you must hold it against your forearm for the entire attunement period.
+
+As a bonus action, you can retract the armblade into your forearm or extend it from there. While it is extended, you can use the weapon as if you were holding it, and you can't use that hand for other purposes.
+
+#### Arming Ring
+**Type:** Ring
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 0.05
+**Cost:**
+While wearing this ring, you can use a bonus action to summon a mundane melee weapon of your choice to the hand that's wearing it, such as a handaxe, scimitar, or whip. The weapon can't have the two-handed or special property, and it immediately vanishes if it's no longer in your hand, if you summon another weapon in this way, or if you're no longer wearing the ring. The weapon is considered magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage.
