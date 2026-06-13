@@ -3628,7 +3628,7 @@ function parseSpellMarkdown(md){
     if(cantrip){school=cantrip[1];level=0;}
     else if(leveled){level=parseInt(leveled[1]);school=leveled[2].trim();}
     // Parse key: value fields — handle both **Key:** Value and plain Key Value
-    var castingTime="",range="",components="",duration="",conc=false;
+    var castingTime="",range="",components="",duration="",conc=false,classes="";
     var descLines=[];
     var pastDuration=false;
     for(var li=2;li<lines.length;li++){
@@ -3646,12 +3646,12 @@ function parseSpellMarkdown(md){
           }
           else if(k==="range"){range=v;}
           else if(k==="components"){components=v;}
+          else if(k==="classes"){classes=v;}
           else if(k==="duration"){
             if(/concentration/i.test(v)){conc=true;v=v.replace(/concentration,?\s*(up\s+to\s+)?/i,"").trim();}
             duration=v;
             pastDuration=true;
           }
-          // "classes" line — skip, not a spell field we store
           continue;
         }
         // Only flip to description mode on unrecognised lines if we've seen all 4 fields
@@ -3668,7 +3668,9 @@ function parseSpellMarkdown(md){
       }
     }
     var desc=descLines.join("\n").trim();
-    spells[name.toLowerCase()]={name,level,school,castingTime,range,components,duration,conc,ritual,desc};
+    // Skip stub entries that are just a name with no real content
+    if(!desc&&!castingTime&&!range&&!components&&!duration&&!school&&!classes) return;
+    spells[name.toLowerCase()]={name,level,school,castingTime,range,components,duration,conc,ritual,classes,desc};
   });
   return spells;
 }
@@ -3714,7 +3716,7 @@ function open5eSpellSearch(query){
         var lvl=parseInt(sp.level_int!==undefined?sp.level_int:sp.level)||0;
         var desc=(sp.desc||"").toString();
         if(sp.higher_level) desc+="\n\nAt Higher Levels. "+sp.higher_level;
-        return {name:sp.name,level:lvl,school:sp.school||"",castingTime:sp.casting_time||"",range:sp.range||"",components:sp.components||"",duration:sp.duration||"",conc:!!sp.concentration&&sp.concentration!=="no",ritual:!!sp.ritual&&sp.ritual!=="no",desc:desc,src:"srd",srdVer:"14"};
+        return {name:sp.name,level:lvl,school:sp.school||"",castingTime:sp.casting_time||"",range:sp.range||"",components:sp.components||"",duration:sp.duration||"",conc:!!sp.concentration&&sp.concentration!=="no",ritual:!!sp.ritual&&sp.ritual!=="no",classes:sp.dnd_class||sp.class||"",desc:desc,src:"srd",srdVer:"14"};
       });
     });
   var v2=fetch("https://api.open5e.com/v2/spells/?name__icontains="+q+"&document__key=srd-2024&limit=15").then(function(r){return r.ok?r.json():{results:[]};}).catch(function(){return {results:[]};})
@@ -3739,7 +3741,7 @@ function open5eSpellSearch(query){
         if(sp.higher_level) desc+="\n\nAt Higher Levels. "+sp.higher_level;
         var comp=[];if(sp.verbal)comp.push("V");if(sp.somatic)comp.push("S");if(sp.material)comp.push("M"+(sp.material_specified?" ("+sp.material_specified+")":""));
         var compStr=comp.length?comp.join(", "):(typeof sp.components==="string"?sp.components:"");
-        return {name:sp.name,level:lvl,school:school,castingTime:sp.casting_time||"",range:sp.range_text||sp.range||"",components:compStr,duration:sp.duration||"",conc:!!sp.concentration,ritual:!!sp.ritual,desc:desc,src:"srd",srdVer:"24"};
+        return {name:sp.name,level:lvl,school:school,castingTime:sp.casting_time||"",range:sp.range_text||sp.range||"",components:compStr,duration:sp.duration||"",conc:!!sp.concentration,ritual:!!sp.ritual,classes:(sp.classes&&sp.classes.length?sp.classes.map(function(x){return x.name||x;}).join(", "):(sp.dnd_class||"")),desc:desc,src:"srd",srdVer:"24"};
       });
     });
   return Promise.all([v1,v2]).then(function(arrs){
@@ -3858,6 +3860,7 @@ function parseFeatMarkdown(md){
     var name=(lines[0]||"").trim();
     if(!name) return;
     var descLines=[];
+    var prereq="";
     for(var li=1;li<lines.length;li++){
       var ln=lines[li].trim();
       if(!ln) continue;
@@ -3868,6 +3871,9 @@ function parseFeatMarkdown(md){
       // Strip ***Prerequisites...*** markers but keep the text
       var cleaned=ln.replace(/\*\*\*([^*]+)\*\*\*/g,"$1").replace(/\*\*([^*]+)\*\*/g,"$1").replace(/\*([^*]+)\*/g,"$1");
       if(!cleaned) continue;
+      // Capture prerequisite line (e.g. "Prerequisite: Strength 13 or higher")
+      var pm=cleaned.match(/^Prerequisites?:\s*(.+)$/i);
+      if(pm){prereq=pm[1].trim();}
       // Convert **Label.** text → - Label. text
       var boldLabel=ln.match(/^\*\*([^*]+)\*\*\.?\s*(.*)$/);
       if(boldLabel){
@@ -3886,7 +3892,23 @@ function parseFeatMarkdown(md){
       }
       formatted.push(ln2);
     });
-    feats[name.toLowerCase()]={name,desc:formatted.join("\n").trim()};
+    var fullDesc=formatted.join("\n").trim();
+    // Skip stub entries with no description
+    if(!fullDesc&&!prereq) return;
+    // Detect which ability scores this feat can increase, from the "Ability Score Increase" line
+    var abilities=[];
+    var asiMatch=fullDesc.match(/Ability Score Increase[^\n]*?\.([^\n]*)/i);
+    var asiText=asiMatch?asiMatch[1]:"";
+    // Also scan a wider window in case wording differs
+    var scanText=asiText||fullDesc;
+    var ablMap=[["Strength","STR"],["Dexterity","DEX"],["Constitution","CON"],["Intelligence","INT"],["Wisdom","WIS"],["Charisma","CHA"]];
+    // Prefer the dedicated ASI line; if it mentions "one ability score of your choice" treat as all six
+    if(/one ability score of your choice|any ability score/i.test(scanText)){
+      abilities=["STR","DEX","CON","INT","WIS","CHA"];
+    } else {
+      ablMap.forEach(function(p){if(new RegExp("\\b"+p[0]+"\\b","i").test(scanText)) abilities.push(p[1]);});
+    }
+    feats[name.toLowerCase()]={name,desc:fullDesc,prereq:prereq,abilities:abilities};
   });
   return feats;
 }
@@ -3917,11 +3939,20 @@ function open5eFeatSearch(query){
     body=(""+(body||"")).replace(/\*\*\*([^*]+)\*\*\*/g,"$1").replace(/^\s*\*\*([^*]+?)\.?\*\*\.?\s*/gm,"- $1. ").replace(/\*\*([^*]+)\*\*/g,"$1").replace(/\*([^*]+)\*/g,"$1");
     return (desc+body).trim();
   }
+  function abilitiesFromText(txt){
+    txt=""+(txt||"");
+    var asi=txt.match(/Ability Score Increase[^\n]*?\.([^\n]*)/i);
+    var scan=asi?asi[1]:txt;
+    if(/one ability score of your choice|any ability score/i.test(scan)) return ["STR","DEX","CON","INT","WIS","CHA"];
+    var out=[];[["Strength","STR"],["Dexterity","DEX"],["Constitution","CON"],["Intelligence","INT"],["Wisdom","WIS"],["Charisma","CHA"]].forEach(function(p){if(new RegExp("\\b"+p[0]+"\\b","i").test(scan)) out.push(p[1]);});
+    return out;
+  }
   var v1=fetch("https://api.open5e.com/v1/feats/?search="+q+"&limit=15").then(function(r){return r.ok?r.json():{results:[]};}).catch(function(){return {results:[]};})
     .then(function(json){
       return (json.results||[]).filter(function(ft){return isSrdDoc(ft.document__slug);}).map(function(ft){
         var body=ft.effects_desc&&ft.effects_desc.length?ft.effects_desc.join("\n"):(ft.desc||"");
-        return {name:ft.name,desc:fmtFeatDesc(ft.prerequisite,body),src:"srd",srdVer:"14"};
+        var fd=fmtFeatDesc(ft.prerequisite,body);
+        return {name:ft.name,desc:fd,prereq:(ft.prerequisite&&ft.prerequisite.toLowerCase()!=="none")?ft.prerequisite:"",abilities:abilitiesFromText(fd),src:"srd",srdVer:"14"};
       });
     });
   var v2=fetch("https://api.open5e.com/v2/feats/?name__icontains="+q+"&document__key=srd-2024&limit=15").then(function(r){return r.ok?r.json():{results:[]};}).catch(function(){return {results:[]};})
@@ -3938,7 +3969,8 @@ function open5eFeatSearch(query){
         if(ft.benefits&&ft.benefits.length){body=ft.benefits.map(function(b){return (b.name?"**"+b.name+".** ":"")+(b.desc||b.description||"");}).join("\n");}
         else body=ft.desc||ft.description||"";
         var pre=ft.prerequisite||(ft.prerequisites&&ft.prerequisites.length?ft.prerequisites.join(", "):"");
-        return {name:ft.name,desc:fmtFeatDesc(pre,body),src:"srd",srdVer:"24"};
+        var fd=fmtFeatDesc(pre,body);
+        return {name:ft.name,desc:fd,prereq:(pre&&(""+pre).toLowerCase()!=="none")?pre:"",abilities:abilitiesFromText(fd),src:"srd",srdVer:"24"};
       });
     });
   return Promise.all([v1,v2]).then(function(arrs){
@@ -4090,6 +4122,15 @@ function parseItemMarkdown(md){
         if(cleaned) descLines.push(cleaned);
       }
     }
+    // If rarity wasn't given but the Type field contains a rarity word, extract it
+    if(!rarity&&type){
+      var rm=type.match(/\b(Very Rare|Common|Uncommon|Rare|Legendary|Artifact)\b/i);
+      if(rm){
+        rarity=rm[1];
+        // Remove the rarity (and a trailing/leading comma) from the type string
+        type=type.replace(/\s*,?\s*\b(Very Rare|Common|Uncommon|Rare|Legendary|Artifact)\b\s*,?\s*/i," ").replace(/\s*,\s*$/,"").replace(/^\s*,\s*/,"").replace(/\s+/g," ").trim();
+      }
+    }
     var fullDesc=descLines.join("\n").trim();
     // Build header: "Type, Rarity" on first line, attunement on the next, then the description
     var headerLines=[];
@@ -4098,7 +4139,9 @@ function parseItemMarkdown(md){
     if(attune===false) headerLines.push("(No Attunement Required)");
     else if(attune) headerLines.push("(Requires Attunement"+(typeof attune==="string"&&attune.replace(/^(yes|true|required|requires attunement?)/i,"").trim()?" "+attune.replace(/^(yes|true|required|requires attunement?)/i,"").trim():"")+")");
     if(headerLines.length>0) fullDesc=headerLines.join("\n")+(fullDesc?"\n"+fullDesc:"");
-    items[name.toLowerCase()]={name,weight,cost,desc:fullDesc,src:"local"};
+    // Skip stub entries: only a name, nothing else
+    if(!descLines.length&&!weight&&!cost&&!type&&!rarity&&attune===null) return;
+    items[name.toLowerCase()]={name,weight,cost,type,rarity,attune:attune===false?false:(attune?true:null),desc:fullDesc,src:"local"};
   });
   return items;
 }
@@ -4154,7 +4197,9 @@ function open5eSearch(query){
             } else {
               d2=(it.desc||it.description||"").toString();
             }
-            return {name:it.name,weight:w2,cost:it.cost!==undefined?(""+it.cost):"",desc:d2,src:"open5e",kind:ep.kind==="magic24"?"magic":"item",srdVer:"24",attune:ep.kind==="magic24"?(function(){var r=it.requires_attunement;return r===true||r==="true"||(typeof r==="string"&&r.trim()&&r.toLowerCase()!=="false"&&r.toLowerCase()!=="no")?true:false;})():null};
+            var v2type=(it.type&&it.type.name?it.type.name:it.type)||"";
+            var v2rarity=(it.rarity&&it.rarity.name?it.rarity.name:it.rarity)||"";
+            return {name:it.name,weight:w2,cost:it.cost!==undefined?(""+it.cost):"",type:v2type,rarity:v2rarity,desc:d2,src:"open5e",kind:ep.kind==="magic24"?"magic":"item",srdVer:"24",attune:ep.kind==="magic24"?(function(){var r=it.requires_attunement;return r===true||r==="true"||(typeof r==="string"&&r.trim()&&r.toLowerCase()!=="false"&&r.toLowerCase()!=="no")?true:false;})():null};
           }
           // ── v1 (2014 SRD) items ──
           var weight=(it.weight||"").toString().replace(/\s*(lb\.?|lbs\.?|pounds?)\s*$/i,"").trim();
@@ -4171,7 +4216,7 @@ function open5eSearch(query){
             var meta=[it.type,it.rarity].filter(Boolean).join(", ");
             desc=[meta,attune,(it.desc||"").toString()].filter(Boolean).join("\n");
           }
-          return {name:it.name,weight:weight,cost:it.cost||"",desc:desc,src:"open5e",kind:ep.kind,srdVer:"14",attune:ep.kind==="magic"?((it.requires_attunement||"").toString().trim()?true:false):null};
+          return {name:it.name,weight:weight,cost:it.cost||"",type:it.type||(ep.kind==="weapon"?"Weapon":ep.kind==="armor"?"Armor":""),rarity:it.rarity||"",desc:desc,src:"open5e",kind:ep.kind,srdVer:"14",attune:ep.kind==="magic"?((it.requires_attunement||"").toString().trim()?true:false):null};
         });
       });
   })).then(function(arrs){
@@ -5680,6 +5725,295 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
   );
 }
 
+// ─── Compendium Search Page ───────────────────────────────────────────────────
+function CompendiumPage({c,s}){
+  const {useState:us}=React;
+  const spellCache=useSpellCompendium();
+  const featCache=useFeatCompendium();
+  const itemCache=useItemCompendium();
+  const [kind,setKind]=us("spells"); // spells | feats | items
+  const [query,setQuery]=us("");
+  const [descQuery,setDescQuery]=us("");
+  const [fLevel,setFLevel]=us("any");
+  const [fSchool,setFSchool]=us("any");
+  const [fClass,setFClass]=us("");
+  const [fCast,setFCast]=us("any");
+  const [fRitual,setFRitual]=us("any"); // any | yes | no
+  const [fConc,setFConc]=us("any");
+  const [fRarity,setFRarity]=us("any");
+  const [fAttune,setFAttune]=us("any");
+  const [fType,setFType]=us("");
+  const [fPrereq,setFPrereq]=us("any"); // any | yes | no
+  const [fPrereqText,setFPrereqText]=us("");
+  const [fAbilities,setFAbilities]=us([]); // selected ability codes
+  const [expanded,setExpanded]=us({});
+  const [page,setPage]=us(0);
+  const [confirmAdd,setConfirmAdd]=us(null); // the result object pending confirmation
+  const [addCls,setAddCls]=us(""); // selected class when adding a spell
+  const [srdResults,setSrdResults]=us([]);
+  const [srdLoading,setSrdLoading]=us(false);
+  const [includeSrd,setIncludeSrd]=us(true);
+  const debounceRef=React.useRef(null);
+
+  // Reset filters when switching kind
+  function switchKind(k){setKind(k);setExpanded({});setSrdResults([]);setPage(0);}
+
+  // Reset to first page whenever a search or filter changes
+  React.useEffect(function(){setPage(0);},[query,descQuery,fLevel,fSchool,fClass,fCast,fRitual,fConc,fRarity,fAttune,fType,fPrereq,fPrereqText,fAbilities,includeSrd,kind]);
+
+  // SRD fetch (debounced) — only when there's a query
+  React.useEffect(function(){
+    if(!includeSrd){setSrdResults([]);return;}
+    var qq=(query||descQuery||"").trim();
+    if(qq.length<2){setSrdResults([]);return;}
+    if(debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current=setTimeout(function(){
+      setSrdLoading(true);
+      var term=query.trim()||descQuery.trim();
+      var p= kind==="spells"?open5eSpellSearch(term)
+            :kind==="feats"?open5eFeatSearch(term)
+            :open5eSearch(term);
+      p.then(function(res){setSrdResults(res||[]);setSrdLoading(false);}).catch(function(){setSrdResults([]);setSrdLoading(false);});
+    },400);
+    return function(){if(debounceRef.current) clearTimeout(debounceRef.current);};
+  },[query,descQuery,kind,includeSrd]);
+
+  // Build the file-based list for the current kind
+  var fileList=[];
+  if(kind==="spells"&&spellCache.status==="ready"&&spellCache.data) fileList=Object.values(spellCache.data).map(function(x){return Object.assign({},x,{src:"file"});});
+  else if(kind==="feats"&&featCache.status==="ready"&&featCache.data) fileList=Object.values(featCache.data).map(function(x){return Object.assign({},x,{src:"file"});});
+  else if(kind==="items"&&itemCache.status==="ready"&&itemCache.data) fileList=Object.values(itemCache.data).map(function(x){return Object.assign({},x,{src:"file",name:x.name});});
+
+  // Merge SRD results in
+  var all=fileList.concat(srdResults||[]);
+
+  // Apply filters
+  var nq=(query||"").toLowerCase().trim();
+  var ndq=(descQuery||"").toLowerCase().trim();
+  var results=all.filter(function(r){
+    if(nq&&(r.name||"").toLowerCase().indexOf(nq)<0) return false;
+    if(ndq&&(r.desc||"").toLowerCase().indexOf(ndq)<0) return false;
+    if(kind==="spells"){
+      if(fLevel!=="any"&&(r.level===undefined||r.level!==parseInt(fLevel))) return false;
+      if(fSchool!=="any"&&(r.school||"").toLowerCase()!==fSchool.toLowerCase()) return false;
+      if(fClass.trim()&&(r.classes||"").toString().toLowerCase().indexOf(fClass.toLowerCase())<0) return false;
+      if(fCast!=="any"&&(r.castingTime||"").toLowerCase().indexOf(fCast.toLowerCase())<0) return false;
+      if(fRitual==="yes"&&!r.ritual) return false;
+      if(fRitual==="no"&&r.ritual) return false;
+      if(fConc==="yes"&&!r.conc) return false;
+      if(fConc==="no"&&r.conc) return false;
+    }
+    if(kind==="items"){
+      if(fRarity!=="any"&&(r.rarity||"").toLowerCase()!==fRarity.toLowerCase()) return false;
+      if(fAttune==="yes"&&r.attune!==true) return false;
+      if(fAttune==="no"&&r.attune!==false) return false;
+      if(fType.trim()&&(r.type||"").toLowerCase().indexOf(fType.toLowerCase())<0) return false;
+    }
+    if(kind==="feats"){
+      var hasPre=!!(r.prereq&&(""+r.prereq).trim());
+      if(fPrereq==="yes"&&!hasPre) return false;
+      if(fPrereq==="no"&&hasPre) return false;
+      if(fPrereq==="yes"&&fPrereqText.trim()&&(r.prereq||"").toLowerCase().indexOf(fPrereqText.toLowerCase())<0) return false;
+      if(fAbilities.length>0){
+        var ab=r.abilities||[];
+        // Match if the feat can increase ANY of the selected abilities
+        var any=fAbilities.some(function(a){return ab.indexOf(a)>=0;});
+        if(!any) return false;
+      }
+    }
+    return true;
+  });
+  // Sort: file first, then by name (spells by level then name)
+  results.sort(function(a,b){
+    if(kind==="spells"){var la=a.level||0,lb=b.level||0;if(la!==lb)return la-lb;}
+    return (a.name||"").localeCompare(b.name||"");
+  });
+  var PER_PAGE=20;
+  var totalResults=results.length;
+  var totalPages=Math.max(1,Math.ceil(totalResults/PER_PAGE));
+  var curPage=Math.min(page,totalPages-1);
+  var pageResults=results.slice(curPage*PER_PAGE,curPage*PER_PAGE+PER_PAGE);
+
+  var SCHOOLS=["Abjuration","Conjuration","Divination","Enchantment","Evocation","Illusion","Necromancy","Transmutation"];
+  var inputStyle={background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,150,42,.2)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"5px 8px",borderRadius:2};
+  var selStyle=Object.assign({},inputStyle,{cursor:"pointer"});
+  var tabBtn=function(k,label){return <div onClick={function(){switchKind(k);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1.5,textTransform:"uppercase",padding:"6px 16px",borderRadius:2,userSelect:"none",border:"1px solid "+(kind===k?"var(--gold)":"rgba(201,150,42,.2)"),background:kind===k?"rgba(201,150,42,.12)":"transparent",color:kind===k?"var(--gold-l)":"rgba(232,213,176,.45)"}}>{label}</div>;};
+
+  function toggle(id){setExpanded(function(e){var n=Object.assign({},e);n[id]=!n[id];return n;});}
+
+  function doAdd(r,clsName){
+    if(kind==="spells"){
+      var lv=r.level||0;
+      var cp=Object.assign({},c.sp);
+      cp[lv]=(cp[lv]||[]).concat([{nm:r.name||"",ti:r.castingTime||"",rng:r.range||"",cmp:r.components||"",dur:r.duration||"",conc:!!r.conc,prep:false,nt:r.desc||"",cls:clsName||"",sc:r.school||"",ritual:!!r.ritual}]);
+      s("sp",cp);
+    } else if(kind==="feats"){
+      s("fts",(c.fts||[]).concat([{nm:r.name||"",ds:r.desc||"",lv:"",limited:false,limits:[{name:"",uses:"",exp:"",die:"NO",recharge:""}]}]));
+    } else if(kind==="items"){
+      var ch=parseChargesFromDesc(r.desc);
+      s("inv",(c.inv||[]).concat([{nm:r.name||"",qt:"1",wt:r.weight||"",nt:r.cost?"Cost: "+r.cost:"",desc:r.desc||"",showDesc:!!r.desc,eq:false,wl:false,charges:ch||null}]));
+    }
+    setConfirmAdd(null);
+  }
+
+  return (
+    <div>
+      <div className="sh">Compendium Search</div>
+      <div style={{display:"flex",gap:8,marginBottom:14}}>{tabBtn("spells","Spells")}{tabBtn("feats","Feats")}{tabBtn("items","Items")}</div>
+
+      {/* Search controls */}
+      <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:8,alignItems:"center"}}>
+        <input value={query} onChange={function(e){setQuery(e.target.value);}} placeholder="Name contains..." style={Object.assign({},inputStyle,{flex:"1 1 160px",minWidth:140})} />
+        <input value={descQuery} onChange={function(e){setDescQuery(e.target.value);}} placeholder="Description contains..." style={Object.assign({},inputStyle,{flex:"1 1 160px",minWidth:140})} />
+      </div>
+
+      {kind==="spells"&&(
+        <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:8,alignItems:"center"}}>
+          <select value={fLevel} onChange={function(e){setFLevel(e.target.value);}} style={selStyle}>
+            <option value="any">Any Level</option><option value="0">Cantrip</option>
+            {[1,2,3,4,5,6,7,8,9].map(function(l){return <option key={l} value={""+l}>Level {l}</option>;})}
+          </select>
+          <select value={fSchool} onChange={function(e){setFSchool(e.target.value);}} style={selStyle}>
+            <option value="any">Any School</option>
+            {SCHOOLS.map(function(sc){return <option key={sc} value={sc}>{sc}</option>;})}
+          </select>
+          <input value={fClass} onChange={function(e){setFClass(e.target.value);}} placeholder="Class..." style={Object.assign({},inputStyle,{width:110})} />
+          <select value={fCast} onChange={function(e){setFCast(e.target.value);}} style={selStyle}>
+            <option value="any">Any Cast Time</option><option value="action">Action</option><option value="bonus">Bonus Action</option><option value="reaction">Reaction</option><option value="minute">Minute(s)</option><option value="hour">Hour(s)</option>
+          </select>
+          <select value={fRitual} onChange={function(e){setFRitual(e.target.value);}} style={selStyle}>
+            <option value="any">Ritual: Any</option><option value="yes">Ritual only</option><option value="no">Non-ritual</option>
+          </select>
+          <select value={fConc} onChange={function(e){setFConc(e.target.value);}} style={selStyle}>
+            <option value="any">Conc: Any</option><option value="yes">Concentration</option><option value="no">No Concentration</option>
+          </select>
+        </div>
+      )}
+
+      {kind==="items"&&(
+        <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:8,alignItems:"center"}}>
+          <select value={fRarity} onChange={function(e){setFRarity(e.target.value);}} style={selStyle}>
+            <option value="any">Any Rarity</option>
+            {["Common","Uncommon","Rare","Very Rare","Legendary","Artifact"].map(function(rr){return <option key={rr} value={rr}>{rr}</option>;})}
+          </select>
+          <select value={fAttune} onChange={function(e){setFAttune(e.target.value);}} style={selStyle}>
+            <option value="any">Attunement: Any</option><option value="yes">Requires Attunement</option><option value="no">No Attunement</option>
+          </select>
+          <input value={fType} onChange={function(e){setFType(e.target.value);}} placeholder="Type contains... (e.g. Wondrous, Weapon)" style={Object.assign({},inputStyle,{flex:"1 1 180px",minWidth:140})} />
+        </div>
+      )}
+
+      {kind==="feats"&&(
+        <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:8,alignItems:"center"}}>
+          <select value={fPrereq} onChange={function(e){setFPrereq(e.target.value);}} style={selStyle}>
+            <option value="any">Prereq: Any</option><option value="yes">Has Prerequisite</option><option value="no">No Prerequisite</option>
+          </select>
+          {fPrereq==="yes"&&<input value={fPrereqText} onChange={function(e){setFPrereqText(e.target.value);}} placeholder="Prereq contains..." style={Object.assign({},inputStyle,{width:170})} />}
+          <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.4)",textTransform:"uppercase"}}>Increases:</span>
+          {["STR","DEX","CON","INT","WIS","CHA"].map(function(ab){
+            var on=fAbilities.indexOf(ab)>=0;
+            return <div key={ab} onClick={function(){setFAbilities(function(prev){return prev.indexOf(ab)>=0?prev.filter(function(x){return x!==ab;}):prev.concat([ab]);});}}
+              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,padding:"4px 8px",borderRadius:2,userSelect:"none",border:"1px solid "+(on?"var(--gold)":"rgba(201,150,42,.2)"),background:on?"rgba(201,150,42,.15)":"transparent",color:on?"var(--gold-l)":"rgba(232,213,176,.45)"}}>{ab}</div>;
+          })}
+        </div>
+      )}
+
+      <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:12}}>
+        <label style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.5)",textTransform:"uppercase"}}>
+          <input type="checkbox" checked={includeSrd} onChange={function(e){setIncludeSrd(e.target.checked);}} />
+          Include SRD
+        </label>
+        {srdLoading&&<span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(201,150,42,.5)",textTransform:"uppercase"}}>Searching SRD…</span>}
+        <span style={{marginLeft:"auto",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.35)"}}>{totalResults} result{totalResults===1?"":"s"}{totalPages>1?" · showing "+(curPage*PER_PAGE+1)+"–"+Math.min(curPage*PER_PAGE+PER_PAGE,totalResults):""}</span>
+      </div>
+
+      {/* Results */}
+      <div style={{border:"1px solid rgba(201,150,42,.12)",borderRadius:2}}>
+        {results.length===0&&<div style={{padding:"20px",textAlign:"center",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.3)"}}>No matches. {kind==="spells"&&spellCache.status==="loading"?"Loading spells…":kind==="feats"&&featCache.status==="loading"?"Loading feats…":kind==="items"&&itemCache.status==="loading"?"Loading items…":"Try a different search."}</div>}
+        {pageResults.map(function(r,idx){
+          var id=r.src+"-"+(r.srdVer||"")+"-"+r.name+"-"+(curPage*PER_PAGE+idx);
+          var isOpen=expanded[id];
+          var sub="";
+          if(kind==="spells") sub=(r.level===0?"Cantrip":"Level "+r.level)+(r.school?" · "+r.school:"")+(r.ritual?" · Ritual":"")+(r.conc?" · Conc":"");
+          else if(kind==="items") sub=[r.rarity,r.type,(r.attune===true?"Attunement":""),(r.weight?r.weight+" lb":"")].filter(Boolean).join(" · ");
+          else if(kind==="feats") sub=[(r.abilities&&r.abilities.length&&r.abilities.length<6?"+"+r.abilities.join("/"):(r.abilities&&r.abilities.length===6?"+Any":"")),(r.prereq?"Prereq":"")].filter(Boolean).join(" · ");
+          var tag=r.src==="file"?"File":("SRD"+(r.srdVer||""));
+          var tagCol=r.src==="file"?"rgba(74,156,92,.6)":"rgba(96,180,196,.55)";
+          return (
+            <div key={id} style={{borderBottom:"1px solid rgba(201,150,42,.07)"}}>
+              <div onClick={function(){toggle(id);}} style={{display:"flex",alignItems:"baseline",gap:10,padding:"8px 12px",cursor:"pointer"}}>
+                <span style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"rgba(201,150,42,.4)",width:12,flexShrink:0}}>{isOpen?"−":"+"}</span>
+                <span style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"var(--gold-l)",fontWeight:600,flex:1}}>{r.name}</span>
+                {sub&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.4)",whiteSpace:"nowrap"}}>{sub}</span>}
+                <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:.5,color:tagCol,whiteSpace:"nowrap",textTransform:"uppercase"}}>{tag}</span>
+              </div>
+              {isOpen&&(
+                <div style={{padding:"4px 12px 14px 34px",background:"rgba(0,0,0,.15)"}}>
+                  {kind==="spells"&&(
+                    <div style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.5)",marginBottom:6,lineHeight:1.6}}>
+                      {r.castingTime&&<span>Cast: {r.castingTime} · </span>}{r.range&&<span>Range: {r.range} · </span>}{r.components&&<span>Comp: {r.components} · </span>}{r.duration&&<span>Duration: {r.duration}</span>}
+                    </div>
+                  )}
+                  <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.8)",lineHeight:1.7,whiteSpace:"pre-wrap"}}>{r.desc||"(No description)"}</div>
+                  <div onClick={function(){var spc=c.spellClasses||[];setAddCls(spc.length>0?(spc[0].nm||""):"");setConfirmAdd(r);}}
+                    style={{display:"inline-block",marginTop:10,cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",padding:"5px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(74,156,92,.4)",color:"rgba(74,156,92,.85)",background:"rgba(74,156,92,.08)"}}>
+                    + Add to {kind==="spells"?"Spell List":kind==="feats"?"Feats":"Inventory"}
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Pagination controls */}
+      {totalPages>1&&(
+        <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,marginTop:14}}>
+          <div onClick={function(){if(curPage>0)setPage(curPage-1);}}
+            style={{cursor:curPage>0?"pointer":"default",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"4px 12px",borderRadius:2,userSelect:"none",border:"1px solid rgba(201,150,42,.2)",color:curPage>0?"var(--gold-l)":"rgba(232,213,176,.2)",opacity:curPage>0?1:.4}}>‹ Prev</div>
+          <span style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,color:"rgba(232,213,176,.5)"}}>Page {curPage+1} / {totalPages}</span>
+          <div onClick={function(){if(curPage<totalPages-1)setPage(curPage+1);}}
+            style={{cursor:curPage<totalPages-1?"pointer":"default",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"4px 12px",borderRadius:2,userSelect:"none",border:"1px solid rgba(201,150,42,.2)",color:curPage<totalPages-1?"var(--gold-l)":"rgba(232,213,176,.2)",opacity:curPage<totalPages-1?1:.4}}>Next ›</div>
+        </div>
+      )}
+      {/* Confirm add modal */}
+      {confirmAdd&&(
+        <div onClick={function(){setConfirmAdd(null);}}
+          style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+          <div onClick={function(e){e.stopPropagation();}}
+            style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,padding:"22px 26px",maxWidth:380,boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+            <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--gold-l)",marginBottom:10}}>Add to {kind==="spells"?"Spell List":kind==="feats"?"Feats":"Inventory"}?</div>
+            <div style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgba(232,213,176,.7)",marginBottom:18,lineHeight:1.5}}>
+              Add <span style={{color:"var(--gold-l)",fontWeight:600}}>{confirmAdd.name}</span>{kind==="spells"&&confirmAdd.level!==undefined?(confirmAdd.level===0?" (cantrip)":" (level "+confirmAdd.level+")"):""} to your {kind==="spells"?"spell list":kind==="feats"?"feats":"main inventory"}?
+            </div>
+            {kind==="spells"&&(
+              <div style={{marginBottom:18}}>
+                <div style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.45)",textTransform:"uppercase",marginBottom:6}}>Add under class</div>
+                {(c.spellClasses||[]).length>0?(
+                  <select value={addCls} onChange={function(e){setAddCls(e.target.value);}}
+                    style={{width:"100%",background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,150,42,.2)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"6px 8px",borderRadius:2,cursor:"pointer"}}>
+                    {(c.spellClasses||[]).map(function(sc,i){var nm=sc.nm||("Spellcasting "+(i+1));return <option key={i} value={sc.nm||""}>{nm}</option>;})}
+                    <option value="">Other Spells</option>
+                  </select>
+                ):(
+                  <div style={{fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>No spellcasting classes defined — it will be added under "Other Spells".</div>
+                )}
+              </div>
+            )}
+            <div style={{display:"flex",gap:10,justifyContent:"flex-end"}}>
+              <div onClick={function(){setConfirmAdd(null);}}
+                style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(232,213,176,.2)",color:"rgba(232,213,176,.5)"}}>Cancel</div>
+              <div onClick={function(){doAdd(confirmAdd,addCls);}}
+                style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(74,156,92,.5)",color:"rgba(74,156,92,.9)",background:"rgba(74,156,92,.12)"}}>Add</div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+// ──────────────────────────────────────────────────────────────────────────────
+
 const PAGES=[
   {label:"I - Character",hideable:false},
   {label:"II - Features",hideable:false},
@@ -5689,6 +6023,7 @@ const PAGES=[
   {label:"VI - Exploits",hideable:true},
   {label:"VII - Creatures",hideable:true},
   {label:"VIII - Dice Roller",hideable:true},
+  {label:"IX - Compendium",hideable:true},
 ];
 
 function CreaturesPage({c,s}){
@@ -6689,6 +7024,7 @@ function App(){
             {pg===5&&<ExploitPage c={c} s={s} />}
             {pg===6&&<CreaturesPage c={c} s={s} />}
             {pg===7&&<DiceRollerPage c={c} s={s} savedRolls={savedRolls} saveSRApp={saveSRApp} />}
+            {pg===8&&<CompendiumPage c={c} s={s} />}
           </div>
           {(function(){const vis=PAGES.map(function(_,i){return i;}).filter(function(i){return hiddenTabs.indexOf(i)<0;});const cur=vis.indexOf(pg)+1;const tot=vis.length;return <div className="pgn">- {cur} / {tot} -</div>;})()}
         </div>
@@ -6699,7 +7035,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.117</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.16</div>
 
 </script>
 </body>
