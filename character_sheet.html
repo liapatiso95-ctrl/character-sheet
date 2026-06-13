@@ -451,7 +451,7 @@ const CSS = `
     .hdr-row{flex-direction:column;gap:10px;min-height:unset}
     .hdr-avatar-wrap{position:static;transform:none;margin-right:0;order:-1}
   }
-  .orn{position:absolute;top:12px;right:18px;font-size:22px;opacity:.07;pointer-events:none;user-select:none;font-family:'Cinzel Decorative',serif;color:var(--gold)}
+  .orn{position:absolute;top:12px;right:18px;font-size:22px;opacity:.16;pointer-events:none;user-select:none;font-family:'Cinzel Decorative',serif;color:var(--gold)}
   /* Truncation tooltip */
   .trunc-tip{
     position:fixed;z-index:99999;
@@ -2265,6 +2265,15 @@ function Page2({c,s}){
       {/* Inventory — Attuned first, then main list */}
       <div className="sh">Items on Person
         {bags.length>0&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:11,fontWeight:400,color:"rgba(232,213,176,.3)",fontStyle:"italic",marginLeft:8,letterSpacing:0,textTransform:"none"}}>drag items between sections</span>}
+        {(function(){
+          var st=_itemCache.status;
+          var col=st==="ready"?"rgba(74,156,92,.6)":st==="loading"?"rgba(201,150,42,.5)":"rgba(201,74,42,.5)";
+          var lbl=st==="ready"?"Item compendium loaded":st==="loading"?"Loading item compendium…":"Item compendium unavailable — check items.md in repo";
+          return <span title={lbl} style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:col,userSelect:"none",marginLeft:10,fontWeight:"normal",textTransform:"uppercase"}}>
+            <span style={{width:6,height:6,borderRadius:"50%",background:col,display:"inline-block",flexShrink:0}} />
+            Compendium
+          </span>;
+        })()}
       </div>
 
       {/* Currency — compact coin row */}
@@ -5308,7 +5317,7 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
 
   return (
     <div style={{marginTop:26}}>
-      <div className="orn">Dice</div>
+      <div className="orn">Dice Roller</div>
 
       {/* Quick Rolls — Attacks / Saves / Initiative / Checks / Skills */}
       <div style={{marginBottom:16,display:"flex",flexDirection:"column",gap:8}}>
@@ -5858,7 +5867,19 @@ function CompendiumPage({c,s}){
 
   return (
     <div>
-      <div className="sh">Compendium Search</div>
+      <div className="orn">Compendium</div>
+      <div className="sh" style={{display:"flex",alignItems:"center"}}>
+        <span>Compendium Search</span>
+        {(function(){
+          var st=kind==="spells"?spellCache.status:kind==="feats"?featCache.status:itemCache.status;
+          var col=st==="ready"?"rgba(74,156,92,.6)":st==="loading"?"rgba(201,150,42,.5)":"rgba(201,74,42,.5)";
+          var lbl=st==="ready"?"Compendium file loaded":st==="loading"?"Loading compendium file…":"Compendium file unavailable (offline or missing)";
+          return <span title={lbl} style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:col,userSelect:"none",marginLeft:"auto",fontWeight:"normal",textTransform:"uppercase"}}>
+            <span style={{width:6,height:6,borderRadius:"50%",background:col,display:"inline-block",flexShrink:0}} />
+            {kind==="spells"?"Spells":kind==="feats"?"Feats":"Items"} File
+          </span>;
+        })()}
+      </div>
       <div style={{display:"flex",gap:8,marginBottom:14}}>{tabBtn("spells","Spells")}{tabBtn("feats","Feats")}{tabBtn("items","Items")}</div>
 
       {/* Search controls */}
@@ -7035,7 +7056,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.16</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.163</div>
 
 </script>
 </body>
