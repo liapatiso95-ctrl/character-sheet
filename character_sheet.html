@@ -2301,6 +2301,12 @@ function Page2({c,s}){
               background:"rgba(201,150,42,.08)",border:"1px solid rgba(201,150,42,.2)",color:"rgba(201,150,42,.5)",borderRadius:10,userSelect:"none"}}>
             {attunedUsed} / {attunedSlots}
           </span>
+          <div style={{marginLeft:"auto",display:"flex",gap:4}}>
+            <div onClick={function(){const a=(c.attuned_inv||[]).map(function(it){return {...it,showDesc:true};});s("attuned_inv",a);}}
+              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Expand all descriptions">+</div>
+            <div onClick={function(){const a=(c.attuned_inv||[]).map(function(it){return {...it,showDesc:false};});s("attuned_inv",a);}}
+              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Collapse all descriptions">−</div>
+          </div>
 
         </div>
         <div onDragOver={e=>{e.preventDefault();setDragOver("attuned");}} onDragLeave={()=>setDragOver(null)} onDrop={()=>onDrop("attuned")}
@@ -2325,7 +2331,7 @@ function Page2({c,s}){
                   <td style={{textAlign:"center"}}><div className={"tog tog-eq"+(it.eq?" on":"")} onClick={()=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],eq:!it.eq};s("attuned_inv",a);}} /></td>
                   <td style={{textAlign:"center"}}><div className={"tog tog-wl"+(it.wl?" on":"")} onClick={()=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],wl:!it.wl};s("attuned_inv",a);}} /></td>
                   <td><ItemNameInput value={it.nm||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],nm:e.target.value};s("attuned_inv",a);}} placeholder="Item..." style={{width:"100%",background:"transparent",border:"none",color:it.eq?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px",fontWeight:it.eq?"600":"400"}}
-                    onAutofill={function(item){const a=[...(c.attuned_inv||[])];const ch=parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("attuned_inv",a);}} /></td>
+                    onAutofill={function(item){const a=[...(c.attuned_inv||[])];const ch=parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",nt:item.cost?"Cost: "+item.cost:a[i].nt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("attuned_inv",a);}} /></td>
                   <td><TipInput value={it.qt||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],qt:e.target.value};s("attuned_inv",a);}} placeholder="1" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                   <td><TipInput value={it.wt||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],wt:e.target.value};s("attuned_inv",a);}} placeholder="0" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                   <td style={{fontFamily:"'Cinzel',serif",fontSize:11,color:it.wl?"var(--teal)":"var(--gold-l)",textAlign:"center",opacity:.8}}>{it.wl?"0":itemWeight(it)>0?itemWeight(it).toFixed(2):"-"}</td>
@@ -2365,6 +2371,12 @@ function Page2({c,s}){
       {/* Main inventory list */}
       <div style={{display:"flex",alignItems:"center",gap:8,padding:"4px 0",marginBottom:4,marginTop:8}}>
         <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:2,color:"rgba(201,150,42,.6)",textTransform:"uppercase"}}>Equipment & Other Items</span>
+        <div style={{marginLeft:"auto",display:"flex",gap:4}}>
+          <div onClick={function(){s("inv",(c.inv||[]).map(function(it){return {...it,showDesc:true};}));}}
+            style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Expand all descriptions">+</div>
+          <div onClick={function(){s("inv",(c.inv||[]).map(function(it){return {...it,showDesc:false};}));}}
+            style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Collapse all descriptions">−</div>
+        </div>
       </div>
       <div onDragOver={e=>{e.preventDefault();setDragOver("inv");}} onDragLeave={()=>setDragOver(null)} onDrop={()=>onDrop("inv")}
         style={{border:dragOver==="inv"?"1px dashed rgba(123,79,207,.6)":"1px solid transparent",borderRadius:2,transition:"border .2s",minHeight:40}}>
@@ -2392,7 +2404,7 @@ function Page2({c,s}){
                     <div className={"tog tog-wl"+(it.wl?" on":"")} onClick={()=>ui("inv",i,"wl",!it.wl)} title="Weightless" />
                   </td>
                   <td><ItemNameInput value={it.nm||""} onChange={e=>ui("inv",i,"nm",e.target.value)} placeholder="Item..." style={{width:"100%",background:"transparent",border:"none",color:it.eq?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px",fontWeight:it.eq?"600":"400",opacity:it.wl?0.7:1}}
-                    onAutofill={function(item){const a=[...c.inv];const ch=parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("inv",a);}} /></td>
+                    onAutofill={function(item){const a=[...c.inv];const ch=parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",nt:item.cost?"Cost: "+item.cost:a[i].nt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("inv",a);}} /></td>
                   <td><TipInput value={it.qt||""} onChange={e=>ui("inv",i,"qt",e.target.value)} placeholder="1" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                   <td><TipInput value={it.wt||""} onChange={e=>ui("inv",i,"wt",e.target.value)} placeholder="0" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                   <td style={{fontFamily:"'Cinzel',serif",fontSize:11,color:it.wl?"var(--teal)":"var(--gold-l)",textAlign:"center",opacity:.8}}>{it.wl?"0":itemWeight(it)>0?itemWeight(it).toFixed(2):"-"}</td>
@@ -2480,6 +2492,12 @@ function Page2({c,s}){
               </span>
               <button onClick={()=>setRemoveBagModal(bag.id)}
                 style={{fontFamily:"'Cinzel',serif",fontSize:9,padding:"3px 10px",background:"transparent",border:"1px solid rgba(201,74,42,.3)",color:"rgba(201,74,42,.5)",cursor:"pointer",borderRadius:2}}>Remove</button>
+              <div style={{display:"flex",gap:4}}>
+                <div onClick={function(){const a=bagInv.map(function(it){return {...it,showDesc:true};});s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}}
+                  style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Expand all descriptions">+</div>
+                <div onClick={function(){const a=bagInv.map(function(it){return {...it,showDesc:false};});s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}}
+                  style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Collapse all descriptions">−</div>
+              </div>
             </div>
             <div onDragOver={e=>{e.preventDefault();setDragOver(dropTarget);}} onDragLeave={()=>setDragOver(null)}
               onDrop={()=>onDrop(dropTarget)}
@@ -2533,7 +2551,7 @@ function Page2({c,s}){
                       <td style={{textAlign:"center"}}><div className={"tog tog-eq"+(it.eq?" on":"")} onClick={()=>{const a=[...bagInv];a[i]={...a[i],eq:!it.eq};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} /></td>
                       <td style={{textAlign:"center"}}><div className={"tog tog-wl"+(it.wl?" on":"")} onClick={()=>{const a=[...bagInv];a[i]={...a[i],wl:!it.wl};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} /></td>
                       <td><ItemNameInput value={it.nm||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],nm:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="Item..." style={{width:"100%",background:"transparent",border:"none",color:it.eq?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px",fontWeight:it.eq?"600":"400",opacity:it.wl?0.7:1}}
-                        onAutofill={function(item){const a=[...bagInv];const ch=parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} /></td>
+                        onAutofill={function(item){const a=[...bagInv];const ch=parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",nt:item.cost?"Cost: "+item.cost:a[i].nt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} /></td>
                       <td><TipInput value={it.qt||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],qt:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="1" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                       <td><TipInput value={it.wt||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],wt:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="0" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                       <td style={{fontFamily:"'Cinzel',serif",fontSize:11,color:it.wl?"var(--teal)":"var(--gold-l)",textAlign:"center",opacity:.8}}>{it.wl?"0":itemWeight(it)>0?itemWeight(it).toFixed(2):"-"}</td>
@@ -6678,7 +6696,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.114</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.116</div>
 
 </script>
 </body>
