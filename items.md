@@ -7207,3 +7207,1357 @@ As a bonus action, you can retract the armblade into your forearm or extend it f
 **Weight:** 0.05
 **Cost:**
 While wearing this ring, you can use a bonus action to summon a mundane melee weapon of your choice to the hand that's wearing it, such as a handaxe, scimitar, or whip. The weapon can't have the two-handed or special property, and it immediately vanishes if it's no longer in your hand, if you summon another weapon in this way, or if you're no longer wearing the ring. The weapon is considered magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage.
+
+#### Armor of Absence
+**Type:** Armor, Plate Armor
+**Rarity:** Artifact
+**Attunement:** yes
+**Weight:** 65
+**Cost:**
+AC 18
+This dark armor is covered in glinting, abjurative runes. Touching its metal without being attuned to it bestows a feeling of detached and cold emptiness. You gain a +2 bonus to AC while wearing this armor. In addition, you have advantage on saving throws against spells and other magical effects, and you have resistance to damage from them. When a creature hits you with a magic weapon that isn't an artifact for the first time on a turn, that weapon's properties and powers are suppressed until the start of that creature's next turn.
+
+Whenever you're targeted by a spell of 1st level or higher, the armor gains a number of charges equal to the spell's level, to a maximum of 5 charges per spell. The armor can have up to 10 charges at a time for use with the properties below; it loses these charges whenever you finish a long rest or when your attunement to it ends. Removing the armor ends any effect created by it.
+
+Antimagic Aura. You can use a bonus action to expend 10 of the armor's charges to cast the antimagic field spell from it. This version of the spell has a duration of 10 minutes and has no effect on the armor's various properties. In addition, you gain 10 temporary hit points whenever a different spell or magical effect is suppressed by this casting of antimagic field for the first time.
+
+Dispel. You can use an action to expend 1 of the armor's charges to cast the dispel magic spell from it, using a spellcasting ability modifier of +0. This version of the spell has a range of touch. For 1 charge, you cast the 3rd-level version of the spell. You can increase the spell slot level by one for each additional charge you expend.
+
+Transmute Magic. You can use a bonus action to expend 1 or more of the armor's charges to immediately gain 1d6 temporary hit points for each expended charge.
+
+Random Properties. The Armor of Absence has the following random properties:
+
+2 minor beneficial properties
+
+1 major beneficial property
+
+1 minor detrimental property
+
+2 major detrimental properties
+
+Destroying the Armor. The only way to destroy the armor is to use its Antimagic Aura property while within an extradimensional space. Doing so causes the space to collapse on itself and destroy the armor (and the person wearing it).
+
+The wearer has Disadvantage on Dexterity (Stealth) checks.
+
+If the wearer has a Strength score lower than 15, their speed is reduced by 10 feet.
+
+#### Armor of Fungal Spores
+**Type:** Armor, Generic Variant
+**Rarity:** Uncommon
+**Attunement:** no
+**Cost:**
+While wearing this armor, you can take a bonus action to make the armor emit poisonous spores, which fill a 10-foot-radius sphere centered on yourself. Each creature in that area must succeed on a DC 15 Constitution saving throw or have the poisoned condition until the end of your next turn. Once this property is used, it can't be used again until the next dawn.
+
+#### Armor of Gleaming
+**Type:** Armor, Generic Variant
+**Rarity:** Common
+**Attunement:** no
+**Cost:**
+This armor never gets dirty.
+
+#### Armor of Icarus
+**Type:** Armor, Breastplate
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 20
+**Cost:**
+AC 14 + Dex (max 2)
+This sculpted breastplate has a pair of small mechanical wings attached to its back. You gain a +1 bonus to AC while wearing this armor. The armor has 6 charges and regains 1d4 + 2 expended charges daily at dawn. While wearing the armor, you can use an action to expend 1 of its charges to magically unfurl the mechanical wings and fly up to 60 feet in a straight line toward a point of bright light that you can see (such as a torch, light spell, or the sun) without provoking opportunity attacks. The wings remain unfurled until you touch the ground, during which time you fall at a rate of 30 feet per round and gain a flying speed of 30 feet, which you can use to glide horizontally as you descend. While gliding in this way, you cannot fly upwards unless you use the armor to fly toward a point of bright light again. When you land on the ground while falling in this way, the mechanical wings refold themselves to your back, and you take no damage from falling.
+
+#### Armor of Invulnerability
+**Type:** Armor, Plate Armor
+**Rarity:** Legendary
+**Attunement:** yes
+**Weight:** 65
+**Cost:**
+AC 18
+You have Resistance to Bludgeoning, Piercing, and Slashing damage while you wear this armor.
+
+Metal Shell. You can take a Magic action to give yourself Immunity to Bludgeoning, Piercing, and Slashing damage for 10 minutes or until you are no longer wearing the armor. Once this property is used, it can't be used again until the next dawn.
+
+The wearer has Disadvantage on Dexterity (Stealth) checks.
+
+If the wearer has a Strength score lower than 15, their speed is reduced by 10 feet.
+
+#### Armor of Resistance
+**Type:** Armor, Generic Variant
+**Rarity:** Rare
+**Attunement:** yes
+**Cost:**
+You have Resistance to one type of damage while you wear this armor. The DM chooses the type or determines it randomly by rolling on the following table.
+
+d10 | Damage Type
+--- | ---
+1 | Acid
+2 | Cold
+3 | Fire
+4 | Force
+5 | Lightning
+6 | Necrotic
+7 | Poison
+8 | Psychic
+9 | Radiant
+10 | Thunder
+
+#### Armor of Safeguarding
+**Type:** Armor, Generic Variant
+**Rarity:** Very Rare
+**Attunement:** yes
+**Cost:**
+Set in the center of this armor's chest is a citrine engraved with the shield rune.
+
+While wearing this armor, your hit point maximum increases by an amount equal to 10 + your level.
+
+Invoking the Rune. As an action, you can invoke the armor's rune to cast the beacon of hope spell with it; the spell has a duration of 1 minute and doesn't require concentration. Once the rune has been invoked, it can't be invoked again until the next dawn.
+
+#### Armor of the Black River
+**Type:** Armor, Generic Variant
+**Rarity:** Rare
+**Attunement:** yes
+**Cost:**
+While wearing this armor, you gain a +1 bonus to AC, and you are immune to shadow corruption (see Chapter 5 of Book of Ebon Tides) and void taint (see Midgard Worldbook) while you wear this armor. Additionally, you can use an action to assume a ghostly form for 10 minutes (together with up to ten creatures you touch), or until you are no longer wearing the armor, gaining a flying speed of 200 feet. You cannot take actions other than movement while in this form. Once this special action is used, it can't be used again until the next dawn.
+
+When combined with the Styx boots, the armor of the Black River permits you to use any branch of the River Styx or other planar waterways as a shadow road. Once per week, you can walk on such a planar waterway for 8 hours and arrive at any other plane of your choosing.
+
+#### Armor of the Fallen
+**Type:** Armor, Generic Variant
+**Rarity:** Uncommon
+**Attunement:** yes
+**Cost:**
+While wearing this armor, you can use it to cast either Speak with Dead or Animate Dead. Once the armor has cast a spell in this way, it can't cast either spell until the next dawn.
+
+Your soul keeps this armor together. If you die while you are attuned to the armor, the armor is destroyed.
+
+#### Armor of the Lost Angel
+**Type:** Armor, Plate Armor
+**Rarity:** Legendary
+**Attunement:** yes
+**Weight:** 65
+**Cost:**
+AC 18
+This dark armor is covered in feathery ornamentations and streaks of scarlet. While wearing it, you gain resistance to fire and poison damage, and you can use a bonus action to extend a pair of spectral wings from your back. The color of the wings' feathers is determined by your alignment: black (evil), gray (neutral), or white (good). The wings remain until you use a bonus action to end the effect, during which time you have a flying speed of 30 feet.
+
+When you use a bonus action to extend the wings, you create a burst of hellish or celestial energy. If your wings are black, each hostile creature within 10 feet of you must succeed on a DC 16 Charisma saving throw or be affected by the bane spell. If your wings are gray or white, each friendly creature other than you within 10 feet of you is affected by the bless spell. Regardless, you must concentrate on the spell as normal, up to its duration. A creature affected by this version of bane takes an extra 1d6 fire damage whenever it's hit with an attack, and a creature affected by this version of bless reduces any damage it takes by 1d6.
+
+Curse. This armor is cursed, and becoming attuned to it extends the curse to you. While you're cursed, you gain the following flaw: "You can always hear a voice whispering in your mind, giving you extreme perspectives on matters at hand. The perspectives are evil if your alignment is good, good if your alignment is evil, or evil and good if your alignment is neutral. You find it hard to immediately dismiss the voices."
+
+The wearer has Disadvantage on Dexterity (Stealth) checks.
+
+If the wearer has a Strength score lower than 15, their speed is reduced by 10 feet.
+
+#### Armor of the Platinum Lord
+**Type:** Armor, Generic Variant
+**Rarity:** Legendary
+**Attunement:** by a Cleric or Paladin
+**Cost:**
+This silvery armor is blessed by a divine dragon. A mantle emblazoned with seven silver scales rests across its shoulders as a sign of piety. While wearing this armor, your Constitution score changes to 20, unless it's already higher. In addition, you have advantage on saving throws against being frightened.
+
+The armor has 7 charges for the following properties. It regains all expended charges daily at dawn.
+
+Platinum Glory. You can use a bonus action to expend 3 of the armor's charges to gain a flying speed of 30 feet for 10 minutes. For the duration, your weapon attacks deal an extra 1d8 radiant damage on a hit, and whenever you restore hit points to a creature using a class feature or a spell you cast, that creature regains an additional 1d8 hit points.
+
+Redirect Damage. When a creature that you can see within 30 feet of you takes damage, you can use your reaction to expend 2 of the armor's charges to prevent that creature from taking the damage. When you do, you take that damage instead, and it is halved for you; this damage can't be reduced in any other way.
+
+Reflect Radiance. Whenever you restore hit points to a target using a class feature or a spell you cast, you can expend 1 or more of the armor's charges to force a creature of your choice within 10 feet of the target to make a Constitution saving throw against your spell save DC. You can choose an additional creature for each charge you expend after the first. On a failed save, an affected creature takes radiant damage equal to half the number of hit points restored to the target. The creature must be able to see the target, which emits a brilliant flash of holy light when it's healed.
+
+Flaw. The armor of the platinum lord makes its wearer a steward of principle. While attuned to the armor, you gain the following flaw: "I can't abide any behavior unbecoming of a lord. Propriety and honesty is the only way: even to villains."
+
+#### Armor of the Reef Warden
+**Type:** Armor, Generic Variant
+**Rarity:** Very Rare
+**Attunement:** yes
+**Cost:**
+This armor is formed from living coral. While you're attuned to it, the armor magically opens and closes around you whenever you don or doff it, as if you were a welcome part of its ecosystem. As a result, doing so takes only an action, instead of multiple minutes. You also gain a swimming speed equal to your walking speed while wearing the armor, and you can walk normally on any surface while underwater (such as on a wall or ceiling).
+
+A thriving community of various spectral fish swim around the armor while you wear it, which duck in and out of its many crevices. You can call upon these fish for a variety of benefits. Once a fish has been used in this way, that fish can't be used again until the next dawn.
+
+Barracuda. When you take the Dash action, you can make a single weapon attack as part of the same action, as a spectral barracuda helps propel your attack. You have advantage on the attack roll if you're underwater.
+
+Moray Eel. When you hit a creature with a melee weapon attack, you can cause a pair of eels to wrap around and grapple the target. The target must succeed on a DC 16 Strength saving throw or be grappled and restrained by the spectral eels for up to 1 minute. A grappled creature takes 1d8 force damage and can repeat the saving throw at the end of each of its turns, ending the effect on a success. If the target is underwater, it has disadvantage on the saving throw.
+
+Pufferfish. When you're hit by a melee attack or are grappled by another creature, you can use your reaction to cause a spectral pufferfish to inflate itself between you and the other creature. That creature takes 3d4 force damage from the fish's sharp spines, and you're immediately moved up to 5 feet away from that creature. If you're underwater, you move up to 15 feet instead. This movement doesn't provoke opportunity attacks, and if you were grappled, you escape from it.
+
+Surgeonfish. You can use a bonus action on your turn to create a swirling school of spectral fish around you. The fish remain until the start of your next turn and grant any creatures of your choice within 10 feet of you half cover for the duration. If you're underwater, the fish grant three-quarters cover instead.
+
+#### Armor of the Stone Citadel
+**Type:** Armor, Plate Armor
+**Rarity:** Legendary
+**Attunement:** yes
+**Weight:** 65
+**Cost:**
+AC 18
+This armor is made of stone and reduces the wearer's speed by 10 feet unless the wearer has a Strength score equal to or higher than 17, instead of 15. Castle-like crenellations run along the tops of the armor's various pieces. While wearing the armor, you can't be petrified, and you have a damage threshold of 10. In addition, if you are blocking a friendly creature enough to grant it half cover against an attack or hostile effect, that creature instead has three-quarters cover against it.
+
+Living Citadel. While wearing the armor, you can use an action to transform into a Huge stone tower. The tower is a 15-foot-square that's 30 feet tall, centered on you. It resembles your head and upper torso, complete with a pair of powerful stone arms. If there isn't space for the tower, you don't transform, and the action (but not the use of this property) is wasted. Your equipment merges into this form when you transform and has no effect for the duration. For the duration, you use your normal senses, but your speed is reduced to 0. While in this form, you gain 100 temporary hit points and have an AC of 18, your damage threshold increases to 20, and you can't be moved or knocked prone. You are also immune to any spell or effect that would alter your form. You remain in this form for up to 8 hours, at which point you return to your normal form. You return to your normal form early if you lose all of these temporary hit points or if you end the effect using an action. While in this form, you can't cast spells, and your normal attacks are replaced by unarmed strikes using your massive stone fists. These unarmed strikes have a reach of 30 feet and deal 4d8 bludgeoning damage on a hit. You can make two unarmed strike attacks on each of your turns when you take the Attack action, even if you can normally make more. Alternatively, you can use an action to hurl a boulder from your arm. The boulder is a ranged weapon attack with a normal range of 60 feet and a long range of 180 feet. On a hit, it deals 6d8 bludgeoning damage. You are proficient with these attacks, which use your Strength modifier for their attack and damage rolls.
+
+You can choose to contain any willing or unconscious creatures that would be in your space when you transform into the tower. Other creatures are pushed to the nearest unoccupied space outside the tower. When you revert to your normal form, any creatures within the tower reappear in the nearest unoccupied space. A door large enough for Medium creatures to enter the tower appears on the ground. Creatures of your choice can open the door easily, but any other creature must make a DC 20 Dexterity check using thieves' tools or a DC 25 Strength (Athletics) check to open it. The tower has no windows, but has two floors and a staircase connecting them inside.
+
+Once this property of the armor has been used, it can't be used again until the next dawn. If you're reduced to 0 temporary hit points and revert to your normal form, it can't be used again until 1d6 + 1 days have passed, instead.
+
+The wearer has Disadvantage on Dexterity (Stealth) checks.
+
+If the wearer has a Strength score lower than 15, their speed is reduced by 10 feet.
+
+#### Armor of the Valiant Soul (Awakened)
+**Type:** Armor, Scale Mail
+**Rarity:** Legendary
+**Attunement:** yes
+**Weight:** 45
+**Cost:**
+AC 14 + Dex (max 2)
+This antique armor forged from jade and black dragon scales was once worn by J'mon Sa Ord of Ank'Harel.
+
+Dormant. While the Armor of the Valiant Soul is in a dormant state, you gain a +1 bonus to AC while wearing it. You can also cast the command spell (save DC 14) while attuned to this armor. Once this property is used, it can't be used again until you finish a long rest.
+
+Awakened. When the Armor of the Valiant Soul reaches an awakened state, you gain the following benefits:
+
+The AC bonus of the armor increases to +2.
+
+You have resistance to acid damage while wearing this armor.
+
+You are immune to the frightened condition while wearing this armor.
+
+The spell save DC for the armor's command spell increases to 16, and the spell can target up to three creatures.
+
+Vestige of Divergence. This item is a Vestige of Divergence.
+
+The wearer has Disadvantage on Dexterity (Stealth) checks.
+
+#### Armor of the Valiant Soul (Dormant)
+**Type:** Armor, Scale Mail
+**Rarity:** Legendary
+**Attunement:** yes
+**Weight:** 45
+**Cost:**
+AC 14 + Dex (max 2)
+This antique armor forged from jade and black dragon scales was once worn by J'mon Sa Ord of Ank'Harel.
+
+Dormant. While the Armor of the Valiant Soul is in a dormant state, you gain a +1 bonus to AC while wearing it. You can also cast the command spell (save DC 14) while attuned to this armor. Once this property is used, it can't be used again until you finish a long rest.
+
+Vestige of Divergence. This item is a Vestige of Divergence.
+
+The wearer has Disadvantage on Dexterity (Stealth) checks.
+
+#### Armor of the Valiant Soul (Exalted)
+**Type:** Armor, Scale Mail
+**Rarity:** Legendary
+**Attunement:** yes
+**Weight:** 45
+**Cost:**
+AC 14 + Dex (max 2)
+This antique armor forged from jade and black dragon scales was once worn by J'mon Sa Ord of Ank'Harel.
+
+Dormant. While the Armor of the Valiant Soul is in a dormant state, you gain a +1 bonus to AC while wearing it. You can also cast the command spell (save DC 14) while attuned to this armor. Once this property is used, it can't be used again until you finish a long rest.
+
+Awakened. When the Armor of the Valiant Soul reaches an awakened state, you gain the following benefits:
+
+The AC bonus of the armor increases to +2.
+
+You have resistance to acid damage while wearing this armor.
+
+You are immune to the frightened condition while wearing this armor.
+
+The spell save DC for the armor's command spell increases to 16, and the spell can target up to three creatures.
+
+Exalted. When the Armor of the Valiant Soul reaches an exalted state, you gain the following benefits:
+
+The AC bonus of the armor increases to +3.
+
+You are immune to acid damage while wearing this armor.
+
+All friendly creatures within 15 feet of you are immune to the frightened condition as long as you are conscious.
+
+The spell save DC of the armor's command spell increases to 18, and the spell can target up to five creatures.
+
+Vestige of Divergence. This item is a Vestige of Divergence.
+
+The wearer has Disadvantage on Dexterity (Stealth) checks.
+
+#### Armor of the White Rose
+**Type:** Armor, Generic Variant
+**Rarity:** Very Rare
+**Attunement:** yes
+**Cost:**
+You are immune to necrotic and cold damage and vulnerable to fire and radiant damage while you wear this armor. Additionally, you are imbued with soul-devouring energy. When you hit with a melee attack, the target takes an extra 3d6 necrotic damage, and you regain 3d6 hit points. If you gain hit points above your maximum, you immediately gain a level of exhaustion, and the soul-devouring power of the armor ends until the next dawn.
+
+#### Armor of Vulnerability (Bludgeoning)
+**Type:** Armor, Generic Variant
+**Rarity:** Rare
+**Attunement:** yes
+**Cost:**
+While wearing this armor, you have Resistance to Bludgeoning damage.
+
+Curse. This armor is cursed, a fact that is revealed only when the Identify spell is cast on the armor or you attune to it. Attuning to the armor curses you until you are targeted by a Remove Curse spell or similar magic; removing the armor fails to end the curse. While cursed, you have Vulnerability to Piercing and Slashing damage.
+
+#### Armor of Vulnerability (Piercing)
+**Type:** Armor, Generic Variant
+**Rarity:** Rare
+**Attunement:** yes
+**Cost:**
+While wearing this armor, you have Resistance to Piercing damage.
+
+Curse. This armor is cursed, a fact that is revealed only when the Identify spell is cast on the armor or you attune to it. Attuning to the armor curses you until you are targeted by a Remove Curse spell or similar magic; removing the armor fails to end the curse. While cursed, you have Vulnerability to Bludgeoning and Slashing damage.
+
+#### Armor of Vulnerability (Slashing)
+**Type:** Armor, Generic Variant
+**Rarity:** Rare
+**Attunement:** yes
+**Cost:**
+While wearing this armor, you have Resistance to Slashing damage.
+
+Curse. This armor is cursed, a fact that is revealed only when the Identify spell is cast on the armor or you attune to it. Attuning to the armor curses you until you are targeted by a Remove Curse spell or similar magic; removing the armor fails to end the curse. While cursed, you have Vulnerability to Bludgeoning and Piercing damage.
+
+#### Armor of Weightlessness
+**Type:** Armor, Generic Variant
+**Rarity:** Uncommon
+**Attunement:** yes
+**Cost:**
+This armor has 5 charges. While you wear it, you can use a bonus action to expend 1 or more charges to cast one of the following spells from the armor, targeting yourself: Jump (1 charge) or Levitate (2 charges).
+
+This armor regains 1d4 + 1 expended charges daily at dawn.
+
+#### Arrow of Expulsion
+**Type:** Ammunition, Arrow
+**Rarity:**
+**Attunement:** no
+**Weight:** 0.05
+**Cost:**
+The head of this magic arrow emits a concussive explosion in a 15-foot radius upon impact, centered on the target of the attack. Each creature within the explosion's area must make a Strength saving throw. The save DC for this effect and the amount of force damage that it deals are based on the arrow's rarity: uncommon (DC 13; 3d6), rare (DC 15; 6d6), or very rare (DC 16; 9d6). On a failed save, a creature takes the damage and is pushed up to 15 feet away from the point of impact, or away from you if it was the target of the attack. If a creature fails the saving throw by 5 or more, it's also knocked prone. On a successful save, a creature takes half as much damage and isn't pushed. The explosion's damage is doubled against structures and objects that aren't being worn or carried. Hit or miss, the arrow is then destroyed.
+
+Other types of magic ammunition of this kind exist, such as bolts of expulsion meant for a crossbow, though arrows are most common.
+
+#### Arrow-Catching Shield
+**Type:** Shield
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 6
+**Cost:**
+AC +2
+You gain a +2 bonus to Armor Class against ranged attack rolls while you wield this Shield. This bonus is in addition to the Shield's normal bonus to AC.
+
+Whenever an attacker makes a ranged attack roll against a target within 5 feet of you, you can take a Reaction to become the target of the attack instead.
+
+#### Artisan's Signet
+**Type:** Ring
+**Rarity:** Uncommon
+**Attunement:** yes
+**Weight:** 0.05
+**Cost:**
+A symbol of an artisan's tool is emblazoned at the top of this golden signet. While wearing the ring, you gain a +2 bonus to any check you make with a set of artisan's tools. Furthermore, you can add half your proficiency bonus to any check you make to use a set of artisan's tools with which you aren't proficient. When you do, the symbol on the ring changes to match the associated tool.
+
+#### Ascendant Dragon Vessel
+**Type:** Wondrous Item
+**Rarity:** Legendary
+**Attunement:** yes
+**Weight:** 1
+**Cost:**
+This vessel can be a potion bottle, drinking horn, or other container meant to hold a liquid.
+
+As a bonus action, if the vessel is empty, you can speak the command word to fill the vessel with one of the following (your choice): ale, olive oil, mead, wine, whiskey, a potion of healing, a potion of greater healing, a potion of superior healing, a potion of supreme healing, a potion of climbing, a potion of fire breath, a potion of flying, or a potion of dragon's majesty. Once this property is used, it can't be used until the next dawn. A potion you create in this way loses its magical properties if it isn't imbibed within 24 hours.
+
+#### Ascendant Dragon's Wrath Weapon
+**Type:** Weapon, Generic Variant
+**Rarity:** Legendary
+**Attunement:** yes
+**Cost:**
+This weapon is decorated with dragon heads, claws, wings, scales, or Draconic letters. When it steeps in a dragon's hoard, it absorbs the energy of the dragon's breath weapon and deals damage of that type with its special properties.
+
+Whenever you roll a 20 on your attack roll with this weapon, each creature of your choice within 5 feet of the target takes 5 damage of the type dealt by the dragon's breath weapon.
+
+You gain a +3 bonus to attack and damage rolls made using the weapon. On a hit, the weapon deals an extra 3d6 damage of the type dealt by the dragon's breath weapon.
+
+As an action, you can unleash a 60-foot cone of destructive energy from the weapon. Each creature in that area must make a DC 18 Dexterity saving throw, taking 12d6 damage of the type dealt by the dragon's breath weapon on a failed save, or half as much damage on a successful one. Once this action is used, it can't be used again until the next dawn.
+
+#### Ascendant Dragon-Touched Focus
+**Type:** Wondrous Item, Spellcasting Focus
+**Rarity:** Legendary
+**Attunement:** by a Spellcaster
+**Weight:** 1
+**Cost:**
+This wondrous item can be a scepter, an orb, an amulet, a crystal, or another finely crafted object. It typically incorporates imagery of dragons' wings, claws, teeth, or scales.
+
+You have advantage on initiative rolls. While you are holding the focus, it can function as a spellcasting focus for all your spells.
+
+The focus gains an additional property determined by the family of the dragon in whose hoard it became Stirring:
+
+Chromatic. Whenever you use a spell slot to cast a spell that deals acid, cold, fire, lightning, or poison damage, roll a d6, and you gain a bonus equal to the number rolled to one of the spell's damage rolls.
+
+Gem. Whenever you use a spell slot to cast a spell, you can immediately teleport to an unoccupied space you can see within 15 feet of you.
+
+Metallic. When a creature you can see within 30 feet of you makes a saving throw, you can use your reaction to give that creature advantage on the saving throw.
+
+While you are holding a Wakened focus, you can use it to cast certain spells. Once the item is used to cast a given spell, it can't be used to cast that spell again until the next dawn. The spells are determined by the family of the dragon in whose hoard it became Wakened.
+
+Chromatic. Hold monster, Rime's binding ice
+
+Gem. Rary's telepathic bond, Raulothim's psychic lance
+
+Metallic. Fizban's platinum shield, legend lore
+
+When you cast a spell of 1st level or higher while holding this focus, you can treat the spell as if it were cast using a 9th-level spell slot. Once this property is used, it can't be used again until the next dawn.
+
+#### Ascendant Scaled Ornament
+**Type:** Wondrous Item
+**Rarity:** Legendary
+**Attunement:** yes
+**Weight:** 1
+**Cost:**
+This ornament can be jewelry, a cloak, or another wearable accessory. It appears to be fashioned from a dragon's scale, tooth, or claw, or it incorporates images in those shapes.
+
+You gain a +1 bonus to AC, and you can't be charmed or frightened. Moreover, each creature of your choice within 30 feet of you has advantage on saving throws it makes to avoid being charmed or frightened or to end those conditions on itself.
+
+When you would take damage of the type dealt by the breath of the dragon in whose hoard the ornament became Wakened, you can use your reaction to take no damage instead, and you regain hit points equal to the damage you would have taken. Once this property is used, it can't be used again until the next dawn.
+
+While you are wearing the ornament, you gain a flying speed equal to your walking speed and can hover. While you are flying using this speed, spectral dragon wings appear on your back.
+
+#### Asclepian Staff
+**Type:** Staff, Weapon
+**Rarity:** Legendary
+**Attunement:** by a Bard, Cleric, Druid, Paladin, or Ranger
+**Weight:** 4
+**Cost:**
+Damage: 1d6 Bludgeoning
+This wooden staff cradles a translucent orb at its top. While attuned to this staff, you have proficiency in the Medicine skill, and your proficiency bonus is doubled for any ability check you make with it. This staff can be wielded as a magic quarterstaff that grants a +2 bonus to attack and damage rolls made with it.
+
+The staff has 16 charges for the following properties. It regains 2d6 + 4 expended charges daily at dawn. If you roll a 1 on both d6s, the staff regains all expended charges.
+
+Spells. While holding the staff, you can expend some of its charges to cast one of the following spells from it, using the spell's normal casting time and your spell attack bonus and spellcasting ability modifier: acid arrow (2 charges), cure wounds (1 charge per spell level, up to 9th), death ward (4 charges), heal (6 charges), lesser restoration (2 charges), mass cure wounds (5 charges), regenerate (7 charges), or warding bond (2 charges).
+
+You can also use an action to cast one of the following spells from the staff without using any charges: animal friendship (snakes only), detect poison and disease, poison spray, or spare the dying.
+
+Staff of the Python. This also functions as a staff of the python. This version of the staff's giant constrictor snake uses your spell save DC for its armor class and your spell attack bonus for its attack rolls, and it has a bonus to all saving throws equal to your spellcasting ability modifier. If the giant constrictor snake is reduced to 0 hit points while the is transformed, it immediately reverts to its form, and this property can't be used again until the next dawn. When you mentally command the snake, you can choose for it to use its action to cast any of the staff's spells on its turn, requiring no components; doing so expends charges and uses your spell attack bonus and spellcasting ability modifier as normal.
+
+Venomous Strike. When you hit a creature with this staff or when the transformed giant constrictor snake hits a creature with its bite, you can expend 1 of the staff's charges to deal an extra 2d6 acid or poison damage (your choice). If either of these extra damage dice roll a 6, or if both dice roll a 1, the target must also succeed on a Constitution saving throw against your spell save DC or become poisoned until the end of your next turn, or the snake's next turn if it made the attack.
+
+Versatile. This weapon can be used with one or two hands. A damage value in parentheses appears with the property—the damage when the weapon is used with two hands to make a melee attack.
+
+#### Ashen Bloom
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** 0.1
+**Cost:**
+An ashen bloom is a rare flower that grows in earth that's been charred by a phoenix's fire. Once it blooms, it continues to live indefinitely until all of its petals are removed, even if it's plucked from the soil. When found, an ashen bloom has 2d4 + 2 petals remaining. The flower crumbles to ash once its last petal is removed.
+
+Its petals have a variety of uses. You can pluck one of its petals as part of the options below. Once a petal has been used, it loses its magic.
+
+Component. You can use one petal as part of casting a spell that deals fire damage. When you do, choose one creature that takes damage from the spell. That target takes an extra 2d6 fire damage.
+
+Eaten. You can eat one petal using an action. When you do, you're cured of either one disease or one poison affecting you. If you're afflicted by more than one, you neutralize one disease or poison of your choice that you know is present, or you neutralize one at random.
+
+Smoked. You can smoke one petal in a pipe or similar object over the course of 1 minute, at which time you gain resistance to fire damage for 1d4 hours. The exhaled smoke is red.
+
+Steeped. You can steep one petal in 8 ounces of cold water over the course of 10 minutes, by which point the water is boiling and crimson. Drinking all of this tea, which takes at least 1 minute, reduces your exhaustion level by one.
+
+#### Astral Aegis
+**Type:** Shield
+**Rarity:** Legendary
+**Attunement:** yes
+**Weight:** 6
+**Cost:**
+AC +2
+This dark shield reflects an ever-present starry sky. When observed at an angle, it looks as though you could reach through its glossy surface. While holding the shield, you have immunity to radiant damage and gain a +2 bonus to your AC. This bonus is in addition to the shield's normal bonus to AC. The shield has the following properties, which you can use while you hold it.
+
+Astral Defender. When a friendly creature within 30 feet of you takes radiant damage from a hostile source, you can use your reaction to magically swap places with that creature, teleporting you both, provided the other creature is willing. You then take the triggering damage, instead of the other creature, unless that creature would still be affected by the triggering effect in its new location.
+
+Astral Projection. You can use an action to cast the astral projection spell from the shield, without any material components. When the spell ends, this property of the shield can't be used again until 7 days have passed. If your silvery cord is severed, the shield is shunted into the Astral Plane and lost, but you and your companions are harmlessly returned to your bodies.
+
+Astral Ward. You can perform a special ritual with the shield over the course of 1 hour, which can be done during a short rest. At the end of that time, a glimmering ward appears, centered on your location, which extends from you in a cylinder that's 100 feet tall with a radius of 50 feet. The ward remains at that location for 24 hours or until you leave the area. For the duration, creatures can't move or travel within the space using teleportation (except by the shield's Astral Defender property) or by extradimensional or interplanar means. In addition, when an aberration enters the ward's area for the first time on a turn or starts its turn there, it must succeed on a DC 17 Wisdom saving throw or take 5d10 radiant damage. Once a creature succeeds on the saving throw, it's immune to the effect for 24 hours.
+
+#### Astral Bracelet of Energy
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** by a Sorcerer or Wizard
+**Weight:** 0.2
+**Cost:**
+An Astral Bracelet is a powerful magical bangle that allows its wearer to see, commune, or otherwise manifest things using powers beyond the Material Plane. The metal and glyphs of each bracelet are related to the kind of power that it holds. You can pull the bracelet off and hold it in the palm of your hand as a Magic action. When you do, the bracelet unfurls to reveal the four inner rings collapsed within it, transforming the bracelet into an astronomical sphere. While the bracelet is transformed in this way, its inner rings slowly spin on their own.
+
+The bracelet has 10 charges, which are only usable in its sphere form. It regains 2d4 + 2 expended charges daily at dawn. If you expend its last charge, the sphere's spinning rings magically fold up again into the wearable bracelet. You can fold the rings back into place early as a Magic action.
+
+Spells. Each kind of Astral Bracelet has a different list of spells that can be cast from it. If a spell cast in this way normally requires a Material component with a cost of 100+ GP, that component is still required when casting the spell. While holding the bracelet in its sphere form, you can expend 1 or more charges to cast one of the corresponding spells from it: Dispel Magic (3 charges), Tenser's Floating Disk (1 charge), Globe of Invulnerability (6 charges), Hallucinatory Terrain (4 charges), Hypnotic Pattern (3 charges), Protection from Energy (3 charges), or Otiluke's Resilient Sphere (4 charges).
+
+#### Astral Bracelet of Heavens
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** by a Cleric or Paladin
+**Weight:** 0.2
+**Cost:**
+An Astral Bracelet is a powerful magical bangle that allows its wearer to see, commune, or otherwise manifest things using powers beyond the Material Plane. The metal and glyphs of each bracelet are related to the kind of power that it holds. You can pull the bracelet off and hold it in the palm of your hand as a Magic action. When you do, the bracelet unfurls to reveal the four inner rings collapsed within it, transforming the bracelet into an astronomical sphere. While the bracelet is transformed in this way, its inner rings slowly spin on their own.
+
+The bracelet has 10 charges, which are only usable in its sphere form. It regains 2d4 + 2 expended charges daily at dawn. If you expend its last charge, the sphere's spinning rings magically fold up again into the wearable bracelet. You can fold the rings back into place early as a Magic action.
+
+Spells. Each kind of Astral Bracelet has a different list of spells that can be cast from it. If a spell cast in this way normally requires a Material component with a cost of 100+ GP, that component is still required when casting the spell. While holding the bracelet in its sphere form, you can expend 1 or more charges to cast one of the corresponding spells from it: Detect Evil and Good (1 charge), Dispel Evil and Good (5 charges), Divination (4 charges), Magic Circle (3 charges), Protection from Evil and Good (1 charge), Spirit Guardians (3 charges), or Warding Bond (2 charges).
+
+#### Astral Bracelet of Hells
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** by a Cleric, Warlock, or Wizard
+**Weight:** 0.2
+**Cost:**
+An Astral Bracelet is a powerful magical bangle that allows its wearer to see, commune, or otherwise manifest things using powers beyond the Material Plane. The metal and glyphs of each bracelet are related to the kind of power that it holds. You can pull the bracelet off and hold it in the palm of your hand as a Magic action. When you do, the bracelet unfurls to reveal the four inner rings collapsed within it, transforming the bracelet into an astronomical sphere. While the bracelet is transformed in this way, its inner rings slowly spin on their own.
+
+The bracelet has 10 charges, which are only usable in its sphere form. It regains 2d4 + 2 expended charges daily at dawn. If you expend its last charge, the sphere's spinning rings magically fold up again into the wearable bracelet. You can fold the rings back into place early as a Magic action.
+
+Spells. Each kind of Astral Bracelet has a different list of spells that can be cast from it. If a spell cast in this way normally requires a Material component with a cost of 100+ GP, that component is still required when casting the spell. While holding the bracelet in its sphere form, you can expend 1 or more charges to cast one of the corresponding spells from it: Detect Evil and Good (1 charge), Dispel Evil and Good (5 charges), Fire Shield (4 charges), Flaming Sphere (2 charges), Hellish Rebuke (1 charge), Magic Circle (3 charges), or Protection from Evil and Good (1 charge).
+
+#### Astral Bracelet of Knowledge
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** by a Bard, Cleric, Druid, Ranger, or Wizard
+**Weight:** 0.2
+**Cost:**
+An Astral Bracelet is a powerful magical bangle that allows its wearer to see, commune, or otherwise manifest things using powers beyond the Material Plane. The metal and glyphs of each bracelet are related to the kind of power that it holds. You can pull the bracelet off and hold it in the palm of your hand as a Magic action. When you do, the bracelet unfurls to reveal the four inner rings collapsed within it, transforming the bracelet into an astronomical sphere. While the bracelet is transformed in this way, its inner rings slowly spin on their own.
+
+The bracelet has 10 charges, which are only usable in its sphere form. It regains 2d4 + 2 expended charges daily at dawn. If you expend its last charge, the sphere's spinning rings magically fold up again into the wearable bracelet. You can fold the rings back into place early as a Magic action.
+
+Spells. Each kind of Astral Bracelet has a different list of spells that can be cast from it. If a spell cast in this way normally requires a Material component with a cost of 100+ GP, that component is still required when casting the spell. While holding the bracelet in its sphere form, you can expend 1 or more charges to cast one of the corresponding spells from it: Comprehend Languages (1 charge), Detect Magic (1 charge), Dispel Magic (3 charges), Identify (1 charge), Legend Lore (5 charges), Locate Creature (4 charges), Locate Object (2 charges), or Sending (3 charges).
+
+#### Astral Bracelet of Omniscience
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** by a Wizard
+**Weight:** 0.2
+**Cost:**
+An Astral Bracelet is a powerful magical bangle that allows its wearer to see, commune, or otherwise manifest things using powers beyond the Material Plane. The metal and glyphs of each bracelet are related to the kind of power that it holds. You can pull the bracelet off and hold it in the palm of your hand as a Magic action. When you do, the bracelet unfurls to reveal the four inner rings collapsed within it, transforming the bracelet into an astronomical sphere. While the bracelet is transformed in this way, its inner rings slowly spin on their own.
+
+The bracelet has 10 charges, which are only usable in its sphere form. It regains 2d4 + 2 expended charges daily at dawn. If you expend its last charge, the sphere's spinning rings magically fold up again into the wearable bracelet. You can fold the rings back into place early as a Magic action.
+
+Spells. Each kind of Astral Bracelet has a different list of spells that can be cast from it. If a spell cast in this way normally requires a Material component with a cost of 100+ GP, that component is still required when casting the spell. While holding the bracelet in its sphere form, you can expend 1 or more charges to cast one of the corresponding spells from it: Arcane Eye (4 charges), Detect Magic (1 charge), Detect Thoughts (2 charges), Scrying (5 charges), See Invisibility (2 charges), Sending (3 charges), or Telepathic Bond (5 charges).
+
+#### Astral Bracelet of Planebending
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** by a Sorcerer, Warlock, or Wizard
+**Weight:** 0.2
+**Cost:**
+An Astral Bracelet is a powerful magical bangle that allows its wearer to see, commune, or otherwise manifest things using powers beyond the Material Plane. The metal and glyphs of each bracelet are related to the kind of power that it holds. You can pull the bracelet off and hold it in the palm of your hand as a Magic action. When you do, the bracelet unfurls to reveal the four inner rings collapsed within it, transforming the bracelet into an astronomical sphere. While the bracelet is transformed in this way, its inner rings slowly spin on their own.
+
+The bracelet has 10 charges, which are only usable in its sphere form. It regains 2d4 + 2 expended charges daily at dawn. If you expend its last charge, the sphere's spinning rings magically fold up again into the wearable bracelet. You can fold the rings back into place early as a Magic action.
+
+Spells. Each kind of Astral Bracelet has a different list of spells that can be cast from it. If a spell cast in this way normally requires a Material component with a cost of 100+ GP, that component is still required when casting the spell. While holding the bracelet in its sphere form, you can expend 1 or more charges to cast one of the corresponding spells from it: Banishment (4 charges), Dimension Door (4 charges), Find Familiar (1 charge), Misty Step (2 charges), Plane Shift (7 charges), Rope Trick (2 charges), or Sending (3 charges).
+
+#### Astral Caltrops
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Weight:** 0.1
+**Cost:**
+As an action, you can spread these magic caltrops over a square area that is 5 feet on a side. Any creature that enters the area must succeed on a DC 15 Dexterity saving throw or stop moving this turn and take 1 piercing damage. When this happens, the caltrops explode in a burst of extraplanar energy, destroying the caltrops and dealing 6d6 force damage to the creature and causing it to rise vertically up to 20 feet, as if by the levitate spell. The creature remains suspended in this way for 1d4 rounds, during which time its speed becomes 0. The effect ends early if the creature takes any damage.
+
+When the caltrops are spread on the ground, they become nearly invisible and float up to 1 inch off the ground. A creature notices the caltrops with a successful DC 20 Wisdom (Perception) check. You can reclaim the invisible caltrops for later use with 1 minute of careful searching and collecting. The caltrops stop floating and become visible once they're reclaimed in this way.
+
+#### Astral Luggage (Uncommon)
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** Optional
+**Weight:** 5
+**Cost:**
+This luggage contains a filtered portal to the edges of the Astral Plane, specifically the areas where beings from The Anomalies slink from their far-away plane to the timeless astral expanse. As such, you don't use the astral luggage as actual luggage, not unless you want to lose it.
+
+**Portal.** The astral luggage can be opened to a two-foot-by-one-foot opening. This opening repels creatures, prohibiting their entry, but any object you place inside the luggage floats off into the Astral Plane.
+
+**Optional Attunement.** Attuning to this item enhances some of the Special Fastenings properties.
+
+**Special Fastenings.** On the luggage are several special buckles, zips, or clips, which you can unfasten to cause magical effects. Once you unfasten a fastening, it can't be unfastened again until the next dawn, at which point it reseals itself. If a save DC is required, use DC 13.
+
+**Ebony Clasp.** As an action, you can unfasten the clasp and throw the luggage at a point you can see within 30 feet of you, where it instantly opens, spewing squirming ebony tentacles in a 20-foot square. This area becomes affected by the black tentacles spell for 1 minute (no concentration required). If you are attuned to the luggage, you are immune to this spell's effects. When the spell ends, the tentacles disappear and the luggage closes.
+
+#### Astral Luggage (Very Rare)
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** Optional
+**Weight:** 5
+**Cost:**
+This luggage contains a filtered portal to the edges of the Astral Plane, specifically the areas where beings from The Anomalies slink from their far-away plane to the timeless astral expanse. As such, you don't use the astral luggage as actual luggage, not unless you want to lose it.
+
+**Portal.** The astral luggage can be opened to a two-foot-by-one-foot opening. This opening repels creatures, prohibiting their entry, but any object you place inside the luggage floats off into the Astral Plane.
+
+**Optional Attunement.** Attuning to this item enhances some of the Special Fastenings properties.
+
+**Special Fastenings.** On the luggage are several special buckles, zips, or clips, which you can unfasten to cause magical effects. Once you unfasten a fastening, it can't be unfastened again until the next dawn, at which point it reseals itself. If a save DC is required, use DC 15.
+
+**Ebony Clasp.** As an action, you can unfasten the clasp and throw the luggage at a point you can see within 30 feet of you, where it instantly opens, spewing squirming ebony tentacles in a 20-foot square. This area becomes affected by the black tentacles spell for 1 minute (no concentration required). If you are attuned to the luggage, you are immune to this spell's effects. When the spell ends, the tentacles disappear and the luggage closes.
+
+**Amethyst Buckle.** As an action, you can unfasten this buckle and throw the luggage at a point you can see within 30 feet of you, where it instantly opens and casts the conjure anomaly spell (no concentration required). If you are attuned to this item, the aberration conjured is under your control; otherwise, the aberration is hostile to all creatures.
+
+**Moonstone Dial.** As an action, you can turn this dial to a symbol representing a specific plane, and press it, causing it to unfasten. As part of the same action, you can throw it to a point you can see within 30 feet of you, where it instantly opens. Until the end of your next turn, the luggage's opening becomes a portal to a random location on the chosen plane that Medium or smaller creatures can move through using 5 feet of movement. At the end of your next turn, the luggage folds in on itself and appears at that location on the destination plane. If you are attuned to the luggage, you can attempt to direct the portal to a specific location, as per the teleport spell.
+
+#### Astral Sea Piercer
+**Type:** Weapon (War Pick)
+**Rarity:** Legendary
+**Attunement:** Required
+**Weight:** 2
+Damage: 1d8 Piercing
+Properties: Versatile (1d10), Mastery: Sap
+
+This golden War Pick was forged in the depths of the Astral Plane and leaves a faint trail of extraplanar energy behind it when swung. You gain a +3 bonus to attack rolls and damage rolls made with this magic weapon, and targets hit by it take an extra 1d4 Force damage. In addition, while you're in the Astral Plane, you always know the direction to the nearest portal to another plane of existence.
+
+**Portal.** This weapon has 4 charges and regains 1d3 + 1 expended charges daily at dawn. As a Bonus Action, you can expend 1 charge to slam the War Pick into any flat, solid surface at least 5 feet in each dimension. When you do, you magically create a small planar rift, which fades after 1 minute. If you expend another charge in this way while there's another such rift within 300 feet of you, the two rifts tear open to form a portal between them. The portal lasts until the end of your next turn or until you close it early (no action required). When the portal closes, the rifts fade. Medium and smaller creatures and objects can move or interact freely through the portal while it's open, carrying with them any momentum they had through to the other side.
+
+Both rifts must be placed on the same plane of existence, and if you create a second rift more than 300 feet away from the first, the first one fades. Rifts can be entered from any direction to travel through the portal. When you enter a rift in this way, you reappear 5 feet in front of the other rift.
+
+In addition, you can expend 1 of the War Pick's charges when you hit a Small or larger creature with it. When you do, that creature takes an extra 1d8 Force damage as a rift appears on its body. Rifts that appear on a creature in this way are attached to the creature and move with it until a portal is opened. When a portal opens between two rifts and at least one of the rifts is attached to a creature, the attached creature or creatures must succeed on a DC 17 Charisma saving throw or be immediately shunted through the portal to the other rift's location. Large and larger creatures automatically succeed on this saving throw.
+
+**Versatile.** A Versatile weapon can be used with one or two hands. A damage value in parentheses appears with the property. The weapon deals that damage when used with two hands to make a melee attack.
+
+**Mastery: Sap.** If you hit a creature with this weapon, that creature has Disadvantage on its next attack roll before the start of your next turn.
+
+#### Astral Shard
+**Type:** Wondrous Item, Spellcasting Focus
+**Rarity:** Rare
+**Attunement:** by a Sorcerer
+**Weight:** 1
+**Cost:**
+This crystal is a solidified shard of the Astral Plane, swirling with silver mist. As an action, you can attach the shard to a Tiny object (such as a weapon or a piece of jewelry) or detach it. It falls off if your attunement to it ends. You can use the shard as a spellcasting focus while you hold or wear it.
+
+When you use a Metamagic option on a spell while you are holding or wearing the shard, immediately after casting the spell you can teleport to an unoccupied space you can see within 30 feet of you.
+
+#### Astromancy Archive
+**Type:** Wondrous Item, Spellcasting Focus
+**Rarity:** Rare
+**Attunement:** by a Wizard
+**Weight:** 3
+**Cost:**
+This brass disc of articulated, concentric rings unfolds into an armillary sphere. As a bonus action, you can unfold it into the sphere or back into a disc. When found, it contains the following spells, which are wizard spells for you while you are attuned to it: augury, divination, find the path, foresight, locate creature, and locate object. It functions as a spellbook for you, with spells encoded on the rings.
+
+While you are holding the archive, you can use it as a spellcasting focus for your wizard spells.
+
+The archive has 3 charges, and it regains 1d3 expended charges daily at dawn. You can use the charges in the following ways while holding it:
+
+- If you spend 1 minute studying the archive, you can expend 1 charge to replace one of your prepared wizard spells with a different spell in the archive. The new spell must be of the divination school.
+- When a creature you can see within 30 feet of you makes an attack roll, an ability check, or a saving throw, you can use your reaction to expend 1 charge and force the creature to roll a d4 and apply the number rolled as a bonus or penalty (your choice) to the original roll. You can do this after you see the roll but before its effects are applied.
+
+#### Astronomer's Boon
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 1
+**Cost:**
+This brass astrolabe has a glass back that sparkles softly when light shines through it. While looking through the glass at the night sky, the names and patterns of any constellation you can see appear alongside their stars on the astrolabe. At the GM's discretion, you may find one or more of the following constellations while looking through the glass. When you do, the astrolabe begins to glow, and you can use an action to speak the item's command word to gain the constellation's respective benefit:
+
+The Drum. 3 stars appear on your back in the shape of a drum. When you roll for initiative, you can expend 1 of the stars as a reaction to grant you and any other friendly creature within 10 feet of you a +1 bonus to the roll. In addition, any creature that gains this bonus to initiative can use a bonus action on its first turn of combat to take either the Dash or Disengage action.
+
+The Knight. 5 stars appear on your arm in the shape of a sword. When you hit with a melee attack, you can choose to expend 1 of the stars as part of the attack to cause the target to take an extra 1d4 radiant damage. Alternatively, if a friendly creature within 30 feet of you that you can see hits a target with a melee attack, you can use your reaction to expend 1 of the stars and empower the attack with light, causing the target to take an extra 1d4 radiant damage.
+
+The Seer. 4 stars appear on your forehead in the shape of an eye. You can use a bonus action to expend 1 of the stars and touch a creature. Once within the next 10 minutes, that creature can choose to add 1d4 to an ability check or saving throw that it makes. It can choose to roll the die before or after making the ability check or saving throw.
+
+The stars remain until the next dusk, at which point any unused stars vanish and are lost. Once the astrolabe has granted a benefit in this way, it can't be used again until the next dusk.
+
+#### Atlas of Endless Horizons
+**Type:** Wondrous Item, Spellcasting Focus
+**Rarity:** Rare
+**Attunement:** by a Wizard
+**Weight:** 3
+**Cost:**
+This thick book is bound in dark leather, crisscrossed with inlaid silver lines suggesting a map or chart. When found, the book contains the following spells, which are wizard spells for you while you are attuned to the book: arcane gate, dimension door, gate, misty step, plane shift, teleportation circle, and word of recall. It functions as a spellbook for you.
+
+While you are holding the book, you can use it as a spellcasting focus for your wizard spells.
+
+The book has 3 charges, and it regains 1d3 expended charges daily at dawn. You can use the charges in the following ways while holding it:
+
+If you spend 1 minute studying the book, you can expend 1 charge to replace one of your prepared wizard spells with a different spell in the book. The new spell must be of the conjuration school.
+
+When you are hit by an attack, you can use your reaction to expend 1 charge to teleport up to 10 feet to an unoccupied space you can see. If your new position is out of range of the attack, it misses you.
+
+#### Attack-In-The-Box
+**Type:** Weapon, Flail
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 2
+**Cost:**
+Damage: 1d8 Bludgeoning
+A colorful box sits at the top of this weapon's wooden handle. Within the box is a coiled spring beneath the flail's spiked head. The head springs out from the box the first time you make an attack with it, granting you advantage on the attack roll and creating a random effect. Roll a d6 and refer to the table below to determine the effect. You can use an action to stuff the head back into the box, or use a bonus action to cause the head to harmlessly spring from it.
+
+d6 | Effect
+--- | ---
+1 | The target is covered with magical confetti and can't benefit from being invisible for 1 minute. On a hit, the target's face is also covered with the confetti, causing any attack roll it makes before the end of its next turn to be made with disadvantage. The confetti vanishes after 1 round.
+2 | The head is replaced with a comical boxing glove. On a hit, the target takes the weapon's damage and is pushed 10 feet away from you. The head then returns to normal.
+3 | The box erupts with a chorus of music. You gain a d6. You can choose to roll the die and add the result to any ability check or attack roll you make in the next minute. When you do, the die is lost.
+4 | On a hit, the target must also succeed on a DC 13 Wisdom saving throw or be affected by the hideous laughter spell. This version of the spell ends at the start of your next turn or when the creature takes any damage.
+5 | A second flail head springs from the box after the first. You can use a bonus action immediately after the attack to make one additional attack with the flail against the same target. On a hit, you don't add your Strength modifier to the damage roll. The head then returns to normal.
+6 | The flail's head is comically large. On a hit, the target takes an extra 6 bludgeoning damage. The head then returns to normal.
+
+#### Augurer's Coin
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 0.1
+**Cost:**
+This triangular coin depicts a fair-faced goddess on one side, representing "weal," and a grim specter on the other, representing "woe." "Weal and Woe" is written in Common along the coin's topmost edge.
+
+You can use an action to flip the coin and hold a question in your mind, allowing the coin to hit the ground when it falls. The coin then duplicates the effect of the augury spell. Depending on the outcome of the spell, the coin lands in one of the following orientations:
+
+If the coin lands with either the goddess or specter facing you, the answer to your question is "weal" or "woe," depending on the shown face.
+
+If "Weal and Woe" is facing you, the answer to your question is "weal and woe."
+
+If the coin lands upright on its edge, the answer is "nothing" instead.
+
+Each time you flip the coin, roll a d20. On a 1 or lower, the coin shatters and is destroyed. The maximum number that needs to be rolled to destroy the coin in this way increases by 1 each time the coin is flipped after the first. When found, the coin has already been flipped 1d4 - 1 times.
+
+#### Aurora Dust
+**Type:** Wondrous Item
+**Rarity:** Common
+**Attunement:** no
+**Weight:** 0.1
+**Cost:**
+This bag is filled with 1d6 + 4 pinches of iridescent blue dust. You can use an action to sprinkle a pinch of it over an open flame. The dust changes the flame's color and light to a mixture of blue, green, and purple, and creates a shimmering aurora the same color above it within the bright light. The dust's effect lasts for the flame's duration (up to 24 hours).
+
+#### Aurum and Argentum
+**Type:** Weapon, Dagger
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** 1
+**Cost:**
+Damage: 1d4 Piercing
+This gold and silver set of Daggers seem ordinary when used on their own but become magical when used together. You gain a +1 bonus to attack rolls and damage rolls made with these magic weapons while you hold one of them in each hand. When you make an extra attack as a result of using the Daggers' Light property, you can add your ability modifier to the damage of that attack if you aren't already adding it to the damage.
+
+In addition, if you hit the same target with both Daggers in the same round, it takes an extra 1d4 Piercing damage from the second attack and can't make Opportunity Attacks until the end of your turn.
+
+Finesse. When making an attack with a Finesse weapon, use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.
+
+Light. When you take the Attack action on your turn and attack with a Light weapon, you can make one extra attack as a Bonus Action later on the same turn. That extra attack must be made with a different Light weapon, and you don't add your ability modifier to the extra attack's damage unless that modifier is negative. For example, you can attack with a Shortsword in one hand and a Dagger in the other using the Attack action and a Bonus Action, but you don't add your Strength or Dexterity modifier to the damage roll of the Bonus Action unless that modifier is negative.
+
+Thrown. If a weapon has the Thrown property, you can throw the weapon to make a ranged attack, and you can draw that weapon as part of the attack. If the weapon is a Melee weapon, use the same ability modifier for the attack and damage rolls that you use for a melee attack with that weapon.
+
+Mastery: Nick. When you make the extra attack of the Light property, you can make it as part of the Attack action instead of as a Bonus Action. You can make this extra attack only once per turn.
+
+#### Avian Circlet
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** 0.2
+**Cost:**
+This ornate silver tiara grants you power over certain flying creatures. While wearing the circlet, you can cast Animal Messenger or Speak with Animals from it. A target isn't affected by these spells if it doesn't have a Fly Speed.
+
+In addition, you can take a Magic action to touch a willing Beast with a Fly Speed. For 1 minute, you can see through the target's eyes as well as your own. While seeing through the target's eyes, you benefit from any special visual senses it has. You can end this effect early (no action required). Once this property is used, it can't be used again until this next dawn.
+
+#### Axe Beak Tomahawk
+**Type:** Weapon, Handaxe
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 2
+**Cost:**
+Damage: 1d6 Slashing
+Properties: Light, Thrown (20/60 ft.), Mastery: Vex
+
+This magic Handaxe is made from the remains of a slain axe beak. The first time on each of your turns that you hit a creature that has a Fly Speed with the axe, that creature must make a DC 13 Strength saving throw. Each time that a target fails this save, its Fly Speed is reduced by 15 feet for 1 minute.
+
+**Light.** When you take the Attack action on your turn and attack with a Light weapon, you can make one extra attack as a Bonus Action later on the same turn. That extra attack must be made with a different Light weapon, and you don't add your ability modifier to the extra attack's damage unless that modifier is negative.
+
+**Thrown.** If a weapon has the Thrown property, you can throw the weapon to make a ranged attack, and you can draw that weapon as part of the attack. If the weapon is a Melee weapon, use the same ability modifier for the attack and damage rolls that you use for a melee attack with that weapon.
+
+**Mastery: Vex.** If you hit a creature with this weapon and deal damage to the creature, you have Advantage on your next attack roll against that creature before the end of your next turn.
+
+#### Axe of Essential Inversion
+**Type:** Weapon, Greataxe
+**Rarity:** Legendary
+**Attunement:** Required
+**Weight:** 7
+**Cost:**
+Damage: 1d12 Slashing
+Properties: Heavy, Two-Handed
+
+This axe's mighty twin blades are edged with ruby and sapphire. You gain a +2 bonus to attack and damage rolls made with this magic weapon, which deals an extra 1d12 force damage to any celestial or fiend it hits.
+
+**Charges.** The axe has 5 charges for the following properties. It regains all expended charges daily at dawn.
+
+**Banishment.** When you make an attack with this weapon, you can expend 2 of its charges to empower it with planar magic, or 1 charge if the target is a celestial or fiend. If the attack hits, the target is affected by the banishment spell (save DC 17). You must concentrate on the spell as normal, but if you fail a Constitution saving throw made to maintain concentration on the spell when you take damage, you can expend 1 of the weapon's charges to succeed instead.
+
+**Dilution.** When you hit a celestial or fiend with this weapon, you can expend 1 of its charges to deal an extra 1d12 force damage. When you do, the target's essence is diluted until the end of your next turn. For the duration, the target is considered to have no damage resistances, immunities, or vulnerabilities.
+
+**Inversion.** When you reduce a celestial or fiend to 0 hit points using the axe, you can expend 1 of its charges to force the target to make a DC 17 Charisma saving throw. On a failed save, the target's sense of self is shattered; it drops to 1 hit point instead, and its alignment is changed. Lawful becomes chaotic, good becomes evil, and vice versa. If its alignment is true neutral or unaligned, or if the target has legendary actions, this property has no effect on it.
+
+**Heavy.** Creatures that are Small or Tiny have disadvantage on attack rolls with heavy weapons.
+
+**Two-Handed.** This weapon requires two hands to use.
+
+#### Axe of Hurricanes
+**Type:** Generic Variant
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** -
+**Cost:**
+You can use an action to create a powerful whirlwind around you by swinging this magic weapon. Make a melee attack with the axe against each creature within 5 feet of you (other than yourself), with a separate attack roll for each target.
+
+Immediately after the attacks, each creature within 15 feet of you (other than you) must make a DC 13 Strength saving throw.
+
+On a failed save, a creature takes 1d8 bludgeoning damage. It takes a second 1d8 bludgeoning damage if it's within 10 feet of you, and a third 1d8 if it's within 5 feet. If the creature is Medium or smaller, it's also thrown up to 10 feet away from you.
+
+On a successful save, a creature takes half as much bludgeoning damage and isn't thrown.
+
+Once this property of the axe has been used, it can't be used again until the next dawn.
+
+#### Axe of the Aurora
+**Type:** Generic Variant
+**Rarity:** Rare
+**Attunement:** Required
+**Weight:** -
+**Cost:**
+A shimmering aurora streaks behind this magic weapon whenever you make an attack with it.
+
+A target hit with the weapon takes an extra 1d6 radiant damage from the attack.
+
+When you roll a 20 on an attack roll with this weapon, the target must succeed on a DC 15 Wisdom saving throw.
+
+On a failed save, the target takes another 2d6 radiant damage and is affected by the hypnotic pattern spell, which lasts until the end of your next turn or until the target takes any other damage.
+
+On a successful save, the radiant damage is halved, and the target isn't affected by the spell.
+
+**Aurora Veil.** You can use an action while holding the axe to speak its command word and create a swirling, luminescent fog around you in a 20-foot-radius sphere.
+
+The fog remains at that location for up to 1 minute, even if you move, or until a wind of moderate or greater speed disperses it.
+
+The fog heavily obscures the area, and any creature that enters the fog or starts its turn there (other than you) must succeed on a DC 15 Wisdom saving throw or be affected by the hypnotic pattern spell.
+
+The spell ends early for a creature if it takes any damage, and it ends early for all affected creatures if the fog is dispersed.
+
+Once a creature succeeds on the saving throw or the spell ends for it, it automatically succeeds on future saves against this effect for the next 24 hours.
+
+Once this property of the axe has been used, it can't be used again until the next dawn.
+
+#### Axe of the Dwarvish Lords
+**Type:** Weapon, Battleaxe
+**Rarity:** Artifact
+**Attunement:** Required
+**Weight:** 4
+**Cost:**
+Damage: 1d8 Slashing
+Properties: Thrown (20/60 ft.), Versatile (1d10), Mastery: Topple
+
+A young dwarf prince set out to forge a weapon that would be regarded as a symbol of unity among his people. Venturing deep under the mountains, deeper than any dwarf had ever delved, the prince came to the blazing heart of a great volcano. With the aid of Moradin, he first crafted four mighty tools: the Starmetal Pick, the Earthheart Forge, the Anvil of Songs, and the Shaping Hammer. With these tools, he forged the Axe of the Dwarvish Lords.
+
+**Magic Weapon.** The Axe of the Dwarvish Lords grants a +3 bonus to attack rolls and damage rolls made with it.
+
+When you attack a creature with the axe and roll a 20 on the d20 for the attack roll, the axe deals an extra 20 Slashing damage.
+
+The axe has the Thrown property. When you hit with a ranged attack using this weapon, it deals an extra 1d8 Force damage, or an extra 2d8 Force damage if the target is a Giant. Immediately after hitting or missing, the weapon flies back to your hand.
+
+**Blessings of Moradin.** While attuned to the axe, you gain the following benefits:
+
+- Darkvision. You gain Darkvision with a range of 60 feet. If you already have Darkvision, its range increases by 60 feet.
+- Fortitude of Stone. Your Constitution increases by 2, to a maximum of 20.
+- Gifts of the Creator. You have proficiency with Brewer's Supplies, Mason's Tools, and Smith's Tools.
+- One with the Forge. You have Immunity to Poison damage and Resistance to Fire damage.
+- Sunder. When you hit an object with the axe, the object takes the maximum amount of damage possible.
+
+**Conjure Earth Elemental.** While holding the axe, you can take a Magic action to summon an Earth Elemental. It appears in an unoccupied space you choose within 30 feet of yourself, understands your languages, obeys your commands, and takes its turn immediately after you on your Initiative count.
+
+The elemental disappears after 24 hours, when it dies, or when you dismiss it as a Bonus Action.
+
+Once used, this property can't be used again until the next dawn.
+
+**Random Properties.**
+- 2 minor beneficial properties
+- 1 major beneficial property
+- 2 minor detrimental properties
+
+**Travel the Depths.** You can take a Magic action to touch the axe to a fixed piece of dwarven stonework and cast Teleport from the axe.
+
+If your intended destination is underground, there is no chance of a mishap or arriving somewhere unexpected.
+
+Once used, this property can't be used again until 3 days have passed.
+
+**Destroying the Axe.** The only way to destroy the axe is to melt it down in the Earthheart Forge, where it was created. It must remain in the burning forge for 50 years before it finally succumbs to the fire and is consumed.
+
+**Thrown.** If a weapon has the Thrown property, you can throw the weapon to make a ranged attack and draw it as part of the attack.
+
+**Versatile.** A Versatile weapon can be used with one or two hands. The value in parentheses is the damage dealt when used with two hands.
+
+**Mastery: Topple.** If you hit a creature with this weapon, you can force it to make a Constitution saving throw (DC 8 + ability modifier used for the attack + your Proficiency Bonus). On a failed save, the creature gains the Prone condition.
+
+#### Axe of the Galloping Headsman (Rare)
+**Type:** Weapon, Battleaxe
+**Rarity:** Rare
+**Attunement:** Required
+**Weight:** 4
+**Cost:**
+Damage: 1d8 Slashing
+Properties: Fabled Heirloom, Versatile (1d10), Mastery: Topple
+
+This axe has a wickedly curved head, honed to a razor's edge and lined with dark fire. Its handle is wrapped in cracked leather, and the entirety is etched with malevolent runes.
+
+You gain a +1 bonus to attack rolls and damage rolls made with this magic weapon.
+
+**Fiery Smite (Rare+).** This axe deals an extra 1d6 Fire damage on a hit. If the target is a creature that damaged you since the end of your last turn, the extra damage becomes 1d10.
+
+**Fabled Heirloom.** This item grows in power as its attuned owner gains levels. It gains all properties from lower rarities as it advances.
+
+**Mastery: Topple.** If you hit a creature with this weapon, you can force it to make a Constitution saving throw (DC 8 + ability modifier used for the attack + your Proficiency Bonus). On a failed save, the creature gains the Prone condition.
+
+#### Axe of the Galloping Headsman (Very Rare)
+**Type:** Weapon, Battleaxe
+**Rarity:** Very Rare
+**Attunement:** Required
+**Weight:** 4
+**Cost:**
+Damage: 1d8 Slashing
+Properties: Fabled Heirloom, Versatile (1d10), Mastery: Topple
+
+You gain a +2 bonus to attack rolls and damage rolls made with this magic weapon.
+
+**Fiery Smite (Rare+).** This axe deals an extra 1d6 Fire damage on a hit. If the target damaged you since the end of your last turn, the extra damage becomes 1d10.
+
+**Mark of Guilt (Very Rare+).** When you hit a creature with the axe, you can mark it for punishment (no action required). You always know the direction and distance to the creature. If it leaves the plane, you know the destination plane. The mark ends if used on another creature or when the target dies.
+
+**Sense Guilt (Very Rare+).** As a Bonus Action, you can hold the blade to a creature's neck. It must succeed on a Charisma saving throw (DC = 16 + the axe's bonus) or you learn something it feels guilty about. The creature is then immune to this effect for 24 hours.
+
+**Fabled Heirloom.** This item grows in power as its attuned owner gains levels.
+
+**Mastery: Topple.** If you hit a creature with this weapon, you can force it to make a Constitution saving throw or knock it Prone.
+
+#### Axe of the Galloping Headsman (Legendary)
+**Type:** Weapon, Battleaxe
+**Rarity:** Legendary
+**Attunement:** Required
+**Weight:** 4
+**Cost:**
+Damage: 1d8 Slashing
+Properties: Fabled Heirloom, Versatile (1d10), Mastery: Topple
+
+You gain a +3 bonus to attack rolls and damage rolls made with this magic weapon.
+
+**Fiery Smite (Rare+).** This axe deals an extra 1d6 Fire damage on a hit. If the target damaged you since the end of your last turn, the extra damage becomes 1d10.
+
+**Mark of Guilt (Very Rare+).** You can mark creatures and always know their direction and distance.
+
+**Sense Guilt (Very Rare+).** You can force a creature to reveal a guilt-ridden secret.
+
+**Dark Binding (Legendary).** Once during your turn when you hit a creature, you can immediately take a Bonus Action to force it to make a DC 19 Strength saving throw. On a failure, it gains the Paralyzed and Prone conditions until the start of your next turn. If possible, it kneels and presents its neck.
+
+**Executioner's Blade (Legendary).** When attacking a Prone creature, you score a Critical Hit on a roll of 19 or 20. On a Critical Hit, the axe deals an extra 3d6 Fire damage, and if the creature is left with 20 or fewer Hit Points afterward, it must succeed on a DC 10 Constitution saving throw or die.
+
+**Fabled Heirloom.** This item grows in power as its attuned owner gains levels.
+
+**Mastery: Topple.** If you hit a creature with this weapon, you can force it to make a Constitution saving throw or knock it Prone.
+
+#### Axe of the Radiant Sun
+**Type:** Generic Variant
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** -
+**Cost:**
+
+This golden axe is always warm to the touch.
+
+You gain a +2 bonus to attack and damage rolls made with this magic weapon between dawn and dusk, or a +1 bonus between dusk and dawn.
+
+**Radiant Swing.** When you take the Attack action while wielding the axe, you can forgo one attack to unleash a 15-foot cone of brilliant light.
+
+Each creature in the area must make a DC 15 Dexterity saving throw.
+
+On a failed save, a creature takes 3d6 radiant damage plus 1d6 fire damage if it is between dawn and dusk.
+
+On a successful save, it takes half damage.
+
+Flammable unattended objects ignite.
+
+Once used, this property can't be used again until the next dawn.
+
+#### Azorius Guild Signet
+**Type:** Ring
+**Rarity:** Uncommon
+**Attunement:** Required
+**Weight:** 0.1
+**Cost:**
+
+This ring bears the symbol of the Azorius Guild and serves as both a magical tool and a sign of guild favor.
+
+The ring has 3 charges and regains 1d3 expended charges daily at dawn.
+
+While wearing it, you can expend 1 charge to cast **Ensnaring Strike** (save DC 13).
+
+#### Azorius Keyrune
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** Required (Azorius Guild Member)
+**Weight:** 0.1
+**Cost:**
+
+This keyrune is carved from white marble and lapis lazuli to resemble a noble bird of prey.
+
+As an action, you can speak the command word and place the keyrune on the ground within 5 feet of you. It transforms into a Giant Eagle for up to 1 hour.
+
+The eagle:
+
+- Is friendly to you, your companions, and members of your guild.
+- Understands your languages.
+- Obeys your spoken commands.
+- Takes the Dodge action and avoids danger if given no commands.
+
+**Telepathic Link.** While the eagle is within 1 mile of you, you can communicate with it telepathically.
+
+**Shared Senses.** As an action, you can see through the eagle's eyes and hear what it hears until the start of your next turn. While doing so, you benefit from its Keen Sight but are blind and deaf to your own surroundings.
+
+The eagle reverts to keyrune form when:
+
+- The duration ends.
+- It reaches 0 hit points.
+- You speak the command word again while touching it.
+
+After reverting, it can't transform again until 36 hours have passed.
+
+#### Azuredge
+**Type:** Weapon, Battleaxe
+**Rarity:** Legendary
+**Attunement:** Required
+**Weight:** 4
+**Cost:**
+Damage: 1d8 Slashing
+Properties: Versatile (1d10)
+
+Forged by the archwizard Ahghairon to defend Waterdeep, Azuredge is an intelligent battleaxe seeking a worthy law-abiding defender.
+
+You gain a +3 bonus to attack rolls and damage rolls made with this magic weapon.
+
+The Shield spell provides no defense against Azuredge. The axe passes through magical force barriers created by that spell.
+
+When you hit a fiend or undead, the target takes an extra 2d6 radiant damage.
+
+**Hurling.** The axe has 3 charges and regains all expended charges daily at dawn.
+
+You can expend 1 charge to throw the axe with a range of 60/180 feet. Whether it hits or misses, it returns to your hand (or your feet) at the end of the turn.
+
+**Illumination.** As an action, you can cause the axe to glow blue or extinguish the glow.
+
+The glow sheds bright light for 30 feet and dim light for an additional 30 feet.
+
+**Sentience.**
+
+- Intelligence 12
+- Wisdom 15
+- Charisma 15
+
+Azuredge has hearing and darkvision out to 120 feet.
+
+It communicates telepathically and can speak, read, and understand Common.
+
+It can sense non-lawful creatures within 120 feet.
+
+**Personality.**
+
+Azuredge is devoted to the protection of Waterdeep and seeks a wielder willing to dedicate themselves fully to the city's defense.
+
+If wielded against its will, the axe can become ten times heavier and magically adhere to Medium or larger objects. Nothing short of a Wish spell can remove it without destruction unless Azuredge willingly releases itself.
+
+#### Baba Yaga's Dancing Broom
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** Required
+**Weight:** 4
+**Cost:**
+
+While holding the broom, you can take a Magic action to transform it into an Animated Broom under your control.
+
+The broom:
+
+- Appears in the nearest unoccupied space.
+- Acts immediately after your turn.
+- Remains animated until you use a Bonus Action and command word to end the effect.
+
+You can mentally command the broom while it is within 30 feet and you are not Incapacitated.
+
+You determine its actions and movement or give it general instructions such as guarding an area or attacking enemies.
+
+If reduced to 0 Hit Points, the broom shatters and is destroyed.
+
+If it returns to inanimate form before reaching 0 Hit Points, it regains all lost Hit Points.
+
+#### Baba Yaga's Mortar and Pestle
+**Type:** Wondrous Item
+**Rarity:** Artifact
+**Attunement:** Required
+**Weight:** 
+**Cost:**
+
+The mortar and pestle count as a single artifact for attunement.
+
+If separated, the pestle reappears beside the mortar at dawn.
+
+**Random Properties**
+
+- 2 minor beneficial properties
+- 1 major beneficial property
+- 1 minor detrimental property
+
+**Mortar**
+
+A Tiny wooden bowl that magically expands up to Large size to accommodate its contents.
+
+**Pestle**
+
+Can be extended into a quarterstaff or reduced to a small pestle once per turn with no action.
+
+As a quarterstaff:
+
+Damage: 1d6 Bludgeoning  
+Properties: Versatile (1d8)
+
+The pestle grants a +3 bonus to attack and damage rolls.
+
+The pestle has 12 charges and regains all expended charges daily at dawn.
+
+When you hit with it, you may expend up to 3 charges, dealing an extra 1d8 force damage per charge.
+
+**Perfect Tools.**
+
+Once per short or long rest, you may name a nonmagical plant, mineral, or fluid worth 10 gp or less.
+
+The mortar instantly fills with the chosen material.
+
+The artifact can also function as:
+
+- Alchemist's Supplies
+- Brewer's Supplies
+- Cook's Utensils
+- Herbalism Kit
+- Poisoner's Kit
+
+You have advantage on checks made with these tools.
+
+**Primal Parts.**
+
+As an action, command the pestle to grind for 1 minute.
+
+At the start of each of your turns, contents in the mortar take 4d10 force damage.
+
+Creatures reduced to 0 hit points are pulverized into powder, paste, or pulp.
+
+Magic items are unaffected.
+
+**Traverse the Night.**
+
+While inside the mortar and holding the pestle, you may command it to travel to a specific location or creature.
+
+If within 1,000 miles:
+
+- Arrival takes 1 hour during the day.
+- Arrival takes 1 minute at night.
+
+**Bones Know Their Home.**
+
+By throwing dust or paste created from a creature native to another world or plane, you may command the mortar to travel to that location.
+
+Travel takes 1 minute.
+
+**Destruction.**
+
+The artifact can only be destroyed if crushed beneath Baba Yaga herself or her Dancing Hut.
+
+#### Baba Yaga's Pestle
+**Type:** Weapon, Quarterstaff
+**Rarity:** Artifact
+**Attunement:** Required
+**Weight:** 4
+**Cost:**
+Damage: 1d6 Bludgeoning
+Properties: Versatile (1d8)
+
+The pestle can expand into a quarterstaff or shrink into a small pestle once during each of your turns without using an action.
+
+You gain a +3 bonus to attack rolls and damage rolls made with it.
+
+The pestle has 12 charges and regains all expended charges daily at dawn.
+
+When you hit a creature, you may expend up to 3 charges to deal an extra 1d8 force damage per charge.
+
+#### Babble Pipes
+**Type:** Wondrous Item, Instrument
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 6
+**Cost:**
+
+These panpipes are assembled from mismatched instruments and produce a dreadful, discordant symphony.
+
+Once per day, as an Action, you can play the pipes.
+
+Each creature within a 30-foot emanation that can hear the music must succeed on a DC 12 Wisdom saving throw or become Frightened for 1 minute.
+
+While frightened:
+
+- The creature must use the Dash action each turn.
+- It must move away from you by the safest available route.
+- If it ends its turn without line of sight to you, it may repeat the saving throw.
+- On a success, the effect ends.
+
+**Tool (Musical Instrument).**
+
+If proficient with the instrument, add your Proficiency Bonus to checks using it.
+
+If you are also proficient in the skill associated with the check, you gain Advantage on the roll.
+
+#### Badge of the Savant
+**Type:** Wondrous Item, Generic Variant
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 0.2
+**Cost:**
+
+A platinum bookplate designed to be magically attached to a wizard's spellbook.
+
+Each badge represents one school of magic:
+
+- Abjuration
+- Conjuration
+- Divination
+- Enchantment
+- Evocation
+- Illusion
+- Necromancy
+- Transmutation
+
+While attached to your spellbook, the gold and time required to copy spells of the badge's school into the spellbook is halved.
+
+Multiple badges can be attached to the same spellbook, granting this benefit for multiple schools simultaneously.
+
+**Attach or Remove.** As an action, you can attach or remove a badge by expending a spell slot whose level equals 1 + the number of badges already attached to the spellbook (maximum 9th-level spell slot).
+
+#### Badge of the Selfless
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** Required
+**Weight:** 0.2
+**Cost:**
+
+This silver badge depicts a four-fingered hand and honors the patron saint of battlefield medics.
+
+While wearing the badge, you gain a +5 bonus to Wisdom (Medicine) checks, even if you are not attuned.
+
+While attuned, you gain the following benefits:
+
+**Reattach Limb.** As an action, you can pin the badge to a severed limb and hold it against its original body. The limb is immediately restored and fully functional.
+
+After using this property, the badge permanently loses all magical properties.
+
+**Selfless Healing.** As an action, touch a creature and expend one of your Hit Dice.
+
+Roll the die. The target regains hit points equal to:
+
+`Constitution modifier + (2 × Hit Die result)`
+
+A creature can benefit from this healing only once per long rest.
+
+**Triage.** You gain proficiency in the Medicine skill.
+
+Additionally, as a Bonus Action, you can make a DC 10 Wisdom (Medicine) check while observing a creature.
+
+On a success, you learn whether that creature is currently at half its hit points or fewer.
+
+#### Badge of the Watch
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** Required
+**Weight:** 0.2
+**Cost:**
+
+This badge signifies the rank of captain within Waterdeep's City Watch.
+
+While wearing the badge, you gain a +2 bonus to AC if you are not using a shield.
+
+If the badge remains more than 5 feet away from you for over 1 minute, it vanishes and reappears within 5 feet of Waterdeep's Open Lord.
+
+While the Open Lord holds the badge:
+
+- They always know your location.
+- This works only while you remain attuned.
+- Both parties must be on the same plane of existence.
+
+**Revocation.** As an action, the Open Lord can touch the badge and immediately end your attunement to it.
+
+#### Badge of the Wayfarer
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** 0.2
+**Cost:**
+
+This maple-leaf-shaped badge bears an embossed porcelain mug.
+
+By speaking its command phrase over the course of 1 minute, you can cast Plane Shift.
+
+The destination is always the legendary inn known as **Wayfarer's Respite** in the Astral Plane.
+
+The inn:
+
+- Has no exterior doors.
+- Can only be entered through the badge.
+- Is magically spacious and luxurious.
+- Always seems to have room available.
+- Frequently accepts favors, information, or treasure as payment.
+
+After 24 hours, all visitors and their belongings are automatically returned to the location they originally departed from.
+
+You may use the badge again before then to return early.
+
+After returning, the badge cannot be used again for 7 days.
+
+**Identify Interaction.**
+
+- Identify only reveals that the badge is magical.
+- Legend Lore reveals its command phrase and true purpose.
+
+#### Bag of Beans
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** 0.5
+**Cost:**
+
+This cloth bag contains 3d4 magical beans when discovered.
+
+The bag always weighs 0.5 lb., regardless of contents.
+
+When the final bean is removed, the bag becomes nonmagical.
+
+**Explosive Dump.**
+
+If one or more beans are dumped from the bag:
+
+- All dumped beans explode.
+- Creatures within a 10-foot-radius sphere make a DC 15 Dexterity saving throw.
+- Failure: 5d4 Force damage.
+- Success: Half damage.
+
+All dumped beans are destroyed.
+
+**Planting a Bean.**
+
+If a bean is planted in dirt or sand and watered, it vanishes and produces a magical effect after 1 minute.
+
+Possible effects include:
+
+- Poisonous or beneficial toadstools
+- Geysers of strange liquids
+- Chaotic Good or Chaotic Evil treants
+- Living statues that slander you
+- Green magical campfires
+- Shrieker fungi
+- Monster-transforming pink toads
+- Hungry bulettes
+- Magical fruit trees
+- Ability-score-enhancing rainbow eggs
+- Treasure-filled mummy pyramids
+- Giant beanstalks leading to distant realms
+
+The exact result is determined by the DM.
+
+#### Bag of Bellstones
+**Type:** Wondrous Item
+**Rarity:** Common
+**Attunement:** no
+**Weight:** 6
+**Cost:**
+
+This brass-colored cloth bag can hold up to 20 stones.
+
+When found, it contains 1d12 + 8 stones.
+
+A stone removed from the bag after remaining inside for at least 1 minute becomes magical until the end of the current turn.
+
+While magical, the stone emits a clear bell-like ringing audible out to 60 feet whenever it:
+
+- Hits a target
+- Strikes an object
+- Touches a surface
+
+The effect ends at the end of the turn.
