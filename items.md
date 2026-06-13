@@ -5057,3 +5057,533 @@ A pale blue green gemstone.
 
 A complex pump organ that originated with the zulkirs of Thay, who use it in the casting of their spells. It is considered to have a dramatic, but sinister, sound.
 
+#### +1 All-Purpose Tool
+**Type:** Wondrous Item, Spellcasting Focus, Uncommon
+**Attunement:** by an Artificer
+**Weight:** 1
+**Cost:**
+This simple screwdriver can transform into a variety of tools; as an action, you can touch the item and transform it into any type of artisan's tool of your choice (see the "Equipment" chapter in the Player's Handbook for a list of artisan's tools). Whatever form the tool takes, you are proficient with it.
+
+While holding this tool, you gain a +1 bonus to the spell attack rolls and the saving throw DCs of your artificer spells.
+
+As an action, you can focus on the tool to channel your creative forces. Choose a cantrip that you don't know from any class list. For 8 hours, you can cast that cantrip, and it counts as an artificer cantrip for you. Once this property is used, it can't be used again until the next dawn.
+
+#### +1 Ammunition
+**Type:** Ammunition, Generic Variant, Uncommon
+**Weight:**
+**Cost:**
+You have a +1 bonus to attack and damage rolls made with this piece of magic ammunition. Once it hits a target, the ammunition is no longer magical.
+
+This ammunition is typically found or sold in quantities of ten or twenty pieces. Ten pieces of this ammunition are equivalent in value to a potion of the same rarity (200 GP).
+
+#### +1 Amulet of the Devout
+**Type:** Wondrous Item, Uncommon
+**Attunement:** by a Cleric or Paladin
+**Weight:** 1
+**Cost:**
+This amulet bears the symbol of a deity inlaid with precious stones or metals. While you wear the holy symbol, you gain a +1 bonus to spell attack rolls and the saving throw DCs of your spells.
+
+While you wear this amulet, you can use your Channel Divinity feature without expending one of the feature's uses. Once this property is used, it can't be used again until the next dawn.
+
+#### +1 Arcane Grimoire
+**Type:** Wondrous Item, Spellcasting Focus, Uncommon
+**Attunement:** by a Wizard
+**Weight:** 3
+**Cost:**
+While you are holding this leather-bound book, you can use it as a spellcasting focus for your wizard spells, and you gain a +1 bonus to spell attack rolls and to the saving throw DCs of your wizard spells.
+
+You can use this book as a spellbook. In addition, when you use your Arcane Recovery feature, you can increase the number of spell slot levels you regain by 1.
+
+#### +1 Armor
+**Type:** Generic Variant, Rare
+**Weight:**
+**Cost:**
+You have a +1 bonus to AC while wearing this armor.
+
+#### +1 Armor of Cold Resistance
+**Type:** Generic Variant
+**Attunement:** yes
+**Weight:**
+**Cost:**
+You have a +1 bonus to AC and resistance to cold damage while wearing this armor.
+
+
+#### +1 Bloodwell Vial
+**Type:** Wondrous Item, Spellcasting Focus, Uncommon
+**Attunement:** by a Sorcerer
+**Weight:** 1
+**Cost:**
+To attune to this vial, you must place a few drops of your blood into it. The vial can't be opened while your attunement to it lasts. If your attunement to the vial ends, the contained blood turns to ash. You can use the vial as a spellcasting focus for your spells while wearing or holding it, and you gain a +1 bonus to spell attack rolls and to the saving throw DCs of your sorcerer spells.
+
+In addition, when you roll any Hit Dice to recover hit points while you are carrying the vial, you can regain 5 sorcery points. This property of the vial can't be used again until the next dawn.
+
+#### +1 Dragon Edge Weapon
+**Type:** Generic Variant, Rare
+**Weight:**
+**Cost:**
+This weapon is made from the harvested remains of a fallen dragon. With a properly reclaimed claw or tooth, the resource can be forged into a simple Piercing or Slashing weapon whose latent draconic powers can appear in battle.
+
+The first time you hit a creature on each of your turns with an attack roll you had Advantage on using this weapon, its draconic magic comes forth to deal an extra 1d6 damage of a type corresponding to the original dragon's breath weapon. Weapons made from the claws or teeth of dragons change in rarity and power depending on the original dragon's age.
+
+Young dragons' bones aren't as powerful as older ones and create Uncommon weapons. Adult dragons can produce Rare weapons, and ancient dragons can create Very Rare weapons, each granting a bonus to attack rolls and damage rolls determined by the weapon's rarity.
+
+#### +1 Dragonhide Belt
+**Type:** Wondrous Item, Uncommon
+**Attunement:** by a Monk
+**Weight:** 1
+**Cost:**
+This finely detailed belt is made of dragonhide. While wearing it, you gain a +1 bonus to the saving throw DCs of your ki features. In addition, you can use an action to regain ki points equal to a roll of your Martial Arts die. You can't use this action again until the next dawn.
+
+#### +1 Dragonkin Weapon
+**Type:** Generic Variant, Rare
+**Attunement:** by a Dragonborn
+**Weight:**
+**Cost:**
+These weapons are made of a scaly metal that radiates draconic elements. You have a +1 bonus to attack rolls and damage rolls made with this magic weapon, and it deals an extra 1d6 damage of the same type as your Dragonborn Breath Weapon trait on a hit. In addition, while attuned to the weapon, you have a +1 bonus to your Breath Weapon's save DC.
+
+The color of the weapon's metal changes to reflect your own natural colors as a Dragonborn once you attune to it.
+
+#### +1 Fate Dealer's Deck
+**Type:** Wondrous Item, Rare
+**Attunement:** by a Cleric or Paladin
+**Weight:** 1
+**Cost:**
+The backs of these cards are inscribed with glyphs representing the Inner Planes, the Outer Planes, or the holy symbols of various deities. While holding this deck, you can use it as a spellcasting focus, and you gain a +1 bonus to spell attack rolls and to your spell save DC.
+
+In addition, while you're holding the deck, you can draw a card as an action to expend and roll one of your Hit Dice and add the deck's bonus to the number rolled. One creature you can see within 30 feet of you either takes radiant damage or regains hit points (your choice) equal to the total.
+
+#### +1 Moon Sickle
+**Type:** Weapon (Sickle), Uncommon
+**Attunement:** by a Druid or Ranger
+**Weight:** 2
+**Cost:**
+Simple Weapon, Melee Weapon
+1d4 Slashing
+Light
+
+This silver-bladed sickle glimmers softly with moonlight. While holding this magic weapon, you gain a +1 bonus to attack and damage rolls made with it, and you gain a +1 bonus to spell attack rolls and the saving throw DCs of your druid and ranger spells. In addition, you can use the sickle as a spellcasting focus for your druid and ranger spells.
+
+When you cast a spell that restores hit points, you can roll a d4 and add the number rolled to the amount of hit points restored, provided you are holding the sickle.
+
+Light. A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons.
+
+#### +1 Rhythm-Maker's Drum
+**Type:** Wondrous Item, Instrument (Drum), Uncommon
+**Attunement:** by a Bard
+**Weight:** 3
+**Cost:**
+While holding this drum, you gain a +1 bonus to spell attack rolls and to the saving throw DCs of your bard spells.
+
+As an action, you can play the drum to regain one use of your Bardic Inspiration feature. This property of the drum can't be used again until the next dawn.
+
+#### +1 Rod of the Pact Keeper
+**Type:** Rod, Uncommon
+**Attunement:** by a Warlock
+**Weight:** 2
+**Cost:**
+While holding this rod, you gain a +1 bonus to spell attack rolls and to the saving throw DCs of your Warlock spells.
+
+In addition, you can regain one spell slot as a Magic action while holding the rod. You can't use this property again until you finish a Long Rest.
+
+#### +1 Wand of the War Mage
+**Type:** Wand, Uncommon
+**Attunement:** by a Spellcaster
+**Weight:** 1
+**Cost:**
+While holding this wand, you gain a +1 bonus to spell attack rolls. In addition, you ignore Half Cover when making a spell attack roll.
+
+#### +1 Shield
+**Type:** Shield (Shield), Uncommon
+**Weight:** 6
+**Cost:**
+While holding this Shield, you have a +1 bonus to Armor Class, in addition to the Shield's normal bonus to AC.
+
+#### +1 Weapon
+**Type:** Generic Variant, Uncommon
+**Weight:**
+**Cost:**
+You have a +1 bonus to attack and damage rolls made with this magic weapon.
+
+#### +1 Wraps of Unarmed Power
+**Type:** Wondrous Item, Uncommon
+**Weight:** 1
+**Cost:**
+While wearing these wraps, you have a +1 bonus to attack rolls and damage rolls made with your Unarmed Strikes. Those strikes deal your choice of Force damage or their normal damage type.
+
+#### +2 All-Purpose Tool
+**Type:** Wondrous Item, Spellcasting Focus, Rare
+**Attunement:** by an Artificer
+**Weight:** 1
+**Cost:**
+This simple screwdriver can transform into a variety of tools; as an action, you can touch the item and transform it into any type of artisan's tool of your choice (see the "Equipment" chapter in the Player's Handbook for a list of artisan's tools). Whatever form the tool takes, you are proficient with it.
+
+While holding this tool, you gain a +2 bonus to the spell attack rolls and the saving throw DCs of your artificer spells.
+
+As an action, you can focus on the tool to channel your creative forces. Choose a cantrip that you don't know from any class list. For 8 hours, you can cast that cantrip, and it counts as an artificer cantrip for you. Once this property is used, it can't be used again until the next dawn.
+
+#### +2 Ammunition
+**Type:** Ammunition, Generic Variant, Rare
+**Weight:**
+**Cost:**
+You have a +2 bonus to attack and damage rolls made with this piece of magic ammunition. Once it hits a target, the ammunition is no longer magical.
+
+This ammunition is typically found or sold in quantities of ten or twenty pieces. Ten pieces of this ammunition are equivalent in value to a potion of the same rarity (2,000 GP).
+
+#### +2 Amulet of the Devout
+**Type:** Wondrous Item, Rare
+**Attunement:** by a Cleric or Paladin
+**Weight:** 1
+**Cost:**
+This amulet bears the symbol of a deity inlaid with precious stones or metals. While you wear the holy symbol, you gain a +2 bonus to spell attack rolls and the saving throw DCs of your spells.
+
+While you wear this amulet, you can use your Channel Divinity feature without expending one of the feature's uses. Once this property is used, it can't be used again until the next dawn.
+
+#### +2 Arcane Grimoire
+**Type:** Wondrous Item, Spellcasting Focus, Rare
+**Attunement:** by a Wizard
+**Weight:** 3
+**Cost:**
+While you are holding this leather-bound book, you can use it as a spellcasting focus for your wizard spells, and you gain a +2 bonus to spell attack rolls and to the saving throw DCs of your wizard spells.
+
+You can use this book as a spellbook. In addition, when you use your Arcane Recovery feature, you can increase the number of spell slot levels you regain by 1.
+
+#### +2 Armor
+**Type:** Generic Variant, Very Rare
+**Weight:**
+**Cost:**
+You have a +2 bonus to AC while wearing this armor.
+
+#### +2 Bloodwell Vial
+**Type:** Wondrous Item, Spellcasting Focus, Rare
+**Attunement:** by a Sorcerer
+**Weight:** 1
+**Cost:**
+To attune to this vial, you must place a few drops of your blood into it. The vial can't be opened while your attunement to it lasts. If your attunement to the vial ends, the contained blood turns to ash. You can use the vial as a spellcasting focus for your spells while wearing or holding it, and you gain a +2 bonus to spell attack rolls and to the saving throw DCs of your sorcerer spells.
+
+In addition, when you roll any Hit Dice to recover hit points while you are carrying the vial, you can regain 5 sorcery points. This property of the vial can't be used again until the next dawn.
+
+#### +2 Dragon Edge Weapon
+**Type:** Generic Variant, Very Rare
+**Weight:**
+**Cost:**
+This weapon is made from the harvested remains of a fallen dragon. With a properly reclaimed claw or tooth, the resource can be forged into a simple Piercing or Slashing weapon whose latent draconic powers can appear in battle.
+
+The first time you hit a creature on each of your turns with an attack roll you had Advantage on using this weapon, its draconic magic comes forth to deal an extra 1d6 damage of a type corresponding to the original dragon's breath weapon. Weapons made from the claws or teeth of dragons change in rarity and power depending on the original dragon's age.
+
+Young dragons' bones aren't as powerful as older ones and create Uncommon weapons. Adult dragons can produce Rare weapons, and ancient dragons can create Very Rare weapons, each granting a bonus to attack rolls and damage rolls determined by the weapon's rarity.
+
+#### +2 Dragonhide Belt
+**Type:** Wondrous Item, Rare
+**Attunement:** by a Monk
+**Weight:** 1
+**Cost:**
+This finely detailed belt is made of dragonhide. While wearing it, you gain a +2 bonus to the saving throw DCs of your ki features. In addition, you can use an action to regain ki points equal to a roll of your Martial Arts die. You can't use this action again until the next dawn.
+
+#### +2 Dragonkin Weapon
+**Type:** Generic Variant, Very Rare
+**Attunement:** by a Dragonborn
+**Weight:**
+**Cost:**
+These weapons are made of a scaly metal that radiates draconic elements. You have a +2 bonus to attack rolls and damage rolls made with this magic weapon, and it deals an extra 1d6 damage of the same type as your Dragonborn Breath Weapon trait on a hit. In addition, while attuned to the weapon, you have a +2 bonus to your Breath Weapon's save DC.
+
+The color of the weapon's metal changes to reflect your own natural colors as a Dragonborn once you attune to it.
+
+#### +2 Fate Dealer's Deck
+**Type:** Wondrous Item, Very Rare
+**Attunement:** by a Cleric or Paladin
+**Weight:** 1
+**Cost:**
+The backs of these cards are inscribed with glyphs representing the Inner Planes, the Outer Planes, or the holy symbols of various deities. While holding this deck, you can use it as a spellcasting focus, and you gain a +2 bonus to spell attack rolls and to your spell save DC.
+
+In addition, while you're holding the deck, you can draw a card as an action to expend and roll one of your Hit Dice and add the deck's bonus to the number rolled. One creature you can see within 30 feet of you either takes radiant damage or regains hit points (your choice) equal to the total.
+
+#### +2 Moon Sickle
+**Type:** Weapon (Sickle), Rare
+**Attunement:** by a Druid or Ranger
+**Weight:** 2
+**Cost:**
+Simple Weapon, Melee Weapon
+1d4 Slashing
+Light
+
+This silver-bladed sickle glimmers softly with moonlight. While holding this magic weapon, you gain a +2 bonus to attack and damage rolls made with it, and you gain a +2 bonus to spell attack rolls and the saving throw DCs of your druid and ranger spells. In addition, you can use the sickle as a spellcasting focus for your druid and ranger spells.
+
+When you cast a spell that restores hit points, you can roll a d4 and add the number rolled to the amount of hit points restored, provided you are holding the sickle.
+
+Light. A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons.
+
+#### +2 Rhythm-Maker's Drum
+**Type:** Wondrous Item, Instrument (Drum), Rare
+**Attunement:** by a Bard
+**Weight:** 3
+**Cost:**
+While holding this drum, you gain a +2 bonus to spell attack rolls and to the saving throw DCs of your bard spells.
+
+As an action, you can play the drum to regain one use of your Bardic Inspiration feature. This property of the drum can't be used again until the next dawn.
+
+#### +2 Ring of Protection
+**Type:** Ring, Rare
+**Attunement:** yes
+**Weight:** 0.1
+**Cost:**
+You gain a +2 bonus to AC and saving throws while wearing this ring.
+
+#### +2 Rod of the Pact Keeper
+**Type:** Rod, Rare
+**Attunement:** by a Warlock
+**Weight:** 2
+**Cost:**
+While holding this rod, you gain a +2 bonus to spell attack rolls and to the saving throw DCs of your Warlock spells.
+
+In addition, you can regain one spell slot as a Magic action while holding the rod. You can't use this property again until you finish a Long Rest.
+
+#### +2 Wand of the War Mage
+**Type:** Wand, Rare
+**Attunement:** by a Spellcaster
+**Weight:** 1
+**Cost:**
+While holding this wand, you gain a +2 bonus to spell attack rolls. In addition, you ignore Half Cover when making a spell attack roll.
+
+#### +2 Shield
+**Type:** Shield (Shield), Rare
+**Weight:** 6
+**Cost:**
+While holding this Shield, you have a +2 bonus to Armor Class, in addition to the Shield's normal bonus to AC.
+
+#### +2 Weapon
+**Type:** Generic Variant, Rare
+**Weight:**
+**Cost:**
+You have a +2 bonus to attack and damage rolls made with this magic weapon.
+
+#### +2 Wraps of Unarmed Power
+**Type:** Wondrous Item, Rare
+**Weight:** 1
+**Cost:**
+While wearing these wraps, you have a +2 bonus to attack rolls and damage rolls made with your Unarmed Strikes. Those strikes deal your choice of Force damage or their normal damage type.
+
+#### +3 All-Purpose Tool
+**Type:** Wondrous Item, Spellcasting Focus, Very Rare
+**Attunement:** by an Artificer
+**Weight:** 1
+**Cost:**
+This simple screwdriver can transform into a variety of tools; as an action, you can touch the item and transform it into any type of artisan's tool of your choice (see the "Equipment" chapter in the Player's Handbook for a list of artisan's tools). Whatever form the tool takes, you are proficient with it.
+
+While holding this tool, you gain a +3 bonus to the spell attack rolls and the saving throw DCs of your artificer spells.
+
+As an action, you can focus on the tool to channel your creative forces. Choose a cantrip that you don't know from any class list. For 8 hours, you can cast that cantrip, and it counts as an artificer cantrip for you. Once this property is used, it can't be used again until the next dawn.
+
+#### +3 Ammunition
+**Type:** Ammunition, Generic Variant, Very Rare
+**Weight:**
+**Cost:**
+You have a +3 bonus to attack and damage rolls made with this piece of magic ammunition. Once it hits a target, the ammunition is no longer magical.
+
+This ammunition is typically found or sold in quantities of ten or twenty pieces. Ten pieces of this ammunition are equivalent in value to a potion of the same rarity (20,000 GP).
+
+#### +3 Amulet of the Devout
+**Type:** Wondrous Item, Very Rare
+**Attunement:** by a Cleric or Paladin
+**Weight:** 1
+**Cost:**
+This amulet bears the symbol of a deity inlaid with precious stones or metals. While you wear the holy symbol, you gain a +3 bonus to spell attack rolls and the saving throw DCs of your spells.
+
+While you wear this amulet, you can use your Channel Divinity feature without expending one of the feature's uses. Once this property is used, it can't be used again until the next dawn.
+
+#### +3 Arcane Grimoire
+**Type:** Wondrous Item, Spellcasting Focus, Very Rare
+**Attunement:** by a Wizard
+**Weight:** 3
+**Cost:**
+While you are holding this leather-bound book, you can use it as a spellcasting focus for your wizard spells, and you gain a +3 bonus to spell attack rolls and to the saving throw DCs of your wizard spells.
+
+You can use this book as a spellbook. In addition, when you use your Arcane Recovery feature, you can increase the number of spell slot levels you regain by 1.
+
+#### +3 Armor
+**Type:** Generic Variant, Legendary
+**Weight:**
+**Cost:**
+You have a +3 bonus to AC while wearing this armor.
+
+#### +3 Bloodwell Vial
+**Type:** Wondrous Item, Spellcasting Focus, Very Rare
+**Attunement:** by a Sorcerer
+**Weight:** 1
+**Cost:**
+To attune to this vial, you must place a few drops of your blood into it. The vial can't be opened while your attunement to it lasts. If your attunement to the vial ends, the contained blood turns to ash. You can use the vial as a spellcasting focus for your spells while wearing or holding it, and you gain a +3 bonus to spell attack rolls and the saving throw DCs of your sorcerer spells.
+
+In addition, when you roll any Hit Dice to recover hit points while you are carrying the vial, you can regain 5 sorcery points. This property of the vial can't be used again until the next dawn.
+
+#### +3 Dragonhide Belt
+**Type:** Wondrous Item, Very Rare
+**Attunement:** by a Monk
+**Weight:** 1
+**Cost:**
+This finely detailed belt is made of dragonhide. While wearing it, you gain a +3 bonus to the saving throw DCs of your ki features. In addition, you can use an action to regain ki points equal to a roll of your Martial Arts die. You can't use this action again until the next dawn.
+
+#### +3 Dragonkin Weapon
+**Type:** Generic Variant, Legendary
+**Attunement:** by a Dragonborn
+**Weight:**
+**Cost:**
+These weapons are made of a scaly metal that radiates draconic elements. You have a +3 bonus to attack rolls and damage rolls made with this magic weapon, and it deals an extra 1d6 damage of the same type as your Dragonborn Breath Weapon trait on a hit. In addition, while attuned to the weapon, you have a +3 bonus to your Breath Weapon's save DC.
+
+The color of the weapon's metal changes to reflect your own natural colors as a Dragonborn once you attune to it.
+
+#### +3 Fate Dealer's Deck
+**Type:** Wondrous Item, Legendary
+**Attunement:** by a Cleric or Paladin
+**Weight:** 1
+**Cost:**
+The backs of these cards are inscribed with glyphs representing the Inner Planes, the Outer Planes, or the holy symbols of various deities. While holding this deck, you can use it as a spellcasting focus, and you gain a +3 bonus to spell attack rolls and to your spell save DC.
+
+In addition, while you're holding the deck, you can draw a card as an action to expend and roll one of your Hit Dice and add the deck's bonus to the number rolled. One creature you can see within 30 feet of you either takes radiant damage or regains hit points (your choice) equal to the total.
+
+#### +3 Moon Sickle
+**Type:** Weapon (Sickle), Very Rare
+**Attunement:** by a Druid or Ranger
+**Weight:** 2
+**Cost:**
+Simple Weapon, Melee Weapon
+1d4 Slashing
+Light
+
+This silver-bladed sickle glimmers softly with moonlight. While holding this magic weapon, you gain a +3 bonus to attack and damage rolls made with it, and you gain a +3 bonus to spell attack rolls and the saving throw DCs of your druid and ranger spells. In addition, you can use the sickle as a spellcasting focus for your druid and ranger spells.
+
+When you cast a spell that restores hit points, you can roll a d4 and add the number rolled to the amount of hit points restored, provided you are holding the sickle.
+
+Light. A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons.
+
+#### +3 Rhythm-Maker's Drum
+**Type:** Wondrous Item, Instrument (Drum), Very Rare
+**Attunement:** by a Bard
+**Weight:** 3
+**Cost:**
+While holding this drum, you gain a +3 bonus to spell attack rolls and to the saving throw DCs of your bard spells.
+
+As an action, you can play the drum to regain one use of your Bardic Inspiration feature. This property of the drum can't be used again until the next dawn.
+
+#### +3 Rod of the Pact Keeper
+**Type:** Rod, Very Rare
+**Attunement:** by a Warlock
+**Weight:** 2
+**Cost:**
+While holding this rod, you gain a +3 bonus to spell attack rolls and to the saving throw DCs of your Warlock spells.
+
+In addition, you can regain one spell slot as a Magic action while holding the rod. You can't use this property again until you finish a Long Rest.
+
+#### +4 Shield
+**Type:** Shield (Shield), Very Rare
+**Weight:** 6
+**Cost:**
+While holding this Shield, you have a +3 bonus to Armor Class, in addition to the Shield's normal bonus to AC.
+
+#### +3 Wand of the War Mage
+**Type:** Wand, Very Rare
+**Attunement:** by a Spellcaster
+**Weight:** 1
+**Cost:**
+While holding this wand, you gain a +3 bonus to spell attack rolls. In addition, you ignore Half Cover when making a spell attack roll.
+
+#### +3 Weapon
+**Type:** Generic Variant, Very Rare
+**Weight:**
+**Cost:**
+You have a +3 bonus to attack and damage rolls made with this magic weapon.
+
+#### +3 Wraps of Unarmed Power
+**Type:** Wondrous Item, Very Rare
+**Weight:** 1
+**Cost:**
+While wearing these wraps, you have a +3 bonus to attack rolls and damage rolls made with your Unarmed Strikes. Those strikes deal your choice of Force damage or their normal damage type.
+
+#### Aastrika's Crown
+**Type:** Wondrous Item, Rare
+**Attunement:** yes
+**Weight:** 1
+**Cost:**
+Aastrika's crown is a relic Aastrika took from her previous commander after killing him. It has been infused with a shred of her power, and it magically resizes to fit its attuned wearer.
+
+Blend with the Blaze. As an action, you can touch a Small or larger mundane flame. When you do, you take no damage from the fire, and you know the location of every Small or larger flame within 10 miles of you. As part of the action, you can teleport to an unoccupied space within 5 feet of another flame you detect. This property can be used twice, and the crown regains all expended uses daily at dawn.
+
+Fire Resistance. You have resistance to fire damage while wearing this crown.
+
+Magma Transport. You know the location of all lava pools in the Molten Enclave. While you are within 10 feet of one of these lava pools, you can use an action to teleport yourself and up to one willing creature within 10 feet of you to an unoccupied space within 10 feet of any other lava pool in the lair.
+
+#### Aberrant Nail
+**Type:** Weapon (Longsword), Legendary
+**Attunement:** yes
+**Weight:** 3
+**Cost:**
+Martial Weapon, Melee Weapon
+1d8 Slashing
+Versatile (1d10)
+
+This greenish blade was forged under the command of a powerful aboleth as a reward for one of its strongest mortal thralls. You gain a +2 bonus to attack and damage rolls made with this magic weapon.
+
+While attuned to this sword, your Intelligence score is 19. It has no effect on you if your Intelligence is already 19 or higher without it. When you hit with an attack using this weapon, the target takes an extra 1d8 psychic damage. While holding the sword, you have resistance to psychic damage.
+
+In addition, when you roll a 20 on an attack roll made with this sword, the target must succeed on a DC 17 Intelligence saving throw or be stunned until the start of your next turn, as it's bombarded by a deluge of unintelligible images and thoughts from a realm beyond comprehension.
+
+Versatile. This weapon can be used with one or two hands. A damage value in parentheses appears with the property—the damage when the weapon is used with two hands to make a melee attack.
+
+#### Abjurer's Bangle (Rare)
+**Type:** Wondrous Item, Rare
+**Weight:** 0.5
+**Cost:**
+You can clasp or remove this metal bracelet around the wrist or ankle of yourself or a willing creature within your reach using an action. The bangle emits a ward of abjuration magic from it that has 75 hit points. A creature wearing the bangle can use its reaction when it takes damage to speak the bangle's command word, causing the magical ward to take the damage instead. Any excess damage carries over to the creature when the bangle's ward is reduced to 0 hit points, at which point the bangle becomes a nonmagical bracelet.
+
+#### Abjurer's Bangle (Uncommon)
+**Type:** Wondrous Item, Uncommon
+**Weight:** 0.5
+**Cost:**
+You can clasp or remove this metal bracelet around the wrist or ankle of yourself or a willing creature within your reach using an action. The bangle emits a ward of abjuration magic from it that has 30 hit points. A creature wearing the bangle can use its reaction when it takes damage to speak the bangle's command word, causing the magical ward to take the damage instead. Any excess damage carries over to the creature when the bangle's ward is reduced to 0 hit points, at which point the bangle becomes a nonmagical bracelet.
+
+#### Abjurer's Bangle (Very Rare)
+**Type:** Wondrous Item, Very Rare
+**Weight:** 0.5
+**Cost:**
+You can clasp or remove this metal bracelet around the wrist or ankle of yourself or a willing creature within your reach using an action. The bangle emits a ward of abjuration magic from it that has 120 hit points. A creature wearing the bangle can use its reaction when it takes damage to speak the bangle's command word, causing the magical ward to take the damage instead. Any excess damage carries over to the creature when the bangle's ward is reduced to 0 hit points, at which point the bangle becomes a nonmagical bracelet.
+
+#### Abjurer's Gilder
+**Type:** Wondrous Item, Uncommon
+**Attunement:** by a Wizard
+**Weight:** 1
+**Cost:**
+This golden badge is usually given to Wizards who either excel at or have mastered Abjuration magic as a symbol of their accomplishments. While wearing this badge, you always have the Shield spell prepared if it's in your spellbook, and it doesn't count against the number of spells you can have prepared. In addition, when you are hit by an attack roll or targeted by the Magic Missile spell, you can take a special Reaction, instead of your normal one, to cast Shield. This special Reaction can be used before or after your normal Reaction for the round, but it can't be used on the same turn as your normal Reaction. Once you take this special Reaction you can't do so again until the start of your next turn.
+
+#### Abracadabrus
+**Type:** Wondrous Item, Very Rare
+**Weight:** 25
+**Cost:**
+An abracadabrus is an ornate, gemstone-studded wooden chest that weighs 25 pounds while empty. Its interior compartment is a cube measuring 1½ feet on a side.
+
+The chest has 20 charges. A creature can use an action to touch the closed lid of the chest and expend 1 of the chest's charges while naming one or more nonmagical objects (including raw materials, foodstuffs, and liquids) worth a total of 1 gp or less. The named objects magically appear in the chest, provided they can all fit inside it and the chest doesn't contain anything else. For example, the chest can conjure a plate of strawberries, a bowl of hot soup, a flagon of water, a stuffed animal, or a bag of twenty caltrops. Food and drink conjured by the chest are delicious, and they spoil if not consumed after 24 hours. Gems and precious metals created by the chest disappear after 1 minute.
+
+The chest regains 1d20 expended charges daily at dawn. If the item's last charge is expended, roll a d20. On a 1, the chest loses its magic (becoming an ordinary chest), and its gemstones turn to dust.
+
+#### Accounting and Valuation of All Things
+**Type:** Wondrous Item, Artifact
+**Attunement:** yes
+**Weight:** 3
+**Cost:**
+The Accounting and Valuation of All Things is bound in gold leaf, with pages of silver and text of blood.
+
+This is a magic tome that functions as a spellbook and arcane focus. You have a +3 bonus to your spell attack and spell save DC.
+
+Random Properties. The Accounting and Valuation of All Things has the following random properties:
+
+    1 major beneficial property
+    1 major detrimental property
+
+The Soul Trade. One section of the book is dedicated to negotiating and valuing mortal souls. When the book is opened within 10 feet of a creature with a soul, that creature must make a DC 22 Wisdom saving throw. On a failed save, the tome analyzes their greatest desires and calculates exactly what they would need to give up their soul. That information is then displayed within the tome, such that the user can offer a trade to acquire a soul. Creatures that succeed on the saving throw simply show up as a question mark in the book's pages and are immune to further valuations.
+
+Mammon's Tax. When the Accounting and Valuation of All Things is used as a spellbook, it maintains a unique ability to forcibly acquire souls. Any creature killed by a spell transcribed within the book has their soul ripped from their body and sent to Minauros. This process renders the subject immune to all forms of resurrection aside from True Resurrection. In payment for their soul, Mammon drops gold equal to (20 × CR) or (2 × Level) on their corpse.
+
+Negotiation Tactics. The tome is capable of providing some assistance to all negotiations, not just those made for souls. You gain a passive +5 to Charisma (Persuasion) checks made to barter. Additionally, as an action, you can surrender your consciousness to the tome, allowing it to take over. For 1 minute, the Accounting and Valuation of All Things speaks for you, using a +12 Charisma (Persuasion) skill and gaining advantage on your rolls. Using the book in this manner has a corrupting influence, and each use compels you to become increasingly greedy, vain, and evil—much like its original owner, Mammon. When the duration ends, if your alignment is non-evil, you suffer 6d6 necrotic damage.
+
+Transcribed Spells. The spellbook section of the Accounting and Valuation of All Things comes with some spells already recorded. For each spell level, roll (1d4 - 1). The DM will determine the necessary spells of each level that already exist within the tome. If you copy spells from the tome to your own spellbook, the cost in gold is doubled. On the opposite end, copying spells from your spellbook to the tome only costs half the gold it normally would.
+
+Destroying the Tome. Destroying the Accounting and Valuation of All Things can be done in two ways. The first option is a simple bribe to Mammon to have him destroy the tome. An offering of 99,999 gp must be made, at midnight, by opening the book and placing the gold inside. If Mammon accepts the offering, the gold melts around the book, then both vanish.
+
+The second route, in case Mammon is unavailable or unwilling, is to incinerate the book. To accomplish this task, a pot of platinum (valued at no less than 99,999 gp) must be melted, enough to fully submerge the book. Once the platinum is prepared, dropping the tome into the molten solution melts the tome. The process completely destroys the tome, as well as the platinum.
