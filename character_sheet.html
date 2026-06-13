@@ -4145,8 +4145,7 @@ function parseItemMarkdown(md){
     var headerLines=[];
     var meta=[type,rarity].filter(Boolean).join(", ");
     if(meta) headerLines.push(meta);
-    if(attune===false) headerLines.push("(No Attunement Required)");
-    else if(attune) headerLines.push("(Requires Attunement"+(typeof attune==="string"&&attune.replace(/^(yes|true|required|requires attunement?)/i,"").trim()?" "+attune.replace(/^(yes|true|required|requires attunement?)/i,"").trim():"")+")");
+    if(attune) headerLines.push("(Requires Attunement"+(typeof attune==="string"&&attune.replace(/^(yes|true|required|requires attunement?)/i,"").trim()?" "+attune.replace(/^(yes|true|required|requires attunement?)/i,"").trim():"")+")");
     if(headerLines.length>0) fullDesc=headerLines.join("\n")+(fullDesc?"\n"+fullDesc:"");
     // Skip stub entries: only a name, nothing else
     if(!descLines.length&&!weight&&!cost&&!type&&!rarity&&attune===null) return;
@@ -4200,7 +4199,7 @@ function open5eSearch(query){
                 var fromRa=raRaw.replace(/^requires attunement/i,"").trim();
                 if(fromRa) detail=fromRa;
               }
-              var att2=hasAttune?("(Requires Attunement"+(detail?" "+detail:"")+")"):"(No Attunement Required)";
+              var att2=hasAttune?("(Requires Attunement"+(detail?" "+detail:"")+")"):"";
               var meta2=[it.type&&it.type.name?it.type.name:it.type,it.rarity&&it.rarity.name?it.rarity.name:it.rarity].filter(Boolean).join(", ");
               d2=[meta2,att2,(it.desc||it.description||"").toString()].filter(Boolean).join("\n");
             } else {
@@ -4221,7 +4220,6 @@ function open5eSearch(query){
             var attune="";
             var ra=(it.requires_attunement||"").toString().trim();
             if(ra){attune="(Requires Attunement"+(ra.replace(/^requires attunement/i,"").trim()?" "+ra.replace(/^requires attunement/i,"").trim():"")+")";}
-            else{attune="(No Attunement Required)";}
             var meta=[it.type,it.rarity].filter(Boolean).join(", ");
             desc=[meta,attune,(it.desc||"").toString()].filter(Boolean).join("\n");
           }
@@ -7056,7 +7054,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.163</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.164</div>
 
 </script>
 </body>
