@@ -4069,7 +4069,9 @@ function parseItemMarkdown(md){
       var ln=lines[li].trim();
       if(/^#/.test(ln)) break; // stop at next heading
       if(!pastFields){
+        // Match bold fields with or without a value: **Field:** value OR **Field:**
         var kv=ln.match(/^\*\*([^*]+)\*\*[:\s]+(.+)$/)||ln.match(/^(Weight|Cost|Type|Rarity|Attunement)[:\s]+(.+)$/i);
+        var kvEmpty=!kv&&(ln.match(/^\*\*([^*]+)\*\*:?\s*$/)||ln.match(/^(Weight|Cost|Type|Rarity|Attunement):\s*$/i));
         if(kv){
           var k=kv[1].toLowerCase().trim().replace(/:$/,""),v=kv[2].trim();
           if(k==="weight") weight=v.replace(/\s*(lb\.?|lbs\.?|pounds?)\s*$/i,"").trim();
@@ -4079,6 +4081,7 @@ function parseItemMarkdown(md){
           else if(k==="attunement") attune=/^(yes|true|required|requires)/i.test(v)?v:(/^(no|none|false)/i.test(v)?false:v);
           continue;
         }
+        if(kvEmpty) continue; // empty field line — skip without flipping to description
         if(ln) pastFields=true;
       }
       if(pastFields){
@@ -6696,7 +6699,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.116</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.117</div>
 
 </script>
 </body>
