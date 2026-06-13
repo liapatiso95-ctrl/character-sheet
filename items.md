@@ -5587,3 +5587,439 @@ Transcribed Spells. The spellbook section of the Accounting and Valuation of All
 Destroying the Tome. Destroying the Accounting and Valuation of All Things can be done in two ways. The first option is a simple bribe to Mammon to have him destroy the tome. An offering of 99,999 gp must be made, at midnight, by opening the book and placing the gold inside. If Mammon accepts the offering, the gold melts around the book, then both vanish.
 
 The second route, in case Mammon is unavailable or unwilling, is to incinerate the book. To accomplish this task, a pot of platinum (valued at no less than 99,999 gp) must be melted, enough to fully submerge the book. Once the platinum is prepared, dropping the tome into the molten solution melts the tome. The process completely destroys the tome, as well as the platinum.
+
+#### Acheron Blade
+**Type:** Generic Variant, Rare
+**Attunement:** yes
+**Weight:** 3
+**Cost:**
+The black blade of this sword is crafted from a mysterious arcane alloy. You gain a +1 bonus to attack and damage rolls made with this magic weapon. While the sword is on your person, you are immune to effects that turn undead.
+
+Dark Blessing. While holding the sword, you can use an action to give yourself 1d4 + 4 temporary hit points. This property can't be used again until the next dusk.
+
+Disheartening Strike. When you hit a creature with an attack using this weapon, you can fill the target with unsettling dread: the target has disadvantage on the next saving throw it makes before the end of your next turn. The creature ignores this effect if it's immune to the frightened condition. Once you use this property, you can't do so again until the next dusk.
+
+#### Acid Absorbing Tattoo
+**Type:** Wondrous Item (Tattoo), Very Rare
+**Attunement:** yes
+**Weight:** 0.1
+**Cost:**
+Produced by a special needle, this magic tattoo features designs that emphasize one color (green).
+
+Tattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.
+
+If your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.
+
+Damage Resistance. While the tattoo is on your skin, you have resistance to acid damage.
+
+Damage Absorption. When you take acid damage, you can use your reaction to gain immunity against that instance of the damage, and you regain a number of hit points equal to half the damage you would have taken. Once this reaction is used, it can't be used again until the next dawn.
+
+#### Acidlight Ammunition
+**Type:** Ammunition, Generic Variant, Rare
+**Weight:**
+**Cost:**
+This ammunition is covered in an alchemical concoction that ignites upon impact, casting Bright Light in the space of the target it hits and Dim Light in a 5-foot Emanation originating from the target for 1 minute. A creature hit by the ammunition takes 1d4 Acid damage at the start of each of its turns and has Disadvantage on Dexterity (Stealth) checks while the ammunition remains lit. The ammunition remains lodged in a target it hits until a creature takes a Utilize action to remove and snuff out the ammunition. The target can't benefit from the Invisible condition while the ammunition is lodged within it. The ammunition is destroyed by the lit solution, preventing it from being recovered once fired.
+
+#### Aciurgist's Blade
+**Type:** Weapon (Glaive), Very Rare
+**Attunement:** by a Paladin
+**Weight:** 6
+**Cost:**
+Martial Weapon, Melee Weapon
+1d10 Slashing
+Heavy, reach, two-handed
+
+This smooth, magic glaive bears holy sigils and oaths down the length of its haft and is always impeccably clean. While holding it, your reach increases by 5 feet when using your Lay on Hands feature.
+
+Once on each of your turns when you expend a spell slot to use your Divine Smite feature on an attack made with this glaive, you can choose one of the following effects to inflict on the target until the start of your next turn. When you expend a spell slot of 2nd level or higher, you can inflict an additional effect for each slot level above 1st, choosing each effect no more than once.
+
+- The target has disadvantage on the next attack roll it makes.  
+- The target's speed is reduced by 10 feet.  
+- The next time the target takes damage, it takes an additional 1d8 necrotic or radiant damage (your choice).  
+- The next attack made against the target is made with advantage.  
+- The target can't regain hit points.
+
+Heavy. Creatures that are Small or Tiny have disadvantage on attack rolls with heavy weapons. A heavy weapon's size and bulk make it too large for a Small or Tiny creature to use effectively.
+
+Reach. This weapon adds 5 feet to your reach when you attack with it. This property also determines your reach for opportunity attacks with a reach weapon.
+
+Two-Handed. This weapon requires two hands to use. This property is relevant only when you attack with the weapon, not when you simply hold it.
+
+#### Acorn Charm
+**Type:** Wondrous Item, Uncommon
+**Weight:** 0.2
+**Cost:**
+This small, polished acorn has been made into a magical bell that rings softly when moved. While wearing this charm, you have advantage on Charisma checks made to interact with plants, and you can communicate with plant creatures as if you shared a common language.
+
+#### Acorn Helmet
+**Type:** Wondrous Item, Uncommon
+**Attunement:** yes
+**Weight:** 2
+**Cost:**
+While wearing this helmet, any falling damage you take is reduced by half. Furthermore, any damage you take as a result of something falling on you, such as a boulder or ambushing darkmantle, is also halved.
+
+In addition, you have advantage on any Wisdom (Animal Handling) or Charisma check you make to interact with Tiny woodland beasts while wearing the helmet.
+
+#### Acrid Wetsuit
+**Type:** Light Armor (Leather Armor), Rare
+**Weight:** 10
+**Cost:**
+AC 11 + Dex
+
+This armor protects its wearer from various environmental hazards. It covers the wearer completely, and magically seals itself closed against certain environmental effects.
+
+While wearing the armor, you gain the following benefits:
+
+- You can tolerate temperatures as high as 150 degrees Fahrenheit without any additional protection.  
+- You can breathe normally underwater. In addition, you ignore the effects of any gaseous poison or airborne diseases, such as the stinking cloud spell.  
+- Whenever you are subjected to acid damage as the result of being engulfed by or submerged in something, you take no damage instead (such as from being eaten by a dragon, absorbed by an ooze, or swimming in an acid pit).
+
+It takes twice as long as normal to don and doff this armor.
+
+#### Adamantine Armor
+**Type:** Generic Variant, Uncommon
+**Weight:*
+**Cost:**
+This suit of armor is reinforced with adamantine, one of the hardest substances in existence. While you're wearing it, any Critical Hit against you becomes a normal hit.
+
+#### Adamantine Weapon
+**Type:** Generic Variant, Uncommon
+**Weight:** 
+**Cost:**
+This weapon or piece of ammunition is made of adamantine, one of the hardest substances in existence. Whenever this weapon or piece of ammunition hits an object, the hit is a Critical Hit.
+
+#### Adder Stone
+**Type:** Wondrous Item, Uncommon
+**Weight:**
+**Cost:**
+These glassy stones are often found near the place where a marra was slain. Each Adder Stone is the size of a small fruit and has a natural hole in it. While you carry an Adder Stone, the first time you would gain the Paralyzed condition, the stone shatters and that condition is removed.
+
+#### Adrenal Blades
+**Type:** Weapon (Scimitar), Very Rare
+**Attunement:** yes
+**Weight:** 3
+**Cost:**
+Martial Weapon, Melee Weapon
+1d6 Slashing
+Finesse, light
+
+This pair of scimitars are made of darkened steel and have feather-like designs. You gain a +1 bonus to attack and damage rolls made with these magic weapons, which are considered to be a single item for the purposes of attuning to them. While holding one of the swords, you always know the general direction and distance of the other. While the swords are on your person, choose one of the following benefits whenever you roll initiative. These benefits last for 1 minute.
+
+Fight. The weapons' bonus increases to +3, instead of +1. You have advantage on opportunity attacks made with them.
+
+Flight. You gain a flying speed of 40 feet, but fall if you end your turn in the air and nothing else is holding you aloft. Opportunity attacks against you are made with disadvantage.
+
+In addition, if a creature forces you to make a saving throw against becoming frightened, you can immediately use your reaction (before making the saving throw) to move up to your speed in a straight line toward that creature. If the target is within 5 feet of you at the end of this movement, you can also make two weapon attacks against it: one with each scimitar. For each attack that hits, you gain a +5 bonus to the saving throw against becoming frightened.
+
+#### Adventurer's Overcoat
+**Type:** Wondrous Item, Rare
+**Attunement:** yes
+**Weight:** 3
+**Cost:**
+This well-traveled and now faded overcoat has been worn by countless other mountaineering adventurers. A thin layer of frost hangs along the coat's hem. While wearing the coat, you and friendly creatures within 5 feet of you have resistance to cold damage.
+
+#### Adventurer's Ring
+**Type:** Ring, Common
+**Weight:** 0.1
+**Cost:**
+While the cover on this ring is open, the ring produces a flame that creates no heat and consumes no fuel. It sheds Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. As a Bonus Action, you can close the cover, smothering the flame, or open it again.
+
+#### Adze of Annam
+**Type:** Weapon (Greataxe), Artifact
+**Attunement:** yes
+**Weight:** 7
+**Cost:**
+Martial Weapon, Melee Weapon
+1d12 Slashing
+Heavy, two-handed
+
+This massive adze is said to have been wielded by All-Father Annam, not as a weapon but as the tool he used to shape the various worlds of the Material Plane eons ago.
+
+Random Properties. The adze has the following random properties, determined by rolling on the appropriate table in the Dungeon Master's Guide:
+
+- 2 minor beneficial properties  
+- 1 major beneficial property  
+- 2 minor detrimental properties  
+
+Magic Weapon. When a creature attunes to the adze, the artifact magically adjusts its size so that creature can wield it as a greataxe. The adze is a magic weapon that grants a +3 bonus to attack and damage rolls made with it. On a hit, the adze deals an additional 3d12 force damage. It also deals double damage to objects and structures.
+
+Divine Mattock. As an action, you can call upon the might of the All-Father and use the adze to cast move earth or fabricate. Once this property is used, it can't be used again until the next dawn.
+
+#### Aegis Grimoire
+**Type:** Shield (Shield), Very Rare
+**Attunement:** by a Wizard
+**Weight:** 6
+**Cost:**
+This leather shield looks like a leather-bound book with brass fixtures. You're considered proficient with this shield while you're attuned to it. The shield has 5 charges and regains 1d4 + 1 expended charges daily at dawn.
+
+Spells. While holding this shield, you can use a bonus action to expend 1 or more of its charges to cast one of the following spells from it: antilife shell (4 charges), mage armor (1 charge), or protection from energy (2 charges). When you cast this version of mage armor on yourself, it also reduces the damage you take from spells by half.
+
+Spell Absorb. While holding this shield, you can use a reaction when you make a saving throw against a spell cast by a hostile creature to expend any number of charges from the shield. For each expended charge, you gain a +2 bonus to the saving throw. You can decide to use this reaction after making the saving throw, but before the GM says whether the roll succeeds or fails. If the number of expended charges was greater than or equal to the level of the spell, you automatically succeed on the saving throw, and the shield's cover flings itself open to reveal the large pages behind it. When this happens, the spell is inscribed in the shield's pages using a magical cipher that can't be understood or transcribed, and the cover slams back shut. The spell remains inscribed until you finish a long rest, until you inscribe a different spell with this property, or until you cast the spell from the shield using its normal casting time (no charges required); the cover flings itself back open when the spell is cast from the shield, and the paper becomes blank once more. Otherwise, the book remains closed and can't be opened. The spell is cast from the shield at the same level in which it was originally cast, and it uses your spell save DC, spell attack bonus, and spellcasting ability modifier.
+
+#### Aegis of Radiance
+**Type:** Shield (Shield), Rare
+**Attunement:** by a Cleric
+**Weight:** 6
+**Cost:**
+This Shield emits a faint, holy glow when wielded and recognizes your devotion to a higher power. When you attune to the Shield, the emblem adorning its face changes to one that represents your chosen deity, allowing you to use the Shield as a Holy Symbol. You gain a +1 bonus to Armor Class while holding this Shield, in addition to the Shield's normal bonus to AC.
+
+While holding the Shield, you can take a Bonus Action and use a command word to cause it to magically shatter into countless fragments of pure light. The pieces of light protect you as if you were wielding the Shield, leaving your hands free. The light surrounds you for 1 minute, until you dismiss the effect as a Bonus Action, or until you have the Unconscious condition or die, at which point the Shield rematerializes on the ground at your feet or strapped to your arm if you have a hand free. If your Holy Symbol is emblazoned upon or attached to the Shield, it floats prominently amidst the shards of light and continues to function as a Spellcasting Focus for you. Undead creatures have Disadvantage on attack rolls made against you while you're surrounded by the light in this way. The surrounding shards of light shed Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. Once this property is used, it can't be used again until the next dawn.
+
+#### Aether Blood
+**Type:** Potion, Rare
+**Weight:** 0.5
+**Cost:**
+Consuming this potion enhances your spellcasting prowess for 1 minute. While the effect lasts, add 1 to the saving throw DCs for the spells you cast. In addition, whenever your spell could be cast using a higher-level spell slot, increase the spell's effective level by 1.
+
+Prolonged use of Aether Blood is grueling. You can consume it safely a number of times equal to your Constitution modifier (minimum 1). Any further use results in painful addiction. While addicted, you have Disadvantage on Strength and Constitution ability checks and saving throws, and attack rolls against you have Advantage.
+
+Consuming another vial of Aether Blood negates this effect until you finish a Long Rest, but you must also make a DC 10 Charisma save. On a failure, you become lethargic, and your Speed is reduced by 20 feet for 1 minute.
+
+The addiction lasts until you receive a Greater Restoration spell, or until you have not consumed Aether Blood for 30 days.
+
+#### Aged Goodberry Wine
+**Type:** Potion, Rare
+**Weight:** 1
+**Cost:**
+This bottle of thick red wine is miraculously made from magical goodberries and peonies using a closely kept family recipe. It tastes fruity and floral, with notes of honey and the feeling of a fresh breeze, and is deeply rejuvenating. The bottle comes with 8 servings of the syrupy potion, which each take 1 minute to drink.
+
+When you drink this wine, you can regain hit points by spending any number of Hit Dice, as if you'd finished a short rest. You regain 1 extra hit point for each Hit Die you spend in this way. The wine provides enough nourishment to sustain a creature for one day. In addition, for the next hour, whenever you roll a Wisdom or Charisma ability check or saving throw, you add 1d4 to the total of the roll.
+
+#### Agony (Awakened)
+**Type:** Weapon (Flail), Legendary
+**Attunement:** by a Creature of Non-Good Alignment
+**Weight:** 2
+**Cost:**
+Martial Weapon, Melee Weapon
+1d8 Bludgeoning
+Vestige
+
+Utilized in countless tortures and slow executions, the hooked chains of this brutal weapon constantly show dried blood and rot. Legend says that Agony was wielded in the Calamity by the gnoll scion of a flesh-eating Demon Lord.
+
+Dormant. While Agony is in a dormant state, you gain a +2 bonus to attack and damage rolls made with this magic weapon. Whenever you damage a creature with Agony, that creature is marked for 10 minutes or until you damage a different creature. When you hit a creature marked in this way with this weapon, the target takes an extra 1d6 piercing damage.
+
+Awakened. When Agony reaches an awakened state, you gain the following benefits:
+
+- The extra damage when you hit a marked creature increases to 1d8.  
+- A marked creature has disadvantage on Constitution checks and Constitution saving throws.  
+- When you reduce a creature to 0 hit points with an attack using Agony, you can immediately make an additional melee attack with this weapon as a bonus action.
+
+Vestige of Divergence. This item is a Vestige of Divergence, see Vestiges of Divergence for more information.
+
+#### Agony (Dormant)
+**Type:** Weapon (Flail), Legendary
+**Attunement:** by a Creature of Non-Good Alignment
+**Weight:** 2
+**Cost:**
+Martial Weapon, Melee Weapon
+1d8 Bludgeoning
+Vestige
+
+Utilized in countless tortures and slow executions, the hooked chains of this brutal weapon constantly show dried blood and rot. Legend says that Agony was wielded in the Calamity by the gnoll scion of a flesh-eating Demon Lord.
+
+Dormant. While Agony is in a dormant state, you gain a +2 bonus to attack and damage rolls made with this magic weapon. Whenever you damage a creature with Agony, that creature is marked for 10 minutes or until you damage a different creature. When you hit a creature marked in this way with this weapon, the target takes an extra 1d6 piercing damage.
+
+Vestige of Divergence. This item is a Vestige of Divergence, see Vestiges of Divergence for more information.
+
+#### Agony (Exalted)
+**Type:** Weapon (Flail), Legendary
+**Attunement:** by a Creature of Non-Good Alignment
+**Weight:** 2
+**Cost:**
+Martial Weapon, Melee Weapon
+1d8 Bludgeoning
+Vestige
+
+Utilized in countless tortures and slow executions, the hooked chains of this brutal weapon constantly show dried blood and rot. Legend says that Agony was wielded in the Calamity by the gnoll scion of a flesh-eating Demon Lord.
+
+Dormant. While Agony is in a dormant state, you gain a +2 bonus to attack and damage rolls made with this magic weapon. Whenever you damage a creature with Agony, that creature is marked for 10 minutes or until you damage a different creature. When you hit a creature marked in this way with this weapon, the target takes an extra 1d6 piercing damage.
+
+Awakened. When Agony reaches an awakened state, you gain the following benefits:
+
+- The extra damage when you hit a marked creature increases to 1d8.  
+- A marked creature has disadvantage on Constitution checks and Constitution saving throws.  
+- When you reduce a creature to 0 hit points with an attack using Agony, you can immediately make an additional melee attack with this weapon as a bonus action.
+
+Exalted. When Agony reaches an exalted state, you gain the following benefits:
+
+- The weapon's bonus to attack and damage rolls increases to +3.  
+- The extra damage when you hit a marked creature increases to 2d8.  
+- When you score a critical hit with this weapon, the target must succeed on a DC 17 Wisdom saving throw or become frightened of you for 1 minute. On a success, the target is immune to this effect for 24 hours.
+
+Vestige of Divergence. This item is a Vestige of Divergence, see Vestiges of Divergence for more information.
+
+markdown
+#### Air Render
+**Type:** Weapon (Shortbow), Rare
+**Attunement:** yes
+**Weight:** 2
+**Cost:**
+Simple Weapon, Ranged Weapon
+1d6 Piercing
+Ammunition (80/320 ft.), two-handed
+
+When you make a ranged attack with this magic bow, you can choose to fire a mote of wind instead of using an arrow. When you do, you gain a +1 bonus to the attack and damage rolls, and you can choose the form the wind takes, causing it to deal either bludgeoning, piercing, or slashing damage (your choice). When you roll a 20 on an attack roll made in this way, the target also suffers from one of the following effects:
+
+Bludgeoning Gust. If the mote of wind dealt bludgeoning damage, the target must succeed on a DC 15 Strength saving throw or be knocked prone or pushed 15 feet away from you (your choice). If the target is Huge or larger, it automatically succeeds on the saving throw.
+
+Piercing Wind. If the mote of wind dealt piercing damage, you can immediately make another attack with the same mote of wind against a different creature that is within 15 feet of the original target. This attack deals piercing damage.
+
+Slashing Tornado. If the mote of wind dealt slashing damage, each other creature within 5 feet of the original target must succeed on a DC 15 Dexterity saving throw or take 2d6 slashing damage.
+
+#### Akaasit Blade
+**Type:** Weapon (Dagger), Rare
+**Attunement:** no
+**Weight:** 1
+**Cost:**
+Simple Weapon, Melee Weapon
+1d4 Piercing
+Finesse, light, thrown (20/60 ft.)
+
+You gain a +1 bonus to attack and damage rolls made with this magic weapon.
+
+This dagger is crafted from the armblades of a defeated akaasit. You can use an action to activate a small measure of prescience within the dagger for 1 minute. If you are attacked by a creature you can see within 5 feet of you while this effect is active, you can use your reaction to make one attack with this dagger against the attacker. If your attack hits, the dagger loses its prescience, and its prescience can't be activated again until the next dawn.
+
+#### Akmon, Hammer of Purphoros
+**Type:** Weapon (Warhammer), Artifact
+**Attunement:** yes
+**Weight:** 2
+**Cost:**
+Martial Weapon, Melee Weapon
+1d8 Bludgeoning
+Versatile (1d10)
+
+Purphoros's hammer works wonders and disasters, the god of the forge using it to craft ground-breaking marvels and dangerous inventions in equal measure. Purphoros rarely bestows Akmon on mortals but occasionally leaves it unattended at his forge in Mount Velus. When Purphoros does permit a mortal to use the hammer, it's usually so they might bring an important work into being, wreck a force of destruction, or forge something remarkable somewhere the god isn't welcome.
+
+Hammer of the Forge. This magic warhammer grants a +3 bonus to attack and damage rolls made with it. When you hit with an attack using it, the target takes an extra 3d10 fire damage.
+
+Blessing of the Forge. If you are a worshiper of Purphoros, you gain all the following benefits for which you have the required piety:
+
+- Piety 10+. The hammer has 1 randomly determined minor beneficial property.  
+- Piety 25+. The hammer has 1 randomly determined major beneficial property.  
+- Piety 50+. The hammer has 1 additional randomly determined major beneficial property.  
+
+If you aren't a worshiper of Purphoros, the hammer has 2 randomly determined minor detrimental properties.
+
+Reforged. While holding the hammer, you have resistance to fire damage and are immune to exhaustion. Additionally, you have proficiency with smith's tools and have advantage on all ability checks made using them.
+
+Spells. While the hammer is on your person, you can use an action to cast one of the following spells (save DC 18): animate objects, heat metal, fabricate, magic weapon, mending, shatter. Once you use the hammer to cast a spell, the spell can't be cast again from it until the next dusk.
+
+Destroying the Hammer. To destroy the hammer, it must be taken to the realm of Tizerus, in the Underworld. There it must be coated in clay from the Mire of Punishment. The heat of the hammer hardens the clay, which fuses to it after one month. Once fully hardened, the clay-covered hammer must be swallowed and digested by a kraken.
+
+#### Alchemical Compendium
+**Type:** Wondrous Item, Rare
+**Attunement:** by a Wizard
+**Weight:** 3
+**Cost:**
+Acrid odors cling to this stained, heavy volume. The book's metal fittings are copper, iron, lead, silver, and gold, some frozen mid-transition from one metal to another. When found, the book contains the following spells: enlarge/reduce, feather fall, flesh to stone, gaseous form, magic weapon, and polymorph. It functions as a spellbook for you.
+
+While you are holding the book, you can use it as a spellcasting focus for your wizard spells.
+
+The book has 3 charges, and it regains 1d3 expended charges daily at dawn. You can use the charges in the following ways while holding it:
+
+- If you spend 1 minute studying the book, you can expend 1 charge to replace one of your prepared wizard spells with a different spell in the book. The new spell must be of the transmutation school.  
+- As an action, you can touch a nonmagical object that isn't being worn or carried and spend a number of charges to transform the target into another object. For 1 charge, the object can be no larger than 1 foot on a side. You can spend additional charges to increase the maximum dimensions by 2 feet per charge. The new object must have a gold value equal to or less than the original.
+
+#### Alchemimic
+**Type:** Wondrous Item, Uncommon
+**Weight:** 1
+**Cost:**
+An alchemist tried, and mostly failed, at reconstituting a mimic from its remains. The result is this vial of swirling purple liquid, which has several orange eyeballs floating around inside of it. You can use an action to pour out the vial and describe a Tiny object (such as a fish hook, ring, or quill). The description can be as detailed or vague as you like. The liquid then transforms itself into the object. This version of the object is extremely sticky to the touch, and although it can duplicate the appearance of other magic items, it doesn't gain their magical properties.
+
+The alchemimic can remain in this form for up to 1 hour, at which time it dissolves into the liquid again. You can use an action to return the alchemimic to the vial while within reach of it, whether it's in its object form or liquid form. Regardless, the item can't transform again until the next dawn or until it consumes one day's worth of rations. It can be fed the rations while in the vial by dropping bits of them into the top; doing so takes 10 minutes. Drinking the alchemimic destroys it and causes the drinker to take 1d10 acid damage.
+
+#### Alchemist's Bubblegun
+**Type:** Weapon (Pistol), Uncommon
+**Attunement:** no
+**Weight:** 3
+**Cost:**
+Martial Weapon, Ranged Weapon, Firearm
+2d6 Acid
+Range 30/90 ft.
+
+This pistol doesn't fire bullets like a traditional pistol, and as a result it lacks the loading and ammunition properties. Instead, it fires a series of pressurized, acidic bubbles. It can only be fired once per turn. A target takes 2d6 acid damage on a hit, instead of the normal damage for a pistol, and you don't add your ability modifier to the damage roll. When you hit a target in this way, you can choose a second target within 5 feet of the first. If the second target would have also been hit by your attack roll, it takes acid damage equal to half the amount dealt to the first one.
+
+In addition, you can use a bonus action to pour a flask of alchemist's fire, a flask of holy water, a drinkable potion, or a poison (basic poison or injury type only) into the bubblegun, altering the weapon as described below.
+
+Alchemist's Fire. For the next minute, any target that takes acid damage from the weapon also takes an extra 1d4 fire damage.
+
+Holy Water. For the next minute, the weapon deals radiant damage instead of acid.
+
+Potion or Poison. The next attack you make with the weapon applies the effects of the potion or poison to the hit target (without dealing its normal acid damage or affecting neighboring creatures); a willing target can choose to automatically be hit by a potion fired in this way. Hit or miss, the potion or poison is then expended.
+
+Range. A weapon that can be used to make a ranged attack has a range shown in parentheses after the ammunition or thrown property. The range lists two numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's maximum range. When attacking a target beyond normal range, you have disadvantage on the attack roll. You can't attack a target beyond the weapon's long range.
+
+#### Alchemist's Firethrower
+**Type:** Weapon (Light Crossbow), Rare
+**Attunement:** no
+**Weight:** 8
+**Cost:**
+Simple Weapon, Ranged Weapon
+1d6 Fire
+Two-handed, range 30/90 ft.
+
+This handheld metal device weighs 8 pounds and measures about 2 feet long and 6 inches across at its widest point. Parts of it resemble a crossbow, such as its stock and trigger, but is otherwise unique in its design. It has a pair of gaps in its wooden stock which can hold two flasks of alchemist's fire, fitting the flasks' mouths into a hole in the bottom of the space. Upending a flask into one of the gaps in this way allows its contents to run through a hidden pipeline within the stock and into the rest of the machine, causing a glass-covered chamber on the top of the device to fill with bubbling liquid. When filled in this way, the two vertical slots at the front of the machine give off a warm and foreboding glow.
+
+This item is a unique ranged weapon with the two-handed property. If you are proficient with light or heavy crossbows, you are proficient with the alchemist's firethrower.
+
+The device can hold a maximum of 100 charges, and gains 50 charges for each bottle of alchemist's fire that's loaded into its stock. You can use an action to load a new flask into the stock, discarding the previous one as part of the same action. While a flask of alchemist's fire is typically thrown, this device converts and concentrates a tiny portion of the sticky solution into a superheated discus that flies from the weapon instead, allowing the normally single-use flasks to power the machine for many attacks instead.
+
+The device loses 1 charge each time you use it to make a ranged weapon attack, which has a normal range of 30 feet and a long range of 90 feet. On a hit, a target takes fire damage equal to 1d6 plus your Dexterity modifier. For each attack that hits, the target also takes 1d6 fire damage at the end of its next turn as the alchemist's fire smolders and evaporates from its body.
+
+Alternatively, while holding the machine, you can use an action to expend 10 of its charges to magically release a belching stream of concentrated alchemist's fire from it in a 30-foot line that is 5 feet wide. Each creature in the line must succeed on a DC 15 Dexterity saving throw or take 8d6 fire damage. Once this property has been used, it can't be used again until the next dawn.
+
+#### Alchemist's Potion Belt
+**Type:** Wondrous Item, Uncommon
+**Weight:** 2
+**Cost:**
+This enchanted belt has two stoppers that magically resize to fit the mouth of any kind of bottle. The belt can carry up to two potions in this way. The belt can be worn comfortably around your waist or across your chest as a bandolier. While wearing the belt, any potion carried on it seems to magically unstopper and spring to your hand, allowing you to drink it as a bonus action. You can attach a bottle to the belt using an action.
+
+When you roll a 1 on a Dexterity saving throw or are hit by a critical hit, roll a d20. On a 1, one of the bottles on the belt shatters and is destroyed.
+
+#### Alchemy Blade
+**Type:** Weapon (Shortsword), Uncommon
+**Attunement:** no
+**Weight:** 2
+**Cost:**
+Martial Weapon, Melee Weapon
+1d6 Piercing
+Finesse, light
+
+This sword has a glass channel running down its length. In place of a traditional pommel, it instead has an open hole designed to fit atop a typical flask or vial. While holding the sword, you can use an action to attach a flask or vial to the pommel and draw its contents into the blade; doing so changes the sword's properties based on the attached flask or vial.
+
+- Acid Vial. The sword deals an extra 1d4 acid damage to the first target hit by it each turn. When the target is an object that isn't being worn or carried, the acid damage is maximized.  
+- Alchemist's Fire. The sword deals an extra 1d4 fire damage to the first target hit by it each turn. If you reduce a creature to 0 hit points using the sword, you can cause a different creature of your choice within 5 feet of the target to also take 2d4 fire damage.  
+- Basic Poison. The sword deals an extra 1d4 poison damage to the first target hit by it each turn. The first time that the target hits with an attack that uses Strength before the start of your next turn, the damage is reduced by an amount equal to the poison damage dealt.  
+- Holy Water. The sword deals an extra 1d4 radiant damage to the first target hit by it each turn. The radiant damage is doubled against fiends and undead.
+
+You can eject and remove the flask or vial using a bonus action, destroying its contents and leaving the container empty.
+
+#### Alchemy Jug
+**Type:** Wondrous Item, Uncommon
+**Weight:** 12
+**Cost:**
+This ceramic jug appears to be able to hold a gallon of liquid and weighs 12 pounds whether full or empty. The jug sloshes when it is shaken, even if the jug is empty.
+
+You can take a Magic action and name one liquid from the Alchemy Jug Liquids table to cause the jug to produce the chosen liquid. Afterward, you can uncork the jug as a Utilize action and pour that liquid out, up to 2 gallons per minute. The maximum amount of liquid the jug can produce depends on the liquid you named.
+
+Once the jug starts producing a liquid, it can't produce a different one, or more of one that has reached its maximum, until the next dawn.
+
+#### Alchemy Jug (Blue)
+**Type:** Wondrous Item, Uncommon
+**Weight:** 12
+**Cost:**
+This ceramic jug appears to be able to hold a gallon of liquid and weighs 12 pounds whether full or empty. Sloshing sounds can be heard from within the jug when it is shaken, even if the jug is empty.
+
+You can use an action and name one liquid from the table below to cause the jug to produce the chosen liquid. Afterward, you can uncork the jug as an action and pour that liquid out, up to 2 gallons per minute. The maximum amount of liquid the jug can produce depends on the liquid you named.
+
+Once the jug starts producing a liquid, it can't produce a different one, or more of one that has reached its maximum, until the next dawn.
+
+#### Alchemy Jug (Orange)
+**Type:** Wondrous Item, Uncommon
+**Weight:** 12
+**Cost:**
+This ceramic jug appears to be able to hold a gallon of liquid and weighs 12 pounds whether full or empty. Sloshing sounds can be heard from within the jug when it is shaken, even if the jug is empty.
+
+You can use an action and name one liquid from the table below to cause the jug to produce the chosen liquid. Afterward, you can uncork the jug as an action and pour that liquid out, up to 2 gallons per minute. The maximum amount of liquid the jug can produce depends on the liquid you named.
+
+Once the jug starts producing a liquid, it can't produce a different one, or more of one that has reached its maximum, until the next dawn.
