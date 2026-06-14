@@ -831,6 +831,8 @@ function Page1({c,s}){
   const [acOpen,setAcOpen]=useState(false);
   const [iniModal,setIniModal]=useState(false);
   const [wpnOpen,setWpnOpen]=useState(null); // {idx, mode:"atk"|"dmg"}
+  const [wpnRef,setWpnRef]=useState(false);
+  const [condRef,setCondRef]=useState(false);
   const wpnSort=(c.sortPrefs&&c.sortPrefs.wpn)||null;
   const onWpnSort=(col)=>s("sortPrefs",{...(c.sortPrefs||{}),wpn:cycleSort(wpnSort,col)});
   const stats=["STR","DEX","CON","INT","WIS","CHA"];
@@ -1466,7 +1468,11 @@ function Page1({c,s}){
       </div>
 
       {/* Damage Resistances / Immunities / Vulnerabilities */}
-      <div className="sh">Damage Resistances</div>
+      <div className="sh" style={{display:"flex",alignItems:"baseline",gap:8}}>Damage &amp; Condition Resistances
+        <span onClick={function(){setCondRef(true);}} title="Condition reference (PHB 2024)"
+          style={{cursor:"pointer",width:15,height:15,borderRadius:"50%",border:"1px solid rgba(56,178,172,.45)",color:"rgba(56,178,172,.8)",fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",display:"inline-flex",alignItems:"center",justifyContent:"center",userSelect:"none",background:"rgba(56,178,172,.08)",lineHeight:1,alignSelf:"center"}}>i</span>
+      </div>
+      {condRef&&<ConditionReferenceModal onClose={function(){setCondRef(false);}} />}
       {(function(){
         const TYPES=[
           {id:"acid",label:"Acid",col:"rgba(130,200,60,.9)"},
@@ -1517,6 +1523,7 @@ function Page1({c,s}){
           </div>
         </div>;
         return <div style={{marginBottom:16}}>
+          <div style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1.5,color:"rgba(201,150,42,.55)",textTransform:"uppercase",marginBottom:6}}>Damage</div>
           <div style={{display:"flex",gap:12,flexWrap:"wrap",marginBottom:4,alignItems:"flex-start"}}>
             <Section label="Resistances" field="res" arr={res} accentCol="rgba(74,156,92,.7)" />
             <Section label="Immunities" field="imm" arr={imm} accentCol="rgba(56,178,172,.7)" />
@@ -1557,6 +1564,59 @@ function Page1({c,s}){
                 })}
               </div>
               <div onClick={()=>setShowPanel(false)} style={{marginTop:8,fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:"rgba(201,150,42,.4)",textAlign:"right",cursor:"pointer",paddingTop:6,borderTop:"1px solid rgba(201,150,42,.1)"}}>close</div>
+            </div>}
+          </div>
+        </div>;
+      })()}
+
+      {/* Condition: Adv. on Saves Against / Immunity */}
+      {(function(){
+        const CONDS=["Blinded","Charmed","Deafened","Exhaustion","Frightened","Grappled","Incapacitated","Paralyzed","Petrified","Poisoned","Prone","Restrained","Stunned","Unconscious"];
+        const condRes=c.condRes&&typeof c.condRes==="object"?c.condRes:{adv:[],imm:[]};
+        const adv=condRes.adv||[];const imm=condRes.imm||[];
+        const toggle=(field,id)=>{const arr=condRes[field]||[];const next=arr.includes(id)?arr.filter(x=>x!==id):[...arr,id];s("condRes",{...condRes,[field]:next});};
+        const [showPanel,setShowPanel]=React.useState(false);
+        const Chip=({id,field,col})=><div style={{display:"inline-flex",alignItems:"center",gap:4,padding:"2px 7px 2px 8px",background:col.replace(".9)",",.12)"),border:"1px solid "+col.replace(".9)",",.4)"),borderRadius:12,margin:"2px 3px 2px 0",flexShrink:0}}>
+          <span onClick={()=>toggle(field,id)} style={{cursor:"pointer",color:col.replace(".9)",",.5)"),fontSize:11,lineHeight:1,userSelect:"none"}}>×</span>
+          <span style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:col,whiteSpace:"nowrap"}}>{id}</span>
+        </div>;
+        const Section=({label,field,arr,accentCol,chipCol})=><div style={{flex:1,minWidth:140,maxWidth:"50%",overflow:"hidden"}}>
+          <div style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1.5,color:accentCol,textTransform:"uppercase",marginBottom:2}}>{label}</div>
+          <div style={{display:"flex",flexDirection:"column",alignItems:"flex-start",overflow:"hidden",gap:2}}>
+            {arr.map(id=><Chip key={id} id={id} field={field} col={chipCol} />)}
+            {arr.length===0&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:"rgba(232,213,176,.2)",fontStyle:"italic"}}>none</span>}
+          </div>
+        </div>;
+        return <div style={{marginBottom:16,marginTop:10}}>
+          <div style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1.5,color:"rgba(56,178,172,.55)",textTransform:"uppercase",marginBottom:6,borderTop:"1px solid rgba(56,178,172,.12)",paddingTop:10}}>Conditions</div>
+          <div style={{display:"flex",gap:12,flexWrap:"wrap",marginBottom:4,alignItems:"flex-start"}}>
+            <Section label="Adv. on Saves Against" field="adv" arr={adv} accentCol="rgba(74,156,92,.7)" chipCol="rgba(74,156,92,.9)" />
+            <Section label="Immunity" field="imm" arr={imm} accentCol="rgba(56,178,172,.7)" chipCol="rgba(56,178,172,.9)" />
+          </div>
+          <div style={{position:"relative",display:"inline-block"}}>
+            <button onClick={()=>setShowPanel(v=>!v)} style={{background:"transparent",border:"1px solid rgba(56,178,172,.25)",color:"rgba(56,178,172,.5)",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,padding:"3px 10px",cursor:"pointer",borderRadius:2}}>+ Add / Remove</button>
+            {showPanel&&<div style={{position:"absolute",left:0,top:"100%",marginTop:4,zIndex:300,background:"#1a1410",border:"1px solid rgba(56,178,172,.3)",padding:"10px 12px",minWidth:280,maxWidth:360,boxShadow:"0 4px 24px rgba(0,0,0,.7)"}}>
+              <div style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1.5,color:"rgba(232,213,176,.35)",marginBottom:6,textTransform:"uppercase"}}>Click=Adv. on Saves · Double=Immune</div>
+              <div style={{display:"flex",flexWrap:"wrap",gap:4}}>
+                {CONDS.map(function(id){
+                  const inAdv=adv.includes(id),inImm=imm.includes(id);
+                  const state=inImm?"imm":inAdv?"adv":null;
+                  const stateCol=state==="imm"?"rgba(56,178,172,.9)":state==="adv"?"rgba(74,156,92,.9)":null;
+                  return <div key={id}
+                    onClick={()=>{
+                      var na=adv,ni=imm;
+                      if(!state){na=[...adv.filter(x=>x!==id),id];}
+                      else if(state==="adv"){na=adv.filter(x=>x!==id);ni=[...imm.filter(x=>x!==id),id];}
+                      else {ni=imm.filter(x=>x!==id);}
+                      s("condRes",{...condRes,adv:na,imm:ni});
+                    }}
+                    style={{cursor:"pointer",padding:"3px 8px",borderRadius:10,border:"1px solid "+(stateCol?stateCol.replace(".9)",",.5)"):"rgba(56,178,172,.25)"),background:stateCol?stateCol.replace(".9)",",.12)"):"rgba(0,0,0,.3)",userSelect:"none"}}>
+                    <span style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:stateCol||"rgba(56,178,172,.5)"}}>{id}</span>
+                    {state&&<span style={{fontFamily:"'Cinzel',serif",fontSize:7,letterSpacing:.5,color:stateCol,marginLeft:4,textTransform:"uppercase"}}>{state==="imm"?"IMM":"ADV"}</span>}
+                  </div>;
+                })}
+              </div>
+              <div onClick={()=>setShowPanel(false)} style={{marginTop:8,fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:"rgba(56,178,172,.4)",textAlign:"right",cursor:"pointer",paddingTop:6,borderTop:"1px solid rgba(56,178,172,.1)"}}>close</div>
             </div>}
           </div>
         </div>;
@@ -1702,7 +1762,11 @@ function Page1({c,s}){
         </div>
       </div>
 
-      <div className="sh" style={{display:"flex",alignItems:"baseline",gap:10}}>Attacks <span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.3)",fontStyle:"italic",letterSpacing:0,textTransform:"none",fontWeight:"normal"}}>rolls appear in the Dice Roller tab</span></div>
+      <div className="sh" style={{display:"flex",alignItems:"baseline",gap:10}}>Attacks / Weapons
+        <span onClick={function(){setWpnRef(true);}} title="Weapons reference (PHB 2024)"
+          style={{cursor:"pointer",width:15,height:15,borderRadius:"50%",border:"1px solid rgba(201,74,42,.45)",color:"rgba(201,74,42,.8)",fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",display:"inline-flex",alignItems:"center",justifyContent:"center",userSelect:"none",background:"rgba(201,74,42,.08)",lineHeight:1,alignSelf:"center"}}>i</span>
+        <span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.3)",fontStyle:"italic",letterSpacing:0,textTransform:"none",fontWeight:"normal"}}>rolls appear in the Dice Roller tab</span></div>
+      {wpnRef&&<WeaponReferenceModal onClose={function(){setWpnRef(false);}} />}
       <div className="stbl-wrap"><table className="itbl" style={{minWidth:520}}>
         <thead><tr>
           <SortableTh label="Name" col="nm" sort={wpnSort} onSort={onWpnSort} style={{width:"20%"}} />
@@ -3502,6 +3566,202 @@ function ToolReferenceModal({onClose}){
             );
           })}
           {list.length===0&&<div style={{padding:"18px 22px",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.3)"}}>No matching tool.</div>}
+        </div>
+      </div>
+    </div>
+  );
+}
+// ──────────────────────────────────────────────────────────────────────────────
+
+// ─── Weapon reference (PHB 2024 weapons, mastery, properties, ammunition) ───────
+const WEAPON_DATA={
+  "Simple Melee":[
+    {n:"Club",dmg:"1d4 Bludgeoning",prop:"Light",mast:"Slow",wt:"2 lb.",cost:"1 SP"},
+    {n:"Dagger",dmg:"1d4 Piercing",prop:"Finesse, Light, Thrown (Range 20/60)",mast:"Nick",wt:"1 lb.",cost:"2 GP"},
+    {n:"Greatclub",dmg:"1d8 Bludgeoning",prop:"Two-Handed",mast:"Push",wt:"10 lb.",cost:"2 SP"},
+    {n:"Handaxe",dmg:"1d6 Slashing",prop:"Light, Thrown (Range 20/60)",mast:"Vex",wt:"2 lb.",cost:"5 GP"},
+    {n:"Javelin",dmg:"1d6 Piercing",prop:"Thrown (Range 30/120)",mast:"Slow",wt:"2 lb.",cost:"5 SP"},
+    {n:"Light Hammer",dmg:"1d4 Bludgeoning",prop:"Light, Thrown (Range 20/60)",mast:"Nick",wt:"2 lb.",cost:"2 GP"},
+    {n:"Mace",dmg:"1d6 Bludgeoning",prop:"—",mast:"Sap",wt:"4 lb.",cost:"5 GP"},
+    {n:"Quarterstaff",dmg:"1d6 Bludgeoning",prop:"Versatile (1d8)",mast:"Topple",wt:"4 lb.",cost:"2 SP"},
+    {n:"Sickle",dmg:"1d4 Slashing",prop:"Light",mast:"Nick",wt:"2 lb.",cost:"1 GP"},
+    {n:"Spear",dmg:"1d6 Piercing",prop:"Thrown (Range 20/60), Versatile (1d8)",mast:"Sap",wt:"3 lb.",cost:"1 GP"}
+  ],
+  "Simple Ranged":[
+    {n:"Dart",dmg:"1d4 Piercing",prop:"Finesse, Thrown (Range 20/60)",mast:"Vex",wt:"1/4 lb.",cost:"5 CP"},
+    {n:"Light Crossbow",dmg:"1d8 Piercing",prop:"Ammunition (Range 80/320; Bolt), Loading, Two-Handed",mast:"Slow",wt:"5 lb.",cost:"25 GP"},
+    {n:"Shortbow",dmg:"1d6 Piercing",prop:"Ammunition (Range 80/320; Arrow), Two-Handed",mast:"Vex",wt:"2 lb.",cost:"25 GP"},
+    {n:"Sling",dmg:"1d4 Bludgeoning",prop:"Ammunition (Range 30/120; Bullet)",mast:"Slow",wt:"—",cost:"1 SP"}
+  ],
+  "Martial Melee":[
+    {n:"Battleaxe",dmg:"1d8 Slashing",prop:"Versatile (1d10)",mast:"Topple",wt:"4 lb.",cost:"10 GP"},
+    {n:"Double-Bladed Scimitar",dmg:"2d4 Slashing",prop:"Special*, Two-Handed",mast:"Graze",wt:"6 lb.",cost:"100 GP",special:"*Special. If you attack with a double-bladed scimitar as part of the Attack action on your turn, you can use a bonus action immediately after to make a melee attack with it. This attack deals 1d4 slashing damage on a hit, instead of 2d4."},
+    {n:"Flail",dmg:"1d8 Bludgeoning",prop:"—",mast:"Sap",wt:"2 lb.",cost:"10 GP"},
+    {n:"Glaive",dmg:"1d10 Slashing",prop:"Heavy, Reach, Two-Handed",mast:"Graze",wt:"6 lb.",cost:"20 GP"},
+    {n:"Greataxe",dmg:"1d12 Slashing",prop:"Heavy, Two-Handed",mast:"Cleave",wt:"7 lb.",cost:"30 GP"},
+    {n:"Greatsword",dmg:"2d6 Slashing",prop:"Heavy, Two-Handed",mast:"Graze",wt:"6 lb.",cost:"50 GP"},
+    {n:"Halberd",dmg:"1d10 Slashing",prop:"Heavy, Reach, Two-Handed",mast:"Cleave",wt:"6 lb.",cost:"20 GP"},
+    {n:"Lance",dmg:"1d10 Piercing",prop:"Heavy, Reach, Two-Handed (unless mounted)",mast:"Topple",wt:"6 lb.",cost:"10 GP"},
+    {n:"Longsword",dmg:"1d8 Slashing",prop:"Versatile (1d10)",mast:"Sap",wt:"3 lb.",cost:"15 GP"},
+    {n:"Maul",dmg:"2d6 Bludgeoning",prop:"Heavy, Two-Handed",mast:"Topple",wt:"10 lb.",cost:"10 GP"},
+    {n:"Morningstar",dmg:"1d8 Piercing",prop:"—",mast:"Sap",wt:"4 lb.",cost:"15 GP"},
+    {n:"Pike",dmg:"1d10 Piercing",prop:"Heavy, Reach, Two-Handed",mast:"Push",wt:"18 lb.",cost:"5 GP"},
+    {n:"Rapier",dmg:"1d8 Piercing",prop:"Finesse",mast:"Vex",wt:"2 lb.",cost:"25 GP"},
+    {n:"Scimitar",dmg:"1d6 Slashing",prop:"Finesse, Light",mast:"Nick",wt:"3 lb.",cost:"25 GP"},
+    {n:"Shortsword",dmg:"1d6 Piercing",prop:"Finesse, Light",mast:"Vex",wt:"2 lb.",cost:"10 GP"},
+    {n:"Trident",dmg:"1d8 Piercing",prop:"Thrown (Range 20/60), Versatile (1d10)",mast:"Topple",wt:"4 lb.",cost:"5 GP"},
+    {n:"Warhammer",dmg:"1d8 Bludgeoning",prop:"Versatile (1d10)",mast:"Push",wt:"5 lb.",cost:"15 GP"},
+    {n:"War Pick",dmg:"1d8 Piercing",prop:"Versatile (1d10)",mast:"Sap",wt:"2 lb.",cost:"5 GP"},
+    {n:"Whip",dmg:"1d4 Slashing",prop:"Finesse, Reach",mast:"Slow",wt:"3 lb.",cost:"2 GP"}
+  ],
+  "Martial Ranged":[
+    {n:"Blowgun",dmg:"1 Piercing",prop:"Ammunition (Range 25/100; Needle), Loading",mast:"Vex",wt:"1 lb.",cost:"10 GP"},
+    {n:"Hand Crossbow",dmg:"1d6 Piercing",prop:"Ammunition (Range 30/120; Bolt), Light, Loading",mast:"Vex",wt:"3 lb.",cost:"75 GP"},
+    {n:"Heavy Crossbow",dmg:"1d10 Piercing",prop:"Ammunition (Range 100/400; Bolt), Heavy, Loading, Two-Handed",mast:"Push",wt:"18 lb.",cost:"50 GP"},
+    {n:"Longbow",dmg:"1d8 Piercing",prop:"Ammunition (Range 150/600; Arrow), Heavy, Two-Handed",mast:"Slow",wt:"2 lb.",cost:"50 GP"},
+    {n:"Musket",dmg:"1d12 Piercing",prop:"Ammunition (Range 40/120; Bullet), Loading, Two-Handed",mast:"Slow",wt:"10 lb.",cost:"500 GP"},
+    {n:"Pistol",dmg:"1d10 Piercing",prop:"Ammunition (Range 30/90; Bullet), Loading",mast:"Vex",wt:"3 lb.",cost:"250 GP"}
+  ]
+};
+const WEAPON_PROPERTIES=[
+  ["Ammunition","You can fire only if you have ammunition. Each attack expends one piece; drawing it is part of the attack (need a free hand to load a one-handed weapon). After a fight, spend 1 minute to recover half the ammunition (round down) you used; the rest is lost."],
+  ["Finesse","Use your choice of Strength or Dexterity for the attack and damage rolls. Use the same modifier for both."],
+  ["Heavy","Disadvantage on attacks if it's a Melee weapon and your Strength is under 13, or a Ranged weapon and your Dexterity is under 13."],
+  ["Light","When you take the Attack action and attack with a Light weapon, you can make one extra attack as a Bonus Action with a different Light weapon. No ability modifier to that extra attack's damage unless negative."],
+  ["Loading","You can fire only one piece of ammunition when you use an action, Bonus Action, or Reaction to fire it, regardless of attacks you could normally make."],
+  ["Range","Two numbers: normal range and long range in feet. Beyond normal range you have Disadvantage; you can't attack beyond long range."],
+  ["Reach","Adds 5 feet to your reach when you attack with it, and for Opportunity Attacks with it."],
+  ["Thrown","You can throw the weapon to make a ranged attack and draw it as part of the attack. Melee weapons use the same modifier you'd use for a melee attack."],
+  ["Two-Handed","Requires two hands when you attack with it."],
+  ["Versatile","Can be used one- or two-handed. The value in parentheses is the damage when used two-handed for a melee attack."],
+  ["Special","The weapon has special rules described in its own entry (e.g., the Double-Bladed Scimitar)."]
+];
+const WEAPON_MASTERY=[
+  ["Cleave","Hit a creature with a melee attack, then make a melee attack against a second creature within 5 feet of the first and within reach. On a hit it takes the weapon's damage (no ability modifier unless negative). Once per turn."],
+  ["Graze","If your attack roll misses, deal damage equal to the ability modifier used for the attack (same damage type). Increased only by increasing that modifier."],
+  ["Nick","When you make the extra attack of the Light property, you can make it as part of the Attack action instead of a Bonus Action. Once per turn."],
+  ["Push","On a hit you can push the creature up to 10 feet straight away from you if it is Large or smaller."],
+  ["Sap","On a hit the creature has Disadvantage on its next attack roll before the start of your next turn."],
+  ["Slow","On a hit that deals damage, reduce the target's Speed by 10 feet until the start of your next turn. Doesn't stack beyond 10 feet."],
+  ["Topple","On a hit, force a Constitution save (DC 8 + the attack's ability modifier + your Proficiency Bonus). On a failure it has the Prone condition."],
+  ["Vex","On a hit that deals damage, you have Advantage on your next attack roll against that creature before the end of your next turn."]
+];
+const AMMUNITION_DATA=[
+  ["Arrows","20","Quiver","1 lb.","1 GP"],
+  ["Bolts","20","Case","1 1/2 lb.","1 GP"],
+  ["Bullets, Firearm","10","Pouch","2 lb.","3 GP"],
+  ["Bullets, Sling","20","Pouch","1 1/2 lb.","4 CP"],
+  ["Needles","50","Pouch","1 lb.","1 GP"]
+];
+
+function WeaponReferenceModal({onClose}){
+  const {useState:us}=React;
+  const [q,setQ]=us("");
+  const [tab,setTab]=us("weapons"); // weapons | properties | mastery | ammo
+  var ql=q.trim().toLowerCase();
+  function thStyle(){return {fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(201,74,42,.65)",textAlign:"left",padding:"4px 8px",borderBottom:"1px solid rgba(201,74,42,.2)",whiteSpace:"nowrap"};}
+  function tdStyle(){return {fontFamily:"'EB Garamond',serif",fontSize:12.5,color:"rgba(232,213,176,.85)",padding:"4px 8px",borderBottom:"1px solid rgba(201,74,42,.06)",verticalAlign:"top"};}
+  var tabBtn=function(k,lbl){return <span onClick={function(){setTab(k);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",padding:"4px 10px",borderRadius:2,userSelect:"none",border:"1px solid "+(tab===k?"rgba(201,74,42,.6)":"rgba(201,74,42,.2)"),color:tab===k?"#e07060":"rgba(232,213,176,.45)",background:tab===k?"rgba(201,74,42,.12)":"transparent"}}>{lbl}</span>;};
+  return (
+    <div onClick={onClose} style={{position:"fixed",inset:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,74,42,.4)",borderRadius:4,maxWidth:720,width:"100%",maxHeight:"86vh",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+        <div style={{padding:"18px 22px 10px",borderBottom:"1px solid rgba(201,74,42,.15)"}}>
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <span style={{fontFamily:"'Cinzel',serif",fontSize:14,letterSpacing:1,color:"#e07060",flex:1}}>Weapons Reference</span>
+            <div onClick={onClose} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:16,color:"rgba(232,213,176,.5)",lineHeight:1,padding:"0 4px"}}>×</div>
+          </div>
+          <div style={{display:"flex",gap:6,marginTop:10,flexWrap:"wrap"}}>{tabBtn("weapons","Weapons")}{tabBtn("properties","Properties")}{tabBtn("mastery","Mastery")}{tabBtn("ammo","Ammunition")}</div>
+          {tab==="weapons"&&<input value={q} onChange={function(e){setQ(e.target.value);}} placeholder="Filter weapons..." style={{marginTop:10,width:"100%",background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,74,42,.2)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"6px 8px",borderRadius:2}} />}
+        </div>
+        <div style={{overflowY:"auto",padding:"6px 0 14px"}}>
+          {tab==="weapons"&&Object.keys(WEAPON_DATA).map(function(cat){
+            var rows=WEAPON_DATA[cat].filter(function(w){return !ql||w.n.toLowerCase().indexOf(ql)>=0;});
+            if(rows.length===0) return null;
+            return (
+              <div key={cat} style={{marginBottom:6}}>
+                <div style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",color:"#e07060",padding:"8px 22px 4px"}}>{cat} Weapons</div>
+                <div style={{padding:"0 14px"}}>
+                  <table style={{width:"100%",borderCollapse:"collapse"}}>
+                    <thead><tr><th style={thStyle()}>Name</th><th style={thStyle()}>Damage</th><th style={thStyle()}>Properties</th><th style={thStyle()}>Mastery</th><th style={thStyle()}>Weight</th><th style={thStyle()}>Cost</th></tr></thead>
+                    <tbody>{rows.map(function(w){return <tr key={w.n}><td style={Object.assign({},tdStyle(),{fontWeight:600,color:"var(--gold-l)",whiteSpace:"nowrap"})}>{w.n}</td><td style={tdStyle()}>{w.dmg}</td><td style={tdStyle()}>{w.prop}</td><td style={Object.assign({},tdStyle(),{color:"#e07060"})}>{w.mast}</td><td style={Object.assign({},tdStyle(),{whiteSpace:"nowrap"})}>{w.wt}</td><td style={Object.assign({},tdStyle(),{whiteSpace:"nowrap"})}>{w.cost}</td></tr>;})}</tbody>
+                  </table>
+                </div>
+              </div>
+            );
+          })}
+          {tab==="weapons"&&(function(){
+            var notes=[];
+            Object.keys(WEAPON_DATA).forEach(function(cat){WEAPON_DATA[cat].forEach(function(w){if(w.special&&(!ql||w.n.toLowerCase().indexOf(ql)>=0)) notes.push(w.special);});});
+            if(notes.length===0) return null;
+            return <div style={{padding:"8px 22px 0"}}>{notes.map(function(nt,i){return <div key={i} style={{fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,.6)",lineHeight:1.55,marginTop:i>0?6:0}}>{nt}</div>;})}</div>;
+          })()}
+          {tab==="properties"&&<div style={{padding:"4px 22px"}}>{WEAPON_PROPERTIES.map(function(p){return <div key={p[0]} style={{marginBottom:10}}><span style={{fontFamily:"'EB Garamond',serif",fontSize:14,fontWeight:600,color:"var(--gold-l)"}}>{p[0]}. </span><span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.8)",lineHeight:1.6}}>{p[1]}</span></div>;})}</div>}
+          {tab==="mastery"&&<div style={{padding:"4px 22px"}}>{WEAPON_MASTERY.map(function(p){return <div key={p[0]} style={{marginBottom:10}}><span style={{fontFamily:"'EB Garamond',serif",fontSize:14,fontWeight:600,color:"#e07060"}}>{p[0]}. </span><span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.8)",lineHeight:1.6}}>{p[1]}</span></div>;})}</div>}
+          {tab==="ammo"&&<div style={{padding:"4px 14px"}}><table style={{width:"100%",borderCollapse:"collapse"}}><thead><tr><th style={thStyle()}>Type</th><th style={thStyle()}>Amount</th><th style={thStyle()}>Storage</th><th style={thStyle()}>Weight</th><th style={thStyle()}>Cost</th></tr></thead><tbody>{AMMUNITION_DATA.map(function(a){return <tr key={a[0]}><td style={Object.assign({},tdStyle(),{fontWeight:600,color:"var(--gold-l)"})}>{a[0]}</td><td style={tdStyle()}>{a[1]}</td><td style={tdStyle()}>{a[2]}</td><td style={tdStyle()}>{a[3]}</td><td style={tdStyle()}>{a[4]}</td></tr>;})}</tbody></table></div>}
+        </div>
+      </div>
+    </div>
+  );
+}
+// ──────────────────────────────────────────────────────────────────────────────
+
+// ─── Condition reference (PHB 2024 conditions) ─────────────────────────────────
+const CONDITION_DATA=[
+  {n:"Blinded",p:"p361",e:[["Can't See","You can't see and automatically fail any ability check that requires sight."],["Attacks Affected","Attack rolls against you have Advantage, and your attack rolls have Disadvantage."]]},
+  {n:"Charmed",p:"p361",e:[["Can't Harm the Charmer","You can't attack the charmer or target the charmer with damaging abilities or magical effects."],["Social Advantage","The charmer has Advantage on any ability check to interact with you socially."]]},
+  {n:"Deafened",p:"p365",e:[["Can't Hear","You can't hear and automatically fail any ability check that requires hearing."]]},
+  {n:"Exhaustion",p:"p365",e:[["Exhaustion Levels","This condition is cumulative. Each time you receive it, you gain 1 Exhaustion level. You die if your Exhaustion level is 6."],["D20 Tests Affected","When you make a D20 Test the roll is reduced by 2 times your Exhaustion level."],["Speed Reduced","Your Speed is reduced by a number of feet equal to 5 times your Exhaustion level."],["Removing Exhaustion Levels","Finishing a Long Rest removes 1 of your Exhaustion levels. When your Exhaustion level reaches 0, the condition ends."]]},
+  {n:"Frightened",p:"p367",e:[["Ability Checks and Attacks Affected","You have Disadvantage on ability checks and attack rolls while the source of fear is within line of sight."],["Can't Approach","You can't willingly move closer to the source of fear."]]},
+  {n:"Grappled",p:"p367",e:[["Speed 0","Your Speed is 0 and can't increase."],["Attacks Affected","You have Disadvantage on attack rolls against any target other than the grappler."],["Movable","The grappler can drag or carry you when it moves, but every foot of movement costs it 1 extra foot unless you are Tiny or two or more sizes smaller than it."]]},
+  {n:"Incapacitated",p:"p369",e:[["Inactive","You can't take any action, Bonus Action, or Reaction."],["No Concentration","Your Concentration is broken."],["Speechless","You can't speak."],["Surprised","If you're Incapacitated when you roll Initiative, you have Disadvantage on the roll."]]},
+  {n:"Invisible",p:"p370",e:[["Surprise","If you're Invisible when you roll Initiative, you have Advantage on the roll."],["Concealed","You aren't affected by any effect that requires its target to be seen unless the effect's creator can somehow see you. Any equipment you are wearing or carrying is also concealed."],["Attacks Affected","Attack rolls against you have Disadvantage, and your attack rolls have Advantage. If a creature can somehow see you, you don't gain this benefit against that creature."]]},
+  {n:"Paralyzed",p:"p371",e:[["Incapacitated","You have the Incapacitated condition."],["Speed 0","Your Speed is 0 and can't increase."],["Saving Throws Affected","You automatically fail Strength and Dexterity saving throws."],["Attacks Affected","Attack rolls against you have Advantage."],["Automatic Critical Hits","Any attack roll that hits you is a Critical Hit if the attacker is within 5 feet of you."]]},
+  {n:"Petrified",p:"p372",e:[["Turned to Inanimate Substance","You are transformed, along with any nonmagical objects you are wearing and carrying, into a solid inanimate substance (usually stone). Your weight increases by a factor of ten, and you cease aging."],["Incapacitated","You have the Incapacitated condition."],["Speed 0","Your Speed is 0 and can't increase."],["Attacks Affected","Attack rolls against you have Advantage."],["Saving Throws Affected","You automatically fail Strength and Dexterity saving throws."],["Resist Damage","You have Resistance to all damage."],["Poison Immunity","You have Immunity to the Poisoned condition."]]},
+  {n:"Poisoned",p:"p372",e:[["Ability Checks and Attacks Affected","You have Disadvantage on attack rolls and ability checks."]]},
+  {n:"Prone",p:"p372",e:[["Restricted Movement","Your only movement options are to crawl or to spend an amount of movement equal to half your Speed (round down) to right yourself and thereby end the condition. If your Speed is 0, you can't right yourself."],["Attacks Affected","You have Disadvantage on attack rolls. An attack roll against you has Advantage if the attacker is within 5 feet of you. Otherwise, that attack roll has Disadvantage."]]},
+  {n:"Restrained",p:"p373",e:[["Speed 0","Your Speed is 0 and can't increase."],["Attacks Affected","Attack rolls against you have Advantage, and your attack rolls have Disadvantage."],["Saving Throws Affected","You have Disadvantage on Dexterity saving throws."]]},
+  {n:"Stunned",p:"p376",e:[["Incapacitated","You have the Incapacitated condition."],["Saving Throws Affected","You automatically fail Strength and Dexterity saving throws."],["Attacks Affected","Attack rolls against you have Advantage."]]},
+  {n:"Unconscious",p:"p376",e:[["Inert","You have the Incapacitated and Prone conditions, and you drop whatever you're holding. When this condition ends, you remain Prone."],["Speed 0","Your Speed is 0 and can't increase."],["Attacks Affected","Attack rolls against you have Advantage."],["Saving Throws Affected","You automatically fail Strength and Dexterity saving throws."],["Automatic Critical Hits","Any attack roll that hits you is a Critical Hit if the attacker is within 5 feet of you."],["Unaware","You're unaware of your surroundings."]]}
+];
+
+function ConditionReferenceModal({onClose}){
+  const {useState:us}=React;
+  const [open,setOpen]=us({});
+  const [q,setQ]=us("");
+  function toggle(n){setOpen(function(e){var x=Object.assign({},e);x[n]=!x[n];return x;});}
+  var list=CONDITION_DATA.filter(function(t){return !q.trim()||t.n.toLowerCase().indexOf(q.toLowerCase())>=0;});
+  return (
+    <div onClick={onClose} style={{position:"fixed",inset:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(56,178,172,.4)",borderRadius:4,maxWidth:560,width:"100%",maxHeight:"82vh",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+        <div style={{padding:"18px 22px 10px",borderBottom:"1px solid rgba(56,178,172,.15)"}}>
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <span style={{fontFamily:"'Cinzel',serif",fontSize:14,letterSpacing:1,color:"rgba(56,178,172,.9)",flex:1}}>Conditions (PHB 2024)</span>
+            <div onClick={onClose} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:16,color:"rgba(232,213,176,.5)",lineHeight:1,padding:"0 4px"}}>×</div>
+          </div>
+          <input value={q} onChange={function(e){setQ(e.target.value);}} placeholder="Filter conditions..." style={{marginTop:10,width:"100%",background:"rgba(0,0,0,.3)",border:"1px solid rgba(56,178,172,.2)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"6px 8px",borderRadius:2}} />
+        </div>
+        <div style={{overflowY:"auto",padding:"4px 0"}}>
+          {list.map(function(t){
+            var isO=open[t.n];
+            return (
+              <div key={t.n} style={{borderBottom:"1px solid rgba(56,178,172,.07)"}}>
+                <div onClick={function(){toggle(t.n);}} style={{display:"flex",alignItems:"center",gap:10,padding:"9px 22px",cursor:"pointer"}}>
+                  <span style={{fontFamily:"'Cinzel',serif",fontSize:11,color:"rgba(56,178,172,.4)",width:12,flexShrink:0}}>{isO?"−":"+"}</span>
+                  <span style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgba(56,178,172,.9)",fontWeight:600,flex:1}}>{t.n}</span>
+                  <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:"rgba(232,213,176,.25)"}}>{t.p}</span>
+                </div>
+                {isO&&<div style={{padding:"2px 22px 14px 44px"}}>
+                  {t.e.map(function(eff,ei){
+                    return <div key={ei} style={{marginBottom:7}}>
+                      <span style={{fontFamily:"'EB Garamond',serif",fontSize:13.5,fontWeight:600,color:"var(--gold-l)"}}>{eff[0]}. </span>
+                      <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.8)",lineHeight:1.6}}>{eff[1]}</span>
+                    </div>;
+                  })}
+                </div>}
+              </div>
+            );
+          })}
+          {list.length===0&&<div style={{padding:"18px 22px",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.3)"}}>No matching condition.</div>}
         </div>
       </div>
     </div>
@@ -7521,7 +7781,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.30</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.36</div>
 
 </script>
 </body>
