@@ -8858,3 +8858,608 @@ Assume Appearance. The creature must be no more than one size larger or smaller 
 Physical interaction with this illusory form reveals it to be an illusion, because things can pass through it. The illusion lasts for 8 hours. It ends early if you dismiss it as a Bonus Action or if you have the Unconscious condition or die.
 
 Assume Feature. If you assume one of the creature's features, your body or mind temporarily changes to accommodate the new ability. You can choose to gain one skill or saving throw proficiency, Damage Resistance, Condition Immunity, special sense, or language known that the creature had. If the creature could breathe underwater, you can choose to gain that feature instead. You retain this feature for 8 hours. You lose it early if you dismiss it as a Bonus Action or if you have the Unconscious condition or die.
+
+#### Bandolier of the Elements
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 1.5
+**Cost:**
+This cross-chest bandolier has 6 magic daggers sheathed across it. When you take the Attack action while wearing this bandolier, you can use a bonus action to throw 1 of the daggers, making a ranged attack with it, provided you have a free hand. When you hit a target with one of these daggers, roll a d6 and consult the table below. The target takes an extra 1d6 damage of the type determined by the table, in addition to the weapon's damage, and the dagger disappears. On a miss, the dagger vanishes and reappears in the bandolier.
+
+A dagger vanishes if you don't hurl it right away and immediately reappears in the bandolier. 1d6 missing daggers reappear in the bandolier's empty sheaths daily at dawn.
+
+d6	Damage Type
+1	Acid
+2	Cold
+3	Fire
+4	Lightning
+5	Poison
+6	Thunder
+
+#### Bands of the Found and Lost
+**Type:** Wondrous Item
+**Rarity:** Common
+**Attunement:** no
+**Weight:** 0.2
+**Cost:**
+The compass-like mechanisms on top of this pair of matching leather bracelets remain motionless until each bracelet is worn by a different creature. While they're worn, each compass points in the direction of the other bracelet. It doesn't indicate height or depth. The compasses spin wildly if the two bands are worn on different planes of existence.
+
+#### Bane Shield
+**Type:** Armor
+**Rarity:** Uncommon
+**Attunement:** yes
+**Weight:** 6
+**Cost:**
+AC +2
+
+This classic iron shield is emblazoned with the skulllike face of a demon. The shield has 3 charges and regains 1d3 expended charges daily at dawn. When you take damage from a creature within 5 feet of you while holding this shield, you can use your reaction to expend 1 of its charges to curse that creature. The next time that creature makes an ability check or attack roll before the end of its next turn, it must roll a d4 and subtract the number rolled from the total.
+
+#### Bane Weapon
+**Type:** Generic Variant
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:**
+**Cost:**
+This magic weapon grants a +1 bonus to attack and damage rolls made with it. Whenever you finish a Long Rest, choose one of the following creature types: Aberration, Beast, Celestial, Dragon, Fiend, Giant, or Undead.
+
+The weapon has 4 charges. If you hit a creature of the chosen type with the weapon, you can expend 1 charge and inflict an additional 2d6 damage of the weapon's type with the attack. The weapon regains 1d4 expended charges daily at dawn.
+
+#### Bangle of Sun and Moon
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** yes
+**Weight:** 0.1
+**Cost:**
+This bangle features a personified sun and moon, transitioning from gold to silver midway through the band. Three small diamonds mark their eyes. While wearing the bangle, you always know how long it is until sunrise, sunset, midday, and midnight.
+
+The bangle has 3 charges and regains 1d3 expended charges daily at dawn. While wearing it, you can expend 2 of the bangle's charges to cast the daylight spell from it. Alternatively, you can expend 1 or more of the bangle's charges to cast the moonbeam spell from it (save DC 13). For 1 charge, you cast the 2nd-level version of the spell. You can increase the spell slot level by one for each additional charge you expend. When you expend 2 or more charges to cast moonbeam in this way, you can choose whether the spell's damage type is cold, fire, or radiant.
+
+If you have 11 or more levels in the druid class and are wearing this bangle, you can expend 3 charges from the bangle to cast the sunbeam spell from it (save DC 13). When you do, there is a permanent and cumulative 25 percent chance that the bangle is destroyed when the spell ends.
+
+#### Bangle of the Arcane Assassin
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** by a Spellcaster
+**Weight:** 0.1
+**Cost:**
+Once per turn while wearing this bangle, you can deal an extra 3d6 damage to one creature you hit with a spell attack if you have advantage on the attack roll. The damage is of a type dealt by the spell attack. If you're a rogue, you can choose for the amount of extra damage you deal to be equal to your Sneak Attack damage instead; you can still only deal Sneak Attack damage once per turn. If a spell would allow you to attack multiple times over the course of its duration, this extra damage can only be dealt on the turn the spell is cast.
+
+In addition, you can ignore the verbal component required for any enchantment or illusion spell you cast while you're in total darkness and wearing the bangle.
+
+#### Bangle of the Starlight Raven
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 0.1
+**Cost:**
+This silver bangle feels almost cool or wet to the touch. Pressing its tail feathers inward causes its wings to unfurl, allowing you to place the bangle on your wrist or remove it. While wearing the bangle, gravity pulls more loosely against you: your weight is halved, and your normal jumping distance is doubled. While wearing it between dusk and dawn, you're also under the effects of the feather fall spell.
+
+The bangle has 7 charges for the following properties. It regains 1d6 + 1 expended charges daily at dusk. The illusory ravens produced by these properties appear like moving constellations of starlight. Using a property requires an action.
+
+Starlight Messenger. You can expend 3 of the bangle's charges to cast the sending spell, or 2 charges between dusk and dawn. When you do, an illusory raven instantly appears before the recipient to deliver your message to it. The recipient's reply is then delivered to you the same way, at which point the raven vanishes.
+
+Stars' Guidance. You can expend 2 of the bangle's charges to cast the locate object spell, or 1 charge between dusk and dawn. When you do, an illusory raven appears on your shoulder to direct you toward the object for the duration, provided it's within range.
+
+Starstruck Swarm. You can expend 1 or more of the bangle's charges to cast the magic missile spell from it. For 1 charge, you cast the 1st-level version of the spell, or the 2nd-level version of the spell between dusk and dawn. You can increase the spell slot level by one for each additional charge you expend. The missiles appear as the illusory ravens hurtling toward each target.
+
+#### Bangles of the Wind's Blessing
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 0.2
+**Cost:**
+While wearing these bangles on either your wrists or ankles, you're always under the effects of the feather fall spell. In addition, you can use a bonus action to tap the bangles together to gain a flying speed of 30 feet. The effect lasts for up to 1 hour, all at once or in several shorter flights, each one using a minimum of 1 minute from the duration. You can end the effect early using a bonus action. The bangles regain any expended flight time daily at dawn.
+
+The bangles' other benefits depend on where they're worn. You can use an action to doff or don the bangles.
+
+Ankles. While wearing both the bangles on your ankles, wind graces your every step. Your walking speed increases by 10 feet, the maximum distance you can jump is doubled, and you can hover up to 2 feet above solid ground. If you have a flying speed, your flying speed also increases by 10 feet.
+
+Wrists. While wearing both the bangles on your wrists, a gentle wind swirls around you. The range of your unarmed strikes increases by 5 feet (pummeling a target with forceful winds), and once on each of your turns when you hit a Large or smaller target with a melee weapon attack or unarmed strike, you can push that creature up to 15 feet away from you. In addition, the normal range of your thrown weapon attacks increases by 15 feet.
+
+Both. While wearing one bangle on your wrist and the other on your ankle of the same side, you can summon a barrier of buffeting wind at a moment's notice. When you or a creature within 5 feet of you are hit by a weapon attack, you can use your reaction to impose a -5 penalty to the triggering attack roll, potentially causing the attack to miss. You must be able to see the attacker.
+
+#### Banishing Arrow
+**Type:** Ammunition
+**Rarity:** Very Rare
+**Attunement:** no
+**Weight:** 0.05
+**Cost:**
+The body of this arrow is twisted in a warping spiral. Small gateways are imprinted on the arrow's head. When you hit a creature with this arrow, that creature must succeed on a DC 17 Charisma saving throw or be affected by the banishment spell (no concentration required); the creature can repeat the saving throw at the end of each of its turns for the duration, ending the effect on itself on a success.
+
+Alternatively, you can use an action to snap the arrow, releasing the magic inside and targeting yourself with the spell instead. You automatically fail the saving throw, but can end the effect at the end of any of your turns (no action required).
+
+The arrow loses its magic once it banishes a creature in this way.
+
+Other types of magic ammunition of this kind exist, such as banishing bolts meant for a crossbow, though arrows are most common.
+
+#### Banjo of Ol' Jericho Sticks (Rare)
+**Type:** Wondrous Item, Spellcasting Focus
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 3
+**Cost:**
+An old, weathered banjo inscribed with runes, this instrument once belonged to Ol' Jericho Sticks, a scarecrow bard created by a hag coven.
+
+While holding the banjo, you can use it as a Spellcasting Focus for your spells; you gain a +1 bonus determined by its rarity to spell attack rolls, your spell save DC, and Charisma (Performance) checks; and you can use the following properties.
+
+Fiendish Lure (Rare+). As a Magic action, choose one Fiend or Humanoid that you can see within 60 feet. The target must succeed on a Wisdom saving throw (DC = 16 + the banjo's bonus) or have the Charmed condition (ignoring a demon's Immunity) for 1 minute. The Charmed condition ends if you or your allies deal damage to the target or force it to make a saving throw. Once a creature is Charmed in this way, this property can't be used again until the next dusk.
+
+Scarecrow's Dance (Rare+). You can take a Bonus Action to strum the banjo and dance wildly to take the Disengage action. The music is audible within 120 feet.
+
+Fabled Heirloom. Each Fabled Heirloom is a magic item that grows in strength as its attuned owner gains power. The rarity of each heirloom increases as the character grows in level, as shown on the Heirloom Rarity table. An heirloom's description details the properties it always has, as well as the properties it gains as it increases in rarity. The heirloom has all the properties of its rarity and lower.
+
+#### Banjo of Ol' Jericho Sticks (Very Rare)
+**Type:** Wondrous Item, Spellcasting Focus
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 3
+**Cost:**
+An old, weathered banjo inscribed with runes, this instrument once belonged to Ol' Jericho Sticks, a scarecrow bard created by a hag coven.
+
+While holding the banjo, you can use it as a Spellcasting Focus for your spells; you gain a +2 bonus determined by its rarity to spell attack rolls, your spell save DC, and Charisma (Performance) checks; and you can use the following properties.
+
+Fiendish Lure (Rare+). As a Magic action, choose one Fiend or Humanoid that you can see within 60 feet. The target must succeed on a Wisdom saving throw (DC = 16 + the banjo's bonus) or have the Charmed condition (ignoring a demon's Immunity) for 1 minute. The Charmed condition ends if you or your allies deal damage to the target or force it to make a saving throw. Once a creature is Charmed in this way, this property can't be used again until the next dusk.
+
+Scarecrow's Dance (Rare+). You can take a Bonus Action to strum the banjo and dance wildly to take the Disengage action. The music is audible within 120 feet.
+
+Join in the Dance (Very Rare+). When you use Scarecrow's Dance, one creature of your choice that you can see within 15 feet of you can take a Reaction to move up to half its Speed without provoking Opportunity Attacks.
+
+Fabled Heirloom. Each Fabled Heirloom is a magic item that grows in strength as its attuned owner gains power. The rarity of each heirloom increases as the character grows in level, as shown on the Heirloom Rarity table. An heirloom's description details the properties it always has, as well as the properties it gains as it increases in rarity. The heirloom has all the properties of its rarity and lower.
+
+#### Banjo of Ol' Jericho Sticks (Legendary)
+**Type:** Wondrous Item, Spellcasting Focus
+**Rarity:** Legendary
+**Attunement:** yes
+**Weight:** 3
+**Cost:**
+An old, weathered banjo inscribed with runes, this instrument once belonged to Ol' Jericho Sticks, a scarecrow bard created by a hag coven.
+
+While holding the banjo, you can use it as a Spellcasting Focus for your spells; you gain a +3 bonus determined by its rarity to spell attack rolls, your spell save DC, and Charisma (Performance) checks; and you can use the following properties.
+
+Fiendish Lure (Rare+). As a Magic action, choose one Fiend or Humanoid that you can see within 60 feet. The target must succeed on a Wisdom saving throw (DC = 16 + the banjo's bonus) or have the Charmed condition (ignoring a demon's Immunity) for 1 minute. The Charmed condition ends if you or your allies deal damage to the target or force it to make a saving throw. Once a creature is Charmed in this way, this property can't be used again until the next dusk.
+
+Scarecrow's Dance (Rare+). You can take a Bonus Action to strum the banjo and dance wildly to take the Disengage action. The music is audible within 120 feet.
+
+Join in the Dance (Very Rare+). When you use Scarecrow's Dance, one creature of your choice that you can see within 15 feet of you can take a Reaction to move up to half its Speed without provoking Opportunity Attacks.
+
+Birdcage (Legendary). As a Magic action, you can force a creature you have Charmed to make a DC 19 Charisma saving throw. On a failed save, the creature disappears, drawn into the banjo. The banjo can contain one creature at a time in this way for up to 24 hours. On a success, the Charmed condition ends on the creature.
+
+Fabled Heirloom. Each Fabled Heirloom is a magic item that grows in strength as its attuned owner gains power. The rarity of each heirloom increases as the character grows in level, as shown on the Heirloom Rarity table. An heirloom's description details the properties it always has, as well as the properties it gains as it increases in rarity. The heirloom has all the properties of its rarity and lower.
+
+#### Banner of the Krig Rune
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 15
+**Cost:**
+Crafted from a thick, red fabric, this banner measures 5 feet high and 3 feet wide. The krig (war) rune is displayed on the fabric with round, metal plates sewn into it. It can be attached to a 10-foot pole to serve as a standard. Furling or unfurling the banner requires an action. The banner has the following properties.
+
+Mark of Courage. As a bonus action, you can touch the unfurled banner and cause it to emanate courage. You and your allies are immune to the frightened condition while within 20 feet of it. This benefit lasts for 10 minutes or until the banner is furled. Once you use this property, you can't use it again until you finish a short or long rest.
+
+Sentinel Standard. You can see invisible creatures while they are within 20 feet of the unfurled banner and within your line of sight.
+
+Standard's Shield. As a bonus action, you can touch the unfurled banner and invoke this power. Any ranged attack roll that targets you or an ally of yours has disadvantage if the target is within 20 feet of the unfurled banner. This benefit lasts for 1 minute or until the banner is furled. Once you use this property, you can't use it again until you finish a short or long rest.
+
+Gift of Battle. You can transfer the banner's magic to a place by tracing the krig rune on the ground with your finger. The point where you trace it becomes the center of a spherical area of magic that has a 500-foot radius and that is fixed to the place. The transfer takes 8 hours of work that requires the banner to be within 5 feet of you and during which you choose creatures, creature types, or both that will benefit from the magic. At the end, the banner is destroyed, and the area gains the following property:
+
+While in the 500-foot-radius sphere, the creatures you chose during the transfer process are immune to the frightened condition and gain a +1 bonus to attack rolls and AC.
+
+#### Banshee Box
+**Type:** Wondrous Item
+**Rarity:** Common
+**Attunement:** no
+**Weight:** 1
+**Cost:**
+This ivory music box is inlaid with silver decorations depicting tiny scenes of gruesome violence. If a creature holds the box for at least one minute, they can use a Magic action to mentally command the box to make a sound or phrase of their choosing, lasting up to one minute. Once the lid is open, that sound or phrase continues to play on a loop until the box is closed. If the person who created the repeating sound travels more than 300 feet away from the box, the lid closes and the music box ceases to play.
+
+The box can create any soundscape, like haunting piano music, the sounds of a lively party, a spoken phrase, or a continuous series of screams. When the Magic action is used to create the sounds, the user can also choose whether the sound is audible in an Emanation with a 5-foot radius, a 30-foot radius, or a 120-foot radius.
+
+#### Barbed Bowstring
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** 0.1
+**Cost:**
+You can use an action to string a nonmagical bow with this item to transform the bow into a magical one. When you hit a creature with a ranged attack using the bow, that creature suffers from a magical barb. A creature with a barb that willingly moves before the start of your next turn takes 3d4 piercing damage as the barb cuts into it; until the end of the turn, the creature's speed is reduced by a cumulative 5 feet for each 4 you roll on the dice.
+
+A creature can only be affected by one barb at a time. A barb created in this way disappears at the start of each of your turns or when it deals damage to a creature that moves. Removing the bowstring from the bow makes the bow nonmagical once more.
+
+#### Bard-in-a-Box
+**Type:** Wondrous Item
+**Rarity:** Common
+**Attunement:** no
+**Weight:** 1
+**Cost:**
+This small music box can play songs upon request. While holding it, you can take a Bonus Action to command the box to magically play a song for which it has music, causing the contraption to emit a slightly tinny rendition of the musical number. The box can know the music for up to five songs at a time but can't recreate lyrics or other creature sounds. The box has a knob on its side to adjust its volume, allowing it to be as quiet as a whisper or as loud as a scream.
+
+Sheet music can be fed into the box through a narrow slot along the bottom of the device. Sheets must be labeled with a song title, page number, and instrument in order for the box to learn the music. Sheets failing to meet these requirements cause the box to make a sad, discordant noise before being spat back out. Once a sheet is successfully fed into the box, it is consumed and can't be retrieved.
+
+If the box already knows five songs and a new sheet of music is successfully fed into it, it quickly plays several bars of the oldest song it knows before it slows to a stop and forgets the music.
+
+#### Bardic Boombox
+**Type:** Wondrous Item, Spellcasting Focus
+**Rarity:** Very Rare
+**Attunement:** by a Bard
+**Weight:** 5
+**Cost:**
+This gilded box is roughly two feet long, one foot tall, and 6 inches deep. It weighs 5 pounds. While holding the box, you can use it as a spellcasting focus for your bard spells. When you cast a bard spell with a verbal component while holding the box, you gain a +2 bonus to that spell's attack roll or save DC, but the spell's verbal component can be heard out to a range twice as far as normal. If the spell deals thunder damage, you can reroll any 1s or 2s on the damage dice. When you do, you must use the new roll. In addition, you can use the box to inspire a creature up to twice as far as normal with your Bardic Inspiration die, doubling its normal audible range as well.
+
+You can use the box as an amplifier while it's within 120 feet of you, causing your voice or any instrument you play to become up to five times as loud as normal at will (no action required). The amplified sound originates from the box. Alternatively, while the box is within 120 feet of you, you can use an action to speak through it in your own voice. You don't need to move your mouth in order to speak through the box in this way.
+
+#### Bardic Leathers
+**Type:** Armor
+**Rarity:** Very Rare
+**Attunement:** by a Bard
+**Weight:** 13
+**Cost:**
+AC 12 + Dex
+
+This armor has strands of spun mithral strung between its various studs, adding extra protection and allowing you to play it like a worn instrument. Even if you're not attuned to the armor, you gain a +2 bonus to AC while wearing it, and if you're proficient with lutes or lyres, you add your proficiency bonus to ability checks that involve playing the bardic leathers as an instrument.
+
+If you're attuned to the armor and have a free hand, you can use your reaction when you're hit by an attack to expend one use of your Bardic Inspiration, using your hand to pluck one of the armor's strings. When you do, you can roll the Bardic Inspiration die and add the result to your AC, potentially causing the triggering attack to miss.
+
+#### Barge Helm
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 3
+**Cost:**
+This flat, rugged helmet lets you run headlong into targets and bowl them over with abandon. If you move at least 20 feet in a straight line toward a target immediately before successfully shoving it, the target takes 1d6 Bludgeoning damage from being barreled into by the helmet.
+
+#### Barghest Collar
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** by a Worg
+**Weight:** 0.5
+**Cost:**
+As a Bonus Action when you bark the command word, you can transform from your worg form into a goblin form with your choice of physical characteristics, including age, sex, skin color, hair color, and voice. While transformed, your size is Small and you lose your Quadruped and Bite traits. Otherwise, your statistics don't change.
+
+You can maintain the transformation for up to 4 hours, all at once or in several shorter periods, each one using a minimum of 1 minute of the duration. The collar regains 2 hours of transformation time for every 12 hours it isn't in use.
+
+#### Barricade Shield
+**Type:** Armor
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 6
+**Cost:**
+AC +2
+
+While holding this sturdy iron Shield, you can take a Magic action to plant it on the ground and expand its height and width to stretch up to 15 feet in either direction, potentially becoming a defensive wall or similar platform. The edges of the Shield magically conform to fit the shape of an enclosed space within its expanded size, such as the walls of a tunnel or hallway. While holding the expanded Shield in place, your Speed becomes 0, and you have Disadvantage on Dexterity checks and Dexterity saving throws. Regardless of the Shield's size, its weight always remains the same.
+
+The expanded Shield is a nonmagical object that has AC 14 and HP 40. The Shield can remain expanded for up to 1 minute before it reverts back to its normal size. The expanded Shield reverts early (but is not destroyed) if it is reduced to 0 Hit Points or moved. If you're holding the expanded Shield, you can choose to revert it early as a Bonus Action.
+
+Once this property is used, it can't be used again until the next dawn.
+
+#### Barrier Tattoo (Large)
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 0
+**Cost:**
+Produced by a special needle, this magic tattoo depicts protective imagery and uses ink that resembles liquid metal.
+
+Tattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.
+
+If your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.
+
+Protection. While you aren't wearing armor, the tattoo grants you an Armor Class of 18. You can use a shield and still gain this benefit.
+
+#### Barrier Tattoo (Medium)
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 0
+**Cost:**
+Produced by a special needle, this magic tattoo depicts protective imagery and uses ink that resembles liquid metal.
+
+Tattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.
+
+If your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.
+
+Protection. While you aren't wearing armor, the tattoo grants you an Armor Class of 15 + your Dexterity modifier (maximum of +2). You can use a shield and still gain this benefit.
+
+#### Barrier Tattoo (Small)
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** yes
+**Weight:** 0
+**Cost:**
+Produced by a special needle, this magic tattoo depicts protective imagery and uses ink that resembles liquid metal.
+
+Tattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.
+
+If your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.
+
+Protection. While you aren't wearing armor, the tattoo grants you an Armor Class of 12 + your dexterity bonus. You can use a shield and still gain this benefit.
+
+#### Bartender's Armistice
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** 0.05
+**Cost:**
+A bartender's armistice is a magical coaster typically kept by wary tavernkeepers for cases of extreme danger. When found, a bartender's armistice comes in a set of 1d3 + 1 coasters. Each coaster is 4 inches across, and its weight is negligible.
+
+As an action, you can speak the coaster's command word and throw it at a point on the ground you can see within 30 feet of you. When you do, the coaster becomes fixed in place at the point and emits a magical field in a 30-foot-radius, 15-foot-high cylinder that's centered on it. Each creature within the area must make a DC 15 Charisma saving throw when the field appears or when it enters the area for the first time on a turn or starts its turn there. A creature can choose to fail this saving throw if it wishes. On a failed save, a creature is charmed by you while it remains within the field. A charmed creature is indifferent about creatures it can see that it's hostile toward. This indifference ends if the target is attacked or harmed by a spell, or if it witnesses any of its friends being harmed. If you or your companions harm a charmed creature or its friends, the charm ends. When the charm or field ends, the creature becomes hostile again, unless the GM rules otherwise.
+
+When a creature makes an attack or casts a harmful spell that either affects a target within the field or enters or leaves the field's area, that creature must first make a DC 15 Wisdom saving throw. On a failed save, the attack or spell fails and is expended, and the action is wasted.
+
+Each creature within the field has advantage on any Charisma (Persuasion) check it makes to deescalate a violent situation. In addition, if a creature in the area is unconscious when the field appears, it immediately stabilizes if it has 0 hit points.
+
+The coaster has AC 15 and 25 hit points. The field remains for 10 minutes or until the coaster drops to 0 hit points, at which point the coaster is destroyed and the field ends. If the field ends after the full duration, there is a 10 percent chance that the coaster remains magical and can be used again. Otherwise, the coaster becomes nonmagical.
+
+#### Basco's Handy Bangle
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** 0.1
+**Cost:**
+This shiny platinum bangle is inlaid with arcane runes that seem to be written by different hands. Labels can be read behind each of the adorning runes on the inside of the bangle. There are ten runes on the bangle, each corresponding to one of the following tools: Alchemist's Supplies, Calligrapher's Supplies, Carpenter's Tools, Cook's Utensils, Leatherworker's Tools, Smith's Tools, Tinker's Tools, Musical Instruments (drum, flute, lute, and lyre), Navigator's Tools, and Thieves' Tools.
+
+As a Magic action, you can touch one of the runes and use the command words, "I can do this," to gain proficiency with the rune's associated tool for the next 24 hours; if you're already proficient with the associated tool, you instead gain Expertise with it for the duration. The rune glows with arcane energy while in effect. Once a rune is activated in this way, it can't be activated again until 1d4 days have passed.
+
+#### Basilisk Crystal
+**Type:** Wondrous Item, Spellcasting Focus
+**Rarity:** Common
+**Attunement:** no
+**Weight:** 0.5
+**Cost:**
+Such crystals are grown on the backs of basilisks before they are shed, and possess incredible hardness. A basilisk crystal cannot be effectively cut or damaged except by tools or weapons made of adamantine.
+
+A basilisk crystal otherwise serves as an excellent arcane spell focus.
+
+An Arcane Focus takes a specific form and is bejeweled or carved to channel arcane magic. A Sorcerer, Warlock, or Wizard can use such an item as a Spellcasting Focus.
+
+#### Basilisk Dagger
+**Type:** Weapon
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** 1
+**Cost:**
+Damage: 1d4 Piercing
+
+Simple Weapon, Melee Weapon
+
+Finesse, Light, Thrown (20/60 ft.)
+
+Mastery: Nick
+
+This magic Dagger was made from pieces of a slain basilisk and still retains some of its properties. The Dagger deals an extra 1d4 Poison damage on a hit.
+
+In addition, when you roll a 20 on the d20 for an attack roll with this weapon against a Large or smaller creature, the target must succeed on a DC 15 Constitution saving throw or have the Restrained condition until the end of your next turn.
+
+Finesse. When making an attack with a Finesse weapon, use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.
+
+Light. When you take the Attack action on your turn and attack with a Light weapon, you can make one extra attack as a Bonus Action later on the same turn. That extra attack must be made with a different Light weapon, and you don't add your ability modifier to the extra attack's damage unless that modifier is negative. For example, you can attack with a Shortsword in one hand and a Dagger in the other using the Attack action and a Bonus Action, but you don't add your Strength or Dexterity modifier to the damage roll of the Bonus Action unless that modifier is negative.
+
+Thrown. If a weapon has the Thrown property, you can throw the weapon to make a ranged attack, and you can draw that weapon as part of the attack. If the weapon is a Melee weapon, use the same ability modifier for the attack and damage rolls that you use for a melee attack with that weapon.
+
+Mastery: Nick. When you make the extra attack of the Light property, you can make it as part of the Attack action instead of as a Bonus Action. You can make this extra attack only once per turn.
+
+#### Bastion Chain
+**Type:** Armor
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 55
+**Cost:**
+AC 16
+
+The chains of this armor shift naturally with your movements. You gain a +1 bonus to AC while you wear this armor, which doesn't impose disadvantage on Dexterity (Stealth) checks you make. In addition, the chains flow around you reflexively when you're surrounded; the armor's bonus to AC increases to +2 when three or more hostile creatures are within 5 feet of you.
+
+The wearer has Disadvantage on Dexterity (Stealth) checks.
+
+If the wearer has a Strength score lower than 13, their speed is reduced by 10 feet.
+
+#### Bath Potion
+**Type:** Potion
+**Rarity:** Common
+**Attunement:** no
+**Weight:** 0.5
+**Cost:**
+This bubbly potion is frothy and smells like lavender. When you drink this potion, any dirt and grime on your body is magically rinsed away. Further, your breath, hair, and nails are suddenly cleaned, either looking polished and pristine or smelling of daisies and honey for the next 24 hours. Bubbles occasionally escape from your mouth while the potion's effects are active.
+
+#### Baton of Many Sizes
+**Type:** Rod
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 2
+**Cost:**
+While holding this segmented, 1-foot-long rod, you can take a Magic action and use a command word to cause it to extend in either direction. The rod can extend up to be up to 50 feet long or as far as the surrounding space allows. If the rod touches another creature or surface before reaching its full length, the rod stops moving in that direction. If it stops moving against a solid, unmoving surface, the rod fills the gaps to hold firm against it.
+
+The rod is unwieldy to hold once it's longer than 10 feet, forcing you to make a Strength (Athletics) check at the start of each of your turns to maintain your hold of it while it's extended beyond that range. The DC for this check is equal to 8 plus 1 for every 5 feet beyond 10 that the rod is extended. For example, the DC is 9 while the rod is 15 feet long, but 16 while it's a full 50 feet. If you drop the rod or use it to make an attack while it's extended more than 10 feet, it immediately retracts back to its shortened length. You can also cause it to retract by taking a Magic action and repeating the command word.
+
+#### Battering Shield
+**Type:** Armor
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 6
+**Cost:**
+AC +2
+
+While holding this iron tower shield, you gain a +1 bonus to AC. This bonus is in addition to the shield's normal bonus to AC.
+
+Additionally, the shield has 3 charges, and it regains 1d3 expended charges daily at dawn. If you are holding the shield and push a creature within your reach at least 5 feet away, you can expend 1 charge to push that creature an additional 10 feet, knock it prone, or both.
+
+#### Battery Shield
+**Type:** Armor
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 6
+**Cost:**
+AC +2
+
+This shield builds up a small electrostatic charge while worn. When a creature makes a melee attack against you using a metal weapon and the attack roll misses by 2 or less, that creature takes 1d4 lightning damage.
+
+#### Battle Dancer Garb
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 4
+**Cost:**
+This floor-length garb flows around your legs to obscure their movement. Sharp, decorative blades hang from the sides. While wearing the garb, you gain a +2 bonus to Dexterity (Acrobatics) checks, as well as Charisma (Performance) checks made to dance.
+
+The garb has 5 charges and regains 1d4 + 1 expended charges daily at dawn. While wearing it, you can use a bonus action to expend one of its charges to take the Dodge action, provided you aren't wearing heavy armor. When you do, if a creature misses you with an attack before the start of your next turn, you can use your reaction to twirl around and force any creature within 5 feet of you to make a DC 15 Dexterity saving throw. A creature takes 2d6 slashing damage on a failed save, or half as much damage on a successful one.
+
+#### Battle Rod
+**Type:** Rod
+**Rarity:** Common
+**Attunement:** no
+**Weight:** 1
+**Cost:**
+The Battle Rod was developed as an alternative to the longer War Staff, and has gained popularity with wandslingers across Khorvaire. When held in two hands, you can use the rod to cast cantrips at up to twice the standard range. However, when you cast a cantrip beyond the standard range, your attack rolls have Disadvantage, and targets have Advantage on saving throws made against your cantrip. For example, a Fire Bolt cast using this rod has a range of 240 feet, but attack rolls against targets more than 120 feet away are made at Disadvantage.
+
+#### Battle Standard of Infernal Power
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** yes
+**Weight:** 12
+**Cost:**
+This hell-forged battle standard is made of infernal iron and fitted with a small, unopenable cage containing a quasit. The trapped quasit is incapacitated, and its cage has AC 19, 10 hit points, and immunity to all types of damage except force damage. If killed or somehow released, the quasit disappears in a cloud of smoke, and a new one appears in the cage, provided the cage is intact.
+
+While you hold the banner, your weapon attacks and those of all allied creatures within 300 feet of you count as magical for the purposes of overcoming damage immunities and resistances.
+
+#### Battle Tax
+**Type:** Weapon
+**Rarity:** Uncommon
+**Attunement:** yes
+**Weight:** 4
+**Cost:**
+Damage: 1d8 Slashing
+
+Martial Weapon, Melee Weapon
+
+Versatile (1d10)
+
+Mastery: Topple
+
+This golden Battleaxe is the chosen weapon of many merchants and followers of mercantile deities. You gain a +1 bonus to attack rolls and damage rolls made with this magic weapon.
+
+When you roll a 20 on the d20 for an attack roll with this weapon against a Small or larger enemy, you magically earn a number of Gold Pieces equal to the attack's damage. When you do, the axe glimmers like a sparkling coin, and you can sense the weight and clink of coins magically falling into your purse, pocket, or bag (your choice). If you have no room for the coins or don't want them to be immediately added to your storage, the coins erupt from where you hit the target instead. Once the axe generates coins in this way, it can't create any more for 12 hours.
+
+Versatile. A Versatile weapon can be used with one or two hands. A damage value in parentheses appears with the property. The weapon deals that damage when used with two hands to make a melee attack.
+
+Mastery: Topple. If you hit a creature with this weapon, you can force the creature to make a Constitution saving throw (DC 8 plus the ability modifier used to make the attack roll and your Proficiency Bonus). On a failed save, the creature has the Prone condition.
+
+#### Battlebeat Club
+**Type:** Weapon
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 2
+**Cost:**
+Damage: 1d4 Bludgeoning
+
+Simple Weapon, Melee Weapon
+
+Light
+
+This weapon creates a resonant, drumming sound whenever it hits a surface. A creature hit with the club takes an extra 1d4 thunder damage from it. When you roll a 20 on an attack roll made with this weapon, the target of the attack must also succeed on a DC 13 Wisdom saving throw or be compelled to dance until the end of its next turn. A dancing creature must use all its movement to dance without leaving its space and has disadvantage on attack rolls and Dexterity saving throws. Other creatures have advantage on attack rolls made against a dancing creature. The creature ceases to dance if it takes any damage. Creatures that can't be charmed are immune to this effect.
+
+If you're also holding the battlebeat shield, the save DC is increased to 15.
+
+#### Battlebeat Shield
+**Type:** Armor
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 6
+**Cost:**
+AC +2
+
+While holding this shield, you have a +1 bonus to AC. This bonus is in addition to the shield's normal bonus to AC. In addition, any thunder damage you take while holding the shield is reduced by 1d6.
+
+If you're also holding the battlebeat club, you can use an action to beat the shield with it. When you do, you recreate the effects of the thunderwave spell from the shield (2nd-level version; save DC 15). Once this property of the shield has been used, it can't be used again until the next dawn.
+
+#### Battleborn Gloves
+**Type:** Wondrous Item
+**Rarity:** Legendary
+**Attunement:** yes
+**Weight:** 1.5
+**Cost:**
+These gloves have been worn by generations of great warriors and bear the marks and remembrances of their prowess. While wearing the gloves, your Strength or Dexterity score increases by 2 (your choice), up to a maximum of 22. Alternatively, you can increase both your Strength and Dexterity scores by 1. You make this decision when you first attune to the gloves.
+
+The gloves have 10 charges. While wearing them, you can expend 1 or more of their charges for the following properties.
+
+Fighting Style Master. You can use an action to expend 1 charge to gain one Fighting Style option of your choice from the fighter class. If you already have a style, the one you choose must be different. You can use this property to gain up to two Fighting styles; if you use it to choose a third style, it replaces one of the other two (your choice which one). Runes that line the metal cuffs of the gloves indicate which Fighting Styles you've chosen.
+
+Single-Handed. You can expend 3 of the glove's charges as a bonus action to temporarily bolster your might: you can wield a two-handed weapon with one hand instead for 1 minute. Alternatively, you can use a bonus action to expend 1 of the gloves' charges to make a single attack with a weapon you're wielding with one hand.
+
+Warrior's Spirit. If you are a fighter, you can expend 2 charges (no action required) to regain a use of your Action Surge or Second Wind feature. Once you do, you can't regain another use of that feature with this property again until you finish a long rest.
+
+The gloves regain all expended charges when you finish a long rest. When this happens, any Fighting Style you gained with them is lost until you expend a charge to select it again. If you use the last charge from the gloves, make a DC 15 Constitution saving throw. On a failed save, you gain one level of exhaustion.
+
+Sentience. The battleborn gloves are a sentient lawful neutral item with an Intelligence of 12, a Wisdom of 17, and a Charisma of 15. They have hearing and darkvision out to a range of 120 feet.
+
+The gloves communicate telepathically with their wearer and can speak, read, and understand Common. When the gloves communicate, they speak with a chorus of voices from countless warriors past. While you are attuned to them, the battleborn gloves also understand every language you know.
+
+Personality. The battleborn gloves are inhabited by the souls of battle from the fallen warriors who once wore the gloves. They share stories, tactics, and skills with the wearer in order to feel a semblance of life even after death.
+
+As a result, the gloves will gently urge the wearer into combat. The longer it's been since they've been in battle, the less gentle the gloves become with their chiding. To the gloves, it doesn't matter if a battle ends in death; it only seeks the thrill of clashing willpower and strength found in combat. If left without battle for long enough, the gloves may prevent the wearer from using their properties.
+
+Curse. These gloves are cursed, and attuning to them extends that curse to you. You remain cursed until you're targeted by a greater restoration spell or similar magic. While cursed, you refuse to remove the gloves, and if you die while wearing them, your soul is immediately drawn into the gloves to join the chorus of other warriors within them. If your body is targeted by a revivify spell or similar magic, you must make a DC 20 Strength (Athletics) or Dexterity (Acrobatics) check. On a success, your spirit escapes the gloves' trapped warriors, allowing the magic to resurrect you. On a failure, the spell fails, your spirit is drawn further into the gloves, and the escape DC increases by 5, up to a maximum of 30.
+
+#### Battlebrew Bomb
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 1
+**Cost:**
+This fist-sized keg contains 1 ounce of extremely old dwarven liquor which is as strong as it is explosive. A built-in locking mechanism keeps the barrel sealed until it's ready to be used. You can use an action to twist the sides of the keg and throw it at a point that you can see up to 20 feet away from you, splitting the keg open on impact and spraying the area with a fine mist of the liquor. Each creature within 10 feet of that point must make a DC 13 Dexterity saving throw, taking 2d8 poison damage on a failed saving throw, or half as much damage on a successful one.
+
+The next time that a target that was sprayed by the liquor takes fire damage within 1 minute, it takes an extra 2d8 fire damage as the liquor ignites.
+
+#### Battlebrew Maul
+**Type:** Weapon
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** 10
+**Cost:**
+Damage: 2d6 Bludgeoning
+
+Martial Weapon, Melee Weapon
+
+Heavy, Two-Handed
+
+Mastery: Topple
+
+The head of this Maul is an alchemical keg that generates battlebrew liquor, a favorite among Dwarves and Orcs. The keg can hold up to 4 gallons of the liquor. It creates 1 gallon each day at dawn and another gallon each time you roll Initiative while holding it. A creature can take a Utilize action to remove or reattach the handle of the Maul to the keg and another Utilize action to pour out or stopper it.
+
+You gain a +1 bonus to attack rolls and damage rolls made with this magic weapon. While held in combat, the hammer heats the liquor inside it. When you roll a 20 on the d20 for an attack roll with this weapon, the target takes an extra 2d6 Acid damage as the hammer buckles from the impact and releases a spray of the volatile liquor. The next time the target takes Fire damage in the next minute after being sprayed with liquor in this way, it takes an extra 2d6 Fire damage as the liquor ignites and burns away.
+
+#### Battlechef Beater
+**Type:** Weapon
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 4
+**Cost:**
+Damage: 1d6 Bludgeoning
+
+Simple Weapon, Melee Weapon
+
+This bladed mace doubles as a hefty whisk used in cooking. It magically spins when swung, such as when whisking a mixing bowl or when used as a weapon. This weapon deals either bludgeoning or slashing damage (your choice each time), plus an extra 1d4 damage of that type whenever it hits a creature. If the creature isn't solid (but still physical), such as an ooze or water elemental, this extra damage is maximized.
+
+Whenever you make an ability check using cook's utensils and use this weapon as part of that tool, you can roll a d4 and add the number rolled to the check.
+
+#### Battlechef Buckler
+**Type:** Armor
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 6
+**Cost:**
+AC +2
+
+This small Shield is the repurposed pot lid of a famous adventuring chef. While wielding the Shield, you have Advantage on saving throws against any effect that deals Fire damage. In addition, if you place the Shield face down over a pot or similar vessel that's holding no more than 2 gallons of a water-based liquid inside, the liquid comes to a rolling boil after 10 minutes.
+
+#### Battlechef Field Dresser
+**Type:** Weapon
+**Rarity:** Uncommon
+**Attunement:** by an Attunement
+**Weight:** 1
+**Cost:**
+Damage: 1d4 Piercing
+
+Simple Weapon, Melee Weapon
+
+Finesse, light, thrown (20/60 ft.)
+
+This sharp knife is enchanted with five fiery runes that magically heat its edge. Its sharp blade is intentionally designed to quickly prepare fresh cuts of meat from slain creatures. When you hit with an attack using this magic dagger, the target takes an extra 1d4 fire damage. In addition, when you reduce a living beast or monstrosity that you can see within 5 feet of you to 0 hit points using this weapon, you can quickly slice off a small, prime cut of its flesh (no action required), cooking it in the process. When you do, you gain 1 ration.
+
