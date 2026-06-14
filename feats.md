@@ -304,8 +304,19 @@ A Collection of DnD 5e Feats
   - #### [{{ Greater Mark of Storm}}{{ 42}}](#p42)
   - #### [{{ Greater Mark of Warding}}{{ 42}}](#p42)
   - #### [{{ Potent Spellmark}}{{ 42}}](#p42)
+- ### [{{ Planar Pact Feats}}{{ 43}}](#p43)
+  - #### [{{ Celestial Pact}}{{ 43}}](#p43)
+  - #### [{{ Celestial Radiance}}{{ 43}}](#p43)
+  - #### [{{ Celestial Grace}}{{ 43}}](#p43)
+  - #### [{{ Fey Pact}}{{ 43}}](#p43)
+  - #### [{{ Fey Sentinel}}{{ 43}}](#p43)
+  - #### [{{ Veil of the Fey}}{{ 44}}](#p44)
+  - #### [{{ Infernal Pact}}{{ 44}}](#p44)
+  - #### [{{ Infernal Bulwark}}{{ 44}}](#p44)
+  - #### [{{ Infernal Dragoon}}{{ 44}}](#p44)
 }}
- 
+
+
 \page
 {{pageNumber,auto}}
 ## Origin Feats
@@ -438,7 +449,8 @@ Your great intellect has allowed you to master what many would consider the fine
 
 You can have a number of masterpieces equal to half your proficiency bonus (rounded down). If you create a masterpiece above that limit, you must choose one to become non-magical.
 
-**Art Appraisal.** You have advantage on checks to assess the value of art.  
+**Art Appraisal.** You have advantage on checks to assess the value of art. 
+
 ### Cloying Mists
 
 You have mastered the art of weaving dense, obscuring mists that hinder your enemies and protect your allies.
@@ -3589,3 +3601,137 @@ You gain the following benefits.
 | 9th–12th | 3rd |
 | 13th–16th | 4th |
 | 17th+ | 5th |
+
+\page
+{{pageNumber,auto}}
+## Planar Pact Feats
+
+Planar Pact feats represent a bond formed with a powerful extraplanar entity or realm, leaving a permanent mark on your body, mind, and soul. Each pact has a base feat available at 1st level and a series of advanced feats that deepen your connection as you grow in power.
+
+### Celestial Pact
+***Prerequisites: Can't Have Another Planar Pact Feat***
+
+A bond with a celestial being of the Upper Planes has blessed your soul with divine light and restorative power. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.
+
+**Celestial Resistance.** You have Resistance to Radiant damage and Necrotic damage.
+
+**Celestial Sight.** You have Blindsight out to 10 feet and can see into the Ethereal Plane. 
+
+**Blessed Touch.** When you stabilise a creature, that creature regains 1 hit point. You can use this ability a number of times equal to your Proficiency bonus, and you regain all expended uses when you finish a long rest.
+
+### Celestial Radiance
+***Prerequisites: Level 4+, Celestial Pact***
+
+The divine light within you blazes outward, searing your enemies and illuminating the darkest corners of the world. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.
+
+**Radiant Strikes.** Once per turn when you hit a creature with an attack roll, you can cause the attack to deal an extra 1d8 Radiant damage. When you do so, the creature must succeed on a Constitution saving throw (DC 8 + the modifier of the ability increased by this feat + your Proficiency Bonus) or have the Blinded condition until the start of your next turn. You can use this ability a number of times equal to yur Proficiency Bonus and you regain all expended uses when you finish a Long Rest.
+
+**Heavenly Rebuke.** Whenever a creature you can see within 60 feet of yourself deals damage to you or an ally, you can take a Reaction to bathe it in searing light, dealing Radiant damage to it equal to a number of d4 equal to your Proficiency Bonus. You can use this benefit a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
+
+**Radiant Spell.** You always have the *Guiding Bolt* spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. When you cast it without a spell slot using this feature, you cast it as its level 2 version. You can also cast it using any spell slots you have. The spell's spellcasting ability is the ability increased by this feat.
+
+\column
+
+### Celestial Grace
+***Prerequisites: Level 4+, Celestial Pact***
+
+The restorative power of the Upper Planes flows through your hands, mending wounds and shielding your allies from harm. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.
+
+**Healing Pool.** You have a pool of healing power represented by a number of d6s equal to your Proficiency Bonus. As a Bonus Action, you can touch a creature and expend any number of those dice, rolling them and restoring that many Hit Points to the creature. You regain all expended dice when you finish a Long Rest.
+
+**Merciful Light.** When you cast a spell or use and ability that restores Hit Points, the target also gains Temporary Hit Points equal to your Proficiency Bonus.
+
+**Grace Spell.** You always have the *Prayer of Healing* spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast it using any spell slots you have. The spell's spellcasting ability is the ability increased by this feat.
+
+### Fey Pact
+***Prerequisites: Can't Have Another Planar Pact Feat***
+
+Your connection to the fey realm has left its mark on your nature. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.
+
+**Fey Bond.** You know Sylvan. If you already know Sylvan when you select this feat, you instead learn one language of your choice from the language tables in the Player's Handbook. You also gain Proficiency in the Nature skill.
+
+**Fey Cantrips.** You know the Druidcraft cantrip and learn one other cantrip of your choice from the Divination or Enchantment school of magic. Intelligence, Wisdom, or Charisma is your spellcasting ability for these spells (choose when you select this feat).
+
+**Honeyed Words.** When you roll a Charisma check, you can reroll the d20. You can do so after seeing the roll but before any of its effects occur, and you must use the new roll. You can use this benefit a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
+
+### Fey Sentinel
+***Prerequisites: Level 4+, Fey Pact***
+
+Your bond with the fey realm deepens, granting you their mercurial evasion and the power to bind foes to the earth. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.
+
+**Fading Target.** When an enemy misses you with an attack roll, you can take a Reaction to gain the Invisible condition until the start of your next turn or until immediately after you make an attack roll, deal damage, or cast a spell. Once you use this benefit, you can't do so again until you finish a Long Rest.
+
+**Fey Shift.** When you take the Dash action, you can forgo the extra movement to teleport to an unoccupied space you can see within a distance equal to half your Speed instead.
+
+**Nature's Roots.** You always have the *Entangle* spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast it using any spell slots you have. The spell's spellcasting ability is the ability increased by this feat.
+
+When you reach character level 5, you also always have the *Plant Growth* spell prepared and can cast it the same way.
+
+\page
+{{pageNumber,auto}}
+
+
+### Veil of the Fey
+***Prerequisites: Level 4+, Fey Pact***
+
+The boundary between your waking world and the fey dream grows thin around you, wrapping you in glamour and leaving those who peer too closely lost in a waking stupor. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.
+
+**Fey Glamour.** You always have the *Disguise Self* spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast it using any spell slots you have. The spell's spellcasting ability is the ability increased by this feat. Additionally, creatures have Disadvantage on ability checks made to see through your illusions and disguises. 
+
+**Dreaming Glamour.** You can take a Magic action to weave a dream-like enchantment in a 30-foot Emanation originating from yourself. Each creature of your choice in that area makes a Wisdom saving throw (DC 8 plus the modifier of the ability increased by this feat plus your Proficiency Bonus). On a failed save, it has the Charmed condition until the end of its next turn. On a successful save, a creature is unaffected, and it is immune to this ability for 24 hours.
+
+**Veil Spell.** You always have the *Sleep* spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. When you cast it without a spell slot using this feature, you cast it as its level 2 version. You can also cast it using any spell slots you have. The spell's spellcasting ability is the ability increased by this feat.
+
+### Infernal Pact
+***Prerequisites: Can't Have Another Planar Pact Feat***
+
+A pact with the forces of the Nine Hells has hardened your body and sharpened your tongue. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Constitution or Charisma by 1, to a maximum of 20.
+
+**Infernal Resistance.** You have Resistance to Fire damage and Poison damage.
+
+**Infernal Sight.** You can see normally in Dim Light and Darkness—both magical and nonmagical—within 60 feet of yourself.
+
+**Silver-Tongued.** You gain proficiency in the Deception skill.
+
+\column
+### Infernal Bulwark
+***Prerequisites: Level 4+, Infernal Pact***
+
+Your infernal heritage manifests as a hardened hide and an aura of diabolic endurance. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Constitution or Charisma by 1, to a maximum of 20.
+
+**Devil's Flesh.** Your skin thickens and assumes a scaled, leathery texture. While you aren't wearing armor or wielding a Shield, your base Armor Class equals 10 plus your Dexterity modifier plus the modifier of the ability increased by this feat.
+
+**Infernal Protection.** You always have the *Armor of Agathys* spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. When you cast it without a spell slot using this feature, you cast this spell as its level 2 version, and it deals Fire damage instead of Cold damage. You can also cast the spell using any spell slots you have of the appropriate level and choose if it deals Fire or Cold damage. Charisma is your spellcasting ability for this spell.
+
+**Vengeful Surge.** Whenever a creature you can see within 60 feet of yourself forces you to make a saving throw and you succeed, you can take a Reaction to roll a number of d4 equal to your proficiency bonus. The creature takes that much Fire damage. You can use this benefit a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
+
+
+### Infernal Dragoon
+***Prerequisites: Level 4+, Infernal Pact***
+
+The diabolic power within you surges to the surface, intimidating your foes and empowering your strikes. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Constitution or Charisma by 1, to a maximum of 20.
+
+**Devilish Aura.** Your close association with diabolic powers unsettles others. You can take a Magic action to manifest an aura of fear in a 30-foot Emanation originating from yourself. Each creature of your choice in that area makes a Charisma saving throw (DC 8 plus the modifier of the ability increased by this feat plus your Proficiency Bonus). On a failed save, it has the Frightened condition until the end of its next turn. On a successful save, a creature is unaffected, and it is immune to this ability for 24 hours.
+
+**Devil's Favor.** You can call on your infernal patron to aid you. When you make a D20 Test, you can add a +2 bonus to the roll. Once you use this benefit, you can't do so again until you finish a Long Rest.
+
+**Diabolic Empowerment.** You always have the *Magic Weapon* spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. When you cast it without a spell slot using this feature, the spell's duration becomes 8 hours for that casting. You can also cast the spell using any spell slots you have of the appropriate level. Charisma is your spellcasting ability for this spell.
+
