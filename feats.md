@@ -628,7 +628,7 @@ You master fighting with two weapons, gaining the following benefits:
 
 **Dual Parry.** You gain a +1 bonus to AC while you are wielding a separate melee weapon in each hand.
 
-**Enhanced Dual Wielding.** When you take the Attack action on your turn and attack with a melee weapon that lacks the Two-Handed property, you can make one extra attack as a Bonus Action later on the same turn with a different weapon, which must be a Melee weapon that lacks the Two-Handed property. You don't add your ability modifier to the extra attack's damage unless that modifier is negative. This extra attack benefits from any features that would benefit the extra attack of Two-Weapon Fighting with Light weapons.
+**Enhanced Dual Wielding.** One-handed melee weapons are considered to have the Light property for you.
 
 **Quick Draw.** You can draw or stow two weapons that lack the Two-Handed property when you would normally be able to draw or stow only one.  
  
