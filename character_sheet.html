@@ -831,8 +831,8 @@ function Page1({c,s}){
   const [acOpen,setAcOpen]=useState(false);
   const [iniModal,setIniModal]=useState(false);
   const [wpnOpen,setWpnOpen]=useState(null); // {idx, mode:"atk"|"dmg"}
-  const [wpnSort,setWpnSort]=useState(null);
-  const onWpnSort=(col)=>setWpnSort(prev=>cycleSort(prev,col));
+  const wpnSort=(c.sortPrefs&&c.sortPrefs.wpn)||null;
+  const onWpnSort=(col)=>s("sortPrefs",{...(c.sortPrefs||{}),wpn:cycleSort(wpnSort,col)});
   const stats=["STR","DEX","CON","INT","WIS","CHA"];
   const skills=[
     {n:"Acrobatics",a:"DEX"},{n:"Animal Handling",a:"WIS"},{n:"Arcana",a:"INT"},
@@ -1917,14 +1917,14 @@ function Page2({c,s}){
   const [attunedMaxModal,setAttunedMaxModal]=useState(false);
   const [removeBagModal,setRemoveBagModal]=useState(null);
   const [bagMaxModal,setBagMaxModal]=useState(null); // bagId
-  const [invSort,setInvSort]=useState(null);
-  const [attSort,setAttSort]=useState(null);
-  const [bagSorts,setBagSorts]=useState({});
-  const [wpnSort,setWpnSort]=useState(null);
-  const onInvSort=(col)=>setInvSort(prev=>cycleSort(prev,col));
-  const onAttSort=(col)=>setAttSort(prev=>cycleSort(prev,col));
-  const onBagSort=(bagId,col)=>setBagSorts(prev=>({...prev,[bagId]:cycleSort(prev[bagId],col)}));
-  const onWpnSort=(col)=>setWpnSort(prev=>cycleSort(prev,col));
+  const invSort=(c.sortPrefs&&c.sortPrefs.inv)||null;
+  const attSort=(c.sortPrefs&&c.sortPrefs.att)||null;
+  const bagSorts=(c.sortPrefs&&c.sortPrefs.bags)||{};
+  const wpnSort=(c.sortPrefs&&c.sortPrefs.wpn)||null;
+  const onInvSort=(col)=>s("sortPrefs",{...(c.sortPrefs||{}),inv:cycleSort(invSort,col)});
+  const onAttSort=(col)=>s("sortPrefs",{...(c.sortPrefs||{}),att:cycleSort(attSort,col)});
+  const onBagSort=(bagId,col)=>s("sortPrefs",{...(c.sortPrefs||{}),bags:{...bagSorts,[bagId]:cycleSort(bagSorts[bagId],col)}});
+  const onWpnSort=(col)=>s("sortPrefs",{...(c.sortPrefs||{}),wpn:cycleSort(wpnSort,col)});
 
   // Attuned slots = 3 + bonus formula
   const attunedBonus=c.attuned_bonus_formula?computeBonusFromFormula(c.attuned_bonus_formula,c):(parseInt(c.attuned_bonus)||0);
@@ -4422,8 +4422,8 @@ function SpellPage({c,s,from,to}){
     var t=setTimeout(function(){setSptMsg(null);},2200);
     setSptMsg({text,timer:t});
   };
-  const [spellSorts,setSpellSorts]=us2({}); // key: "lv-gi" => {col,dir}
-  const onSpellSort=(lv,gi,col)=>setSpellSorts(prev=>{var k=lv+"-"+gi;return {...prev,[k]:cycleSort(prev[k],col)};});
+  const spellSorts=(c.sortPrefs&&c.sortPrefs.spells)||{}; // key: "lv-gi" => {col,dir}
+  const onSpellSort=(lv,gi,col)=>{var k=lv+"-"+gi;var cur=spellSorts[k];var next={...spellSorts,[k]:cycleSort(cur,col)};s("sortPrefs",{...(c.sortPrefs||{}),spells:next});};
   const slotBase={1:4,2:3,3:3,4:3,5:3,6:2,7:2,8:1,9:1};
   const ABLTS=["STR","DEX","CON","INT","WIS","CHA"];
 
@@ -4510,7 +4510,12 @@ function SpellPage({c,s,from,to}){
             onAutofill={function(sp2){
               const cp={...c.sp};
               cp[lv]=[...(cp[lv]||[])];
-              cp[lv][i]={...cp[lv][i],nm:sp2.name,sc:sp2.school,ti:sp2.castingTime,rng:sp2.range,cmp:sp2.components,dur:sp2.duration,conc:sp2.conc,ritual:sp2.ritual,nt:sp2.desc};
+              // Set the class from the group this spell is rendered under, so autofilled
+              // spells carry their class (e.g. "Druid") rather than being left unassigned.
+              // group.sc is non-null only for real spellcasting-class groups; the "Other"
+              // / no-class group has group.sc===null, in which case we leave cls as-is.
+              var grpCls=(group&&group.sc&&group.name)?group.name:(cp[lv][i]&&cp[lv][i].cls)||"";
+              cp[lv][i]={...cp[lv][i],nm:sp2.name,sc:sp2.school,ti:sp2.castingTime,rng:sp2.range,cmp:sp2.components,dur:sp2.duration,conc:sp2.conc,ritual:sp2.ritual,nt:sp2.desc,cls:grpCls};
               s("sp",cp);
             }}
           />
@@ -4949,8 +4954,8 @@ function SpellPage({c,s,from,to}){
 
 function ExploitPage({c,s}){
   const {useState:ues}=React;
-  const [exploitSorts,setExploitSorts]=ues({}); // key: "deg-gi" => {col,dir}
-  const onExploitSort=(deg,gi,col)=>setExploitSorts(prev=>{var k=deg+"-"+gi;return {...prev,[k]:cycleSort(prev[k],col)};});
+  const exploitSorts=(c.sortPrefs&&c.sortPrefs.exploits)||{}; // key: "deg-gi" => {col,dir}
+  const onExploitSort=(deg,gi,col)=>{var k=deg+"-"+gi;var cur=exploitSorts[k];var next={...exploitSorts,[k]:cycleSort(cur,col)};s("sortPrefs",{...(c.sortPrefs||{}),exploits:next});};
   const ABLTS=["STR","DEX","CON","INT","WIS","CHA"];
   const pb=(()=>{var cls=c.classes&&c.classes.length>0?c.classes:[{nm:c.cls||"",lv:"",hd:"d6"}];var lv=cls.reduce(function(t,cl){return t+(parseInt(cl.lv)||0);},0);var base=lv<1?2:Math.ceil(lv/4)+1;return base+(parseInt((c.pbBonus||"").replace("+",""))||0);})();
   const ue=(deg,i,f,v)=>{const cp={...c.expl};cp[deg]=[...(cp[deg]||[])];cp[deg][i]={...cp[deg][i],[f]:v};s("expl",cp);};
@@ -5840,6 +5845,7 @@ function CompendiumPage({c,s}){
   const [confirmAdd,setConfirmAdd]=us(null); // the result object pending confirmation
   const [addCls,setAddCls]=us(""); // selected class when adding a spell
   const [confirmAddAll,setConfirmAddAll]=us(false); // confirm modal for "add all" spells
+  const [skippedInfo,setSkippedInfo]=us(null); // {names:[...], cls:""} popup for spells skipped as duplicates
   const [srdResults,setSrdResults]=us([]);
   const [srdLoading,setSrdLoading]=us(false);
   const [includeSrd,setIncludeSrd]=us(true);
@@ -5931,11 +5937,34 @@ function CompendiumPage({c,s}){
 
   function toggle(id){setExpanded(function(e){var n=Object.assign({},e);n[id]=!n[id];return n;});}
 
+  // Shared duplicate matcher for spells. Two spells are the same if all identity fields match
+  // UNDER THE SAME CLASS (empty class = "Other Spells"). Notes (nt) and prep status are ignored.
+  function spellMatches(sp,candidate){
+    var norm=function(x){return (x||"").toString().trim().toLowerCase();};
+    return norm(sp.nm)===norm(candidate.nm)
+        && norm(sp.sc)===norm(candidate.sc)
+        && norm(sp.ti)===norm(candidate.ti)
+        && norm(sp.rng)===norm(candidate.rng)
+        && norm(sp.cmp)===norm(candidate.cmp)
+        && norm(sp.dur)===norm(candidate.dur)
+        && (!!sp.conc)===(!!candidate.conc)
+        && (!!sp.ritual)===(!!candidate.ritual)
+        && norm(sp.cls)===norm(candidate.cls);
+  }
+
   function doAdd(r,clsName){
     if(kind==="spells"){
       var lv=r.level||0;
+      var candidate={nm:r.name||"",ti:r.castingTime||"",rng:r.range||"",cmp:r.components||"",dur:r.duration||"",conc:!!r.conc,prep:false,nt:r.desc||"",cls:clsName||"",sc:r.school||"",ritual:!!r.ritual};
+      var existing=(c.sp&&c.sp[lv])||[];
+      var alreadyExists=existing.some(function(sp){return spellMatches(sp,candidate);});
+      if(alreadyExists){
+        setConfirmAdd(null);
+        setSkippedInfo({names:[candidate.nm],cls:clsName||""});
+        return;
+      }
       var cp=Object.assign({},c.sp);
-      cp[lv]=(cp[lv]||[]).concat([{nm:r.name||"",ti:r.castingTime||"",rng:r.range||"",cmp:r.components||"",dur:r.duration||"",conc:!!r.conc,prep:false,nt:r.desc||"",cls:clsName||"",sc:r.school||"",ritual:!!r.ritual}]);
+      cp[lv]=existing.concat([candidate]);
       s("sp",cp);
     } else if(kind==="feats"){
       s("fts",(c.fts||[]).concat([{nm:r.name||"",ds:r.desc||"",lv:"",limited:false,limits:[{name:"",uses:"",exp:"",die:"NO",recharge:""}]}]));
@@ -5947,14 +5976,27 @@ function CompendiumPage({c,s}){
   }
 
   function doAddAll(clsName){
-    // Add all current filtered results (all pages) to the spell list
-    var newSp=Object.assign({},c.sp);
+    // Add all current filtered results to the spell list, skipping any spell already present
+    // UNDER THE SAME CLASS. Collects the names of skipped spells to report afterward.
+    // Deep-copy each level array so mutations don't affect the original and
+    // so we check against the growing list (catches duplicates within the batch too).
+    var newSp={};
+    Object.keys(c.sp||{}).forEach(function(lv){ newSp[lv]=(c.sp[lv]||[]).slice(); });
+    var skipped=[];
     results.forEach(function(r){
       var lv=r.level||0;
-      newSp[lv]=(newSp[lv]||[]).concat([{nm:r.name||"",ti:r.castingTime||"",rng:r.range||"",cmp:r.components||"",dur:r.duration||"",conc:!!r.conc,prep:false,nt:r.desc||"",cls:clsName||"",sc:r.school||"",ritual:!!r.ritual}]);
+      var candidate={nm:r.name||"",ti:r.castingTime||"",rng:r.range||"",cmp:r.components||"",dur:r.duration||"",conc:!!r.conc,prep:false,nt:r.desc||"",cls:clsName||"",sc:r.school||"",ritual:!!r.ritual};
+      if(!newSp[lv]) newSp[lv]=[];
+      var alreadyExists=newSp[lv].some(function(sp){return spellMatches(sp,candidate);});
+      if(!alreadyExists){
+        newSp[lv].push(candidate);
+      } else {
+        skipped.push(candidate.nm);
+      }
     });
     s("sp",newSp);
     setConfirmAddAll(false);
+    if(skipped.length>0) setSkippedInfo({names:skipped,cls:clsName||""});
   }
 
   return (
@@ -6135,9 +6177,9 @@ function CompendiumPage({c,s}){
             style={{background:"#1a1410",border:"1px solid rgba(123,79,207,.5)",borderRadius:4,padding:"22px 26px",maxWidth:400,boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
             <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--arcane-l)",marginBottom:10}}>Add All {totalResults} Spell{totalResults===1?"":"s"} to Spell List?</div>
             <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.6)",marginBottom:18,lineHeight:1.6}}>
-              This will add all <span style={{color:"var(--arcane-l)",fontWeight:600}}>{totalResults} spell{totalResults===1?"":"s"}</span> from your current search results to your spell list. Duplicates will be added as additional entries.
+              This will add all <span style={{color:"var(--arcane-l)",fontWeight:600}}>{totalResults} spell{totalResults===1?"":"s"}</span> from your current search results to your spell list. Spells already in your list will be skipped.
             </div>
-            {(c.spellClasses||[]).length>0&&(
+            {(c.spellClasses||[]).length>0?(
               <div style={{marginBottom:18}}>
                 <div style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.45)",textTransform:"uppercase",marginBottom:6}}>Add under class</div>
                 <select value={addCls} onChange={function(e){setAddCls(e.target.value);}}
@@ -6146,12 +6188,35 @@ function CompendiumPage({c,s}){
                   <option value="">Other Spells</option>
                 </select>
               </div>
+            ):(
+              <div style={{marginBottom:18,fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>No spellcasting classes defined — they will be added under "Other Spells".</div>
             )}
             <div style={{display:"flex",gap:10,justifyContent:"flex-end"}}>
               <div onClick={function(){setConfirmAddAll(false);}}
                 style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(232,213,176,.2)",color:"rgba(232,213,176,.5)"}}>Cancel</div>
               <div onClick={function(){doAddAll(addCls);}}
                 style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(123,79,207,.6)",color:"rgba(184,154,240,.9)",background:"rgba(123,79,207,.15)"}}>Add All</div>
+            </div>
+          </div>
+        </div>
+      )}
+      {skippedInfo&&(
+        <div onClick={function(){setSkippedInfo(null);}}
+          style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.7)",zIndex:100001,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+          <div onClick={function(e){e.stopPropagation();}}
+            style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,padding:"22px 26px",maxWidth:420,maxHeight:"70vh",overflowY:"auto",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+            <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--gold-l)",marginBottom:10}}>{skippedInfo.names.length===1?"Spell Already in List":skippedInfo.names.length+" Spells Already in List"}</div>
+            <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.6)",marginBottom:14,lineHeight:1.6}}>
+              The following {skippedInfo.names.length===1?"spell was":"spells were"} not added because {skippedInfo.names.length===1?"it already exists":"they already exist"} under <span style={{color:"var(--gold-l)",fontWeight:600}}>{skippedInfo.cls?skippedInfo.cls:"Other Spells"}</span>:
+            </div>
+            <div style={{display:"flex",flexDirection:"column",gap:3,marginBottom:18,paddingLeft:4}}>
+              {skippedInfo.names.map(function(nm,i){return (
+                <div key={i} style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"var(--parch)"}}>• {nm}</div>
+              );})}
+            </div>
+            <div style={{display:"flex",justifyContent:"flex-end"}}>
+              <div onClick={function(){setSkippedInfo(null);}}
+                style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 16px",borderRadius:2,userSelect:"none",border:"1px solid rgba(201,150,42,.5)",color:"var(--gold-l)",background:"rgba(201,150,42,.12)"}}>OK</div>
             </div>
           </div>
         </div>
@@ -7182,7 +7247,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.21</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.28</div>
 
 </script>
 </body>
