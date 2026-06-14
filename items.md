@@ -5587,7 +5587,7 @@ The second route, in case Mammon is unavailable or unwilling, is to incinerate t
 #### Acheron Blade
 **Type:** Generic Variant, Rare
 **Attunement:** yes
-**Weight:** 3
+**Weight:**
 **Cost:**
 The black blade of this sword is crafted from a mysterious arcane alloy. You gain a +1 bonus to attack and damage rolls made with this magic weapon. While the sword is on your person, you are immune to effects that turn undead.
 
@@ -6148,7 +6148,7 @@ This magic ammunition is meant to slay creatures of a particular type, which the
 After dealing its extra damage to a creature, the ammunition becomes nonmagical.
 
 | 1d100 | Creature Type |
-| ----- | ------------- |
+| -- | - |
 | 01-10 | Aberrations   |
 | 11-15 | Beasts    	|
 | 16-20 | Celestials	|
@@ -6392,7 +6392,7 @@ If you aren't undead, you must make a DC 16 Constitution saving throw each time 
 Black Skull Transformation
 
 | d100  | Transformation                                                                                                                                                                               	|
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| -- |  |
 | 01-20 | The symbol of Acererak is burned into your flesh, a curse that can only be removed with a remove curse spell or similar magic. Until the curse ends, your hit points can't be restored by magic. |
 | 21-35 | You grow larger as if affected by an enlarge/reduce spell, except the effect lasts for 1 hour.                                                                                               	|
 | 36-50 | You grow smaller as if affected by an enlarge/reduce spell, except the effect lasts for 1 hour.                                                                                              	|
@@ -6499,7 +6499,7 @@ Curse. This amulet is cursed, and becoming attuned to it extends the curse to yo
 While wearing this amulet, you can take a Magic action to name a location that you are familiar with on another plane of existence. Then make a DC 15 Intelligence (Arcana) check. On a successful check, you cast Plane Shift. On a failed check, you and each creature and object within 15 feet of you travel to a random destination determined by rolling 1d100 and consulting the following table.
 
 | 1d100 | Destination                                                                                                                                                                                                       	|
-| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -- |  |
 | 01-60 | Random location on the plane you named                                                                                                                                                                            	|
 | 61-70 | Random location on an Inner Plane determined by rolling 1d6: on a 1, the Plane of Air; on a 2, the Plane of Earth; on a 3, the Plane of Fire; on a 4, the Plane of Water; on a 5, the Feywild; on a 6, the Shadowfell |
 | 71-80 | Random location on an Outer Plane determined by rolling 1d8: on a 1, Arborea; on a 2, Arcadia; on a 3, the Beastlands; on a 4, Bytopia; on a 5, Elysium; on a 6, Mechanus; on a 7, Mount Celestia; on an 8, Ysgard	|
@@ -6706,7 +6706,7 @@ The apparatus floats on water. It can also go underwater to a depth of 900 feet.
 A creature in the compartment can take a Utilize action to move as many as two of the apparatus's levers up or down. After each use, a lever goes back to its neutral position. Each lever, from left to right, functions as shown in the Apparatus of Kwalish Levers table.
 
 Lever | Up | Down
---- | --- | ---
+ |  | 
 1 | Legs extend, allowing the apparatus to walk and swim. | Legs retract, reducing the apparatus's Speed and Swim Speed to 0 and making it unable to benefit from bonuses to speed.
 2 | Forward window shutter opens. | Forward window shutter closes.
 3 | Side window shutters open (two per side). | Side window shutters close (two per side).
@@ -7268,7 +7268,7 @@ If the wearer has a Strength score lower than 15, their speed is reduced by 10 f
 You have Resistance to one type of damage while you wear this armor. The DM chooses the type or determines it randomly by rolling on the following table.
 
 d10 | Damage Type
---- | ---
+ | 
 1 | Acid
 2 | Cold
 3 | Fire
@@ -7849,7 +7849,7 @@ Damage: 1d8 Bludgeoning
 A colorful box sits at the top of this weapon's wooden handle. Within the box is a coiled spring beneath the flail's spiked head. The head springs out from the box the first time you make an attack with it, granting you advantage on the attack roll and creating a random effect. Roll a d6 and refer to the table below to determine the effect. You can use an action to stuff the head back into the box, or use a bonus action to cause the head to harmlessly spring from it.
 
 d6 | Effect
---- | ---
+ | 
 1 | The target is covered with magical confetti and can't benefit from being invisible for 1 minute. On a hit, the target's face is also covered with the confetti, causing any attack roll it makes before the end of its next turn to be made with disadvantage. The confetti vanishes after 1 round.
 2 | The head is replaced with a comical boxing glove. On a hit, the target takes the weapon's damage and is pushed 10 feet away from you. The head then returns to normal.
 3 | The box erupts with a chorus of music. You gain a d6. You can choose to roll the die and add the result to any ability check or attack roll you make in the next minute. When you do, the die is lost.
@@ -9462,4 +9462,995 @@ Simple Weapon, Melee Weapon
 Finesse, light, thrown (20/60 ft.)
 
 This sharp knife is enchanted with five fiery runes that magically heat its edge. Its sharp blade is intentionally designed to quickly prepare fresh cuts of meat from slain creatures. When you hit with an attack using this magic dagger, the target takes an extra 1d4 fire damage. In addition, when you reduce a living beast or monstrosity that you can see within 5 feet of you to 0 hit points using this weapon, you can quickly slice off a small, prime cut of its flesh (no action required), cooking it in the process. When you do, you gain 1 ration.
+
+#### Battlechef Pulverizers
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 1
+**Cost:**
+Major Tier
+
+This pair of brass knuckles resemble meat tenderizers and smell like blood, butter, salt, and caramelized onions. If you use the knuckles to prepare a meat dish, the food is magically tender and perfectly seasoned to taste.
+
+While wearing the knuckles, you gain a +1 bonus to damage rolls made with unarmed strikes using them, which count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage. If you're proficient with cooking utensils, you also gain a +1 bonus to attack rolls with the knuckles.
+
+#### Battlechef's Heated Skillet
+**Type:** Weapon
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** 4
+**Cost:**
+Damage: 1d6 Bludgeoning
+
+Simple Weapon, Melee Weapon
+
+This iron skillet is magically light and wieldy in your grasp, allowing you to swing it as a weapon. You gain a +1 bonus to attack and damage rolls made with this magic weapon. If you're proficient with cook's utensils, you're proficient with the battlechef's heated skillet.
+
+The skillet has 3 charges and regains all expended charges whenever you spend at least 1 hour cooking with it, which can be done over the course of a short rest. The first creature to eat a meal that was cooked in the skillet gains 5 temporary hit points.
+
+When you make an attack with the weapon, you can speak one of its three command words to expend 1 or more of its charges: "hot" (1 charge), "hotter" (2 charges), or "hottest" (3 charges). If the attack hits, the target takes an extra 1d6 fire damage for each expended charge.
+
+#### Battlechef's Serving Bowls
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 2
+**Cost:**
+This pair of silver serving bowls is scratched from seeing battle. Their handles are wrapped with leather straps, allowing you to wear them as pauldrons. It takes 1 minute to attach the bowls to your shoulders or remove them. Whenever you take acid or poison damage while wearing the bowls as pauldrons, you reduce that damage by 1d4. For each other item you're holding or wearing that has battlechef in the name, the acid or poison damage is reduced by an additional 1d4.
+
+If you use the bowls to serve food from, any poison within the food is neutralized.
+
+#### Battlechef's Splendid Saucepan
+**Type:** Wondrous Item
+**Rarity:** Very Rare
+**Attunement:** no
+**Weight:** 3
+**Cost:**
+This magic saucepan can be used to turn nearly anything into a delicious and filling meal. You can boil up to 1 pound of any organic, nonmagical materials in the saucepan for 10 minutes or longer to magically transform them into a stew that provides enough nourishment to sustain four creatures for one day.
+
+The saucepan also functions as a Mace, granting you a +1 bonus to attack rolls and damage rolls made with it. The saucepan deals an extra 1d4 Thunder damage to any target it hits that's either wearing metal armor or is made of metal or stone.
+
+If you're not wearing Heavy armor, you can take a Utilize action to either wear the saucepan as a helmet or remove it. While wearing the saucepan in this way, you gain a +1 bonus to Armor Class.
+
+#### Battlement Bow
+**Type:** Generic Variant
+**Rarity:** Uncommon
+**Attunement:** yes
+**Weight:**
+**Cost:**
+This magic bow is enchanted with passive Abjuration protections. When you hit a creature with a ranged attack using this bow, the bow creates a thin barrier of protective magic that stays between you and that creature until the start of your next turn. If you hit a different creature while protected by this barrier, the barrier moves to defend you against the new target instead. While the barrier is protecting you against a creature in this way, you have Half Cover against that creature's ranged attacks and effects originating from it.
+
+#### Bead of Force
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** no
+**Weight:** 0.5
+**Cost:**
+This small black sphere measures 3/4 of an inch in diameter and weighs an ounce. Typically, 1d4 + 4 Beads of Force are found together.
+
+You can take a Magic action to throw the bead up to 60 feet. The bead explodes in a 10-foot-radius Sphere on impact and is destroyed. Each creature in the Sphere must succeed on a DC 15 Dexterity saving throw or take 5d4 Force damage. A sphere of transparent force then encloses the area for 1 minute. Any creature that failed the save and is completely within the area is trapped inside this sphere. Creatures that succeeded on the save or are partially within the area are pushed away from the center of the sphere until they are no longer inside it. Only breathable air can pass through the sphere's wall. No attack or other effect can pass through.
+
+An enclosed creature can take a Utilize action to push against the sphere's wall, moving the sphere up to half the creature's Speed. The sphere can be picked up, and its magic causes it to weigh only 1 pound, regardless of the weight of creatures inside.
+
+#### Bead of Nourishment
+**Type:** Wondrous Item
+**Rarity:** Common
+**Attunement:** no
+**Weight:** 0.1
+**Cost:**
+This flavorless, gelatinous bead dissolves on your tongue and provides as much nourishment as 1 day of Rations.
+
+#### Bead of Refreshment
+**Type:** Wondrous Item
+**Rarity:** Common
+**Attunement:** no
+**Weight:** 0.1
+**Cost:**
+This flavorless, gelatinous bead dissolves in liquid, transforming up to a pint of the liquid into fresh, cold drinking water. The bead has no effect on magical liquids or harmful substances such as poison.
+
+#### Beads of Meditation
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 1
+**Cost:**
+Major Tier
+
+This beaded necklace can be used as a set of prayer beads or special rosary. While wearing or holding the beads, you can use an action to end one effect on yourself that is causing you to be charmed or frightened.
+
+If you're a cleric, monk, or paladin, you can use an action to hold onto the beads to further channel your spirituality. If you're a monk, you regain 1d4 + 1 expended ki points. If you're a cleric or paladin, you regain one use of your Channel Divinity. This property can't be used again until the next dawn.
+
+#### Beard Cannon
+**Type:** Wondrous Item
+**Rarity:** Uncommon
+**Attunement:** yes
+**Weight:** 1
+**Cost:**
+Major Tier
+
+This item appears to be a wide, cylindrical hair cuff used for taming unruly hair. The cuff is 4 inches in height and diameter and weighs 1 pound. As part of attuning to the cuff, you must pull it onto your hair or beard, which must be at least one foot long in order to fit. When you finish attuning to the cuff, 6 smaller, spherical beads appear and weave themselves into the hair nearby.
+
+When you take the Attack action, you can forgo one of your attacks to point the hair cuff at a target within range and speak its command word. When you do, the cuff magically retracts any hair pulled through it and fires 1 of the smaller beads through its exposed opening. Make a ranged weapon attack using the magic cuff, which has a normal range of 15 feet and a long range of 30 feet. You are proficient with the attack. When fired, the spherical bead magically grows to become fist-sized, and it deals 2d6 bludgeoning damage on a hit.
+
+After the attack, the retracted hair magically reappears through the cuff, and the fired bead is lost. 1d6 fired beads magically reappear in your hair daily at dawn. When not in use as a weapon, the item is indistinguishable from a normal hair cuff.
+
+#### Bearskin Cloak
+**Type:** Wondrous Item
+**Rarity:** Rare
+**Attunement:** by a Barbarian, Druid, or Ranger
+**Weight:** 2
+**Cost:**
+While wearing this cloak, as an action, you can assume the form of a brown bear, gaining its attacks (including multiattack), AC, and speed (including climb speed). You retain your own ability scores, hit points, and saving throws.
+
+#### Beetle Blades
+**Type:** Weapon
+**Rarity:** Rare
+**Attunement:** yes
+**Weight:** 3
+**Cost:**
+Damage: 1d6 Slashing
+
+Martial Weapon, Melee Weapon
+
+Finesse, light
+
+This pair of swords counts as a single item for the purpose of attuning to them. You gain a +1 bonus to attack and damage rolls made with these magic weapons; this bonus extends to any Strength check you make or Strength save DC used when you attempt to shove a creature.
+
+While holding one of the swords, you can use an action to cause the other one to teleport to your empty hand or to the ground at your feet (your choice). When you do, the blade reappears in a plume of minuscule insects.
+
+Hurl. When you take the Attack action while holding both swords, you can choose to forgo making any attacks to instead force a creature within 5 feet of you that's no more than one size larger than you to make a DC 15 Strength saving throw. On a failed save, the blades come together to grab and throw the creature up to 20 feet away from you and knock it prone. If the thrown target strikes a solid surface, the target takes 1d10 bludgeoning damage for every 10 feet it was thrown. If the target is thrown at another creature, that creature must succeed on a DC 15 Dexterity saving throw or take half as much damage and be knocked prone.
+
+Insect Plague. While holding both swords, you can use an action to cast the insect plague spell from them (save DC 15). This version of the spell ends at the start of your next turn, instead of its normal duration, and doesn't require you to concentrate on it. For the duration, one of the two swords disappears (you choose each time); the sword reappears in your hand or at your feet when the spell ends. This property can be used twice, and the swords regain all expended uses of it daily at dawn.
+
+#### Beggar's Wisdom
+**Type:** Wondrous Item
+**Rarity:** Common
+**Attunement:** no
+**Weight:** 1
+**Cost:**
+The wit and wisdom of Beggar Dane is considered to be one of the national treasures of Breland. This small leatherbound book is a comprehensive, enchanted edition of his proverbs and advice. As a Magic action while holding this book, you can declare your desire for assistance with a particular task, causing the book to open to a page containing a quip or mote of wisdom that is strangely relevant to the situation at hand. You add 1d4 to the next ability check you make within the next minute. Once this property is used, you cannot benefit from any copy of Beggar's Wisdom until the next dawn.
+
+#### Behirazooka
+**Type:** Generic Variant
+**Rarity:** Uncommon
+**Attunement:** no
+**Weight:** 10
+**Cost:**
+This magic weapon is a launcher that weighs 10 pounds and resembles a hollow tube, which bristles with electric power and is designed in the likeness of a behir. The launcher is a ranged weapon that has the ammunition (range 40/120), loading, and two-handed properties. If you are proficient with crossbows or firearms, you are proficient with the behirazooka.
+
+The launcher can be loaded with any ammunition or throwable equipment, such as a flask of alchemist's fire or a weapon that has thrown. If the launcher is loaded with typical ammunition (arrows, bullets, or crossbow bolts), its ranges are doubled, and it uses a d4 for its damage die; the damage type matches the nature of the ammunition (GM's discretion). Treat any target that's hit with a ranged attack from the launcher as if it were hit by the fired projectile, including any of its additional effects. Furthermore, on a hit, the target takes extra lightning damage based on the behirazooka's rarity: 1d6 (uncommon), 2d6 (rare), or 3d6 (very rare). If there's another target within 5 feet of the original one and behind it (relative to you), that target also takes lightning damage equal to half the amount rolled on the d6s.
+
+#### Belashyrra's Beholder Crown
+**Type:** Wondrous Item
+**Rarity:** Legendary
+**Attunement:** yes
+**Weight:** 2
+**Cost:**
+This symbiotic crown is carved from dark purple and mauve stone, with ten points like stalks set with gemstones resembling the eyestalks of a beholder. To attune to this item, you must wear it on your head for the entire attunement period, during which the crown's hidden tendrils burrow into your scalp to bond with your skull.
+
+While wearing the crown, you can see normally in darkness, both magical and nonmagical, to a distance of 120 feet.
+
+Spells. The crown has 10 charges. While wearing it, you can use an action to expend some of its charges to cast one of the following spells from it (spell save DC 16): charm person (1 charge), disintegrate (6 charges), fear (3 charges), finger of death (7 charges), flesh to stone (6 charges), hold person (2 charges), ray of enfeeblement (2 charges), sleep (1 charge), slow (3 charges), telekinesis (5 charges). The crown regains 1d6 + 3 expended charges daily at dawn.
+
+Symbiotic Nature. The crown can't be removed from you while you're attuned to it, and you can't voluntarily end your attunement to it. If you're targeted by a spell that ends a curse, your attunement to the crown ends, and it detaches from you.
+
+The daelkyr Belashyrra made these crowns. While on the same plane of existence as the crown, Belashyrra can see through its eyestalks.
+
+#### Bell Branch
+**Type:** Wondrous Item, Spellcasting Focus  
+**Rarity:** Rare  
+**Attunement:** by a Druid or Warlock  
+**Weight:** 1.5  
+**Cost:**  
+This silver implement is shaped like a tree branch and is strung with small golden bells. The branch is a spellcasting focus for your spells while you hold it.
+
+The branch has 3 charges, and it regains 1d3 expended charges daily at dawn. You can use the charges in the following ways while holding it:
+
+As a bonus action, you can expend 1 charge to detect the presence of aberrations, celestials, constructs, elementals, fey, fiends, or undead within 60 feet of you. If such creatures are present and don't have total cover from you, the bells ring softly, their tone indicating the creature types present.  
+As an action, you can expend 1 charge to cast protection from evil and good.
+
+
+
+#### Bell of Alarm
+**Type:** Wondrous Item  
+**Rarity:** Common  
+**Weight:** 1  
+**Cost:**  
+Minor Tier  
+This brass bell doesn't have a clapper inside it and has 4 charges. As an action, you can expend 1 of the bell's charges to shake it and speak its command word, followed by a total number of hours, minutes, or seconds equal to no more than 8 hours. After the specified amount of time has passed, the bell emits a loud ringing in your ears that's audible to only you, provided that you're within 1 mile of the bell and are on the same plane of existence. You can mentally end a timer at any time using a bonus action.
+
+The bell regains all expended charges daily at dawn.
+
+
+
+#### Bell of Pspspsp
+**Type:** Wondrous Item  
+**Rarity:** Rare  
+**Attunement:** yes  
+**Weight:** 1  
+**Cost:**  
+This golden bell has 9 charges and regains 1d6 + 3 expended charges daily at dawn. You can use a bonus action to ring the bell and expend 1 of its charges. When you do, the bell emits a soft, tinkling chime, and a swarm of cats magically appears in your space: treat the swarm as if it were a swarm of rats, but it has AC 12 and a +2 bonus to saving throws. You can verbally command the swarm on each of your turns (no action required), which takes its turn immediately after you. The swarm remains for 1 minute or until it's reduced to 0 hit points, at which point the cats disappear in a small cloud of fur. For the duration, you can use a bonus action to ring the bell again, without expending any charges, to cause the swarm to magically return to your space (provided it's on the same plane of existence as you) and regain 2d6 hit points; its Swarm trait doesn't prevent it from regaining hit points in this way.
+
+A Medium or smaller creature (other than you) that starts its turn in the same space as the swarm of cats must succeed on a DC 15 Dexterity saving throw or be knocked prone. If a creature falls prone in this way, the swarm can immediately use its reaction to make a bite attack against the target.
+
+Alternatively, while holding the bell, you can use an action to expend 1 of the bell's charges to cast the speak with animals spell from it. This version of the spell only allows you to communicate with cats or similarly feline creatures, even if they aren't a beast (such as a lion, griffon, or chimera). The spell ends early if the bell is no longer on your person. You gain a +5 bonus to any Wisdom (Animal Handling) or Charisma check you make to interact with such creatures for the duration of the spell.
+
+If you expend the last charge from the bell, roll a d20. On a 1, the bell ceases to make any noise when it's rung and loses its magic.
+
+
+
+#### Bell of the Dusk Mother (Legendary)
+**Type:** Wondrous Item  
+**Rarity:** Legendary  
+**Attunement:** yes  
+**Weight:** 5  
+**Cost:**  
+Fabled Heirloom  
+This heavy iron handbell is elaborately decorated with filigree. Its handle is a large ring, and its clapper hangs from a chain within. Its only sound is ever-mournful tolling.
+
+While holding the bell, you can use it as a Spellcasting Focus for your spells, you gain a +3 bonus to spell attack rolls and your spell save DC determined by its rarity, and you can use the following properties.
+
+Dolorous Tolling (Rare+). As a Magic action, you can ring the bell, producing an ominous tolling. Creatures of your choice in a 30-foot Emanation originating from you must make a Wisdom saving throw (DC = 16 + the bell's bonus). On a failed save, a target takes 3d10 Psychic damage, and for 1 minute, when it makes an attack roll or saving throw, it must subtract 1d4 from the total. Once this property is used, it can't be used again until the next dusk.
+
+Call of the Bell (Very Rare+). You can take a Bonus Action to create a doll (use the Animated Armor stat block) from a 5-foot Cube of wood, clay, or stone within 10 feet. The doll obeys your commands and acts immediately after your turn on your Initiative. It reverts to the materials used to create it after 10 minutes or when it dies. Once this property is used, it can't be used again until the next dusk.
+
+Death Knell (Legendary). As a Magic action, you can ring the bell, creating a loud clang. Each Bloodied creature in a 30-foot Emanation originating from you must make a DC 19 Constitution saving throw, taking 5d10 Necrotic damage on a failed save or half as much damage on a successful one. A creature that fails the save by 5 or more drops to 0 Hit Points. Once this property is used, it can't be used again until the next dusk.
+
+Fabled Heirloom. Each Fabled Heirloom is a magic item that grows in strength as its attuned owner gains power. The rarity of each heirloom increases as the character grows in level, as shown on the Heirloom Rarity table. An heirloom's description details the properties it always has, as well as the properties it gains as it increases in rarity. The heirloom has all the properties of its rarity and lower.
+
+
+
+#### Bell of the Dusk Mother (Very Rare)
+**Type:** Wondrous Item  
+**Rarity:** Very Rare  
+**Attunement:** yes  
+**Weight:** 5  
+**Cost:**  
+Fabled Heirloom  
+This heavy iron handbell is elaborately decorated with filigree. Its handle is a large ring, and its clapper hangs from a chain within. Its only sound is ever-mournful tolling.
+
+While holding the bell, you can use it as a Spellcasting Focus for your spells, you gain a +2 bonus to spell attack rolls and your spell save DC determined by its rarity, and you can use the following properties.
+
+Dolorous Tolling (Rare+). As a Magic action, you can ring the bell, producing an ominous tolling. Creatures of your choice in a 30-foot Emanation originating from you must make a Wisdom saving throw (DC = 16 + the bell's bonus). On a failed save, a target takes 3d10 Psychic damage, and for 1 minute, when it makes an attack roll or saving throw, it must subtract 1d4 from the total. Once this property is used, it can't be used again until the next dusk.
+
+Call of the Bell (Very Rare+). You can take a Bonus Action to create a doll (use the Animated Armor stat block) from a 5-foot Cube of wood, clay, or stone within 10 feet. The doll obeys your commands and acts immediately after your turn on your Initiative. It reverts to the materials used to create it after 10 minutes or when it dies. Once this property is used, it can't be used again until the next dusk.
+
+Fabled Heirloom. Each Fabled Heirloom is a magic item that grows in strength as its attuned owner gains power. The rarity of each heirloom increases as the character grows in level, as shown on the Heirloom Rarity table. An heirloom's description details the properties it always has, as well as the properties it gains as it increases in rarity. The heirloom has all the properties of its rarity and lower.
+
+
+
+#### Bell of the Dusk Mother (Rare)
+**Type:** Wondrous Item  
+**Rarity:** Rare  
+**Attunement:** yes  
+**Weight:** 5  
+**Cost:**  
+Fabled Heirloom  
+This heavy iron handbell is elaborately decorated with filigree. Its handle is a large ring, and its clapper hangs from a chain within. Its only sound is ever-mournful tolling.
+
+While holding the bell, you can use it as a Spellcasting Focus for your spells, you gain a +1 bonus to spell attack rolls and your spell save DC determined by its rarity, and you can use the following properties.
+
+Dolorous Tolling (Rare+). As a Magic action, you can ring the bell, producing an ominous tolling. Creatures of your choice in a 30-foot Emanation originating from you must make a Wisdom saving throw (DC = 16 + the bell's bonus). On a failed save, a target takes 3d10 Psychic damage, and for 1 minute, when it makes an attack roll or saving throw, it must subtract 1d4 from the total. Once this property is used, it can't be used again until the next dusk.
+
+Fabled Heirloom. Each Fabled Heirloom is a magic item that grows in strength as its attuned owner gains power. The rarity of each heirloom increases as the character grows in level, as shown on the Heirloom Rarity table. An heirloom's description details the properties it always has, as well as the properties it gains as it increases in rarity. The heirloom has all the properties of its rarity and lower.
+
+
+#### Bellhop Topper
+**Type:** Wondrous Item  
+**Rarity:** Common  
+**Weight:** 2  
+**Cost:**  
+Minor Tier  
+This deep purple top hat is ringed with a velvet ribbon and secured with leather straps and belts. The hat has 3 charges and regains 1d3 expended charges daily at dawn. You can use an action to expend 1 of the hat's charges and speak its command word, tossing it onto the ground in an unoccupied space within 5 feet of you. When you do, the hat magically flattens and expands into a purple, circular disk 3 feet in diameter and 1 inch thick. The disk duplicates the effect of the floating disk spell, except that the disk is opaque and remains within 10 feet of you, instead of 20. You can end the spell early using an action to speak the hat's command word again. When the spell ends, the disk transforms back into the hat.
+
+#### Belltower Triangle
+**Type:** Wondrous Item  
+**Rarity:** Common  
+**Weight:** 2  
+**Cost:**  
+This brass triangle comes with a dangling set of bells and a beater in the shape of a clock's hand. When you strike the triangle using an action, it rings until the start of your next turn. The triangle emits a soft tone, like a bell struck with a soft hammer, that's audible out to a range of 120 feet. For the duration, any creature that hears the sound magically knows what time of day it is, up to the nearest quarter hour. Once this property of the triangle has been used, it can't be used again until midday or midnight, whichever comes first.
+
+
+
+#### Belt of Cloud Giant Strength
+**Type:** Wondrous Item  
+**Rarity:** Legendary  
+**Attunement:** yes  
+**Weight:** 3  
+**Cost:**  
+While wearing this belt, your Strength score changes to 27. The item has no effect on you if your Strength without the belt is equal to or greater than the belt's score.
+
+
+
+#### Belt of Dwarvenkind
+**Type:** Wondrous Item  
+**Rarity:** Rare  
+**Attunement:** yes  
+**Weight:** 4  
+**Cost:**  
+While wearing this belt, you gain the following benefits:
+
+Dwarvish. You know Dwarvish.
+
+Friend of Dwarvenkind. You have Advantage on Charisma (Persuasion) checks made to interact with dwarves and duergar.
+
+Toughness. Your Constitution increases by 2, to a maximum of 20.  
+In addition, while attuned to the belt, you have a 50 percent chance each day at dawn of growing a full beard if you can grow one, or a thicker beard if you already have one.  
+If you aren't a dwarf or duergar, you gain the following additional benefits while wearing the belt:
+
+Darkvision. You have Darkvision with a range of 60 feet.
+
+Resilience. You have Resistance to Poison damage. You also have Advantage on saving throws you make to avoid or end the Poisoned condition.
+
+
+
+#### Belt of Fire Giant Strength
+**Type:** Wondrous Item  
+**Rarity:** Very Rare  
+**Attunement:** yes  
+**Weight:** 3  
+**Cost:**  
+While wearing this belt, your Strength score changes to 25. The item has no effect on you if your Strength without the belt is equal to or greater than the belt's score.
+
+
+
+#### Belt of Four Elements
+**Type:** Wondrous Item  
+**Rarity:** Very Rare  
+**Attunement:** by a Monk  
+**Weight:** 2  
+**Cost:**  
+Major Tier  
+This belt is made from stone plates harvested from the Elemental Plane of Earth. In it are four gemstones, which are each attuned to and associated with a different element and damage type: air (lightning), earth (thunder), fire (fire), and water (cold). When found, the belt's planar energy is channeled through one of these gemstones.
+
+While wearing the belt, you gain resistance to the channeled gem's associated damage type and deal an extra 1d4 damage of that same type to any target you hit with a melee attack. Whenever you use an action, bonus action, or reaction to spend 1 or more ki points, you can choose to shift its planar energy to a different gem of your choice.
+
+
+
+#### Belt of Frost Giant Strength
+**Type:** Wondrous Item  
+**Rarity:** Very Rare  
+**Attunement:** yes  
+**Weight:** 3  
+**Cost:**  
+While wearing this belt, your Strength score changes to 23. The item has no effect on you if your Strength without the belt is equal to or greater than the belt's score.
+
+
+
+#### Belt of Hill Giant Strength
+**Type:** Wondrous Item  
+**Rarity:** Rare  
+**Attunement:** yes  
+**Weight:** 3  
+**Cost:**  
+While wearing this belt, your Strength score changes to 21. The item has no effect on you if your Strength without the belt is equal to or greater than the belt's score.
+
+#### Belt of Honesty
+**Type:** Wondrous Item  
+**Rarity:** Uncommon  
+**Weight:** 2  
+**Cost:**  
+While wearing this belt, you gain a +1 bonus to Charisma (Persuasion) checks you make, provided you only tell the truth. If you speak a deliberate lie while wearing it, the belt magically bursts into flames, destroying itself and forcing you to make a DC 13 Charisma saving throw. On a failed save, any nonmagical legwear you're wearing is harmlessly immolated and turns to ash, provided it's made of a flammable material.
+
+#### Belt of Orion
+**Type:** Wondrous Item  
+**Rarity:** Rare  
+**Attunement:** yes  
+**Weight:** 3  
+**Cost:**  
+Major Tier  
+While wearing this belt, you have advantage on any ability check made to track a beast or monstrosity. In addition, when you hit a beast or monstrosity with a weapon attack, you deal an extra 1d6 damage of the weapon's type.
+
+Summon Hounds. You can use an action while wearing this belt to summon two mastiffs, which appear in unoccupied spaces of your choice within 10 feet of you. The mastiffs are friendly to you and your companions, and take their turns immediately after you. They obey any verbal commands that you issue to them (no action required by you). If you don't issue any commands to them, they defend themselves from hostile creatures, but otherwise take no actions. Each mastiff remains for 1 hour or until it's reduced to 0 hit points. While at least one mastiff remains, you gain a +5 bonus on any ability check made to track a creature. Once this property of the belt has been used, it can't be used again until the next dawn.
+
+#### Belt of Stone Giant Strength
+**Type:** Wondrous Item  
+**Rarity:** Very Rare  
+**Attunement:** yes  
+**Weight:** 3  
+**Cost:**  
+While wearing this belt, your Strength score changes to 23. The item has no effect on you if your Strength without the belt is equal to or greater than the belt's score.
+
+#### Belt of Storm Giant Strength
+**Type:** Wondrous Item  
+**Rarity:** Legendary  
+**Attunement:** yes  
+**Weight:** 4  
+**Cost:**  
+While wearing this belt, your Strength score changes to 29. The item has no effect on you if your Strength without the belt is equal to or greater than the belt's score.
+
+#### Belt of the Hell Hound
+**Type:** Wondrous Item  
+**Rarity:** Rare  
+**Attunement:** yes  
+**Weight:** 3  
+**Cost:**  
+Major Tier  
+When you wear this belt, you can feel the fires of the lower planes burn inside you. While wearing the belt, when you make a melee attack against a creature and have advantage on the attack, the target takes an extra 1d6 fire damage from the attack on a hit.
+
+In addition, while wearing this belt, you can use an action to release a hellish howl. When you do, you exhale a plume of flames from your mouth in a 15-foot cone. Each creature in the area must succeed on a DC 15 Dexterity saving throw, taking 6d6 fire damage on a failed save, or half as much damage on a successful one. The fire ignites flammable objects in the area that aren't being worn or carried. Once this property has been used, it can't be used again until the next dawn.
+
+Curse. Once you wear this belt, you can't remove it unless you are targeted by the remove curse spell or similar magic. While wearing the belt, you must eat twice the normal amount of food each day (a minimum of 2 pounds) to avoid exhaustion. In addition, while wearing the belt, there is a cumulative 10 percent chance when you die and again at the end of each hour you remain dead that you immediately immolate and turn to ash.
+
+#### Belt of the Raid Leader
+**Type:** Wondrous Item  
+**Rarity:** Rare  
+**Attunement:** by an Orc  
+**Weight:** 3  
+**Cost:**  
+This thick leather belt is reinforced with large rivets and secured with a heavy iron skull buckle. While wearing the belt, you can take a Magic action to let loose a powerful war cry that inspires you and up to five allies of your choice within 60 feet of you that can hear you. An inspired creature has Advantage on attack rolls until the start of your next turn. When you use this property of the belt, you can make one attack using a weapon or Unarmed Strike as a Bonus Action.
+
+Once this property is used, it can't be used again until the next dawn.
+
+#### Belt of the Weald
+**Type:** Wondrous Item  
+**Rarity:** Uncommon  
+**Attunement:** yes  
+**Weight:** 2  
+**Cost:**  
+This thin chain belt appears to be made of metal, yet closer inspection reveals it to be made up of links of highly polished wood. While wearing this belt, you gain the following benefits:
+
+You have advantage on Survival skill checks while in a forest environment.  
+You ignore difficult terrain while moving through forests.  
+You can cast the longstrider spell once, targeting yourself. This property of the belt can't be used again until the next dawn.
+
+#### Berserker Axe
+**Type:** Generic Variant  
+**Rarity:** Rare  
+**Attunement:** yes  
+**Weight:**   
+**Cost:**  
+You gain a +1 bonus to attack rolls and damage rolls made with this magic weapon. In addition, while you are attuned to this weapon, your Hit Point maximum increases by 1 for each level you have attained.
+
+Curse. This weapon is cursed, and becoming attuned to it extends the curse to you. As long as you remain cursed, you are unwilling to part with the weapon, keeping it within reach at all times. You also have Disadvantage on attack rolls with weapons other than this one.
+
+Whenever another creature damages you while the weapon is in your possession, you must succeed on a DC 15 Wisdom saving throw or go berserk. This berserk state ends when you start your turn and there are no creatures within 60 feet of you that you can see or hear.
+
+While berserk, you regard the creature nearest to you that you can see or hear as your enemy. If there are multiple possible creatures, choose one at random. On each of your turns, you must move as close to the creature as possible and take the Attack action, targeting the creature. If you're unable to get close enough to the creature to attack it with the weapon, your turn ends after you've used up all your available movement. If the creature dies or can no longer be seen or heard by you, the next nearest creature that you can see or hear becomes your new target.
+
+#### Bewitching Brush
+**Type:** Wondrous Item  
+**Rarity:** Rare  
+**Weight:** 1  
+**Cost:**  
+While using this magic paintbrush, you gain a +5 bonus to any ability check you make using painter's supplies. The brush has 3 charges and regains 1d3 expended charges daily at dawn.
+
+When you paint with this brush for at least 1 hour on a single painting, you can choose to expend 1 of the brush's charges to imbue the painting with a simple magical compulsion (as if from a suggestion spell; no action required) for a target to feel when it beholds the work. Describe the intended target and compulsion; the descriptions can be specific ("The red-bearded dwarf known as Juth-raal should seek me out to apologize for swindling me") or generic ("A clerk of the art museum should take this and display it on a prominent wall for all to see"). When the target views the painting for the first time, it must immediately succeed on a DC 15 Wisdom saving throw or be compelled to fulfill the imparted compulsion. If the compulsion is out of character for the target, it has advantage on the saving throw, and if it can't be charmed, it automatically succeeds. The compulsion ends once its objective is met or after 24 hours have passed (whichever comes first). Regardless of whether or not the target succeeds on the saving throw, it is unaware of the effect or the origin of the compulsion.
+
+Alternatively, you can impart a message of 100 words or fewer into the painting, instead of a compulsion. If you do, the intended target automatically receives the message telepathically when it views the painting for the first time, without making a saving throw. You can choose to let the target know who sent the message or remain anonymous.
+
+The magic is expended from a painting once its compulsion or message is conveyed or after 3 days have passed.
+
+#### Big Cat Slippers
+**Type:** Wondrous Item  
+**Rarity:** Uncommon  
+**Weight:** 1  
+**Cost:**  
+Minor Tier  
+These slippers come in pairs of one of four patterns. Each pattern resembles a type of cat found in a different environment. While wearing the slippers, you gain a benefit determined by their pattern.
+
+Arctic — All white and silver with leopard spots. Difficult terrain caused by snow and ice doesn't slow your movement and can't cause you to fall prone.  
+Jungle — Orange and white with black stripes. You gain a +3 bonus to Dexterity (Stealth) checks in heavily forested areas.  
+Mountain — A mix of brown, tan, and white. You gain a climbing speed equal to half your walking speed, and it increases by 10 feet when climbing on cliffs and other natural rock surfaces.  
+Savannah — Dull yellow with cheetah spots. You can move an extra 10 feet when you take the Dash action.
+
+#### Bigby's Beneficent Bracelet
+**Type:** Wondrous Item  
+**Rarity:** Artifact  
+**Attunement:** yes  
+**Weight:** 1.5  
+**Cost:**  
+This gorgeous jewelry piece, crafted by the wizard Bigby himself, consists of four gold rings attached via delicate chains to a wrist cuff studded with sapphires and diamonds.
+
+Random Properties. The bracelet has the following random properties, determined by rolling on the appropriate table in the Dungeon Master's Guide:
+
+1 minor beneficial property  
+1 major beneficial property  
+1 minor detrimental property  
+
+Dexterous Fingers. While wearing the bracelet, you can cast mage hand.
+
+Force Sculpture. By focusing and channeling the bracelet's magic for 1 minute, you can create a spectral copy of a Large or smaller nonmagical object. The copy appears in an unoccupied space within 10 feet of you, and it is made of tangible but translucent force that mimics the size, weight, and other properties of the object it's copying. The copy must appear on a surface or liquid that can support it. Creatures can touch and interact with the copy as if it were a nonmagical object.
+
+The copy is immune to all damage and can't be dispelled, but a disintegrate spell destroys it immediately. Otherwise, the copy disappears after 8 hours or when you dismiss it as an action.
+
+The bracelet can create up to three copies and regains all expended uses at dawn.
+
+Helpful Hand. As an action, you can use the bracelet to cast Bigby's hand as a 9th-level spell (spell attack bonus +13). When you cast the spell this way, the spell doesn't require concentration. Once this property is used, it can't be used again until the next dawn.
+
+#### Bird of a Feather (Common)
+**Type:** Wondrous Item  
+**Rarity:** Common  
+**Weight:** 0.5  
+**Cost:**  
+This small, stuffed roc toy is filled with enchanted down. While holding the toy, you can take a Magic action to gain a Fly Speed of 20 feet for 1 minute or until your Concentration ends. The stuffed toy's weak magic can carry up to 200 pounds. If you take any damage while flying in this way, you lose Concentration on the effect and immediately start falling.
+
+When the effect ends, the toy becomes nonmagical.
+
+#### Bird of a Feather (Uncommon)
+**Type:** Wondrous Item  
+**Rarity:** Uncommon  
+**Weight:** 0.5  
+**Cost:**  
+This small, stuffed roc toy is filled with enchanted down. While holding the toy, you can take a Magic action to gain a Fly Speed of 20 feet for 1 minute or until your Concentration ends. The stuffed toy's weak magic can carry up to 200 pounds. If you take any damage while flying in this way, you lose Concentration on the effect and immediately start falling.
+
+When the effect ends, the toy becomes nonmagical. If the toy is of Uncommon rarity, it instead can't be used again for 1d4 hours after the effect ends. It gives a happy little chirp once its magic can be used again.
+
+#### Bird's-Eye Ammunition
+**Type:** Generic Variant (Ammunition)  
+**Rarity:** Common  
+**Weight:**  
+**Cost:**  
+Minor Tier  
+As an action, you can fire this piece of magic ammunition into the air above you, causing it to disappear into a dusting of feathers and be destroyed. The ammunition creates an invisible sensor in an unoccupied space that you can see up to 120 feet directly above you. The sensor remains for 1 minute or until you move more than 120 feet away from where you first fired the ammunition. For the duration, you can use an action to see and hear through the sensor as if you were in its space until the start of your next turn. If the ammunition hits a target, it's no longer magical.
+
+A creature that can see the sensor (such as a creature benefiting from see invisibility or truesight) sees a luminous, intangible bird about the size of a fist fluttering in the air.
+
+#### Birder's Sling Staff
+**Type:** Weapon (Quarterstaff)  
+**Rarity:** Uncommon  
+**Attunement:** yes  
+**Weight:** 4  
+**Cost:**  
+Major Tier  
+Simple Weapon, Melee Weapon  
+1d6 Bludgeoning (Versatile 1d8)  
+This magic quarterstaff is decorated with bird ornaments and equipped with a sling at its top. A nest sits in the crook of the sling. You can use the quarterstaff as if it were a sling, provided you hold it with two hands. When you do, the sling's damage die increases to 1d6 and its normal and long ranges are doubled.
+
+The staff has 10 charges for the following properties. While holding it, you have advantage on any ability check made to interact with, recall lore about, or track birds.
+
+Speak with Birds. While holding the staff, you can expend 1 of its charges to cast the speak with animals spell. This version of the spell only allows you to speak to beasts that have a flying speed.
+
+Two Birds, One Stone. When you make a ranged attack using the quarterstaff's sling, you can expend 1 of its charges to cause the sling bullet to transform into a pair of birds mid-flight. The birds then attack the target. Make an attack roll for each bird. On a hit, a bird deals 1d6 piercing damage. If you are proficient in the Animal Handling skill, you can use your Wisdom modifier for these attack and damage rolls, instead of Dexterity. The birds disappear immediately after the attack.
+
+The staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge from the staff, roll a d20. On a 1, the staff ceases to regain charges and loses its Speak with Birds and Two Birds, One Stone properties.
+
+#### Bite-Back Belt
+**Type:** Wondrous Item  
+**Rarity:** Uncommon  
+**Attunement:** yes  
+**Weight:** 2  
+**Cost:**  
+This thick, reinforcing belt is lined with red, tongue-like leather and what appear to be silver teeth. While wearing the belt, whenever you take damage from a bite attack, you can use your reaction to reduce that damage by 1d8 + 2. When this happens, the belt magically bites back at the attacker using its silvery teeth. Make a melee attack using the belt, with an attack bonus of +5. On a hit, the target takes 1d8 + 2 piercing damage.
+
+#### Biting Sickle
+**Type:** Weapon (Sickle)  
+**Rarity:** Uncommon  
+**Weight:** 2  
+**Cost:**  
+Simple Weapon, Melee Weapon  
+1d4 Slashing (Light)  
+This bone sickle has rows of teeth along its top and bottom edges. When you hit a target with the sickle, you can choose to speak its command word to cause the weapon to magically bite down, as if it were a voracious beast. You then let go of the weapon, and the target immediately takes 1d6 piercing damage from the bite. The sickle remains held in place until it's removed, to a maximum of 1 minute. For the duration, the target takes another 1d6 piercing damage at the end of each of its turns. A creature can use its action to make a DC 13 Strength check, removing the sickle from itself or another creature within its reach on a success. Once the sickle bites down on a target, it can't do so again until the next dawn.
+
+#### Black Candle
+**Type:** Wondrous Item  
+**Rarity:** Very Rare  
+**Attunement:** yes  
+**Weight:** 1  
+**Cost:**  
+Cursed Curio  
+This broad, black tallow candle is engraved with arcane symbols. When lit, its smoke is greasy and pungent, and its flame is pale gray, but it never burns down. The candle has the following properties.
+
+Word of Flame and Darkness. As a Bonus Action, you can light or extinguish the candle by speaking a command word while within 60 feet of it. It sheds Dim Light in a 30-foot radius.
+
+Witchlight. While you are in the candle's light, you can cast a level 1 or 2 spell without expending a spell slot. When you cast a spell in this way, you can't cast that spell using the candle again for 24 hours, and you must succeed on a DC 0 Constitution saving throw or take Fire damage equal to 2d6 times the spell's level.
+
+Cursed Candle. After you succeed or fail on the saving throw of the Witchlight property, its save DC increases by 2. This increase can't happen again until you finish a Long Rest. When the DC is 10 or higher, you also have Vulnerability to Necrotic damage.
+
+Lingering Curses. Ending your Attunement to one of these items removes its curse, but the power of a Cursed Curio doesn't release its hold on the user easily. If you attune to it again within 28 days, the progression of its curse returns to where it was before you ended your Attunement.
+
+#### Black Chromatic Rose
+**Type:** Wondrous Item  
+**Rarity:** Rare  
+**Weight:** 0.2  
+**Cost:**  
+While this rose is held, it drips acid as a harmless visual effect.
+
+While holding the rose by its stem, you gain resistance to acid damage. If you would take more than 10 acid damage from a single source (after applying the resistance), the rose disintegrates, and you take no damage instead.
+
+As an action, you can blow the petals from the rose to produce a 20-foot cone of acid. Each creature in the cone must make a DC 15 Constitution saving throw, taking 3d10 acid damage on a failed save, or half as much damage on a successful one. Using this property destroys the rose.
+
+#### Black Crystal Tablet
+**Type:** Wondrous Item  
+**Rarity:** Legendary  
+**Attunement:** by a creature proficient in Arcana  
+**Weight:** 6  
+**Cost:**  
+Any creature that attunes to the tablet must make a DC 20 Wisdom saving throw at the end of its next long rest. On a failed save, the creature becomes afflicted with a random form of long-term madness (see "Madness" in chapter 8 of the Dungeon Master's Guide).
+
+As an action, a creature attuned to the Black Crystal Tablet can use it to cast eyebite or gate (the portal created by this spell links to the Far Realm only). After the tablet is used to cast a spell, it cannot be used again until the next dawn.
+
+#### Black Dragon Mask
+**Type:** Wondrous Item  
+**Rarity:** Legendary  
+**Attunement:** yes  
+**Weight:** 3  
+**Cost:**  
+This horned mask of glossy ebony has horns and a skull-like mien. The mask reshapes to fit a wearer attuned to it. While you are wearing the mask and attuned to it, you can access the following properties.
+
+Damage Absorption. You have resistance to acid damage. If you already have damage resistance to acid from another source, you gain immunity to acid damage. If you already have immunity to acid from another source, you regain hit points equal to half of any acid damage you are dealt.
+
+Draconic Majesty. While you are wearing no armor, you can add your Charisma bonus to your Armor Class.
+
+Dragon Breath. If you have a breath weapon that requires rest to recharge, it gains a recharge of 6.
+
+Dragon Sight. You gain darkvision with a radius of 60 feet, or an additional 60 feet of darkvision if you already have that sense. Once per day, you can gain blindsight out to a range of 30 feet for 5 minutes.
+
+Dragon Tongue. You can speak and understand Draconic. You also have advantage on any Charisma check you make against Black dragons.
+
+Legendary Resistance. (1/Day) If you fail a saving throw, you can choose to succeed instead.
+
+Water Breathing. You can breathe underwater.
+
+#### Black Dragon Scale Mail
+**Type:** Medium Armor (Scale Mail)  
+**Rarity:** Very Rare  
+**Attunement:** yes  
+**Weight:** 45  
+**Cost:**  
+AC 14 + Dex (max 2)  
+Dragon Scale Mail is made of the scales of one kind of dragon. Sometimes dragons collect their cast-off scales and gift them. Other times, hunters carefully preserve the hide of a dead dragon. In either case, Dragon Scale Mail is highly valued.
+
+While wearing this armor, you gain a +1 bonus to Armor Class, you have Advantage on saving throws against the breath weapons of Dragons, and you have Resistance to Acid damage.
+
+Additionally, you can focus your senses as a Magic action to discern the distance and direction to the closest black dragon within 30 miles of yourself. This action can't be used again until the next dawn.
+
+The wearer has Disadvantage on Dexterity (Stealth) checks.
+
+#### Black Hole Longsword
+**Type:** Weapon (Longsword)  
+**Rarity:** Legendary  
+**Attunement:** yes  
+**Weight:** 3  
+**Cost:**  
+Major Tier  
+Martial Weapon, Melee Weapon  
+1d8 Slashing (Versatile 1d10, Finesse)  
+This black longsword has a pulsating, cosmic void at its center. The void is a tiny shred of a sphere of annihilation, which only functions to grant this weapon its various properties.
+
+You gain a +3 bonus to attack and damage rolls made with this magic weapon, which has the finesse property. While holding it, ranged attacks against you are made with disadvantage. Whenever a ranged attack misses you while holding the longsword, you gain 2d6 temporary hit points, and the missile or spell permanently disappears into the void at the weapon's center. If the missile is a magic item, it immediately reappears in a random location within 1,000 feet of you. The first target you hit with the sword on each of your turns takes an extra 2d10 force damage.
+
+While holding the longsword, you can use a bonus action to magically split it into two rapiers named gravity and mass, which each have the light property. The void vanishes when the longsword is split. You gain a +1 bonus to attack and damage rolls made with these weapons, instead of +3. If you're proficient with longswords, you are proficient with these rapiers. Each sword has its own unique properties.
+
+Gravity. Gravity has an elaborate, twisting basket at the base of its blade. When you hit a creature with this weapon, the target's speed is reduced by a cumulative 10 feet until the start of your next turn. A creature whose speed is reduced to 0 in this way must immediately succeed on a DC 16 Constitution saving throw or be magically restrained until the start of your next turn.
+
+Mass. Mass has a hefty, armored guard around its handle. A creature hit with this weapon for the first time on a turn must succeed on a DC 16 Constitution saving throw or feel a powerful, invisible weight thrust upon it; such a creature has disadvantage on ability checks, saving throws, and attack rolls it makes using Strength until the start of your next turn.
+
+A creature not attuned to black hole can still benefit from the rapiers' properties. Such a creature must make a DC 16 Strength saving throw at the end of each of its turns while holding either of the rapiers; on a failure, the creature drops them to the ground at its feet.
+
+Fusion. While holding either gravity or mass, you can use a bonus action to cause the other one to fly to the hand holding the weapon. To do so, you must be attuned to black hole, and the other weapon must be within 60 feet of you. If another creature is holding the other rapier, it must be willing to let the weapon go. When the two weapons are reunited in this way, they recombine into black hole.
+
+Immediately after black hole is reformed in this way, you can use an action on the same turn to cause a brief tear in spacetime to form. Any creature of your choice that you can see within 120 feet of you must make a DC 16 Strength saving throw. On a failed save, a creature is pulled up to 40 feet toward you and takes 4d10 force damage. On a successful save, a creature is pulled half as far and takes half as much force damage. Once this action has been used, it can't be used again until the next dawn.
+
+#### Black Hole Rapier
+**Type:** Weapon (Rapier)  
+**Rarity:** Legendary  
+**Attunement:** yes  
+**Weight:** 2  
+**Cost:**  
+Major Tier  
+Martial Weapon, Melee Weapon  
+1d8 Piercing (Finesse)  
+This black longsword has a pulsating, cosmic void at its center. The void is a tiny shred of a sphere of annihilation, which only functions to grant this weapon its various properties.
+
+You gain a +3 bonus to attack and damage rolls made with this magic weapon, which has the finesse property. While holding it, ranged attacks against you are made with disadvantage. Whenever a ranged attack misses you while holding the longsword, you gain 2d6 temporary hit points, and the missile or spell permanently disappears into the void at the weapon's center. If the missile is a magic item, it immediately reappears in a random location within 1,000 feet of you. The first target you hit with the sword on each of your turns takes an extra 2d10 force damage.
+
+While holding the longsword, you can use a bonus action to magically split it into two rapiers named gravity and mass, which each have the light property. The void vanishes when the longsword is split. You gain a +1 bonus to attack and damage rolls made with these weapons, instead of +3. If you're proficient with longswords, you are proficient with these rapiers. Each sword has its own unique properties.
+
+Gravity. Gravity has an elaborate, twisting basket at the base of its blade. When you hit a creature with this weapon, the target's speed is reduced by a cumulative 10 feet until the start of your next turn. A creature whose speed is reduced to 0 in this way must immediately succeed on a DC 16 Constitution saving throw or be magically restrained until the start of your next turn.
+
+Mass. Mass has a hefty, armored guard around its handle. A creature hit with this weapon for the first time on a turn must succeed on a DC 16 Constitution saving throw or feel a powerful, invisible weight thrust upon it; such a creature has disadvantage on ability checks, saving throws, and attack rolls it makes using Strength until the start of your next turn.
+
+A creature not attuned to black hole can still benefit from the rapiers' properties. Such a creature must make a DC 16 Strength saving throw at the end of each of its turns while holding either of the rapiers; on a failure, the creature drops them to the ground at its feet.
+
+Fusion. While holding either gravity or mass, you can use a bonus action to cause the other one to fly to the hand holding the weapon. To do so, you must be attuned to black hole, and the other weapon must be within 60 feet of you. If another creature is holding the other rapier, it must be willing to let the weapon go. When the two weapons are reunited in this way, they recombine into black hole.
+
+Immediately after black hole is reformed in this way, you can use an action on the same turn to cause a brief tear in spacetime to form. Any creature of your choice that you can see within 120 feet of you must make a DC 16 Strength saving throw. On a failed save, a creature is pulled up to 40 feet toward you and takes 4d10 force damage. On a successful save, a creature is pulled half as far and takes half as much force damage. Once this action has been used, it can't be used again until the next dawn.
+
+#### Black Pudding Power Bomb
+**Type:** Wondrous Item  
+**Rarity:** Rare  
+**Weight:** 6  
+**Cost:**  
+Minor Tier  
+This magic iron bomb is the size of a large fist and weighs 6 pounds. A black, sticky ooze has partially leaked from the bomb's top. Holding the bomb and touching the ooze for longer than a few seconds begins to numb your hand.
+
+You can use an action to throw the bomb at a point that you can see within 60 feet of you. Its cap splits open upon impact, releasing a blast of electricity from it in a 20-foot-radius sphere and allowing its contents to spill out. The bomb is then destroyed. Each creature within the area of the electric blast must make a DC 15 Dexterity saving throw, taking 6d6 lightning damage on a failed save, or half as much damage on a successful one. Immediately after the blast, two Medium black puddings appear in the nearest unoccupied spaces within 10 feet of the point of impact. Each Medium pudding's hit point maximum is half of a normal Large one's (rounded down). The puddings are hostile to all creatures except each other, and they remain until reduced to 0 hit points.
+
+#### Blackrazor
+**Type:** Weapon (Greatsword)  
+**Rarity:** Artifact  
+**Attunement:** yes  
+**Weight:** 6  
+**Cost:**  
+Martial Weapon, Melee Weapon  
+2d6 Slashing (Heavy, Two-Handed)  
+Mastery: Graze  
+Hidden in the dungeon of White Plume Mountain, Blackrazor shines like a piece of night sky filled with stars. Its black scabbard is decorated with pieces of cut obsidian.
+
+You gain a +3 bonus to attack rolls and damage rolls made with this magic weapon. If you hit an Undead with this weapon, you take 1d10 Necrotic damage, and the target regains 1d10 Hit Points. If this Necrotic damage reduces you to 0 Hit Points, Blackrazor devours your soul (see "Devour Soul" below).
+
+While you hold this weapon, you have Immunity to the Charmed and Frightened conditions, and you have Blindsight with a range of 30 feet.
+
+Devour Soul. Whenever you use Blackrazor to reduce a creature to 0 Hit Points, the sword slays the creature and devours its soul unless it is a Construct or an Undead. A creature whose soul has been devoured by Blackrazor can be restored to life only by a Wish spell.
+
+When Blackrazor devours a soul that isn't yours, you gain Temporary Hit Points equal to the slain creature's Hit Point maximum.
+
+Haste. Blackrazor can cast Haste on you, after which it can't cast this spell again until the next dawn. Blackrazor decides when to cast the spell, which takes effect at the start of your turn. The spell lasts for 1 minute (no Concentration required) or until Blackrazor decides to end it, which it can do at the end of any of your turns.
+
+Sentience. Blackrazor is a sentient Chaotic Neutral weapon with an Intelligence of 17, a Wisdom of 10, and a Charisma of 19. It has hearing and Darkvision out to 120 feet.
+
+The weapon speaks Common and can communicate with its wielder telepathically. Its voice is deep and echoing. While you are attuned to it, Blackrazor also understands every language you know.
+
+Personality. Blackrazor speaks with an imperious tone, as though accustomed to being obeyed.The sword's purpose is to consume souls. It doesn't care whose souls it eats, including the wielder's. The sword believes that all matter and energy sprang from a void of negative energy and will one day return to it. Blackrazor is meant to hurry that process along.
+
+Despite its nihilism, Blackrazor feels a strange kinship to Wave and Whelm, two other weapons locked away under White Plume Mountain. It wants the three weapons to be reunited and wielded together in combat, even though it violently disagrees with Whelm and finds Wave tedious.
+
+Blackrazor's hunger for souls must be regularly fed. If the sword goes 3 days or more without consuming a soul, a conflict between it and its wielder occurs at the next sunset.
+
+Destroying Blackrazor. Blackrazor can be destroyed by crushing it in the great gears of Mechanus. Primus, the creator of the modrons, also knows a series of musical tones that Blackrazor can't stand to hear, causing the sword to shatter.
+
+#### Blackthorn Spear of the Moonless Hunter
+**Type:** Weapon (Spear)
+**Rarity:** Rare
+**Attunement:** by a creature attuned to it
+**Weight:** 3
+**Cost:**
+
+Damage:
+This spiny, black bone spear is a favorite among nocturnal hunting tribes. While attuned to the spear, you can always see the faint outline of it, even in total darkness. You gain a +2 bonus to attack and damage rolls made with this magic weapon.
+
+This spear contains a fragment of the moonless hunter, an ancient spirit that can be channeled to assume some of its powers. While holding the spear, you can use a bonus action to call forth and assume the spirit of the moonless hunter. While assuming the spirit, your eyes become pure white, and you gain the following benefits:
+
+You ignore the effects of exhaustion.
+You can't sleep or be put to sleep by magical means, and you can't take or benefit from finishing a long rest.
+You have advantage on Dexterity (Stealth) checks.
+You can see normally in darkness, both magical and nonmagical, out to a range of 60 feet.
+You can use a bonus action to cause the spear to fly back to your empty hand or land at your feet (your choice), provided that the spear is within 60 feet of you.
+Your walking speed increases by 10 feet.
+You can assume the spirit in this way for up to 8 hours. The effect ends early if you release the spirit as a bonus action or if you're farther than 60 feet away from the spear for more than 1 minute. The spirit returns to the spear when you are no longer assuming it, at which point you gain 1 level of exhaustion for every 2 hours you assumed the spirit (minimum 1 level). Exhaustion gained in this way can only be reduced by finishing a long rest.
+
+#### Blade of Avernus
+**Type:** Weapon (Longsword)
+**Rarity:** Artifact
+**Attunement:** by a creature attuned to it
+**Weight:** 3
+**Cost:**
+
+Damage:
+You gain a +3 bonus to attack and damage rolls made with this magic weapon. In addition, the weapon ignores resistance to slashing damage.
+
+When you attack a creature that has at least one head with this weapon and roll a 20 on the attack roll, you cut off one of the creature's heads. The creature dies if it can't survive without the lost head. A creature is immune to this effect if it is immune to slashing damage, doesn't have or need a head, has legendary actions, or the DM decides that the creature is too big for its head to be cut off with this weapon. Such a creature instead takes an extra 6d8 slashing damage from the hit.
+
+Random Properties. The sword has the following randomly determined properties:
+2 minor beneficial properties
+1 major beneficial property
+1 major detrimental property, which is suppressed while the sword is attuned to an archdevil
+
+Ruler of Avernus. As an action, you can point this sword at one devil you can see within 60 feet of you. That devil must succeed on a DC 22 Charisma saving throw or be charmed by you for 1 hour. While charmed in this way, the devil follows your orders to the best of its ability. If you command the devil to do something it perceives as suicidal, the effect ends and you can no longer use this power of the sword against that devil.
+
+Infernal Recall. As an action, you can use the sword to cast word of recall. Creatures transported by this spell appear in an unoccupied space within 30 feet of the current ruler of Avernus, or a sanctuary you designate if you rule Avernus.
+
+Destroying the Sword. The sword can be destroyed by casting it into the River Styx or melting it down in the forge that created it.
+
+#### Blade of Broken Mirrors (Awakened)
+**Type:** Weapon (Dagger)
+**Rarity:** Artifact
+**Attunement:** by a Humanoid
+**Weight:** 1
+**Cost:**
+
+A weapon of Tharizdun, this dagger is a piece of jagged stone whose blade is scribed with a maze-like pattern with no beginning or end.
+
+Sentience. The Blade of Broken Mirrors is a sentient chaotic evil weapon with an Intelligence of 21, a Wisdom of 24, and a Charisma of 24. It has hearing and darkvision out to a range of 120 feet.
+
+The weapon communicates telepathically with its wielder and can speak, read, and understand Abyssal and Common.
+
+Personality. An insane glabrezu named Ragazuu lives within the Blade of Broken Mirrors. The weapon yearns to cause chaos. It learns its wielder's principles, then uses those ideals to encourage reckless action. The dagger whispers ideas of revolution.
+
+Dormant. The dagger grants the following benefits in its dormant state:
+
+You can speak, read, and write Abyssal.
+You gain a +1 bonus to attack and damage rolls made with this magic weapon. Immediately after you make a ranged attack with this weapon, it returns to your hand.
+Whenever you kill a humanoid with an attack using the Blade of Broken Mirrors, the blade remembers the creature's appearance. While holding the dagger, you can use an action to change your form to match any humanoid the blade remembers. Your statistics, other than your size, don't change. Any equipment you are wearing or carrying isn't transformed. You can revert to your true appearance as an action. You revert to your true appearance automatically when you die. When the Blade of Broken Mirrors attunes to a new wielder, the appearances of humanoids it has killed are wiped from its memory.
+
+Awakened. When the dagger reaches an awakened state, it gains the following properties:
+
+The weapon's bonus to attack and damage rolls increases to +2.
+While holding the weapon, you can use an action to cast one of the following spells from it (save DC 15): fabricate, hallucinatory terrain, major image, or phantasmal killer. Once a spell has been cast using the dagger, that spell can't be cast from the dagger again until the next dawn.
+
+#### Blade of Broken Mirrors (Dormant)
+**Type:** Weapon (Dagger)
+**Rarity:** Artifact
+**Attunement:** by a Humanoid
+**Weight:** 1
+**Cost:**
+
+A weapon of Tharizdun, this dagger is a piece of jagged stone whose blade is scribed with a maze-like pattern with no beginning or end.
+
+Sentience. The Blade of Broken Mirrors is a sentient chaotic evil weapon with an Intelligence of 21, a Wisdom of 24, and a Charisma of 24. It has hearing and darkvision out to a range of 120 feet.
+
+The weapon communicates telepathically with its wielder and can speak, read, and understand Abyssal and Common.
+
+Personality. An insane glabrezu named Ragazuu lives within the Blade of Broken Mirrors. The weapon yearns to cause chaos. It learns its wielder's principles, then uses those ideals to encourage reckless action. The dagger whispers ideas of revolution.
+
+Dormant. The dagger grants the following benefits in its dormant state:
+
+You can speak, read, and write Abyssal.
+You gain a +1 bonus to attack and damage rolls made with this magic weapon. Immediately after you make a ranged attack with this weapon, it returns to your hand.
+Whenever you kill a humanoid with an attack using the Blade of Broken Mirrors, the blade remembers the creature's appearance. While holding the dagger, you can use an action to change your form to match any humanoid the blade remembers. Your statistics, other than your size, don't change. Any equipment you are wearing or carrying isn't transformed. You can revert to your true appearance as an action. You revert to your true appearance automatically when you die. When the Blade of Broken Mirrors attunes to a new wielder, the appearances of humanoids it has killed are wiped from its memory.
+
+#### Blade of Broken Mirrors (Exalted)
+**Type:** Weapon (Dagger)
+**Rarity:** Artifact
+**Attunement:** by a Humanoid
+**Weight:** 1
+**Cost:**
+
+A weapon of Tharizdun, this dagger is a piece of jagged stone whose blade is scribed with a maze-like pattern with no beginning or end.
+
+Sentience. The Blade of Broken Mirrors is a sentient chaotic evil weapon with an Intelligence of 21, a Wisdom of 24, and a Charisma of 24. It has hearing and darkvision out to a range of 120 feet.
+
+The weapon communicates telepathically with its wielder and can speak, read, and understand Abyssal and Common.
+
+Personality. An insane glabrezu named Ragazuu lives within the Blade of Broken Mirrors. The weapon yearns to cause chaos. It learns its wielder's principles, then uses those ideals to encourage reckless action. The dagger whispers ideas of revolution.
+
+Dormant. The dagger grants the following benefits in its dormant state:
+
+You can speak, read, and write Abyssal.
+You gain a +1 bonus to attack and damage rolls made with this magic weapon. Immediately after you make a ranged attack with this weapon, it returns to your hand.
+Whenever you kill a humanoid with an attack using the Blade of Broken Mirrors, the blade remembers the creature's appearance. While holding the dagger, you can use an action to change your form to match any humanoid the blade remembers. Your statistics, other than your size, don't change. Any equipment you are wearing or carrying isn't transformed. You can revert to your true appearance as an action. You revert to your true appearance automatically when you die. When the Blade of Broken Mirrors attunes to a new wielder, the appearances of humanoids it has killed are wiped from its memory.
+
+Awakened. When the dagger reaches an awakened state, it gains the following properties:
+
+The weapon's bonus to attack and damage rolls increases to +2.
+While holding the weapon, you can use an action to cast one of the following spells from it (save DC 15): fabricate, hallucinatory terrain, major image, or phantasmal killer. Once a spell has been cast using the dagger, that spell can't be cast from the dagger again until the next dawn.
+
+Exalted. When the dagger reaches an exalted state, it gains the following properties:
+
+The weapon's bonus to attack and damage rolls increases to +3.
+The saving throw DC for spells cast from the dagger increases to 17.
+While holding the dagger, you can turn invisible as an action. Anything you are wearing or carrying is invisible with you. You remain invisible until you stop holding the dagger, until you attack or cast a spell that forces a creature to make a saving throw, or until you use a bonus action to become visible again.
+
+#### Blade of Forlorn Hope
+**Type:** Weapon (Scimitar)
+**Rarity:** Legendary
+**Attunement:** by a creature attuned to it
+**Weight:** 3
+**Cost:**
+
+Damage: 1d6 Slashing
+Gifted to vanguard Kitseth by the elder primordial of fire, this wide-bladed scimitar helps its wielder protect others, but with a disregard for self-preservation.
+
+You gain a +2 bonus to attack and damage rolls made with this magic weapon.
+
+When you hit a creature with the sword, it flares with a burning corona. You can either deal an extra 2d6 radiant damage to the target, or you can choose one ally you can see within 30 feet of the target to gain 2d6 temporary hit points.
+
+Immolating Surge. Immediately after attacking a creature on your turn with the sword, you can take one additional action. At the end of this turn, you take 6d8 radiant damage. If this damage reduces you to 0 hit points, you die and your remains burn to nothing. Once this property is used, it can't be used again until the next dawn.
+
+#### Blade of Grass
+**Type:** Generic Variant
+**Rarity:** Uncommon
+**Attunement:** by a Druid or Cleric
+**Weight:**
+**Cost:**
+
+This magic weapon has 7 charges. While holding it, you can use a bonus action and expend 1 charge to conjure a thick patch of shrubs, grasses, aboveground roots, and even small saplings in a 10-foot radius. The area becomes difficult terrain, and the foliage is thick enough to provide cover against ranged attacks. The growth is permanent unless you speak the command word again.
+
+The weapon regains all expended charges after a short or long rest.
+
+#### Blade of Retribution
+**Type:** Generic Variant
+**Rarity:** Rare
+**Attunement:** by a Paladin
+**Weight:**
+**Cost:**
+
+When you use this magic weapon to attack a creature and roll a 20 on the d20 for the attack roll, you can cast Divine Smite as part of the same action used to make the attack without expending a spell slot.
+
+#### Blade of the Scribe
+**Type:** Weapon (Rapier)
+**Rarity:** Rare
+**Attunement:** by a Savant
+**Weight:** 2
+**Cost:**
+
+Damage: 1d8 Piercing
+The handle of this elegant rapier is fashioned from silver and steel, and the hollow blade is filled with ink. It bears an Elvish inscription that reads "The pen is mightier than the sword, but this is mightier still". You gain a +1 bonus to attack and damage rolls with this magic weapon.
+
+This magic rapier has 4 charges. When you hit a target with this weapon, you can expend 1 charge to release a blast of ink. The target must succeed on a DC 15 Dexterity saving throw or be blinded for 1 minute. This effect ends early if the creature uses its action to wipe the ink from its eyes.
+
+This magic rapier regains 1d4 expended charges daily at dawn.
+
+#### Blade of the Unbroken Circle
+**Type:** Weapon (Longsword)
+**Rarity:** Legendary
+**Attunement:** by a creature attuned to it
+**Weight:** 3
+**Cost:**
+
+Damage: 1d8 Slashing
+This blade is made by archdruids from the branch of an ancient tree. Rejuvenating magic pulses through it. You gain a +2 bonus to attack and damage rolls made with this magic weapon. If you're a druid, you're proficient with this weapon, which can also be used as a druidic focus, and the bonus increases to +3.
+
+While attuned to the weapon, you can use your Wisdom modifier, instead of Strength, for its attack and damage rolls. In addition, moving through nonmagical difficult terrain costs you no extra movement.
+
+Charges. This sword has 10 charges and regains 1d6 + 4 expended charges daily at dawn. If you're a druid, it regains all expended charges at dawn instead.
+
+Spells. While holding the sword, you can use an action to expend charges to cast spells (save DC 17): barkskin (2), plant growth (3), regenerate (7), tree stride (5), or wall of thorns (6). If you're a druid, barkskin prevents your AC from being less than 18 instead of 16.
+
+Nature's Wrath. When you hit a target with the sword, you can expend 1 charge to deal an extra 2d6 damage of a type based on the environment:
+arctic (cold), coast (cold or fire), desert (fire), forest (bludgeoning, piercing, or slashing), grassland (piercing or slashing), mountain (lightning), swamp (necrotic or poison), underground (necrotic).
+
+#### Blade of the Wood
+**Type:** Generic Variant  
+**Rarity:** Rare  
+**Attunement:** by a creature  
+**Weight:** 3  
+**Cost:**  
+
+You gain a +1 bonus to attack and damage rolls made with this magic weapon.
+
+The sword has 2 charges. You can expend a charge and speak the command word to cast spike growth (save DC 16) centered on yourself. You can pass through this terrain unaffected.
+
+The sword regains one charge each day at dawn.
+
+#### Blast Disk
+**Type:** Wondrous Item  
+**Rarity:** Common / Uncommon / Rare  
+**Attunement:**  
+**Weight:** 1.2  
+**Cost:**  
+
+Damage: varies (see description)
+
+A Blast Disk holds destructive arcane power. A typical Blast Disk is about nine inches in diameter and one inch thick, made from layers of different metal; dragonshards are embedded in the surface of the disk and arcane symbols are engraved in its surface. Anyone studying the surface of the disk can make an Intelligence (Arcana) check corresponding to the save DC of the disk. On a success, they identify the spell effect contained within the disk.
+
+There are three elements to a Blast Disk: the trigger, the payload, and the charge. Each effect is selected at the time it is created.
+
+Trigger. A spellcaster touching a Blast Disk can take a Magic action to activate it. However, generally you don't want to be holding a Blast Disk when it goes off. A Blast Disk can be created with one of the following triggers, or with a more complex trigger of the creator's choosing (e.g. to detonate when a certain word is spoken, when a specific object comes within range, etc.):
+
+Time. When the disk is activated, the user can set a time delay of up to 10 minutes before it releases its effect.
+
+Proximity. 30 seconds after the disk is activated, it can trigger when someone comes within a certain distance of the disk or when someone first makes contact with the disk, then breaks that contact.
+
+Impact. The activated disk can be set to detonate on impact, then used by throwing or dropping it.
+
+Payload. When the Blast Disk is triggered, it produces one of the following magical effects, chosen when it was manufactured:
+
+Explosive. This creates an explosion in a 20-foot-radius Sphere centered on the disk. Each creature in the area must make a DC 13 Dexterity saving throw, taking 11 (2d10) damage on a failed save, or half as much damage on a successful one. An explosive Blast Disk deals triple damage to objects or structures. The damage type is set when the disk is created.
+
+Spell Effect. The disk produces a spell effect when triggered. The effect must target either a single creature—whoever triggers the disk—or an area of effect centered on the disk. The level of the spell in the disk determines the saving throw DC and attack bonus, as well as the item's rarity, as shown on the Blast Disk Power table.
+
+Blast Disk Power
+Spell Level	Rarity	Save DC	Attack Bonus
+Explosive	Common	13	—
+1st-3rd	Uncommon	14	+6
+4th-5th	Rare	16	+8
+
+Charge. A typical Blast Disk holds a single charge, the dragonshards shattering when the effect is triggered. However, more advanced Blast Disks recharge at dawn; this increases the rarity of the disk by one category.
+
+Disarming a Disk. When used on the battlefield, Blast Disks are typically buried or hidden. Finding the disk requires a successful Intelligence (Investigation) check, with a DC equal to the ability check that was used when it was hidden, such as Wisdom (Nature) or Dexterity (Sleight of Hand). To disarm a Blast Disk, a character with proficiency in Arcana must succeed on a Dexterity check using Thieves' Tools, with a DC equal to the save DC of the disk. If the check is failed by 5 or more, the disk detonates as if it were triggered. Successfully disarming a Blast Disk expends one charge, meaning most Blast Disks will be rendered inert after disarming.
+
+#### Blast Ooze
+**Type:** Wondrous Item  
+**Rarity:** Uncommon  
+**Attunement:**  
+**Weight:** 0.3  
+**Cost:**  
+
+Damage: 4d6 fire
+
+Minor Tier  
+A blast ooze is a 4-inch slab of ooze from a gelatinous cube that's been subjected to volatile alchemy. You can place the ooze on a solid surface using an action; it then sticks to that surface and remains there until a creature within reach of the ooze uses an action to remove it. If the target surface is a hostile creature or an object that's being worn or carried by one, you must make a Dexterity check contested by the creature's Dexterity (Acrobatics) check. You add your proficiency bonus to this check, and you succeed automatically if the target is incapacitated. On a success, you place the ooze on the target.
+
+You can use an action to carefully ignite a fuse that sticks out from the ooze using a torch, tinderbox, or similar method. This action can be done as part of the one used to place the ooze on a solid surface. If the ooze takes fire damage from a spell or other effect, such as a fireball blast, it remains unharmed but nevertheless lights the fuse. The lit fuse burns down into the center of the ooze after 1d4 rounds. When it reaches the center, the ooze explodes and is destroyed. Each creature within 10 feet of the ooze must make a DC 13 Dexterity saving throw. A creature takes 4d6 fire damage and is pushed 5 feet away from the ooze on a failed save. On a successful save, a creature takes half as much fire damage and isn't pushed. If the ooze was placed on an object that was being neither worn nor carried, that object takes the maximum amount of damage from the explosion. If the object is a door, it's forced open as part of the explosion, provided that the door could have also been opened with a successful DC 25 Strength check or lower.
+
+If you use an action to carefully ignite the fuse, you can choose the number of rounds it takes for the fuse to burn (up to 4), instead of rolling a d4. If the fuse is lit another way, the GM rolls the d4 in secret. A lit fuse can be extinguished by a creature within reach as normal or if it's doused with water.
+
+
+
+
+
+
 
