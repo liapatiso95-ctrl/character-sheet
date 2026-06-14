@@ -11382,11 +11382,11 @@ It retains its weapon and armor proficiencies, and any damage resistances or imm
 **Components:** V, S, M (a smoke stained mirror)  
 **Duration:** Concentration, up to 1 hour  
 
-Targeting a creature you can see within range, you bring its shadow to life under your control. If the creature has a CR of more than 3 or the creature has no shadow (either from the nature of the creature or from the lack of a light source to cast one) the spell fails and you don't expend the spell slot. Creatures without CR (Such as players) have Immunity to this spell.
+Targeting a creature you can see within range, you bring its shadow to life under your control. If the creature has a CR of more than 3 or the creature has no shadow (either from the nature of the creature or from the lack of a light source to cast one) the spell fails and you don't expend the spell slot. If a creature has no CR, use its level or level of the spell used to summon it.
 
 Otherwise a copy of the creature is created using its game statistics adjacent to the creature (on the side away from the brightest light near it). The shadow has no legendary actions, legendary resistance, and cannot cast spells. The shadow has Hit Points equal to half the target's Hit Points, and looks like mirrored version of the creature it was summoned from formed from inky black smoke. The shadow is resistant to Bludgeoning, Piercing, and Slashing damage from non-magical sources while in darkness. The shadow is vulnerable to all damage while in Bright Light, and always vulnerable to Fire, Lightning, and Radiant damage. If the shadow is killed, the target creature it was summoned from casts no shadows for the next 8 hours.
 
-The shadow acts immediately after the creature's turn, and without further direction it attempts to follow and takes the attack action against the creature it was summoned from. As a Reaction to the shadow starting it's turn, the caster can exert control over it and cause it to move and take its action as the caster directs.
+The shadow is an ally to you and your companions. It acts immediately after the creature's turn. It obeys your verbal commands (no action required by you). If you don't issue any, it attempts to follow and damage the creature it was summoned from.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the maximum CR of the spell target increases by 1 for eack slot level above 3rd.
 
