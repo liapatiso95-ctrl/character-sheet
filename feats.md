@@ -1832,12 +1832,9 @@ You have trained to use the most potent armaments and weapons of war. You gain t
 
 **Weapon Mastery.** Choose a number of simple or martial weapons equal to your Proficiency Bonus. You can use the Mastery property of your chosen weapons. As your Proficiency Bonus increases, you choose additional weapons to gain this benefit.
 
-{{descriptive
-##### Alternate Weapon Master Feat
 If you don't want to use Weapon Masteries, use this:
 
 **Weapon Mastery.** Choose a number of simple or martial weapons equal to your Proficiency Bonus. Whenever you make an attack with those weapons you gain a +1 bonus to both the attack and damage roll. As your Proficiency Bonus increases, you choose additional weapons to gain this benefit.
-}}
 
 ### Wild Companion
 ***Prerequisite: Wisdom 13 or higher***
