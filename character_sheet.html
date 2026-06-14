@@ -3842,6 +3842,87 @@ function open5eSpellSearch(query){
   });
 }
 
+// ─── Exploit compendium (laserllama Compendium of Exploits, raw text format) ─────
+const EXPLOIT_MD_URL="https://raw.githubusercontent.com/liapatiso95-ctrl/character-sheet/main/exploits.md";
+const _exploitCache={data:null,status:"idle"};
+const _exploitListeners=[];
+function _notifyExploitListeners(){_exploitListeners.forEach(function(fn){fn();});}
+
+// Derive dice cost from an exploit's description text.
+// "up to your Proficiency Bonus" => "up to PB"; otherwise "1 die".
+function deriveExploitCost(desc){
+  var d=(desc||"").toLowerCase();
+  if(/up to your proficiency bonus/.test(d)) return "up to PB";
+  return "1 die";
+}
+
+// Parse the raw laserllama Compendium text. A real entry is any line that is a name,
+// immediately followed by a line matching "Nth-degree Exploit". Everything from the line
+// after Execution (or after the last header field) until the next entry is the description.
+function parseExploitMarkdown(md){
+  var out={};
+  var rawLines=md.replace(/\r\n/g,"\n").split("\n");
+  // Find indices where a "<degree>-degree Exploit" line occurs; the line before it is the name.
+  var degRe=/^(\d+)(?:st|nd|rd|th)-degree\s+Exploit\s*$/i;
+  var entryStarts=[];
+  for(var i=1;i<rawLines.length;i++){
+    var m=rawLines[i].trim().match(degRe);
+    if(m){
+      var nameLine=(rawLines[i-1]||"").trim();
+      // Name must be a non-empty, reasonably short line that isn't itself a field/heading
+      if(nameLine && nameLine.length<=60 && !/[:.]$/.test(nameLine) && !/^(classes|prerequisites|execution)\b/i.test(nameLine)){
+        entryStarts.push({nameIdx:i-1,degIdx:i,degree:parseInt(m[1])});
+      }
+    }
+  }
+  for(var e=0;e<entryStarts.length;e++){
+    var cur=entryStarts[e];
+    var endIdx=(e+1<entryStarts.length)?entryStarts[e+1].nameIdx:rawLines.length;
+    var name=rawLines[cur.nameIdx].trim();
+    var degree=cur.degree;
+    var classes="",prereq="",execution="";
+    var descLines=[];
+    var sawHeaderField=false;
+    for(var li=cur.degIdx+1;li<endIdx;li++){
+      var ln=(rawLines[li]||"").trim();
+      var kc=ln.match(/^Classes\s*[:：]\s*(.+)$/i);
+      var kp=ln.match(/^Prerequisites\s*[:：]\s*(.+)$/i);
+      var ke=ln.match(/^Execution\s*[:：]\s*(.+)$/i);
+      if(kc){classes=kc[1].trim();sawHeaderField=true;continue;}
+      if(kp){prereq=kp[1].trim();sawHeaderField=true;continue;}
+      if(ke){execution=ke[1].trim();sawHeaderField=true;continue;}
+      // Description lines come after the header fields
+      if(sawHeaderField){
+        descLines.push(rawLines[li]); // keep original (incl. blank lines for paragraphs)
+      }
+    }
+    // Trim leading/trailing blank lines from description
+    while(descLines.length&&!descLines[0].trim()) descLines.shift();
+    while(descLines.length&&!descLines[descLines.length-1].trim()) descLines.pop();
+    var desc=descLines.join("\n");
+    if(!name) continue;
+    out[name.toLowerCase()]={name:name,degree:degree,classes:classes,prereq:prereq,execution:execution,cost:deriveExploitCost(desc),desc:desc};
+  }
+  return out;
+}
+
+function useExploitCompendium(){
+  const [tick,setTick]=React.useState(0);
+  React.useEffect(function(){
+    function onUpdate(){setTick(function(t){return t+1;});}
+    _exploitListeners.push(onUpdate);
+    if(_exploitCache.status==="idle"){
+      _exploitCache.status="loading";
+      fetch(EXPLOIT_MD_URL)
+        .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
+        .then(function(text){_exploitCache.data=parseExploitMarkdown(text);_exploitCache.status="ready";_notifyExploitListeners();})
+        .catch(function(){_exploitCache.status="error";_notifyExploitListeners();});
+    }
+    return function(){var idx=_exploitListeners.indexOf(onUpdate);if(idx>=0)_exploitListeners.splice(idx,1);};
+  },[]);
+  return _exploitCache;
+}
+
 function SpellNameInput({value, onChange, onAutofill, placeholder, style, spellLevel}){
   const cache=useSpellCompendium();
   const [open,setOpen]=React.useState(false);
@@ -3930,6 +4011,64 @@ function SpellNameInput({value, onChange, onAutofill, placeholder, style, spellL
             );
           })}
           {srdLoading&&<div style={{padding:"6px 10px",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(201,150,42,.5)",textTransform:"uppercase"}}>Searching SRD…</div>}
+        </div>
+      )}
+    </div>
+  );
+}
+// ──────────────────────────────────────────────────────────────────────────────
+
+// ─── ExploitNameInput — autofill from the local exploits compendium ────────────
+function ExploitNameInput({value, onChange, onAutofill, placeholder, style, degree}){
+  const cache=useExploitCompendium();
+  const [open,setOpen]=React.useState(false);
+  const [rect,setRect]=React.useState(null);
+  const inputRef=React.useRef(null);
+  const pickingRef=React.useRef(false);
+
+  const updateRect=React.useCallback(function(){
+    if(inputRef.current){var r=inputRef.current.getBoundingClientRect();setRect({left:r.left,top:r.bottom,width:r.width});}
+  },[]);
+
+  var matches=[];
+  if(cache.status==="ready"&&cache.data&&(value||"").length>=2){
+    var q=(value||"").toLowerCase();
+    matches=Object.values(cache.data).filter(function(ex){
+      return ex.name.toLowerCase().includes(q)&&(degree===undefined||ex.degree===degree);
+    }).slice(0,10);
+  }
+
+  React.useEffect(function(){
+    if(!open) return;
+    updateRect();
+    function onMove(){updateRect();}
+    window.addEventListener("scroll",onMove,true);window.addEventListener("resize",onMove);
+    return function(){window.removeEventListener("scroll",onMove,true);window.removeEventListener("resize",onMove);};
+  },[open,updateRect]);
+
+  function apply(ex){pickingRef.current=false;setOpen(false);onAutofill(ex);}
+
+  var showDrop=open&&((value||"").length>=2)&&matches.length>0&&rect;
+
+  return (
+    <div style={{position:"relative",display:"flex",alignItems:"center",width:"100%"}}>
+      <input ref={inputRef} value={value||""} onChange={onChange}
+        onFocus={function(){updateRect();setOpen(true);}}
+        onBlur={function(){if(!pickingRef.current) setOpen(false);}}
+        placeholder={placeholder} style={style} />
+      {showDrop&&(
+        <div onMouseDown={function(){pickingRef.current=true;}} onMouseUp={function(){pickingRef.current=false;}}
+          style={{position:"fixed",top:rect.top,left:rect.left,zIndex:99999,background:"#1a1208",border:"1px solid rgba(201,74,42,.4)",boxShadow:"0 4px 24px rgba(0,0,0,.9)",minWidth:Math.max(rect.width,220),maxWidth:360,maxHeight:280,overflowY:"auto"}}>
+          {matches.map(function(ex,idx){
+            return (
+              <div key={ex.name+idx} onClick={function(){apply(ex);}}
+                style={{padding:"6px 10px",cursor:"pointer",borderBottom:"1px solid rgba(201,74,42,.08)",display:"flex",alignItems:"baseline",gap:8}}>
+                <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"#e07060",fontWeight:600,flex:1}}>{ex.name}</span>
+                <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(201,74,42,.7)",whiteSpace:"nowrap"}}>{ex.degree+"°"}</span>
+                <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:.5,color:"rgba(74,156,92,.6)",whiteSpace:"nowrap",textTransform:"uppercase"}}>File</span>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
@@ -5104,8 +5243,9 @@ function ExploitPage({c,s}){
                   )}
                   <div className="stbl-wrap"><table className="stbl" style={{minWidth:300}}>
                     <thead><tr>
-                      <SortableTh label="Exploit Name" col="nm" sort={exploitSorts[deg+"-"+gi]||null} onSort={(col)=>onExploitSort(deg,gi,col)} style={{width:"25%"}} />
-                      <SortableTh label="Dice Cost" col="uses" sort={exploitSorts[deg+"-"+gi]||null} onSort={(col)=>onExploitSort(deg,gi,col)} style={{width:"12%"}} />
+                      <SortableTh label="Exploit Name" col="nm" sort={exploitSorts[deg+"-"+gi]||null} onSort={(col)=>onExploitSort(deg,gi,col)} style={{width:"22%"}} />
+                      <SortableTh label="Dice Cost" col="uses" sort={exploitSorts[deg+"-"+gi]||null} onSort={(col)=>onExploitSort(deg,gi,col)} style={{width:"11%"}} />
+                      <SortableTh label="Execution" col="exec" sort={exploitSorts[deg+"-"+gi]||null} onSort={(col)=>onExploitSort(deg,gi,col)} style={{width:"16%"}} />
                       {hasUsed&&<th style={{width:"4%",textAlign:"center"}} title="Used this rest">U</th>}
                       <th>Notes</th>
                       <th style={{width:"3%"}}></th>
@@ -5116,8 +5256,12 @@ function ExploitPage({c,s}){
                         const ex=sorted.item; const i=sorted.item.__i;
                         return [
                           <tr key={i+"a"} style={{opacity:(hasUsed&&ex.used)?0.45:1,transition:"opacity .2s"}}>
-                            <td><TipInput value={ex.nm||""} onChange={e=>ue(deg,i,"nm",e.target.value)} placeholder="Exploit name..." style={{width:"100%",background:"transparent",border:"none",color:col,fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px",fontWeight:600}} /></td>
+                            <td><ExploitNameInput value={ex.nm||""} degree={deg}
+                              onChange={e=>ue(deg,i,"nm",e.target.value)}
+                              onAutofill={function(ex2){const cp={...c.expl};cp[deg]=[...(cp[deg]||[])];cp[deg][i]={...cp[deg][i],nm:ex2.name,uses:ex2.cost||cp[deg][i].uses||"",exec:ex2.execution||"",prereq:ex2.prereq||"",desc:ex2.desc||"",showDesc:ex2.desc?true:cp[deg][i].showDesc};s("expl",cp);}}
+                              placeholder="Exploit name..." style={{width:"100%",background:"transparent",border:"none",color:col,fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px",fontWeight:600}} /></td>
                             <td><TipInput value={ex.uses||""} onChange={e=>ue(deg,i,"uses",e.target.value)} placeholder="1 die" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px"}} /></td>
+                            <td><TipInput value={ex.exec||""} onChange={e=>ue(deg,i,"exec",e.target.value)} placeholder="1 action" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px"}} /></td>
                             {hasUsed&&<td style={{textAlign:"center"}}>
                               <div style={{width:14,height:14,borderRadius:2,border:"1px solid "+(ex.used?col:"rgba(201,74,42,.3)"),background:ex.used?col:"rgba(0,0,0,.35)",cursor:"pointer",display:"inline-block",transition:"all .15s"}} onClick={()=>ue(deg,i,"used",!ex.used)} title="Mark as used" />
                             </td>}
@@ -5127,7 +5271,12 @@ function ExploitPage({c,s}){
                               style={{background:"transparent",border:"none",color:ex.showDesc?"var(--arcane-l)":"rgba(184,154,240,.25)",cursor:"pointer",fontSize:12,padding:0,lineHeight:1,fontFamily:"'Cinzel',serif"}}>{ex.showDesc?"−":"+"}</button></td>
                           </tr>,
                           ex.showDesc&&<tr key={i+"b"} style={{borderBottom:"1px solid rgba(123,79,207,.1)"}}>
-                            <td colSpan={hasUsed?6:5} style={{padding:"2px 4px 6px"}}>
+                            <td colSpan={hasUsed?7:6} style={{padding:"2px 4px 6px"}}>
+                              <div style={{display:"flex",alignItems:"baseline",gap:4,padding:"0 4px 3px"}}>
+                                <span style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:"rgba(201,74,42,.75)",fontStyle:"italic",whiteSpace:"nowrap"}}>Prerequisites:</span>
+                                <TipInput value={ex.prereq||""} onChange={e=>ue(deg,i,"prereq",e.target.value)} placeholder="none"
+                                  style={{flex:1,background:"transparent",border:"none",color:"rgba(201,74,42,.75)",fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",outline:"none",padding:0}} />
+                              </div>
                               <AutoTextarea value={ex.desc||""} onChange={e=>ue(deg,i,"desc",e.target.value)} placeholder="Describe what this exploit does..."
                                 style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 4px"}} />
                             </td>
@@ -5825,7 +5974,8 @@ function CompendiumPage({c,s}){
   const spellCache=useSpellCompendium();
   const featCache=useFeatCompendium();
   const itemCache=useItemCompendium();
-  const [kind,setKind]=us("spells"); // spells | feats | items
+  const exploitCache=useExploitCompendium();
+  const [kind,setKind]=us("spells"); // spells | feats | items | exploits
   const [query,setQuery]=us("");
   const [descQuery,setDescQuery]=us("");
   const [fLevel,setFLevel]=us("any");
@@ -5840,6 +5990,9 @@ function CompendiumPage({c,s}){
   const [fPrereq,setFPrereq]=us("any"); // any | yes | no
   const [fPrereqText,setFPrereqText]=us("");
   const [fAbilities,setFAbilities]=us([]); // selected ability codes
+  const [fDegree,setFDegree]=us("any"); // exploit degree filter
+  const [fExec,setFExec]=us(""); // exploit execution textbox filter
+  const [fExClass,setFExClass]=us(""); // exploit class textbox filter
   const [expanded,setExpanded]=us({});
   const [page,setPage]=us(0);
   const [confirmAdd,setConfirmAdd]=us(null); // the result object pending confirmation
@@ -5852,14 +6005,15 @@ function CompendiumPage({c,s}){
   const debounceRef=React.useRef(null);
 
   // Reset filters when switching kind
-  function switchKind(k){setKind(k);setExpanded({});setSrdResults([]);setPage(0);}
+  function switchKind(k){setKind(k);setExpanded({});setSrdResults([]);setPage(0);setFDegree("any");setFExec("");setFExClass("");}
 
   // Reset to first page whenever a search or filter changes
-  React.useEffect(function(){setPage(0);},[query,descQuery,fLevel,fSchool,fClass,fCast,fRitual,fConc,fRarity,fAttune,fType,fPrereq,fPrereqText,fAbilities,includeSrd,kind]);
+  React.useEffect(function(){setPage(0);},[query,descQuery,fLevel,fSchool,fClass,fCast,fRitual,fConc,fRarity,fAttune,fType,fPrereq,fPrereqText,fAbilities,fDegree,fExec,fExClass,includeSrd,kind]);
 
   // SRD fetch (debounced) — only when there's a query
   React.useEffect(function(){
     if(!includeSrd){setSrdResults([]);return;}
+    if(kind==="exploits"){setSrdResults([]);return;} // exploits have no SRD API
     var qq=(query||descQuery||"").trim();
     if(qq.length<2){setSrdResults([]);return;}
     if(debounceRef.current) clearTimeout(debounceRef.current);
@@ -5879,6 +6033,7 @@ function CompendiumPage({c,s}){
   if(kind==="spells"&&spellCache.status==="ready"&&spellCache.data) fileList=Object.values(spellCache.data).map(function(x){return Object.assign({},x,{src:"file"});});
   else if(kind==="feats"&&featCache.status==="ready"&&featCache.data) fileList=Object.values(featCache.data).map(function(x){return Object.assign({},x,{src:"file"});});
   else if(kind==="items"&&itemCache.status==="ready"&&itemCache.data) fileList=Object.values(itemCache.data).map(function(x){return Object.assign({},x,{src:"file",name:x.name});});
+  else if(kind==="exploits"&&exploitCache.status==="ready"&&exploitCache.data) fileList=Object.values(exploitCache.data).map(function(x){return Object.assign({},x,{src:"file"});});
 
   // Merge SRD results in
   var all=fileList.concat(srdResults||[]);
@@ -5917,11 +6072,17 @@ function CompendiumPage({c,s}){
         if(!any) return false;
       }
     }
+    if(kind==="exploits"){
+      if(fDegree!=="any"&&r.degree!==parseInt(fDegree)) return false;
+      if(fExClass.trim()&&(r.classes||"").toString().toLowerCase().indexOf(fExClass.toLowerCase())<0) return false;
+      if(fExec.trim()&&(r.execution||"").toString().toLowerCase().indexOf(fExec.toLowerCase())<0) return false;
+    }
     return true;
   });
   // Sort: file first, then by name (spells by level then name)
   results.sort(function(a,b){
     if(kind==="spells"){var la=a.level||0,lb=b.level||0;if(la!==lb)return la-lb;}
+    if(kind==="exploits"){var da=a.degree||0,db=b.degree||0;if(da!==db)return da-db;}
     return (a.name||"").localeCompare(b.name||"");
   });
   var PER_PAGE=20;
@@ -5952,6 +6113,13 @@ function CompendiumPage({c,s}){
         && norm(sp.cls)===norm(candidate.cls);
   }
 
+  // Exploit duplicate matcher — same name + degree + class (empty class = unassigned).
+  function exploitMatches(ex,candidate){
+    var norm=function(x){return (x||"").toString().trim().toLowerCase();};
+    return norm(ex.nm)===norm(candidate.nm)
+        && norm(ex.cls)===norm(candidate.cls);
+  }
+
   function doAdd(r,clsName){
     if(kind==="spells"){
       var lv=r.level||0;
@@ -5971,6 +6139,19 @@ function CompendiumPage({c,s}){
     } else if(kind==="items"){
       var ch=parseChargesFromDesc(r.desc);
       s("inv",(c.inv||[]).concat([{nm:r.name||"",qt:"1",wt:r.weight||"",nt:r.cost?"Cost: "+r.cost:"",desc:r.desc||"",showDesc:!!r.desc,eq:false,wl:false,charges:ch||null}]));
+    } else if(kind==="exploits"){
+      var deg=r.degree||1;
+      var candidate={nm:r.name||"",uses:r.cost||"1 die",exec:r.execution||"",prereq:r.prereq||"",desc:r.desc||"",nt:"",used:false,cls:clsName||"",showDesc:false};
+      var existingEx=(c.expl&&c.expl[deg])||[];
+      var dup=existingEx.some(function(ex){return exploitMatches(ex,candidate);});
+      if(dup){
+        setConfirmAdd(null);
+        setSkippedInfo({names:[candidate.nm],cls:clsName||""});
+        return;
+      }
+      var cpe=Object.assign({},c.expl);
+      cpe[deg]=existingEx.concat([candidate]);
+      s("expl",cpe);
     }
     setConfirmAdd(null);
   }
@@ -5999,22 +6180,40 @@ function CompendiumPage({c,s}){
     if(skipped.length>0) setSkippedInfo({names:skipped,cls:clsName||""});
   }
 
+  function doAddAllExploits(clsName){
+    // Add all current filtered exploit results, skipping any already present under the same class.
+    var newExpl={};
+    Object.keys(c.expl||{}).forEach(function(deg){ newExpl[deg]=(c.expl[deg]||[]).slice(); });
+    var skipped=[];
+    results.forEach(function(r){
+      var deg=r.degree||1;
+      var candidate={nm:r.name||"",uses:r.cost||"1 die",exec:r.execution||"",prereq:r.prereq||"",desc:r.desc||"",nt:"",used:false,cls:clsName||"",showDesc:false};
+      if(!newExpl[deg]) newExpl[deg]=[];
+      var dup=newExpl[deg].some(function(ex){return exploitMatches(ex,candidate);});
+      if(!dup){ newExpl[deg].push(candidate); }
+      else { skipped.push(candidate.nm); }
+    });
+    s("expl",newExpl);
+    setConfirmAddAll(false);
+    if(skipped.length>0) setSkippedInfo({names:skipped,cls:clsName||""});
+  }
+
   return (
     <div>
       <div className="orn">Compendium</div>
       <div className="sh" style={{display:"flex",alignItems:"center"}}>
         <span>Compendium Search</span>
         {(function(){
-          var st=kind==="spells"?spellCache.status:kind==="feats"?featCache.status:itemCache.status;
+          var st=kind==="spells"?spellCache.status:kind==="feats"?featCache.status:kind==="exploits"?exploitCache.status:itemCache.status;
           var col=st==="ready"?"rgba(74,156,92,.6)":st==="loading"?"rgba(201,150,42,.5)":"rgba(201,74,42,.5)";
           var lbl=st==="ready"?"Compendium file loaded":st==="loading"?"Loading compendium file…":"Compendium file unavailable (offline or missing)";
           return <span title={lbl} style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:col,userSelect:"none",marginLeft:"auto",fontWeight:"normal",textTransform:"uppercase"}}>
             <span style={{width:6,height:6,borderRadius:"50%",background:col,display:"inline-block",flexShrink:0}} />
-            {kind==="spells"?"Spells":kind==="feats"?"Feats":"Items"} File
+            {kind==="spells"?"Spells":kind==="feats"?"Feats":kind==="exploits"?"Exploits":"Items"} File
           </span>;
         })()}
       </div>
-      <div style={{display:"flex",gap:8,marginBottom:14}}>{tabBtn("spells","Spells")}{tabBtn("feats","Feats")}{tabBtn("items","Items")}</div>
+      <div style={{display:"flex",gap:8,marginBottom:14,flexWrap:"wrap"}}>{tabBtn("spells","Spells")}{tabBtn("feats","Feats")}{tabBtn("items","Items")}{tabBtn("exploits","Exploits")}</div>
 
       {/* Search controls */}
       <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:8,alignItems:"center"}}>
@@ -6073,11 +6272,22 @@ function CompendiumPage({c,s}){
         </div>
       )}
 
+      {kind==="exploits"&&(
+        <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:8,alignItems:"center"}}>
+          <select value={fDegree} onChange={function(e){setFDegree(e.target.value);}} style={selStyle}>
+            <option value="any">Any Degree</option>
+            {[1,2,3,4,5].map(function(d){return <option key={d} value={""+d}>{d}{d===1?"st":d===2?"nd":d===3?"rd":"th"} Degree</option>;})}
+          </select>
+          <input value={fExClass} onChange={function(e){setFExClass(e.target.value);}} placeholder="Class..." style={Object.assign({},inputStyle,{width:120})} />
+          <input value={fExec} onChange={function(e){setFExec(e.target.value);}} placeholder="Execution contains... (e.g. reaction, 1 action)" style={Object.assign({},inputStyle,{flex:"1 1 200px",minWidth:160})} />
+        </div>
+      )}
+
       <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:12}}>
-        <label style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.5)",textTransform:"uppercase"}}>
+        {kind!=="exploits"&&<label style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.5)",textTransform:"uppercase"}}>
           <input type="checkbox" checked={includeSrd} onChange={function(e){setIncludeSrd(e.target.checked);}} />
           Include SRD
-        </label>
+        </label>}
         {srdLoading&&<span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(201,150,42,.5)",textTransform:"uppercase"}}>Searching SRD…</span>}
         <span style={{marginLeft:"auto",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.35)"}}>{totalResults} result{totalResults===1?"":"s"}{totalPages>1?" · showing "+(curPage*PER_PAGE+1)+"–"+Math.min(curPage*PER_PAGE+PER_PAGE,totalResults):""}</span>
         {kind==="spells"&&totalResults>0&&(
@@ -6086,11 +6296,17 @@ function CompendiumPage({c,s}){
             + Add All ({totalResults})
           </div>
         )}
+        {kind==="exploits"&&totalResults>0&&(
+          <div onClick={function(){var exc=c.exploitClasses||[];setAddCls(exc.length>0?(exc[0].nm||""):"");setConfirmAddAll(true);}}
+            style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",padding:"4px 10px",borderRadius:2,userSelect:"none",border:"1px solid rgba(201,74,42,.4)",color:"#e07060",background:"rgba(201,74,42,.1)",whiteSpace:"nowrap",flexShrink:0}}>
+            + Add All ({totalResults})
+          </div>
+        )}
       </div>
 
       {/* Results */}
       <div style={{border:"1px solid rgba(201,150,42,.12)",borderRadius:2}}>
-        {results.length===0&&<div style={{padding:"20px",textAlign:"center",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.3)"}}>No matches. {kind==="spells"&&spellCache.status==="loading"?"Loading spells…":kind==="feats"&&featCache.status==="loading"?"Loading feats…":kind==="items"&&itemCache.status==="loading"?"Loading items…":"Try a different search."}</div>}
+        {results.length===0&&<div style={{padding:"20px",textAlign:"center",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.3)"}}>No matches. {kind==="spells"&&spellCache.status==="loading"?"Loading spells…":kind==="feats"&&featCache.status==="loading"?"Loading feats…":kind==="items"&&itemCache.status==="loading"?"Loading items…":kind==="exploits"&&exploitCache.status==="loading"?"Loading exploits…":kind==="exploits"&&exploitCache.status==="error"?"Exploits file unavailable — check exploits.md in repo.":"Try a different search."}</div>}
         {pageResults.map(function(r,idx){
           var id=r.src+"-"+(r.srdVer||"")+"-"+r.name+"-"+(curPage*PER_PAGE+idx);
           var isOpen=expanded[id];
@@ -6098,6 +6314,7 @@ function CompendiumPage({c,s}){
           if(kind==="spells") sub=(r.level===0?"Cantrip":"Level "+r.level)+(r.school?" · "+r.school:"")+(r.ritual?" · Ritual":"")+(r.conc?" · Conc":"");
           else if(kind==="items") sub=[r.rarity,r.type,(r.attune===true?"Attunement":""),(r.weight?r.weight+" lb":"")].filter(Boolean).join(" · ");
           else if(kind==="feats") sub=[(r.abilities&&r.abilities.length&&r.abilities.length<6?"+"+r.abilities.join("/"):(r.abilities&&r.abilities.length===6?"+Any":"")),(r.prereq?"Prereq":"")].filter(Boolean).join(" · ");
+          else if(kind==="exploits") sub=[(r.degree?r.degree+(r.degree===1?"st":r.degree===2?"nd":r.degree===3?"rd":"th")+" Degree":""),(r.cost||""),(r.execution||"")].filter(Boolean).join(" · ");
           var tag=r.src==="file"?"File":("SRD"+(r.srdVer||""));
           var tagCol=r.src==="file"?"rgba(74,156,92,.6)":"rgba(96,180,196,.55)";
           return (
@@ -6115,11 +6332,24 @@ function CompendiumPage({c,s}){
                       {r.castingTime&&<span>Cast: {r.castingTime} · </span>}{r.range&&<span>Range: {r.range} · </span>}{r.components&&<span>Comp: {r.components} · </span>}{r.duration&&<span>Duration: {r.duration}</span>}
                     </div>
                   )}
+                  {kind==="exploits"&&(
+                    <div style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.5)",marginBottom:6,lineHeight:1.6}}>
+                      {r.classes&&<span>Classes: {r.classes} · </span>}{r.execution&&<span>Execution: {r.execution} · </span>}<span>Cost: {r.cost||"1 die"}</span>
+                      {r.prereq&&<div style={{color:"rgba(201,74,42,.75)",fontStyle:"italic",marginTop:2}}>Prerequisites: {r.prereq}</div>}
+                    </div>
+                  )}
                   <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.8)",lineHeight:1.7,whiteSpace:"pre-wrap"}}>{r.desc||"(No description)"}</div>
-                  <div onClick={function(){var spc=c.spellClasses||[];setAddCls(spc.length>0?(spc[0].nm||""):"");setConfirmAdd(r);}}
-                    style={{display:"inline-block",marginTop:10,cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",padding:"5px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(74,156,92,.4)",color:"rgba(74,156,92,.85)",background:"rgba(74,156,92,.08)"}}>
-                    + Add to {kind==="spells"?"Spell List":kind==="feats"?"Feats":"Inventory"}
-                  </div>
+                  {kind==="exploits"?(
+                    <div onClick={function(){var exc=c.exploitClasses||[];setAddCls(exc.length>0?(exc[0].nm||""):"");setConfirmAdd(r);}}
+                      style={{display:"inline-block",marginTop:10,cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",padding:"5px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(201,74,42,.45)",color:"#e07060",background:"rgba(201,74,42,.08)"}}>
+                      + Add to Exploit List
+                    </div>
+                  ):(
+                    <div onClick={function(){var spc=c.spellClasses||[];setAddCls(spc.length>0?(spc[0].nm||""):"");setConfirmAdd(r);}}
+                      style={{display:"inline-block",marginTop:10,cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",padding:"5px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(74,156,92,.4)",color:"rgba(74,156,92,.85)",background:"rgba(74,156,92,.08)"}}>
+                      + Add to {kind==="spells"?"Spell List":kind==="feats"?"Feats":"Inventory"}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -6143,9 +6373,9 @@ function CompendiumPage({c,s}){
           style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
           <div onClick={function(e){e.stopPropagation();}}
             style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,padding:"22px 26px",maxWidth:380,boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
-            <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--gold-l)",marginBottom:10}}>Add to {kind==="spells"?"Spell List":kind==="feats"?"Feats":"Inventory"}?</div>
+            <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--gold-l)",marginBottom:10}}>Add to {kind==="spells"?"Spell List":kind==="feats"?"Feats":kind==="exploits"?"Exploit List":"Inventory"}?</div>
             <div style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgba(232,213,176,.7)",marginBottom:18,lineHeight:1.5}}>
-              Add <span style={{color:"var(--gold-l)",fontWeight:600}}>{confirmAdd.name}</span>{kind==="spells"&&confirmAdd.level!==undefined?(confirmAdd.level===0?" (cantrip)":" (level "+confirmAdd.level+")"):""} to your {kind==="spells"?"spell list":kind==="feats"?"feats":"main inventory"}?
+              Add <span style={{color:"var(--gold-l)",fontWeight:600}}>{confirmAdd.name}</span>{kind==="spells"&&confirmAdd.level!==undefined?(confirmAdd.level===0?" (cantrip)":" (level "+confirmAdd.level+")"):""}{kind==="exploits"&&confirmAdd.degree?(" ("+confirmAdd.degree+(confirmAdd.degree===1?"st":confirmAdd.degree===2?"nd":confirmAdd.degree===3?"rd":"th")+" degree)"):""} to your {kind==="spells"?"spell list":kind==="feats"?"feats":kind==="exploits"?"exploit list":"main inventory"}?
             </div>
             {kind==="spells"&&(
               <div style={{marginBottom:18}}>
@@ -6158,6 +6388,20 @@ function CompendiumPage({c,s}){
                   </select>
                 ):(
                   <div style={{fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>No spellcasting classes defined — it will be added under "Other Spells".</div>
+                )}
+              </div>
+            )}
+            {kind==="exploits"&&(
+              <div style={{marginBottom:18}}>
+                <div style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.45)",textTransform:"uppercase",marginBottom:6}}>Add under class</div>
+                {(c.exploitClasses||[]).length>0?(
+                  <select value={addCls} onChange={function(e){setAddCls(e.target.value);}}
+                    style={{width:"100%",background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,74,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"6px 8px",borderRadius:2,cursor:"pointer"}}>
+                    {(c.exploitClasses||[]).map(function(ec,i){var nm=ec.nm||("Exploit Class "+(i+1));return <option key={i} value={ec.nm||""}>{nm}</option>;})}
+                    <option value="">Other / Unassigned</option>
+                  </select>
+                ):(
+                  <div style={{fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>No exploit classes defined — it will be added unassigned.</div>
                 )}
               </div>
             )}
@@ -6200,14 +6444,44 @@ function CompendiumPage({c,s}){
           </div>
         </div>
       )}
+      {confirmAddAll&&kind==="exploits"&&(
+        <div onClick={function(){setConfirmAddAll(false);}}
+          style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+          <div onClick={function(e){e.stopPropagation();}}
+            style={{background:"#1a1410",border:"1px solid rgba(201,74,42,.5)",borderRadius:4,padding:"22px 26px",maxWidth:400,boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+            <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"#e07060",marginBottom:10}}>Add All {totalResults} Exploit{totalResults===1?"":"s"} to Exploit List?</div>
+            <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.6)",marginBottom:18,lineHeight:1.6}}>
+              This will add all <span style={{color:"#e07060",fontWeight:600}}>{totalResults} exploit{totalResults===1?"":"s"}</span> from your current search results to your exploit list. Exploits already in your list will be skipped.
+            </div>
+            {(c.exploitClasses||[]).length>0?(
+              <div style={{marginBottom:18}}>
+                <div style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.45)",textTransform:"uppercase",marginBottom:6}}>Add under class</div>
+                <select value={addCls} onChange={function(e){setAddCls(e.target.value);}}
+                  style={{width:"100%",background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,74,42,.3)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"6px 8px",borderRadius:2,cursor:"pointer"}}>
+                  {(c.exploitClasses||[]).map(function(ec,i){var nm=ec.nm||("Exploit Class "+(i+1));return <option key={i} value={ec.nm||""}>{nm}</option>;})}
+                  <option value="">Other / Unassigned</option>
+                </select>
+              </div>
+            ):(
+              <div style={{marginBottom:18,fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>No exploit classes defined — they will be added unassigned.</div>
+            )}
+            <div style={{display:"flex",gap:10,justifyContent:"flex-end"}}>
+              <div onClick={function(){setConfirmAddAll(false);}}
+                style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(232,213,176,.2)",color:"rgba(232,213,176,.5)"}}>Cancel</div>
+              <div onClick={function(){doAddAllExploits(addCls);}}
+                style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(201,74,42,.6)",color:"#e07060",background:"rgba(201,74,42,.15)"}}>Add All</div>
+            </div>
+          </div>
+        </div>
+      )}
       {skippedInfo&&(
         <div onClick={function(){setSkippedInfo(null);}}
           style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.7)",zIndex:100001,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
           <div onClick={function(e){e.stopPropagation();}}
             style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,padding:"22px 26px",maxWidth:420,maxHeight:"70vh",overflowY:"auto",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
-            <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--gold-l)",marginBottom:10}}>{skippedInfo.names.length===1?"Spell Already in List":skippedInfo.names.length+" Spells Already in List"}</div>
+            <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--gold-l)",marginBottom:10}}>{(function(){var w=kind==="exploits"?"Exploit":"Spell";return skippedInfo.names.length===1?(w+" Already in List"):(skippedInfo.names.length+" "+w+"s Already in List");})()}</div>
             <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.6)",marginBottom:14,lineHeight:1.6}}>
-              The following {skippedInfo.names.length===1?"spell was":"spells were"} not added because {skippedInfo.names.length===1?"it already exists":"they already exist"} under <span style={{color:"var(--gold-l)",fontWeight:600}}>{skippedInfo.cls?skippedInfo.cls:"Other Spells"}</span>:
+              The following {kind==="exploits"?(skippedInfo.names.length===1?"exploit was":"exploits were"):(skippedInfo.names.length===1?"spell was":"spells were")} not added because {skippedInfo.names.length===1?"it already exists":"they already exist"} under <span style={{color:"var(--gold-l)",fontWeight:600}}>{skippedInfo.cls?skippedInfo.cls:(kind==="exploits"?"Other / Unassigned":"Other Spells")}</span>:
             </div>
             <div style={{display:"flex",flexDirection:"column",gap:3,marginBottom:18,paddingLeft:4}}>
               {skippedInfo.names.map(function(nm,i){return (
@@ -7247,7 +7521,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.28</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.30</div>
 
 </script>
 </body>
