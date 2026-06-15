@@ -1981,6 +1981,19 @@ function Page2({c,s}){
   const [attunedMaxModal,setAttunedMaxModal]=useState(false);
   const [removeBagModal,setRemoveBagModal]=useState(null);
   const [bagMaxModal,setBagMaxModal]=useState(null); // bagId
+  const [wtPrompt,setWtPrompt]=useState(null); // {list, idx, bagId, name} for autofill weight prompt
+  const [wtVal,setWtVal]=useState("");
+  // Commit the weight prompt value (empty => "0", since 0 is acceptable) into the right list.
+  function commitWtPrompt(){
+    if(!wtPrompt) return;
+    var v=wtVal.trim()===""?"0":wtVal.trim();
+    if(wtPrompt.list==="inv"){var a=[...(c.inv||[])];if(a[wtPrompt.idx]){a[wtPrompt.idx]={...a[wtPrompt.idx],wt:v};s("inv",a);}}
+    else if(wtPrompt.list==="attuned_inv"){var b=[...(c.attuned_inv||[])];if(b[wtPrompt.idx]){b[wtPrompt.idx]={...b[wtPrompt.idx],wt:v};s("attuned_inv",b);}}
+    else if(wtPrompt.list==="bag"){var bags=c.bags||[];s("bags",bags.map(function(bg){if(bg.id!==wtPrompt.bagId)return bg;var bi=[...(bg.inv||[])];if(bi[wtPrompt.idx]){bi[wtPrompt.idx]={...bi[wtPrompt.idx],wt:v};}return {...bg,inv:bi};}));}
+    setWtPrompt(null);
+  }
+  // Helper: should we prompt for weight on this autofilled item?
+  function needsWeight(item){var w=(item.weight==null?"":(""+item.weight)).trim();return w===""||parseFloat(w)===0;}
   const invSort=(c.sortPrefs&&c.sortPrefs.inv)||null;
   const attSort=(c.sortPrefs&&c.sortPrefs.att)||null;
   const bagSorts=(c.sortPrefs&&c.sortPrefs.bags)||{};
@@ -2021,9 +2034,19 @@ function Page2({c,s}){
   const attunedWeight=(c.attuned_inv||[]).reduce((sum,it)=>sum+itemWeight(it),0);
 
   const getBagSelfWeight=(bag)=>bag&&bag.selfWeight!=null?parseFloat(bag.selfWeight)||0:5;
+  // A bag is "weightless inside" by default (extradimensional). If weightless===false,
+  // its contents (and coins) count toward the character's carried weight.
+  const isWeightlessInside=(bag)=>bag?bag.weightless!==false:true;
   // New bags array
   const bags=c.bags||[];
   const newBagsWeight=bags.reduce((t,b)=>t+getBagSelfWeight(b),0);
+  // Contents of non-weightless bags add to carried weight (items + coins at 0.02 lb each).
+  const bagContentsWeight=bags.reduce((t,b)=>{
+    if(isWeightlessInside(b)) return t;
+    var items=(b.inv||[]).reduce((s,it)=>s+itemWeight(it),0);
+    var coins=countCoins(b.cur||{})*0.02;
+    return t+items+coins;
+  },0);
 
   // Carry capacity: base is STR*15, plus flat bonus, times multiplier
   const str=getTotal(c,"STR")||10;
@@ -2032,7 +2055,7 @@ function Page2({c,s}){
   const baseCapacity=str*15;
   const totalCapacity=(baseCapacity+carryFlat)*carryMult;
 
-  const totalWeight=invWeight+attunedWeight+newBagsWeight+coinWeight;
+  const totalWeight=invWeight+attunedWeight+newBagsWeight+bagContentsWeight+coinWeight;
   // Variant encumbrance rule: encumbered at STR*5, heavily encumbered at STR*10, max carry STR*15 (all pre-multiplier)
   const encThresh1=(str*5+carryFlat)*carryMult;
   const encThresh2=(str*10+carryFlat)*carryMult;
@@ -2404,7 +2427,7 @@ function Page2({c,s}){
                   <td style={{textAlign:"center"}}><div className={"tog tog-eq"+(it.eq?" on":"")} onClick={()=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],eq:!it.eq};s("attuned_inv",a);}} /></td>
                   <td style={{textAlign:"center"}}><div className={"tog tog-wl"+(it.wl?" on":"")} onClick={()=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],wl:!it.wl};s("attuned_inv",a);}} /></td>
                   <td><ItemNameInput value={it.nm||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],nm:e.target.value};s("attuned_inv",a);}} placeholder="Item..." style={{width:"100%",background:"transparent",border:"none",color:it.eq?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px",fontWeight:it.eq?"600":"400"}}
-                    onAutofill={function(item){const a=[...(c.attuned_inv||[])];const ch=parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",nt:item.cost?"Cost: "+item.cost:a[i].nt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("attuned_inv",a);}} /></td>
+                    onAutofill={function(item){const a=[...(c.attuned_inv||[])];const ch=item.charges||parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",nt:item.cost?"Cost: "+item.cost:a[i].nt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("attuned_inv",a);if(item.weightInferred){setWtVal((a[i].wt==null?"":(""+a[i].wt)));setWtPrompt({list:"attuned_inv",idx:i,name:item.name});}}} /></td>
                   <td><TipInput value={it.qt||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],qt:e.target.value};s("attuned_inv",a);}} placeholder="1" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                   <td><TipInput value={it.wt||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],wt:e.target.value};s("attuned_inv",a);}} placeholder="0" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                   <td style={{fontFamily:"'Cinzel',serif",fontSize:11,color:it.wl?"var(--teal)":"var(--gold-l)",textAlign:"center",opacity:.8}}>{it.wl?"0":itemWeight(it)>0?itemWeight(it).toFixed(2):"-"}</td>
@@ -2477,7 +2500,7 @@ function Page2({c,s}){
                     <div className={"tog tog-wl"+(it.wl?" on":"")} onClick={()=>ui("inv",i,"wl",!it.wl)} title="Weightless" />
                   </td>
                   <td><ItemNameInput value={it.nm||""} onChange={e=>ui("inv",i,"nm",e.target.value)} placeholder="Item..." style={{width:"100%",background:"transparent",border:"none",color:it.eq?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px",fontWeight:it.eq?"600":"400",opacity:it.wl?0.7:1}}
-                    onAutofill={function(item){const a=[...c.inv];const ch=parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",nt:item.cost?"Cost: "+item.cost:a[i].nt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("inv",a);}} /></td>
+                    onAutofill={function(item){const a=[...c.inv];const ch=item.charges||parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",nt:item.cost?"Cost: "+item.cost:a[i].nt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("inv",a);if(item.weightInferred){setWtVal((a[i].wt==null?"":(""+a[i].wt)));setWtPrompt({list:"inv",idx:i,name:item.name});}}} /></td>
                   <td><TipInput value={it.qt||""} onChange={e=>ui("inv",i,"qt",e.target.value)} placeholder="1" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                   <td><TipInput value={it.wt||""} onChange={e=>ui("inv",i,"wt",e.target.value)} placeholder="0" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                   <td style={{fontFamily:"'Cinzel',serif",fontSize:11,color:it.wl?"var(--teal)":"var(--gold-l)",textAlign:"center",opacity:.8}}>{it.wl?"0":itemWeight(it)>0?itemWeight(it).toFixed(2):"-"}</td>
@@ -2563,6 +2586,11 @@ function Page2({c,s}){
                 style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,padding:"1px 7px",background:"rgba(123,79,207,.08)",border:"1px solid rgba(123,79,207,.2)",color:"rgba(184,154,240,.5)",borderRadius:10,userSelect:"none",textTransform:"none"}}>
                 Weighs {getBagSelfWeight(bag)} lbs · holds up to {getBohMax(bag)} lbs
               </span>
+              <span onClick={()=>s("bags",bags.map(b=>b.id===bag.id?{...b,weightless:!(b.weightless!==false)}:b))}
+                title={isWeightlessInside(bag)?"Contents do NOT add to your carried weight (extradimensional). Tap to change.":"Contents DO add to your carried weight. Tap to change."}
+                style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,padding:"1px 7px",borderRadius:10,userSelect:"none",textTransform:"none",whiteSpace:"nowrap",border:"1px solid "+(isWeightlessInside(bag)?"rgba(56,178,172,.4)":"rgba(201,150,42,.3)"),background:isWeightlessInside(bag)?"rgba(56,178,172,.1)":"rgba(201,150,42,.08)",color:isWeightlessInside(bag)?"rgba(56,178,172,.85)":"rgba(201,150,42,.7)"}}>
+                {isWeightlessInside(bag)?"Weightless inside ✓":"Weightless inside ✕"}
+              </span>
               <button onClick={()=>setRemoveBagModal(bag.id)}
                 style={{fontFamily:"'Cinzel',serif",fontSize:9,padding:"3px 10px",background:"transparent",border:"1px solid rgba(201,74,42,.3)",color:"rgba(201,74,42,.5)",cursor:"pointer",borderRadius:2}}>Remove</button>
               <div style={{display:"flex",gap:4}}>
@@ -2624,7 +2652,7 @@ function Page2({c,s}){
                       <td style={{textAlign:"center"}}><div className={"tog tog-eq"+(it.eq?" on":"")} onClick={()=>{const a=[...bagInv];a[i]={...a[i],eq:!it.eq};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} /></td>
                       <td style={{textAlign:"center"}}><div className={"tog tog-wl"+(it.wl?" on":"")} onClick={()=>{const a=[...bagInv];a[i]={...a[i],wl:!it.wl};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} /></td>
                       <td><ItemNameInput value={it.nm||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],nm:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="Item..." style={{width:"100%",background:"transparent",border:"none",color:it.eq?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px",fontWeight:it.eq?"600":"400",opacity:it.wl?0.7:1}}
-                        onAutofill={function(item){const a=[...bagInv];const ch=parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",nt:item.cost?"Cost: "+item.cost:a[i].nt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} /></td>
+                        onAutofill={function(item){const a=[...bagInv];const ch=item.charges||parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",nt:item.cost?"Cost: "+item.cost:a[i].nt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));if(item.weightInferred){setWtVal((a[i].wt==null?"":(""+a[i].wt)));setWtPrompt({list:"bag",idx:i,bagId:bag.id,name:item.name});}}} /></td>
                       <td><TipInput value={it.qt||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],qt:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="1" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                       <td><TipInput value={it.wt||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],wt:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="0" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                       <td style={{fontFamily:"'Cinzel',serif",fontSize:11,color:it.wl?"var(--teal)":"var(--gold-l)",textAlign:"center",opacity:.8}}>{it.wl?"0":itemWeight(it)>0?itemWeight(it).toFixed(2):"-"}</td>
@@ -2662,7 +2690,7 @@ function Page2({c,s}){
 
       <div style={{marginTop:16}}>
         <button className="arb" style={{borderColor:"rgba(123,79,207,.35)",color:"var(--arcane-l)"}}
-          onClick={()=>s("bags",[...bags,{id:Date.now()+"",nm:"Bag of Holding",inv:[]}])}>+ Add Extradimensional Container</button>
+          onClick={()=>s("bags",[...bags,{id:Date.now()+"",nm:"Bag of Holding",inv:[],selfWeight:5,maxLbs:500,weightless:true}])}>+ Add Container</button>
       </div>
 
       {/* Bag max weight modal */}
@@ -2683,11 +2711,11 @@ function Page2({c,s}){
               <input type="number" min={0}
                 value={(function(){var b=bags.find(function(b){return b.id===bagMaxModal;});return b&&b._swInput!=null?b._swInput:getBagSelfWeight(b);})()}
                 onChange={e=>s("bags",bags.map(b=>b.id===bagMaxModal?{...b,_swInput:e.target.value,selfWeight:e.target.value===''?5:Math.max(0,parseFloat(e.target.value)||0)}:b))}
-                onBlur={e=>s("bags",bags.map(b=>b.id===bagMaxModal?{...b,_swInput:null,selfWeight:e.target.value===''?15:Math.max(0,parseFloat(e.target.value)||0)}:b))}
+                onBlur={e=>s("bags",bags.map(b=>b.id===bagMaxModal?{...b,_swInput:null,selfWeight:e.target.value===''?5:Math.max(0,parseFloat(e.target.value)||0)}:b))}
                 style={{width:72,background:"rgba(0,0,0,.3)",border:"none",borderBottom:"1px solid rgba(123,79,207,.35)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:18,textAlign:"center",outline:"none",fontWeight:700}} />
             </div>
             <div style={{display:"flex",justifyContent:"flex-end"}}>
-              <button onClick={()=>{s("bags",bags.map(b=>b.id===bagMaxModal?{...b,_maxInput:null,_swInput:null,maxLbs:b.maxLbs||500,selfWeight:b.selfWeight!=null?b.selfWeight:15}:b));setBagMaxModal(null);}} style={{background:"rgba(74,156,92,.12)",border:"1px solid rgba(74,156,92,.35)",color:"rgba(74,156,92,.9)",fontFamily:"'Cinzel',serif",fontSize:10,padding:"5px 16px",cursor:"pointer",borderRadius:2}}>Done</button>
+              <button onClick={()=>{s("bags",bags.map(b=>b.id===bagMaxModal?{...b,_maxInput:null,_swInput:null,maxLbs:b.maxLbs||500,selfWeight:b.selfWeight!=null?b.selfWeight:5}:b));setBagMaxModal(null);}} style={{background:"rgba(74,156,92,.12)",border:"1px solid rgba(74,156,92,.35)",color:"rgba(74,156,92,.9)",fontFamily:"'Cinzel',serif",fontSize:10,padding:"5px 16px",cursor:"pointer",borderRadius:2}}>Done</button>
             </div>
           </div>
         </div>,
@@ -2774,6 +2802,23 @@ function Page2({c,s}){
                 s("bags",bags.filter(b=>b.id!==removeBagModal));
                 setRemoveBagModal(null);
               }} style={{background:"rgba(201,74,42,.15)",border:"1px solid rgba(201,74,42,.4)",color:"#e07060",fontFamily:"'Cinzel',serif",fontSize:10,padding:"5px 12px",cursor:"pointer",borderRadius:2}}>Lose Items & Coins</button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+      {wtPrompt&&ReactDOM.createPortal(
+        <div style={{position:"fixed",inset:0,zIndex:10000,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.78)"}}>
+          <div style={{background:"#1a1208",border:"1px solid rgba(201,150,42,.4)",padding:"22px 28px",minWidth:300,maxWidth:380,width:"90vw",boxShadow:"0 8px 40px rgba(0,0,0,.9)"}} onClick={e=>e.stopPropagation()}>
+            <div style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,color:"var(--gold-l)",textTransform:"uppercase",marginBottom:14,borderBottom:"1px solid rgba(201,150,42,.2)",paddingBottom:8}}>Confirm Item Weight</div>
+            <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.7)",marginBottom:14,lineHeight:1.6}}>
+              <span style={{color:"var(--gold-l)",fontWeight:600}}>{wtPrompt.name}</span> has no officially assigned weight. The proposed weight below is an estimate — adjust it if you like (enter 0 if it's weightless):
+            </div>
+            <input autoFocus type="number" value={wtVal} onChange={e=>setWtVal(e.target.value)}
+              onKeyDown={e=>{if(e.key==="Enter")commitWtPrompt();}}
+              placeholder="0" style={{width:"100%",background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,150,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"7px 9px",borderRadius:2,marginBottom:16}} />
+            <div style={{display:"flex",gap:10,justifyContent:"flex-end"}}>
+              <button onClick={commitWtPrompt} style={{background:"rgba(74,156,92,.12)",border:"1px solid rgba(74,156,92,.35)",color:"rgba(74,156,92,.9)",fontFamily:"'Cinzel',serif",fontSize:10,padding:"5px 12px",cursor:"pointer",borderRadius:2}}>Confirm Weight</button>
             </div>
           </div>
         </div>,
@@ -4635,20 +4680,712 @@ function parseItemMarkdown(md){
   return items;
 }
 
+// ─── 5etools JSON item source ─────────────────────────────────────────────────
+const ITEM_JSON_BASE="https://raw.githubusercontent.com/liapatiso95-ctrl/character-sheet/main/items/";
+const ITEM_JSON_INDEX=ITEM_JSON_BASE+"index.json";
+const _ITEM_TYPE={A:"Ammunition",AF:"Ammunition",AT:"Artisan's Tools",EM:"Eldritch Machine",EXP:"Explosive",G:"Adventuring Gear",GS:"Gaming Set",GV:"Generic Variant",HA:"Heavy Armor",INS:"Instrument",LA:"Light Armor",M:"Melee Weapon",MA:"Medium Armor",MNT:"Mount",P:"Potion",R:"Ranged Weapon",RD:"Rod",RG:"Ring",S:"Shield",SC:"Scroll",SCF:"Spellcasting Focus",OTH:"Other",T:"Tool",TAH:"Tack and Harness",TG:"Trade Good",TB:"Trade Bar",FD:"Food and Drink",VEH:"Vehicle (Land)",SHP:"Vehicle (Water)",AIR:"Vehicle (Air)",SPC:"Vehicle (Space)",$:"Treasure","$A":"Treasure (Art Object)","$C":"Treasure (Coinage)","$G":"Treasure (Gemstone)",WD:"Wand"};
+const _ITEM_DMG={A:"Acid",B:"Bludgeoning",C:"Cold",F:"Fire",O:"Force",L:"Lightning",N:"Necrotic",P:"Piercing",I:"Poison",Y:"Psychic",R:"Radiant",S:"Slashing",T:"Thunder"};
+const _ITEM_PROP={T:"Thrown",V:"Versatile",H:"Heavy","2H":"Two-Handed",F:"Finesse",L:"Light",R:"Reach",A:"Ammunition",LD:"Loading",S:"Special",AF:"Ammunition (futuristic)",RLD:"Reload",BF:"Burst Fire",Vst:"Vestige of Divergence"};
+const _ITEM_RECHARGE={round:"each round",restShort:"a short rest",restLong:"a long rest",dawn:"dawn",dusk:"dusk",midnight:"midnight"};
+
+// Strip 5etools {@tag content|source|display} markup, keeping the best display text.
+function strip5eTags(s){
+  if(s==null) return "";
+  var str=""+s;
+  var prev=null;
+  // Repeat until stable (handles nested tags)
+  while(prev!==str){
+    prev=str;
+    str=str.replace(/\{@(\w+)\s*([^{}]*)\}/g,function(_,tag,body){
+      tag=tag.toLowerCase();
+      var parts=body.split("|");
+      if(tag==="dc") return "DC "+body.trim();
+      if(tag==="filter") return parts[0].trim();
+      if(tag==="dice"||tag==="damage"||tag==="scaledice"||tag==="scaledamage"){
+        // {@dice 1d3 + 2} or {@dice 1d6|display}
+        return (parts.length>1?parts[parts.length-1]:parts[0]).trim();
+      }
+      if(tag==="chance"||tag==="recharge"){return parts[0].trim();}
+      // Most tags: prefer explicit display text (last part if >1), else first part (the name)
+      if(parts.length>=3 && parts[2].trim()) return parts[2].trim();
+      if((tag==="item"||tag==="spell"||tag==="creature"||tag==="condition"||tag==="action"||tag==="variantrule"||tag==="filter"||tag==="book"||tag==="quickref"||tag==="skill"||tag==="sense"||tag==="status")){
+        // these may have a display override in part[1] for some, but name is part[0]
+        return parts[0].trim();
+      }
+      return parts[0].trim();
+    });
+  }
+  return str;
+}
+
+// Recursively flatten a 5etools entries array into clean paragraph text.
+function flatten5eEntries(entries,out){
+  out=out||[];
+  if(entries==null) return out;
+  if(typeof entries==="string"){var t=strip5eTags(entries).trim();if(t)out.push(t);return out;}
+  if(Array.isArray(entries)){entries.forEach(function(e){flatten5eEntries(e,out);});return out;}
+  if(typeof entries==="object"){
+    var ty=entries.type;
+    if(ty==="table"){
+      var tlines=[];
+      if(entries.caption){var cap=strip5eTags(entries.caption).trim();if(cap)tlines.push(cap);}
+      var labels=(entries.colLabels||[]).map(function(l){return strip5eTags(l).trim();});
+      if(labels.length) tlines.push(labels.join("  |  "));
+      (entries.rows||[]).forEach(function(row){
+        if(!Array.isArray(row)) return;
+        var cells=row.map(function(cell){
+          if(cell&&typeof cell==="object") return flatten5eEntries(cell,[]).join(" ");
+          return strip5eTags(cell).trim();
+        });
+        tlines.push(cells.join("  |  "));
+      });
+      if(tlines.length) out.push(tlines.join("\n"));
+      return out;
+    }
+    if(ty==="list"&&Array.isArray(entries.items)){
+      entries.items.forEach(function(it){
+        if(typeof it==="string"){var s=strip5eTags(it).trim();if(s)out.push(s);}
+        else if(it&&typeof it==="object"){
+          var label=it.name?strip5eTags(it.name).trim():"";
+          var body=flatten5eEntries(it.entries||it.entry||"",[]).join(" ").trim();
+          if(label&&body) out.push(label.replace(/:?$/,":")+" "+body);
+          else if(label) out.push(label);
+          else if(body) out.push(body);
+        }
+      });
+      return out;
+    }
+    if(entries.entries||entries.items){
+      if(entries.name){var nm=strip5eTags(entries.name).trim();if(nm)out.push(nm);}
+      flatten5eEntries(entries.entries||entries.items,out);
+      return out;
+    }
+    if(entries.entry){flatten5eEntries(entries.entry,out);return out;}
+  }
+  return out;
+}
+
+// Convert a 5etools value (in copper) to a clean coin string.
+function copperToCoin(cp){
+  if(cp==null) return "";
+  var n=Number(cp);if(!isFinite(n)||n<=0) return "";
+  if(n%100===0) return (n/100)+" gp";
+  if(n>=100) return (n/100)+" gp";       // e.g. 150 -> 1.5 gp
+  if(n%10===0) return (n/10)+" sp";        // e.g. 20 -> 2 sp
+  return n+" cp";                          // e.g. 2 -> 2 cp
+}
+
+// Decode the attunement requirement tag for searching.
+function attuneTagText(item){
+  if(!item.reqAttuneTags||!item.reqAttuneTags.length) {
+    if(typeof item.reqAttune==="string"){return item.reqAttune.replace(/^by an?\s+/i,"").trim();}
+    return "";
+  }
+  return item.reqAttuneTags.map(function(t){
+    if(t.spellcasting) return "Spellcaster";
+    if(t.class) return (""+t.class).split("|")[0];
+    if(t.race) return (""+t.race).split("|")[0];
+    if(t.background) return (""+t.background).split("|")[0];
+    if(t.alignment) return (Array.isArray(t.alignment)?t.alignment.join(" "):t.alignment);
+    return Object.values(t).map(function(v){return (""+v).split("|")[0];}).join(" ");
+  }).filter(Boolean).join(", ");
+}
+
+function titleCase(s){return (""+s).replace(/\w\S*/g,function(w){return w.charAt(0).toUpperCase()+w.slice(1);});}
+
+// Resolve a single 5etools _copy item against a name|source index of the raw pool.
+// Inherits all base fields, overlays the child's own fields, then applies _mod
+// (entries appendArr/prependArr/replaceArr + insertArr). Returns a plain merged object.
+function resolve5eCopy(it,index,depth){
+  if(!it||!it._copy||depth>5) return it;
+  var key=((it._copy.name||"")+"|"+(it._copy.source||"")).toLowerCase();
+  var base=index[key];
+  if(!base) return it; // base not found — leave as-is
+  // base may itself be a copy
+  if(base._copy) base=resolve5eCopy(base,index,(depth||0)+1);
+  // Deep-ish clone of base, then overlay child's own fields (except _copy)
+  var merged=JSON.parse(JSON.stringify(base));
+  Object.keys(it).forEach(function(k){ if(k!=="_copy") merged[k]=it[k]; });
+  delete merged._copy;
+  delete merged.reprintedAs; // the copy is its own item, not a reprint
+  // Apply _mod
+  var mod=it._copy._mod;
+  if(mod){
+    Object.keys(mod).forEach(function(field){
+      var ops=Array.isArray(mod[field])?mod[field]:[mod[field]];
+      ops.forEach(function(op){
+        if(!op||typeof op!=="object"){return;}
+        var cur=merged[field];
+        if(!Array.isArray(cur)) cur=(cur==null?[]:[cur]);
+        var addItems=op.items==null?[]:(Array.isArray(op.items)?op.items:[op.items]);
+        if(op.mode==="appendArr") merged[field]=cur.concat(addItems);
+        else if(op.mode==="prependArr") merged[field]=addItems.concat(cur);
+        else if(op.mode==="replaceArr"||op.mode==="replaceTxt") merged[field]=addItems;
+        else if(op.mode==="insertArr"){
+          var idx=(op.index==null?cur.length:op.index);
+          var copy=cur.slice(); copy.splice.apply(copy,[idx,0].concat(addItems)); merged[field]=copy;
+        }
+      });
+    });
+  }
+  return merged;
+}
+
+// Substitute 5etools {=field} and {=field/modifier} template variables from a context object.
+function subTemplateVars(str,ctx){
+  if(typeof str!=="string") return str;
+  return str.replace(/\{=([\w]+)(?:\/([\w]+))?\}/g,function(_,key,mod){
+    var v=ctx[key];
+    if(v==null) return "";
+    v=""+v;
+    if(mod==="lowercase") v=v.toLowerCase();
+    else if(mod==="title") v=v.replace(/\w\S*/g,function(w){return w.charAt(0).toUpperCase()+w.slice(1);});
+    return v;
+  });
+}
+// Deep template substitution across an inherits object's entries.
+function subTemplateDeep(val,ctx){
+  if(typeof val==="string") return subTemplateVars(val,ctx);
+  if(Array.isArray(val)) return val.map(function(x){return subTemplateDeep(x,ctx);});
+  if(val&&typeof val==="object"){var o={};Object.keys(val).forEach(function(k){o[k]=subTemplateDeep(val[k],ctx);});return o;}
+  return val;
+}
+// Does a base item satisfy a magicvariant's requires/excludes entry?
+function baseMatchesReq(base,req){
+  return Object.keys(req).every(function(k){
+    var want=req[k];
+    if(k==="type"){var bt=(base.type||"").split("|")[0];return bt===(""+want).split("|")[0];}
+    if(k==="property"){var bp=(base.property||[]).map(function(p){return (""+p).split("|")[0];});return bp.indexOf((""+want).split("|")[0])>=0;}
+    if(k==="dmgType") return base.dmgType===want;
+    if(k==="weaponCategory") return base.weaponCategory===want;
+    if(k==="name"){var names=Array.isArray(want)?want:[want];return names.indexOf(base.name)>=0;}
+    if(k==="source"){var srcs=Array.isArray(want)?want:[want];return srcs.indexOf(base.source)>=0;}
+    // boolean flags: armor, weapon, sword, bow, axe, spear, etc. — base must have the same truthy flag
+    if(want===true) return base[k]===true;
+    if(want===false) return !base[k];
+    return base[k]===want;
+  });
+}
+function baseMatchesVariant(base,variant){
+  var reqs=variant.requires||[];
+  var ok=reqs.length===0||reqs.some(function(r){return baseMatchesReq(base,r);});
+  if(!ok) return false;
+  var exc=variant.excludes;
+  if(exc){
+    // excludes is a single object; any matching key disqualifies
+    var hit=Object.keys(exc).some(function(k){
+      var want=exc[k];var r={};r[k]=want;return baseMatchesReq(base,r);
+    });
+    if(hit) return false;
+  }
+  return true;
+}
+// Generate concrete items from a magicvariant applied to all matching base items.
+function expandMagicVariant(variant,baseItems){
+  var out=[];
+  var inh=variant.inherits||{};
+  baseItems.forEach(function(base){
+    if(!baseMatchesVariant(base,variant)) return;
+    // Build the context for template vars: base fields + inherited bonus fields
+    var ctx=Object.assign({},base,inh);
+    // Merge: start from base, overlay inherited (template-substituted) fields
+    var merged=JSON.parse(JSON.stringify(base));
+    Object.keys(inh).forEach(function(k){
+      if(/^name(Prefix|Suffix|Remove|Add)/.test(k)) return; // name controls handled below
+      if(k==="entries"){ merged.entries=subTemplateDeep(inh.entries,ctx); return; }
+      merged[k]=subTemplateDeep(inh[k],ctx);
+    });
+    // Build the name
+    var nm=base.name;
+    if(inh.nameRemove){ nm=nm.replace(new RegExp(inh.nameRemove.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"g"),""); }
+    if(inh.namePrefix) nm=inh.namePrefix+nm;
+    if(inh.nameSuffix) nm=nm+inh.nameSuffix;
+    merged.name=nm;
+    merged.source=inh.source||variant.source||base.source;
+    delete merged.reprintedAs; // generated item is its own thing
+    delete merged._copy;
+    merged._generated=true;
+    out.push(merged);
+  });
+  return out;
+}
+
+// Resolve {#itemEntry Name|Source} references in an item's entries.
+// Looks up the itemEntry definition's entriesTemplate, substitutes {{item.X}}
+// variables from the referencing item's own fields, and returns the expanded entries array.
+function resolveItemEntryRefs(entries,item,entryIndex){
+  if(!Array.isArray(entries)) return entries;
+  var out=[];
+  entries.forEach(function(e){
+    if(typeof e==="string"){
+      var m=e.match(/^\{#itemEntry\s+([^|}]+)(?:\|([^}]+))?\}$/);
+      if(m){
+        var nm=m[1].trim(), src=(m[2]||"").trim();
+        var def=entryIndex[(nm+"|"+src).toLowerCase()]||entryIndex[nm.toLowerCase()+"|"];
+        if(!def){ // try any source
+          var k=Object.keys(entryIndex).find(function(key){return key.indexOf(nm.toLowerCase()+"|")===0;});
+          if(k) def=entryIndex[k];
+        }
+        if(def){
+          var tmpl=def.entriesTemplate||def.entries||[];
+          var filled=subItemEntryVars(tmpl,item);
+          (Array.isArray(filled)?filled:[filled]).forEach(function(x){out.push(x);});
+          return;
+        }
+        // unresolved — drop the raw token rather than show it
+        return;
+      }
+    }
+    out.push(e);
+  });
+  return out;
+}
+// Substitute {{item.field}} and {{func item.field}} placeholders deeply from the item's own fields.
+function subItemEntryVars(val,item){
+  if(typeof val==="string"){
+    return val.replace(/\{\{(?:(\w+)\s+)?item\.(\w+)\}\}/g,function(_,fn,f){
+      var v=item[f];
+      if(v==null) return "";
+      // Format arrays (e.g. resist:["acid","cold"]) as a readable list.
+      if(Array.isArray(v)){
+        var parts=v.map(function(x){return (""+x).split("|")[0];});
+        if(parts.length<=1) return parts.join("");
+        if(parts.length===2) return parts[0]+" and "+parts[1];
+        return parts.slice(0,-1).join(", ")+", and "+parts[parts.length-1];
+      }
+      return (""+v).split("|")[0];
+    });
+  }
+  if(Array.isArray(val)) return val.map(function(x){return subItemEntryVars(x,item);});
+  if(val&&typeof val==="object"){var o={};Object.keys(val).forEach(function(k){o[k]=subItemEntryVars(val[k],item);});return o;}
+  return val;
+}
+
+// Infer a sensible weight (lb) for an item lacking one, from its name/type.
+// Returns a number. typeCode is the decoded 5etools type code; flags carries boolean type-flags.
+function inferItemWeight(name,typeCode,flags){
+  var n=(name||"").toLowerCase();
+  flags=flags||{};
+  function has(re){return re.test(n);}
+  // Weapons & Armor
+  if(has(/\bpadded armor\b/)) return 8;
+  if(has(/\bleather armor\b/)) return 10;
+  if(has(/\bstudded leather armor\b/)) return 13;
+  if(has(/\bhide armor\b/)) return 12;
+  if(has(/\b(chain shirt|breast ?plate)\b/)) return 20;
+  if(has(/\bscale mail armor\b/)) return 45;
+  if(has(/\b(half ?plate armor|ring ?mail armor)\b/)) return 40;
+  if(has(/\bchain ?mail armor\b/)) return 55;
+  if(has(/\bsplint armor\b/)) return 60;
+  if(has(/\bplate armor\b/)) return 65;
+  if(has(/\bshield\b/)) return 6;
+  if(has(/\b(dagger|blowgun|dart)\b/)) return 1;
+  if(has(/\b(club|handaxe|light hammer|sickle|shortsword|rapier|war pick|warhammer|hand crossbow|shortbow)\b/)) return 2;
+  if(has(/\b(spear|scimitar|whip|longsword|trident)\b/)) return 3;
+  if(has(/\b(battleaxe|morningstar|mace)\b/)) return 4;
+  if(has(/\blight crossbow\b/)) return 5;
+  if(has(/\b(glaive|halberd|greatsword|lance)\b/)) return 6;
+  if(has(/\bgreataxe\b/)) return 7;
+  if(has(/\b(greatclub|maul)\b/)) return 10;
+  if(has(/\b(pike|heavy crossbow)\b/)) return 18;
+  // Armor / shield by type code
+  if(typeCode==="LA") return 10;
+  if(typeCode==="MA") return 30;
+  if(typeCode==="HA") return 60;
+  if(typeCode==="S") return 6;
+  if(has(/\bceremonial armor\b/)) return 20;
+  // Minor Items
+  if(has(/\bstatuette\b/)) return 8;
+  if(has(/\bmusic box\b/)) return 1;
+  if(has(/\b(painting|tapestry)\b/)) return 6;
+  // Containers
+  if(has(/\bsatchel\b/)) return 3;
+  if(has(/\bback ?pack\b/)) return 5;
+  if(has(/\b(bag|sack|pouch|haversack)\b/)) return 1;
+  if(has(/\bchest\b/)) return 25;
+  if(has(/\bbarrel\b/)) return 70;
+  if(has(/\bcrate\b/)) return 40;
+  if(has(/\bbox\b/)) return 10;
+  if(has(/\bdeck\b/)) return 0.2;
+  // Worn / apparel
+  if(has(/\b(robe|robes)\b/)) return 3;
+  if(has(/\b(cloak|cape|coat|mantle)\b/)) return 3;
+  if(has(/\b(clothes|clothing|outfit|garb|vestments?)\b/)) return 3;
+  if(has(/\b(boots|shoes|slippers|sandals)\b/)) return 2;
+  if(has(/\b(gloves|gauntlets?)\b/)) return 1;
+  if(has(/\bwraps\b/)) return 0.5;
+  if(has(/\bbelt\b/)) return 1;
+  if(has(/\b(mask|circlet|headpiece)\b/)) return 1;
+  if(has(/\b(crown|helmet)\b/)) return 4;
+  if(has(/\b(eye[- ]?patch|eyepatch)\b/)) return 0.2;
+  // Jewelry (check specific before generic)
+  if(has(/\bring\b/)||typeCode==="RG") return 0.05;
+  if(has(/\bearring\b/)) return 0.05;
+  if(has(/\bamulet\b/)) return 1;
+  if(has(/\b(necklace|pendant|periapt|medallion|talisman)\b/)) return 0.5;
+  if(has(/\b(bracelet|bangle|armlet)\b/)) return 0.5;
+  if(has(/\bbrooch\b/)) return 0.5;
+  if(has(/\b(tattoo|needle)\b/)||flags.tattoo) return 0.05;
+  // Consumables
+  if(has(/\b(scroll)\b/)||typeCode==="SC") return 0.1;
+  if(has(/\bpotion\b/)||typeCode==="P") return 0.5;
+  if(has(/\boil\b/)) return 0.5;
+  if(has(/\bpoison\b/)||flags.poison) return 0.5;
+  // Implements
+  if(has(/\bstaff\b/)||flags.staff||typeCode==="ST") return 4;
+  if(has(/\bwand\b/)||typeCode==="WD") return 1;
+  if(has(/\brod\b/)||typeCode==="RD") return 2;
+  // Food
+  if (typeCode==="FD") return 1;
+  // Treasure
+  if(typeCode==="$G") return 0.01;
+  if(typeCode==="$C") return 0.02;
+  if(has(/\bidol\b/)) return 2;
+  if(has(/\btablet\b/)) return 3;
+  if(has(/\bhand ?mirror\b/)) return 0.5;
+  if(has(/\bmirror\b/)) return 1;
+  if(has(/\b(lens|dice)\b/)) return 0.1;
+  if(has(/\bcrystal ball\b/)) return 5;
+  // Various Items
+  if(has(/\borb\b/)) return 3;
+  if(has(/\b(crystal|shard)\b/)) return 1;
+  if(has(/\b(figurine|totem)\b/)) return 1;
+  if(has(/\b(spellbook|book|grimoire)\b/)) return 3;
+  if(has(/\btome\b/)) return 5;
+  if(has(/\bmanual\b/)) return 3;
+  if(has(/\blantern\b/)) return 2;
+  if(has(/\bhorn\b/)) return 2;
+  if(has(/\binstrument\b/) ||typeCode==="INS") return 3;
+  // Treasure (Art)
+  if(typeCode==="$A") return 2;
+  // Stones
+  if(has(/\bioun stone\b/)) return 0;
+  if(has(/\bstone\b/)) return 1;
+  if(has(/\bgem\b/)) return 0.01;
+  // Artisan's tools
+  if(typeCode==="AT"||has(/\b(tools|supplies|kit)\b/)) return 6;
+  // Spellcasting focus
+  if(flags.scf||typeCode==="SCF") return 2;
+  // Wondrous fallback
+  if(flags.wondrous) return 4;
+  // Final fallback
+  return 5;
+}
+
+// Parse the 5etools items.json into our item shape.
+// Accepts a JSON string OR an already-merged data object {item,baseitem,magicvariant,itemGroup}.
+function parseItemJson(jsonOrData){
+  var out={};
+  var data;
+  if(typeof jsonOrData==="string"){ try{data=JSON.parse(jsonOrData);}catch(e){return out;} }
+  else data=jsonOrData||{};
+  // Gather every item-bearing array from the file (all may coexist in one file).
+  var items=Array.isArray(data)?data:(data.item||[]);
+  var baseItems=(data&&data.baseitem)||[];
+  var variants=(data&&data.magicvariant)||[];
+  var groups=(data&&data.itemGroup)||[];
+  var itemEntries=(data&&data.itemEntry)||[];
+  // Index itemEntry definitions by name|source (lowercased) for {#itemEntry} resolution.
+  var entryIndex={};
+  itemEntries.forEach(function(e){ if(e&&e.name) entryIndex[((e.name||"")+"|"+(e.source||"")).toLowerCase()]=e; });
+  if(!Array.isArray(items)) items=[];
+  // Build a name|source index over the RAW item+base pool (incl. reprinted) for _copy inheritance.
+  var index={};
+  items.concat(baseItems).forEach(function(it){ if(it&&it.name) index[((it.name||"")+"|"+(it.source||"")).toLowerCase()]=it; });
+  // Resolve _copy items.
+  var resolvedItems=items.map(function(it){ return (it&&it._copy)?resolve5eCopy(it,index,0):it; });
+  // Expand magicvariants against base items (no variant-on-variant chaining).
+  var generated=[];
+  variants.forEach(function(v){ generated=generated.concat(expandMagicVariant(v,baseItems)); });
+  // Full raw pool to parse: concrete items, base items, then generated variants.
+  var arr=resolvedItems.concat(baseItems).concat(generated);
+  arr.forEach(function(it){
+    if(!it||!it.name) return;
+    if(it.reprintedAs) return; // skip items that have been reprinted elsewhere
+    if(out[it.name.toLowerCase()]) return; // first source wins (item > base > variant)
+    var name=it.name;
+    var typeCode=(it.type||"").split("|")[0];
+    var isVehicleOrMount=/^(VEH|SHP|AIR|SPC|MNT)$/.test(typeCode);
+    // weight (with optional multiplier / note); infer one when absent.
+    var weight="", weightInferred=false;
+    if(it.weight!=null) weight=""+it.weight;
+    else if(it.weightMult!=null) weight="x"+it.weightMult;
+    else if(!isVehicleOrMount){
+      weight=""+inferItemWeight(name,typeCode,{wondrous:it.wondrous,staff:it.staff,tattoo:it.tattoo,poison:it.poison,scf:it.scfType!=null});
+      weightInferred=true;
+    }
+    var header=[];
+    // ── Type line ──
+    // Primary type: Wondrous Item and Staff act as their own type name; otherwise the type code.
+    var typeParts=[];
+    // group(s) come first, e.g. group ["Holy Symbol"] => "Holy Symbol, Spellcasting Focus"
+    var groupNames=Array.isArray(it.group)?it.group:(it.group?[it.group]:[]);
+    groupNames.forEach(function(g){var gn=(""+g).split("|")[0].trim();if(gn)typeParts.push(titleCase(gn));});
+    if(it.wondrous) typeParts.push("Wondrous Item");
+    if(it.staff) typeParts.push("Staff");
+    if(it.tattoo) typeParts.push("Tattoo");
+    var typeName=_ITEM_TYPE[typeCode]||(typeCode?typeCode:"");
+    var genericType=(typeCode==="G"||typeCode===""||typeCode==="OTH");
+    var flagNamed=(it.staff||it.tattoo||groupNames.length>0);
+    if(typeName && !((it.wondrous||flagNamed) && genericType)) typeParts.push(typeName);
+    // Parenthetical descriptors: base item, then flag descriptors (poison, sentient, firearm, cursed)
+    var parens=[];
+    var baseItemName=it.baseItem?titleCase((""+it.baseItem).split("|")[0]):"";
+    if(baseItemName) parens.push(baseItemName);
+    if(it.poison) parens.push("Poison");
+    if(it.sentient) parens.push("Sentient");
+    if(it.firearm) parens.push("Firearm");
+    if(it.curse) parens.push("Cursed");
+    var typeStr=typeParts.join(", ");
+    if(parens.length) typeStr+=(typeStr?" ":"")+"("+parens.join(", ")+")";
+    var rarity=(it.rarity&&!/^(none|unknown|varies|unknown \(magic\))$/i.test(it.rarity))?titleCase(it.rarity):"";
+    var typeLine="Type: "+[typeStr,rarity].filter(Boolean).join(", ");
+    if(typeStr||rarity) header.push(typeLine.trim());
+    // ── Attunement line ──
+    if(it.reqAttune){
+      if(it.reqAttune===true) header.push("(Requires Attunement)");
+      else if(/^optional$/i.test(it.reqAttune)) header.push("(Optional Attunement)");
+      else header.push("(Requires Attunement "+strip5eTags(it.reqAttune).trim()+")");
+    }
+    // ── Combat line (weapons) ──
+    if(it.dmg1){
+      var dt=_ITEM_DMG[(it.dmgType||"").toUpperCase()]||"";
+      var combat=it.dmg1+(dt?" "+dt:"");
+      if(it.dmg2) combat+=" (Versatile "+it.dmg2+")";
+      var props=(it.property||[]).map(function(p){return _ITEM_PROP[(""+p).split("|")[0]]||(""+p).split("|")[0];}).filter(Boolean);
+      if(it.range) props.push("Range "+it.range);
+      if(props.length) combat+=" · "+props.join(", ");
+      var mast=(it.mastery||[]).map(function(m){return (""+m).split("|")[0];}).filter(Boolean);
+      if(mast.length) combat+=" · Mastery: "+mast.join(", ");
+      if(it.bonusWeapon) combat+=" · "+it.bonusWeapon+" to attack & damage";
+      header.push(combat);
+    } else if(it.bonusWeapon){
+      header.push(it.bonusWeapon+" to weapon attack & damage rolls");
+    }
+    // ── Armor line ──
+    if(it.ac!=null||it.acSpecial){
+      var acVal;
+      if(it.acSpecial) acVal=strip5eTags(it.acSpecial);
+      else {
+        acVal=""+it.ac;
+        // 5etools stores only the base number; the Dex rule comes from the armor type.
+        if(typeCode==="LA") acVal+=" + Dex modifier";
+        else if(typeCode==="MA") acVal+=" + Dex modifier (max 2)";
+        else if(typeCode==="S") acVal=(/^[+-]/.test(""+it.ac)?"":"+")+it.ac; // shields add to AC
+        // HA: flat number, no Dex
+      }
+      var acLine="Armor Class: "+acVal;
+      if(it.strength) acLine+=" · Min. Strength "+it.strength;
+      if(it.stealth) acLine+=" · Stealth Disadvantage";
+      header.push(acLine);
+    }
+    // ── Vehicle / Mount stats ──
+    if(isVehicleOrMount){
+      var vstats=[];
+      if(it.speed!=null) vstats.push("Speed "+it.speed+(typeCode==="MNT"?" ft.":" mph"));
+      if(it.vehSpeed!=null) vstats.push("Speed "+it.vehSpeed+" mph");
+      if(it.carryingCapacity!=null) vstats.push("Carrying Capacity "+it.carryingCapacity+" lb");
+      if(it.capPassenger!=null) vstats.push("Passengers "+it.capPassenger);
+      if(it.capCargo!=null) vstats.push("Cargo "+it.capCargo+" tons");
+      if(it.crew!=null) vstats.push("Crew "+it.crew);
+      else if(it.crewMin!=null||it.crewMax!=null) vstats.push("Crew "+(it.crewMin||"?")+"–"+(it.crewMax||"?"));
+      if(it.vehAc!=null) vstats.push("AC "+it.vehAc);
+      if(it.vehHp!=null) vstats.push("HP "+it.vehHp);
+      if(it.vehDmgThresh!=null) vstats.push("Damage Threshold "+it.vehDmgThresh);
+      if(vstats.length) header.push(vstats.join(" · "));
+    }
+    // ── Value ──
+    var valStr=copperToCoin(it.value);
+    if(valStr) header.push("Value: "+valStr+(it.valueMult?" (x"+it.valueMult+")":""));
+    else if(it.valueMult) header.push("Value: x"+it.valueMult);
+    // ── Charges note ──
+    if(it.charges!=null){
+      var chLine="Charges: "+it.charges;
+      if(it.recharge) chLine+=" (regains"+(it.rechargeAmount?" "+strip5eTags(it.rechargeAmount):" all")+" at "+(_ITEM_RECHARGE[it.recharge]||it.recharge)+")";
+      header.push(chLine);
+    }
+    // ── Body (entries + additionalEntries) ──
+    var resolvedEntries=resolveItemEntryRefs(it.entries,it,entryIndex);
+    var bodyArr=flatten5eEntries(resolvedEntries,[]);
+    flatten5eEntries(it.additionalEntries,bodyArr);
+    var body=bodyArr.join("\n");
+    var fullDesc=header.join("\n")+(body?"\n\n"+body:"");
+    // ── Structured charges for the tracker ──
+    var charges=null;
+    if(it.charges!=null&&Number(it.charges)>0){
+      var restore="";
+      if(it.rechargeAmount) restore=strip5eTags(it.rechargeAmount).replace(/\s+/g,"");
+      else if(it.recharge) restore=String(it.charges); // regains all by default
+      charges={enabled:true,max:String(it.charges),used:"0",restore:restore,msg:null};
+    } else {
+      charges=parseChargesFromDesc(body); // fallback: read the description
+    }
+    var attune=it.reqAttune?(it.reqAttune===true?true:(/^optional$/i.test(it.reqAttune)?true:true)):null;
+    var storedType=typeStr;
+    out[name.toLowerCase()]={
+      name:name,weight:weight,cost:valStr,type:storedType||typeName,rarity:rarity,
+      attune:attune,attuneTag:attuneTagText(it),desc:fullDesc,charges:charges,src:"json",weightInferred:weightInferred
+    };
+  });
+  // ── itemGroup members: add only those not already present standalone. ──
+  // The group's own entries/rarity describe the generated member. Skip members
+  // that are just mundane equipment names with nothing to describe them.
+  groups.forEach(function(g){
+    if(!g||!g.items) return;
+    var groupDescArr=flatten5eEntries(g.entries,[]);
+    var groupRarity=(g.rarity&&!/^(none|unknown|varies)$/i.test(g.rarity))?titleCase(g.rarity):"";
+    var groupAttune=g.reqAttune?true:null;
+    g.items.forEach(function(m){
+      var mname=(""+m).split("|")[0];
+      if(!mname) return;
+      var key=mname.toLowerCase();
+      if(out[key]) return; // already a standalone item
+      // Skip junk: a member with no group description AND no rarity is just an equipment label
+      if(groupDescArr.length===0&&!groupRarity) return;
+      var gTypeCode=(""+(g.type||"")).split("|")[0];
+      var gTypeName=(gTypeCode&&gTypeCode!=="GV")?(_ITEM_TYPE[gTypeCode]||""):"";
+      var hdr=[];
+      if(groupRarity||gTypeName) hdr.push("Type: "+[gTypeName,groupRarity].filter(Boolean).join(", "));
+      var body=groupDescArr.join("\n");
+      out[key]={
+        name:mname,weight:"",cost:"",type:gTypeName,rarity:groupRarity,
+        attune:groupAttune,attuneTag:(typeof g.reqAttune==="string"?g.reqAttune.replace(/^by an?\s+/i,"").trim():""),
+        desc:(hdr.length?hdr.join("\n")+"\n\n":"")+body,charges:parseChargesFromDesc(body),src:"json"
+      };
+    });
+  });
+  return out;
+}
+
+// ─── Spell Scroll generation ───────────────────────────────────────────────────
+// Per spell level: [rarity, save DC, attack bonus]. Index 0 = cantrip.
+const _SCROLL_TABLE=[
+  ["Common",13,5],    // Cantrip
+  ["Common",13,5],    // 1st
+  ["Uncommon",13,5],  // 2nd
+  ["Uncommon",15,7],  // 3rd
+  ["Rare",15,7],      // 4th
+  ["Rare",17,9],      // 5th
+  ["Very Rare",17,9], // 6th
+  ["Very Rare",18,10],// 7th
+  ["Very Rare",18,10],// 8th
+  ["Legendary",19,11] // 9th
+];
+function _scrollLevelName(lv){return lv===0?"Cantrip":(lv===1?"1st":lv===2?"2nd":lv===3?"3rd":lv+"th")+" Level";}
+function _scrollBoilerplate(lv){
+  var row=_SCROLL_TABLE[lv]||_SCROLL_TABLE[0];
+  var rarity=row[0], dc=row[1], atk=row[2];
+  var lvlWord=lv===0?"cantrip":(_scrollLevelName(lv).replace(" Level","").toLowerCase()+"-level");
+  var txt=
+    "A Spell Scroll bears the words of a single spell, written in a mystical cipher. If the spell is on your spell list, you can read the scroll and cast its spell without Material components. Otherwise, the scroll is unintelligible. Casting the spell by reading the scroll requires the spell's normal casting time. Once the spell is cast, the words on the scroll fade, and the scroll itself crumbles to dust.\n\n"+
+    "If the casting is interrupted, the scroll isn't lost. If the spell is on your spell list but of a higher level than you can normally cast, you must make an ability check using your spellcasting ability to determine whether you cast it successfully. The DC equals 10 plus the spell's level. On a failed check, the spell disappears from the scroll with no other effect.\n\n"+
+    "The spell on the scroll is "+(/^8/.test(lvlWord)?"an ":"a ")+lvlWord+" spell. Its saving throw DC is "+dc+", and its attack bonus is +"+atk+".";
+  return {rarity:rarity,text:txt};
+}
+// Build the spell's own block verbatim-style from parsed spell fields.
+function _spellBlockText(sp){
+  var lines=[];
+  var lvlSchool=sp.level===0?(sp.school?sp.school+" Cantrip":"Cantrip"):(_scrollLevelName(sp.level).replace(" Level","")+"-level"+(sp.school?" "+sp.school:""));
+  if(sp.ritual) lvlSchool+=" (ritual)";
+  lines.push(lvlSchool);
+  if(sp.castingTime) lines.push("Casting Time: "+sp.castingTime+(sp.ritual?" or Ritual":""));
+  if(sp.range) lines.push("Range: "+sp.range);
+  if(sp.components) lines.push("Components: "+sp.components);
+  if(sp.duration) lines.push("Duration: "+(sp.conc?"Concentration, up to ":"")+sp.duration);
+  if(sp.classes) lines.push("Classes: "+sp.classes);
+  var head=lines.join("\n");
+  return head+(sp.desc?"\n\n"+sp.desc:"");
+}
+// Generate spell-scroll items: one generic per level + one per spell in the cache.
+function generateSpellScrolls(spellData){
+  var out={};
+  // Generic scrolls per level
+  for(var lv=0;lv<=9;lv++){
+    var bp=_scrollBoilerplate(lv);
+    var nm="Spell Scroll ("+_scrollLevelName(lv)+")";
+    out[nm.toLowerCase()]={name:nm,weight:"",cost:"",type:"Scroll",rarity:bp.rarity,attune:null,attuneTag:"",
+      desc:"Type: Scroll, "+bp.rarity+"\n\n"+bp.text,charges:null,src:"json"};
+  }
+  // Per-spell scrolls
+  if(spellData){
+    Object.keys(spellData).forEach(function(k){
+      var sp=spellData[k];
+      if(!sp||!sp.name) return;
+      var lv=sp.level||0;
+      var bp=_scrollBoilerplate(lv);
+      var nm="Spell Scroll ("+sp.name+")";
+      out[nm.toLowerCase()]={
+        name:nm,weight:"",cost:"",type:"Scroll",rarity:bp.rarity,attune:null,attuneTag:"",
+        desc:"Type: Scroll, "+bp.rarity+"\n\n"+bp.text+"\n\n———\n"+sp.name+"\n"+_spellBlockText(sp),
+        charges:null,src:"json"
+      };
+    });
+  }
+  return out;
+}
+
 function useItemCompendium(){
   const [tick,setTick]=React.useState(0);
   React.useEffect(function(){
     function onUpdate(){setTick(function(t){return t+1;});}
     _itemListeners.push(onUpdate);
+    // Regenerate spell scrolls whenever the spell cache updates (markdown now, JSON later).
+    function regenScrolls(){
+      if(_spellCache.status==="ready"||_spellCache.data){
+        _itemCache.scrolls=generateSpellScrolls(_spellCache.data);
+        _notifyItemListeners();
+      }
+    }
+    _spellListeners.push(regenScrolls);
     if(_itemCache.status==="idle"){
       _itemCache.status="loading";
+      _itemCache.data={};
+      var pending=2;
+      function done(){pending--;if(pending<=0)_itemCache.status="ready";_notifyItemListeners();}
+      // ── Markdown source ──
       fetch(ITEM_MD_URL)
         .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
-        .then(function(text){_itemCache.data=parseItemMarkdown(text);_itemCache.status="ready";_notifyItemListeners();})
-        .catch(function(){_itemCache.status="error";_itemCache.data={};_notifyItemListeners();});
+        .then(function(text){var md=parseItemMarkdown(text);Object.keys(md).forEach(function(k){if(!_itemCache.data[k])_itemCache.data[k]=md[k];});})
+        .catch(function(){})
+        .finally(function(){done();});
+      // ── JSON sources: read the manifest, fetch every listed file, merge their
+      //    arrays by key (so magicvariants can see baseitems from other files), parse once. ──
+      fetch(ITEM_JSON_INDEX)
+        .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();})
+        .then(function(list){
+          var files=Array.isArray(list)?list:(list&&list.files)||[];
+          if(!files.length) return null;
+          return Promise.all(files.map(function(fn){
+            var url=/^https?:\/\//.test(fn)?fn:(ITEM_JSON_BASE+fn);
+            return fetch(url).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});
+          })).then(function(datas){
+            var merged={item:[],baseitem:[],magicvariant:[],itemGroup:[],itemEntry:[]};
+            datas.forEach(function(d){
+              if(!d) return;
+              ["item","baseitem","magicvariant","itemGroup","itemEntry"].forEach(function(key){
+                if(Array.isArray(d[key])) merged[key]=merged[key].concat(d[key]);
+              });
+              if(Array.isArray(d)) merged.item=merged.item.concat(d);
+            });
+            var js=parseItemJson(merged);
+            Object.keys(js).forEach(function(k){if(!_itemCache.data[k])_itemCache.data[k]=js[k];});
+          });
+        })
+        .catch(function(){})
+        .finally(function(){done();});
     }
-    return function(){var idx=_itemListeners.indexOf(onUpdate);if(idx>=0)_itemListeners.splice(idx,1);};
+    // Generate scrolls now if spells already loaded; the listener handles later loads.
+    regenScrolls();
+    return function(){
+      var i1=_itemListeners.indexOf(onUpdate);if(i1>=0)_itemListeners.splice(i1,1);
+      var i2=_spellListeners.indexOf(regenScrolls);if(i2>=0)_spellListeners.splice(i2,1);
+    };
   },[]);
+  // Merge base item data with generated spell scrolls (scrolls don't override real items).
+  if(_itemCache.scrolls){
+    var combined=Object.assign({},_itemCache.scrolls,_itemCache.data);
+    return {data:combined,status:_itemCache.status};
+  }
   return _itemCache;
 }
 
@@ -4731,11 +5468,25 @@ function ItemNameInput({value, onChange, onAutofill, placeholder, style}){
     }
   },[]);
 
-  // Local matches (items.md) take priority
+  // Debounce the matching value so typing stays smooth against a large item set.
+  const [dValue,setDValue]=React.useState(value||"");
+  React.useEffect(function(){var t=setTimeout(function(){setDValue(value||"");},120);return function(){clearTimeout(t);};},[value]);
+
+  // Local matches (items.md + items.json) take priority
   var localMatches=[];
-  if(local.status==="ready"&&local.data&&(value||"").length>=2){
-    var q=(value||"").toLowerCase();
-    localMatches=Object.values(local.data).filter(function(it){return it.name.toLowerCase().includes(q);}).slice(0,6);
+  if(local.status==="ready"&&local.data&&(dValue||"").length>=2){
+    var q=(dValue||"").toLowerCase();
+    var exactM=[],prefixM=[],subM=[];
+    var keys=Object.keys(local.data);
+    for(var ki=0;ki<keys.length;ki++){
+      var k=keys[ki];var pos=k.indexOf(q);
+      if(pos<0) continue;
+      if(k===q) exactM.push(local.data[k]);
+      else if(pos===0) prefixM.push(local.data[k]);
+      else subM.push(local.data[k]);
+      if(exactM.length+prefixM.length+subM.length>=40) break; // cap scan
+    }
+    localMatches=exactM.concat(prefixM).concat(subM).slice(0,6);
   }
 
   // Debounced Open5e fallback
@@ -4799,7 +5550,7 @@ function ItemNameInput({value, onChange, onAutofill, placeholder, style}){
               >
                 <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"var(--gold-l)",fontWeight:600,flex:1}}>{it.name}</span>
                 {it.weight?<span style={{fontFamily:"'EB Garamond',serif",fontSize:10,color:"rgba(232,213,176,.4)",whiteSpace:"nowrap"}}>{it.weight} lb</span>:null}
-                <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:.5,color:it.src==="local"?"rgba(74,156,92,.6)":"rgba(96,180,196,.55)",whiteSpace:"nowrap",textTransform:"uppercase"}}>{it.src==="local"?"File":("SRD"+(it.srdVer||""))}</span>
+                <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:.5,color:(it.src==="local"||it.src==="json"||it.src==="file")?"rgba(74,156,92,.6)":"rgba(96,180,196,.55)",whiteSpace:"nowrap",textTransform:"uppercase"}}>{(it.src==="local"||it.src==="json"||it.src==="file")?"File":("SRD"+(it.srdVer||""))}</span>
               </div>
             );
           })}
@@ -6238,6 +6989,13 @@ function CompendiumPage({c,s}){
   const [kind,setKind]=us("spells"); // spells | feats | items | exploits
   const [query,setQuery]=us("");
   const [descQuery,setDescQuery]=us("");
+  // Debounced copies — used when filtering the large item set so typing stays responsive.
+  const [dQuery,setDQuery]=us("");
+  const [dDescQuery,setDDescQuery]=us("");
+  React.useEffect(function(){var t=setTimeout(function(){setDQuery(query);},140);return function(){clearTimeout(t);};},[query]);
+  React.useEffect(function(){var t=setTimeout(function(){setDDescQuery(descQuery);},140);return function(){clearTimeout(t);};},[descQuery]);
+  const qEff=kind==="items"?dQuery:query;
+  const dqEff=kind==="items"?dDescQuery:descQuery;
   const [fLevel,setFLevel]=us("any");
   const [fSchool,setFSchool]=us("any");
   const [fClass,setFClass]=us("");
@@ -6247,6 +7005,7 @@ function CompendiumPage({c,s}){
   const [fRarity,setFRarity]=us("any");
   const [fAttune,setFAttune]=us("any");
   const [fType,setFType]=us("");
+  const [fAttuneTag,setFAttuneTag]=us("");
   const [fPrereq,setFPrereq]=us("any"); // any | yes | no
   const [fPrereqText,setFPrereqText]=us("");
   const [fAbilities,setFAbilities]=us([]); // selected ability codes
@@ -6259,6 +7018,8 @@ function CompendiumPage({c,s}){
   const [addCls,setAddCls]=us(""); // selected class when adding a spell
   const [confirmAddAll,setConfirmAddAll]=us(false); // confirm modal for "add all" spells
   const [skippedInfo,setSkippedInfo]=us(null); // {names:[...], cls:""} popup for spells skipped as duplicates
+  const [weightPrompt,setWeightPrompt]=us(null); // {invIndex} item just added needing a weight
+  const [weightVal,setWeightVal]=us("");
   const [srdResults,setSrdResults]=us([]);
   const [srdLoading,setSrdLoading]=us(false);
   const [includeSrd,setIncludeSrd]=us(true);
@@ -6268,7 +7029,7 @@ function CompendiumPage({c,s}){
   function switchKind(k){setKind(k);setExpanded({});setSrdResults([]);setPage(0);setFDegree("any");setFExec("");setFExClass("");}
 
   // Reset to first page whenever a search or filter changes
-  React.useEffect(function(){setPage(0);},[query,descQuery,fLevel,fSchool,fClass,fCast,fRitual,fConc,fRarity,fAttune,fType,fPrereq,fPrereqText,fAbilities,fDegree,fExec,fExClass,includeSrd,kind]);
+  React.useEffect(function(){setPage(0);},[query,descQuery,fLevel,fSchool,fClass,fCast,fRitual,fConc,fRarity,fAttune,fType,fAttuneTag,fPrereq,fPrereqText,fAbilities,fDegree,fExec,fExClass,includeSrd,kind]);
 
   // SRD fetch (debounced) — only when there's a query
   React.useEffect(function(){
@@ -6299,8 +7060,8 @@ function CompendiumPage({c,s}){
   var all=fileList.concat(srdResults||[]);
 
   // Apply filters
-  var nq=(query||"").toLowerCase().trim();
-  var ndq=(descQuery||"").toLowerCase().trim();
+  var nq=(qEff||"").toLowerCase().trim();
+  var ndq=(dqEff||"").toLowerCase().trim();
   var results=all.filter(function(r){
     if(nq&&(r.name||"").toLowerCase().indexOf(nq)<0) return false;
     if(ndq&&(r.desc||"").toLowerCase().indexOf(ndq)<0) return false;
@@ -6315,10 +7076,12 @@ function CompendiumPage({c,s}){
       if(fConc==="no"&&r.conc) return false;
     }
     if(kind==="items"){
-      if(fRarity!=="any"&&(r.rarity||"").toLowerCase()!==fRarity.toLowerCase()) return false;
+      if(fRarity==="__mundane"){ if((r.rarity||"").trim()) return false; }
+      else if(fRarity!=="any"&&(r.rarity||"").toLowerCase()!==fRarity.toLowerCase()) return false;
       if(fAttune==="yes"&&r.attune!==true) return false;
       if(fAttune==="no"&&r.attune!==false) return false;
       if(fType.trim()&&(r.type||"").toLowerCase().indexOf(fType.toLowerCase())<0) return false;
+      if(fAttuneTag.trim()&&(r.attuneTag||"").toLowerCase().indexOf(fAttuneTag.toLowerCase())<0) return false;
     }
     if(kind==="feats"){
       var hasPre=!!(r.prereq&&(""+r.prereq).trim());
@@ -6343,6 +7106,13 @@ function CompendiumPage({c,s}){
   results.sort(function(a,b){
     if(kind==="spells"){var la=a.level||0,lb=b.level||0;if(la!==lb)return la-lb;}
     if(kind==="exploits"){var da=a.degree||0,db=b.degree||0;if(da!==db)return da-db;}
+    // When searching by name, surface exact match first, then prefix matches.
+    if(nq){
+      var an=(a.name||"").toLowerCase(),bn=(b.name||"").toLowerCase();
+      var ar=an===nq?0:(an.indexOf(nq)===0?1:2);
+      var br=bn===nq?0:(bn.indexOf(nq)===0?1:2);
+      if(ar!==br) return ar-br;
+    }
     return (a.name||"").localeCompare(b.name||"");
   });
   var PER_PAGE=20;
@@ -6397,8 +7167,15 @@ function CompendiumPage({c,s}){
     } else if(kind==="feats"){
       s("fts",(c.fts||[]).concat([{nm:r.name||"",ds:r.desc||"",lv:"",limited:false,limits:[{name:"",uses:"",exp:"",die:"NO",recharge:""}]}]));
     } else if(kind==="items"){
-      var ch=parseChargesFromDesc(r.desc);
-      s("inv",(c.inv||[]).concat([{nm:r.name||"",qt:"1",wt:r.weight||"",nt:r.cost?"Cost: "+r.cost:"",desc:r.desc||"",showDesc:!!r.desc,eq:false,wl:false,charges:ch||null}]));
+      var ch=r.charges||parseChargesFromDesc(r.desc);
+      var newInv=(c.inv||[]).concat([{nm:r.name||"",qt:"1",wt:r.weight||"",nt:r.cost?"Cost: "+r.cost:"",desc:r.desc||"",showDesc:!!r.desc,eq:false,wl:false,charges:ch||null}]);
+      s("inv",newInv);
+      // Only prompt when WE inferred the weight (the item had no official weight).
+      if(r.weightInferred){
+        var w=(r.weight==null?"":(""+r.weight)).trim();
+        setWeightVal(w);
+        setWeightPrompt({invIndex:newInv.length-1,name:r.name||""});
+      }
     } else if(kind==="exploits"){
       var deg=r.degree||1;
       var candidate={nm:r.name||"",uses:r.cost||"1 die",exec:r.execution||"",prereq:r.prereq||"",desc:r.desc||"",nt:"",used:false,cls:clsName||"",showDesc:false};
@@ -6508,12 +7285,14 @@ function CompendiumPage({c,s}){
         <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:8,alignItems:"center"}}>
           <select value={fRarity} onChange={function(e){setFRarity(e.target.value);}} style={selStyle}>
             <option value="any">Any Rarity</option>
+            <option value="__mundane">Mundane (no rarity)</option>
             {["Common","Uncommon","Rare","Very Rare","Legendary","Artifact"].map(function(rr){return <option key={rr} value={rr}>{rr}</option>;})}
           </select>
           <select value={fAttune} onChange={function(e){setFAttune(e.target.value);}} style={selStyle}>
             <option value="any">Attunement: Any</option><option value="yes">Requires Attunement</option><option value="no">No Attunement</option>
           </select>
-          <input value={fType} onChange={function(e){setFType(e.target.value);}} placeholder="Type contains... (e.g. Wondrous, Weapon)" style={Object.assign({},inputStyle,{flex:"1 1 180px",minWidth:140})} />
+          <input value={fType} onChange={function(e){setFType(e.target.value);}} placeholder="Type contains... (e.g. Wondrous, Weapon)" style={Object.assign({},inputStyle,{flex:"1 1 160px",minWidth:130})} />
+          <input value={fAttuneTag} onChange={function(e){setFAttuneTag(e.target.value);}} placeholder="Attune by... (e.g. Warlock)" style={Object.assign({},inputStyle,{flex:"1 1 140px",minWidth:120})} />
         </div>
       )}
 
@@ -6575,8 +7354,9 @@ function CompendiumPage({c,s}){
           else if(kind==="items") sub=[r.rarity,r.type,(r.attune===true?"Attunement":""),(r.weight?r.weight+" lb":"")].filter(Boolean).join(" · ");
           else if(kind==="feats") sub=[(r.abilities&&r.abilities.length&&r.abilities.length<6?"+"+r.abilities.join("/"):(r.abilities&&r.abilities.length===6?"+Any":"")),(r.prereq?"Prereq":"")].filter(Boolean).join(" · ");
           else if(kind==="exploits") sub=[(r.degree?r.degree+(r.degree===1?"st":r.degree===2?"nd":r.degree===3?"rd":"th")+" Degree":""),(r.cost||""),(r.execution||"")].filter(Boolean).join(" · ");
-          var tag=r.src==="file"?"File":("SRD"+(r.srdVer||""));
-          var tagCol=r.src==="file"?"rgba(74,156,92,.6)":"rgba(96,180,196,.55)";
+          var isLocal=(r.src==="file"||r.src==="local"||r.src==="json");
+          var tag=isLocal?"File":("SRD"+(r.srdVer||""));
+          var tagCol=isLocal?"rgba(74,156,92,.6)":"rgba(96,180,196,.55)";
           return (
             <div key={id} style={{borderBottom:"1px solid rgba(201,150,42,.07)"}}>
               <div onClick={function(){toggle(id);}} style={{display:"flex",alignItems:"baseline",gap:10,padding:"8px 12px",cursor:"pointer"}}>
@@ -6589,7 +7369,7 @@ function CompendiumPage({c,s}){
                 <div style={{padding:"4px 12px 14px 34px",background:"rgba(0,0,0,.15)"}}>
                   {kind==="spells"&&(
                     <div style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.5)",marginBottom:6,lineHeight:1.6}}>
-                      {r.castingTime&&<span>Cast: {r.castingTime} · </span>}{r.range&&<span>Range: {r.range} · </span>}{r.components&&<span>Comp: {r.components} · </span>}{r.duration&&<span>Duration: {r.duration}</span>}
+                      {r.castingTime&&<span>Cast: {r.castingTime} · </span>}{r.range&&<span>Range: {r.range} · </span>}{r.components&&<span>Comp: {r.components} · </span>}{r.duration&&<span>Duration: {(r.conc?"Concentration, up to ":"")+r.duration}</span>}
                     </div>
                   )}
                   {kind==="exploits"&&(
@@ -6730,6 +7510,24 @@ function CompendiumPage({c,s}){
                 style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(232,213,176,.2)",color:"rgba(232,213,176,.5)"}}>Cancel</div>
               <div onClick={function(){doAddAllExploits(addCls);}}
                 style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(201,74,42,.6)",color:"#e07060",background:"rgba(201,74,42,.15)"}}>Add All</div>
+            </div>
+          </div>
+        </div>
+      )}
+      {weightPrompt&&(
+        <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.7)",zIndex:100002,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+          <div onClick={function(e){e.stopPropagation();}}
+            style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,padding:"22px 26px",maxWidth:360,boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+            <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--gold-l)",marginBottom:10}}>Confirm Item Weight</div>
+            <div style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgba(232,213,176,.7)",marginBottom:14,lineHeight:1.5}}>
+              <span style={{color:"var(--gold-l)",fontWeight:600}}>{weightPrompt.name}</span> has no officially assigned weight. The proposed weight below is an estimate — adjust it if you like (enter 0 if it's weightless):
+            </div>
+            <input autoFocus type="number" value={weightVal} onChange={function(e){setWeightVal(e.target.value);}}
+              onKeyDown={function(e){if(e.key==="Enter"){var cp=[...(c.inv||[])];if(cp[weightPrompt.invIndex]){cp[weightPrompt.invIndex]={...cp[weightPrompt.invIndex],wt:weightVal.trim()===""?"0":weightVal.trim()};s("inv",cp);}setWeightPrompt(null);}}}
+              placeholder="0" style={{width:"100%",background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,150,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"7px 9px",borderRadius:2,marginBottom:16}} />
+            <div style={{display:"flex",gap:10,justifyContent:"flex-end"}}>
+              <div onClick={function(){var cp=[...(c.inv||[])];if(cp[weightPrompt.invIndex]){cp[weightPrompt.invIndex]={...cp[weightPrompt.invIndex],wt:weightVal.trim()===""?"0":weightVal.trim()};s("inv",cp);}setWeightPrompt(null);}}
+                style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(74,156,92,.5)",color:"rgba(74,156,92,.9)",background:"rgba(74,156,92,.12)"}}>Confirm Weight</div>
             </div>
           </div>
         </div>
@@ -7781,7 +8579,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.38</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.59</div>
 
 </script>
 </body>
