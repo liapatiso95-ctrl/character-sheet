@@ -4005,6 +4005,38 @@ const _spellCache={data:null,status:"idle"}; // "idle"|"loading"|"ready"|"error"
 const _spellListeners=[];
 function _notifySpellListeners(){_spellListeners.forEach(function(fn){fn();});}
 
+// Repo base for compendium JSON folders (spells/, feats/, exploits/, items/).
+const REPO_RAW_BASE="https://raw.githubusercontent.com/liapatiso95-ctrl/character-sheet/main/";
+// Load every JSON file listed in <folder>/index.json, read one array key from each
+// (e.g. "spell"), run them through `convert`, and merge into `target` WITHOUT
+// overwriting existing keys (so markdown, loaded first, wins name conflicts).
+// `convert` takes the combined array and returns a {key: record} object.
+// Calls `onDone` exactly once when finished (success or failure).
+function loadCompendiumJsonFolder(folder,arrayKey,convert,target,onDone){
+  var base=REPO_RAW_BASE+folder+"/";
+  fetch(base+"index.json")
+    .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();})
+    .then(function(list){
+      var files=Array.isArray(list)?list:(list&&list.files)||[];
+      if(!files.length) return null;
+      return Promise.all(files.map(function(fn){
+        var url=/^https?:\/\//.test(fn)?fn:(base+fn);
+        return fetch(url).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});
+      })).then(function(datas){
+        var combined=[];
+        datas.forEach(function(d){
+          if(!d) return;
+          if(Array.isArray(d[arrayKey])) combined=combined.concat(d[arrayKey]);
+          else if(Array.isArray(d)) combined=combined.concat(d); // bare array file
+        });
+        var conv=convert(combined)||{};
+        Object.keys(conv).forEach(function(k){if(!target[k])target[k]=conv[k];});
+      });
+    })
+    .catch(function(){})
+    .finally(function(){if(onDone)onDone();});
+}
+
 function parseSpellMarkdown(md){
   var spells={};
   // Split on #### headings
@@ -4071,18 +4103,135 @@ function parseSpellMarkdown(md){
   return spells;
 }
 
+// ─── 5etools spell JSON → same shape parseSpellMarkdown produces ───────────────
+const _SPELL_SCHOOL={A:"Abjuration",C:"Conjuration",D:"Divination",E:"Enchantment",V:"Evocation",I:"Illusion",N:"Necromancy",T:"Transmutation",P:"Psionic"};
+// "1 action", "1 bonus action", "10 minutes", "1 reaction (...)" from time:[{number,unit,condition}].
+function _fmtSpellTime(time){
+  if(!Array.isArray(time)||!time.length) return "";
+  return time.map(function(t){
+    var n=t.number!=null?t.number:1;
+    var unit=t.unit||"action";
+    var s=n+" "+unit+(n===1?"":"s");
+    if(t.condition) s+=" ("+strip5eTags(t.condition)+")";
+    return s;
+  }).join(" or ");
+}
+// "Self (30-foot cone)", "120 feet", "Touch", "Self" from range:{type,distance:{type,amount}}.
+function _fmtSpellRange(range){
+  if(!range||typeof range!=="object") return strip5eTags(range||"");
+  var d=range.distance||{};
+  var amt=d.amount, dtype=d.type;
+  function dist(){
+    if(dtype==="touch") return "Touch";
+    if(dtype==="self") return "Self";
+    if(dtype==="sight") return "Sight";
+    if(dtype==="unlimited") return "Unlimited";
+    if(dtype==="feet") return amt+" feet";
+    if(dtype==="miles") return amt+" mile"+(amt===1?"":"s");
+    return (amt!=null?amt+" ":"")+(dtype||"");
+  }
+  var rt=range.type;
+  if(rt==="point") return dist();
+  if(rt==="self") return "Self";
+  if(rt==="touch") return "Touch";
+  if(rt==="special") return "Special";
+  // Shaped areas: cone/radius/line/sphere/cube/hemisphere — "Self (30-foot cone)" etc.
+  if(rt&&dtype==="feet"&&amt!=null) return "Self ("+amt+"-foot "+rt+")";
+  return dist();
+}
+// "V, S, M (a bit of fur)" from components:{v,s,m}.
+function _fmtSpellComponents(comp){
+  if(!comp||typeof comp!=="object") return strip5eTags(comp||"");
+  var parts=[];
+  if(comp.v) parts.push("V");
+  if(comp.s) parts.push("S");
+  if(comp.m){
+    if(comp.m===true) parts.push("M");
+    else if(typeof comp.m==="string") parts.push("M ("+strip5eTags(comp.m)+")");
+    else if(comp.m.text) parts.push("M ("+strip5eTags(comp.m.text)+")");
+    else parts.push("M");
+  }
+  if(comp.r) parts.push("R");
+  return parts.join(", ");
+}
+// Returns {text, conc}. "Instantaneous", "1 minute", "Up to 1 hour", "Until dispelled".
+function _fmtSpellDuration(dur){
+  if(!Array.isArray(dur)||!dur.length) return {text:"",conc:false};
+  var conc=false;
+  var text=dur.map(function(d){
+    if(d.concentration) conc=true;
+    if(d.type==="instant") return "Instantaneous";
+    if(d.type==="permanent"){
+      var ends=(d.ends||[]).map(function(e){return e==="dispel"?"dispelled":e==="trigger"?"triggered":e;});
+      return ends.length?"Until "+ends.join(" or "):"Permanent";
+    }
+    if(d.type==="special") return "Special";
+    if(d.type==="timed"&&d.duration){
+      var u=d.duration;
+      var amt=u.amount!=null?u.amount:1;
+      var unit=u.type||"round";
+      return (d.concentration?"":"")+amt+" "+unit+(amt===1?"":"s");
+    }
+    return d.type||"";
+  }).join(", ");
+  return {text:text,conc:conc};
+}
+// Unique class names from classes.fromClassList (+ subclass/variant lists if present).
+function _fmtSpellClasses(classes){
+  if(!classes||typeof classes!=="object") return "";
+  var names=[];
+  (classes.fromClassList||[]).forEach(function(c){if(c&&c.name)names.push(c.name);});
+  (classes.fromClassListVariant||[]).forEach(function(c){if(c&&c.name)names.push(c.name);});
+  // dedupe, preserve order
+  var seen={},out=[];
+  names.forEach(function(n){var k=n.toLowerCase();if(!seen[k]){seen[k]=1;out.push(n);}});
+  return out.join(", ");
+}
+function convertSpellJson(arr){
+  var out={};
+  (arr||[]).forEach(function(sp){
+    if(!sp||!sp.name) return;
+    var level=sp.level||0;
+    var school=_SPELL_SCHOOL[(sp.school||"").toUpperCase()]||(sp.school||"");
+    var ritual=!!(sp.meta&&sp.meta.ritual);
+    var castingTime=_fmtSpellTime(sp.time);
+    var range=_fmtSpellRange(sp.range);
+    var components=_fmtSpellComponents(sp.components);
+    var dd=_fmtSpellDuration(sp.duration);
+    var classes=_fmtSpellClasses(sp.classes);
+    // Description: entries, then higher-level/cantrip-scaling appended with a blank line.
+    var descArr=flatten5eEntries(sp.entries,[]);
+    if(sp.entriesHigherLevel&&sp.entriesHigherLevel.length){
+      var hl=flatten5eEntries(sp.entriesHigherLevel,[]);
+      if(hl.length){descArr.push("");descArr=descArr.concat(hl);}
+    }
+    var desc=descArr.join("\n").trim();
+    out[sp.name.toLowerCase()]={
+      name:sp.name,level:level,school:school,castingTime:castingTime,range:range,
+      components:components,duration:dd.text,conc:dd.conc,ritual:ritual,classes:classes,desc:desc
+    };
+  });
+  return out;
+}
+
 function useSpellCompendium(){
   const [tick,setTick]=React.useState(0);
   React.useEffect(function(){
     function onUpdate(){setTick(function(t){return t+1;});}
     _spellListeners.push(onUpdate);
-    // Trigger fetch if idle
+    // Trigger fetch if idle. Load markdown (authoritative) and the spells/ JSON
+    // folder in parallel; markdown is written first so it wins name conflicts.
     if(_spellCache.status==="idle"){
       _spellCache.status="loading";
+      _spellCache.data={};
+      var pending=2;
+      function done(){pending--;if(pending<=0)_spellCache.status="ready";_notifySpellListeners();}
       fetch(SPELL_MD_URL)
         .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
-        .then(function(text){_spellCache.data=parseSpellMarkdown(text);_spellCache.status="ready";_notifySpellListeners();})
-        .catch(function(){_spellCache.status="error";_notifySpellListeners();});
+        .then(function(text){var md=parseSpellMarkdown(text);Object.keys(md).forEach(function(k){if(!_spellCache.data[k])_spellCache.data[k]=md[k];});})
+        .catch(function(){})
+        .finally(function(){done();});
+      loadCompendiumJsonFolder("spells","spell",convertSpellJson,_spellCache.data,done);
     }
     return function(){var idx=_spellListeners.indexOf(onUpdate);if(idx>=0)_spellListeners.splice(idx,1);};
   },[]);
@@ -4211,6 +4360,65 @@ function parseExploitMarkdown(md){
   return out;
 }
 
+// ─── 5etools optionalfeature (LaserLlama exploit) JSON → markdown-parser shape ──
+// NOTE: the JSON is lossy compared with the hand-authored markdown. Degree, cost,
+// prereq and description convert faithfully; Classes and Execution are best-effort
+// (the JSON encodes only exploit *families* and Foundry activation data, not the
+// specific class list or the markdown's hand-written execution phrasing). When an
+// exploit exists in both sources, the markdown wins, so authored entries keep their
+// exact fields; only JSON-only exploits use this approximation.
+const _EXPLOIT_FAMILY_CLASS={SE:"Barbarian",ME:"Fighter",DE:"Rogue",TE:"Warlord"};
+// Pull the degree (1–5) and family classes out of featureType codes like "LL:1ME".
+function _exploitDegreeAndClasses(featureType){
+  var degree=0; var fams={};
+  (featureType||[]).forEach(function(ft){
+    var m=(""+ft).match(/(\d)?([SMDT]E)$/); // optional degree digit + family
+    if(m){
+      if(m[1]&&!degree) degree=parseInt(m[1]);
+      var cls=_EXPLOIT_FAMILY_CLASS[m[2]];
+      if(cls) fams[cls]=true;
+    }
+  });
+  // Preserve a stable class order
+  var order=["Barbarian","Fighter","Rogue","Warlord"];
+  var classes=order.filter(function(c){return fams[c];}).join(", ");
+  return {degree:degree,classes:classes};
+}
+// Best-effort execution string from a Foundry activity's activation block.
+function _exploitExecution(opt){
+  var acts=opt.foundryActivities||[];
+  if(!acts.length) return "";
+  var a=acts[0]||{};
+  var act=a.activation||{};
+  // activation may be {type,condition} or flattened "activation.type"
+  var type=act.type||a["activation.type"]||"";
+  var cond=act.condition||"";
+  var label="";
+  if(type==="action") label="1 action";
+  else if(type==="bonus") label="1 bonus action";
+  else if(type==="reaction") label="1 reaction";
+  else if(type==="special") label=cond?strip5eTags(cond):"Special";
+  else if(type) label="1 "+type;
+  if(cond&&type!=="special"&&!/^(special)$/i.test(label)) label+=" ("+strip5eTags(cond)+")";
+  return label.trim();
+}
+function convertExploitJson(arr){
+  var out={};
+  (arr||[]).forEach(function(opt){
+    if(!opt||!opt.name) return;
+    var dc=_exploitDegreeAndClasses(opt.featureType);
+    var prereq=format5ePrerequisite(opt.prerequisite);
+    if(!prereq) prereq="None";
+    var desc=flatten5eEntries(opt.entries,[]).join("\n").trim();
+    var execution=_exploitExecution(opt);
+    out[opt.name.toLowerCase()]={
+      name:opt.name,degree:dc.degree,classes:dc.classes,prereq:prereq,
+      execution:execution,cost:deriveExploitCost(desc),desc:desc
+    };
+  });
+  return out;
+}
+
 function useExploitCompendium(){
   const [tick,setTick]=React.useState(0);
   React.useEffect(function(){
@@ -4218,10 +4426,15 @@ function useExploitCompendium(){
     _exploitListeners.push(onUpdate);
     if(_exploitCache.status==="idle"){
       _exploitCache.status="loading";
+      _exploitCache.data={};
+      var pending=2;
+      function done(){pending--;if(pending<=0)_exploitCache.status="ready";_notifyExploitListeners();}
       fetch(EXPLOIT_MD_URL)
         .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
-        .then(function(text){_exploitCache.data=parseExploitMarkdown(text);_exploitCache.status="ready";_notifyExploitListeners();})
-        .catch(function(){_exploitCache.status="error";_notifyExploitListeners();});
+        .then(function(text){var md=parseExploitMarkdown(text);Object.keys(md).forEach(function(k){if(!_exploitCache.data[k])_exploitCache.data[k]=md[k];});})
+        .catch(function(){})
+        .finally(function(){done();});
+      loadCompendiumJsonFolder("exploits","optionalfeature",convertExploitJson,_exploitCache.data,done);
     }
     return function(){var idx=_exploitListeners.indexOf(onUpdate);if(idx>=0)_exploitListeners.splice(idx,1);};
   },[]);
@@ -4448,6 +4661,115 @@ function parseFeatMarkdown(md){
   return feats;
 }
 
+// ─── 5etools prerequisite array → readable string ──────────────────────────────
+const _ABIL_FULL={str:"Strength",dex:"Dexterity",con:"Constitution",int:"Intelligence",wis:"Wisdom",cha:"Charisma"};
+function format5ePrerequisite(prereq){
+  if(!Array.isArray(prereq)||!prereq.length) return "";
+  // Each array element is an alternative ("OR"); within an element, parts are "AND".
+  var alts=prereq.map(function(p){
+    if(!p||typeof p!=="object") return "";
+    var parts=[];
+    if(p.level!=null){
+      var lv=(typeof p.level==="object")?p.level.level:p.level;
+      if(lv!=null) parts.push("Level "+lv);
+    }
+    if(Array.isArray(p.ability)){
+      p.ability.forEach(function(ab){
+        Object.keys(ab).forEach(function(k){
+          var nm=_ABIL_FULL[k]||k;
+          parts.push(nm+" "+ab[k]+" or higher");
+        });
+      });
+    }
+    if(Array.isArray(p.race)){
+      var races=p.race.map(function(r){return (""+(r.name||r)).split("|")[0];});
+      if(races.length) parts.push(races.join(" or "));
+    }
+    if(p.spellcasting||p.spellcasting2020||p.spellcastingFeature) parts.push("the ability to cast at least one spell");
+    if(p.spellcastingPrepared) parts.push("Spellcasting feature");
+    if(Array.isArray(p.feat)){
+      var feats=p.feat.map(function(f){return titleCase((""+f).split("|")[0]);});
+      if(feats.length) parts.push(feats.join(" or ")+" feat");
+    }
+    if(Array.isArray(p.feature)){
+      var feA=p.feature.map(function(f){return titleCase((""+f).split("|")[0]);});
+      if(feA.length) parts.push(feA.join(" or "));
+    }
+    if(Array.isArray(p.proficiency)){
+      p.proficiency.forEach(function(pr){
+        Object.keys(pr).forEach(function(k){
+          parts.push("Proficiency with "+(""+pr[k]).split("|")[0]+" "+k);
+        });
+      });
+    }
+    if(Array.isArray(p.otherSummary)){
+      p.otherSummary.forEach(function(o){if(o&&o.entrySummary)parts.push(strip5eTags(o.entrySummary));});
+    } else if(p.otherSummary&&p.otherSummary.entrySummary){
+      parts.push(strip5eTags(p.otherSummary.entrySummary));
+    } else if(p.other){
+      parts.push(strip5eTags(p.other));
+    }
+    if(p.background){
+      var bg=Array.isArray(p.background)?p.background.map(function(b){return (""+(b.name||b)).split("|")[0];}):[(""+p.background).split("|")[0]];
+      parts.push(bg.join(" or ")+" background");
+    }
+    // exclusiveFeatCategory and similar internal gating are not player-facing prose; skip.
+    return parts.join(", ");
+  }).filter(Boolean);
+  // dedupe identical alternatives
+  var seen={},uniq=[];
+  alts.forEach(function(a){if(!seen[a]){seen[a]=1;uniq.push(a);}});
+  return uniq.join(" or ");
+}
+// Detect which ability scores a feat can raise (same logic as the markdown parser).
+function _featAbilities(fullDesc){
+  var abilities=[];
+  var asiMatch=fullDesc.match(/Ability Score Increase[^\n]*?\.([^\n]*)/i);
+  var asiText=asiMatch?asiMatch[1]:"";
+  var scanText=asiText||fullDesc;
+  var ablMap=[["Strength","STR"],["Dexterity","DEX"],["Constitution","CON"],["Intelligence","INT"],["Wisdom","WIS"],["Charisma","CHA"]];
+  if(/one ability score of your choice|any ability score/i.test(scanText)){
+    abilities=["STR","DEX","CON","INT","WIS","CHA"];
+  } else {
+    ablMap.forEach(function(p){if(new RegExp("\\b"+p[0]+"\\b","i").test(scanText)) abilities.push(p[1]);});
+  }
+  return abilities;
+}
+// Render feat entries into the same "- Label. text" form the markdown parser emits.
+function _featDescFromEntries(entries){
+  var lines=[];
+  (entries||[]).forEach(function(e){
+    if(typeof e==="string"){ var s=strip5eTags(e).trim(); if(s)lines.push(s); }
+    else if(e&&typeof e==="object"){
+      if(e.name&&(e.entries||e.items)){
+        var body=flatten5eEntries(e.entries||e.items,[]).join(" ").trim();
+        var label=strip5eTags(e.name).replace(/\.$/,"").trim();
+        lines.push("- "+label+". "+body);
+      } else {
+        flatten5eEntries(e,lines);
+      }
+    }
+  });
+  // Blank line before each "- " block (except first), matching the markdown parser.
+  var formatted=[];
+  lines.forEach(function(ln,idx){
+    if(ln.indexOf("- ")===0&&idx>0&&lines[idx-1].indexOf("- ")!==0&&lines[idx-1]!=="") formatted.push("");
+    formatted.push(ln);
+  });
+  return formatted.join("\n").trim();
+}
+function convertFeatJson(arr){
+  var out={};
+  (arr||[]).forEach(function(ft){
+    if(!ft||!ft.name) return;
+    var prereq=format5ePrerequisite(ft.prerequisite);
+    var fullDesc=_featDescFromEntries(ft.entries);
+    if(!fullDesc&&!prereq) return; // skip stubs
+    out[ft.name.toLowerCase()]={name:ft.name,desc:fullDesc,prereq:prereq,abilities:_featAbilities(fullDesc)};
+  });
+  return out;
+}
+
 function useFeatCompendium(){
   const [tick,setTick]=React.useState(0);
   React.useEffect(function(){
@@ -4455,10 +4777,15 @@ function useFeatCompendium(){
     _featListeners.push(onUpdate);
     if(_featCache.status==="idle"){
       _featCache.status="loading";
+      _featCache.data={};
+      var pending=2;
+      function done(){pending--;if(pending<=0)_featCache.status="ready";_notifyFeatListeners();}
       fetch(FEAT_MD_URL)
         .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
-        .then(function(text){_featCache.data=parseFeatMarkdown(text);_featCache.status="ready";_notifyFeatListeners();})
-        .catch(function(){_featCache.status="error";_notifyFeatListeners();});
+        .then(function(text){var md=parseFeatMarkdown(text);Object.keys(md).forEach(function(k){if(!_featCache.data[k])_featCache.data[k]=md[k];});})
+        .catch(function(){})
+        .finally(function(){done();});
+      loadCompendiumJsonFolder("feats","feat",convertFeatJson,_featCache.data,done);
     }
     return function(){var idx=_featListeners.indexOf(onUpdate);if(idx>=0)_featListeners.splice(idx,1);};
   },[]);
@@ -4675,7 +5002,18 @@ function parseItemMarkdown(md){
     if(headerLines.length>0) fullDesc=headerLines.join("\n")+(fullDesc?"\n"+fullDesc:"");
     // Skip stub entries: only a name, nothing else
     if(!descLines.length&&!weight&&!cost&&!type&&!rarity&&attune===null) return;
-    items[name.toLowerCase()]={name,weight,cost,type,rarity,attune:attune===false?false:(attune?true:null),desc:fullDesc,src:"local"};
+    // ── Parity with the JSON parser ──
+    // attuneTag: searchable attunement requirement, stripped of a leading "by a/an"
+    // and any generic yes/required wording (e.g. "by a Warlock" -> "Warlock").
+    var attuneTag="";
+    if(typeof attune==="string"){
+      attuneTag=attune.replace(/^(yes|true|required|requires attunement?)\b[\s,:-]*/i,"")
+                      .replace(/^by an?\s+/i,"").trim();
+    }
+    // charges: structured charge-tracker object derived from the description text,
+    // exactly as the JSON parser falls back to when an item has no explicit count.
+    var charges=parseChargesFromDesc(fullDesc);
+    items[name.toLowerCase()]={name,weight,cost,type,rarity,attune:attune===false?false:(attune?true:null),attuneTag:attuneTag,desc:fullDesc,charges:charges,src:"local"};
   });
   return items;
 }
@@ -5073,6 +5411,19 @@ function inferItemWeight(name,typeCode,flags){
 }
 
 // Parse the 5etools items.json into our item shape.
+// True only when entries contain an actual "pick from these options" block — a
+// table or list. A nested {type:"entries"} sub-section (e.g. a Curse/Wish block
+// on a magic weapon) is ordinary description text and does NOT count. This is the
+// test for whether a generic parent (item group / variant) is worth showing.
+function entriesHaveList(entries){
+  if(!Array.isArray(entries)) return false;
+  for(var i=0;i<entries.length;i++){
+    var e=entries[i];
+    if(e&&typeof e==="object"&&(e.type==="table"||e.type==="list")) return true;
+  }
+  return false;
+}
+
 // Accepts a JSON string OR an already-merged data object {item,baseitem,magicvariant,itemGroup}.
 function parseItemJson(jsonOrData){
   var out={};
@@ -5097,6 +5448,27 @@ function parseItemJson(jsonOrData){
   // Expand magicvariants against base items (no variant-on-variant chaining).
   var generated=[];
   variants.forEach(function(v){ generated=generated.concat(expandMagicVariant(v,baseItems)); });
+  // ── Generic parents from magicvariants (Feature 1) ──
+  // A magicvariant template (e.g. "Ammunition of Slaying") is shown as its own
+  // generic entry ONLY when it is not reprinted elsewhere and its description
+  // carries an actual list/table of options. Tagged generic:true so it appears
+  // in the compendium only behind the "show generic items" toggle and never in
+  // the inventory typeahead.
+  var genericParents=[];
+  variants.forEach(function(v){
+    var inh=(v&&v.inherits)||{};
+    if(inh.reprintedAs) return;            // superseded printing — ignore entirely
+    if(!entriesHaveList(inh.entries)) return; // no option list — not worth showing generically
+    if(!v.name) return;
+    genericParents.push({
+      name:v.name,
+      type:"GV",                            // generic variant
+      rarity:inh.rarity,
+      reqAttune:inh.reqAttune,
+      entries:inh.entries,
+      _genericParent:true
+    });
+  });
   // Full raw pool to parse: concrete items, base items, then generated variants.
   var arr=resolvedItems.concat(baseItems).concat(generated);
   arr.forEach(function(it){
@@ -5230,16 +5602,67 @@ function parseItemJson(jsonOrData){
   // ── itemGroup members: add only those not already present standalone. ──
   // The group's own entries/rarity describe the generated member. Skip members
   // that are just mundane equipment names with nothing to describe them.
+  //
+  // Feature 2 — reprinted groups are ignored: a group with `reprintedAs` is a
+  // superseded printing, so its members are NOT injected from it. They survive
+  // only if they also belong to a live (non-reprinted) group or already exist as
+  // a standalone concrete item. First pass: collect the names that a live group
+  // vouches for, so processing order doesn't matter.
+  var liveGroupMembers={};
+  groups.forEach(function(g){
+    if(!g||!g.items||g.reprintedAs) return;
+    g.items.forEach(function(m){
+      var k=(""+m).split("|")[0].toLowerCase();
+      if(k) liveGroupMembers[k]=true;
+    });
+  });
+  // Members injected from a GV-typed group (e.g. "Armor of Resistance",
+  // "Enspelled Weapon") are abstract "no particular item" generics — e.g.
+  // "Armor of Acid Resistance" with no specific base armor. Flag them so they
+  // can be shown in the compendium but kept out of the inventory entirely.
+  var variantGenericMembers={};
   groups.forEach(function(g){
     if(!g||!g.items) return;
+    if((""+(g.type||"")).split("|")[0]!=="GV") return;
+    g.items.forEach(function(m){
+      var k=(""+m).split("|")[0].toLowerCase();
+      if(k) variantGenericMembers[k]=true;
+    });
+  });
+  groups.forEach(function(g){
+    if(!g||!g.items) return;
+    var groupReprinted=!!g.reprintedAs;
     var groupDescArr=flatten5eEntries(g.entries,[]);
     var groupRarity=(g.rarity&&!/^(none|unknown|varies)$/i.test(g.rarity))?titleCase(g.rarity):"";
     var groupAttune=g.reqAttune?true:null;
+    // Feature 1 — generic parent: a non-reprinted group whose entries carry an
+    // actual list/table (e.g. "Armor of Resistance" with its d10 table) is shown
+    // as its own generic:true entry — compendium-only (behind toggle), never in
+    // inventory. Groups without an option list are not surfaced generically.
+    if(!groupReprinted&&g.name&&entriesHaveList(g.entries)){
+      var gpKey=g.name.toLowerCase();
+      if(!out[gpKey]){
+        var gpTypeCode=(""+(g.type||"")).split("|")[0];
+        var gpTypeName=(gpTypeCode&&gpTypeCode!=="GV")?(_ITEM_TYPE[gpTypeCode]||""):"";
+        var gpHdr=[];
+        if(groupRarity||gpTypeName) gpHdr.push("Type: "+[gpTypeName,groupRarity].filter(Boolean).join(", "));
+        if(groupAttune) gpHdr.push("(Requires Attunement)");
+        var gpBody=groupDescArr.join("\n");
+        out[gpKey]={
+          name:g.name,weight:"",cost:"",type:gpTypeName,rarity:groupRarity,
+          attune:groupAttune,attuneTag:(typeof g.reqAttune==="string"?g.reqAttune.replace(/^by an?\s+/i,"").trim():""),
+          desc:(gpHdr.length?gpHdr.join("\n")+"\n\n":"")+gpBody,
+          charges:parseChargesFromDesc(gpBody),src:"json",generic:true
+        };
+      }
+    }
     g.items.forEach(function(m){
       var mname=(""+m).split("|")[0];
       if(!mname) return;
       var key=mname.toLowerCase();
       if(out[key]) return; // already a standalone item
+      // Reprinted group: only inject this member if a live group also lists it.
+      if(groupReprinted&&!liveGroupMembers[key]) return;
       // Skip junk: a member with no group description AND no rarity is just an equipment label
       if(groupDescArr.length===0&&!groupRarity) return;
       var gTypeCode=(""+(g.type||"")).split("|")[0];
@@ -5250,9 +5673,29 @@ function parseItemJson(jsonOrData){
       out[key]={
         name:mname,weight:"",cost:"",type:gTypeName,rarity:groupRarity,
         attune:groupAttune,attuneTag:(typeof g.reqAttune==="string"?g.reqAttune.replace(/^by an?\s+/i,"").trim():""),
-        desc:(hdr.length?hdr.join("\n")+"\n\n":"")+body,charges:parseChargesFromDesc(body),src:"json"
+        desc:(hdr.length?hdr.join("\n")+"\n\n":"")+body,charges:parseChargesFromDesc(body),src:"json",
+        variantGeneric:variantGenericMembers[key]?true:undefined
       };
     });
+  });
+  // ── Generic parents from magicvariants (Feature 1) ──
+  // Emitted last so a real concrete item of the same name always wins.
+  genericParents.forEach(function(gp){
+    var key=(gp.name||"").toLowerCase();
+    if(!key||out[key]) return;
+    var gpTypeCode=(""+(gp.type||"")).split("|")[0];
+    var gpTypeName=(gpTypeCode&&gpTypeCode!=="GV")?(_ITEM_TYPE[gpTypeCode]||""):"";
+    var gpRarity=(gp.rarity&&!/^(none|unknown|varies)$/i.test(gp.rarity))?titleCase(gp.rarity):"";
+    var gpHdr=[];
+    if(gpRarity||gpTypeName) gpHdr.push("Type: "+[gpTypeName,gpRarity].filter(Boolean).join(", "));
+    if(gp.reqAttune) gpHdr.push("(Requires Attunement)");
+    var gpBody=flatten5eEntries(gp.entries,[]).join("\n");
+    out[key]={
+      name:gp.name,weight:"",cost:"",type:gpTypeName,rarity:gpRarity,
+      attune:gp.reqAttune?true:null,attuneTag:(typeof gp.reqAttune==="string"?gp.reqAttune.replace(/^by an?\s+/i,"").trim():""),
+      desc:(gpHdr.length?gpHdr.join("\n")+"\n\n":"")+gpBody,
+      charges:parseChargesFromDesc(gpBody),src:"json",generic:true
+    };
   });
   return out;
 }
@@ -5481,6 +5924,7 @@ function ItemNameInput({value, onChange, onAutofill, placeholder, style}){
     for(var ki=0;ki<keys.length;ki++){
       var k=keys[ki];var pos=k.indexOf(q);
       if(pos<0) continue;
+      if(local.data[k]&&(local.data[k].generic||local.data[k].variantGeneric)) continue; // generic/variant parents never go in inventory
       if(k===q) exactM.push(local.data[k]);
       else if(pos===0) prefixM.push(local.data[k]);
       else subM.push(local.data[k]);
@@ -7006,6 +7450,7 @@ function CompendiumPage({c,s}){
   const [fAttune,setFAttune]=us("any");
   const [fType,setFType]=us("");
   const [fAttuneTag,setFAttuneTag]=us("");
+  const [showGeneric,setShowGeneric]=us(false); // show variant/generic item parents (default off)
   const [fPrereq,setFPrereq]=us("any"); // any | yes | no
   const [fPrereqText,setFPrereqText]=us("");
   const [fAbilities,setFAbilities]=us([]); // selected ability codes
@@ -7029,7 +7474,7 @@ function CompendiumPage({c,s}){
   function switchKind(k){setKind(k);setExpanded({});setSrdResults([]);setPage(0);setFDegree("any");setFExec("");setFExClass("");}
 
   // Reset to first page whenever a search or filter changes
-  React.useEffect(function(){setPage(0);},[query,descQuery,fLevel,fSchool,fClass,fCast,fRitual,fConc,fRarity,fAttune,fType,fAttuneTag,fPrereq,fPrereqText,fAbilities,fDegree,fExec,fExClass,includeSrd,kind]);
+  React.useEffect(function(){setPage(0);},[query,descQuery,fLevel,fSchool,fClass,fCast,fRitual,fConc,fRarity,fAttune,fType,fAttuneTag,fPrereq,fPrereqText,fAbilities,fDegree,fExec,fExClass,includeSrd,kind,showGeneric]);
 
   // SRD fetch (debounced) — only when there's a query
   React.useEffect(function(){
@@ -7076,6 +7521,7 @@ function CompendiumPage({c,s}){
       if(fConc==="no"&&r.conc) return false;
     }
     if(kind==="items"){
+      if(r.generic&&!showGeneric) return false; // hide generic/variant parents unless opted in
       if(fRarity==="__mundane"){ if((r.rarity||"").trim()) return false; }
       else if(fRarity!=="any"&&(r.rarity||"").toLowerCase()!==fRarity.toLowerCase()) return false;
       if(fAttune==="yes"&&r.attune!==true) return false;
@@ -7293,6 +7739,10 @@ function CompendiumPage({c,s}){
           </select>
           <input value={fType} onChange={function(e){setFType(e.target.value);}} placeholder="Type contains... (e.g. Wondrous, Weapon)" style={Object.assign({},inputStyle,{flex:"1 1 160px",minWidth:130})} />
           <input value={fAttuneTag} onChange={function(e){setFAttuneTag(e.target.value);}} placeholder="Attune by... (e.g. Warlock)" style={Object.assign({},inputStyle,{flex:"1 1 140px",minWidth:120})} />
+          <label title="Show generic 'parent' items (e.g. Armor of Resistance) that list their variants in a table. These never appear in your inventory." style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",fontFamily:"'EB Garamond',serif",fontSize:13,color:showGeneric?"rgba(232,213,176,.85)":"rgba(232,213,176,.45)",whiteSpace:"nowrap",userSelect:"none"}}>
+            <input type="checkbox" checked={showGeneric} onChange={function(e){setShowGeneric(e.target.checked);}} style={{accentColor:"var(--arcane)",cursor:"pointer"}} />
+            Show generic items
+          </label>
         </div>
       )}
 
@@ -7384,12 +7834,17 @@ function CompendiumPage({c,s}){
                       style={{display:"inline-block",marginTop:10,cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",padding:"5px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(201,74,42,.45)",color:"#e07060",background:"rgba(201,74,42,.08)"}}>
                       + Add to Exploit List
                     </div>
+                  ):(kind==="items"&&(r.generic||r.variantGeneric)?(
+                    <div title="Generic reference entry — pick a specific item to add to your inventory."
+                      style={{display:"inline-block",marginTop:10,fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",padding:"5px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(201,150,42,.2)",color:"rgba(232,213,176,.4)",background:"rgba(201,150,42,.04)",fontStyle:"italic"}}>
+                      Generic — reference only
+                    </div>
                   ):(
                     <div onClick={function(){var spc=c.spellClasses||[];setAddCls(spc.length>0?(spc[0].nm||""):"");setConfirmAdd(r);}}
                       style={{display:"inline-block",marginTop:10,cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",padding:"5px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(74,156,92,.4)",color:"rgba(74,156,92,.85)",background:"rgba(74,156,92,.08)"}}>
                       + Add to {kind==="spells"?"Spell List":kind==="feats"?"Feats":"Inventory"}
                     </div>
-                  )}
+                  ))}
                 </div>
               )}
             </div>
@@ -8579,7 +9034,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.59</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.70</div>
 
 </script>
 </body>
