@@ -319,6 +319,7 @@ const init=()=>{ const d=({
   expl:{1:[],2:[],3:[],4:[],5:[]},
   exploitDie:"d4",exploitDice:"",exploitDiceExp:"",
   creatures:[],
+  savedRolls:[],
 }); return window.__characterLoad ? window.__characterLoad(d) : d; };
 
 const CSS = `
@@ -9031,7 +9032,7 @@ function App(){
   const [hiddenTabs,setHiddenTabs]=useState(function(){try{var h=JSON.parse(localStorage.getItem('_ht'));return Array.isArray(h)?h:[];}catch(e){return [];}});
   const [showTabMgr,setShowTabMgr]=useState(false);
   const savedRolls=c.savedRolls||[];
-  const saveSRApp=function(updater){s("savedRolls",updater);};
+  const saveSRApp=function(updater){s("savedRolls",function(prev){return updater(Array.isArray(prev)?prev:[]);});};
 
   // Global confirm modal
   const [confirmState,setConfirmState]=useState({open:false,message:"",onConfirm:null});
