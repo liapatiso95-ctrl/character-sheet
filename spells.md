@@ -5089,23 +5089,14 @@ Whispering to the spirits of nature, you create one of the following effects wit
 
 **Fire Play.** You light or snuff out a candle, a torch, or a campfire.
 
-***Cantrip Scaling***. You add the following additional abilities when you
-reach certain levels.
+***Cantrip Scaling***. You add the following additional abilities when you reach certain levels.
 
-**Beast Summoning.** You cause a Tiny beast within range to come 10 feet
-closer to you on its next turn, provided that creature
-has all its Hit Points (at 5th level)
+**Beast Summoning.** You cause a Tiny beast within range to come 10 feet closer to you on its next turn, provided that  creature has all its Hit Points (at 5th level)
 
-**Plant Awareness.** You cause plants within range to twist and bend
-silently to indicate the presence of Small or larger
-creatures near them (at 11th level)
+**Plant Awareness.** You cause plants within range to twist and bend silently to indicate the presence of Small or larger
+creatures near them (at 11th level) 
 
-**Seasonal Tranformation.** You cause plants within range to take any seasonal
-form, such as bearing fruit, losing or growing leaves
-or flowers (at 17th level). This effect takes 1
-minute and requires concentration. Once you end
-your concentration, the plant returns to its previous
-state over the course of 10 minutes.
+**Seasonal Tranformation.** You cause plants within range to take any seasonal form, such as bearing fruit, losing or growing leaves or flowers (at 17th level). This effect takes 1 minute and requires concentration. Once you end your concentration, the plant returns to its previous state over the course of 10 minutes.
 
 \column
 #### Electric Arc
@@ -5208,9 +5199,7 @@ You magically emanate a sense of friendship toward one creature you can see with
 
 The spell ends early if the target takes damage or if you make an attack roll, deal damage, or force anyone to make a saving throw. When the spell ends, the target knows it was Charmed by you.
 
-***Cantrip Scaling***. You can affect one additional creature when you reach
-5th level (two creatures), 11th level (three creatures),
-and 17th level (four creatures).
+***Cantrip Scaling***. You can affect one additional creature when you reach 5th level (two creatures), 11th level (three creatures), and 17th level (four creatures).
 
 #### Frostbite
 *Evocation Cantrip*  
@@ -5348,11 +5337,7 @@ You touch one object that is no larger than 10 feet in any dimension. Until the 
 
 If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.
 
-***Cantrip Scaling***. When you reach 5th level, when you cast this spell you
-can choose to increase or decrease the radius of bright
-light and of Dim Light by up to 5 feet. This control
-increases to 10 feet when you reach 11th level, and 15
-feet when you reach 17th level.
+***Cantrip Scaling***. When you reach 5th level, when you cast this spell you can choose to increase or decrease the radius of bright light and of Dim Light by up to 5 feet. This control increases to 10 feet when you reach 11th level, and 15 feet when you reach 17th level.
 
 #### Lightning Leash
 *Evocation Cantrip*  
@@ -5397,9 +5382,7 @@ As a Magic action on your later turns, you can control the hand thus again. As p
 
 The hand can't attack, activate magic items, or carry more than 10 pounds.
 
-***Cantrip Scaling***. The range of the hand increases by 5 feet when you
-reach 5th level (35 feet), 11th level (40 feet), and 17th
-level (45 feet).
+***Cantrip Scaling***. The range of the hand increases by 5 feet when you reach 5th level (35 feet), 11th level (40 feet), and 17th level (45 feet).
 
 \page
 {{pageNumber,auto}}
@@ -5416,9 +5399,7 @@ You touch one to three pebbles and imbue them with magic. You or someone else ca
 
 If you cast this spell again, the spell ends on any pebbles still affected by your previous casting.
 
-***Cantrip Scaling***. The number of stones you can affect increases by 1
-when you reach 5th level (4 stones), 11th level (5
-stones), and 17th level (6 stones)
+***Cantrip Scaling***. The number of stones you can affect increases by 1 when you reach 5th level (4 stones), 11th level (5 stones), and 17th level (6 stones)
 
 #### Mending
 *Transmutation Cantrip*  
@@ -5432,10 +5413,7 @@ This spell repairs a single break or tear in an object you touch, such as a brok
 
 This spell can physically repair a magic item, but it can't restore magic to such an object.
 
-***Cantrip Scaling***. The maximum size of object you can mend increases to
-1 foot by 1 foot by 2 feet when you reach 5th level, 1 foot
-by 2 feet by 2 feet at 11th level, and 2 feet on each side
-when you reach 17th level.
+***Cantrip Scaling***. The maximum size of object you can mend increases to 1 foot by 1 foot by 2 feet when you reach 5th level, 1 foot by 2 feet by 2 feet at 11th level, and 2 feet on each side when you reach 17th level.
 \column
 #### Message
 *Divination Cantrip*  
@@ -5449,9 +5427,7 @@ You point toward a creature within range and whisper a message. The target (and 
 
 You can cast this spell through solid objects if you are familiar with the target and know it is beyond the barrier. Magical silence; 1 foot of stone, metal, or wood; or a thin sheet of lead blocks the spell.
 
-***Cantrip Scaling***. The range of your message increases by 30 feet when
-you reach 5th level (150 feet), 11th level (180 feet), and
-17th level (210 feet).
+***Cantrip Scaling***. The range of your message increases by 30 feet when you reach 5th level (150 feet), 11th level (180 feet), and 17th level (210 feet).
 
 #### Mind Sliver
 *Enchantment Cantrip*  
@@ -5510,9 +5486,7 @@ If a creature takes a Study action to examine the sound or image, the creature c
 
 **Image.** If you create an image of an object—such as a chair, muddy footprints, or a small chest—it must be no larger than a 5-foot Cube. The image can't create sound, light, smell, or any other sensory effect. Physical interaction with the image reveals it to be an illusion, since things can pass through it.
 
-***Cantrip Scaling***. The duration of the spell increases by 1 minute when
-you reach 5th level (2 minutes), 11th level (3 minutes),
-and 17th level (4 minutes).
+***Cantrip Scaling***. The duration of the spell increases by 1 minute when you reach 5th level (2 minutes), 11th level (3 minutes), and 17th level (4 minutes).
 
 #### Mold Earth
 *Transmutation Cantrip*  
@@ -5552,8 +5526,7 @@ You batter a creature within range with psionic force, forcing it to make a Stre
 
 You channel necrotic spiritual power to your hand, changing it into a withered specter of itself. Make a melee spell attack against one creature within your reach. On hit, it takes 1d8 Necrotic damage, and you can choose to gain Temporary Hit Points equal to half the Necrotic damage dealt.
 
-***Cantrip Scaling***. The damage of this spell increases
-by 1d8 at 5th (2d8), 11th (3d8), and 17th level (4d8).
+***Cantrip Scaling***. The damage of this spell increases by 1d8 at 5th (2d8), 11th (3d8), and 17th level (4d8).
 
 
 \page
@@ -5617,13 +5590,9 @@ You create a magical effect within range. Choose the effect from the options bel
 
 **Minor Creation.** You create a nonmagical trinket or an illusory image that can fit in your hand. It lasts until the end of your next turn. A trinket can deal no damage and has no monetary worth.
 
-***Cantrip Scaling***. At 5th level, as one of your effects you can cause a
-Tiny object you can see that is not being held or carried
-to vibrate gently or vigorously for up to 1 minute.
-At 11th level you can cause two effects per casting
-of the spell and have up to four effects active at a time.
-At 17th level you can cause three effects per casting
-of the spell and have up to six effects active at a time.
+***Cantrip Scaling***. At 5th level, as one of your effects you can cause a Tiny object you can see that is not being held or carried to vibrate gently or vigorously for up to 1 minute.
+At 11th level you can cause two effects per casting of the spell and have up to four effects active at a time.
+At 17th level you can cause three effects per casting of the spell and have up to six effects active at a time.
 
 
 
@@ -5835,9 +5804,7 @@ You cast sorcerous energy at one creature or object within range. Make a ranged 
 
 If you roll an 8 on a d8 for this spell, you can roll another d8, and add it to the damage. When you cast this spell, the maximum number of these d8s you can add to the spell's damage equals your spellcasting ability modifier.
 
-**Cantrip	Upgrade.** This	spell’s	damage	
-increases	by	1d8 when	you	reach	level	5	(2d8),	
-11 (3d8),	and	17 (4d8).
+**Cantrip	Upgrade.** This spell’s damage increases by	1d8 when you reach level 5 (2d8), 11 (3d8),	and	17 (4d8).
 
 
 #### Spare the Dying
@@ -5958,13 +5925,9 @@ You manifest a minor wonder within range. You create one of the effects below wi
 
 **Tremors.** You cause harmless tremors in the ground for 1 minute.
 
-***Cantrip Scaling***. At 5th level, as one of your effects you can cause
-yourself to appear 10 percent larger or smaller for 1
-minute.
-At 11th level you can cause two effects per casting
-of the spell and have up to four effects active at a time.
-At 17th level you can cause three effects per casting
-of the spell and have up to six effects active at a time.
+***Cantrip Scaling***. At 5th level, as one of your effects you can cause yourself to appear 10 percent larger or smaller for 1 minute.
+At 11th level you can cause two effects per casting of the spell and have up to four effects active at a time.
+At 17th level you can cause three effects per casting of the spell and have up to six effects active at a time.
 
 #### Thorn Whip
 *Transmutation Cantrip*  
@@ -6132,10 +6095,7 @@ Audible Alarm. The alarm produces the sound of a handbell for 10 seconds within 
 
 Mental Alarm. You are alerted by a mental ping if you are within 1 mile of the warded area. This ping awakens you if you're asleep.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, the area you can include in
-the spell’s range doubles in size for each slot level above
-1st (to a maximum of 5,120 feet at 9th level).
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the area you can include in the spell’s range doubles in size for each slot level above 1st (to a maximum of 5,120 feet at 9th level).
 
 \page
 {{pageNumber,auto}}
@@ -6269,10 +6229,7 @@ Up to three creatures of your choice that you can see within range must make Cha
 
 You establish a telepathic link with one beast you touch that is friendly to you or Charmed by you. Until the spell ends, the link is active while you and the beast are within Line of Sight of each other. Through the link, the beast can understand your telepathic messages to it, and it can telepathically communicate simple emotions and concepts back to you. While the link is active, the beast gains Advantage on attack rolls against any creature within 5 feet of you that you can see.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, the range at which the beast
-gains Advantage on attack rolls increases by 5 feet for
-each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the range at which the beast gains Advantage on attack rolls increases by 5 feet for each slot level above 1st.
 
 \page
 {{pageNumber,auto}}
@@ -6457,11 +6414,7 @@ You perform a special religious ceremony that is infused with magic. When you ca
 - **Funeral Rite.** You touch one corpse, and for the next 7 days, the target can't become undead by any means short of a wish spell.
 - **Wedding.** You touch adult humanoids willing to be bonded together in marriage. For the next 7 days, each target gains a +2 bonus to AC while they are within 30 feet of each other. A creature can benefit from this rite again only if widowed.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, you can affect one additional
-creature or item for each slot level above 1st. If you wed
-more than two creatures to one another, the wedding is
-ended if any one of the partners dies.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature or item for each slot level above 1st. If you wed more than two creatures to one another, the wedding is ended if any one of the partners dies.
 
 \page
 {{pageNumber,auto}}
@@ -6573,15 +6526,7 @@ You try to compel a creature into a duel. One creature that you can see within r
 
 The spell ends if you make an attack roll against a creature other than the target, if you cast a spell on an enemy other than the target, if an ally of yours damages the target, or if you end your turn more than 30 feet away from the target.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, you can affect one additional
-creature for each slot level above 1st. The spell ends if
-you attack any creature not under its effect or you cast a
-spell that targets a hostile creature not under its effect.
-If a creature friendly to you damages one of the targets
-or casts a harmful spell on it, or if you end your turn
-more than 30 feet away from one of the targets, the
-effect ends for that creature.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The spell ends if you attack any creature not under its effect or you cast a spell that targets a hostile creature not under its effect. If a creature friendly to you damages one of the targets or casts a harmful spell on it, or if you end your turn more than 30 feet away from one of the targets, the effect ends for that creature.
 
 #### Comprehend Languages
 *1st-level Divination (ritual)*  
@@ -6595,12 +6540,7 @@ For the duration, you understand the literal meaning of any language that you he
 
 This spell doesn't decode symbols or secret messages.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, the spell’s duration increases
-to 8 hours (2nd level), 1 day (3rd level), 1 week (4th
-level), 1 month (5th level), 3 months (6th level), 6
-months (7th level), or 1 year (8th level). At 9th level, the
-spell effect is permanent on you.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the spell’s duration increases to 8 hours (2nd level), 1 day (3rd level), 1 week (4th level), 1 month (5th level), 3 months (6th level), 6 months (7th level), or 1 year (8th level). At 9th level, the spell effect is permanent on you.
 \column
 #### Crashing Wave
 *1st-level Conjuration*  
@@ -6719,9 +6659,7 @@ For the duration, you sense the location of any Aberration, Celestial, Elemental
 
 The spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, the area of effect increases by
-15 feet for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the area of effect increases by 15 feet for each slot level above 1st.
 
 
 #### Detect Magic
@@ -6736,9 +6674,7 @@ For the duration, you sense the presence of magical effects within 30 feet of yo
 
 The spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, the area of effect increases by
-15 feet for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the area of effect increases by 15 feet for each slot level above 1st.
 
 #### Detect Poison and Disease
 *1st-level Divination (ritual)*  
@@ -6752,9 +6688,7 @@ For the duration, you sense the location of poisons, poisonous or venomous creat
 
 The spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, the area of effect increases by
-15 feet for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the area of effect increases by 15 feet for each slot level above 1st.
 
 #### Disguise Self
 *1st-level Illusion*  
@@ -6770,11 +6704,7 @@ The changes wrought by this spell fail to hold up to physical inspection. For ex
 
 To discern that you are disguised, a creature must take the Study action to inspect your appearance and succeed on an Intelligence (Investigation) check against your spell save DC.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, you can choose an additional
-willing creature within 10 feet of you for each slot level
-above 1st. Each creature chooses its own form for the
-duration.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can choose an additional willing creature within 10 feet of you for each slot level above 1st. Each creature chooses its own form for the duration.
 
 #### Dissonant Whispers
 *1st-level Enchantment*  
@@ -6870,9 +6800,7 @@ Grasping plants sprout from the ground in a 20-foot square within range. For the
 
 Each creature (other than you) in the area when you cast the spell must succeed on a Strength saving throw or have the Restrained condition until the spell ends. A Restrained creature can take an Action to make a Strength (Athletics) check against your spell save DC. On a success, it frees itself from the grasping plants and is no longer Restrained by them.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, the area of effect and range
-both increase by 10 feet for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the area of effect and range both increase by 10 feet for each slot level above 1st.
 
 #### Entomb
 *1st-level Transmutation*  
@@ -6911,11 +6839,7 @@ You hurl a bolt of pure spirit at a creature within range. Make a ranged spell a
 
 This spell allows you to move at an incredible pace. You take the Dash action, and until the spell ends, you can take that action again as a Bonus Action.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, you can gain an additional 5
-feet of movement for each slot level above 1st. This
-burst of speed only applies to the Dash Bonus action
-granted by this spell.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can gain an additional 5 feet of movement for each slot level above 1st. This burst of speed only applies to the Dash Bonus action granted by this spell.
 
 #### Explosive Deflection
 *1st-level Evocation*  
@@ -6958,9 +6882,7 @@ Objects in a 20-foot Cube within range are outlined in blue, green, or violet li
 
 Attack rolls against an affected creature or object have Advantage if the attacker can see it.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, the area of effect and range
-both increase by 10 feet for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the area of effect and range both increase by 10 feet for each slot level above 1st.
 
 #### Fall
 *1st-level Transmutation*  
@@ -7010,9 +6932,7 @@ You touch a willing creature, foretelling an accurate strike. Its next attack be
 
 Choose up to five falling creatures within range. A falling creature's rate of descent slows to 60 feet per round until the spell ends. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature.
 
-***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, for each slot level above 1st,
-the range increases by 10 feet and you can affect one
-additional creature.
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, for each slot level above 1st, the range increases by 10 feet and you can affect one additional creature.
 
 \page
 {{pageNumber,auto}}
@@ -7039,8 +6959,7 @@ Finally, when you cast a spell with a range of touch, your familiar can deliver 
 
 **Different Forms.** Some features allow you to summon familiars, using different statblocks than those normally allowed by the spell. In that case, you use that statblock, modified by the ***Otherwordly Familiar*** statblock presented here.
 
-**At	Higher	Levels.** When	you	cast	this	spell	
-using	a	Spell	Slot	of	level 2	or	higher,	the familiar gains benefits as shown in the statblock below, and you reduce your hit point maximum by 1 for each slot level above 1st. If the familiar is destroyed, your hit point maximum returns to normal.
+**At	Higher	Levels.** When you cast	this spell using a Spell Slot of level 2 or	higher, the familiar gains benefits as shown in the statblock below, and you reduce your hit point maximum by 1 for each slot level above 1st. If the familiar is destroyed, your hit point maximum returns to normal.
 
 {{note
 {{monster,
@@ -7138,9 +7057,7 @@ You infuse the component used in the spell's casting with magic. The fruit gains
 
 The fruit becomes nonmagical when the spell ends.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, you infuse an additional
-fruit for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you infuse an additional fruit for each slot level above 1st.
 
 \page
 
@@ -7168,9 +7085,7 @@ Slick grease covers the ground in a 10-foot square centered on a point within ra
 
 When the grease appears, each creature standing in its area must succeed on a Dexterity saving throw or fall Prone. A creature that enters the area or ends its turn there must also succeed on a Dexterity saving throw or fall Prone.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, the area of effect and range
-both increase by 5 feet for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the area of effect and range both increase by 5 feet for each slot level above 1st.
 
 #### Grip of the Dead
 *1st-level Necromancy*  
@@ -7289,9 +7204,7 @@ One creature of your choice that you can see within range makes a Wisdom saving 
 
 At the end of each of its turns and each time it takes damage, it makes another Wisdom saving throw. The target has Advantage on the save if the save is triggered by damage. On a successful save, the spell ends.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, you can target one additional
-creature for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.
 \page
 {{pageNumber,auto}}
 
@@ -7372,9 +7285,7 @@ You touch an object throughout the spell's casting. If the object is a magic ite
 
 If you instead touch a creature throughout the casting, you learn which ongoing spells, if any, are currently affecting it.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, you can identify one
-additional item for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can identify one additional item for each slot level above 1st.
 
 
 #### Illusory Pit
@@ -7408,10 +7319,7 @@ If the spell is dispelled, the original script and the illusion both disappear.
 
 A creature that has Truesight can read the hidden message.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, the first time a creature
-attempts to Investigate the illusion, that creature takes
-1d4 Psychic damage for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the first time a creature attempts to Investigate the illusion, that creature takes 1d4 Psychic damage for each slot level above 1st.
 
 
 
@@ -7493,9 +7401,7 @@ As a Bonus action on each subsequent turn, you can use an instrument to play thi
 
 You touch a willing creature and greatly alter its buoyancy. Once on each of its turns until the spell ends, the target can spend 10 feet of its movement to jump up to 30 feet.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, you can target one additional
-creature for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.
 
 #### Karmic Reflection
 *1st-level Enchantment*  
@@ -7535,9 +7441,7 @@ You touch a creature. The target's Speed increases by 10 feet until the spell en
 
 You touch a willing creature who isn't wearing armor, and a protective magical force surrounds it until the spell ends. The target's base AC becomes 13 + its Dexterity modifier. The spell ends if the target dons armor or if you dismiss the spell by taking the Magic action.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 3rd level or higher, the base AC increases by 1
-for each 2 slot levels above 1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, the base AC increases by 1 for each 2 slot levels above 1st.
 
 #### Magic Missile
 *1st-level Evocation*  
@@ -7699,9 +7603,7 @@ Until the spell ends, one willing creature you touch is protected against creatu
 
 The protection grants several benefits. Creatures of those types have Disadvantage on attack rolls against the target. The target also can't be possessed by or gain the Charmed or Frightened conditions from them. If the target is already possessed, Charmed, or Frightened by such a creature, the target has Advantage on any new saving throw against the relevant effect.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, you can target one additional
-creature for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.
 
 #### Purify Food and Drink
 *1st-level Transmutation (ritual)*  
@@ -7713,10 +7615,7 @@ creature for each slot level above 1st.
 
 You remove poison and rot from nonmagical food and drink in a 5-foot-radius Sphere centered on a point within range.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, the area of effect doubles in
-size for each slot level above 1st (to a maximum radius
-of 1,000 feet at 9th level).
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the area of effect doubles in size for each slot level above 1st (to a maximum radius of 1,000 feet at 9th level).
 
 
 \page
@@ -7766,12 +7665,7 @@ You ward a creature within range against attacks. Until the spell ends, any crea
 
 The spell ends if the warded creature makes an attack roll, casts a spell, or deals damage.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 3rd level or higher, the number of creatures you
-can affect increases by 1 for each 2 slot levels above 1st.
-If one of the warded creatures makes an attack, casts a
-spell that affects an enemy, or deals damage to another
-creature, the effect ends for that creature.
+***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, the number of creatures you can affect increases by 1 for each 2 slot levels above 1st. If one of the warded creatures makes an attack, casts a spell that affects an enemy, or deals damage to another creature, the effect ends for that creature.
 
 #### Searing Smite
 *1st-level Evocation*  
@@ -7837,13 +7731,7 @@ You cause solidified tendrils of shadow to spring from a Medium or smaller creat
 
 An invisible barrier of magical force appears and protects you. Until the end of this turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from Magic Missile.
 
-***At Higher Levels.*** As a Reaction when a creature you can
-see within range is hit by an attack or targeted by the
-magic missile spell, you can cast this spell using a spell
-slot of 2nd level or higher to give it the same benefit as if
-it cast it on itself. The range is 10 feet when you cast the
-spell using a 2nd level slot, and increases by 5 feet for
-each slot level above 2nd.
+***At Higher Levels.*** As a Reaction when a creature you can see within range is hit by an attack or targeted by the magic missile spell, you can cast this spell using a spell slot of 2nd level or higher to give it the same benefit as if it cast it on itself. The range is 10 feet when you cast the spell using a 2nd level slot, and increases by 5 feet for each slot level above 2nd.
 
 #### Shield of Faith
 *1st-level Abjuration*  
@@ -7855,10 +7743,7 @@ each slot level above 2nd.
 
 A shimmering field appears and surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, for each slot level above 1st,
-the range increases by 10 feet and you can affect one
-creature of your choice within range.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, for each slot level above 1st, the range increases by 10 feet and you can affect one creature of your choice within range.
 
 #### Silent Image
 *1st-level Illusion*  
@@ -7874,11 +7759,7 @@ As a Magic action, you can cause the image to move to any spot within range. As 
 
 Physical interaction with the image reveals it to be an illusion, since things can pass through it. A creature that takes a Study action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, you can increase the size of
-the image by 5 feet on each side for each slot level
-above 1st, and the spell’s range increases by the same
-amount.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can increase the size of the image by 5 feet on each side for each slot level above 1st, and the spell’s range increases by the same amount.
 \page
 {{pageNumber,auto}}
 #### Sleep
@@ -7913,11 +7794,7 @@ A Restrained creature can make a Dexterity saving throw at the end of each of it
 
 After the trap is triggered, the spell ends when no creature is Restrained by it.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, you can create one additional
-snare for each slot level above 1st. The snares can be
-placed in any configuration as long as no two are more
-than 30 feet apart.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can create one additional snare for each slot level above 1st. The snares can be placed in any configuration as long as no two are more than 30 feet apart.
 
 #### Speak with Animals
 *1st-level Divination (ritual)*  
@@ -8049,14 +7926,7 @@ The disk is immobile while you are within 20 feet of it. If you move more than 2
 
 If you move more than 100 feet from the disk (typically because it can't move around an obstacle to follow you), the spell ends.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, for each slot level above 1st,
-the duration of the spell increases by 1 hour, the radius
-of the disk by 1 foot, and the carrying capacity by 100
-pounds. In addition, for the duration of the spell you can
-use a Bonus action to re-summon the disk after it has
-vanished. You can do this once for each slot level above
-1st.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, for each slot level above 1st, the duration of the spell increases by 1 hour, the radius of the disk by 1 foot, and the carrying capacity by 100 pounds. In addition, for the duration of the spell you can use a Bonus action to re-summon the disk after it has vanished. You can do this once for each slot level above 1st.
 
 #### Thunder Punch
 *1st-level Evocation*  
@@ -8164,10 +8034,7 @@ Once on each of your turns as a Bonus Action, you can mentally command the serva
 
 If you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, for each slot level above 1st,
-the servant has an additional 1d8 Hit Points and
-increases its Strength by 2.
+***At Higher Levels.*** When you cast this spell using a spell  slot of 2nd level or higher, for each slot level above 1st, the servant has an additional 1d8 Hit Points and increases its Strength by 2.
 \page
 {{pageNumber,auto}}
 
@@ -8267,10 +8134,7 @@ You move like the wind. Until the spell ends, your movement doesn't provoke oppo
 
 Once before the spell ends, you can give yourself Advantage on one weapon attack roll on your turn. That attack deals an extra 1d8 Force damage on a hit. Whether you hit or miss, your Speed increases by 30 feet until the end of that turn.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 2nd level or higher, for each slot level above 1st,
-the additional Force damage increases by 1d8 and the
-additional Speed increases by 10 feet.
+***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, for each slot level above 1st, the additional Force damage increases by 1d8 and the additional Speed increases by 10 feet.
 
 \page
 {{pageNumber,auto}}
@@ -8336,11 +8200,7 @@ You alter your physical form. Choose one of the following options. Its effects l
 - **Change Appearance:** You alter your appearance. You decide what you look like, including your height, weight, facial features, sound of your voice, hair length, coloration, and other distinguishing characteristics. You can make yourself appear as a member of another species, though none of your statistics change. You can't appear as a creature of a different size, and your basic shape stays the same; if you're bipedal, you can't use this spell to become quadrupedal, for instance. For the duration, you can take a Magic action to change your appearance in this way again.
 - **Natural Weapons:** You grow claws (Slashing), fangs (Piercing), horns (Piercing), or hooves (Bludgeoning). When you use your Unarmed Strike to deal damage with that new growth, it deals 1d6 damage of the type in parentheses instead of dealing the normal damage for your Unarmed Strike, and you use your spellcasting ability modifier for the attack and damage rolls rather than using Strength. The natural weapon is magic in nature.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 3rd level or higher, you can choose an additional
-willing creature within 10 feet of you for each slot level
-above 2nd. Each creature chooses its own form for the
-duration.
+***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, you can choose an additional willing creature within 10 feet of you for each slot level above 2nd. Each creature chooses its own form for the duration.
 
 \column
 #### Animal Messenger
@@ -8461,12 +8321,7 @@ You touch a closed door, window, gate, chest, or other entryway, and it becomes 
 While affected by this spell, the object is more difficult to break or force open; the DC to break it or pick any locks on it increases by 10.
 
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 3rd level or higher, the DC to break or pick the
-lock increases by 1 for each slot level above 2nd. In
-addition, the spell cannot be bypassed by a knock spell
-of a lower level than the level at which you cast this
-spell.
+***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, the DC to break or pick the lock increases by 1 for each slot level above 2nd. In addition, the spell cannot be bypassed by a knock spell of a lower level than the level at which you cast this spell.
 
 #### Arcane Scorcher
 *2nd-level Evocation*  
@@ -8535,11 +8390,7 @@ The spell doesn't take into account any possible circumstances that might change
 If you cast the spell two or more times before completing your next long rest, there is a cumulative 25 percent chance for each casting after the first that you get a random reading. The DM makes this roll in secret.
 
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 4th level or higher, you can include one
-additional plan in your augury for each 2 slot levels
-above 2nd. The divination shows you which plan is most
-favorable and least favorable.
+***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, you can include one additional plan in your augury for each 2 slot levels above 2nd. The divination shows you which plan is most favorable and least favorable.
 
 \column
 
@@ -8651,8 +8502,7 @@ When you cast the spell, choose one of the following options, the effects of whi
 - **Tremorsense:** You gain 30 ft. of Tremorsense.
 - **Websense:** While in contact with a web, you know the exact location of any other creature in contact with the same web.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 3rd level or higher, you can choose one additional sense for each two slot levels above 2nd. When you take the Magic action to switch senses, you can only switch one option at a time.
+***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, you can choose one additional sense for each two slot levels above 2nd. When you take the Magic action to switch senses, you can only switch one option at a time.
 
 #### Beast Sense
 *2nd-level Divination (ritual)*  
@@ -8664,11 +8514,7 @@ slot of 3rd level or higher, you can choose one additional sense for each two sl
 
 You touch a willing beast. For the duration of the spell, you can take the Magic action to see through the beast's eyes and hear what it hears, and continue to do so until you take the Magic action to return to your normal senses. While perceiving through the beast's senses, you gain the benefits of any special senses possessed by that creature, though you are Blinded and Deafened to your own surroundings.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 3rd level or higher, you can target one additional
-beast for each slot level above 2nd. You can use your
-action to switch your senses from one beast to another
-or back to your own.
+***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, you can target one additional beast for each slot level above 2nd. You can use your action to switch your senses from one beast to another or back to your own.
 \column
 #### Become Fire
 *2nd-level Transmutation*  
@@ -8814,10 +8660,7 @@ You cause a creature's blood to erupt outward in a violent burst. The target mus
 
 Your body becomes blurred, shifting and wavering to all who can see you. For the duration, any creature has Disadvantage on attack rolls against you. An attacker has Immunity to this effect if it doesn't rely on sight, as with Blindsight, or can see through illusions, as with Truesight.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 3rd level or higher, you gain 5 temporary hit
-points for each slot level above 2nd. These are lost
-when the spell ends.
+***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, you gain 5 temporary hit points for each slot level above 2nd. These are lost when the spell ends.
 
 #### Boil Blood
 *2nd-level Necromancy*  
@@ -8890,9 +8733,7 @@ Each Humanoid in a 20-foot-radius Sphere centered on a point you choose within r
 - The creature has Immunity to the Charmed and Frightened conditions until the spell ends. If the creature was already Charmed or Frightened, those conditions are suppressed for the duration.
 - The creature becomes Indifferent about creatures of your choice that it's Hostile toward. This indifference ends if the target takes damage or witnesses its allies taking damage. When the spell ends, the creature's attitude returns to normal.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 3rd level or higher, the range and area of effect
-both increase by 10 feet for each slot level above 2nd.
+***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, the range and area of effect both increase by 10 feet for each slot level above 2nd.
 
 \page
 {{pageNumber,auto}}
@@ -9138,11 +8979,7 @@ Alternatively, you cast the spell on an object that isn't being worn or carried,
 
 If any of this spell's area overlaps with an area of light created by a spell of 2nd level or lower, the spell that created the light is dispelled.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 3rd level or higher, the radius increases by 5 feet
-for each slot level above 2nd. In addition, it dispels any
-magical light created by a spell of the same level or
-lower.
+***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, the radius increases by 5 feet for each slot level above 2nd. In addition, it dispels any magical light created by a spell of the same level or lower.
 
 #### Darkvision
 *2nd-level Transmutation*  
@@ -9187,10 +9024,7 @@ The spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a th
 
 As a Magic action on your next turn, you can try to probe deeper into the target's mind. If you probe deeper, the target makes a Wisdom saving throw. On a failed save, you discern the target's reasoning, emotions, and something that looms large in its mind (such as a worry, love, or hate). On a successful save, the spell ends. Either way, the target knows that you are probing into its mind, and until you shift your attention away from the target's mind, the target can take an action on its turn to make an Intelligence (Arcana) check against your spell save DC, ending the spell on a success.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 3rd level or higher, on your action you can read
-the thoughts of an additional creature for each slot level
-above 2nd.
+***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, on your action you can read the thoughts of an additional creature for each slot level above 2nd.
 
 
 \page
@@ -10328,9 +10162,7 @@ You touch a creature. If it is Poisoned, you neutralize the poison. If more than
 
 For the duration, the target has Advantage on saving throws against being Poisoned, and it has Resistance to Poison damage.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 3rd level or higher, you can affect one additional
-creature for each slot level above 2nd.
+***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, you can affect one additional creature for each slot level above 2nd.
 \column
 #### Pseudopod Slam
 *2nd-level Conjuration*  
@@ -10629,9 +10461,7 @@ On your next turn, you can cast the spell absorbed by the spell trap without exp
 
 Until the spell ends, one willing creature you touch gains the ability to move up, down, and across vertical surfaces and upside down along ceilings, while leaving its hands free. The target also gains a Climb Speed equal to its Speed.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 3rd level or higher, you can affect one additional
-creature for each slot level above 2nd.
+***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, you can affect one additional creature for each slot level above 2nd.
 
 \page
 {{pageNumber,auto}}
@@ -10648,9 +10478,7 @@ The ground in a 20-foot-radius Sphere centered on a point within range sprouts h
 
 The transformation of the ground is camouflaged to look natural. Any creature that can't see the area when the spell is cast must take a Search action and succeed on a Wisdom (Perception or Survival) check against your spell save DC to recognize the terrain as hazardous before entering it.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 3rd level or higher, the radius increases by 5
-feet for each slot level above 2nd.
+***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, the radius increases by 5 feet for each slot level above 2nd.
 
 #### Spirit Echo
 *2nd-level Conjuration*  
@@ -11024,12 +10852,7 @@ You touch a willing creature. Until the spell ends, it is cloaked in a ghostly c
 
 You protect your mind with a mantra of mundane, repetitive thoughts in order to better resist mental assault. Until the beginning of your next turn, you have Advantage on all Intelligence, Wisdom, and Charisma saving throws, and you gain Resistance to Psychic damage.
 
-***At Higher Levels.*** As a Reaction when a creature you can
-see within range is forced to make an Intelligence, Wisdom, or Charisma saving throw or takes Psychic damage, you can cast this spell using a spell
-slot of 3rd level or higher to give it the same benefit as if
-it cast it on itself. The range is 5 feet when you cast the
-spell using a 3rd level slot, and increases by 5 feet for
-each slot level above 3rd.
+***At Higher Levels.*** As a Reaction when a creature you can see within range is forced to make an Intelligence, Wisdom, or Charisma saving throw or takes Psychic damage, you can cast this spell using a spell slot of 3rd level or higher to give it the same benefit as if it cast it on itself. The range is 5 feet when you cast the spell using a 3rd level slot, and increases by 5 feet for each slot level above 3rd.
 \column
 #### Unholy Wave
 *2nd-level Necromancy*  
@@ -11463,9 +11286,7 @@ A creature that succeeds on its saving throw takes half as much damage and suffe
 
 An aura radiates from you in a 30-foot Emanation for the duration. When you create the aura and at the start of each of your turns while it persists, you can restore 2d6 Hit Points to one creature in it.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 4th level or higher, the amount of healing
-increases by 1d6 for each slot level above 3rd.
+***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, the amount of healing increases by 1d6 for each slot level above 3rd.
 \column
 #### Beacon of Hope
 *3rd-level Abjuration*  
@@ -11658,16 +11479,7 @@ When you cast the spell, choose seeing or hearing. You can use the chosen sense 
 
 A creature that sees the sensor (such as a creature benefiting from See Invisibility or Truesight) sees a luminous orb about the size of your fist.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 4th level, the duration increases to 1 hour, and it
-increases by 1 hour for each slot level above 4th. When
-you cast it at 5th level or higher, you can regain
-concentration on the spell after losing it or choosing to
-drop it, as long as you are within the spell’s duration.
-You can do this as a Bonus action, a number of times
-equal to the number of slot levels above 4th. While you
-are not concentrating on the spell, you have none of its
-benefits.
+***At Higher Levels.*** When you cast this spell using a spell slot of 4th level, the duration increases to 1 hour, and it increases by 1 hour for each slot level above 4th. When you cast it at 5th level or higher, you can regain concentration on the spell after losing it or choosing to drop it, as long as you are within the spell’s duration. You can do this as a Bonus action, a number of times equal to the number of slot levels above 4th. While you are not concentrating on the spell, you have none of its benefits.
 \column
 
 #### Conjure Animals
@@ -11823,9 +11635,7 @@ Once a creature has been targeted by this spell, they cannot be targeted again f
 
 Holy power radiates from you in an aura with a 30-foot Emanation, awakening boldness in friendly creatures. Until the spell ends, the aura moves with you, centered on you. While in the aura, each nonhostile creature in the aura (including you) deals an extra 1d4 Radiant damage when it hits with a weapon attack.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 4th level or higher, the damage increases by 1d4
-for each slot level above 3rd.
+***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d4 for each slot level above 3rd.
 
 \page
 {{pageNumber,auto}}
@@ -11998,9 +11808,7 @@ You reach into the mind of one creature you can see and force it to make an Inte
 
 Whenever the affected creature chooses another creature as a target, it must choose the target at random from among the creatures it can see within range of the attack, spell, or other ability it's using. If an enemy provokes an opportunity attack from the affected creature, the creature must make that attack if it is able to.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 4th level or higher, you can affect one additional
-creature for each slot level above 3rd.
+***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, you can affect one additional creature for each slot level above 3rd.
 
 #### Erode
 *3rd-level Conjuration*  
@@ -12075,11 +11883,7 @@ The spell ends if the target moves, speaks or takes any action. Additionally, yo
 
 If the target is diseased or Poisoned when you cast the spell, or becomes diseased or Poisoned while under the spell's effect, the disease and poison have no effect until the spell ends.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 4th level or higher, the duration increases to 8
-hours (4th level), 1 day (5th level), 1 week (6th level),
-1 month (7th level), 1 year (8th level), or permanent (9th
-level).
+***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, the duration increases to 8 hours (4th level), 1 day (5th level), 1 week (6th level), 1 month (7th level), 1 year (8th level), or permanent (9th level).
 \page
 {{pageNumber,auto}}
 
@@ -12376,9 +12180,7 @@ You create a twisting pattern of colors that weaves through the air inside a 30-
 
 An affected creature can repeat this saving throw at the end of each of its turns, ending the effect on a success. The spell also ends for an affected creature if it takes any damage or if someone else uses an Action to shake it out of its stupor.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 4th level or higher, the area of effect increases by
-10 feet for each slot level above 3rd.
+***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, the area of effect increases by 10 feet for each slot level above 3rd.
 
 #### Illusionary Fireball
 *3rd-level Illusion*  
@@ -13211,9 +13013,7 @@ You create a 20-foot-radius Sphere of yellow, nauseating gas centered on a point
 
 Each creature that starts its turn in the Sphere must succeed on a Constitution saving throw or have the Poisoned condition until the end of the current turn. While Poisoned in this way, the creature can't take an Action or a Bonus Action, as it spends its turn retching and reeling.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 4th level or higher, the radius increases by 10
-feet for each slot level above 3rd.
+***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, the radius increases by 10 feet for each slot level above 3rd.
 
 \page
 {{pageNumber,auto}}
@@ -13557,9 +13357,7 @@ You can bring along objects as long as their weight doesn't exceed what you can 
 
 You conjure up a wave of water that crashes down on an area within range. The area can be up to 30 feet long, up to 10 feet wide, and up to 10 feet tall. Each creature in that area must make a Dexterity saving throw. On a failed save, a creature takes 4d8 Bludgeoning damage and is knocked Prone. On a successful save, a creature takes half as much damage and isn't knocked Prone. The water then spreads out across the ground in all directions, extinguishing unprotected flames in its area and within 30 feet of it, and then it vanishes.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 4th level or higher, the length of the wave
-increases by 10 feet for each slot level above 3rd.
+***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, the length of the wave increases by 10 feet for each slot level above 3rd.
 
 #### Tiny Hut
 *3rd-level Abjuration (ritual)*  
@@ -13663,9 +13461,7 @@ You create a wall of swirling sand on the ground at a point you can see within r
 
 The wall disappears when the spell ends.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 4th level or higher, the length of the wall
-increases by 10 feet for each slot level above 3rd.
+***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, the length of the wall increases by 10 feet for each slot level above 3rd.
 
 #### Wall of Water
 *3rd-level Evocation*  
@@ -13687,9 +13483,7 @@ Spells that deal Cold damage that pass through the wall cause the area of the wa
 
 Lightning effects apply half their damage to any creature in contact with the wall when they pass through.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 4th level or higher, the length of the wall
-increases by 10 feet for each slot level above 3rd.
+***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, the length of the wall increases by 10 feet for each slot level above 3rd.
 
 #### Wasp Barrage
 *3rd-level Conjuration*  
@@ -13792,13 +13586,7 @@ When the wall appears, each creature in its area makes a Strength saving throw, 
 
 The strong wind keeps fog, smoke, and other gases at bay. Small or smaller flying creatures or objects can't pass through the wall. Loose, lightweight materials brought into the wall fly upward. Arrows, bolts, and other ordinary projectiles launched at targets behind the wall are deflected upward and miss automatically. Boulders hurled by Giants or siege engines, and similar projectiles, are unaffected. Creatures in gaseous form can't pass through it.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 4th level or higher, for the duration you can use
-a Magic action to move the wall 10 feet in any direction for
-each slot level above 3rd. A Small or smaller creature
-can make a Strength saving throw to pass through the
-wall when it moves, otherwise it is pushed back by the
-wall.
+***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, for the duration you can use a Magic action to move the wall 10 feet in any direction for each slot level above 3rd. A Small or smaller creature can make a Strength saving throw to pass through the wall when it moves, otherwise it is pushed back by the wall.
 
 #### Wither
 *3rd-level Necromancy*  
@@ -13868,10 +13656,7 @@ You create an Invisible, invulnerable eye within range that hovers for the durat
 
 As a Bonus Action, you can move the eye up to 30 feet in any direction. A solid barrier blocks the eye's movement, but the eye can pass through an opening as small as 1 inch in diameter.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 5th level or higher, for each slot level above 4th,
-the movement Speed of the eye increases by 10 feet and
-the range of its Darkvision increases by 15 feet. 
+***At Higher Levels.*** When you cast this spell using a spell slot of 5th level or higher, for each slot level above 4th, the movement Speed of the eye increases by 10 feet and the range of its Darkvision increases by 15 feet. 
 
 #### Arc of Lightning
 *4th-level Evocation*  
@@ -14966,11 +14751,7 @@ The target gains a number of Temporary Hit Points equal to the Hit Points of the
 
 **Equipment.** The target's gear melds into the new form. The creature can't use or otherwise benefit from any of that equipment.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 6th level or higher, you can transform one
-additional creature for every two slot levels above 4th.
-At 9th level, you can also choose to cast it with a
-duration of 1 minute without concentration.
+***At Higher Levels.*** When you cast this spell using a spell slot of 6th level or higher, you can transform one additional creature for every two slot levels above 4th. At 9th level, you can also choose to cast it with a duration of 1 minute without concentration.
 
 \column
 #### Private Sanctum
@@ -15976,9 +15757,7 @@ You conjure a Large, intangible spirit from the Elemental Planes that appears in
 
 Whenever a creature you can see enters the spirit's space or starts its turn within 5 feet of the spirit, you can force that creature to make a Dexterity saving throw if the spirit has no creature Restrained. On failed save, the target takes 8d8 damage of the spirit's type, and the target has the Restrained condition until the spell ends. At the start of each of its turns, the Restrained target repeats the save. On a failed save, the target takes 4d8 damage of the spirit's type. On a successful save, the target isn't Restrained by the spirit.
 
-**At	Higher	Levels.** When	you	cast	this	spell	
-using	a	spell	slot	of	level	6	or	higher,	the	damage	
-increases	by	2d8	for	each	slot	level	above	5.
+**At	Higher	Levels.** When you cast this spell using a spell slot of level 6 or	higher,	the	damage increases by 2d8	for	each slot level	above	5.
 
 #### Conjure Volley
 *5th-level Conjuration*  
@@ -15991,9 +15770,7 @@ increases	by	2d8	for	each	slot	level	above	5.
 You brandish the weapon used to cast the spell and choose a point within range. Hundreds of similar spectral weapons (or ammunition appropriate to the weapon) fall in a volley and then disappear. Each creature of your choice that you can see in a 40-foot-radius, 20-foot-high Cylinder centered on that point makes a Dexterity saving throw. A creature takes 8d8 Force damage on a failed save or half as much damage on a successful one.
 
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 6th level or higher, the damage increases by 2d8
-for each slot level above 5th.
+***At Higher Levels.*** When you cast this spell using a spell slot of 6th level or higher, the damage increases by 2d8 for each slot level above 5th.
 
 \column
 
@@ -16034,12 +15811,7 @@ The target must make a Constitution saving throw against poison at the end of ea
 
 Whenever the target receives an effect that would end the Poisoned condition, the target must succeed on a Constitution saving throw to end the disease.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 7th level or higher, the number of failed saving
-throws required for the disease to be applied decreases
-by 1 for every two slot levels above 5th. The number of
-successful saving throws required to avoid the disease
-remains the same.
+***At Higher Levels.*** When you cast this spell using a spell slot of 7th level or higher, the number of failed saving throws required for the disease to be applied decreases by 1 for every two slot levels above 5th. The number of successful saving throws required to avoid the disease remains the same.
 
 \column
 
@@ -16255,9 +16027,7 @@ When the Cylinder appears, each creature in it must make a Constitution saving t
 
 If you're within 60 feet of the Cylinder, you can move it up to 60 feet as a Bonus action on your turn.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 6th level or higher, the damage increases by
-1d10 for each slot level above 5th.
+***At Higher Levels.*** When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d10 for each slot level above 5th.
 
 #### Deglove Creature
 *5th-level Necromancy*  
@@ -16283,9 +16053,7 @@ If this damage kills the target creature, it's flesh sloughs of it's skeleton, c
 
 You strike the ground, creating a burst of divine energy that ripples outward from you. Each creature you choose within 30 feet of you must succeed on a Constitution saving throw or take 5d6 Thunder damage, as well as 5d6 Radiant or Necrotic damage (your choice), and be knocked Prone. A creature that succeeds on its saving throw takes half as much damage and isn't knocked Prone.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 6th level or higher, the Thunder damage increases
-by 2d6 for each slot level above 5th.
+***At Higher Levels.*** When you cast this spell using a spell slot of 6th level or higher, the Thunder damage increases by 2d6 for each slot level above 5th.
 
 #### Devouring Darkness
 *5th-level Necromancy*  
@@ -17578,9 +17346,7 @@ You choose a point within range and cause psychic energy to explode there. Each 
 
 After a failed save, a target has muddled thoughts for 1 minute. During that time, it rolls a d6 and subtracts the number rolled from all its attack rolls and ability checks, as well as its Constitution saving throws to maintain concentration. The target can make an Intelligence saving throw at the end of each of its turns, ending the effect on itself on a success.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 6th level or higher, the radius increases by 5 feet
-for each slot level above 5th.
+***At Higher Levels.*** When you cast this spell using a spell slot of 6th level or higher, the radius increases by 5 feet for each slot level above 5th.
 \page
 {{pageNumber,auto}}
 #### Telekinesis
@@ -17913,9 +17679,7 @@ You create a vertical wall of whirling, razor-sharp blades made of magical energ
 
 Any creature in the wall's space makes a Dexterity saving throw, taking 6d10 Force damage on a failed save or half as much damage on a successful one. A creature also makes that save if it enters the wall's space or ends it turn there. A creature makes that save only once per turn..
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 7th level or higher, the damage increases by
-1d10 for each slot level above 6th.
+***At Higher Levels.*** When you cast this spell using a spell slot of 7th level or higher, the damage increases by 1d10 for each slot level above 6th.
 
 \page
 {{pageNumber,auto}}
@@ -18180,20 +17944,9 @@ It retains all languages, weapon and armor proficiencies, and any damage resista
 **Components:** V, S, M (an obsidian orb, worth at least 250 gp, which the spell consumes)  
 **Duration:** Concentration, up to 1 hour  
 
-You attune your mind to a place that you are
-currently present at, delving deep into its history and
-unraveling past events that have transpired there.
-For the duration, you witness visions of these events
-as if they had occurred in your presence. This place
-must have definitive borders (like a house, a temple
-or a labyrinth) and its size cannot exceed a mile in
-diameter. While concentrating on the spell, you fall
-Unconscious into a meditative state, focusing solely
-on the visions you experience. The visions reveal
-information that may date up to 1 year in the past.
-After every 10 minutes of concentrating on the spell,
-you gain knowledge regarding one of the following
-subjects (chosen by you):
+You attune your mind to a place that you are currently present at, delving deep into its history and unraveling past events that have transpired there.
+For the duration, you witness visions of these events as if they had occurred in your presence. This place must have definitive borders (like a house, a temple or a labyrinth) and its size cannot exceed a mile in diameter. While concentrating on the spell, you fall Unconscious into a meditative state, focusing solely on the visions you experience. The visions reveal information that may date up to 1 year in the past.
+After every 10 minutes of concentrating on the spell, you gain knowledge regarding one of the following subjects (chosen by you):
 -  The purpose of this place’s creation (if any).
 -  The names and the appearances of the most important creatures that have interacted with the place.
 -  The significant events that have transpired in this place and its current utility (if any).
@@ -18201,22 +17954,10 @@ subjects (chosen by you):
 -  The structure and vague design of the place.
 -  Any other information that the DM may see fit.
 
-Every time you gain information on one of the above
-subjects, you must make a saving throw using your
-spellcasting ability against your spell save DC. You
-take 1d8 Psychic damage on a failed save, or half as
-much on a successful one. The Psychic damage you
-take increases by 1d8 for each additional subject
-that you choose to discover information about.
+Every time you gain information on one of the above subjects, you must make a saving throw using your spellcasting ability against your spell save DC. You take 1d8 Psychic damage on a failed save, or half as much on a successful one. The Psychic damage you take increases by 1d8 for each additional subject that you choose to discover information about.
 
-***At Higher Levels.*** When you cast this spell using a
-Spell Slot of 7th level you learn information that may
-date up to 100 years in the past, and the damage die
-dealt by the spell increases to d10. Casting the spell
-using a 8th level slot or higher allows you to gain
-information that dates back to the place’s creation,
-while the damage die dealt by the spell increases to
-d12. When you cast this spell using a Spell Slot of 9th level, you take no damage from the spell.
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level you learn information that may date up to 100 years in the past, and the damage die
+dealt by the spell increases to d10. Casting the spell using a 8th level slot or higher allows you to gain information that dates back to the place’s creation, while the damage die dealt by the spell increases to d12. When you cast this spell using a Spell Slot of 9th level, you take no damage from the spell.
 
 \page
 {{pageNumber,auto}}
@@ -19080,9 +18821,7 @@ This spell snatches the soul of a humanoid as it dies and traps it inside the ti
 - **Eyes of the Dead.** You can take the Magic action to name a place the humanoid saw in life, which creates an invisible sensor somewhere in that place if it is on the plane of existence you're currently on. The sensor remains for as long as you concentrate, up to 10 minutes (as if you were concentrating on a spell). You receive visual and auditory information from the sensor as if you were in its space using your senses.
 A creature that can see the sensor (such as one using see invisibility or Truesight) sees a translucent image of the tormented humanoid whose soul you caged.
 
-***At Higher Levels.*** When you cast this spell using a spell
-slot of 7th level or higher, you can exploit a soul an
-additional time for each slot level above 6th.
+***At Higher Levels.*** When you cast this spell using a spell slot of 7th level or higher, you can exploit a soul an additional time for each slot level above 6th.
 
 #### Stirge Swarm
 *6th-level Conjuration (blood magic)*  
@@ -19707,10 +19446,7 @@ You send a shimmering wave of force outward, striking each creature within a 60-
 7. **Thunder.** The target takes 9d8 Thunder damage, is knocked backwards 30 feet, and falls Prone.
 8. **Multiple.** The target is struck by multiple blasts. Roll twice more, rerolling any 8's.
 
-***At Higher Levels.*** When you cast this spell using an 8thlevel
-Spell Slot, instead of rolling a d8 for each ray, roll a
-d10. On a roll of 8 or higher, the Multiple effect occurs.
-When you cast it at 9th level, roll a d12 instead.
+***At Higher Levels.*** When you cast this spell using an 8th level Spell Slot, instead of rolling a d8 for each ray, roll a d10. On a roll of 8 or higher, the Multiple effect occurs. When you cast it at 9th level, roll a d12 instead.
 
 #### Prophesied Strike
 *7th-level Divination*  
@@ -21051,6 +20787,7 @@ You forge a telepathic link among up to eight willing creatures of your choice w
 - It knows each Cantrip that another creature in the link knows. It uses the same spellcasting ability for the Cantrip as the creature sharing its Cantrip with the link.
 
 The link ends if you or one of the targets casts this spell again. A target is also removed from the link if it dies or if it is ever on a different plane of existence from you.
+
 #### Paradox
 *9th-level Transmutation*  
 **Classes:** Psion, Sorcerer, Warlock, Wizard  
