@@ -17,6 +17,8 @@ if('serviceWorker' in navigator){
     navigator.serviceWorker.register('./sw.js').catch(function(){});
   });
 }
+// Apply saved theme as early as possible to avoid a flash of the wrong theme
+(function(){try{if((localStorage.getItem('dnd5e_theme')||'dark')==='light')document.documentElement.classList.add('light-theme');}catch(e){}})();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
@@ -33,8 +35,17 @@ body{margin:0;background:#0d0a08}
 .btn-load:hover{background:rgba(123,79,207,.28)}
 .btn-new{background:rgba(201,74,42,.1);border:1px solid rgba(201,74,42,.35);color:#e07060}
 .btn-new:hover{background:rgba(201,74,42,.22)}
+.btn-theme{background:rgba(232,213,176,.08);border:1px solid rgba(232,213,176,.3);color:#e8d5b0}
+.btn-theme:hover{background:rgba(232,213,176,.18)}
 .save-status{font-family:'EB Garamond',serif;font-size:11px;color:rgba(232,213,176,.35);font-style:italic;white-space:nowrap}
 #root{padding-top:50px}
+/* Light theme: invert the whole page, then double-invert images so they render normally.
+   Applied to the root element so full-screen (inset:0) modals still cover the viewport. */
+html.light-theme{filter:invert(1) hue-rotate(180deg) contrast(1.1)}
+html.light-theme img{filter:contrast(0.909) invert(1) hue-rotate(180deg)}
+/* Faux-bold: thicken every glyph by its own color so small text reads heavier.
+   Stacks on top of existing font-weights, so it doesn't flatten the heading hierarchy. */
+html.light-theme,html.light-theme input,html.light-theme select,html.light-theme textarea,html.light-theme button{-webkit-text-stroke:0.3px currentColor}
 </style>
 </head>
 <body>
@@ -43,6 +54,7 @@ body{margin:0;background:#0d0a08}
   <button class="btn-save" onclick="saveToFile()">&#8659; Save JSON</button>
   <button class="btn-load" onclick="document.getElementById('fi').click()">&#8657; Load JSON</button>
   <button class="btn-new" onclick="newCharacter()">+ New</button>
+  <button class="btn-theme" id="theme-btn" onclick="toggleTheme()">&#9790; Light</button>
   <input type="file" id="fi" accept=".json" style="display:none" onchange="loadFromFile(event)">
   <span class="save-status" id="ss">Loading...</span>
 </div>
@@ -185,6 +197,26 @@ function newCharacter(){
   }
 }
 function ss(msg){var el=document.getElementById('ss');if(el)el.textContent=msg;}
+// --- Light / dark theme toggle (persisted independently of character data) ---
+var THEME_KEY='dnd5e_theme';
+function applyTheme(t){
+  var light=(t==='light');
+  document.documentElement.classList.toggle('light-theme',light);
+  var b=document.getElementById('theme-btn');
+  if(b) b.innerHTML=light?'\u2600 Dark':'\u263E Light';
+}
+function toggleTheme(){
+  var cur='dark';
+  try{cur=localStorage.getItem(THEME_KEY)||'dark';}catch(e){}
+  var next=(cur==='light')?'dark':'light';
+  try{localStorage.setItem(THEME_KEY,next);}catch(e){}
+  applyTheme(next);
+}
+(function(){
+  var t='dark';
+  try{t=localStorage.getItem(THEME_KEY)||'dark';}catch(e){}
+  applyTheme(t);
+})();
 window.__characterAutoSave=function(state){
   window.__lastSaveState=state; // in-memory fallback for Safari
   var toSave=Object.assign({},state);
@@ -9213,7 +9245,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.82</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.90</div>
 
 </script>
 </body>
