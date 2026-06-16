@@ -5435,7 +5435,7 @@ function inferItemWeight(name,typeCode,flags){
   if(has(/\b(cloak|cape|coat|mantle)\b/)) return 3;
   if(has(/\b(clothes|clothing|outfit|garb|vestments?)\b/)) return 3;
   if(has(/\b(boots|shoes|slippers|sandals)\b/)) return 2;
-  if(has(/\b(gloves|gauntlets?)\b/)) return 1;
+  if(has(/\b(gloves?|gauntlets?)\b/)) return 1;
   if(has(/\bwraps\b/)) return 0.5;
   if(has(/\bbelt\b/)) return 1;
   if(has(/\b(mask|circlet|headpiece|hat|murmur)\b/)) return 1;
@@ -5473,7 +5473,7 @@ function inferItemWeight(name,typeCode,flags){
   if(has(/\borb\b/)) return 3;
   if(has(/\b(crystal|shard)\b/)) return 1;
   if(has(/\b(figurine|totem)\b/)) return 1;
-  if(has(/\bcompass\b/)) return 1;
+  if(has(/\b(compass|fan)\b/)) return 1;
   if(has(/\b(spellbook|book|grimoire)\b/)) return 3;
   if(has(/\btome\b/)) return 5;
   if(has(/\bmanual\b/)) return 3;
