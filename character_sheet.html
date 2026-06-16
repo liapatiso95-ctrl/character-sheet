@@ -4286,25 +4286,31 @@ function convertSpellJson(arr){
   return out;
 }
 
+// Kick off the spell-compendium fetch if it hasn't started yet. Idempotent and safe to
+// call from anywhere — the item compendium calls it too, so spell scrolls can be generated
+// even when the user opens Inventory without first visiting the Compendium.
+function ensureSpellCacheLoading(){
+  if(_spellCache.status!=="idle") return;
+  _spellCache.status="loading";
+  _spellCache.data={};
+  var pending=2;
+  function done(){pending--;if(pending<=0)_spellCache.status="ready";_notifySpellListeners();}
+  // Load markdown (authoritative) and the spells/ JSON folder in parallel;
+  // markdown is written first so it wins name conflicts.
+  fetch(SPELL_MD_URL)
+    .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
+    .then(function(text){var md=parseSpellMarkdown(text);Object.keys(md).forEach(function(k){if(!_spellCache.data[k])_spellCache.data[k]=md[k];});})
+    .catch(function(){})
+    .finally(function(){done();});
+  loadCompendiumJsonFolder("spells","spell",convertSpellJson,_spellCache.data,done);
+}
+
 function useSpellCompendium(){
   const [tick,setTick]=React.useState(0);
   React.useEffect(function(){
     function onUpdate(){setTick(function(t){return t+1;});}
     _spellListeners.push(onUpdate);
-    // Trigger fetch if idle. Load markdown (authoritative) and the spells/ JSON
-    // folder in parallel; markdown is written first so it wins name conflicts.
-    if(_spellCache.status==="idle"){
-      _spellCache.status="loading";
-      _spellCache.data={};
-      var pending=2;
-      function done(){pending--;if(pending<=0)_spellCache.status="ready";_notifySpellListeners();}
-      fetch(SPELL_MD_URL)
-        .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
-        .then(function(text){var md=parseSpellMarkdown(text);Object.keys(md).forEach(function(k){if(!_spellCache.data[k])_spellCache.data[k]=md[k];});})
-        .catch(function(){})
-        .finally(function(){done();});
-      loadCompendiumJsonFolder("spells","spell",convertSpellJson,_spellCache.data,done);
-    }
+    ensureSpellCacheLoading();
     return function(){var idx=_spellListeners.indexOf(onUpdate);if(idx>=0)_spellListeners.splice(idx,1);};
   },[]);
   return _spellCache;
@@ -5825,7 +5831,7 @@ function generateSpellScrolls(spellData){
   for(var lv=0;lv<=9;lv++){
     var bp=_scrollBoilerplate(lv);
     var nm="Spell Scroll ("+_scrollLevelName(lv)+")";
-    out[nm.toLowerCase()]={name:nm,weight:"",cost:"",type:"Scroll",rarity:bp.rarity,attune:null,attuneTag:"",
+    out[nm.toLowerCase()]={name:nm,weight:""+inferItemWeight(nm,"SC",{}),weightInferred:true,cost:"",type:"Scroll",rarity:bp.rarity,attune:null,attuneTag:"",
       desc:"Type: Scroll, "+bp.rarity+"\n\n"+bp.text,charges:null,src:"json"};
   }
   // Per-spell scrolls
@@ -5837,7 +5843,7 @@ function generateSpellScrolls(spellData){
       var bp=_scrollBoilerplate(lv);
       var nm="Spell Scroll ("+sp.name+")";
       out[nm.toLowerCase()]={
-        name:nm,weight:"",cost:"",type:"Scroll",rarity:bp.rarity,attune:null,attuneTag:"",
+        name:nm,weight:""+inferItemWeight(nm,"SC",{}),weightInferred:true,cost:"",type:"Scroll",rarity:bp.rarity,attune:null,attuneTag:"",
         desc:"Type: Scroll, "+bp.rarity+"\n\n"+bp.text+"\n\n———\n"+sp.name+"\n"+_spellBlockText(sp),
         charges:null,src:"json"
       };
@@ -5859,6 +5865,10 @@ function useItemCompendium(){
       }
     }
     _spellListeners.push(regenScrolls);
+    // Ensure spells load even if the user never opens the Compendium, so the
+    // generated spell scrolls are available to inventory autofill. regenScrolls
+    // (registered above) builds them once the spell cache finishes loading.
+    ensureSpellCacheLoading();
     if(_itemCache.status==="idle"){
       _itemCache.status="loading";
       _itemCache.data={};
@@ -7999,7 +8009,8 @@ function CompendiumPage({c,s}){
                 <div style={{padding:"4px 12px 14px 34px",background:"rgba(0,0,0,.15)"}}>
                   {kind==="spells"&&(
                     <div style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.5)",marginBottom:6,lineHeight:1.6}}>
-                      {r.castingTime&&<span>Cast: {r.castingTime} · </span>}{r.range&&<span>Range: {r.range} · </span>}{r.components&&<span>Comp: {r.components} · </span>}{r.duration&&<span>Duration: {(r.conc?"Concentration, up to ":"")+r.duration}</span>}
+                      {r.classes&&<div style={{color:"rgba(232,213,176,.6)"}}>Classes: {r.classes}</div>}
+                      <div>{r.castingTime&&<span>Cast: {r.castingTime} · </span>}{r.range&&<span>Range: {r.range} · </span>}{r.components&&<span>Comp: {r.components} · </span>}{r.duration&&<span>Duration: {(r.conc?"Concentration, up to ":"")+r.duration}</span>}</div>
                     </div>
                   )}
                   {kind==="exploits"&&(
@@ -9245,7 +9256,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.90</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.93</div>
 
 </script>
 </body>
