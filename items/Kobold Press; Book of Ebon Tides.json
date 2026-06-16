@@ -9778,7 +9778,7 @@
 					"class": "druid"
 				}
 			],
-			"weight": 55,
+			"weight": 5,
 			"ac": 16,
 			"strength": "13",
 			"grantsProficiency": true,
