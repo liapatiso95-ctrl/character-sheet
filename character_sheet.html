@@ -7499,6 +7499,7 @@ function CompendiumPage({c,s}){
   const [fExClass,setFExClass]=us(""); // exploit class textbox filter
   const [expanded,setExpanded]=us({});
   const [page,setPage]=us(0);
+  const [pageSize,setPageSize]=us(20); // results per page: 10/20/50/100
   const [confirmAdd,setConfirmAdd]=us(null); // the result object pending confirmation
   const [addCls,setAddCls]=us(""); // selected class when adding a spell
   const [confirmAddAll,setConfirmAddAll]=us(false); // confirm modal for "add all" spells
@@ -7514,7 +7515,7 @@ function CompendiumPage({c,s}){
   function switchKind(k){setKind(k);setExpanded({});setSrdResults([]);setPage(0);setFDegree("any");setFExec("");setFExClass("");}
 
   // Reset to first page whenever a search or filter changes
-  React.useEffect(function(){setPage(0);setPickedId(null);},[query,descQuery,fLevel,fSchool,fClass,fCast,fRitual,fConc,fRarity,fAttune,fType,fAttuneTag,fPrereq,fPrereqText,fAbilities,fDegree,fExec,fExClass,includeSrd,kind,showGeneric]);
+  React.useEffect(function(){setPage(0);setPickedId(null);},[query,descQuery,fLevel,fSchool,fClass,fCast,fRitual,fConc,fRarity,fAttune,fType,fAttuneTag,fPrereq,fPrereqText,fAbilities,fDegree,fExec,fExClass,includeSrd,kind,showGeneric,pageSize]);
 
   // SRD fetch (debounced) — only when there's a query
   React.useEffect(function(){
@@ -7601,7 +7602,7 @@ function CompendiumPage({c,s}){
     }
     return (a.name||"").localeCompare(b.name||"");
   });
-  var PER_PAGE=20;
+  var PER_PAGE=pageSize;
   var totalResults=results.length;
   var totalPages=Math.max(1,Math.ceil(totalResults/PER_PAGE));
   var curPage=Math.min(page,totalPages-1);
@@ -7862,12 +7863,28 @@ function CompendiumPage({c,s}){
         </div>
       )}
 
-      <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:12}}>
+      <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:12,flexWrap:"wrap"}}>
         {kind!=="exploits"&&<label style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.5)",textTransform:"uppercase"}}>
           <input type="checkbox" checked={includeSrd} onChange={function(e){setIncludeSrd(e.target.checked);}} />
           Include SRD
         </label>}
         {srdLoading&&<span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(201,150,42,.5)",textTransform:"uppercase"}}>Searching SRD…</span>}
+        {/* Expand / collapse all on the current page */}
+        {pageResults.length>0&&(
+          <div style={{display:"flex",alignItems:"center",gap:4}}>
+            <div onClick={function(){setExpanded(function(e){var n=Object.assign({},e);pageResults.forEach(function(r,idx){n[rowId(r,curPage*PER_PAGE+idx)]=true;});return n;});}}
+              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.55)",border:"1px solid rgba(184,154,240,.2)",padding:"2px 6px",borderRadius:2,userSelect:"none"}} title="Expand all on this page">+</div>
+            <div onClick={function(){setExpanded(function(e){var n=Object.assign({},e);pageResults.forEach(function(r,idx){delete n[rowId(r,curPage*PER_PAGE+idx)];});return n;});}}
+              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.55)",border:"1px solid rgba(184,154,240,.2)",padding:"2px 6px",borderRadius:2,userSelect:"none"}} title="Collapse all on this page">−</div>
+          </div>
+        )}
+        {/* Results per page */}
+        <label style={{display:"flex",alignItems:"center",gap:5,fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.5)",textTransform:"uppercase"}}>
+          Per page
+          <select value={""+pageSize} onChange={function(e){setPageSize(parseInt(e.target.value));}} style={Object.assign({},selStyle,{padding:"2px 6px",fontSize:11})}>
+            {[10,20,50,100].map(function(n){return <option key={n} value={""+n}>{n}</option>;})}
+          </select>
+        </label>
         <span style={{marginLeft:"auto",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.35)"}}>{totalResults} result{totalResults===1?"":"s"}{totalPages>1?" · showing "+(curPage*PER_PAGE+1)+"–"+Math.min(curPage*PER_PAGE+PER_PAGE,totalResults):""}</span>
         {kind==="spells"&&totalResults>0&&(
           <div onClick={function(){var spc=c.spellClasses||[];setAddCls(spc.length>0?(spc[0].nm||""):"");setConfirmAddAll(true);}}
@@ -7944,15 +7961,46 @@ function CompendiumPage({c,s}){
       </div>
 
       {/* Pagination controls */}
-      {totalPages>1&&(
-        <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,marginTop:14}}>
-          <div onClick={function(){if(curPage>0)setPage(curPage-1);}}
-            style={{cursor:curPage>0?"pointer":"default",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"4px 12px",borderRadius:2,userSelect:"none",border:"1px solid rgba(201,150,42,.2)",color:curPage>0?"var(--gold-l)":"rgba(232,213,176,.2)",opacity:curPage>0?1:.4}}>‹ Prev</div>
-          <span style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,color:"rgba(232,213,176,.5)"}}>Page {curPage+1} / {totalPages}</span>
-          <div onClick={function(){if(curPage<totalPages-1)setPage(curPage+1);}}
-            style={{cursor:curPage<totalPages-1?"pointer":"default",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"4px 12px",borderRadius:2,userSelect:"none",border:"1px solid rgba(201,150,42,.2)",color:curPage<totalPages-1?"var(--gold-l)":"rgba(232,213,176,.2)",opacity:curPage<totalPages-1?1:.4}}>Next ›</div>
+      {totalPages>1&&(function(){
+        // Build a compact page list: 1 … (cur-1) cur (cur+1) … last
+        var nums=[];
+        var add=function(p){if(nums.indexOf(p)<0&&p>=0&&p<totalPages)nums.push(p);};
+        add(0);add(1);
+        add(curPage-1);add(curPage);add(curPage+1);
+        add(totalPages-2);add(totalPages-1);
+        nums.sort(function(a,b){return a-b;});
+        // Insert gaps marker (-1) where pages are skipped
+        var seq=[];
+        for(var i=0;i<nums.length;i++){
+          if(i>0&&nums[i]-nums[i-1]>1) seq.push(-1);
+          seq.push(nums[i]);
+        }
+        var pgBtn=function(active,disabled,onClick,label,key){
+          return (<div key={key} onClick={disabled?null:onClick}
+            style={{cursor:disabled?"default":"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",minWidth:active?28:undefined,textAlign:"center",padding:"4px 9px",borderRadius:2,userSelect:"none",
+              border:"1px solid "+(active?"rgba(201,150,42,.6)":"rgba(201,150,42,.2)"),
+              color:active?"#1a1410":(disabled?"rgba(232,213,176,.2)":"var(--gold-l)"),
+              background:active?"var(--gold)":"transparent",opacity:disabled?.4:1}}>{label}</div>);
+        };
+        return (
+        <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:6,marginTop:14,flexWrap:"wrap"}}>
+          {pgBtn(false,curPage===0,function(){setPage(curPage-1);},"‹","prev")}
+          {seq.map(function(p,i){
+            if(p===-1) return <span key={"gap"+i} style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"rgba(232,213,176,.3)",padding:"0 2px"}}>…</span>;
+            return pgBtn(p===curPage,false,function(){setPage(p);},""+(p+1),"p"+p);
+          })}
+          {pgBtn(false,curPage>=totalPages-1,function(){setPage(curPage+1);},"›","next")}
+          <span style={{display:"flex",alignItems:"center",gap:5,marginLeft:8,fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.4)",textTransform:"uppercase"}}>
+            Go to
+            <input type="number" min={1} max={totalPages} defaultValue={curPage+1} key={"jump"+curPage+"_"+totalPages}
+              onKeyDown={function(e){if(e.key==="Enter"){var v=parseInt(e.target.value);if(!isNaN(v))setPage(Math.max(0,Math.min(totalPages-1,v-1)));}}}
+              onBlur={function(e){var v=parseInt(e.target.value);if(!isNaN(v))setPage(Math.max(0,Math.min(totalPages-1,v-1)));}}
+              style={{width:52,background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,150,42,.25)",borderRadius:2,color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:11,textAlign:"center",padding:"3px 4px",outline:"none"}} />
+            / {totalPages}
+          </span>
         </div>
-      )}
+        );
+      })()}
       {/* Confirm add modal */}
       {confirmAdd&&(
         <div onClick={function(){setConfirmAdd(null);}}
@@ -9125,7 +9173,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.74</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.80</div>
 
 </script>
 </body>
