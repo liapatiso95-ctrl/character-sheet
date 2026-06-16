@@ -5353,7 +5353,7 @@ function inferItemWeight(name,typeCode,flags){
   if(has(/\b(gloves|gauntlets?)\b/)) return 1;
   if(has(/\bwraps\b/)) return 0.5;
   if(has(/\bbelt\b/)) return 1;
-  if(has(/\b(mask|circlet|headpiece)\b/)) return 1;
+  if(has(/\b(mask|circlet|headpiece|hat)\b/)) return 1;
   if(has(/\b(crown|helmet)\b/)) return 4;
   if(has(/\b(eye[- ]?patch|eyepatch)\b/)) return 0.2;
   // Jewelry (check specific before generic)
@@ -7424,6 +7424,37 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
 }
 
 // ─── Compendium Search Page ───────────────────────────────────────────────────
+// Complex text-search matcher used by every search box in the compendium.
+// Grammar (all case-insensitive, substring-based):
+//   +  AND   (binds tightest)   e.g. wizard+sorcerer  = both must appear
+//   |  OR                       e.g. druid|cleric     = either may appear
+//   !  NOT   (global exclusion) e.g. !warlock         = must NOT appear anywhere
+// AND binds tighter than OR, so:  a+b|c  ==  (a AND b) OR c
+// !terms apply to the whole query regardless of position.
+// Example: druid|wizard+sorcerer!warlock
+//   → [druid OR (wizard AND sorcerer)] AND NOT warlock
+// An empty query matches everything; a query of only !terms acts as a pure filter.
+function matchQuery(text, query){
+  text=(""+(text||"")).toLowerCase();
+  query=(""+(query||"")).trim();
+  if(!query) return true;
+  // Pull out every !term (a term runs until the next + | ! or end) as a global exclusion.
+  var excludes=[];
+  var positive=query.replace(/!([^+|!]*)/g,function(_,t){var s=t.trim().toLowerCase();if(s)excludes.push(s);return "";});
+  for(var i=0;i<excludes.length;i++){ if(text.indexOf(excludes[i])>=0) return false; }
+  positive=positive.toLowerCase();
+  var orGroups=positive.split("|").map(function(g){return g.trim();}).filter(function(g){return g.length>0;});
+  if(!orGroups.length) return true; // only exclusions were supplied → already passed them
+  for(var g=0;g<orGroups.length;g++){
+    var ands=orGroups[g].split("+").map(function(a){return a.trim();}).filter(Boolean);
+    if(!ands.length) continue;
+    var all=true;
+    for(var a=0;a<ands.length;a++){ if(text.indexOf(ands[a])<0){all=false;break;} }
+    if(all) return true;
+  }
+  return false;
+}
+
 function CompendiumPage({c,s}){
   const {useState:us}=React;
   const spellCache=useSpellCompendium();
@@ -7451,6 +7482,8 @@ function CompendiumPage({c,s}){
   const [fType,setFType]=us("");
   const [fAttuneTag,setFAttuneTag]=us("");
   const [showGeneric,setShowGeneric]=us(false); // show variant/generic item parents (default off)
+  const [pickedId,setPickedId]=us(null); // id of the randomly-chosen item to highlight
+  const [showQueryHelp,setShowQueryHelp]=us(false); // search-syntax help popup
   const [fPrereq,setFPrereq]=us("any"); // any | yes | no
   const [fPrereqText,setFPrereqText]=us("");
   const [fAbilities,setFAbilities]=us([]); // selected ability codes
@@ -7474,7 +7507,7 @@ function CompendiumPage({c,s}){
   function switchKind(k){setKind(k);setExpanded({});setSrdResults([]);setPage(0);setFDegree("any");setFExec("");setFExClass("");}
 
   // Reset to first page whenever a search or filter changes
-  React.useEffect(function(){setPage(0);},[query,descQuery,fLevel,fSchool,fClass,fCast,fRitual,fConc,fRarity,fAttune,fType,fAttuneTag,fPrereq,fPrereqText,fAbilities,fDegree,fExec,fExClass,includeSrd,kind,showGeneric]);
+  React.useEffect(function(){setPage(0);setPickedId(null);},[query,descQuery,fLevel,fSchool,fClass,fCast,fRitual,fConc,fRarity,fAttune,fType,fAttuneTag,fPrereq,fPrereqText,fAbilities,fDegree,fExec,fExClass,includeSrd,kind,showGeneric]);
 
   // SRD fetch (debounced) — only when there's a query
   React.useEffect(function(){
@@ -7508,12 +7541,12 @@ function CompendiumPage({c,s}){
   var nq=(qEff||"").toLowerCase().trim();
   var ndq=(dqEff||"").toLowerCase().trim();
   var results=all.filter(function(r){
-    if(nq&&(r.name||"").toLowerCase().indexOf(nq)<0) return false;
-    if(ndq&&(r.desc||"").toLowerCase().indexOf(ndq)<0) return false;
+    if(nq&&!matchQuery(r.name,nq)) return false;
+    if(ndq&&!matchQuery(r.desc,ndq)) return false;
     if(kind==="spells"){
       if(fLevel!=="any"&&(r.level===undefined||r.level!==parseInt(fLevel))) return false;
       if(fSchool!=="any"&&(r.school||"").toLowerCase()!==fSchool.toLowerCase()) return false;
-      if(fClass.trim()&&(r.classes||"").toString().toLowerCase().indexOf(fClass.toLowerCase())<0) return false;
+      if(fClass.trim()&&!matchQuery(r.classes,fClass)) return false;
       if(fCast!=="any"&&(r.castingTime||"").toLowerCase().indexOf(fCast.toLowerCase())<0) return false;
       if(fRitual==="yes"&&!r.ritual) return false;
       if(fRitual==="no"&&r.ritual) return false;
@@ -7526,14 +7559,14 @@ function CompendiumPage({c,s}){
       else if(fRarity!=="any"&&(r.rarity||"").toLowerCase()!==fRarity.toLowerCase()) return false;
       if(fAttune==="yes"&&r.attune!==true) return false;
       if(fAttune==="no"&&r.attune!==false) return false;
-      if(fType.trim()&&(r.type||"").toLowerCase().indexOf(fType.toLowerCase())<0) return false;
-      if(fAttuneTag.trim()&&(r.attuneTag||"").toLowerCase().indexOf(fAttuneTag.toLowerCase())<0) return false;
+      if(fType.trim()&&!matchQuery(r.type,fType)) return false;
+      if(fAttuneTag.trim()&&!matchQuery(r.attuneTag,fAttuneTag)) return false;
     }
     if(kind==="feats"){
       var hasPre=!!(r.prereq&&(""+r.prereq).trim());
       if(fPrereq==="yes"&&!hasPre) return false;
       if(fPrereq==="no"&&hasPre) return false;
-      if(fPrereq==="yes"&&fPrereqText.trim()&&(r.prereq||"").toLowerCase().indexOf(fPrereqText.toLowerCase())<0) return false;
+      if(fPrereq==="yes"&&fPrereqText.trim()&&!matchQuery(r.prereq,fPrereqText)) return false;
       if(fAbilities.length>0){
         var ab=r.abilities||[];
         // Match if the feat can increase ANY of the selected abilities
@@ -7543,8 +7576,8 @@ function CompendiumPage({c,s}){
     }
     if(kind==="exploits"){
       if(fDegree!=="any"&&r.degree!==parseInt(fDegree)) return false;
-      if(fExClass.trim()&&(r.classes||"").toString().toLowerCase().indexOf(fExClass.toLowerCase())<0) return false;
-      if(fExec.trim()&&(r.execution||"").toString().toLowerCase().indexOf(fExec.toLowerCase())<0) return false;
+      if(fExClass.trim()&&!matchQuery(r.classes,fExClass)) return false;
+      if(fExec.trim()&&!matchQuery(r.execution,fExec)) return false;
     }
     return true;
   });
@@ -7567,9 +7600,26 @@ function CompendiumPage({c,s}){
   var curPage=Math.min(page,totalPages-1);
   var pageResults=results.slice(curPage*PER_PAGE,curPage*PER_PAGE+PER_PAGE);
 
+  // Stable row id for a result at absolute index `i` in `results` (matches the
+  // render loop below so expand/highlight state lines up).
+  function rowId(r,i){return r.src+"-"+(r.srdVer||"")+"-"+r.name+"-"+i;}
+  // Pick one item at random from the currently-shown (filtered) results, jump to
+  // its page, expand it, and highlight it. Uses `results` (all pages), not just
+  // the current page, so it honours every active filter and search term.
+  function chooseRandomItem(){
+    if(!results.length) return;
+    var i=Math.floor(Math.random()*results.length);
+    var id=rowId(results[i],i);
+    setPage(Math.floor(i/PER_PAGE));
+    setPickedId(id);
+    setExpanded(function(e){var n=Object.assign({},e);n[id]=true;return n;});
+  }
+
   var SCHOOLS=["Abjuration","Conjuration","Divination","Enchantment","Evocation","Illusion","Necromancy","Transmutation"];
   var inputStyle={background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,150,42,.2)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"5px 8px",borderRadius:2};
   var selStyle=Object.assign({},inputStyle,{cursor:"pointer"});
+  var qhKey={fontFamily:"'Cinzel',serif",fontSize:15,fontWeight:700,color:"var(--arcane)",textAlign:"center"};
+  var qhEx={fontFamily:"monospace",fontSize:12,color:"var(--gold-l)",background:"rgba(0,0,0,.3)",padding:"1px 5px",borderRadius:2};
   var tabBtn=function(k,label){return <div onClick={function(){switchKind(k);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1.5,textTransform:"uppercase",padding:"6px 16px",borderRadius:2,userSelect:"none",border:"1px solid "+(kind===k?"var(--gold)":"rgba(201,150,42,.2)"),background:kind===k?"rgba(201,150,42,.12)":"transparent",color:kind===k?"var(--gold-l)":"rgba(232,213,176,.45)"}}>{label}</div>;};
 
   function toggle(id){setExpanded(function(e){var n=Object.assign({},e);n[id]=!n[id];return n;});}
@@ -7699,9 +7749,37 @@ function CompendiumPage({c,s}){
       <div style={{display:"flex",gap:8,marginBottom:14,flexWrap:"wrap"}}>{tabBtn("spells","Spells")}{tabBtn("feats","Feats")}{tabBtn("items","Items")}{tabBtn("exploits","Exploits")}</div>
 
       {/* Search controls */}
-      <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:8,alignItems:"center"}}>
+      <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:8,alignItems:"center",position:"relative"}}>
         <input value={query} onChange={function(e){setQuery(e.target.value);}} placeholder="Name contains..." style={Object.assign({},inputStyle,{flex:"1 1 160px",minWidth:140})} />
         <input value={descQuery} onChange={function(e){setDescQuery(e.target.value);}} placeholder="Description contains..." style={Object.assign({},inputStyle,{flex:"1 1 160px",minWidth:140})} />
+        <div onClick={function(){setShowQueryHelp(function(v){return !v;});}}
+          title="How to write complex search queries"
+          style={{flexShrink:0,width:24,height:24,borderRadius:"50%",border:"1px solid rgba(123,79,207,.5)",color:"var(--arcane)",background:showQueryHelp?"rgba(123,79,207,.2)":"rgba(123,79,207,.08)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'EB Garamond',serif",fontSize:14,fontStyle:"italic",fontWeight:700,userSelect:"none"}}>i</div>
+        {showQueryHelp&&(
+          <div style={{position:"absolute",top:"100%",right:0,marginTop:6,zIndex:300,width:"min(420px,92vw)",background:"#1a1410",border:"1px solid rgba(123,79,207,.4)",borderRadius:3,padding:"14px 16px",boxShadow:"0 6px 28px rgba(0,0,0,.6)"}}>
+            <div style={{display:"flex",alignItems:"baseline",justifyContent:"space-between",marginBottom:8}}>
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1.5,textTransform:"uppercase",color:"var(--arcane)"}}>Search Syntax</span>
+              <span onClick={function(){setShowQueryHelp(false);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.4)"}}>close ✕</span>
+            </div>
+            <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.8)",lineHeight:1.7}}>
+              Every search box understands these operators. They combine plain words (matched as “contains”, case-insensitive):
+              <div style={{marginTop:8,display:"grid",gridTemplateColumns:"auto 1fr",gap:"4px 12px",alignItems:"baseline"}}>
+                <span style={qhKey}>+</span><span><b>AND</b> — both terms must appear. <span style={qhEx}>wizard+sorcerer</span></span>
+                <span style={qhKey}>|</span><span><b>OR</b> — either term may appear. <span style={qhEx}>druid|cleric</span></span>
+                <span style={qhKey}>!</span><span><b>NOT</b> — term must <i>not</i> appear (anywhere in the query). <span style={qhEx}>!warlock</span></span>
+              </div>
+              <div style={{marginTop:10}}>
+                <b>+</b> binds tighter than <b>|</b>, so <span style={qhEx}>a+b|c</span> means <span style={{fontStyle:"italic"}}>(a and b) or c</span>.
+              </div>
+              <div style={{marginTop:10,paddingTop:10,borderTop:"1px solid rgba(123,79,207,.18)"}}>
+                <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(201,150,42,.5)"}}>EXAMPLE</span>
+                <div style={{marginTop:3}}><span style={qhEx}>druid|wizard+sorcerer!warlock</span></div>
+                <div style={{marginTop:4,fontStyle:"italic",color:"rgba(232,213,176,.6)"}}>matches anything that is <b>druid</b>, or both <b>wizard</b> and <b>sorcerer</b> — but never anything containing <b>warlock</b>.</div>
+              </div>
+              <div style={{marginTop:10,fontSize:12,color:"rgba(232,213,176,.45)"}}>An empty box matches everything. Spaces around terms are ignored.</div>
+            </div>
+          </div>
+        )}
       </div>
 
       {kind==="spells"&&(
@@ -7731,7 +7809,7 @@ function CompendiumPage({c,s}){
         <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:8,alignItems:"center"}}>
           <select value={fRarity} onChange={function(e){setFRarity(e.target.value);}} style={selStyle}>
             <option value="any">Any Rarity</option>
-            <option value="__mundane">Mundane (no rarity)</option>
+            <option value="__mundane">Mundane/No rarity</option>
             {["Common","Uncommon","Rare","Very Rare","Legendary","Artifact"].map(function(rr){return <option key={rr} value={rr}>{rr}</option>;})}
           </select>
           <select value={fAttune} onChange={function(e){setFAttune(e.target.value);}} style={selStyle}>
@@ -7743,6 +7821,11 @@ function CompendiumPage({c,s}){
             <input type="checkbox" checked={showGeneric} onChange={function(e){setShowGeneric(e.target.checked);}} style={{accentColor:"var(--arcane)",cursor:"pointer"}} />
             Show generic items
           </label>
+          <div onClick={chooseRandomItem}
+            title={results.length?"Pick one item at random from the "+results.length+" shown (respects filters)":"No items to choose from"}
+            style={{display:"inline-flex",alignItems:"center",gap:6,marginLeft:"auto",cursor:results.length?"pointer":"default",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",padding:"5px 14px",borderRadius:2,userSelect:"none",border:"1px solid "+(results.length?"rgba(123,79,207,.5)":"rgba(201,150,42,.15)"),color:results.length?"var(--arcane)":"rgba(232,213,176,.25)",background:results.length?"rgba(123,79,207,.1)":"transparent",whiteSpace:"nowrap"}}>
+            ⚄ Choose Random Item
+          </div>
         </div>
       )}
 
@@ -7797,8 +7880,9 @@ function CompendiumPage({c,s}){
       <div style={{border:"1px solid rgba(201,150,42,.12)",borderRadius:2}}>
         {results.length===0&&<div style={{padding:"20px",textAlign:"center",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.3)"}}>No matches. {kind==="spells"&&spellCache.status==="loading"?"Loading spells…":kind==="feats"&&featCache.status==="loading"?"Loading feats…":kind==="items"&&itemCache.status==="loading"?"Loading items…":kind==="exploits"&&exploitCache.status==="loading"?"Loading exploits…":kind==="exploits"&&exploitCache.status==="error"?"Exploits file unavailable — check exploits.md in repo.":"Try a different search."}</div>}
         {pageResults.map(function(r,idx){
-          var id=r.src+"-"+(r.srdVer||"")+"-"+r.name+"-"+(curPage*PER_PAGE+idx);
+          var id=rowId(r,curPage*PER_PAGE+idx);
           var isOpen=expanded[id];
+          var isPicked=(id===pickedId);
           var sub="";
           if(kind==="spells") sub=(r.level===0?"Cantrip":"Level "+r.level)+(r.school?" · "+r.school:"")+(r.ritual?" · Ritual":"")+(r.conc?" · Conc":"");
           else if(kind==="items") sub=[r.rarity,r.type,(r.attune===true?"Attunement":""),(r.weight?r.weight+" lb":"")].filter(Boolean).join(" · ");
@@ -7808,7 +7892,7 @@ function CompendiumPage({c,s}){
           var tag=isLocal?"File":("SRD"+(r.srdVer||""));
           var tagCol=isLocal?"rgba(74,156,92,.6)":"rgba(96,180,196,.55)";
           return (
-            <div key={id} style={{borderBottom:"1px solid rgba(201,150,42,.07)"}}>
+            <div key={id} style={{borderBottom:"1px solid rgba(201,150,42,.07)",background:isPicked?"rgba(201,150,42,.10)":"transparent",boxShadow:isPicked?"inset 3px 0 0 var(--gold)":"none"}}>
               <div onClick={function(){toggle(id);}} style={{display:"flex",alignItems:"baseline",gap:10,padding:"8px 12px",cursor:"pointer"}}>
                 <span style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"rgba(201,150,42,.4)",width:12,flexShrink:0}}>{isOpen?"−":"+"}</span>
                 <span style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"var(--gold-l)",fontWeight:600,flex:1}}>{r.name}</span>
@@ -9034,7 +9118,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.70</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.73</div>
 
 </script>
 </body>
