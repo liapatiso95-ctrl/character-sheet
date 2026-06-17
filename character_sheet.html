@@ -843,7 +843,7 @@ function TA({label,val,set,rows}){
   return (
     <div className="fg">
       {label&&<label className="fl">{label}</label>}
-      <textarea className="fi" value={val} onChange={e=>set(e.target.value)} rows={rows||4} style={{minHeight:rows?rows*22:80}} />
+      <MdField className="fi" value={val} onChange={e=>set(e.target.value)} style={{minHeight:rows?rows*22:80}} />
     </div>
   );
 }
@@ -858,6 +858,138 @@ function AutoTextarea({value,onChange,placeholder,style,className}){
   return <textarea ref={ref} value={value||""} onChange={onChange} placeholder={placeholder}
     className={className}
     style={{minHeight:"1.5em",...style,height:"auto",overflow:"hidden",resize:"none"}} />;
+}
+
+// ── Markdown rendering (dependency-free) ───────────────────────────────────────
+// Supports headings, **bold** / *italic* / ***both***, `code`, [links](url),
+// horizontal rules, ordered/unordered lists, blockquotes, fenced code, and GFM
+// pipe tables. Used to render entry descriptions and any user-written text.
+function _mdSplitRow(line){var s=line.trim().replace(/^\|/,"").replace(/\|$/,"");return s.split("|").map(function(c){return c.trim();});}
+function _mdIsTableSep(line){return /^\s*\|?\s*:?-{1,}:?\s*(\|\s*:?-{1,}:?\s*)*\|?\s*$/.test(line)&&line.indexOf("-")>=0;}
+function _mdParseBlocks(text){
+  var src=(text||"").replace(/\r\n/g,"\n").replace(/\r/g,"\n");
+  var lines=src.split("\n"); var blocks=[]; var i=0;
+  function flushPara(buf){ if(buf.length) blocks.push({type:"p",text:buf.join("\n")}); }
+  while(i<lines.length){
+    var line=lines[i], trimmed=line.trim();
+    if(!trimmed){i++;continue;}
+    if(/^```/.test(trimmed)){var fence=[];i++;while(i<lines.length&&!/^```/.test(lines[i].trim())){fence.push(lines[i]);i++;}i++;blocks.push({type:"code",text:fence.join("\n")});continue;}
+    var h=trimmed.match(/^(#{1,6})\s+(.*)$/);
+    if(h){blocks.push({type:"heading",level:h[1].length,text:h[2].replace(/\s+#+\s*$/,"").trim()});i++;continue;}
+    if(/^(\*\s*){3,}$/.test(trimmed)||/^(-\s*){3,}$/.test(trimmed)||/^(_\s*){3,}$/.test(trimmed)){blocks.push({type:"hr"});i++;continue;}
+    if(trimmed.indexOf("|")>=0&&i+1<lines.length&&_mdIsTableSep(lines[i+1])){
+      var header=_mdSplitRow(line);
+      var aligns=_mdSplitRow(lines[i+1]).map(function(c){var l=c.charAt(0)===":",r=c.charAt(c.length-1)===":";return l&&r?"center":r?"right":l?"left":"";});
+      i+=2; var rows=[];
+      while(i<lines.length&&lines[i].trim().indexOf("|")>=0&&lines[i].trim()){rows.push(_mdSplitRow(lines[i]));i++;}
+      blocks.push({type:"table",header:header,aligns:aligns,rows:rows}); continue;
+    }
+    if(/^>\s?/.test(trimmed)){var q=[];while(i<lines.length&&/^>\s?/.test(lines[i].trim())){q.push(lines[i].trim().replace(/^>\s?/,""));i++;}blocks.push({type:"quote",text:q.join("\n")});continue;}
+    if(/^[-*+]\s+/.test(trimmed)){var u=[];while(i<lines.length&&/^[-*+]\s+/.test(lines[i].trim())){u.push(lines[i].trim().replace(/^[-*+]\s+/,""));i++;}blocks.push({type:"ul",items:u});continue;}
+    if(/^\d+[.)]\s+/.test(trimmed)){var o=[];while(i<lines.length&&/^\d+[.)]\s+/.test(lines[i].trim())){o.push(lines[i].trim().replace(/^\d+[.)]\s+/,""));i++;}blocks.push({type:"ol",items:o});continue;}
+    var para=[];
+    while(i<lines.length){
+      var l2=lines[i], t2=l2.trim();
+      if(!t2) break;
+      if(/^(#{1,6})\s+/.test(t2)||/^```/.test(t2)||/^[-*+]\s+/.test(t2)||/^\d+[.)]\s+/.test(t2)||/^>\s?/.test(t2)) break;
+      if(/^(\*\s*){3,}$/.test(t2)||/^(-\s*){3,}$/.test(t2)||/^(_\s*){3,}$/.test(t2)) break;
+      if(t2.indexOf("|")>=0&&i+1<lines.length&&_mdIsTableSep(lines[i+1])) break;
+      para.push(l2);i++;
+    }
+    flushPara(para);
+  }
+  return blocks;
+}
+function _mdInline(text){
+  var out=[]; var rest=text==null?"":(""+text);
+  var patterns=[
+    {re:/`([^`]+)`/,t:"code"},
+    {re:/\*\*\*([^*]+?)\*\*\*/,t:"bi"},
+    {re:/\*\*([^*]+?)\*\*/,t:"b"},
+    {re:/(^|[^*])\*([^*\s][^*]*?)\*/,t:"ig"},
+    {re:/\b_([^_]+?)_\b/,t:"i"},
+    {re:/\[([^\]]+)\]\(([^)\s]+)\)/,t:"a"}
+  ];
+  var guard=0;
+  while(rest&&guard++<5000){
+    var best=null,bestIdx=Infinity,bestPat=null;
+    for(var p=0;p<patterns.length;p++){
+      var m=patterns[p].re.exec(rest);
+      if(m){var idx=m.index+(patterns[p].t==="ig"?(m[1]?m[1].length:0):0);if(idx<bestIdx){bestIdx=idx;best=m;bestPat=patterns[p];}}
+    }
+    if(!best){out.push({t:"text",v:rest});break;}
+    if(bestIdx>0) out.push({t:"text",v:rest.slice(0,bestIdx)});
+    if(bestPat.t==="code") out.push({t:"code",v:best[1]});
+    else if(bestPat.t==="bi") out.push({t:"bi",children:_mdInline(best[1])});
+    else if(bestPat.t==="b") out.push({t:"b",children:_mdInline(best[1])});
+    else if(bestPat.t==="ig") out.push({t:"i",children:_mdInline(best[2])});
+    else if(bestPat.t==="i") out.push({t:"i",children:_mdInline(best[1])});
+    else if(bestPat.t==="a") out.push({t:"a",v:best[1],href:best[2]});
+    var consumedLen=(bestPat.t==="ig")?(best[0].length-(best[1]?best[1].length:0)):best[0].length;
+    rest=rest.slice(bestIdx+consumedLen);
+  }
+  return out;
+}
+function _mdRenderInline(tokens,kp){
+  return tokens.map(function(tok,idx){
+    var key=kp+"-"+idx;
+    if(tok.t==="text") return tok.v;
+    if(tok.t==="code") return <code key={key} style={{fontFamily:"monospace",fontSize:"0.85em",background:"rgba(201,150,42,.12)",padding:"0 3px",borderRadius:2}}>{tok.v}</code>;
+    if(tok.t==="b") return <strong key={key}>{_mdRenderInline(tok.children,key)}</strong>;
+    if(tok.t==="i") return <em key={key}>{_mdRenderInline(tok.children,key)}</em>;
+    if(tok.t==="bi") return <strong key={key}><em>{_mdRenderInline(tok.children,key)}</em></strong>;
+    if(tok.t==="a") return <a key={key} href={tok.href} target="_blank" rel="noopener noreferrer" onClick={function(e){e.stopPropagation();}} style={{color:"var(--arcane-l)",textDecoration:"underline"}}>{tok.v}</a>;
+    return null;
+  });
+}
+function Markdown({text}){
+  if(text==null||text==="") return null;
+  var blocks=_mdParseBlocks(""+text);
+  return (<div className="md">{blocks.map(function(b,bi){
+    var key="mb"+bi;
+    if(b.type==="heading"){
+      var sz=[0,16,15,13,12,11,11][b.level]||12;
+      return <div key={key} style={{fontFamily:"'Cinzel',serif",fontSize:sz,fontWeight:600,color:"var(--gold-l)",margin:(bi?"10px":"0")+" 0 4px",letterSpacing:.3}}>{_mdRenderInline(_mdInline(b.text),key)}</div>;
+    }
+    if(b.type==="hr") return <hr key={key} style={{border:"none",borderTop:"1px solid rgba(201,150,42,.2)",margin:"8px 0"}} />;
+    if(b.type==="code") return <pre key={key} style={{fontFamily:"monospace",fontSize:12,background:"rgba(0,0,0,.25)",padding:"6px 8px",borderRadius:3,overflowX:"auto",whiteSpace:"pre-wrap"}}>{b.text}</pre>;
+    if(b.type==="quote") return <div key={key} style={{borderLeft:"2px solid rgba(201,150,42,.3)",paddingLeft:8,margin:"6px 0",fontStyle:"italic",opacity:.92,whiteSpace:"pre-wrap"}}>{_mdRenderInline(_mdInline(b.text),key)}</div>;
+    if(b.type==="ul") return <ul key={key} style={{margin:"4px 0",paddingLeft:18}}>{b.items.map(function(it,ii){return <li key={ii} style={{marginBottom:3}}>{_mdRenderInline(_mdInline(it),key+"-"+ii)}</li>;})}</ul>;
+    if(b.type==="ol") return <ol key={key} style={{margin:"4px 0",paddingLeft:20}}>{b.items.map(function(it,ii){return <li key={ii} style={{marginBottom:3}}>{_mdRenderInline(_mdInline(it),key+"-"+ii)}</li>;})}</ol>;
+    if(b.type==="table") return (
+      <div key={key} style={{overflowX:"auto",margin:"6px 0"}}>
+        <table style={{borderCollapse:"collapse",width:"100%"}}>
+          <thead><tr>{b.header.map(function(hh,hi){return <th key={hi} style={{border:"1px solid rgba(201,150,42,.25)",padding:"3px 7px",textAlign:b.aligns[hi]||"left",fontFamily:"'Cinzel',serif",fontSize:"0.8em",letterSpacing:.3,color:"var(--gold-l)",background:"rgba(201,150,42,.08)"}}>{_mdRenderInline(_mdInline(hh),key+"h"+hi)}</th>;})}</tr></thead>
+          <tbody>{b.rows.map(function(row,ri){return <tr key={ri}>{row.map(function(cell,ci){return <td key={ci} style={{border:"1px solid rgba(201,150,42,.18)",padding:"3px 7px",textAlign:b.aligns[ci]||"left"}}>{_mdRenderInline(_mdInline(cell),key+"r"+ri+"c"+ci)}</td>;})}</tr>;})}</tbody>
+        </table>
+      </div>
+    );
+    return <div key={key} style={{margin:(bi?"6px":"0")+" 0 0",whiteSpace:"pre-wrap"}}>{_mdRenderInline(_mdInline(b.text),key)}</div>;
+  })}</div>);
+}
+
+// Click-to-edit field: shows rendered markdown; click switches to a raw textarea
+// for editing, blur switches back. Drop-in replacement for the description
+// AutoTextareas so user-written markdown renders.
+function MdField({value,onChange,placeholder,style,className}){
+  const [editing,setEditing]=React.useState(false);
+  const ref=React.useRef(null);
+  React.useEffect(function(){
+    if(editing&&ref.current){var el=ref.current;el.style.height="auto";el.style.height=el.scrollHeight+"px";
+      el.focus(); try{el.setSelectionRange(el.value.length,el.value.length);}catch(e){}}
+  },[editing]);
+  React.useEffect(function(){
+    if(editing&&ref.current){var el=ref.current;el.style.height="auto";el.style.height=el.scrollHeight+"px";}
+  },[value,editing]);
+  if(editing){
+    return <textarea ref={ref} className={className} value={value||""} onChange={onChange} onBlur={function(){setEditing(false);}}
+      placeholder={placeholder} style={{minHeight:"1.5em",width:"100%",boxSizing:"border-box",...style,height:"auto",overflow:"hidden",resize:"none"}} />;
+  }
+  var hasContent=value&&(""+value).trim();
+  return <div className={className} onClick={function(){setEditing(true);}} title="Click to edit"
+    style={{cursor:"text",minHeight:"1.4em",width:"100%",boxSizing:"border-box",...style,whiteSpace:"normal"}}>
+    {hasContent?<Markdown text={value} />:<span style={{opacity:.4,fontStyle:"italic"}}>{placeholder||"Click to add…"}</span>}
+  </div>;
 }
 
 // Shared carried-weight calculation so the Speed penalty (Page1) and the
@@ -1961,7 +2093,7 @@ function Page1({c,s}){
         {[["Personality Traits","tr"],["Ideals","id"],["Bonds","bn"],["Flaws","fw"]].map(([t,k])=>(
           <div key={k} className="tb">
             <div className="tt">{t}</div>
-            <textarea value={c[k]||""} onChange={e=>s(k,e.target.value)} placeholder={t+"..."} />
+            <MdField value={c[k]||""} onChange={e=>s(k,e.target.value)} placeholder={t+"..."} />
           </div>
         ))}
       </div>
@@ -2516,7 +2648,7 @@ function Page2({c,s}){
                 it.showDesc&&<tr key={i+"b"} style={{borderBottom:"1px solid rgba(201,150,42,.1)"}}>
                   <td></td><td></td><td></td>
                   <td colSpan={7} style={{padding:"2px 4px 6px"}}>
-                    <AutoTextarea value={it.desc||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],desc:e.target.value};s("attuned_inv",a);}} placeholder="Item description..."
+                    <MdField value={it.desc||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],desc:e.target.value};s("attuned_inv",a);}} placeholder="Item description..."
                       style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 4px"}} />
                     <ChargeTracker it={it} onUpdate={function(ch){const a=[...(c.attuned_inv||[])];a[i]={...a[i],charges:ch||undefined};s("attuned_inv",a);}} />
                   </td>
@@ -2589,7 +2721,7 @@ function Page2({c,s}){
                 it.showDesc&&<tr key={i+"b"} style={{borderBottom:"1px solid rgba(123,79,207,.1)"}}>
                   <td></td><td></td><td></td>
                   <td colSpan={7} style={{padding:"2px 4px 6px"}}>
-                    <AutoTextarea value={it.desc||""} onChange={e=>ui("inv",i,"desc",e.target.value)} placeholder="Item description..."
+                    <MdField value={it.desc||""} onChange={e=>ui("inv",i,"desc",e.target.value)} placeholder="Item description..."
                       style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 4px"}} />
                     <ChargeTracker it={it} onUpdate={function(ch){ui("inv",i,"charges",ch||undefined);}} />
                   </td>
@@ -2741,7 +2873,7 @@ function Page2({c,s}){
                     it.showDesc&&<tr key={i+"b"} style={{borderBottom:"1px solid rgba(123,79,207,.1)"}}>
                       <td></td><td></td><td></td>
                       <td colSpan={7} style={{padding:"2px 4px 6px"}}>
-                        <AutoTextarea value={it.desc||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],desc:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="Item description..."
+                        <MdField value={it.desc||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],desc:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="Item description..."
                           style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 4px"}} />
                         <ChargeTracker it={it} onUpdate={function(ch){const a=[...bagInv];a[i]={...a[i],charges:ch||undefined};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} />
                       </td>
@@ -2927,7 +3059,7 @@ function Page4({c,s}){
           <div style={{flex:1}}>
             <input className="fi" value={n.nm||""} onChange={e=>ui("npc",i,"nm",e.target.value)} placeholder="Name..." style={{marginBottom:6,width:"100%"}} />
             <input className="fi" value={n.rl||""} onChange={e=>ui("npc",i,"rl",e.target.value)} placeholder="Role / Relation..." style={{marginBottom:6,width:"100%"}} />
-            <textarea className="fi" value={n.nt||""} onChange={e=>ui("npc",i,"nt",e.target.value)} placeholder="Notes..." rows={3} style={{minHeight:64,width:"100%"}} />
+            <MdField className="fi" value={n.nt||""} onChange={e=>ui("npc",i,"nt",e.target.value)} placeholder="Notes..." style={{minHeight:64,width:"100%"}} />
           </div>
           <button className="db" onClick={()=>window.__confirm("Delete this NPC?",()=>di("npc",i))}>x</button>
         </div>
@@ -2940,7 +3072,7 @@ function Page4({c,s}){
           <div style={{flex:1}}>
             <input className="fi" value={f.nm||""} onChange={e=>{const a=[...(c.factions||[])];a[i]={...a[i],nm:e.target.value};s("factions",a);}} placeholder="Faction name..." style={{marginBottom:6,width:"100%"}} />
             <input className="fi" value={f.rl||""} onChange={e=>{const a=[...(c.factions||[])];a[i]={...a[i],rl:e.target.value};s("factions",a);}} placeholder="Relation / Rank..." style={{marginBottom:6,width:"100%"}} />
-            <textarea className="fi" value={f.nt||""} onChange={e=>{const a=[...(c.factions||[])];a[i]={...a[i],nt:e.target.value};s("factions",a);}} placeholder="Notes..." rows={3} style={{minHeight:64,width:"100%"}} />
+            <MdField className="fi" value={f.nt||""} onChange={e=>{const a=[...(c.factions||[])];a[i]={...a[i],nt:e.target.value};s("factions",a);}} placeholder="Notes..." style={{minHeight:64,width:"100%"}} />
           </div>
           <button className="db" onClick={()=>{window.__confirm("Delete this faction?",()=>s("factions",(c.factions||[]).filter((_,j)=>j!==i)));}}>x</button>
         </div>
@@ -2955,7 +3087,7 @@ function Page4({c,s}){
           <div key={i} className="nc" style={{borderLeft:"3px solid rgba(123,79,207,.4)"}}>
             <div style={{flex:1}}>
               <input className="fi" value={n.ti||""} onChange={e=>ui("nt1",i,"ti",e.target.value)} placeholder="Session title or date..." style={{marginBottom:6,fontFamily:"'Cinzel',serif",fontSize:12,color:"var(--arcane-l)"}} />
-              <textarea className="fi" value={n.tx||""} onChange={e=>ui("nt1",i,"tx",e.target.value)} placeholder="What happened this session..." rows={3} style={{minHeight:60}} />
+              <MdField className="fi" value={n.tx||""} onChange={e=>ui("nt1",i,"tx",e.target.value)} placeholder="What happened this session..." style={{minHeight:60}} />
             </div>
             <button className="db" onClick={()=>window.__confirm("Delete this note?",()=>di("nt1",i))}>x</button>
           </div>
@@ -2969,7 +3101,7 @@ function Page4({c,s}){
           <div key={i} className="nc" style={{borderLeft:"3px solid rgba(42,140,156,.3)"}}>
             <div style={{flex:1}}>
               <input className="fi" value={n.ti||""} onChange={e=>ui("nt3",i,"ti",e.target.value)} placeholder="Title or topic..." style={{marginBottom:6,fontFamily:"'Cinzel',serif",fontSize:12,color:"rgba(96,180,196,.8)"}} />
-              <textarea className="fi" value={n.tx||""} onChange={e=>ui("nt3",i,"tx",e.target.value)} placeholder="Notes..." rows={3} style={{minHeight:64}} />
+              <MdField className="fi" value={n.tx||""} onChange={e=>ui("nt3",i,"tx",e.target.value)} placeholder="Notes..." style={{minHeight:64}} />
             </div>
             <button className="db" onClick={()=>window.__confirm("Delete this note?",()=>di("nt3",i))}>x</button>
           </div>
@@ -3981,7 +4113,7 @@ function Page3({c,s}){
                   <div style={{marginBottom:8}}>
                     {limits.map(function(lim,li){return <LimitBlock key={li} lim={lim} idx={li} c={c} onChange={function(li2,f2,v){updFeatLim(i,li2,f2,v);}} onDelete={function(li2){delFeatLim(i,li2);}} isOnly={limits.length===1} />;})}</div>
                 )}{limited&&<button className="arb" onClick={()=>addFeatLim(i)} style={{fontSize:9,padding:"2px 8px",marginTop:2,borderColor:"rgba(201,74,42,.3)",color:"rgba(201,74,42,.6)"}}>+ Add Limit</button>}
-                {dsOpen&&<AutoTextarea value={f.ds||""} onChange={e=>updFeat(i,"ds",e.target.value)} placeholder="Description..."
+                {dsOpen&&<MdField value={f.ds||""} onChange={e=>updFeat(i,"ds",e.target.value)} placeholder="Description..."
                   style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,lineHeight:1.6,outline:"none"}} />}
               </div>
               <button className="db" onClick={()=>window.__confirm("Delete this feature?",()=>s("feat",c.feat.filter((_,j)=>j!==i)))}>x</button>
@@ -4043,7 +4175,7 @@ function Page3({c,s}){
                   <div style={{marginBottom:8}}>
                     {limits.map(function(lim,li){return <LimitBlock key={li} lim={lim} idx={li} c={c} onChange={function(li2,f2,v){updFtsLim(i,li2,f2,v);}} onDelete={function(li2){delFtsLim(i,li2);}} isOnly={limits.length===1} />;})}</div>
                 )}{limited&&<button className="arb" onClick={()=>addFtsLim(i)} style={{fontSize:9,padding:"2px 8px",marginTop:2,borderColor:"rgba(201,74,42,.3)",color:"rgba(201,74,42,.6)"}}>+ Add Limit</button>}
-                {dsOpen&&<AutoTextarea value={f.ds||""} onChange={e=>updFts(i,"ds",e.target.value)} placeholder="Description..."
+                {dsOpen&&<MdField value={f.ds||""} onChange={e=>updFts(i,"ds",e.target.value)} placeholder="Description..."
                   style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,lineHeight:1.6,outline:"none"}} />}
               </div>
               <button className="db" onClick={()=>window.__confirm("Delete this feature?",()=>s("fts",c.fts.filter((_,j)=>j!==i)))}>x</button>
@@ -4062,7 +4194,7 @@ function Page3({c,s}){
             <span onClick={function(){setToolRef(true);}} title="Tool reference (XGE / PHB 2024)"
               style={{cursor:"pointer",width:15,height:15,borderRadius:"50%",border:"1px solid rgba(201,150,42,.45)",color:"rgba(201,150,42,.75)",fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",display:"inline-flex",alignItems:"center",justifyContent:"center",userSelect:"none",background:"rgba(201,150,42,.08)",lineHeight:1}}>i</span>
           </label>
-          <textarea className="fi" value={c.tprof} onChange={e=>s("tprof",e.target.value)} rows={4} style={{minHeight:88}} />
+          <MdField className="fi" value={c.tprof} onChange={e=>s("tprof",e.target.value)} style={{minHeight:88}} />
         </div>
       </div>
       <TA label="Languages" val={c.lang} set={v=>s("lang",v)} rows={3} />
@@ -4109,10 +4241,57 @@ function loadCompendiumJsonFolder(folder,arrayKey,convert,target,onDone){
     .finally(function(){if(onDone)onDone();});
 }
 
+// Homebrewery preprocessing for spell markdown. ONLY {{note}} and {{monster}} blocks
+// are kept (wrappers stripped, contents preserved); every OTHER {{…}} block (pageNumber,
+// descriptive, quote, wide, etc.) is discarded entirely — contents and all. Headings inside
+// a kept block are placeholder-protected so the #### splitter / desc-break won't cut there
+// (restored later), and "**Label** :: value" stat syntax becomes "**Label:** value".
+function _prepHomebrew(md){
+  var lines=(md||"").replace(/\r\n/g,"\n").replace(/\r/g,"\n").split("\n");
+  var out=[]; var stack=[]; // stack of booleans: is this open block a "drop" block?
+  function dropping(){for(var k=0;k<stack.length;k++) if(stack[k]) return true; return false;}
+  for(var i=0;i<lines.length;i++){
+    var raw=lines[i];
+    var startInBlock=stack.length>0;
+    var kept=""; var j=0;
+    while(j<raw.length){
+      if(raw.charAt(j)==="{"&&raw.charAt(j+1)==="{"){
+        var mOpen=raw.slice(j).match(/^\{\{\s*([A-Za-z][\w-]*)?(?:\s*,\s*[A-Za-z][\w-]*)*\s*,?\s*/);
+        var nm=(mOpen&&mOpen[1]?mOpen[1]:"").toLowerCase();
+        var keepBlock=(nm==="note"||nm==="monster");
+        stack.push(dropping()?true:!keepBlock); // once inside a drop block, stay dropping
+        j+=(mOpen?mOpen[0].length:2);
+        continue;
+      }
+      if(raw.charAt(j)==="}"&&raw.charAt(j+1)==="}"){
+        if(stack.length) stack.pop();
+        j+=2; continue;
+      }
+      if(!dropping()) kept+=raw.charAt(j);
+      j++;
+    }
+    var inBlock=startInBlock||stack.length>0;
+    if(kept.trim()===""){
+      // Preserve only genuine blank lines that sit outside any block.
+      if(raw.trim()===""&&!dropping()&&!inBlock) out.push("");
+      continue;
+    }
+    if(inBlock){
+      kept=kept.replace(/^(\s*)(#{4,6})\s+/,function(_m,sp,h){return sp+"@@MDH"+h.length+"@@ ";});
+      kept=kept.replace(/\*\*\s*::\s*/g,":** ").replace(/\s*::\s*/g,": ");
+    }
+    out.push(kept);
+  }
+  return out.join("\n");
+}
+function _restoreHeadings(s){
+  return (s||"").replace(/@@MDH([456])@@ /g,function(_m,n){return new Array(+n+1).join("#")+" ";});
+}
+
 function parseSpellMarkdown(md){
   var spells={};
-  // Split on #### headings
-  var blocks=md.split(/^####\s+/m).slice(1);
+  // Strip homebrewery wrappers (keeps embedded stat blocks), then split on #### headings.
+  var blocks=_prepHomebrew(md).split(/^####\s+/m).slice(1);
   blocks.forEach(function(block){
     var lines=block.split("\n");
     var name=(lines[0]||"").trim();
@@ -4158,16 +4337,24 @@ function parseSpellMarkdown(md){
         if(ln&&castingTime&&range&&components&&duration&&!pastDuration){pastDuration=true;}
       }
       if(pastDuration){
-        var cleaned=ln.replace(/\*\*\*([^*]+)\*\*\*/g,"$1").replace(/\*\*([^*]+)\*\*/g,"$1").replace(/\*([^*]+)\*/g,"$1");
-        // Skip layout artifacts like "column", "\column", "page", "\page", "{{...}}"
-        if(cleaned&&!/^\\?(column|page)$/i.test(cleaned)&&!/^\{\{/.test(cleaned)){
-          // Add blank line before "At Higher Levels" and "Cantrip Scaling"
-          if(/^(at higher levels|cantrip scaling)/i.test(cleaned)&&descLines.length>0) descLines.push("");
-          descLines.push(cleaned);
+        // Keep markdown intact in the description; only strip for the artifact/heading checks.
+        var plain=ln.replace(/[*`_]/g,"");
+        if(ln&&!/^\\?(column|page)$/i.test(plain)&&!/^\{\{/.test(ln)){
+          // Normalize "At Higher Levels" / "Cantrip Scaling/Upgrade" to a ***run-in*** subheader,
+          // regardless of how (or whether) the markdown emphasized it.
+          var hm=ln.match(/^[\*_]*\s*(at higher levels|cantrip scaling|cantrip upgrade|cantrip update)\b[\s.*_]*/i);
+          if(hm){
+            if(descLines.length>0) descLines.push("");
+            var hrest=ln.slice(hm[0].length).trim();
+            var htitle=hm[1].toLowerCase().replace(/\b\w/g,function(c){return c.toUpperCase();});
+            descLines.push("***"+htitle+".***"+(hrest?" "+hrest:""));
+          } else {
+            descLines.push(ln);
+          }
         }
       }
     }
-    var desc=descLines.join("\n").trim();
+    var desc=_restoreHeadings(descLines.join("\n").trim());
     // Skip stub entries that are just a name with no real content
     if(!desc&&!castingTime&&!range&&!components&&!duration&&!school&&!classes) return;
     spells[name.toLowerCase()]={name,level,school,castingTime,range,components,duration,conc,ritual,classes,desc};
@@ -4338,7 +4525,7 @@ function open5eSpellSearch(query){
       return (json.results||[]).filter(function(sp){return isSrdDoc(sp.document__slug);}).map(function(sp){
         var lvl=parseInt(sp.level_int!==undefined?sp.level_int:sp.level)||0;
         var desc=(sp.desc||"").toString();
-        if(sp.higher_level) desc+="\n\nAt Higher Levels. "+sp.higher_level;
+        if(sp.higher_level) desc+="\n\n***At Higher Levels.*** "+sp.higher_level;
         return {name:sp.name,level:lvl,school:sp.school||"",castingTime:sp.casting_time||"",range:sp.range||"",components:sp.components||"",duration:sp.duration||"",conc:!!sp.concentration&&sp.concentration!=="no",ritual:!!sp.ritual&&sp.ritual!=="no",classes:sp.dnd_class||sp.class||"",desc:desc,src:"srd",srdVer:"14"};
       });
     });
@@ -4361,7 +4548,7 @@ function open5eSpellSearch(query){
         var lvl=typeof sp.level==="number"?sp.level:(parseInt(sp.level_int!==undefined?sp.level_int:sp.level)||0);
         var school=sp.school&&sp.school.name?sp.school.name:(typeof sp.school==="string"?sp.school:"");
         var desc=(sp.desc||"").toString();
-        if(sp.higher_level) desc+="\n\nAt Higher Levels. "+sp.higher_level;
+        if(sp.higher_level) desc+="\n\n***At Higher Levels.*** "+sp.higher_level;
         var comp=[];if(sp.verbal)comp.push("V");if(sp.somatic)comp.push("S");if(sp.material)comp.push("M"+(sp.material_specified?" ("+sp.material_specified+")":""));
         var compStr=comp.length?comp.join(", "):(typeof sp.components==="string"?sp.components:"");
         return {name:sp.name,level:lvl,school:school,castingTime:sp.casting_time||"",range:sp.range_text||sp.range||"",components:compStr,duration:sp.duration||"",conc:!!sp.concentration,ritual:!!sp.ritual,classes:(sp.classes&&sp.classes.length?sp.classes.map(function(x){return x.name||x;}).join(", "):(sp.dnd_class||"")),desc:desc,src:"srd",srdVer:"24"};
@@ -4690,24 +4877,26 @@ function parseFeatMarkdown(md){
     for(var li=1;li<lines.length;li++){
       var ln=lines[li].trim();
       if(!ln) continue;
-      // Stop at any heading (#, ##, ### section dividers — e.g. next feat group)
-      if(/^#/.test(ln)) break;
+      // Stop at section dividers (#, ##, ### — e.g. next feat group), but KEEP
+      // #### sub-sections so embedded tables (e.g. a spells table) are captured.
+      if(/^#{1,3}\s/.test(ln)) break;
       // Skip layout artifacts
       if(/^\\?(column|page)$/i.test(ln)||/^\{\{/.test(ln)) continue;
       // Strip ***Prerequisites...*** markers but keep the text
       var cleaned=ln.replace(/\*\*\*([^*]+)\*\*\*/g,"$1").replace(/\*\*([^*]+)\*\*/g,"$1").replace(/\*([^*]+)\*/g,"$1");
       if(!cleaned) continue;
-      // Capture prerequisite line (e.g. "Prerequisite: Strength 13 or higher")
-      var pm=cleaned.match(/^Prerequisites?:\s*(.+)$/i);
-      if(pm){prereq=pm[1].trim();}
-      // Convert **Label.** text → - Label. text
+      // Capture prerequisite/requirement line; keep it OUT of the body so it
+      // can't pollute ability detection — it's re-echoed (as ***) at the top.
+      var pm=cleaned.match(/^(?:Prerequisites?|Requirements?)\s*[:：]\s*(.+)$/i);
+      if(pm){prereq=pm[1].trim();continue;}
+      // Convert a bold label line into a markdown list item, keeping the bold.
       var boldLabel=ln.match(/^\*\*([^*]+)\*\*\.?\s*(.*)$/);
       if(boldLabel){
         var label=boldLabel[1].replace(/\.$/,"").trim();
         var rest=boldLabel[2].trim();
-        descLines.push("- "+label+". "+rest);
+        descLines.push("- **"+label+".** "+rest);
       } else {
-        descLines.push(cleaned);
+        descLines.push(ln); // keep markdown intact
       }
     }
     // Insert blank line before each "- " entry (except first)
@@ -4721,19 +4910,20 @@ function parseFeatMarkdown(md){
     var fullDesc=formatted.join("\n").trim();
     // Skip stub entries with no description
     if(!fullDesc&&!prereq) return;
-    // Detect which ability scores this feat can increase, from the "Ability Score Increase" line
+    // Detect ability scores from the body only (prereq excluded above).
     var abilities=[];
-    var asiMatch=fullDesc.match(/Ability Score Increase[^\n]*?\.([^\n]*)/i);
+    var plainDesc=fullDesc.replace(/[*`_]/g,"");
+    var asiMatch=plainDesc.match(/Ability Score Increase[^\n]*?\.([^\n]*)/i);
     var asiText=asiMatch?asiMatch[1]:"";
-    // Also scan a wider window in case wording differs
-    var scanText=asiText||fullDesc;
+    var scanText=asiText||plainDesc;
     var ablMap=[["Strength","STR"],["Dexterity","DEX"],["Constitution","CON"],["Intelligence","INT"],["Wisdom","WIS"],["Charisma","CHA"]];
-    // Prefer the dedicated ASI line; if it mentions "one ability score of your choice" treat as all six
     if(/one ability score of your choice|any ability score/i.test(scanText)){
       abilities=["STR","DEX","CON","INT","WIS","CHA"];
     } else {
       ablMap.forEach(function(p){if(new RegExp("\\b"+p[0]+"\\b","i").test(scanText)) abilities.push(p[1]);});
     }
+    // Echo the prerequisite as a bold-italic sub-header at the top.
+    if(prereq) fullDesc=("***Prerequisite: "+prereq+"***\n"+fullDesc).trim();
     feats[name.toLowerCase()]={name,desc:fullDesc,prereq:prereq,abilities:abilities};
   });
   return feats;
@@ -4822,7 +5012,7 @@ function _featDescFromEntries(entries){
       if(e.name&&(e.entries||e.items)){
         var body=flatten5eEntries(e.entries||e.items,[]).join(" ").trim();
         var label=strip5eTags(e.name).replace(/\.$/,"").trim();
-        lines.push("- "+label+". "+body);
+        lines.push("- **"+label+".** "+body);
       } else {
         flatten5eEntries(e,lines);
       }
@@ -4843,7 +5033,9 @@ function convertFeatJson(arr){
     var prereq=format5ePrerequisite(ft.prerequisite);
     var fullDesc=_featDescFromEntries(ft.entries);
     if(!fullDesc&&!prereq) return; // skip stubs
-    out[ft.name.toLowerCase()]={name:ft.name,desc:fullDesc,prereq:prereq,abilities:_featAbilities(fullDesc)};
+    var abilities=_featAbilities(fullDesc);
+    if(prereq) fullDesc=("***Prerequisite: "+prereq+"***\n"+(fullDesc||"")).trim();
+    out[ft.name.toLowerCase()]={name:ft.name,desc:fullDesc,prereq:prereq,abilities:abilities};
   });
   return out;
 }
@@ -4875,8 +5067,8 @@ function open5eFeatSearch(query){
   var q=encodeURIComponent(query);
   function fmtFeatDesc(prereq,body){
     var desc="";
-    if(prereq&&(""+prereq).toLowerCase()!=="none"&&(""+prereq).trim()) desc+="Prerequisites: "+prereq+"\n";
-    body=(""+(body||"")).replace(/\*\*\*([^*]+)\*\*\*/g,"$1").replace(/^\s*\*\*([^*]+?)\.?\*\*\.?\s*/gm,"- $1. ").replace(/\*\*([^*]+)\*\*/g,"$1").replace(/\*([^*]+)\*/g,"$1");
+    if(prereq&&(""+prereq).toLowerCase()!=="none"&&(""+prereq).trim()) desc+="***Prerequisite: "+prereq+"***\n";
+    body=(""+(body||"")).replace(/^\s*\*\*([^*]+?)\.?\*\*\.?\s*/gm,"- **$1.** ");
     return (desc+body).trim();
   }
   function abilitiesFromText(txt){
@@ -4892,7 +5084,7 @@ function open5eFeatSearch(query){
       return (json.results||[]).filter(function(ft){return isSrdDoc(ft.document__slug);}).map(function(ft){
         var body=ft.effects_desc&&ft.effects_desc.length?ft.effects_desc.join("\n"):(ft.desc||"");
         var fd=fmtFeatDesc(ft.prerequisite,body);
-        return {name:ft.name,desc:fd,prereq:(ft.prerequisite&&ft.prerequisite.toLowerCase()!=="none")?ft.prerequisite:"",abilities:abilitiesFromText(fd),src:"srd",srdVer:"14"};
+        return {name:ft.name,desc:fd,prereq:(ft.prerequisite&&ft.prerequisite.toLowerCase()!=="none")?ft.prerequisite:"",abilities:abilitiesFromText(body),src:"srd",srdVer:"14"};
       });
     });
   var v2=fetch("https://api.open5e.com/v2/feats/?name__icontains="+q+"&document__key=srd-2024&limit=15").then(function(r){return r.ok?r.json():{results:[]};}).catch(function(){return {results:[]};})
@@ -4910,7 +5102,7 @@ function open5eFeatSearch(query){
         else body=ft.desc||ft.description||"";
         var pre=ft.prerequisite||(ft.prerequisites&&ft.prerequisites.length?ft.prerequisites.join(", "):"");
         var fd=fmtFeatDesc(pre,body);
-        return {name:ft.name,desc:fd,prereq:(pre&&(""+pre).toLowerCase()!=="none")?pre:"",abilities:abilitiesFromText(fd),src:"srd",srdVer:"24"};
+        return {name:ft.name,desc:fd,prereq:(pre&&(""+pre).toLowerCase()!=="none")?pre:"",abilities:abilitiesFromText(body),src:"srd",srdVer:"24"};
       });
     });
   return Promise.all([v1,v2]).then(function(arrs){
@@ -5058,8 +5250,7 @@ function parseItemMarkdown(md){
       }
       if(pastFields){
         if(/^\\?(column|page)$/i.test(ln)||/^\{\{/.test(ln)) continue;
-        var cleaned=ln.replace(/\*\*\*([^*]+)\*\*\*/g,"$1").replace(/\*\*([^*]+)\*\*/g,"$1").replace(/\*([^*]+)\*/g,"$1");
-        if(cleaned) descLines.push(cleaned);
+        if(ln) descLines.push(ln); // keep markdown intact
       }
     }
     // If rarity wasn't given but the Type field contains a rarity word, extract it
@@ -5075,8 +5266,8 @@ function parseItemMarkdown(md){
     // Build header: "Type, Rarity" on first line, attunement on the next, then the description
     var headerLines=[];
     var meta=[type,rarity].filter(Boolean).join(", ");
-    if(meta) headerLines.push(meta);
-    if(attune) headerLines.push("(Requires Attunement"+(typeof attune==="string"&&attune.replace(/^(yes|true|required|requires attunement?)/i,"").trim()?" "+attune.replace(/^(yes|true|required|requires attunement?)/i,"").trim():"")+")");
+    if(meta) headerLines.push("**Type:** "+meta);
+    if(attune) headerLines.push("*(Requires Attunement"+(typeof attune==="string"&&attune.replace(/^(yes|true|required|requires attunement?)/i,"").trim()?" "+attune.replace(/^(yes|true|required|requires attunement?)/i,"").trim():"")+")*");
     if(headerLines.length>0) fullDesc=headerLines.join("\n")+(fullDesc?"\n"+fullDesc:"");
     // Skip stub entries: only a name, nothing else
     if(!descLines.length&&!weight&&!cost&&!type&&!rarity&&attune===null) return;
@@ -5150,37 +5341,51 @@ function flatten5eEntries(entries,out){
   if(typeof entries==="object"){
     var ty=entries.type;
     if(ty==="table"){
-      var tlines=[];
-      if(entries.caption){var cap=strip5eTags(entries.caption).trim();if(cap)tlines.push(cap);}
       var labels=(entries.colLabels||[]).map(function(l){return strip5eTags(l).trim();});
-      if(labels.length) tlines.push(labels.join("  |  "));
-      (entries.rows||[]).forEach(function(row){
-        if(!Array.isArray(row)) return;
-        var cells=row.map(function(cell){
-          if(cell&&typeof cell==="object") return flatten5eEntries(cell,[]).join(" ");
-          return strip5eTags(cell).trim();
+      var bodyRows=(entries.rows||[]).filter(Array.isArray).map(function(row){
+        return row.map(function(cell){
+          if(cell&&typeof cell==="object") return flatten5eEntries(cell,[]).join(" ").replace(/\s*\|\s*/g," / ").trim();
+          return strip5eTags(cell).replace(/\s*\|\s*/g," / ").trim();
         });
-        tlines.push(cells.join("  |  "));
       });
-      if(tlines.length) out.push(tlines.join("\n"));
+      var ncol=labels.length||(bodyRows[0]?bodyRows[0].length:0);
+      if(ncol){
+        var tl=[];
+        if(entries.caption){var cap=strip5eTags(entries.caption).trim();if(cap)tl.push("**"+cap+"**");}
+        var hdr=labels.slice(); while(hdr.length<ncol) hdr.push("");
+        tl.push("| "+hdr.slice(0,ncol).join(" | ")+" |");
+        tl.push("| "+hdr.slice(0,ncol).map(function(){return "---";}).join(" | ")+" |");
+        bodyRows.forEach(function(r){var rr=r.slice(0,ncol);while(rr.length<ncol)rr.push("");tl.push("| "+rr.join(" | ")+" |");});
+        out.push(tl.join("\n"));
+      }
       return out;
     }
     if(ty==="list"&&Array.isArray(entries.items)){
       entries.items.forEach(function(it){
-        if(typeof it==="string"){var s=strip5eTags(it).trim();if(s)out.push(s);}
+        if(typeof it==="string"){var s=strip5eTags(it).trim();if(s)out.push("- "+s);}
         else if(it&&typeof it==="object"){
-          var label=it.name?strip5eTags(it.name).trim():"";
+          // A named list item: bullet with a bold run-in label.
+          var label=it.name?strip5eTags(it.name).replace(/[.:]$/,"").trim():"";
           var body=flatten5eEntries(it.entries||it.entry||"",[]).join(" ").trim();
-          if(label&&body) out.push(label.replace(/:?$/,":")+" "+body);
-          else if(label) out.push(label);
-          else if(body) out.push(body);
+          if(label&&body) out.push("- **"+label+".** "+body);
+          else if(label) out.push("- **"+label+"**");
+          else if(body) out.push("- "+body);
         }
       });
       return out;
     }
     if(entries.entries||entries.items){
-      if(entries.name){var nm=strip5eTags(entries.name).trim();if(nm)out.push(nm);}
-      flatten5eEntries(entries.entries||entries.items,out);
+      // A named {name,entries} block is a run-in sub-header: ***Name.*** body…
+      var inner=flatten5eEntries(entries.entries||entries.items,[]);
+      if(entries.name){
+        var nm=strip5eTags(entries.name).replace(/[.:]$/,"").trim();
+        if(nm){
+          var heading="***"+nm+".***";
+          if(inner.length&&!/^(\s*[-|]|\*\*\*)/.test(inner[0])) inner[0]=heading+" "+inner[0];
+          else inner.unshift(heading);
+        }
+      }
+      for(var qi=0;qi<inner.length;qi++) out.push(inner[qi]);
       return out;
     }
     if(entries.entry){flatten5eEntries(entries.entry,out);return out;}
@@ -5435,7 +5640,7 @@ function inferItemWeight(name,typeCode,flags){
   if(has(/\b(cloak|cape|coat|mantle)\b/)) return 3;
   if(has(/\b(clothes|clothing|outfit|garb|vestments?)\b/)) return 3;
   if(has(/\b(boots|shoes|slippers|sandals)\b/)) return 2;
-  if(has(/\b(gloves?|gauntlets?)\b/)) return 1;
+  if(has(/\b(gloves|gauntlets?)\b/)) return 1;
   if(has(/\bwraps\b/)) return 0.5;
   if(has(/\bbelt\b/)) return 1;
   if(has(/\b(mask|circlet|headpiece|hat|murmur)\b/)) return 1;
@@ -5473,7 +5678,7 @@ function inferItemWeight(name,typeCode,flags){
   if(has(/\borb\b/)) return 3;
   if(has(/\b(crystal|shard)\b/)) return 1;
   if(has(/\b(figurine|totem)\b/)) return 1;
-  if(has(/\b(compass|fan)\b/)) return 1;
+  if(has(/\bcompass\b/)) return 1;
   if(has(/\b(spellbook|book|grimoire)\b/)) return 3;
   if(has(/\btome\b/)) return 5;
   if(has(/\bmanual\b/)) return 3;
@@ -5597,13 +5802,13 @@ function parseItemJson(jsonOrData){
     var typeStr=typeParts.join(", ");
     if(parens.length) typeStr+=(typeStr?" ":"")+"("+parens.join(", ")+")";
     var rarity=(it.rarity&&!/^(none|unknown|varies|unknown \(magic\))$/i.test(it.rarity))?titleCase(it.rarity):"";
-    var typeLine="Type: "+[typeStr,rarity].filter(Boolean).join(", ");
+    var typeLine="**Type:** "+[typeStr,rarity].filter(Boolean).join(", ");
     if(typeStr||rarity) header.push(typeLine.trim());
     // ── Attunement line ──
     if(it.reqAttune){
-      if(it.reqAttune===true) header.push("(Requires Attunement)");
-      else if(/^optional$/i.test(it.reqAttune)) header.push("(Optional Attunement)");
-      else header.push("(Requires Attunement "+strip5eTags(it.reqAttune).trim()+")");
+      if(it.reqAttune===true) header.push("*(Requires Attunement)*");
+      else if(/^optional$/i.test(it.reqAttune)) header.push("*(Optional Attunement)*");
+      else header.push("*(Requires Attunement "+strip5eTags(it.reqAttune).trim()+")*");
     }
     // ── Combat line (weapons) ──
     if(it.dmg1){
@@ -5614,7 +5819,7 @@ function parseItemJson(jsonOrData){
       if(it.range) props.push("Range "+it.range);
       if(props.length) combat+=" · "+props.join(", ");
       var mast=(it.mastery||[]).map(function(m){return (""+m).split("|")[0];}).filter(Boolean);
-      if(mast.length) combat+=" · Mastery: "+mast.join(", ");
+      if(mast.length) combat+=" · **Mastery:** "+mast.join(", ");
       if(it.bonusWeapon) combat+=" · "+it.bonusWeapon+" to attack & damage";
       header.push(combat);
     } else if(it.bonusWeapon){
@@ -5632,7 +5837,7 @@ function parseItemJson(jsonOrData){
         else if(typeCode==="S") acVal=(/^[+-]/.test(""+it.ac)?"":"+")+it.ac; // shields add to AC
         // HA: flat number, no Dex
       }
-      var acLine="Armor Class: "+acVal;
+      var acLine="**Armor Class:** "+acVal;
       if(it.strength) acLine+=" · Min. Strength "+it.strength;
       if(it.stealth) acLine+=" · Stealth Disadvantage";
       header.push(acLine);
@@ -5654,11 +5859,11 @@ function parseItemJson(jsonOrData){
     }
     // ── Value ──
     var valStr=copperToCoin(it.value);
-    if(valStr) header.push("Value: "+valStr+(it.valueMult?" (x"+it.valueMult+")":""));
-    else if(it.valueMult) header.push("Value: x"+it.valueMult);
+    if(valStr) header.push("**Value:** "+valStr+(it.valueMult?" (x"+it.valueMult+")":""));
+    else if(it.valueMult) header.push("**Value:** x"+it.valueMult);
     // ── Charges note ──
     if(it.charges!=null){
-      var chLine="Charges: "+it.charges;
+      var chLine="**Charges:** "+it.charges;
       if(it.recharge) chLine+=" (regains"+(it.rechargeAmount?" "+strip5eTags(it.rechargeAmount):" all")+" at "+(_ITEM_RECHARGE[it.recharge]||it.recharge)+")";
       header.push(chLine);
     }
@@ -5731,8 +5936,8 @@ function parseItemJson(jsonOrData){
         var gpTypeCode=(""+(g.type||"")).split("|")[0];
         var gpTypeName=(gpTypeCode&&gpTypeCode!=="GV")?(_ITEM_TYPE[gpTypeCode]||""):"";
         var gpHdr=[];
-        if(groupRarity||gpTypeName) gpHdr.push("Type: "+[gpTypeName,groupRarity].filter(Boolean).join(", "));
-        if(groupAttune) gpHdr.push("(Requires Attunement)");
+        if(groupRarity||gpTypeName) gpHdr.push("**Type:** "+[gpTypeName,groupRarity].filter(Boolean).join(", "));
+        if(groupAttune) gpHdr.push("*(Requires Attunement)*");
         var gpBody=groupDescArr.join("\n");
         out[gpKey]={
           name:g.name,weight:"",cost:"",type:gpTypeName,rarity:groupRarity,
@@ -5754,7 +5959,7 @@ function parseItemJson(jsonOrData){
       var gTypeCode=(""+(g.type||"")).split("|")[0];
       var gTypeName=(gTypeCode&&gTypeCode!=="GV")?(_ITEM_TYPE[gTypeCode]||""):"";
       var hdr=[];
-      if(groupRarity||gTypeName) hdr.push("Type: "+[gTypeName,groupRarity].filter(Boolean).join(", "));
+      if(groupRarity||gTypeName) hdr.push("**Type:** "+[gTypeName,groupRarity].filter(Boolean).join(", "));
       var body=groupDescArr.join("\n");
       out[key]={
         name:mname,weight:"",cost:"",type:gTypeName,rarity:groupRarity,
@@ -5773,8 +5978,8 @@ function parseItemJson(jsonOrData){
     var gpTypeName=(gpTypeCode&&gpTypeCode!=="GV")?(_ITEM_TYPE[gpTypeCode]||""):"";
     var gpRarity=(gp.rarity&&!/^(none|unknown|varies)$/i.test(gp.rarity))?titleCase(gp.rarity):"";
     var gpHdr=[];
-    if(gpRarity||gpTypeName) gpHdr.push("Type: "+[gpTypeName,gpRarity].filter(Boolean).join(", "));
-    if(gp.reqAttune) gpHdr.push("(Requires Attunement)");
+    if(gpRarity||gpTypeName) gpHdr.push("**Type:** "+[gpTypeName,gpRarity].filter(Boolean).join(", "));
+    if(gp.reqAttune) gpHdr.push("*(Requires Attunement)*");
     var gpBody=flatten5eEntries(gp.entries,[]).join("\n");
     out[key]={
       name:gp.name,weight:"",cost:"",type:gpTypeName,rarity:gpRarity,
@@ -5950,9 +6155,9 @@ function open5eSearch(query){
                 var fromRa=raRaw.replace(/^requires attunement/i,"").trim();
                 if(fromRa) detail=fromRa;
               }
-              var att2=hasAttune?("(Requires Attunement"+(detail?" "+detail:"")+")"):"";
+              var att2=hasAttune?("*(Requires Attunement"+(detail?" "+detail:"")+")*"):"";
               var meta2=[it.type&&it.type.name?it.type.name:it.type,it.rarity&&it.rarity.name?it.rarity.name:it.rarity].filter(Boolean).join(", ");
-              d2=[meta2,att2,(it.desc||it.description||"").toString()].filter(Boolean).join("\n");
+              d2=[(meta2?"**Type:** "+meta2:""),att2,(it.desc||it.description||"").toString()].filter(Boolean).join("\n");
             } else {
               d2=(it.desc||it.description||"").toString();
             }
@@ -5970,9 +6175,9 @@ function open5eSearch(query){
           } else {
             var attune="";
             var ra=(it.requires_attunement||"").toString().trim();
-            if(ra){attune="(Requires Attunement"+(ra.replace(/^requires attunement/i,"").trim()?" "+ra.replace(/^requires attunement/i,"").trim():"")+")";}
+            if(ra){attune="*(Requires Attunement"+(ra.replace(/^requires attunement/i,"").trim()?" "+ra.replace(/^requires attunement/i,"").trim():"")+")*";}
             var meta=[it.type,it.rarity].filter(Boolean).join(", ");
-            desc=[meta,attune,(it.desc||"").toString()].filter(Boolean).join("\n");
+            desc=[(meta?"**Type:** "+meta:""),attune,(it.desc||"").toString()].filter(Boolean).join("\n");
           }
           return {name:it.name,weight:weight,cost:it.cost||"",type:it.type||(ep.kind==="weapon"?"Weapon":ep.kind==="armor"?"Armor":""),rarity:it.rarity||"",desc:desc,src:"open5e",kind:ep.kind,srdVer:"14",attune:ep.kind==="magic"?((it.requires_attunement||"").toString().trim()?true:false):null};
         });
@@ -6225,7 +6430,7 @@ function SpellPage({c,s,from,to}){
         <td></td>
         {lv>0&&!(group&&group.sc&&group.sc.known)&&<td></td>}
         <td colSpan={lv>0&&!(group&&group.sc&&group.sc.known)?11:10} style={{paddingBottom:6,paddingTop:0}}>
-          <AutoTextarea value={sp.nt||""} onChange={e=>us(lv,i,"nt",e.target.value)} placeholder="Description..."
+          <MdField value={sp.nt||""} onChange={e=>us(lv,i,"nt",e.target.value)} placeholder="Description..."
             style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 0"}} />
         </td>
       </tr>
@@ -6825,7 +7030,7 @@ function ExploitPage({c,s}){
                                 <TipInput value={ex.prereq||""} onChange={e=>ue(deg,i,"prereq",e.target.value)} placeholder="none"
                                   style={{flex:1,background:"transparent",border:"none",color:"rgba(201,74,42,.75)",fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",outline:"none",padding:0}} />
                               </div>
-                              <AutoTextarea value={ex.desc||""} onChange={e=>ue(deg,i,"desc",e.target.value)} placeholder="Describe what this exploit does..."
+                              <MdField value={ex.desc||""} onChange={e=>ue(deg,i,"desc",e.target.value)} placeholder="Describe what this exploit does..."
                                 style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 4px"}} />
                             </td>
                           </tr>
@@ -8023,7 +8228,7 @@ function CompendiumPage({c,s}){
                       {r.prereq&&<div style={{color:"rgba(201,74,42,.75)",fontStyle:"italic",marginTop:2}}>Prerequisites: {r.prereq}</div>}
                     </div>
                   )}
-                  <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.8)",lineHeight:1.7,whiteSpace:"pre-wrap"}}>{r.desc||"(No description)"}</div>
+                  <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.8)",lineHeight:1.7}}>{r.desc?<Markdown text={r.desc} />:"(No description)"}</div>
                   {kind==="exploits"?(
                     <div onClick={function(){var exc=c.exploitClasses||[];setAddCls(exc.length>0?(exc[0].nm||""):"");setConfirmAdd(r);}}
                       style={{display:"inline-block",marginTop:10,cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",padding:"5px 14px",borderRadius:2,userSelect:"none",border:"1px solid rgba(201,74,42,.45)",color:"#e07060",background:"rgba(201,74,42,.08)"}}>
@@ -8639,7 +8844,7 @@ function CreaturesPage({c,s}){
                 return <div key={ti} style={{display:"flex",gap:6,marginBottom:6,alignItems:"flex-start"}}>
                   <TipInput value={tr.nm||""} onChange={function(e){updNested(cr.id,"traits",ti,"nm",e.target.value);}} placeholder="Trait name"
                     style={{width:110,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.15)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:11,fontWeight:600,outline:"none",flexShrink:0}} />
-                  <AutoTextarea value={tr.desc||""} onChange={function(e){updNested(cr.id,"traits",ti,"desc",e.target.value);}} placeholder="Description..."
+                  <MdField value={tr.desc||""} onChange={function(e){updNested(cr.id,"traits",ti,"desc",e.target.value);}} placeholder="Description..."
                     style={{flex:1,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.1)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:12,outline:"none",resize:"vertical",minHeight:40,lineHeight:1.5}} />
                   <span onClick={function(){window.__confirm("Delete this trait?",function(){s("creatures",creatures.map(function(x){return x.id===cr.id?{...x,traits:(x.traits||[]).filter(function(_,j){return j!==ti;})}:x;}));});}}
                     style={{cursor:"pointer",color:"rgba(201,74,42,.35)",fontSize:13,flexShrink:0,paddingTop:2}}>×</span>
@@ -8713,7 +8918,7 @@ function CreaturesPage({c,s}){
                         s("creatures",creatures.map(function(x){return x.id===cr.id?{...x,[section.key]:(x[section.key]||[]).filter(function(_,j){return j!==ei;})}:x;}));
                       });}} style={{cursor:"pointer",color:"rgba(201,74,42,.35)",fontSize:13,alignSelf:"flex-end",paddingBottom:2}}>×</span>
                     </div>
-                    <AutoTextarea value={entry.description||""} onChange={function(e){updNested(cr.id,section.key,ei,"description",e.target.value);}} placeholder="Description..."
+                    <MdField value={entry.description||""} onChange={function(e){updNested(cr.id,section.key,ei,"description",e.target.value);}} placeholder="Description..."
                       rows={2} style={{width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.08)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:12,outline:"none",resize:"vertical",minHeight:36,lineHeight:1.5}} />
                   </div>;
                 })}
@@ -8808,7 +9013,7 @@ function CreaturesPage({c,s}){
             {/* Notes */}
             <div style={{marginTop:8}}>
               <div style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:2,color:colLight,textTransform:"uppercase",marginBottom:4}}>Notes</div>
-              <AutoTextarea value={cr.nt||""} onChange={function(e){upd(cr.id,"nt",e.target.value);}} placeholder="Additional notes, special abilities, description..."
+              <MdField value={cr.nt||""} onChange={function(e){upd(cr.id,"nt",e.target.value);}} placeholder="Additional notes, special abilities, description..."
                 rows={3} style={{width:"100%",background:"rgba(0,0,0,.15)",border:"1px solid rgba(201,150,42,.1)",borderRadius:2,color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:12,outline:"none",resize:"vertical",minHeight:64,lineHeight:1.5,padding:"6px 8px"}} />
             </div>
           </div>}
@@ -9260,7 +9465,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v1.95</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.5.2</div>
 
 </script>
 </body>
