@@ -4912,7 +4912,7 @@ You must provide blank paper or a similarly suitable material for the spell to c
 
 Alternatively, for the duration, any words spoken out loud within range automatically appear written onto the blank paper you are holding. Foreign languages are not translated but do appear spelled correctly using that language’s alphabet. Verbal components of magical spells are not recorded.
 
-***Cantrip Scaling***. The spell's range increases by 10 feet when you reach 5th level (20 feet), 11th level (30 feet) and 17th level (40 feet). Starting at 5th level, the spell also creates mundane copies of magical writing and illustrations. 
+***Cantrip Upgrade.*** The spell's range increases by 10 feet when you reach 5th level (20 feet), 11th level (30 feet) and 17th level (40 feet). Starting at 5th level, the spell also creates mundane copies of magical writing and illustrations. 
 
 \column
 
@@ -4926,7 +4926,7 @@ Alternatively, for the duration, any words spoken out loud within range automati
 
 You hurl a bubble of acid at a point within range. All creatures within 5 feet of that point must succeed on a Dexterity saving throw or take 1d6 Acid damage.
 
-***Cantrip Scaling***. This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
+***Cantrip Upgrade.*** This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
 
 #### Alchemical Grenade
 *Transmutation Cantrip*  
@@ -4938,7 +4938,7 @@ You hurl a bubble of acid at a point within range. All creatures within 5 feet o
 
 You generate a partially magical, partially alchemical Sphere and hurl it at a point within range. On impact it explodes in a 5-foot radius sphere. Creatures within the area must make a successful Dexterity saving throw or take 1d6 Acid, Fire, or Poison (your choice) damage.
 
-***Cantrip Scaling***. This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
+***Cantrip Upgrade.*** This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
 
 \page
 {{pageNumber,auto}}
@@ -4954,7 +4954,7 @@ You generate a partially magical, partially alchemical Sphere and hurl it at a p
 
 You trace a sigil of warding into the air. Whenever you take Bludgeoning, Piercing, or Slashing damage for the duration of this spell, you can reduce the damage you take by 1d4. 
 
-***Cantrip Scaling***. The damage reduction of this spell increases when you reach 5th level (1d6), 11th level (1d8), and 17th level (1d10).
+***Cantrip Upgrade.*** The damage reduction of this spell increases when you reach 5th level (1d6), 11th level (1d8), and 17th level (1d10).
 
 
 #### Blood Bolt
@@ -4967,7 +4967,7 @@ You trace a sigil of warding into the air. Whenever you take Bludgeoning, Pierci
 
 You transmute a drop of blood into a crimson dart and launch it at creatures within range, making a ranged spell attack. On hit, the target takes 1d6 Piercing damage and 1d6 Necrotic damage.
 
-***Cantrip Scaling***. The piercing and Necrotic damage increase by 1d6 at 5th level (2d6), 11th level (3d6), and 17th level (4d6). The blood consumed also increases when the damage increases at 5th (2), 11th (3), and 17th (4).
+***Cantrip Upgrade.*** The piercing and Necrotic damage increase by 1d6 at 5th level (2d6), 11th level (3d6), and 17th level (4d6). The blood consumed also increases when the damage increases at 5th (2), 11th (3), and 17th (4).
 
 \column
 #### Booming Blade
@@ -4982,7 +4982,7 @@ As a Bonus action, you wreathe the melee weapon used in the casting of this spel
 
 Once per casting when you deal Thunder damage with this spell, you can envelop your target in thunderous energy until the start of your next turn. If the target willingly moves 5 feet or more before then, this thunderous energy explodes and it takes 1d4 Thunder damage.
 
-***Cantrip Scaling***. The Thunder damage dealt by this spell when the creature moves at least 5 feet increases at 5th level (2d4), 11th level (3d4), and 17th level (4d4).
+***Cantrip Upgrade.*** The Thunder damage dealt by this spell when the creature moves at least 5 feet increases at 5th level (2d4), 11th level (3d4), and 17th level (4d4).
 
 #### Burn
 *Transmutation Cantrip*  
@@ -4994,7 +4994,7 @@ Once per casting when you deal Thunder damage with this spell, you can envelop y
 
 You ignite a brilliant flame around your hand that sears anything you touch. Make a melee spell attack against the target. On hit, the target takes 1d12 Fire damage.
 
-***Cantrip Scaling***. The spell's damage increases by 1d12 when you reach 5th level (2d12), 11th level (3d12), and 17th level (4d12).
+***Cantrip Upgrade.*** The spell's damage increases by 1d12 when you reach 5th level (2d12), 11th level (3d12), and 17th level (4d12).
 
 #### Chill Touch
 *Necromancy Cantrip*  
@@ -5025,7 +5025,7 @@ You can manipulate fire and use it to assault your foes. When you cast this spel
 
 **Hurl Flame.** You create a small ball of flickering flame in your hand and hurl it at one target that you can see within range, making a ranged spell attack against it. On hit, it takes 1d8 Fire damage. Flammable objects that aren't being worn or carried are ignited when hit by this spell attack.
 
-***Cantrip Scaling***. The damage of *Hurl Flame* increases by 1d8 when you reach 5th (2d8), 11th (3d8) and 17th (4d8) level. The area *Manipulate Flame* affects increases by an adjacent 5-foot Cube at 5th (2 adjacent 5-foot Cubes), 11th (3 adjacent 5-foot Cubes) and 17th (4 adjacent 5-foot Cubes) level.
+***Cantrip Upgrade.*** The damage of *Hurl Flame* increases by 1d8 when you reach 5th (2d8), 11th (3d8) and 17th (4d8) level. The area *Manipulate Flame* affects increases by an adjacent 5-foot Cube at 5th (2 adjacent 5-foot Cubes), 11th (3 adjacent 5-foot Cubes) and 17th (4 adjacent 5-foot Cubes) level.
 
 #### Create Bonfire
 *Conjuration Cantrip*  
@@ -5039,7 +5039,7 @@ You create a bonfire on ground that you can see within range. Until the spell en
 
 The bonfire ignites flammable objects in its area that aren't being worn or carried.
 
-***Cantrip Scaling***. The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
+***Cantrip Upgrade.*** The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
 \column
 
 #### Dancing Lights
@@ -5054,7 +5054,7 @@ You create up to four torch-sized lights within range, making them appear as tor
 
 As a Bonus action on your turn, you can move the lights up to 60 feet to a new spot within range. A light must be within 20 feet of another light created by this spell, and a light winks out if it exceeds the spell's range.
 
-***Cantrip Scaling***. You can create one additional light when you reach 5th level (five lights), 11th level (six lights), and 17th level (seven lights). From 11th level you can form an image of a Large creature by combining the lights.
+***Cantrip Upgrade.*** You can create one additional light when you reach 5th level (five lights), 11th level (six lights), and 17th level (seven lights). From 11th level you can form an image of a Large creature by combining the lights.
 
 #### Decaying Touch
 *Necromancy Cantrip*  
@@ -5066,7 +5066,7 @@ As a Bonus action on your turn, you can move the lights up to 60 feet to a new s
 
 You wreath your hand in necrotic decay that causes anything you touch to wither and die. Make a melee spell attack against the target. On hit, the target takes 1d6 Necrotic damage and starts to flake and decay. The first time they take damage from another source before the start of your next turn, they take an additional 1d6 Necrotic damage. Targets immune to diseases have Immunity to this effect.
 
-***Cantrip Scaling***. Both the initial and secondary damage of the spell increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
+***Cantrip Upgrade.*** Both the initial and secondary damage of the spell increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
 
 \page
 {{pageNumber,auto}}
@@ -5089,7 +5089,7 @@ Whispering to the spirits of nature, you create one of the following effects wit
 
 **Fire Play.** You light or snuff out a candle, a torch, or a campfire.
 
-***Cantrip Scaling***. You add the following additional abilities when you reach certain levels.
+***Cantrip Upgrade.*** You add the following additional abilities when you reach certain levels.
 
 **Beast Summoning.** You cause a Tiny beast within range to come 10 feet closer to you on its next turn, provided that  creature has all its Hit Points (at 5th level)
 
@@ -5109,7 +5109,7 @@ creatures near them (at 11th level)
 
 You shoot a jolt of lightning at a creature you can see within range. Make a ranged spell attack against the target. On hit, the target takes 1d8 primary Lightning damage and an arc of lightning jumps from the target to another creature within 15 feet, using the same attack roll, dealing 1d4 secondary Lightning damage on hit.
 
-***Cantrip Scaling***. This spell's damage increases by 1d8 primary and 1d4 secondary damage when you reach 5th level (2d8 and 2d4), 11th level (3d8 and 3d4), and 17th level (4d8 and 4d4).
+***Cantrip Upgrade.*** This spell's damage increases by 1d8 primary and 1d4 secondary damage when you reach 5th level (2d8 and 2d4), 11th level (3d8 and 3d4), and 17th level (4d8 and 4d4).
 
 #### Encode Thoughts
 *Enchantment Cantrip*  
@@ -5125,7 +5125,7 @@ If you cast this spell while concentrating on a spell or an ability that allows 
 
 Casting this spell while holding a thought strand allows you to instantly receive whatever memory, idea, or message the thought strand contains. (Casting detect thoughts on the strand has the same effect.)
 
-***Cantrip Scaling***. At 5th Level, you can have up to five thought strands at a time and the spell lasts for 24 hours, if you so choose. If you cast the spell to create a sixth thought strand, you must choose one of the other five and dismiss it.  
+***Cantrip Upgrade.*** At 5th Level, you can have up to five thought strands at a time and the spell lasts for 24 hours, if you so choose. If you cast the spell to create a sixth thought strand, you must choose one of the other five and dismiss it.  
 At 11th level, you can now cast this spell to destroy a thought strand that you made. You can also have up to twenty thought strands at a time and the spell lasts for up to a month.  
 At 17th level, you can cast this spell to destroy any one thought strand. You can also have unlimited thought strands and they last until dispelled or destroyed.
 
@@ -5142,7 +5142,7 @@ At 17th level, you can cast this spell to destroy any one thought strand. You ca
 
 You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 Fire damage. A flammable object hit by this spell ignites if it isn't being worn or carried.
 
-***Cantrip Scaling***. This spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).
+***Cantrip Upgrade.*** This spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).
 
 
 #### Fists of Fire
@@ -5159,7 +5159,7 @@ For the duration, any flammable object you attempt to hold catches fire. If you 
 
 You can end the spell early (no action required).
 
-***Cantrip Scaling***. The damage this spell does to Grappled targets increases by 1d4 at 5th level (2d4), 11th level (3d4), and 17th level (4d4).
+***Cantrip Upgrade.*** The damage this spell does to Grappled targets increases by 1d4 at 5th level (2d4), 11th level (3d4), and 17th level (4d4).
 
 #### Force Bolt
 *Evocation Cantrip*  
@@ -5171,7 +5171,7 @@ You can end the spell early (no action required).
 
 You hurl a mote of arcane energy at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 2d4 Force damage.
 
-***Cantrip Scaling***. This spell's damage increases by 2d4 when you reach 5th level (4d4), 11th level (6d4), and 17th level (8d4).
+***Cantrip Upgrade.*** This spell's damage increases by 2d4 when you reach 5th level (4d4), 11th level (6d4), and 17th level (8d4).
 
 \column
 
@@ -5185,7 +5185,7 @@ You hurl a mote of arcane energy at a creature or object within range. Make a ra
 
 You instill a deadly chill into your hand. Make a melee spell attack against the target. On hit, the target takes 1d10 Cold damage, and the target's movement Speed is reduced by 10 feet until the end of their turn.
 
-***Cantrip Scaling***. The spell's damage increases by 1d8 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).
+***Cantrip Upgrade.*** The spell's damage increases by 1d8 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).
 
 #### Friends
 *Enchantment Cantrip*  
@@ -5199,7 +5199,7 @@ You magically emanate a sense of friendship toward one creature you can see with
 
 The spell ends early if the target takes damage or if you make an attack roll, deal damage, or force anyone to make a saving throw. When the spell ends, the target knows it was Charmed by you.
 
-***Cantrip Scaling***. You can affect one additional creature when you reach 5th level (two creatures), 11th level (three creatures), and 17th level (four creatures).
+***Cantrip Upgrade.*** You can affect one additional creature when you reach 5th level (two creatures), 11th level (three creatures), and 17th level (four creatures).
 
 #### Frostbite
 *Evocation Cantrip*  
@@ -5211,7 +5211,7 @@ The spell ends early if the target takes damage or if you make an attack roll, d
 
 You cause numbing frost to form on one creature that you can see within range. The target must make a Constitution saving throw. On a failed save, the target takes 1d6 Cold damage, and it has Disadvantage on the next weapon attack roll it makes before the end of its next turn.
 
-***Cantrip Scaling***. The spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
+***Cantrip Upgrade.*** The spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
 \page
 {{pageNumber,auto}}
 
@@ -5227,7 +5227,7 @@ As a Bonus action, you wreathe the melee weapon used in the casting of this spel
 
 Once per casting when you deal Fire damage with this spell, you can cause the flames to leap to another creature you can see within 5 feet of your target, dealing 1d6 Fire damage to it.
 
-***Cantrip Scaling***. The Fire damage dealt to the second creature by this spell increases at 5th level (1d8), 11th level (1d10), and 17th level (1d12).
+***Cantrip Upgrade.*** The Fire damage dealt to the second creature by this spell increases at 5th level (1d8), 11th level (1d10), and 17th level (1d12).
 
 \column
 
@@ -5241,7 +5241,7 @@ Once per casting when you deal Fire damage with this spell, you can cause the fl
 
 You touch a willing creature and choose a skill. Until the spell ends, the creature adds 1d4 to any ability check using the chosen skill.
 
-***Cantrip Scaling***. The bonus increases when you reach 5th level (1d6), 11th level (1d8), and 17th level (1d10).
+***Cantrip Upgrade.*** The bonus increases when you reach 5th level (1d6), 11th level (1d8), and 17th level (1d10).
 
 #### Gust (Beckon Air)
 *Transmutation Cantrip*  
@@ -5257,7 +5257,7 @@ You can manipulate the winds and use them to assault foes. When you cast this sp
 
 **Hurl Squall.** You create a small wind squall in your hand and hurl it at a target you can see within range, forcing it to make a Strength saving throw. On a failed save, it takes 1d6 Thunder damage and a Medium or smaller target is knocked back 10 feet in a straight line.
 
-***Cantrip Scaling***.  The damage of *Hurl Squall*, as well as the size of the target it can knock back increase when you reach 5th (2d6, Large), 11th (3d6, Huge) and 17th (4d6, Gargantuan) level. The area *Manipulate Air* affects increases by an adjacent 5-foot Cube at 5th (2 5-foot adjacent cubes), 11th (3 5-foot adjacent cubes) and 17th (4 5-foot adjacent cubes) level.
+***Cantrip Upgrade.***  The damage of *Hurl Squall*, as well as the size of the target it can knock back increase when you reach 5th (2d6, Large), 11th (3d6, Huge) and 17th (4d6, Gargantuan) level. The area *Manipulate Air* affects increases by an adjacent 5-foot Cube at 5th (2 5-foot adjacent cubes), 11th (3 5-foot adjacent cubes) and 17th (4 5-foot adjacent cubes) level.
 \page
 {{pageNumber,auto}}
 
@@ -5282,7 +5282,7 @@ You conjure a weapon formed from magical ice in your hand. You have proficiency 
 
 Regardless of its form, the weapon deals Cold damage. You can end the spell early, letting the weapon melt to a harmless splash of water (no action required). You can have up to three ice weapons formed from this spell at a time. After forming a fourth, the first created one melts away.
 
-***Cantrip Scaling***. At 5th level, you can conjure one additional weapon at a time (2 weapons) and the maximum raises by one (4 weapons). Both numbers increase at 11th level (3 weapons conjured at once and 5 weapons maximum) and at 17th level (4 weapons conjured at once and 6 weapons maximum).
+***Cantrip Upgrade.*** At 5th level, you can conjure one additional weapon at a time (2 weapons) and the maximum raises by one (4 weapons). Both numbers increase at 11th level (3 weapons conjured at once and 5 weapons maximum) and at 17th level (4 weapons conjured at once and 6 weapons maximum).
 
 
 #### Illusionary Dart
@@ -5295,7 +5295,7 @@ Regardless of its form, the weapon deals Cold damage. You can end the spell earl
 
 You create and throw an illusionary dart at a creature you can see within range. Make a ranged spell attack. On hit, they take 1d8 Psychic damage. 
 
-***Cantrip Scaling***. The number of darts you can throw with this spell increases when you reach 5th level (2 darts), 11th (3 darts), and 17th level (4 darts). You can direct the dart at the same target or at different ones. Make a separate attack roll for each dart.
+***Cantrip Upgrade.*** The number of darts you can throw with this spell increases when you reach 5th level (2 darts), 11th (3 darts), and 17th level (4 darts). You can direct the dart at the same target or at different ones. Make a separate attack roll for each dart.
 \column
 
 #### Impact
@@ -5308,7 +5308,7 @@ You create and throw an illusionary dart at a creature you can see within range.
 
 You impart great force into a target you touch. Make a melee spell attack against the target. On hit, the target takes 1d10 Bludgeoning damage, and is knocked 5 feet directly away from you.
 
-***Cantrip Scaling***. The spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).
+***Cantrip Upgrade.*** The spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).
 
 #### Infestation
 *Conjuration Cantrip*  
@@ -5320,7 +5320,7 @@ You impart great force into a target you touch. Make a melee spell attack agains
 
 You cause a cloud of biting, stinging insects to appear near one creature you can see within range. The target must make a Constitution saving throw. On failure, it takes 1d4 Piercing damage and 1d4 Poison damage and moves 5 feet in a direction of your choice.
 
-***Cantrip Scaling***. The spell's damage increases by 1d4 when you reach 5th level (2d4 + 2d4), 11th level (3d4 + 3d4), and 17th level (4d4 + 4d4).
+***Cantrip Upgrade.*** The spell's damage increases by 1d4 when you reach 5th level (2d4 + 2d4), 11th level (3d4 + 3d4), and 17th level (4d4 + 4d4).
 
 
 \page
@@ -5337,7 +5337,7 @@ You touch one object that is no larger than 10 feet in any dimension. Until the 
 
 If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.
 
-***Cantrip Scaling***. When you reach 5th level, when you cast this spell you can choose to increase or decrease the radius of bright light and of Dim Light by up to 5 feet. This control increases to 10 feet when you reach 11th level, and 15 feet when you reach 17th level.
+***Cantrip Upgrade.*** When you reach 5th level, when you cast this spell you can choose to increase or decrease the radius of bright light and of Dim Light by up to 5 feet. This control increases to 10 feet when you reach 11th level, and 15 feet when you reach 17th level.
 
 #### Lightning Leash
 *Evocation Cantrip*  
@@ -5349,7 +5349,7 @@ If you target an object held or worn by a hostile creature, that creature must s
 
 You create a whip of crackling electricity, and arc it outwards at a creature of your choice that you can see within 30 feet. Make a melee spell attack. If it hits, the target takes 1d6 Lightning damage, and is ensnared by the lightning leash. Until the start of your next turn, as a Reaction if the enemy moves outside this spell's range, you can yank on the leash. The target must make a Strength saving throw or take 1d6 Lightning damage and have their movement reduced by half. Once they are outside of the spell's range, the leash dissipates.
 
-***Cantrip Scaling***. Both damage rolls increase by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
+***Cantrip Upgrade.*** Both damage rolls increase by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
 
 
 \column
@@ -5364,7 +5364,7 @@ You create a whip of crackling electricity, and arc it outwards at a creature of
 
 You create a lash of arcane lightning and strikes at a creature of your choice you can see within 15 feet. It must succeed on a Strength saving throw or take 1d8 Lightning damage and be pulled in a Line to an unoccupied space within 5 feet of you.
 
-***Cantrip Scaling***. The range of this spell increases at 5th level (20 feet), 11th level (25 feet), and 17th level (30 feet).
+***Cantrip Upgrade.*** The range of this spell increases at 5th level (20 feet), 11th level (25 feet), and 17th level (30 feet).
 
 #### Mage Hand
 *Conjuration Cantrip*  
@@ -5382,7 +5382,7 @@ As a Magic action on your later turns, you can control the hand thus again. As p
 
 The hand can't attack, activate magic items, or carry more than 10 pounds.
 
-***Cantrip Scaling***. The range of the hand increases by 5 feet when you reach 5th level (35 feet), 11th level (40 feet), and 17th level (45 feet).
+***Cantrip Upgrade.*** The range of the hand increases by 5 feet when you reach 5th level (35 feet), 11th level (40 feet), and 17th level (45 feet).
 
 \page
 {{pageNumber,auto}}
@@ -5399,7 +5399,7 @@ You touch one to three pebbles and imbue them with magic. You or someone else ca
 
 If you cast this spell again, the spell ends on any pebbles still affected by your previous casting.
 
-***Cantrip Scaling***. The number of stones you can affect increases by 1 when you reach 5th level (4 stones), 11th level (5 stones), and 17th level (6 stones)
+***Cantrip Upgrade.*** The number of stones you can affect increases by 1 when you reach 5th level (4 stones), 11th level (5 stones), and 17th level (6 stones)
 
 #### Mending
 *Transmutation Cantrip*  
@@ -5413,7 +5413,7 @@ This spell repairs a single break or tear in an object you touch, such as a brok
 
 This spell can physically repair a magic item, but it can't restore magic to such an object.
 
-***Cantrip Scaling***. The maximum size of object you can mend increases to 1 foot by 1 foot by 2 feet when you reach 5th level, 1 foot by 2 feet by 2 feet at 11th level, and 2 feet on each side when you reach 17th level.
+***Cantrip Upgrade.*** The maximum size of object you can mend increases to 1 foot by 1 foot by 2 feet when you reach 5th level, 1 foot by 2 feet by 2 feet at 11th level, and 2 feet on each side when you reach 17th level.
 \column
 #### Message
 *Divination Cantrip*  
@@ -5427,7 +5427,7 @@ You point toward a creature within range and whisper a message. The target (and 
 
 You can cast this spell through solid objects if you are familiar with the target and know it is beyond the barrier. Magical silence; 1 foot of stone, metal, or wood; or a thin sheet of lead blocks the spell.
 
-***Cantrip Scaling***. The range of your message increases by 30 feet when you reach 5th level (150 feet), 11th level (180 feet), and 17th level (210 feet).
+***Cantrip Upgrade.*** The range of your message increases by 30 feet when you reach 5th level (150 feet), 11th level (180 feet), and 17th level (210 feet).
 
 #### Mind Sliver
 *Enchantment Cantrip*  
@@ -5439,7 +5439,7 @@ You can cast this spell through solid objects if you are familiar with the targe
 
 You drive a disorienting spike of psychic energy into the mind of one creature you can see within range. The target must succeed on an Intelligence saving throw or take 1d6 Psychic damage and subtract 1d4 from the next saving throw it makes before the end of your next turn.
 
-***Cantrip Scaling***. This spell's damage increases by 1d6 when you reach certain levels: 5th level (2d6), 11th level (3d6), and 17th level (4d6).
+***Cantrip Upgrade.*** This spell's damage increases by 1d6 when you reach certain levels: 5th level (2d6), 11th level (3d6), and 17th level (4d6).
 
 #### Mind Thrust
 *Evocation Cantrip*  
@@ -5451,7 +5451,7 @@ You drive a disorienting spike of psychic energy into the mind of one creature y
 
 You assault the mind a creature within range with a torrent of psionic power. Make a ranged spell attack against the target. On hit, the creature takes 1d8 Psychic damage and it cannot take Reactions until the start of your next turn.
 
-***Cantrip Scaling***.  This spell’s damage increases by 1d8 when you reach certain levels: 5th level (2d8), 11th level (3d8), and 17th level (4d8).
+***Cantrip Upgrade.***  This spell’s damage increases by 1d8 when you reach certain levels: 5th level (2d8), 11th level (3d8), and 17th level (4d8).
 
 
 
@@ -5468,7 +5468,7 @@ You assault the mind a creature within range with a torrent of psionic power. Ma
 
 You speak a word of minor misfortune toward a creature you can see within range. The target must succeed on a Wisdom saving throw or have disadvantage on their next attack roll, ability check, or saving throw (your choice).
 
-***Cantrip Scaling***. You can affect additional creatures when you reach certain levels: two creatures at 5th level, three creatures at 11th level, and four creatures at 17th level. Each creature must be within 10 feet of the others when you target them.
+***Cantrip Upgrade.*** You can affect additional creatures when you reach certain levels: two creatures at 5th level, three creatures at 11th level, and four creatures at 17th level. Each creature must be within 10 feet of the others when you target them.
 
 #### Minor Illusion
 *Illusion Cantrip*  
@@ -5486,7 +5486,7 @@ If a creature takes a Study action to examine the sound or image, the creature c
 
 **Image.** If you create an image of an object—such as a chair, muddy footprints, or a small chest—it must be no larger than a 5-foot Cube. The image can't create sound, light, smell, or any other sensory effect. Physical interaction with the image reveals it to be an illusion, since things can pass through it.
 
-***Cantrip Scaling***. The duration of the spell increases by 1 minute when you reach 5th level (2 minutes), 11th level (3 minutes), and 17th level (4 minutes).
+***Cantrip Upgrade.*** The duration of the spell increases by 1 minute when you reach 5th level (2 minutes), 11th level (3 minutes), and 17th level (4 minutes).
 
 #### Mold Earth
 *Transmutation Cantrip*  
@@ -5502,7 +5502,7 @@ You can manipulate the earth and use it to assault your foes. When you cast this
 
 **Hurl Stone.** You create a small ball of loose stone and dirt in your hand and hurl it at a target you can see within range, making a ranged spell attack against it. On hit, it takes your choice of either 1d6 Bludgeoning or Piercing damage, and if the target is Small or smaller it is knocked prone.
 
-***Cantrip Scaling***. The damage of *Hurl Stone*, as well as the size of the target knocked prone increase when you reach 5th (2d6, Medium), 11th (3d6, Large) and 17th (4d6, Huge) level. The area *Manipulate Earth* affects increases by an adjacent 5-foot Cube at 5th (2 5-foot adjacent cubes), 11th (3 5-foot adjacent cubes) and 17th (4 5-foot adjacent cubes) level.
+***Cantrip Upgrade.*** The damage of *Hurl Stone*, as well as the size of the target knocked prone increase when you reach 5th (2d6, Medium), 11th (3d6, Large) and 17th (4d6, Huge) level. The area *Manipulate Earth* affects increases by an adjacent 5-foot Cube at 5th (2 5-foot adjacent cubes), 11th (3 5-foot adjacent cubes) and 17th (4 5-foot adjacent cubes) level.
 
 #### Mystic Hammer
 *Conjuration Cantrip*  
@@ -5514,7 +5514,7 @@ You can manipulate the earth and use it to assault your foes. When you cast this
 
 You batter a creature within range with psionic force, forcing it to make a Strength saving throw. On a failed save, it takes 1d6 Force damage and is knocked Prone. Large and larger creatures have Advantage on this Strength saving throw.
 
-***Cantrip Scaling***. The damage of this Cantrip and the size of the creature that makes the saving throw normally increase when you reach certain levels: 5th level (2d6, Large), 11th level (3d6, Huge), and 17th level (4d6).
+***Cantrip Upgrade.*** The damage of this Cantrip and the size of the creature that makes the saving throw normally increase when you reach certain levels: 5th level (2d6, Large), 11th level (3d6, Huge), and 17th level (4d6).
 
 #### Otherworldly Grasp
 *Necromancy Cantrip*  
@@ -5526,7 +5526,7 @@ You batter a creature within range with psionic force, forcing it to make a Stre
 
 You channel necrotic spiritual power to your hand, changing it into a withered specter of itself. Make a melee spell attack against one creature within your reach. On hit, it takes 1d8 Necrotic damage, and you can choose to gain Temporary Hit Points equal to half the Necrotic damage dealt.
 
-***Cantrip Scaling***. The damage of this spell increases by 1d8 at 5th (2d8), 11th (3d8), and 17th level (4d8).
+***Cantrip Upgrade.*** The damage of this spell increases by 1d8 at 5th (2d8), 11th (3d8), and 17th level (4d8).
 
 
 \page
@@ -5542,7 +5542,7 @@ You channel necrotic spiritual power to your hand, changing it into a withered s
 
 You spray toxic mist at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d12 Poison damage.
 
-***Cantrip Scaling***. The damage increases by 1d12 when you reach levels 5 (2d12), 11 (3d12), and 17 (4d12).
+***Cantrip Upgrade.*** The damage increases by 1d12 when you reach levels 5 (2d12), 11 (3d12), and 17 (4d12).
 
 #### Prehensile Hair
 *Transmutation Cantrip*  
@@ -5554,7 +5554,7 @@ You spray toxic mist at a creature within range. Make a ranged spell attack agai
 
 You grow unduly long and tough hair which you can manipulate at will. You can use your hair to perform simple tasks within 10 feet of you, such as manipulating an object, opening an unlocked door or container, stowing, or retrieving an item from an open container, or pouring the contents out of a vial. You can cast spells with a range of Touch using your hair, out to a range of 10 feet. Your hair returns to its normal length when this spell ends.
 
-***Cantrip Scaling***. The range of the hair increases by 5 feet at 5th level (15 feet), 11th level (20 feet) and 17th level (25 feet).
+***Cantrip Upgrade.*** The range of the hair increases by 5 feet at 5th level (15 feet), 11th level (20 feet) and 17th level (25 feet).
 
 #### Preservation
 *Transmutation Cantrip*  
@@ -5566,7 +5566,7 @@ You grow unduly long and tough hair which you can manipulate at will. You can us
 
 You touch a Small or smaller object or container that contains objects, slowing the passage of time for that object to half its usual pace. Food takes twice as long to spoil, a torch burns twice as long, a lamp consumes 1/2 as much oil, ice melts half as fast, etc. This effect lasts until you use the effect again, until the object changes state (such as food being eaten), or 1 day passes (at which time you can use the spell again to maintain it). This does not affect the items interactions with the world (such as a weapon being preserved in this way would not swing slower).
 
-***Cantrip Scaling***. This spell's effect increases to slowing time to 1/3 its usually pace when you reach 5th level, 1/4 its usual pace when you reach 11th level, and 1/5 its usual pace when you reach 17th level.
+***Cantrip Upgrade.*** This spell's effect increases to slowing time to 1/3 its usually pace when you reach 5th level, 1/4 its usual pace when you reach 11th level, and 1/5 its usual pace when you reach 17th level.
 
 #### Prestidigitation
 *Transmutation Cantrip*  
@@ -5590,7 +5590,7 @@ You create a magical effect within range. Choose the effect from the options bel
 
 **Minor Creation.** You create a nonmagical trinket or an illusory image that can fit in your hand. It lasts until the end of your next turn. A trinket can deal no damage and has no monetary worth.
 
-***Cantrip Scaling***. At 5th level, as one of your effects you can cause a Tiny object you can see that is not being held or carried to vibrate gently or vigorously for up to 1 minute.
+***Cantrip Upgrade.*** At 5th level, as one of your effects you can cause a Tiny object you can see that is not being held or carried to vibrate gently or vigorously for up to 1 minute.
 At 11th level you can cause two effects per casting of the spell and have up to four effects active at a time.
 At 17th level you can cause three effects per casting of the spell and have up to six effects active at a time.
 
@@ -5608,7 +5608,7 @@ At 17th level you can cause three effects per casting of the spell and have up t
 
 As part of an unarmed strike, you cause your teeth or fingers to transform into savage fangs or claws. On hit, this unarmed strike deals either magical Piercing or Slashing damage equal to 1d6 + your Strength modifier. Your teeth and fingers revert to normal after this unarmed strike. Alternatively, you can use your Spellcasting ability for the attack and damage roll.
 
-***Cantrip Scaling***. The damage die of this spell increases at 5th level (1d8), 11th level (1d10), and 17th level (1d12).
+***Cantrip Upgrade.*** The damage die of this spell increases at 5th level (1d8), 11th level (1d10), and 17th level (1d12).
 
 #### Produce Flame
 *Conjuration Cantrip*  
@@ -5622,7 +5622,7 @@ A flickering flame appears in your hand and remains there for the duration. Whil
 
 Until the spell ends, you can take the Magic action to hurl fire at a creature or an object within 60 feet of you. Make a ranged spell attack. On a hit, the target takes 1d8 Fire damage.
 
-***Cantrip Scaling***. This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
+***Cantrip Upgrade.*** This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
 
 #### Psionic Strike
 *Evocation Cantrip*  
@@ -5634,7 +5634,7 @@ Until the spell ends, you can take the Magic action to hurl fire at a creature o
 
 As part of an unarmed strike, you manifest a blade of psionic energy in your hand. On hit, the target takes Psychic damage equal to 1d6 + your Strength modifier, in place of the normal damage of your unarmed strike. Your hand immediately reverts to its normal appearance at the end of the attack.
 
-***Cantrip Scaling***. The damage die of this spell increases when you reach 5th level (1d8), 11th level (1d10), and 17th level (1d12).
+***Cantrip Upgrade.*** The damage die of this spell increases when you reach 5th level (1d8), 11th level (1d10), and 17th level (1d12).
 \column
 #### Ray of Frost
 *Evocation Cantrip*  
@@ -5646,7 +5646,7 @@ As part of an unarmed strike, you manifest a blade of psionic energy in your han
 
 A frigid beam of blue-white light streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, it takes 1d8 Cold damage, and its Speed is reduced by 10 feet until the start of your next turn.
 
-***Cantrip Scaling***. The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
+***Cantrip Upgrade.*** The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
 
 #### Resistance
 *Abjuration Cantrip*  
@@ -5658,7 +5658,7 @@ A frigid beam of blue-white light streaks toward a creature within range. Make a
 
 You weave a protective mantle of magic around one willing creature you touch. Once per turn, when the target is forced to make a saving throw it can gain a 1d4 bonus to its roll.
 
-***Cantrip Scaling.*** The bonus increases when you reach 5th level (1d6), 11th level (1d8), and 17th level (1d10).
+***Cantrip Upgrade.*** The bonus increases when you reach 5th level (1d6), 11th level (1d8), and 17th level (1d10).
 
 
 #### Rock Slam
@@ -5671,7 +5671,7 @@ You weave a protective mantle of magic around one willing creature you touch. On
 
 You fling a rock a creature you can see within range. Make a ranged spell attack. On hit, the target takes 1d10 Bludgeoning damage. On a critical hit, the target is knocked Prone or 10 feet backwards (your choice).
 
-***Cantrip Scaling.*** The spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).
+***Cantrip Upgrade.*** The spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).
 
 
 
@@ -5689,7 +5689,7 @@ You fling a rock a creature you can see within range. Make a ranged spell attack
 
 Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 Radiant damage. The target gains no benefit from Half Cover or Three-Quarters Cover for this save.
 
-***Cantrip Scaling.*** The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
+***Cantrip Upgrade.*** The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
 
 #### Sapping Sting
 *Necromancy Cantrip*  
@@ -5701,7 +5701,7 @@ Flame-like radiance descends on a creature that you can see within range. The ta
 
 You sap the vitality of one creature you can see in range. The target must succeed on a Constitution saving throw or take 1d6 Necrotic damage and fall Prone.
 
-***Cantrip Scaling.*** This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
+***Cantrip Upgrade.*** This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
 
 #### Seance
 *Divination Cantrip*  
@@ -5723,7 +5723,7 @@ You channel minor spirits, allowing them to work through you so that they may on
 
 **Ley Line Revelation.** Ley lines within range briefly reveal themselves as they flicker with otherworldly light.
 
-***Cantrip Scaling***. You add the following additional abilities when you
+***Cantrip Upgrade.*** You add the following additional abilities when you
 reach certain levels.
 
 **Name of the Departed.** You can learn the name of a dead humanoid that you touch, if any (at 5th level)
@@ -5742,7 +5742,7 @@ reach certain levels.
 
 You form a whip of shadows that lashes out toward a creature within range. Make a melee spell attack, on hit, the target takes 2d4 Psychic damage. In addition, if the target is in Dim Light or darkness, you make the attack roll with Advantage.
 
-***Cantrip Scaling***. The spell's damage increases by 2d4 when you reach 5th level (4d4), 11th level (6d4), and 17th level (8d4).
+***Cantrip Upgrade.*** The spell's damage increases by 2d4 when you reach 5th level (4d4), 11th level (6d4), and 17th level (8d4).
 
 
 #### Shape Water
@@ -5759,7 +5759,7 @@ You can manipulate water and use it to assault your enemies. When you cast this 
 
 **Hurl Wave.** You create a small orb of tempestuous water in your hand and hurl it at one target you can see within range, forcing it to make a Dexterity saving throw. On a failed save, the target takes 1d8 Bludgeoning or Cold damage, and any non-magical flame it is holding, or within 5 feet of it, is instantly extinguished.
 
-***Cantrip Scaling***. The damage of *Hurl Wave* increases at 5th level (2d8), 11th level (3d8) and 17th level (4d8). The area affected by *Manipulate Water* increases by an adjacent 5-foot Cube at 5th (2 adjacent 5-foot Cube), 11th (3 adjacent 5-foot Cube) and 17th (4 adjacent 5-foot Cube) level.
+***Cantrip Upgrade.*** The damage of *Hurl Wave* increases at 5th level (2d8), 11th level (3d8) and 17th level (4d8). The area affected by *Manipulate Water* increases by an adjacent 5-foot Cube at 5th (2 adjacent 5-foot Cube), 11th (3 adjacent 5-foot Cube) and 17th (4 adjacent 5-foot Cube) level.
 
 
 \page
@@ -5777,7 +5777,7 @@ A Club or Quarterstaff you are holding is imbued with nature's power. For the du
 
 The spell ends early if you cast it again or if you let go of the weapon.
 
-***Cantrip Scaling***. The damage die changes when you reach levels 5 (d10), 11 (d12), and 17 (2d6).
+***Cantrip Upgrade.*** The damage die changes when you reach levels 5 (d10), 11 (d12), and 17 (2d6).
 
 #### Shocking Grasp
 *Evocation Cantrip*  
@@ -5789,7 +5789,7 @@ The spell ends early if you cast it again or if you let go of the weapon.
 
 Lightning springs from your hand to deliver a shock to a creature you try to touch. Make a melee spell attack against the target. You have Advantage on the attack roll if the target is wearing armor made of metal. On a hit, the target takes 1d8 Lightning damage, and it can't take Reactions until the start of its next turn.
 
-***Cantrip Scaling***. The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
+***Cantrip Upgrade.*** The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
 \column
 
 #### Sorcerous Burst
@@ -5834,7 +5834,7 @@ With a quick jolt of necromantic energy, the dead momentarily rise to obey you, 
 
 Once the corpse attacks, it once again crumples into a heap. A corpse targeted by this spell does not become an undead creature.
 
-***Cantrip Scaling.*** This spell's damage increases as you gain levels. At 5th level, the corpse deals two damage dice according to its size. At 11th level, it deals three damage dice, and at 17th level, it deals four damage dice.
+***Cantrip Upgrade.*** This spell's damage increases as you gain levels. At 5th level, the corpse deals two damage dice according to its size. At 11th level, it deals three damage dice, and at 17th level, it deals four damage dice.
 
 #### Spell-Shattering Blade
 *Abjuration Cantrip*  
@@ -5848,7 +5848,7 @@ As a Bonus action, you wreathe the melee weapon used in the casting of this spel
 
 Once per casting when you deal damage with this spell, you can envelop your target in arcane energy until the start of your next turn. If the target casts a spell before then, it takes 1d4 Psychic damage.
 
-***Cantrip Scaling***. The Psychic damage dealt by this spell when the creature casts a spell increases at 5th level (2d4), 11th level (3d4), and 17th level (4d4).
+***Cantrip Upgrade.*** The Psychic damage dealt by this spell when the creature casts a spell increases at 5th level (2d4), 11th level (3d4), and 17th level (4d4).
 
 \column
 #### Starry Wisp (Glitterbeam)
@@ -5861,7 +5861,7 @@ Once per casting when you deal damage with this spell, you can envelop your targ
 
 You project a beam of twinkling lights at a creature or object within range. Make a ranged spell attack against the target. On a hit, it takes 1d8 Radiant damage. Until a creature uses an Action to remove the glitter, a target hit by this spell emits Dim Light in a 5-foot radius, it cannot benefit from the Invisible condition and has Disadvantage on any Dexterity (Stealth) checks it makes to hide or conceal itself.
 
-***Cantrip Scaling***. The damage of this spell increases by 1d8 at 5th (2d8), 11th (3d8), and 17th level (4d8).
+***Cantrip Upgrade.*** The damage of this spell increases by 1d8 at 5th (2d8), 11th (3d8), and 17th level (4d8).
 
 #### Stone Forming
 *Transmutation Cantrip*  
@@ -5873,7 +5873,7 @@ You project a beam of twinkling lights at a creature or object within range. Mak
 
 You touch a stone surface or the ground, and call forth stone that shapes itself to your command. You can make any roughly shaped Small or Tiny item from the stone, including functional simple or martial melee weapons (for Medium or smaller creatures). Items made this way lose any magical durability after one hour, and become easily broken if they would not normally be functional in that shape. You can only have one such item created at once. 
 
-***Cantrip Scaling***. When you reach certain levels, you can create one more item at a time using this Cantrip. At 5th level, you can have two such items. At 11th level, you can have 3 such items and at 17th level, you can have 4 such items.
+***Cantrip Upgrade.*** When you reach certain levels, you can create one more item at a time using this Cantrip. At 5th level, you can have two such items. At 11th level, you can have 3 such items and at 17th level, you can have 4 such items.
 
 \page
 {{pageNumber,auto}}
@@ -5887,7 +5887,7 @@ You touch a stone surface or the ground, and call forth stone that shapes itself
 
 You conjure a defensive ring of spectral blades which sweep around you. Creatures within 5 feet of you must succeed on a Dexterity saving throw or take 1d6 Slashing damage.
 
-***Cantrip Scaling***. The damage die of this spell increases at 5th level (1d8), 11th level (1d10), and 17th level (1d12). Starting at 5th level, you can also choose to cast this Cantrip as an Action. If you do so, the damage increases by 1d6 at 5th level (2d6), 11th level (3d6), and 17th level (4d6).
+***Cantrip Upgrade.*** The damage die of this spell increases at 5th level (1d8), 11th level (1d10), and 17th level (1d12). Starting at 5th level, you can also choose to cast this Cantrip as an Action. If you do so, the damage increases by 1d6 at 5th level (2d6), 11th level (3d6), and 17th level (4d6).
 
 #### Tempestuous Blade
 *Evocation Cantrip*  
@@ -5901,7 +5901,7 @@ As a Bonus action, you infuse the melee weapon used in the casting of this spell
 
 Once per casting when you deal Lightning damage with this spell, you can infuse your target with an electrical charge until the start of your next turn. If the target uses a Reaction of any kind before then, this tempestuous charge is unleashed and it takes 1d4 Lightning damage.
 
-***Cantrip Scaling***. The Lightning damage dealt by this spell when the creature takes a Reaction increases at 5th level (2d4), 11th level (3d4), and 17th level (4d4).
+***Cantrip Upgrade.*** The Lightning damage dealt by this spell when the creature takes a Reaction increases at 5th level (2d4), 11th level (3d4), and 17th level (4d4).
 
 #### Thaumaturgy
 *Transmutation Cantrip*  
@@ -5925,7 +5925,7 @@ You manifest a minor wonder within range. You create one of the effects below wi
 
 **Tremors.** You cause harmless tremors in the ground for 1 minute.
 
-***Cantrip Scaling***. At 5th level, as one of your effects you can cause yourself to appear 10 percent larger or smaller for 1 minute.
+***Cantrip Upgrade.*** At 5th level, as one of your effects you can cause yourself to appear 10 percent larger or smaller for 1 minute.
 At 11th level you can cause two effects per casting of the spell and have up to four effects active at a time.
 At 17th level you can cause three effects per casting of the spell and have up to six effects active at a time.
 
@@ -5939,7 +5939,7 @@ At 17th level you can cause three effects per casting of the spell and have up t
 
 You create a long, vine-like whip covered in thorns that lashes out at your command toward a creature in range. Make a melee spell attack against the target. If the attack hits, the creature takes 1d6 Piercing damage, and if the creature is Large or smaller, you pull the creature up to 10 feet closer to you.
 
-***Cantrip Scaling***. This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
+***Cantrip Upgrade.*** This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
 
 #### Thunderclap
 *Evocation Cantrip*  
@@ -5951,7 +5951,7 @@ You create a long, vine-like whip covered in thorns that lashes out at your comm
 
 You create a burst of cracking sound that can be heard up to 100 feet away. All other creatures within 5 feet of you must succeed on a Constitution saving throw or take 1d8 Thunder damage and be Deafened until the end of their next turn.
 
-***Cantrip Scaling***. The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
+***Cantrip Upgrade.*** The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
 
 
 
@@ -5969,7 +5969,7 @@ You create a burst of cracking sound that can be heard up to 100 feet away. All 
 
 You emit a crashing bang with a localized point of intensity targeting a creature within range. The target must succeed on a Constitution saving throw or take 1d8 Thunder damage and become Deafened until the start of their next turn. Constitution saving throws to maintain concentration on spells triggered by this damage are made with Disadvantage.
 
-***Cantrip Scaling***. The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
+***Cantrip Upgrade.*** The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
 
 #### Toll the Dead
 *Necromancy Cantrip*  
@@ -5981,7 +5981,7 @@ You emit a crashing bang with a localized point of intensity targeting a creatur
 
 You point at one creature you can see within range, and the single chime of a dolorous bell is audible within 10 feet of the target. The target must succeed on a Wisdom saving throw or take 1d8 Necrotic damage. If the target is missing any of its Hit Points, it instead takes 1d12 Necrotic damage.
 
-***Cantrip Scaling***. The spell's damage increases by one die when you reach 5th level (2d8 or 2d12), 11th level (3d8 or 3d12), and 17th level (4d8 or 4d12).
+***Cantrip Upgrade.*** The spell's damage increases by one die when you reach 5th level (2d8 or 2d12), 11th level (3d8 or 3d12), and 17th level (4d8 or 4d12).
 
 #### True Strike
 *Divination Cantrip*  
@@ -5993,7 +5993,7 @@ You point at one creature you can see within range, and the single chime of a do
 
 You infuse your weapon with divination magic and point it at one creature you can see. For the duration, you can use your spellcasting ability instead of Strength or Dexterity for the attack and damage rolls of melee attacks using that weapon against that target.
 
-***Cantrip Scaling.*** The first attack you make using the weapon against the target deals additional damage when you reach level 5 (1d4), level 11 (2d4) and level 17 (3d4).
+***Cantrip Upgrade.*** The first attack you make using the weapon against the target deals additional damage when you reach level 5 (1d4), level 11 (2d4) and level 17 (3d4).
 \column
 
 #### Vicious Mockery
@@ -6006,7 +6006,7 @@ You infuse your weapon with divination magic and point it at one creature you ca
 
 You unleash a string of insults laced with subtle Enchantments at a creature you can see within range. If the target can hear you (though it need not understand you), it must succeed on a Wisdom saving throw or take 1d6 Psychic damage and have Disadvantage on the next attack roll it makes before the end of its next turn.
 
-***Cantrip Scaling.*** This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
+***Cantrip Upgrade.*** This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
 
 
 #### Water Bullet
@@ -6019,7 +6019,7 @@ You unleash a string of insults laced with subtle Enchantments at a creature you
 
 You create a compressed bead of water and fire it at a creature you can see within range. Make a ranged spell attack. On hit, the target takes 1d6 + your spellcasting ability modifier Piercing damage.
 
-***Cantrip Scaling.*** This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
+***Cantrip Upgrade.*** This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
 
 #### Windborne Weapon
 *Transmutation Cantrip*  
@@ -6031,7 +6031,7 @@ You create a compressed bead of water and fire it at a creature you can see with
 
 Make an attack with a weapon with the ammunition or thrown property as part of the action used to cast this spell, turning it into a ranged spell attack. This attack ignores cover. On hit, it deals 1d8 damage of the weapon's damage type.
 
-***Cantrip Scaling.*** This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
+***Cantrip Upgrade.*** This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
 
 \page
 {{pageNumber,auto}}
@@ -6046,7 +6046,7 @@ Make an attack with a weapon with the ammunition or thrown property as part of t
 
 Burning radiance erupts from you in a 5-foot Emanation. Each creature of your choice that you can see in it must succeed on a Constitution saving throw or take 1d6 Radiant damage.
 
-***Cantrip Scaling.*** The spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
+***Cantrip Upgrade.*** The spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
 
 \page
 {{pageNumber,auto}}
