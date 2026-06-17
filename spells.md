@@ -7247,7 +7247,7 @@ You create a shard of ice and fling it at one creature within range. Make a rang
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the Cold damage increases by 1d8 for each slot level above 1st.
 \column
 
-{{note
+{{descriptive
 {{font-family:WalterTurncoat "Hunter’s Mark" emerges from the ranger's connection to the wild, allowing them to mark their chosen prey with an ethereal bond. With whispered words steeped in the reverence of the hunt, the ranger designates their target, infusing their attacks with a primal energy that enhances damage and heightens their senses. This mystic bond persists until the hunter chooses a new quarry or the current one falls, reflecting the ranger's unwavering focus and attunement to the rhythms of nature. As a mage scholar, I find this spell a captivating fusion of wilderness lore and martial prowess, embodying the ranger's role as a protector of the natural world. }}
 :
 {{font-family:WalterTurncoat"Ice Arrow" and "Ice Knife" are manifestations of elemental magic, channeling the biting chill of winter into potent projectiles. Through gestures imbued with the essence of frost, the caster conjures icy shards, launching them toward their target with precision and force. "Ice Arrow" strikes true, delivering a burst of frigid energy upon impact, while "Ice Knife" combines piercing and freezing damage in a devastating display of elemental power. Their potency increases with the caster's proficiency, reflecting a deepening mastery over the arcane arts. Personally, as a scholar enamored with the mysteries of elemental magic, I find these spells a mesmerizing testament to the beauty and ferocity of ice in its magical form. }}
@@ -7484,7 +7484,7 @@ You hurl a glob of acid at a creature within range, making a ranged spell attack
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the initial damage increases by 2d4 for each slot level above 1st.
 
-{{note
+{{descriptive
 
 {{font-family:WalterTurncoat Magic Missile is an elegant exemplar of fundamental arcane principles and remains one of the most enduring offensive spells due to its unwavering precision. When invoked, this spell conjures luminous missiles of pure magical force that unerringly strike their targets, bypassing even the most agile evasion techniques or obscuring barriers. The sheer reliability of its homing capabilities is the result of a refined focus on the caster's will, weaving arcane energies into bolts that instinctively seek their designated mark.}}
 
@@ -7545,7 +7545,7 @@ The spell ends after dealing damage, or at the start of your next turn, whicheve
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d12 for each slot level above 1st.
 
-{{note,wide
+{{descriptive,wide
 {{font-family:WalterTurncoat  "Mind Ray" delves into the arcane depths of mental manipulation, unleashing a torrent of psychic energy upon the caster's chosen target. Its verbal and somatic components intertwine ancient incantations with gestures reminiscent of ancient rituals, culminating in a surge of mental force that pierces through mundane defenses. Success hinges on the target's inner resilience, with failure leaving them vulnerable to both damage and mental disarray. While undoubtedly potent in its capacity to disrupt foes, some scholars caution against its indiscriminate use, citing concerns over the potential backlash from those who survive its onslaught.}}
 \column
 {{font-family:WalterTurncoat "Nauseating Poison," conversely, embodies the sinister allure of dark magic, cloaking the caster's weapon in a malevolent mist of toxic vapors. Its components resonate with the ominous echoes of forbidden incantations, conjuring forth the essence of decay and corruption. Upon impact, the target not only suffers additional Poison damage but may also succumb to the debilitating effects of poisoning, their constitution tested against the virulent brew. While effective in incapacitating adversaries, moral qualms arise regarding the use of such insidious methods, as some question the righteousness of resorting to necromantic arts for offensive purposes. }}
@@ -7810,7 +7810,7 @@ Most Beasts have little to say about topics that don't pertain to survival or co
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the duration of the spell increases to 1 hour (2nd level), 8 hours (3rd level), 1 day (4th level), 1 week (5th level), 1 month (6th level), 6 months (7th level), or 1 year (8th level). At 9th level, the spell effect is permanent on you.
 
-{{note
+{{descriptive
 
 {{font-family:WalterTurncoat The Sleep spell is an Enchantment that embodies the tranquil power of magic to pacify. With a few spoken words and a pinch of fine sand, rose petals, or even a cricket, a caster can summon a wave of magical drowsiness that radiates outward from a focal point, inducing a slumber that washes over those caught in its gentle sway. The magic prioritizes the weakest, ensuring that the most susceptible creatures are lulled into Unconsciousness first, leaving their stronger companions without their usual support.}}
 
@@ -8544,7 +8544,7 @@ You solidify into a stone. Until the start of your next turn, you are Petrified.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you gain 10 more Temporary Hit Points for each slot level above 2nd.
 
-{{note
+{{descriptive
 {{font-family:WalterTurncoat Become Stone is a Transmutation spell that allows the caster to embody the resilience of rock itself, transforming into solid stone with a swift incantation and gesture. This magical petrification encases them in an impenetrable shell, making them nearly impervious to harm while they remain immobile and statuesque for a brief moment. During this transformation, the caster gains the unyielding durability of stone, with their hardened form providing formidable protection against incoming threats before they revert to their natural state. For those drawing on higher levels of magic, the spell’s transformative power can further fortify the caster against oncoming dangers, offering them a moment of reprieve and safety amid the chaos of battle.}}
 }}
 
@@ -8955,7 +8955,7 @@ For the duration of the spell, as a Bonus action, you can move the wave of water
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 2nd.
 
-{{note
+{{descriptive
 
 {{font-family:WalterTurncoat Crown of Madness is a sinister Enchantment that embodies the darker side of magical manipulation. With a whispered incantation and subtle gestures, the caster inflicts a twisted curse upon a chosen humanoid within range. The victim's eyes blaze with a malevolent gleam as a crown of jagged iron materializes atop their head, marking them as puppets of the caster's will. This crown compels them to unleash their fury upon those around them, turning on their allies with violent intent. They are forced to wield their weapons against a mentally chosen target, all while bound within the web of madness the spell weaves. }}
 
@@ -11564,7 +11564,7 @@ If the result of your ability check is equal to or greater than the result of th
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the level of the spell is added to the ability check, as noted above.
 
-{{note
+{{descriptive
 ##### Counterspell (and similar abilities) Rule
 A Spell Slot is expended when a spell is succesfully cast. As thus, spells and effects that state that "a Spell fails and has no effect" (or use similar language) make the spell dissipate with no effect, and the Action, Bonus Action, or Reaction used to cast it is wasted. If that spell was cast with a Spell Slot, the slot isn't expended.
 }}
@@ -12707,8 +12707,7 @@ This swarm is considered to be climbing on the target creature and moves with it
 The swarm uses the caster’s spell attack modifier when attacking (if it is higher than their attack modifier). A swarm will attack the creature it fell on if it can, or move to chase the creature if it has been knocked off of them. Any spiders that remain when the spell ends disappear.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the radius increases by 10 feet for each slot level above 3rd.
-\page
-{{pageNumber,auto}}
+
 
 
 #### Remove Curse
@@ -12722,7 +12721,8 @@ The swarm uses the caster’s spell attack modifier when attacking (if it is hig
 At your touch, all curses affecting one creature or object end. If the object is a cursed magic item, its curse remains, but the spell breaks its owner's attunement to the object so it can be removed or discarded.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can affect one additional creature for each slot level above 3rd.
-
+\page
+{{pageNumber,auto}}
 
 #### Remove Gravity
 *3rd-level Transmutation*  
@@ -12749,7 +12749,6 @@ You force a creature that can hear you within range to make a Wisdom saving thro
 While dancing, the target must use all its movement to dance without leaving its space and has disadvantage on Dexterity saving throws and attack rolls. While affected, creatures have advantage on attack rolls against it. As an action, a dancing creature can make a Wisdom saving throw to regain control of itself, ending the spell on a success.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature who can hear you within range for each slot level above 3rd.
-
 
 #### Revivify
 *3rd-level Necromancy*  
@@ -12784,13 +12783,14 @@ You transform some of your blood into three floating spears of crimson power. Wh
 **Components:** V, S  
 **Duration:** Instantaneous  
 
-You release a seismic wave, slamming the ground in front of you causing the earth to explode violently in a 30-foot Cone in front of you. Creatures touching the ground in the area must make a Strength saving throw. On failure, they take 4d10 
+You release a seismic wave, slamming the ground in front of you causing the earth to explode violently in a 30-foot Cone in front of you. Creatures touching the ground in the area must make a Strength saving throw. On failure, they take 4d10 Bludgeoning damage and fall Prone. On success, they take half as much damage and do not fall Prone. Large or larger objects and structures in the area of effect automatically fail the save and take double damage. The ground becomes Difficult Terrain until cleared. Each 5-foot-square portion of the area requires at least 1 minute to clear by hand.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d10 for each slot level above 2nd.
+
 \page
 {{pageNumber,auto}}
 
-Bludgeoning damage and fall Prone. On success, they take half as much damage and do not fall Prone. Large or larger objects and structures in the area of effect automatically fail the save and take double damage. The ground becomes Difficult Terrain until cleared. Each 5-foot-square portion of the area requires at least 1 minute to clear by hand.
 
-***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d10 for each slot level above 2nd.
 
 #### Sending
 *3rd-level Divination*  
@@ -15602,7 +15602,7 @@ The awakened beast or plant is Charmed by you for 30 days or until you or your c
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, you can apply one of the following additional effects to the awakened creature for each slot level above 5th: increase its Hit Points by 2d10; increase its Intelligence by 2 points; increase its movement Speed by 10 feet.
 
-{{note
+{{descriptive
 {{font-family:WalterTurncoat Awaken, a spell of mystical metamorphosis, weaves a tale of magic's communion with the essence of nature. Through an intricate ritual with a precious agate, the caster imbues a creature or plant of significant size with profound consciousness. Once bereft of cognition or possessing mere remnants of understanding, these beings awaken to a state of awareness akin to mortals, endowed with newfound intelligence, mobility, and senses reminiscent of humanity. Bound to the caster by a fleeting charm, they reciprocate kindness for thirty days or until harmed, retaining autonomy thereafter. At heightened levels, the caster may bestow additional blessings, illuminating the spell's potential to foster unity between sentient beings and the natural world, a testament to the transformative power of magic's embrace.}}
 }}
 
@@ -17819,34 +17819,8 @@ If you die, the Homunculus dies instantly.
 - Increase Speed by 5 ft.  
 - Gain resistance to one of the following damage types: Bludgeoning, Piercing, or Slashing  
 
-#### Create Monstrosity (Chimeric Binding)
-*6th-level Transmutation*  
-**Classes:** Wizard  
-**Casting Time:** 1 hour  
-**Range:** Touch  
-**Components:** V, S, M (the corpses of the appropriate Beasts and blood of the spellcaster, all consumed)  
-**Duration:** Instantaneous  
-
-You spill your blood onto the corpses, binding them together into a new form. This reduces your maximum hit points by 5 and creates a Hippogriff, Griffon, or Peryton under your control. Monstrosities created by this spell follow the rules below.
-
-**Control.** As a bonus action, you can mentally command any Monstrosities you created with this spell within 60 feet. You determine how they act or set a general course of action (e.g., *“defend this dungeon”*). Monstrosities follow commands until completed. If a Monstrosity is not given a command, it defends itself with extreme prejudice.
-
-**Creator's Bond.** While a Monstrosity is under your control, you cannot regain the maximum hit points spent to create it. After a long rest, you can release control over any Monstrosity to regain the maximum hit points expended. Released Monstrosities become hostile to all living creatures, particularly their creator.
-
-***At Higher Levels.*** When you cast this spell using a higher-level spell slot, you may expend additional maximum hit points to create more powerful Monstrosities, as shown in the table below.
-
-| Slot Level | Max. HP Expended | Monstrosity Created |
-|------------|-----------------|-------------------|
-| 7th        | 8               | Manticore, Owlbear |
-| 8th        | 10              | Bulette, Girallon |
-| 9th        | 15              | Chimera           |
-
-
-
-
-
-
 {{note,
+{{monster
 
 #### Homunculus
 *Tiny Construct*
@@ -17871,6 +17845,32 @@ You spill your blood onto the corpses, binding them together into a new form. Th
 *Hit:* 1d4 + PB piercing damage.
 
 }}
+}}
+
+\page
+{{pageNumber,auto}}
+
+#### Create Monstrosity (Chimeric Binding)
+*6th-level Transmutation*  
+**Classes:** Wizard  
+**Casting Time:** 1 hour  
+**Range:** Touch  
+**Components:** V, S, M (the corpses of the appropriate Beasts and blood of the spellcaster, all consumed)  
+**Duration:** Instantaneous  
+
+You spill your blood onto the corpses, binding them together into a new form. This reduces your maximum hit points by 5 and creates a Hippogriff, Griffon, or Peryton under your control. Monstrosities created by this spell follow the rules below.
+
+**Control.** As a bonus action, you can mentally command any Monstrosities you created with this spell within 60 feet. You determine how they act or set a general course of action (e.g., *“defend this dungeon”*). Monstrosities follow commands until completed. If a Monstrosity is not given a command, it defends itself with extreme prejudice.
+
+**Creator's Bond.** While a Monstrosity is under your control, you cannot regain the maximum hit points spent to create it. After a long rest, you can release control over any Monstrosity to regain the maximum hit points expended. Released Monstrosities become hostile to all living creatures, particularly their creator.
+
+***At Higher Levels.*** When you cast this spell using a higher-level spell slot, you may expend additional maximum hit points to create more powerful Monstrosities, as shown in the table below.
+
+| Slot Level | Max. HP Expended | Monstrosity Created |
+|------------|-----------------|-------------------|
+| 7th        | 8               | Manticore, Owlbear |
+| 8th        | 10              | Bulette, Girallon |
+| 9th        | 15              | Chimera           |
 
 \page
 {{pageNumber,auto}}
