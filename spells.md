@@ -12750,6 +12750,7 @@ While dancing, the target must use all its movement to dance without leaving its
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature who can hear you within range for each slot level above 3rd.
 
+\column
 #### Revivify
 *3rd-level Necromancy*  
 **Classes:** Artificer, Cleric, Druid, Paladin, Ranger  
@@ -12775,6 +12776,11 @@ You transform some of your blood into three floating spears of crimson power. Wh
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, for each Spell Slot level above 3rd, you can sacrifice 2 additional Hit Points to create an additional spear.
 
 
+
+\page
+{{pageNumber,auto}}
+
+
 #### Seismic Wave
 *3rd-level Transmutation*  
 **Classes:** Druid, Magus, Sorcerer, Wizard  
@@ -12786,11 +12792,6 @@ You transform some of your blood into three floating spears of crimson power. Wh
 You release a seismic wave, slamming the ground in front of you causing the earth to explode violently in a 30-foot Cone in front of you. Creatures touching the ground in the area must make a Strength saving throw. On failure, they take 4d10 Bludgeoning damage and fall Prone. On success, they take half as much damage and do not fall Prone. Large or larger objects and structures in the area of effect automatically fail the save and take double damage. The ground becomes Difficult Terrain until cleared. Each 5-foot-square portion of the area requires at least 1 minute to clear by hand.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d10 for each slot level above 2nd.
-
-\page
-{{pageNumber,auto}}
-
-
 
 #### Sending
 *3rd-level Divination*  
@@ -12808,6 +12809,7 @@ Upon receiving your message, a creature can block your ability to reach it again
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the message length you can send increases by 25 words for each slot level above 3rd.
 
+\column
 #### Silver Lance
 *3rd-level Evocation*  
 **Classes:** Cleric, Sorcerer, Wizard  
@@ -12819,8 +12821,6 @@ Upon receiving your message, a creature can block your ability to reach it again
 Silver energy bursts out from you in a 120-foot-long, 5-foot-wide line. Each creature of your choice in the line makes a Strength saving throw. On a failed save, a creature takes 3d10 force damage and is knocked prone. On a successful save, a creature takes half as much damage only.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, the force damage increases by 1d10 for each slot level above 3rd.
-\column
-
 
 #### Sleet Storm
 *3rd-level Conjuration*  
@@ -12835,6 +12835,10 @@ Until the spell ends, sleet falls in a 40-foot-tall, 20-foot-radius Cylinder cen
 Ground in the Cylinder is Difficult Terrain. When a creature enters the Cylinder for the first time on a turn or starts its turn there, it must succeed on a Dexterity saving throw or have the Prone condition. If it is concentrating on a spell, it must also succeed on a Constitution saving throws or lose Concentration.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the radius increases by 10 feet for each slot level above 3rd.
+
+\page
+{{pageNumber,auto}}
+
 
 #### Slow
 *3rd-level Transmutation*  
@@ -12854,9 +12858,7 @@ If the creature attempts to cast a spell with a casting time of an Action, roll 
 A creature affected by this spell makes another Wisdom saving throw at the end of each of its turns. On a successful save, the effect ends for it.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, for each slot level above 3rd, you can affect two additional creatures within a Cube 10 feet bigger on each side.
-\page
-{{pageNumber,auto}}
-
+\column
 #### Sonic Wave
 *3rd-level Conjuration*  
 **Classes:** Bard, Magus, Sorcerer, Wizard  
