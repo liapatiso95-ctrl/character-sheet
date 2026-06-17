@@ -338,9 +338,9 @@ Always on the lookout for danger, you gain the following benefits:
 
 **Ability Score Increase.** Increase your Dexterity, Intelligence or Wisdom by 1, to a maximum of 20.
 
-***Initiative Proficiency.*** When you roll Initiative, you can add your Proficiency Bonus to the roll.
+**Initiative Proficiency.** When you roll Initiative, you can add your Proficiency Bonus to the roll.
 
-***Initiative Swap.*** Immediately after you roll Initiative, you can swap your initiative with the Initiative of one willing ally in the same combat. You can’t take this swap if you or the ally is Incapacitated.
+**Initiative Swap.** Immediately after you roll Initiative, you can swap your initiative with the Initiative of one willing ally in the same combat. You can’t take this swap if you or the ally is Incapacitated.
 
 ### Artificer Initiate
 You've learned some of an artificer's inventiveness. You gain the following benefits.  
@@ -1924,9 +1924,9 @@ You have studied deeply the ways of White Magic, gaining the following benefits:
 ***Prerequisites: Level 4+, scion of the outer planes (lawful outer plane) feat***   
 You can channel cosmic forces of order to gain these benefits:
 
-***Ability Score Increase.*** Increase one ability score of your choice by 1, to a maximum of 20.
+**Ability Score Increase.** Increase one ability score of your choice by 1, to a maximum of 20.
 
-***Stasis Strike.*** Once per turn, when you damage a creature you can see within 60 feet of yourself, you can deal an extra 1d8 force damage to the target, and it must make a Wisdom saving throw (DC equal to 8 + your proficiency bonus + the modifier of the spellcasting ability you chose for the Scion of the Outer Planes feat) as spectral bindings try to ensnare it. On a successful save, the target escapes. On a failed save, the target has the restrained condition until the start of your next turn. These bindings manifest as chains or some other symbol of stasis. You can use this benefit a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.
+**Stasis Strike.** Once per turn, when you damage a creature you can see within 60 feet of yourself, you can deal an extra 1d8 force damage to the target, and it must make a Wisdom saving throw (DC equal to 8 + your proficiency bonus + the modifier of the spellcasting ability you chose for the Scion of the Outer Planes feat) as spectral bindings try to ensnare it. On a successful save, the target escapes. On a failed save, the target has the restrained condition until the start of your next turn. These bindings manifest as chains or some other symbol of stasis. You can use this benefit a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.
 
 
 ### Baleful Scion
