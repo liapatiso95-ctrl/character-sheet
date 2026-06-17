@@ -6446,10 +6446,6 @@ The energy can't leap again unless you cast the spell with a level 2+ Spell Slot
 
 **At	Higher	Levels.** The damage increases by 1d8 for each Spell Slot level above 1. The energy can leap a maximum number of times equal to the level of the slot expended, and a creature can be targeted only once by each casting of this spell.
 
-
-\page
-{{pageNumber,auto}}
-
 #### Charm Person
 *1st-level Enchantment*  
 **Classes:** Bard, Druid, Psion, Sorcerer, Vessel, Warlock, Wizard  
@@ -6462,6 +6458,7 @@ You attempt to charm a humanoid you can see within range. It must make a Wisdom 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.
 
+\column
 #### Chromatic Orb
 *1st-level Evocation*  
 **Classes:** Magus, Sorcerer, Wizard  
@@ -6486,8 +6483,10 @@ You launch a dazzling array of flashing, colorful light. Each creature in a 15-f
 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the cone increases 5 feet in length for each slot level above 1st.
+\page
+{{pageNumber,auto}}
 
-\column
+
 #### Command
 *1st-level Enchantment*  
 **Classes:** Bard, Cleric, Paladin, Psion, Shaman, Vessel  
@@ -6510,10 +6509,6 @@ You speak a one-word command to a creature you can see within range. The target 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. 
 
-
-
-\page
-{{pageNumber,auto}}
 #### Compelled Duel
 *1st-level Enchantment*  
 **Classes:** Paladin, Vessel  
@@ -6527,6 +6522,7 @@ You try to compel a creature into a duel. One creature that you can see within r
 The spell ends if you make an attack roll against a creature other than the target, if you cast a spell on an enemy other than the target, if an ally of yours damages the target, or if you end your turn more than 30 feet away from the target.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The spell ends if you attack any creature not under its effect or you cast a spell that targets a hostile creature not under its effect. If a creature friendly to you damages one of the targets or casts a harmful spell on it, or if you end your turn more than 30 feet away from one of the targets, the effect ends for that creature.
+\column
 
 #### Comprehend Languages
 *1st-level Divination (ritual)*  
@@ -6541,7 +6537,7 @@ For the duration, you understand the literal meaning of any language that you he
 This spell doesn't decode symbols or secret messages.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the spell’s duration increases to 8 hours (2nd level), 1 day (3rd level), 1 week (4th level), 1 month (5th level), 3 months (6th level), 6 months (7th level), or 1 year (8th level). At 9th level, the spell effect is permanent on you.
-\column
+
 #### Crashing Wave
 *1st-level Conjuration*  
 **Classes:** Druid, Shaman, Sorcerer, Wizard  
@@ -6554,6 +6550,8 @@ A wave of water sweeps out from you. Each creature in a 15-foot Cone must make a
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d6 for each level above 1st.
 
+\page
+{{pageNumber,auto}}
 
 #### Create or Destroy Water
 *1st-level Transmutation*  
@@ -6968,9 +6966,8 @@ Finally, when you cast a spell with a range of touch, your familiar can deliver 
 ___
 **Armor Class** :: + 1 per 2 spell levels above 1st
 **Hit Points**  :: + 5 per spell level above 1st (the familiar has a number of Hit Dice [d6s] equal to the spell’s level, unless stated otherwise)
-
 ___
-:
+
 **Proficiency Bonus**   :: equals your Proficiency Bonus
 ___
 ##### Actions
@@ -8243,8 +8240,6 @@ While you are within 500 feet of the Animated Object, you can telepathically com
 | 3rd        | Medium | 2d6         |
 | 4th        | Large  | 2d10        |
 | 5th        | Huge   | 2d12        |
-
-:::
 
 {{quote
 Animate Object, in its rare second-circle form, is a restrained cousin to the common fifth-circle spell. I encountered it most often among practitioners of Devilry, who prize its subtlety over spectacle—preferring a single obedient object to a clamor of animated matter. It is a quiet magic, and thus a treacherous one.
@@ -11126,22 +11121,6 @@ You summon a giant spectral angel that appears around you before crashing its gr
 \page
 {{pageNumber,auto}}
 
-{{note
-***Skeleton Template***
-
-When reanimated as a skeleton, a creature receives the following modifications:
-
-- Its type becomes Undead.
-- Its Strength becomes 10 if it was lower.
-- Its Dexterity becomes 14 if it was lower.
-- Its Constitution becomes 15, Its Intelligence becomes 6, its Wisdom becomes 8, and its Charisma becomes 5.
-- It gains vulnerability to Bludgeoning damage, immunity to Poison damage, and immunity to the Exhaustion and Poisoned conditions.
-- It has 60-foot Darkvision.
-- Its CR becomes 1/4 if it was lower than 1/4.
-
-It retains its weapon and armor proficiencies, and any damage resistances or immunities. It loses all languages, but can understand its creator's speech. It retains any natural weapon attacks. It loses its Spellcasting. Other features are generally lost, but may be retained at your DM's discretion.
-}}
-
 #### Animate Dead
 *3rd-level Necromancy*  
 **Classes:** Cleric, Wizard  
@@ -11158,9 +11137,22 @@ While an undead created by this spell is under your control, you can't regain th
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the target's maximum CR increases by 1 for each slot level above 3rd. If cast using a Spell Slot of 5th level or higher, you can also raise a *Ghoul*, using the Ghoul Template.
 
-
 {{note
-***Zombie Template***
+##### Skeleton Template
+
+When reanimated as a skeleton, a creature receives the following modifications:
+
+- Its type becomes Undead.
+- Its Strength becomes 10 if it was lower.
+- Its Dexterity becomes 14 if it was lower.
+- Its Constitution becomes 15, Its Intelligence becomes 6, its Wisdom becomes 8, and its Charisma becomes 5.
+- It gains vulnerability to Bludgeoning damage, immunity to Poison damage, and immunity to the Exhaustion and Poisoned conditions.
+- It has 60-foot Darkvision.
+- Its CR becomes 1/4 if it was lower than 1/4.
+}}
+\column
+{{note
+##### Zombie Template
 
 When reanimated as a zombie, a creature receives the following modifications:
 
@@ -11174,10 +11166,7 @@ When reanimated as a zombie, a creature receives the following modifications:
 - Its CR becomes 1/4 if it was lower than 1/4.
 - It gains the trait: **Undead Fortitude**. If damage reduces the zombie to 0 Hit Points, it must make a Constitution saving throw with a DC of 5 + the damage taken, unless the damage is Radiant or from a critical hit. On a success, the zombie drops to 1 Hit Point instead.
 
-
-It retains its weapon and armor proficiencies, and any damage resistances or immunities. It loses all languages, but can understand its creator's speech. It retains any natural weapon attacks. It loses its Spellcasting. Other features are generally lost, but may be retained at your DM's discretion.
-:
-***Ghoul Template***
+##### Ghoul Template
 
 When reanimated as a ghoul, a creature receives the following modifications:
 
@@ -11191,8 +11180,8 @@ When reanimated as a ghoul, a creature receives the following modifications:
 - It gains a bite attack, which deals 2d6 damage on a hit.
 - It gains a claw attack, which deals 2d4 damage on a hit and can use its Dexterity modifier in place of Strength. Additionally, once per turn on its turn when this attack hits, it can force the target to make a DC 10 Constitution saving throw or be Paralyzed for one minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on a success. Elves and the undead have Immunity to this effect.
 
-It retains its weapon and armor proficiencies, and any damage resistances or immunities. It loses all languages, but can understand its creator's speech. It retains any natural weapon attacks. It loses its Spellcasting. Other features are generally lost, but may be retained at your DM's discretion.
 
+For all templates, the creature retains its weapon and armor proficiencies, and any damage resistances or immunities. It loses all languages, but can understand its creator's speech. It retains any natural weapon attacks. It loses its Spellcasting. Other features are generally lost, but may be retained at your DM's discretion.
 }}
 
 \page
@@ -12886,7 +12875,9 @@ You grant the semblance of life to a corpse of your choice within range, allowin
 Until the spell ends, you can ask the corpse up to five questions. The corpse knows only what it knew in life, including the languages it knew. Answers are usually brief, cryptic, or repetitive, and the corpse is under no compulsion to offer a truthful answer if you are antagonistic toward it or it recognizes you as an enemy. This spell doesn't return the creature's soul to its body, only its animating spirit. Thus, the corpse can't learn new information, doesn't comprehend anything that has happened since it died, and can't speculate about future events.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can ask two more questions for each slot level above 3rd.
-\column
+
+\page
+{{pageNumber,auto}}
 
 #### Speak with Plants
 *3rd-level Transmutation*  
@@ -12920,9 +12911,7 @@ You touch a willing creature. Until the spell ends, it becomes semi-incorporeal 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.
 
-\page
-{{pageNumber,auto}}
-
+\column
 #### Spectral Viper
 *3rd-level Conjuration*  
 **Classes:** Druid, Wizard  
@@ -12954,7 +12943,8 @@ You prick a target with a tiny magical fang of venom. Make a melee spell attack 
 If you miss your melee attack roll, you can concentrate (as if concentrating on a spell) to maintain the attack for another attempt until the end of your next turn. (You may make subsequent attempts until you hit or lose concentration)
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d12 for each slot level above 3rd.
-\column
+\page
+{{pageNumber,auto}}
 
 #### Spirit Guardians
 *3rd-level Conjuration*  
@@ -12986,10 +12976,7 @@ In addition, any creature of your choice that you can see that starts its turn w
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d8 for every two slot levels above 3rd.
 
-\page
-{{pageNumber,auto}}
-
-
+\column
 #### Static Field
 *3rd-level Evocation*  
 **Classes:** Artificer, Magus, Sorcerer, Warlock, Wizard  
@@ -13001,7 +12988,6 @@ In addition, any creature of your choice that you can see that starts its turn w
 A visible field of static energy crackles to life in a 20-foot radius around a point you can see within range. If a creature takes an Action, Reaction, or moves 5 feet or more within the field, they take 1d12 Lightning damage. A creature can take damage from each trigger once per turn (taking an Action, a Reaction, or moving).
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the radius increases by 10 feet for each slot level above 3rd.
-\column
 
 #### Stinking Cloud
 *3rd-level Conjuration*  
@@ -13284,6 +13270,7 @@ You call forth an undead spirit. It manifests in an unoccupied space that you ca
 The creature is an ally to you and your companions. In combat, the creature shares your initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the Dodge action and uses its move to avoid danger.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, use the higher level wherever the spell's level appears in the stat block.
+
 {{note
 {{monster,
 #### Undead Spirit
@@ -14328,21 +14315,6 @@ The creature is an ally to you and your allies. In combat, the creature shares y
 
 ***At Higher Levels.*** Use the Spell Slot's level for the spell's level in the stat block.
 
-#### Grasping Vine
-*4th-level Conjuration*  
-**Classes:** Druid, Ranger, Shaman   
-**Casting Time:** Bonus action  
-**Range:** 60 feet  
-**Components:** V, S  
-**Duration:** Concentration, up to 1 minute  
-
-You conjure a vine that sprouts from a surface in an unoccupied space that you can see within range. The vine lasts for the duration.
-
-Make a melee spell attack against a creature within 30 feet of the vine. On a hit, the target takes 4d8 Bludgeoning damage and is pulled up to 30 feet toward the vine; if the target is Huge or smaller, it has the Grappled condition (escape DC equal to your spell save DC). The vine can grapple only one creature at a time, and you can cause the vine to release a Grappled creature (no action required).
-
-As a Bonus Action on your later turns, you can repeat the attack against a creature within 30 feet of the vine.
-
-***At Higher Levels.*** The number of creatures the vine can grapple increases by one for each Spell Slot level above 4.
 
 {{note
 {{monster,
@@ -14378,12 +14350,28 @@ ___
 }}
 }}
 
-\column
 
 
 
 \page
 {{pageNumber,auto}}
+
+#### Grasping Vine
+*4th-level Conjuration*  
+**Classes:** Druid, Ranger, Shaman   
+**Casting Time:** Bonus action  
+**Range:** 60 feet  
+**Components:** V, S  
+**Duration:** Concentration, up to 1 minute  
+
+You conjure a vine that sprouts from a surface in an unoccupied space that you can see within range. The vine lasts for the duration.
+
+Make a melee spell attack against a creature within 30 feet of the vine. On a hit, the target takes 4d8 Bludgeoning damage and is pulled up to 30 feet toward the vine; if the target is Huge or smaller, it has the Grappled condition (escape DC equal to your spell save DC). The vine can grapple only one creature at a time, and you can cause the vine to release a Grappled creature (no action required).
+
+As a Bonus Action on your later turns, you can repeat the attack against a creature within 30 feet of the vine.
+
+***At Higher Levels.*** The number of creatures the vine can grapple increases by one for each Spell Slot level above 4.
+
 
 #### Grasp Of The Grave
 *4th-level Necromancy*  
@@ -14401,6 +14389,7 @@ Until the spell ends, you can take the Magic action to force each creature withi
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, its damage increases by 1d6 for each slot level above 4th.
 
+\column
 #### Gravecall (Create Undead)
 *4th-level Necromancy*  
 **Classes:** Cleric, Warlock, Wizard  
@@ -14430,6 +14419,11 @@ As a bonus action, you can mentally command any number of undead you created wit
 | 9th        | 15              | Revenant, Vampire Spawn |
 
 
+
+\page
+{{pageNumber,auto}}
+
+
 #### Gravity Sinkhole
 *4th-level Evocation*  
 **Classes:** Psion, Sorcerer, Wizard   
@@ -14441,9 +14435,6 @@ As a bonus action, you can mentally command any number of undead you created wit
 A 20-foot-radius Sphere of crushing force forms at a point you can see within range and tugs at the creatures there. Each creature in the Sphere must make a Constitution saving throw. On a failed save, the creature takes 5d10 Force damage and is pulled in a straight Line toward the center of the sphere, ending in an unoccupied space as close to the center as possible (even if that space is in the air). On a successful save, the creature takes half as much damage and isn't pulled.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th.
-
-\page
-{{pageNumber,auto}}
 
 #### Greater Invisibility
 *4th-level Illusion*  
@@ -14471,7 +14462,6 @@ Any creature hostile to you that moves to a space within 10 feet of the guardian
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, for each slot level above 4th, the damage increases by 5 and the maximum damage dealt before the guardian vanishes increases by 20.
 
-\column
 #### Guardian of Nature
 *4th-level Transmutation*  
 **Classes:** Druid, Ranger, Shaman   
@@ -15939,6 +15929,21 @@ You curse a target creature, causing an overwhelming sense of powerlessness to w
 \page
 {{pageNumber,auto}}
 
+#### Danse Macabre
+*5th-level Necromancy*  
+**Classes:** Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** V, S  
+**Duration:** Concentration, up to 1 hour  
+
+Jagged, dark threads of magic jump from your fingertips, connecting to five Tiny, Small or Medium corpses of CR 1/4 or higher that you can see within range. Each corpse immediately transforms into an undead creature of the same size, which takes your choice of form (Corpse Puppet (Skeleton) or Corpse Puppet (Zombie)) using the Corpse Puppet stat blocks in this page.
+
+The creatures are allies to you and your companions. In combat, the creatures share your initiative count, but they take their turns immediately after yours. As a Bonus action, you can issue one command to any number of puppets within the spell's range. If you don't issue a command, they take the Dodge action and use their move to avoid danger.
+
+The creatures are under your control until the spell ends, after which they become inanimate once more.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, you animate up to two additional corpses for each slot level above 5th.
 
 {{note
 {{monster,
@@ -15968,22 +15973,7 @@ ___
 }}
 }}
 
-#### Danse Macabre
-*5th-level Necromancy*  
-**Classes:** Warlock, Wizard  
-**Casting Time:** Action  
-**Range:** 60 feet  
-**Components:** V, S  
-**Duration:** Concentration, up to 1 hour  
-
-Jagged, dark threads of magic jump from your fingertips, connecting to five Tiny, Small or Medium corpses of CR 1/4 or higher that you can see within range. Each corpse immediately transforms into an undead creature of the same size, which takes your choice of form (Corpse Puppet (Skeleton) or Corpse Puppet (Zombie)) using the Corpse Puppet stat blocks in this page.
-
-The creatures are allies to you and your companions. In combat, the creatures share your initiative count, but they take their turns immediately after yours. As a Bonus action, you can issue one command to any number of puppets within the spell's range. If you don't issue a command, they take the Dodge action and use their move to avoid danger.
-
-The creatures are under your control until the spell ends, after which they become inanimate once more.
-
-***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, you animate up to two additional corpses for each slot level above 5th.
-
+:
 {{note
 {{monster,
 #### Corpse Puppet (Zombie)
@@ -16013,6 +16003,7 @@ ___
 ___
 }}
 }}
+
 \page
 {{pageNumber,auto}}
 #### Dawn
@@ -17893,7 +17884,7 @@ While an undead created by this spell is under your control, you can't regain th
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the target's maximum CR increases by 1 for each slot level above 6th.
 
 {{note
-***Wraith Template***
+##### Wraith Template
 When reanimated as a wraith, a creature receives the following modifications:
 - Its type becomes Undead (incorporeal).
 - Its Strength becomes 6, its Dexterity becomes 16 if it was lower.
@@ -17916,7 +17907,7 @@ It retains all languages, weapon and armor proficiencies, and any damage resista
 {{pageNumber,auto}}
 
 {{note
-***Vampire Spawn Template***
+##### Vampire Spawn Template
 When reanimated as vampire spawn, a creature receives the following modifications:
 - Its type becomes Undead.
 - Its Strength becomes 16 if it was lower, its Dexterity becomes 16 if it was lower.
@@ -18856,22 +18847,6 @@ The creature is an ally to you and your companions. In combat, the creature shar
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, use the higher level wherever the spell's level appears in the stat block.
 
-#### Sunbeam
-*6th-level Evocation*  
-**Classes:** Cleric, Druid, Sorcerer, Wizard   
-**Casting Time:** Action  
-**Range:** Self (60-foot Line)  
-**Components:** V, S, M (a magnifying glass)  
-**Duration:** Concentration, up to 1 minute  
-
-You launch a sunbeam in a 5-foot-wide, 60-foot-long Line. Each creature in the Line makes a Constitution saving throw. On a failed save, a creature takes 6d8 Radiant damage and has the Blinded condition until the start of your next turn. On a successful save, it takes half as much damage only.
-
-Until the spell ends, you can take a Magic action to create a new Line of radiance.
-
-For the duration, a mote of brilliant radiance shines above you. It sheds Bright Light in a 30-foot radius and Dim Light for an additional 30 feet. This light is sunlight.
-
-***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, you deal an additional 1d8 damage for each slot level above 6th.
-
 
 {{note
 {{monster,
@@ -18905,8 +18880,28 @@ ___
 ___
 }}
 }}
+
+
 \page
 {{pageNumber,auto}}
+
+#### Sunbeam
+*6th-level Evocation*  
+**Classes:** Cleric, Druid, Sorcerer, Wizard   
+**Casting Time:** Action  
+**Range:** Self (60-foot Line)  
+**Components:** V, S, M (a magnifying glass)  
+**Duration:** Concentration, up to 1 minute  
+
+You launch a sunbeam in a 5-foot-wide, 60-foot-long Line. Each creature in the Line makes a Constitution saving throw. On a failed save, a creature takes 6d8 Radiant damage and has the Blinded condition until the start of your next turn. On a successful save, it takes half as much damage only.
+
+Until the spell ends, you can take a Magic action to create a new Line of radiance.
+
+For the duration, a mote of brilliant radiance shines above you. It sheds Bright Light in a 30-foot radius and Dim Light for an additional 30 feet. This light is sunlight.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, you deal an additional 1d8 damage for each slot level above 6th.
+
+
 #### Temporal Visions
 *6th-level Divination (ritual)*  
 **Classes:** Cleric, Wizard  
@@ -18935,7 +18930,6 @@ This spell creates a magical link between a Large or larger inanimate plant with
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the duration increases by 1 round for each slot level above 6th. You can also choose to allow travel for the duration either from your location to the far location, in the other direction, or both.
 
-\column
 #### True Seeing
 *6th-level Divination*  
 **Classes:** Bard, Cleric, Psion, Sorcerer, Warlock, Wizard   
@@ -18948,6 +18942,9 @@ This spell gives the willing creature you touch the ability to see things as the
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, you can affect one additional creature for each slot level above 6th.
 
+
+\page
+{{pageNumber,auto}}
 
 #### Volcanic Burst
 *6th-level Transmutation*  
@@ -18962,9 +18959,6 @@ You call fiery forces from below the earth to erupt upwards violently, causing t
 The center 10-foot radius becomes Difficult Terrain until cleared. Each 5-foot-square portion of the area requires at least 1 minute to clear by hand.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the Bludgeoning damage increases by 1d10 for each slot level above 6th.
-
-\page
-{{pageNumber,auto}}
 
 #### Wall of Ice
 *6th-level Evocation*  
@@ -19000,6 +18994,9 @@ A creature can move through the wall, albeit slowly and painfully. For every 1 f
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, both types of damage increase by 1d8 for each slot level above 6th.
 
+\page
+{{pageNumber,auto}}
+
 #### Wind Walk
 *6th-level Transmutation*  
 **Classes:** Druid   
@@ -19028,9 +19025,7 @@ You must designate a location, such as a temple, as a sanctuary by casting this 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the range increases by 10 feet for each slot level above 6th.
 
-\page
-{{pageNumber,auto}}
-
+\column
 #### Walking Hut
 *6th-level Transmutation*  
 **Classes:** Warlock, Wizard  
