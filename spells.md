@@ -6966,7 +6966,6 @@ Finally, when you cast a spell with a range of touch, your familiar can deliver 
 {{note
 {{monster,
 #### Otherwordly Familiar
-:
 ___
 **Armor Class** :: + 1 per 2 spell levels above 1st
 **Hit Points**  :: + 5 per spell level above 1st (the familiar has a number of Hit Dice [d6s] equal to the spell’s level, unless stated otherwise)
@@ -9283,7 +9282,7 @@ ___
 **Challenge** :: -
 **Proficiency Bonus**   :: equals your Proficiency Bonus
 ___
-***Life Bond..*** When you regain Hit Points from a spell of 1st
+***Life Bond.*** When you regain Hit Points from a spell of 1st
 level or higher, the steed regains the same number of
 Hit Points if you’re within 5 feet of it.
 ___
@@ -17674,7 +17673,7 @@ If you do not take the Magic action to maintain or redirect it, the spell ends e
 
 You create a vertical wall of whirling, razor-sharp blades made of magical energy. The wall appears within range and lasts for the duration. You can make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5 feet thick. The wall provides Three-Quarters Cover to creatures behind it, and its space is Difficult Terrain.
 
-Any creature in the wall's space makes a Dexterity saving throw, taking 6d10 Force damage on a failed save or half as much damage on a successful one. A creature also makes that save if it enters the wall's space or ends it turn there. A creature makes that save only once per turn..
+Any creature in the wall's space makes a Dexterity saving throw, taking 6d10 Force damage on a failed save or half as much damage on a successful one. A creature also makes that save if it enters the wall's space or ends it turn there. A creature makes that save only once per turn.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 7th level or higher, the damage increases by 1d10 for each slot level above 6th.
 
@@ -17903,7 +17902,7 @@ When reanimated as a wraith, a creature receives the following modifications:
 - **Incorporeal Movement.** The wraith can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object.
 - **Life Drain.** The wraith's natural weapon attacks deal necrotic damage instead of their normal damage type. When the wraith hits with a natural weapon attack, the target must make a DC 14 Constitution saving throw. On a failed save, the target's hit point maximum is reduced by the damage taken. This reduction lasts until the target finishes a long rest. If this reduces the target's hit point maximum to 0, the target dies.
 
-It retains all languages, weapon and armor proficiencies, and any damage resistances or immunities it had in life. It retains its features, but attacks may deal Necrotic damage, at DM's discretion..
+It retains all languages, weapon and armor proficiencies, and any damage resistances or immunities it had in life. It retains its features, but attacks may deal Necrotic damage, at DM's discretion.
 }}
 
 
