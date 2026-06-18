@@ -1,5 +1,5 @@
 #### Blade of the Scribe
-**Type:** Weapon (Rapier)  
+**Type:** Melee Weapon (Rapier)  
 **Rarity:** Rare 
 **Attunement:** by a Savant 
 **Weight:** 2  
@@ -52,7 +52,7 @@ This bronze ring is etched with hieroglyphics from a forgotten civilization. It 
 While you wear this ring, you can expend 1  Charge and focus your thoughts on one object or creature you can see to instantly learn one piece of significant, forgotten, or secret knowledge about it, so long as such information exists.
 
 #### Staff of the Headmaster
-**Type:** Weapon (Quarterstaff)  
+**Type:** Melee Weapon (Quarterstaff)  
 **Rarity:** Very Rare 
 **Attunement:** by a Savant 
 **Weight:** 4  
