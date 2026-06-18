@@ -2,6 +2,7 @@
 **Type:** Melee Weapon (Rapier)  
 **Rarity:** Rare 
 **Attunement:** by a Savant 
+**Bonus:** +1 to attack & damage rolls
 **Weight:** 2  
 **Cost:**  
 
@@ -55,6 +56,7 @@ While you wear this ring, you can expend 1  Charge and focus your thoughts on on
 **Type:** Melee Weapon (Quarterstaff)  
 **Rarity:** Very Rare 
 **Attunement:** by a Savant 
+**Bonus:** +2 to attack & damage rolls
 **Weight:** 4  
 **Cost:**  
 
