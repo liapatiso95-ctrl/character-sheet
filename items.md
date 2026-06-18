@@ -11,7 +11,7 @@ This magic rapier has 4 Charges. When you hit a target with this weapon, you can
 This magic rapier regains 1d4 Charges daily at dawn.
 
 #### Doctoral Robes
-**Type:** Wondrous Item
+**Type:** Wondrous Item, Robes
 **Rarity:** Legendary
 **Attunement:** by a Savant
 **Weight:** 3
