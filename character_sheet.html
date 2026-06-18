@@ -5227,21 +5227,23 @@ function parseItemMarkdown(md){
     var lines=block.split("\n");
     var name=(lines[0]||"").trim();
     if(!name) return;
-    var weight="",cost="",descLines=[],attune=null,type="",rarity="";
+    var weight="",cost="",descLines=[],attune=null,type="",rarity="",bonus="",damage="";
     var pastFields=false;
     for(var li=1;li<lines.length;li++){
       var ln=lines[li].trim();
       if(/^#/.test(ln)) break; // stop at next heading
       if(!pastFields){
         // Match bold fields with or without a value: **Field:** value OR **Field:**
-        var kv=ln.match(/^\*\*([^*]+)\*\*[:\s]+(.+)$/)||ln.match(/^(Weight|Cost|Type|Rarity|Attunement)[:\s]+(.+)$/i);
-        var kvEmpty=!kv&&(ln.match(/^\*\*([^*]+)\*\*:?\s*$/)||ln.match(/^(Weight|Cost|Type|Rarity|Attunement):\s*$/i));
+        var kv=ln.match(/^\*\*([^*]+)\*\*[:\s]+(.+)$/)||ln.match(/^(Weight|Cost|Type|Rarity|Attunement|Bonus|Damage)[:\s]+(.+)$/i);
+        var kvEmpty=!kv&&(ln.match(/^\*\*([^*]+)\*\*:?\s*$/)||ln.match(/^(Weight|Cost|Type|Rarity|Attunement|Bonus|Damage):\s*$/i));
         if(kv){
           var k=kv[1].toLowerCase().trim().replace(/:$/,""),v=kv[2].trim();
           if(k==="weight") weight=v.replace(/\s*(lb\.?|lbs\.?|pounds?)\s*$/i,"").trim();
           else if(k==="cost") cost=v;
           else if(k==="type") type=v;
           else if(k==="rarity") rarity=v;
+          else if(k==="bonus") bonus=v;
+          else if(k==="damage") damage=v;
           else if(k==="attunement") attune=/^(yes|true|required|requires)/i.test(v)?v:(/^(no|none|false)/i.test(v)?false:v);
           continue;
         }
@@ -5282,7 +5284,7 @@ function parseItemMarkdown(md){
     // charges: structured charge-tracker object derived from the description text,
     // exactly as the JSON parser falls back to when an item has no explicit count.
     var charges=parseChargesFromDesc(fullDesc);
-    items[name.toLowerCase()]={name,weight,cost,type,rarity,attune:attune===false?false:(attune?true:null),attuneTag:attuneTag,desc:fullDesc,charges:charges,src:"local"};
+    items[name.toLowerCase()]={name,weight,cost,type,rarity,attune:attune===false?false:(attune?true:null),attuneTag:attuneTag,desc:fullDesc,charges:charges,bonus:bonus,damage:damage,src:"local"};
   });
   return items;
 }
@@ -5715,9 +5717,112 @@ function entriesHaveList(entries){
   return false;
 }
 
+// Map of base-weapon / base-armor name -> stats, populated while parsing JSON items. Used to
+// enrich markdown items that name a base weapon/armor in parentheses, e.g. "Flame Tongue (Longsword)".
+var _weaponStatsByName={};
+var _armorStatsByName={};
+function _buildItemCombatLine(it,dmgOverride){
+  it=it||{};
+  var combat="";
+  if(dmgOverride) combat=(""+dmgOverride).trim();
+  else if(it.dmg1){
+    var dt=_ITEM_DMG[(it.dmgType||"").toUpperCase()]||"";
+    combat=it.dmg1+(dt?" "+dt:"");
+    if(it.dmg2) combat+=" (Versatile "+it.dmg2+")";
+  }
+  if(!combat) return it.bonusWeapon?(it.bonusWeapon+" to weapon attack & damage rolls"):"";
+  var props=(it.property||[]).map(function(p){return _ITEM_PROP[(""+p).split("|")[0]]||(""+p).split("|")[0];}).filter(Boolean);
+  if(it.range) props.push("Range "+it.range);
+  if(props.length) combat+=" · "+props.join(", ");
+  var mast=(it.mastery||[]).map(function(m){return (""+m).split("|")[0];}).filter(Boolean);
+  if(mast.length) combat+=" · **Mastery:** "+mast.join(", ");
+  if(it.bonusWeapon) combat+=" · "+it.bonusWeapon+" to attack & damage";
+  return combat;
+}
+function _buildItemAcLine(a){
+  if(!a||a.ac==null) return "";
+  var acVal=""+a.ac;
+  if(a.typeCode==="LA") acVal+=" + Dex modifier";
+  else if(a.typeCode==="MA") acVal+=" + Dex modifier (max 2)";
+  else if(a.typeCode==="S") acVal=(/^[+-]/.test(""+a.ac)?"":"+")+a.ac;
+  return "**Armor Class:** "+acVal;
+}
+// After both sources load, enrich markdown items. The base weapon/armor is read from the
+// Type line (e.g. "**Type:** Weapon (Rapier)" or "Armor (Plate)" or "Shield"), giving that
+// item's damage/AC line; a "+N" in the name or type adds "+N to attack & damage" (weapons)
+// or "+N AC" (armor/shields).
+function _enrichMdItemsWithWeaponStats(){
+  var data=_itemCache.data; if(!data) return;
+  Object.keys(data).forEach(function(k){
+    var it=data[k];
+    if(!it||it.src==="json"||it._weaponEnriched||!it.desc) return;
+    it._weaponEnriched=true;
+    var nm=it.name||"";
+    var typeM=it.desc.match(/\*\*Type:\*\*\s*([^\n]*)/i);
+    var typeLine=typeM?typeM[1]:"";
+    // Base item from the Type line's parenthetical; fall back to a name parenthetical.
+    var parenM=typeLine.match(/\(([^)]+)\)/)||nm.match(/\(([^)]+)\)/);
+    var baseKey=parenM?parenM[1].trim().toLowerCase():"";
+    var isShield=/\bshield\b/i.test(typeLine);
+    var isArmor=/\barmou?r\b/i.test(typeLine)||isShield;
+    var isWeapon=/\bweapon\b/i.test(typeLine);
+    var wStats=_weaponStatsByName[baseKey];
+    var aStats=_armorStatsByName[baseKey]||(isShield?_armorStatsByName["shield"]:null);
+    var hasDmgField=!!(it.damage&&(""+it.damage).trim());
+    var bonus=(it.bonus&&(""+it.bonus).trim())?(""+it.bonus).trim():"";
+    var lines=[];
+    var statLine="";
+    if(isWeapon||wStats||hasDmgField){
+      // Author-supplied Damage overrides the base's dice/type; properties & mastery still
+      // fill in from the base (only what's missing) — mirroring the JSON gap-fill.
+      statLine=_buildItemCombatLine(wStats||{},hasDmgField?(""+it.damage).trim():"");
+    } else if((isArmor||aStats)&&!/\*\*Armor Class:\*\*/.test(it.desc)){
+      statLine=aStats?_buildItemAcLine(aStats):"";
+    }
+    // Magic bonus (verbatim from the "Bonus" field) rides on the SAME line, right after
+    // mastery/AC — matching the JSON layout. Standalone only when there's no stat line.
+    if(statLine){
+      if(bonus) statLine+=" · "+bonus;
+      lines.push(statLine);
+    } else if(bonus){
+      lines.push(bonus);
+    }
+    // Charges line (mirrors JSON), when the description implies charges and none is shown yet.
+    if(it.charges&&it.charges.max&&!/\*\*Charges:\*\*/.test(it.desc)){
+      var chLine="**Charges:** "+it.charges.max;
+      if(it.charges.restore){
+        var tm=it.desc.toLowerCase().match(/at (dawn|dusk|midnight|sunrise|sunset|nightfall)/);
+        chLine+=" (regains "+it.charges.restore+(tm?" at "+tm[1]:"")+")";
+      }
+      lines.push(chLine);
+    }
+    if(!lines.length) return;
+    // Insert right after the Type/attunement header, before the body (blank-separated),
+    // since the markdown desc separates header from body with only a single newline.
+    var dlines=it.desc.split("\n");
+    var hEnd=-1;
+    for(var di=0;di<dlines.length;di++){
+      if(/^\*\*Type:\*\*/.test(dlines[di])){
+        hEnd=di;
+        while(hEnd+1<dlines.length&&/^\s*\*\(.*\)\*\s*$/.test(dlines[hEnd+1])) hEnd++;
+        break;
+      }
+    }
+    if(hEnd>=0){
+      var block=lines.slice();
+      if(hEnd+1<dlines.length&&dlines[hEnd+1].trim()!=="") block.push(""); // blank line before body
+      Array.prototype.splice.apply(dlines,[hEnd+1,0].concat(block));
+      it.desc=dlines.join("\n");
+    } else {
+      it.desc=lines.join("\n")+"\n\n"+it.desc;
+    }
+  });
+}
+
 // Accepts a JSON string OR an already-merged data object {item,baseitem,magicvariant,itemGroup}.
 function parseItemJson(jsonOrData){
   var out={};
+  _weaponStatsByName={}; _armorStatsByName={};
   var data;
   if(typeof jsonOrData==="string"){ try{data=JSON.parse(jsonOrData);}catch(e){return out;} }
   else data=jsonOrData||{};
@@ -5762,6 +5867,21 @@ function parseItemJson(jsonOrData){
   });
   // Full raw pool to parse: concrete items, base items, then generated variants.
   var arr=resolvedItems.concat(baseItems).concat(generated);
+  // Pre-pass: base weapon/armor stats. Skip reprinted printings, and for weapons PREFER the
+  // entry that carries mastery (the 2024 weapons) so every reference — including 2014 magic
+  // items — inherits it rather than matching an older, mastery-less printing.
+  arr.forEach(function(it){
+    if(!it||!it.name||it.reprintedAs) return;
+    var key=it.name.toLowerCase();
+    if(it.dmg1){
+      var hasMast=!!(it.mastery&&it.mastery.length);
+      var cur=_weaponStatsByName[key];
+      if(!cur||(hasMast&&!(cur.mastery&&cur.mastery.length)))
+        _weaponStatsByName[key]={dmg1:it.dmg1,dmgType:it.dmgType,dmg2:it.dmg2,property:it.property,range:it.range,mastery:it.mastery,bonusWeapon:it.bonusWeapon};
+    }
+    var tc=(it.type||"").split("|")[0];
+    if(it.ac!=null&&/^(LA|MA|HA|S)$/.test(tc)&&!_armorStatsByName[key]) _armorStatsByName[key]={ac:it.ac,typeCode:tc};
+  });
   arr.forEach(function(it){
     if(!it||!it.name) return;
     if(it.reprintedAs) return; // skip items that have been reprinted elsewhere
@@ -5811,20 +5931,27 @@ function parseItemJson(jsonOrData){
       else header.push("*(Requires Attunement "+strip5eTags(it.reqAttune).trim()+")*");
     }
     // ── Combat line (weapons) ──
+    // Pull from the base weapon only what's MISSING — never overwrite stats the item
+    // defines itself (some items intentionally redefine damage/type/properties).
+    //  • If the item has its own combat stats, leave them; only add mastery (a 2024-only
+    //    mechanic that older items can't carry on purpose) when absent.
+    //  • If the item has no combat stats of its own (it relies on its baseItem), populate
+    //    the full profile from the newest printing of that base.
     if(it.dmg1){
-      var dt=_ITEM_DMG[(it.dmgType||"").toUpperCase()]||"";
-      var combat=it.dmg1+(dt?" "+dt:"");
-      if(it.dmg2) combat+=" (Versatile "+it.dmg2+")";
-      var props=(it.property||[]).map(function(p){return _ITEM_PROP[(""+p).split("|")[0]]||(""+p).split("|")[0];}).filter(Boolean);
-      if(it.range) props.push("Range "+it.range);
-      if(props.length) combat+=" · "+props.join(", ");
-      var mast=(it.mastery||[]).map(function(m){return (""+m).split("|")[0];}).filter(Boolean);
-      if(mast.length) combat+=" · **Mastery:** "+mast.join(", ");
-      if(it.bonusWeapon) combat+=" · "+it.bonusWeapon+" to attack & damage";
-      header.push(combat);
-    } else if(it.bonusWeapon){
-      header.push(it.bonusWeapon+" to weapon attack & damage rolls");
+      if(!(it.mastery&&it.mastery.length)){
+        var _bwm=_weaponStatsByName[(it.baseItem?(""+it.baseItem).split("|")[0]:name).toLowerCase()];
+        if(_bwm&&_bwm.mastery&&_bwm.mastery.length) it.mastery=_bwm.mastery;
+      }
+    } else if(it.baseItem){
+      var _bw=_weaponStatsByName[(""+it.baseItem).split("|")[0].toLowerCase()];
+      if(_bw&&_bw.dmg1){
+        it.dmg1=_bw.dmg1; it.dmgType=_bw.dmgType; it.dmg2=_bw.dmg2;
+        it.property=_bw.property; it.range=_bw.range;
+        if(_bw.mastery&&_bw.mastery.length) it.mastery=_bw.mastery;
+      }
     }
+    var combatLine=_buildItemCombatLine(it);
+    if(combatLine) header.push(combatLine);
     // ── Armor line ──
     if(it.ac!=null||it.acSpecial){
       var acVal;
@@ -6079,7 +6206,7 @@ function useItemCompendium(){
       _itemCache.status="loading";
       _itemCache.data={};
       var pending=2;
-      function done(){pending--;if(pending<=0)_itemCache.status="ready";_notifyItemListeners();}
+      function done(){pending--;if(pending<=0){_enrichMdItemsWithWeaponStats();_itemCache.status="ready";}_notifyItemListeners();}
       // ── Markdown source ──
       fetch(ITEM_MD_URL)
         .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
@@ -9465,7 +9592,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.5.2</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.8.4</div>
 
 </script>
 </body>
