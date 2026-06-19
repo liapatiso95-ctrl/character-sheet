@@ -6856,7 +6856,7 @@ You release a burst of explosive energy to deflect an incoming attack. Roll 2d6 
 
 If the triggering attack was a melee attack, the attacker takes damage equal to the amount rolled. This damage is the same type as the damage dealt by the triggering attack.
 
-***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage reduction and the damage dealth increase by 1d6 for each slot level above 1st.
 
 
 
