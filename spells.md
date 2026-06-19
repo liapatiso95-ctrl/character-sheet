@@ -5800,11 +5800,11 @@ Lightning springs from your hand to deliver a shock to a creature you try to tou
 **Components:** V, S  
 **Duration:** Instantaneous  
 
-You cast sorcerous energy at one creature or object within range. Make a ranged attack roll against the target. On a hit, the target takes 1d8 damage of a type you choose: Acid, Cold, Fire, Lightning Poison, Psychic, or Thunder.
+You cast sorcerous energy at one creature or object within range. Make a ranged attack roll against the target. On a hit, the target takes 1d8 damage of a type you choose: Acid, Cold, Fire, Lightning, Poison, Psychic, or Thunder.
 
-If you roll an 8 on a d8 for this spell, you can roll another d8, and add it to the damage. When you cast this spell, the maximum number of these d8s you can add to the spell's damage equals your spellcasting ability modifier.
+If you roll an 8 on a d8 for this spell, you can roll another d8 and add it to the damage. When you cast this spell, the maximum number of these d8s you can add to the spell's damage equals your spellcasting ability modifier.
 
-**Cantrip	Upgrade.** This spell’s damage increases by	1d8 when you reach level 5 (2d8), 11 (3d8),	and	17 (4d8).
+***Cantrip Upgrade.*** This spell’s damage increases by 1d8 when you reach level 5 (2d8), 11 (3d8), and 17 (4d8)
 
 
 #### Spare the Dying
@@ -6427,24 +6427,25 @@ You perform a special religious ceremony that is infused with magic. When you ca
 **Components:** V, S  
 **Duration:**  Instantaneous  
 
-You	hurl	an	undulating	mass	of	chaotic	energy	at	one	creature	in	range.	Make	a	ranged	spell	attack	against	the	target.	On	a	hit,	the	target	takes	3d8	damage.	Choose	one	of	the	d8s.	The	number	rolled	on	that	die	determines	the	attack’s	damage	type,	as	shown	below.
+You hurl an undulating mass of chaotic energy at one creature in range. Make a ranged spell attack against the target. On a hit, the target takes 3d8 damage. Choose one of the d8s. The number rolled on that die determines the attack's damage type, as shown below.
 
-| d8 | Additional Effect |
-|:-----:|:--|
-| 1     | Acid |
-| 2     | Cold |
-| 3     | Fire |
-| 4     | Force |
-| 5     | Lightning |
-| 6     | Poison |
-| 7     | Psychic |
-| 8     | Thunder |
+|  d8 | Damage Type |
+| :-: | :---------- |
+|  1  | Acid        |
+|  2  | Cold        |
+|  3  | Fire        |
+|  4  | Force       |
+|  5  | Lightning   |
+|  6  | Poison      |
+|  7  | Psychic     |
+|  8  | Thunder     |
 
-If	you	roll	the	same	number	on	two or more	d8s,	the	chaotic	energy	leaps	from	the	target	to	a	different	creature	of	your	choice	within	30	feet	of	it.	Make	a	new	attack	roll	against	the	new	target,	and	make	a	new	damage	roll,	which	could	cause	the	chaotic	energy	to	leap	again.
+If you roll the same number on two or more d8s, the chaotic energy leaps from the target to a different creature of your choice within 30 feet of it. Make a new attack roll against the new target and make a new damage roll, which could cause the chaotic energy to leap again.
 
 The energy can't leap again unless you cast the spell with a level 2+ Spell Slot.
 
-**At	Higher	Levels.** The damage increases by 1d8 for each Spell Slot level above 1. The energy can leap a maximum number of times equal to the level of the slot expended, and a creature can be targeted only once by each casting of this spell.
+***At Higher Levels.*** The damage increases by 1d8 for each Spell Slot level above 1. The energy can leap a maximum number of times equal to the level of the slot expended, and a creature can be targeted only once by each casting of this spell.
+
 
 #### Charm Person
 *1st-level Enchantment*  
