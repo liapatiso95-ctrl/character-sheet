@@ -6964,7 +6964,7 @@ Finally, when you cast a spell with a range of touch, your familiar can deliver 
 
 **Different Forms.** Some features allow you to summon familiars, using different statblocks than those normally allowed by the spell. In that case, you use that statblock, modified by the ***Otherwordly Familiar*** statblock presented here.
 
-**At Higher Levels.** When you cast this spell using a Spell Slot of level 2 or higher, the familiar gains benefits as shown in the statblock below, and you reduce your hit point maximum by 1 for each slot level above 1st. If the familiar is destroyed, your hit point maximum returns to normal.
+***At Higher Levels.*** When you cast this spell using a Spell Slot of level 2 or higher, the familiar gains benefits as shown in the statblock below, and you reduce your hit point maximum by 1 for each slot level above 1st. If the familiar is destroyed, your hit point maximum returns to normal.
 
 {{note
 {{monster,
