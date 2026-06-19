@@ -6852,9 +6852,11 @@ This spell allows you to move at an incredible pace. You take the Dash action, a
 **Components:** V, S, M (a pinch of black powder)  
 **Duration:** Instantaneous  
 
-You release an explosive blast an energy to deflect an attack. Roll 2d6. The damage of the attack is reduced by the amount rolled. If the amount rolled is higher than the damage of the attack, and the attack was a melee attack, the attacker takes the remainder of the damage.
+You release a burst of explosive energy to deflect an incoming attack. Roll 2d6 and reduce the damage you take from the triggering attack by the total rolled.
 
-***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 2nd.
+If the triggering attack was a melee attack, the attacker takes damage equal to the amount rolled. This damage is the same type as the damage dealt by the triggering attack.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.
 
 
 
