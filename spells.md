@@ -763,7 +763,7 @@ With these words, I bid you welcome, dear reader, to the pages of this spellbook
   - #### [{{ Animate Objects}}{{ 225}}](#p225)
   - #### [{{ Animated Object Statistics}}{{ 225}}](#p225)
   - #### [{{ Antilife Shell}}{{ 225}}](#p225)
-  - #### [{{ Anvil Drop}}{{ 225}}](#p225)
+  - #### [{{ Anvil Drop}}{{ 226}}](#p226)
   - #### [{{ Arcane Hand}}{{ 226}}](#p226)
   - #### [{{ Awaken}}{{ 226}}](#p226)
   - #### [{{ Ball Lightning}}{{ 227}}](#p227)
@@ -4659,7 +4659,7 @@ On a turn, you can only cast one spell of 1st level or higher. You cannot for ex
 - [{{ Acid Rain}}{{ 224}}](#p224)
 - [{{ Aether Storm}}{{ 224}}](#p224)
 - [{{ Animate Objects}}{{ 225}}](#p225)
-- [{{ Anvil Drop}}{{ 225}}](#p225)
+- [{{ Anvil Drop}}{{ 226}}](#p226)
 - [{{ Arcane Hand}}{{ 226}}](#p226)
 - [{{ Ball Lightning}}{{ 227}}](#p227)
 - [{{ Burial Barrage}}{{ 227}}](#p227)
@@ -15505,28 +15505,39 @@ On each subsequent turn for the duration of the spell, as a Bonus action, you ca
 **Components:** V, S  
 **Duration:** Concentration, up to 1 minute  
 
-You magically animate nearby objects, bending them to your will. Choose up to six nonmagical objects within range that are not being worn or carried. Small targets count as one and a half object, Medium targets count as two objects, Large targets count as three objects, Huge targets count as six objects. Each object animates until the spell ends or until reduced to 0 Hit Points; when an object drops to 0 Hit Points, any remaining damage carries over to its original object form.
+Objects animate at your command. Choose a number of nonmagical objects within range that aren't being worn or carried, aren't fixed to a surface, and aren't Gargantuan. The maximum number of objects is equal to your spellcasting ability modifier; for this number, a Medium or smaller target counts as one object, a Large target counts as two, and a Huge target counts as three.
 
-#### Animated Object Statistics
+Each target animates, sprouts legs, and becomes a Construct that uses the Animated Object stat block; this creature is under your control until the spell ends or until it is reduced to 0 Hit Points. Each creature you make with this spell is an ally to you and your allies. In combat, it shares your Initiative count and takes its turn immediately after yours.
 
-| Size  | HP | AC | Str | Dex | Damage      | Speed        |
-|-------|----|----|-----|-----|-------------|--------------|
-| Tiny  | 5  | 19 | 12  | 28  | 1d4 + 1     | fly 30 (hover) |
-| Small | 10 | 18 | 16  | 24  | 1d6 + 3     | fly 30       |
-| Medium| 20 | 17 | 20  | 20  | 1d10 + 5    | 30           |
-| Large | 30 | 16 | 24  | 16  | 2d10 + 7    | 25           |
-| Huge  | 60 | 15 | 28  | 12  | 5d12 + 9    | 20           |
+Until the spell ends, you can take a Bonus Action to mentally command any creature you made with this spell if the creature is within 500 feet of you (if you control multiple creatures, you can command any of them at the same time, issuing the same command to each one). If you issue no commands, the creature takes the Dodge action and moves only to avoid harm. When the creature drops to 0 Hit Points, it reverts to its object form, and any remaining damage carries over to that form.
 
-An animated object has 30 feet of Blindsight and statistics as shown in the table above. The DM might rule an object has immunities, resistances, and vulnerabilities to specific damage types based on its form. If an object is securely attached to a surface or a larger object, such as a chain bolted to a wall, its Speed is 0.
+***At Higher Levels.*** The creature's Slam damage increases by 1d4 (Medium or smaller), 1d6 (Large), or 1d12 (Huge) for each spell slot level above 5.
 
-In combat, an object shares your initiative count, but takes its turn immediately after yours.
+{{note,
+{{monster,
+#### Animated Object
+*Tiny, Small, Medium, Large, or Huge Construct, Unaligned*
+___
+**Armor Class** :: 15  
+**Hit Points**  :: 10 (Medium or smaller), 20 (Large), 40 (Huge)  
+**Speed**       :: 30 ft.  
+**Initiative**  :: +0 (10)  
+___
+| STR | DEX | CON | INT | WIS | CHA |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|16 (+3)|10 (+0)|10 (+0)|3 (-4)|3 (-4)|1 (-5)|
+___
+**Senses** :: Blindsight 30 ft., passive Perception 6  
+**Languages** :: Understands the languages you know  
+**Challenge** :: None (XP 0; PB equals your Proficiency Bonus)  
+**Proficiency Bonus** :: equals your Proficiency Bonus  
+___
+##### Actions
+***Slam.*** Melee Attack Roll: bonus equals your spell attack modifier, reach 5 ft., one target. Hit: Force damage equal to 1d4 + 3 (Tiny/Small/Medium), 2d6 + 3 + your spellcasting ability modifier (Large), or 2d12 + 3 + your spellcasting ability modifier (Huge).
+___
+}}
+}}
 
-As a Bonus action, you can issue one command to any number of objects within the spell's range, otherwise, the only action an object takes on its turn is the Dodge action. An object may also be commanded to attempt an action available to all creatures, such as grapple or shove, if its form permits it to do so.
-
-If commanded to attack, an object makes one melee attack against the target you specify within 5 feet of it. Its attack bonus is equal to your spell attack modifier. An object usually deals Bludgeoning damage, but the DM might rule it inflicts Slashing or Piercing based on its form.
-
-***At Higher Levels.*** If you cast this spell using a Spell Slot of 6th level or higher, you can animate two additional objects for each slot level above 5th.
-\column
 #### Antilife Shell
 *5th-level Abjuration*  
 **Classes:** Druid, Shaman  
@@ -15543,6 +15554,9 @@ If you move so that an affected creature is forced to pass through the barrier, 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the range increases by 5 feet for each slot level above 5th.
 
+
+\page
+{{pageNumber,auto}}
 #### Anvil Drop
 *5th-level Conjuration*  
 **Classes:** Wizard  
@@ -15558,8 +15572,6 @@ If the path of the anvil (directly above the target point) is interrupted, the c
 If the anvil deals less than 80 damage, the anvil survives the impact, and is an anvil of moderate quality.
 
 ***At Higher Levels.*** When cast with a 9th level Spell Slot, the range of the spell becomes 120 miles, though you must still be able to see the target (such as via scrying).
-\page
-{{pageNumber,auto}}
 
 #### Arcane Hand
 *5th-level Evocation*  
@@ -15585,7 +15597,6 @@ When you cast the spell and as a Bonus Action on your later turns, you can move 
 
 ***At Higher Levels.*** The damage of the Clenched Fist increases by 2d8 and the damage of the Grasping Hand increases by 2d6 for each Spell Slot level above 5th.
 
-\column
 #### Awaken
 *5th-level Transmutation*  
 **Classes:** Artificer, Bard, Druid, Ranger, Shaman  
@@ -15599,10 +15610,6 @@ After spending the casting time tracing magical pathways within a precious gemst
 The awakened beast or plant is Charmed by you for 30 days or until you or your companions do anything harmful to it. When the Charmed condition ends, the awakened creature chooses whether to remain friendly to you, based on how you treated it while it was Charmed.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, you can apply one of the following additional effects to the awakened creature for each slot level above 5th: increase its Hit Points by 2d10; increase its Intelligence by 2 points; increase its movement Speed by 10 feet.
-
-{{descriptive
-{{font-family:WalterTurncoat Awaken, a spell of mystical metamorphosis, weaves a tale of magic's communion with the essence of nature. Through an intricate ritual with a precious agate, the caster imbues a creature or plant of significant size with profound consciousness. Once bereft of cognition or possessing mere remnants of understanding, these beings awaken to a state of awareness akin to mortals, endowed with newfound intelligence, mobility, and senses reminiscent of humanity. Bound to the caster by a fleeting charm, they reciprocate kindness for thirty days or until harmed, retaining autonomy thereafter. At heightened levels, the caster may bestow additional blessings, illuminating the spell's potential to foster unity between sentient beings and the natural world, a testament to the transformative power of magic's embrace.}}
-}}
 
 
 \page
