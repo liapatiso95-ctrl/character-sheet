@@ -25,7 +25,6 @@ A Collection of DnD 5e Feats
 {{pageNumber,auto}}
 
  
-
 {{toc,wide
 # Contents
 
@@ -191,8 +190,8 @@ A Collection of DnD 5e Feats
   - #### [{{ Trickster’s Collaboration}}{{ 27}}](#p27)
   - #### [{{ Unyielding Unity}}{{ 27}}](#p27)
   - #### [{{ Vigor of the Hill Giant}}{{ 27}}](#p27)
-
 }}
+
 
 
 \page
@@ -258,9 +257,10 @@ A Collection of DnD 5e Feats
   - #### [{{ Firbolg Beast Magic}}{{ 34}}](#p34)
   - #### [{{ Flames of Phlegethos}}{{ 34}}](#p34)
   - #### [{{ Focused Personas}}{{ 34}}](#p34)
+  - #### [{{ Hexbound Anchor}}{{ 34}}](#p34)
   - #### [{{ Infernal Constitution}}{{ 34}}](#p34)
   - #### [{{ Juggernaut Plating}}{{ 34}}](#p34)
-  - #### [{{ Master of Mimicry}}{{ 34}}](#p34)
+  - #### [{{ Master of Mimicry}}{{ 35}}](#p35)
   - #### [{{ Mountain’s Endurance}}{{ 35}}](#p35)
   - #### [{{ Orcish Fury}}{{ 35}}](#p35)
   - #### [{{ Prodigy}}{{ 35}}](#p35)
@@ -268,7 +268,7 @@ A Collection of DnD 5e Feats
   - #### [{{ Second Chance}}{{ 35}}](#p35)
   - #### [{{ Sky Warden}}{{ 35}}](#p35)
   - #### [{{ Squat Nimbleness}}{{ 35}}](#p35)
-  - #### [{{ Superior Shifting}}{{ 35}}](#p35)
+  - #### [{{ Superior Shifting}}{{ 36}}](#p36)
   - #### [{{ Svirfneblin Magic}}{{ 36}}](#p36)
   - #### [{{ Thoughtsinger}}{{ 36}}](#p36)
   - #### [{{ Tortle Protector}}{{ 36}}](#p36)
@@ -2870,6 +2870,16 @@ You’ve developed personas that help you focus your talents. Work with your DM 
 
 **Persona Expertise (Skill).** Choose a skill you're proficient in and define a different persona associated with it. While you are using your Shapechanging trait to assume the identity of that persona, your proficiency bonus is doubled for any ability check you make using that skill.
 
+### Hexbound Anchor
+***Prerequisite: Hexblood (Eerie Token)***  
+You've learned to let your hag-given magic run both directions through the locks of hair, nails, and teeth you shed. You gain the following benefits:
+
+**Ability Score Increase.** Increase the ability score you use for your Hex Magic trait (Intelligence, Wisdom, or Charisma) by 1, to a maximum of 20.  
+
+**Advanced Magic.** You can use your Eerie Token trait twice, instead of once, before you must finish a long rest.  
+
+**Hexcraft.** When you use the *Remote Viewing*  part of your *Eerir Token* feature while one of your eerie tokens is on a creature's person or hidden in a place that creature calls home, you can cast one and only one spell you know or have prepared that targets only that creature, treating it as within the spell's range, provided it is on the same plane of existence and within line of sight from the token.
+
 ### Infernal Constitution
 ***Prerequisite: Tiefling (Any trait)***
 
@@ -2894,6 +2904,11 @@ Your armor is a part of you, strengthened by your life force. You gain the follo
 
 **Armor Immunity.** While it's incorporated into your body, your armor can't be targeted by any effect (such as heat metal or the antennae of a rust monster) against your will.
 
+
+
+ 
+\page
+{{pageNumber,auto}}
 ### Master of Mimicry
 ***Prerequisite: Kenku (Mimicry)***  
 
@@ -2903,10 +2918,6 @@ of others. You gain the following benefits:
 **Ability Score Increase.** Increase your Dexterity or Wisdom score by 1, to a maximum of 20.
 
 **Mimicry.** Whenever another creature you can see uses a skill or tool, you can use your reaction to gain proficiency in that skill or tool. Proficiencies gained in this way last until you finish a short or long rest, and you can only mimic one proficiency at a time. Once you use this ability, you can't do so again until you finish a short or long rest.
-
- 
-\page
-{{pageNumber,auto}}
 
 ### Mountain’s Endurance
 ***Prerequisite: Goliath (Stone's Endurance)***  
@@ -2993,6 +3004,11 @@ You are uncommonly nimble for your race. You gain the following benefits:
 
 **Slippery.** You have advantage on any Strength (Athletics) or Dexterity (Acrobatics) check you make to escape from being grappled.
 
+
+ 
+\page
+{{pageNumber,auto}}
+
 ### Superior Shifting
 ***Prerequisite: Shifter (Shifting trait)***
 
@@ -3003,10 +3019,6 @@ You have a strong connection to the beast within, strengthening your body and yo
 **Extended Shifting.** When you use your Shifting trait, the transformation lasts for ten minutes, until you die, or until you end it as a bonus action. You also gain temporary hit points equal to 3 x your proficiency bonus, instead of 2 x your proficiency bonus when you use your Shifting trait.
 
 **Additional Shifts.** You can use your Shifting trait two additional times per long rest.
-
- 
-\page
-{{pageNumber,auto}}
 
 ### Svirfneblin Magic
 ***Prerequisite: Gnome (Gift of the Svirfneblin trait)***
@@ -3036,7 +3048,8 @@ You have mastered using your shell to better protect yourself and others. You ga
 **Enhanced Natural Armor.** Your natural armor trait now provides a base AC of 18. As normal, your Dexterity modifier doesn't affect this number.
 
 **Protective Shell.** As a reaction when you are attacked or forced to make a Dexterity saving throw, choose any number of creatures within 5 feet of you. Each chosen creature is considered to have half-cover while within 5 feet of you until the start of your next turn. Once you use this ability, you can't do so again until you've finished a short or long rest.
- 
+
+\column
 ### Triton Deep Magic
 ***Prerequisite: Triton (Guardian of the Depths trait)***   
 
