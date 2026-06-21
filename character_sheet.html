@@ -338,6 +338,9 @@ const init=()=>{ const d=({
   feat:[],
   fts:[],
   npc:[],
+  locations:[],
+  lore:[],
+  customSections:[],
   factions:[],
   aprof:"",
   tprof:"",lang:"",
@@ -440,6 +443,7 @@ const CSS = `
   .db{background:transparent;border:none;color:rgba(201,74,42,.4);cursor:pointer;font-size:14px;padding:0 4px;transition:color .15s}
   .db:hover{color:var(--ember)}
   .nc{background:rgba(0,0,0,.25);border:1px solid rgba(201,150,42,.15);padding:10px 14px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start}
+  .md{overflow-wrap:anywhere;word-break:break-word;max-width:100%}
   .nbdg{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;flex-shrink:0;margin-top:4px}
   .ally-badge{background:rgba(74,156,92,.2);border:1px solid rgba(74,156,92,.4);color:#6dbb80}
   .enemy-badge{background:rgba(201,74,42,.2);border:1px solid rgba(201,74,42,.4);color:#e07060}
@@ -3063,9 +3067,49 @@ function Page4({c,s}){
   const mdPreview=(t)=>((t||"").replace(/[*_#>`~]/g," ").replace(/\s+/g," ").trim());
   const collapsedRow=(k,i,t)=><div onClick={()=>toggleDesc(k,i)} title="Show notes"
     style={{cursor:"pointer",color:"rgba(232,213,176,.3)",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",padding:"4px 2px"}}>{mdPreview(t)||"(empty — click to add notes)"}</div>;
+  const {useState:us}=React;
+  const [sub,setSub]=us("npc");
+  // Custom user-defined sections — each {id, name, items:[{ti,tx,showDesc}]}
+  const csList=c.customSections||[];
+  const csUpd=(id,fn)=>s("customSections",(c.customSections||[]).map(cs=>cs.id===id?fn(cs):cs));
+  const csItemUI=(id,i,f,v)=>csUpd(id,cs=>({...cs,items:cs.items.map((it,j)=>j===i?{...it,[f]:v}:it)}));
+  const csItemDel=(id,i)=>csUpd(id,cs=>({...cs,items:cs.items.filter((_,j)=>j!==i)}));
+  const csItemAdd=(id)=>csUpd(id,cs=>({...cs,items:[...(cs.items||[]),{ti:"",tx:""}]}));
+  const csItemToggle=(id,i)=>csUpd(id,cs=>({...cs,items:cs.items.map((it,j)=>j===i?{...it,showDesc:it.showDesc===false}:it)}));
+  const csSetAllDesc=(id,val)=>csUpd(id,cs=>({...cs,items:(cs.items||[]).map(it=>({...it,showDesc:val}))}));
+  const csDelete=(id)=>{s("customSections",(c.customSections||[]).filter(cs=>cs.id!==id));setSub("npc");};
+  const csAdd=()=>{var id=Date.now()+Math.random();s("customSections",[...(c.customSections||[]),{id:id,name:"New Section",items:[]}]);setSub("cs:"+id);};
+  const subTabs=[
+    {key:"npc",label:"NPCs",n:(c.npc||[]).length},
+    {key:"locations",label:"Locations",n:(c.locations||[]).length},
+    {key:"lore",label:"Lore",n:(c.lore||[]).length},
+    {key:"factions",label:"Organisations",n:(c.factions||[]).length},
+    {key:"nt1",label:"Session Notes",n:(c.nt1||[]).length},
+    {key:"nt3",label:"Other Notes",n:(c.nt3||[]).length},
+  ].concat(csList.map(function(cs){return {key:"cs:"+cs.id,label:cs.name||"Untitled",n:(cs.items||[]).length};}));
   return (
     <div>
       <div className="orn">Notes</div>
+      <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:34,marginTop:14}}>
+        {subTabs.map(function(t){
+          var active=sub===t.key;
+          return <button key={t.key} onClick={function(){setSub(t.key);}}
+            style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",padding:"7px 13px",cursor:"pointer",borderRadius:2,transition:"all .2s",display:"flex",alignItems:"center",gap:7,
+              background:active?"linear-gradient(135deg,rgba(123,79,207,.3),rgba(201,150,42,.15))":"rgba(20,14,8,.8)",
+              border:"1px solid "+(active?"var(--gold)":"rgba(201,150,42,.25)"),
+              color:active?"var(--gold-l)":"#a08c5a"}}>
+            {t.label}
+            <span style={{fontFamily:"'Cinzel',serif",fontSize:9,minWidth:16,textAlign:"center",padding:"1px 5px",borderRadius:9,
+              background:active?"rgba(201,150,42,.25)":"rgba(0,0,0,.35)",
+              color:active?"var(--gold-l)":"rgba(232,213,176,.45)",
+              border:"1px solid "+(active?"rgba(201,150,42,.4)":"rgba(201,150,42,.12)")}}>{t.n}</span>
+          </button>;
+        })}
+        <button onClick={csAdd} title="Add a new custom section"
+          style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1,textTransform:"uppercase",padding:"7px 12px",cursor:"pointer",borderRadius:2,transition:"all .2s",
+            background:"transparent",border:"1px dashed rgba(123,79,207,.4)",color:"rgba(184,154,240,.7)"}}>+ Section</button>
+      </div>
+      {sub==="npc"&&<div>
       <div className="sh">NPCs {descBtns("npc")}</div>
       {c.npc.map((n,i)=>{var open=n.showDesc!==false;return (
         <div key={i} className="nc">
@@ -3094,8 +3138,45 @@ function Page4({c,s}){
         </div>
       );})}
       <button className="arb" onClick={()=>ai("npc",{nm:"",rl:"",nt:"",ty:"neutral"})}>+ Add NPC</button>
+      </div>}
 
-      <div className="sh" style={{marginTop:28}}>Factions & Organisations {descBtns("factions")}</div>
+      {sub==="locations"&&<div>
+      <div className="sh">Locations {descBtns("locations")}</div>
+      {(c.locations||[]).map((n,i)=>{var open=n.showDesc!==false;return (
+        <div key={i} className="nc">
+          <span onClick={()=>toggleDesc("locations",i)} title={open?"Hide notes":"Show notes"} style={chevSt}>{open?"▾":"▸"}</span>
+          <div style={{flex:1,minWidth:0}}>
+            <input className="fi" value={n.nm||""} onChange={e=>ui("locations",i,"nm",e.target.value)} placeholder="Location name..." style={{marginBottom:6,width:"100%"}} />
+            <input className="fi" value={n.rg||""} onChange={e=>ui("locations",i,"rg",e.target.value)} placeholder="Region / Type..." style={{marginBottom:6,width:"100%"}} />
+            {open
+              ?<MdField className="fi" value={n.nt||""} onChange={e=>ui("locations",i,"nt",e.target.value)} placeholder="Notes... (markdown supported)" style={{minHeight:64,width:"100%"}} />
+              :collapsedRow("locations",i,n.nt)}
+          </div>
+          <button className="db" onClick={()=>window.__confirm("Delete this location?",()=>di("locations",i))}>x</button>
+        </div>
+      );})}
+      <button className="arb" onClick={()=>ai("locations",{nm:"",rg:"",nt:""})}>+ Add Location</button>
+      </div>}
+
+      {sub==="lore"&&<div>
+      <div className="sh">Lore {descBtns("lore")}</div>
+      {(c.lore||[]).map((n,i)=>{var open=n.showDesc!==false;return (
+        <div key={i} className="nc" style={{borderLeft:"3px solid rgba(201,150,42,.35)"}}>
+          <span onClick={()=>toggleDesc("lore",i)} title={open?"Hide notes":"Show notes"} style={chevSt}>{open?"▾":"▸"}</span>
+          <div style={{flex:1,minWidth:0}}>
+            <input className="fi" value={n.ti||""} onChange={e=>ui("lore",i,"ti",e.target.value)} placeholder="Title or subject..." style={{marginBottom:6,fontFamily:"'Cinzel',serif",fontSize:12,color:"var(--gold-l)"}} />
+            {open
+              ?<MdField className="fi" value={n.tx||""} onChange={e=>ui("lore",i,"tx",e.target.value)} placeholder="Lore, history, world details... (markdown supported)" style={{minHeight:64,width:"100%"}} />
+              :collapsedRow("lore",i,n.tx)}
+          </div>
+          <button className="db" onClick={()=>window.__confirm("Delete this lore entry?",()=>di("lore",i))}>x</button>
+        </div>
+      );})}
+      <button className="arb" onClick={()=>ai("lore",{ti:"",tx:""})}>+ Add Lore</button>
+      </div>}
+
+      {sub==="factions"&&<div>
+      <div className="sh">Organisations {descBtns("factions")}</div>
       {(c.factions||[]).map((f,i)=>{var open=f.showDesc!==false;return (
         <div key={i} className="nc">
           <span onClick={()=>toggleDesc("factions",i)} title={open?"Hide notes":"Show notes"} style={chevSt}>{open?"▾":"▸"}</span>
@@ -3110,11 +3191,11 @@ function Page4({c,s}){
         </div>
       );})}
       <button className="arb" onClick={()=>s("factions",[...(c.factions||[]),{nm:"",rl:"",nt:""}])}>+ Add Faction</button>
+      </div>}
 
-      <div className="sh" style={{marginTop:28}}>Notes</div>
-
+      {sub==="nt1"&&<div>
+      <div className="sh">Session Notes {descBtns("nt1")}</div>
       <div style={{marginBottom:6}}>
-        <div style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:2,color:"var(--arcane-g)",opacity:.7,textTransform:"uppercase",marginBottom:8,display:"flex",alignItems:"center",gap:8}}>Session Notes {descBtns("nt1")}</div>
         {(c.nt1||[]).map((n,i)=>{var open=n.showDesc!==false;return (
           <div key={i} className="nc" style={{borderLeft:"3px solid rgba(123,79,207,.4)"}}>
             <span onClick={()=>toggleDesc("nt1",i)} title={open?"Hide notes":"Show notes"} style={chevSt}>{open?"▾":"▸"}</span>
@@ -3129,9 +3210,11 @@ function Page4({c,s}){
         );})}
         <button className="arb" onClick={()=>ai("nt1",{ti:"",tx:""})}>+ Add Session Note</button>
       </div>
+      </div>}
 
-      <div style={{marginBottom:6,marginTop:20}}>
-        <div style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:2,color:"var(--arcane-g)",opacity:.7,textTransform:"uppercase",marginBottom:8,display:"flex",alignItems:"center",gap:8}}>Other Notes {descBtns("nt3")}</div>
+      {sub==="nt3"&&<div>
+      <div className="sh">Other Notes {descBtns("nt3")}</div>
+      <div style={{marginBottom:6}}>
         {(c.nt3||[]).map((n,i)=>{var open=n.showDesc!==false;return (
           <div key={i} className="nc" style={{borderLeft:"3px solid rgba(42,140,156,.3)"}}>
             <span onClick={()=>toggleDesc("nt3",i)} title={open?"Hide notes":"Show notes"} style={chevSt}>{open?"▾":"▸"}</span>
@@ -3146,6 +3229,38 @@ function Page4({c,s}){
         );})}
         <button className="arb" onClick={()=>ai("nt3",{ti:"",tx:""})}>+ Add Note</button>
       </div>
+      </div>}
+
+      {csList.map(function(cs){
+        if(sub!=="cs:"+cs.id) return null;
+        var items=cs.items||[];
+        var csDescBtns=items.length>0?<span style={{display:"inline-flex",gap:3}}>
+          <span onClick={()=>csSetAllDesc(cs.id,true)} title="Expand all" style={ecBtn}>+</span>
+          <span onClick={()=>csSetAllDesc(cs.id,false)} title="Collapse all" style={ecBtn}>−</span>
+        </span>:null;
+        return <div key={cs.id}>
+          <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap",marginTop:26,marginBottom:14}}>
+            <input value={cs.name||""} onChange={e=>csUpd(cs.id,function(x){return {...x,name:e.target.value};})} placeholder="Section name..."
+              style={{minWidth:140,maxWidth:"60vw",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.35)",color:"var(--gold)",fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:600,letterSpacing:3,textTransform:"uppercase",outline:"none",padding:"2px 0"}} />
+            <button onClick={()=>window.__confirm("Delete the whole \""+(cs.name||"Untitled")+"\" section and all its notes?",()=>csDelete(cs.id))} title="Delete this section"
+              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(201,74,42,.6)",background:"transparent",border:"1px solid rgba(201,74,42,.3)",padding:"2px 7px",borderRadius:2,flexShrink:0}}>Delete</button>
+            {csDescBtns}
+          </div>
+          {items.map((n,i)=>{var open=n.showDesc!==false;return (
+            <div key={i} className="nc" style={{borderLeft:"3px solid rgba(184,154,240,.4)"}}>
+              <span onClick={()=>csItemToggle(cs.id,i)} title={open?"Hide notes":"Show notes"} style={chevSt}>{open?"▾":"▸"}</span>
+              <div style={{flex:1,minWidth:0}}>
+                <input className="fi" value={n.ti||""} onChange={e=>csItemUI(cs.id,i,"ti",e.target.value)} placeholder="Title or topic..." style={{marginBottom:6,fontFamily:"'Cinzel',serif",fontSize:12,color:"var(--arcane-l)"}} />
+                {open
+                  ?<MdField className="fi" value={n.tx||""} onChange={e=>csItemUI(cs.id,i,"tx",e.target.value)} placeholder="Notes... (markdown supported)" style={{minHeight:64,width:"100%"}} />
+                  :<div onClick={()=>csItemToggle(cs.id,i)} title="Show notes" style={{cursor:"pointer",color:"rgba(232,213,176,.3)",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",padding:"4px 2px"}}>{mdPreview(n.tx)||"(empty — click to add notes)"}</div>}
+              </div>
+              <button className="db" onClick={()=>window.__confirm("Delete this entry?",()=>csItemDel(cs.id,i))}>x</button>
+            </div>
+          );})}
+          <button className="arb" onClick={()=>csItemAdd(cs.id)}>+ Add Entry</button>
+        </div>;
+      })}
     </div>
   );
 }
@@ -6551,6 +6666,7 @@ function SpellPage({c,s,from,to}){
   const [maxPrepModal,setMaxPrepModal]=us2(null); // spellClass index
   const [spellPtsModal,setSpellPtsModal]=us2(false);
   const [sptMsg,setSptMsg]=us2(null); // {text, timer}
+  const [activeLv,setActiveLv]=us2(null); // active spell-level subtab (null = first available)
   const showSptMsg=function(text){
     setSptMsg(function(prev){if(prev&&prev.timer)clearTimeout(prev.timer);return null;});
     var t=setTimeout(function(){setSptMsg(null);},2200);
@@ -6599,6 +6715,18 @@ function SpellPage({c,s,from,to}){
 
   const ordinal=(n)=>{if(n===0)return "Cantrips";const sf=["th","st","nd","rd"];const v=n%100;return n+(sf[(v-20)%10]||sf[v]||sf[0])+" Level";};
   const classNames=spCls.map(function(sc){return sc.nm||"";}).filter(function(n){return n;});
+
+  // Which levels actually render a block (mirrors the per-level visibility filter below)
+  const lvVisible=(lv)=>{
+    if(classNames.length===0) return true;
+    const cls=spCls.filter(function(sc){const mx=sc.maxLv!==undefined?sc.maxLv:9;return (sc.nm||"")&&(lv===0||(lv>=1&&lv<=mx));});
+    return cls.length>0||(c.sp[lv]||[]).length>0;
+  };
+  const visLvls=allLvls.filter(lvVisible);
+  const curLv=(activeLv!=null&&visLvls.indexOf(activeLv)>=0)?activeLv:(visLvls.length?visLvls[0]:(allLvls.length?allLvls[0]:0));
+  // Per-class-group collapse within a level (keyed "lv|ClassName"), saved with the character
+  const spGroupCollapsed=c.spGroupCollapsed||{};
+  const toggleSpGroup=(lv,name)=>{var k=lv+"|"+name;s("spGroupCollapsed",{...(c.spGroupCollapsed||{}),[k]:!spGroupCollapsed[k]});};
 
   const countForClass=(clsName,lv)=>{
     var total=0,prepared=0;
@@ -6970,7 +7098,24 @@ function SpellPage({c,s,from,to}){
       })()}
 
       {/* Spell levels */}
-      {allLvls.map(lv=>{
+      {visLvls.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:6,marginTop:24,marginBottom:20}}>
+        {visLvls.map(function(lv){
+          var active=curLv===lv;
+          var cnt=(c.sp[lv]||[]).length;
+          return <button key={lv} onClick={function(){setActiveLv(lv);}}
+            style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",padding:"7px 12px",cursor:"pointer",borderRadius:2,transition:"all .2s",display:"flex",alignItems:"center",gap:6,
+              background:active?"linear-gradient(135deg,rgba(123,79,207,.3),rgba(201,150,42,.15))":"rgba(20,14,8,.8)",
+              border:"1px solid "+(active?"var(--arcane)":"rgba(184,154,240,.2)"),
+              color:active?"var(--arcane-l)":"rgba(184,154,240,.55)"}}>
+            {lv===0?"Cantrips":"Lvl "+lv}
+            <span style={{fontFamily:"'Cinzel',serif",fontSize:9,minWidth:15,textAlign:"center",padding:"1px 5px",borderRadius:9,
+              background:active?"rgba(184,154,240,.22)":"rgba(0,0,0,.35)",
+              color:active?"var(--arcane-l)":"rgba(184,154,240,.4)",
+              border:"1px solid "+(active?"rgba(184,154,240,.4)":"rgba(184,154,240,.12)")}}>{cnt}</span>
+          </button>;
+        })}
+      </div>}
+      {allLvls.filter(function(lv){return lv===curLv;}).map(lv=>{
         const classesForThisLevel=spCls.filter(function(sc){
           if(!(sc.nm||"")) return false;
           const mx=sc.maxLv!==undefined?sc.maxLv:9;
@@ -7037,10 +7182,13 @@ function SpellPage({c,s,from,to}){
             {groups.map(function(group,gi){
               const cnt=group.spells.length;
               const prep=group.spells.filter(function(x){return x.sp.prep&&!x.sp.bonus;}).length;
+              const grpCollapsed=!!(group.name&&spGroupCollapsed[lv+"|"+group.name]);
               return (
                 <div key={gi} style={{marginBottom:gi<groups.length-1?12:0}}>
                   {group.name&&(
-                    <div style={{display:"flex",alignItems:"center",gap:10,padding:"4px 0 5px",borderBottom:"1px solid rgba(123,79,207,.2)",marginBottom:4}}>
+                    <div onClick={function(){toggleSpGroup(lv,group.name);}} title={grpCollapsed?"Show "+group.name+" spells":"Hide "+group.name+" spells"}
+                      style={{display:"flex",alignItems:"center",gap:10,padding:"4px 0 5px",borderBottom:"1px solid rgba(123,79,207,.2)",marginBottom:4,cursor:"pointer",userSelect:"none"}}>
+                      <span style={{fontFamily:"'Cinzel',serif",fontSize:11,color:"rgba(184,154,240,.6)",width:12,textAlign:"center",flexShrink:0}}>{grpCollapsed?"▸":"▾"}</span>
                       <span style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:2,color:"var(--arcane-l)",textTransform:"uppercase"}}>
                       {group.name+" "+(lv===0?"Cantrips":ordinal(lv)+" Spell"+(cnt!==1?"s":""))}
                       </span>
@@ -7055,7 +7203,7 @@ function SpellPage({c,s,from,to}){
                       </span>
                     </div>
                   )}
-                  <div className="stbl-wrap"><table className="stbl">
+                  {!grpCollapsed&&<div className="stbl-wrap"><table className="stbl">
                     <thead><tr>
                       <th style={{width:"3%"}}></th>
                       {lv>0&&!(group.sc&&group.sc.known)&&<SortableTh label="P" col="prep" sort={spellSorts[lv+"-"+gi]||null} onSort={(col)=>onSpellSort(lv,gi,col)} style={{width:"3%",textAlign:"center"}} title="Prepared" />}
@@ -7072,10 +7220,10 @@ function SpellPage({c,s,from,to}){
                       <th style={{width:"3%"}}></th>
                     </tr></thead>
                     <tbody>{renderRows(group,lv,spellSorts[lv+"-"+gi]||null)}</tbody>
-                  </table></div>
-                  <button className="arb" onClick={()=>as(lv,group.name)} style={{marginTop:4}}>
+                  </table></div>}
+                  {!grpCollapsed&&<button className="arb" onClick={()=>as(lv,group.name)} style={{marginTop:4}}>
                     {"+ Add "+(group.name?(group.name+" "):"")+(lv===0?"Cantrip":"Spell")}
-                  </button>
+                  </button>}
                 </div>
               );
             })}
@@ -7088,6 +7236,7 @@ function SpellPage({c,s,from,to}){
 
 function ExploitPage({c,s}){
   const {useState:ues}=React;
+  const [activeDeg,setActiveDeg]=ues(1); // active exploit-degree subtab
   const exploitSorts=(c.sortPrefs&&c.sortPrefs.exploits)||{}; // key: "deg-gi" => {col,dir}
   const onExploitSort=(deg,gi,col)=>{var k=deg+"-"+gi;var cur=exploitSorts[k];var next={...exploitSorts,[k]:cycleSort(cur,col)};s("sortPrefs",{...(c.sortPrefs||{}),exploits:next});};
   const ABLTS=["STR","DEX","CON","INT","WIS","CHA"];
@@ -7107,6 +7256,9 @@ function ExploitPage({c,s}){
   const clsDC=(ec)=>{const mod=getMod(c,ec.abl||"STR");const bon=ec.dcBonusFormula?computeBonusFromFormula(ec.dcBonusFormula,c):(parseInt((ec.dcBonus||"").replace("+",""))||0);const dcPen=c.exhAffectAllDC?exExhPen:0;return ""+(8+pb+mod+bon+dcPen);};
   const classNames=exCls.map(function(ec){return ec.nm||"";}).filter(function(n){return n;});
   const countForClass=(cn)=>{var t=0;[1,2,3,4,5].forEach(function(d){(c.expl[d]||[]).forEach(function(ex){if((ex.cls||"")===cn)t++;});});return t;};
+  // Per-class-group collapse within a degree (keyed "deg|ClassName"), saved with the character
+  const exGroupCollapsed=c.exGroupCollapsed||{};
+  const toggleExGroup=(deg,name)=>{var k=deg+"|"+name;s("exGroupCollapsed",{...(c.exGroupCollapsed||{}),[k]:!exGroupCollapsed[k]});};
 
   // Shared exploit dice
   const diceMax=parseInt(c.exploitDice)||0;
@@ -7133,8 +7285,8 @@ function ExploitPage({c,s}){
         {exCls.map(function(ec,i){
           var total=ec.nm?countForClass(ec.nm):0;
           return (
-            <div key={i} style={{background:"rgba(0,0,0,.25)",border:"1px solid rgba(201,74,42,.3)",padding:"12px 14px",minWidth:200,flex:1,position:"relative"}}>
-              <div style={{display:"flex",gap:8,alignItems:"center",marginBottom:10,paddingRight:36}}>
+            <div key={i} style={{background:"rgba(0,0,0,.25)",border:"1px solid rgba(201,74,42,.3)",padding:"12px 14px",minWidth:220,flex:1,position:"relative"}}>
+              <div style={{display:"flex",gap:8,alignItems:"center",marginBottom:10}}>
                 <input value={ec.nm||""} onChange={function(e){updExCls(i,"nm",e.target.value);}} placeholder="Class name..."
                   style={{flex:1,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,74,42,.5)",color:"#e07060",fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:600,padding:"2px 4px",outline:"none"}} />
                 <button className="db" onClick={function(){window.__confirm("Delete this exploit class?",function(){delExCls(i);});}}>x</button>
@@ -7201,7 +7353,26 @@ function ExploitPage({c,s}){
           </div>
       </div>
 
-      {[1,2,3,4,5].map(deg=>{
+      <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:18}}>
+        {[1,2,3,4,5].map(function(deg){
+          var active=activeDeg===deg;
+          var col=degColors[""+deg];
+          var cnt=(c.expl[deg]||[]).length;
+          return <button key={deg} onClick={function(){setActiveDeg(deg);}}
+            style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",padding:"7px 12px",cursor:"pointer",borderRadius:2,transition:"all .2s",display:"flex",alignItems:"center",gap:6,
+              background:active?col.replace(/[\d.]+\)$/,"0.18)"):"rgba(20,14,8,.8)",
+              border:"1px solid "+(active?col.replace(/[\d.]+\)$/,"0.6)"):"rgba(201,74,42,.2)"),
+              color:active?col:"rgba(232,213,176,.4)"}}>
+            {degNames[""+deg]}
+            <span style={{fontFamily:"'Cinzel',serif",fontSize:9,minWidth:15,textAlign:"center",padding:"1px 5px",borderRadius:9,
+              background:active?col.replace(/[\d.]+\)$/,"0.25)"):"rgba(0,0,0,.35)",
+              color:active?col:"rgba(232,213,176,.4)",
+              border:"1px solid "+(active?col.replace(/[\d.]+\)$/,"0.4)"):"rgba(201,74,42,.12)")}}>{cnt}</span>
+          </button>;
+        })}
+      </div>
+
+      {[1,2,3,4,5].filter(function(deg){return deg===activeDeg;}).map(deg=>{
         const allEx=c.expl[deg]||[];
         const col=degColors[""+deg];
         const borderCol=borderCols[""+deg];
@@ -7228,15 +7399,18 @@ function ExploitPage({c,s}){
             </div>
             {groups.map(function(group,gi){
               const cnt=group.exploits.length;
+              const grpCollapsed=!!(group.name&&exGroupCollapsed[deg+"|"+group.name]);
               return (
                 <div key={gi} style={{marginBottom:gi<groups.length-1?10:0}}>
                   {group.name&&(
-                    <div style={{display:"flex",alignItems:"center",gap:10,padding:"4px 0 4px",borderBottom:"1px solid rgba(201,74,42,.2)",marginBottom:4}}>
+                    <div onClick={function(){toggleExGroup(deg,group.name);}} title={grpCollapsed?"Show "+group.name+" exploits":"Hide "+group.name+" exploits"}
+                      style={{display:"flex",alignItems:"center",gap:10,padding:"4px 0 4px",borderBottom:"1px solid rgba(201,74,42,.2)",marginBottom:4,cursor:"pointer",userSelect:"none"}}>
+                      <span style={{fontFamily:"'Cinzel',serif",fontSize:11,color:"rgba(224,112,96,.7)",width:12,textAlign:"center",flexShrink:0}}>{grpCollapsed?"▸":"▾"}</span>
                       <span style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:2,color:"#e07060",textTransform:"uppercase"}}>{group.name+" "+degNames[""+deg]+" Exploit"+(cnt!==1?"s":"")}</span>
                       <span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.35)",fontStyle:"italic"}}>{cnt+" known"}</span>
                     </div>
                   )}
-                  <div className="stbl-wrap"><table className="stbl" style={{minWidth:300}}>
+                  {!grpCollapsed&&<div className="stbl-wrap"><table className="stbl" style={{minWidth:300}}>
                     <thead><tr>
                       <SortableTh label="Exploit Name" col="nm" sort={exploitSorts[deg+"-"+gi]||null} onSort={(col)=>onExploitSort(deg,gi,col)} style={{width:"22%"}} />
                       <SortableTh label="Dice Cost" col="uses" sort={exploitSorts[deg+"-"+gi]||null} onSort={(col)=>onExploitSort(deg,gi,col)} style={{width:"11%"}} />
@@ -7279,10 +7453,10 @@ function ExploitPage({c,s}){
                         ];
                       })}
                     </tbody>
-                  </table></div>
-                  <button className="arb" onClick={()=>ae(deg,group.name)} style={{marginTop:4,borderColor:borderCol}}>
+                  </table></div>}
+                  {!grpCollapsed&&<button className="arb" onClick={()=>ae(deg,group.name)} style={{marginTop:4,borderColor:borderCol}}>
                     {"+ Add "+(group.name?(group.name+" "):"")+degNames[""+deg]+" Exploit"}
-                  </button>
+                  </button>}
                 </div>
               );
             })}
@@ -7348,8 +7522,8 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
 
   // Custom roller state
   const [custName,setCustName]=us2("");
-  // diceGroups: [{count, sides}]  — supports multi-die expressions like 3d6+2d8
-  const [custDiceGroups,setCustDiceGroups]=us2([{count:1,sides:20}]);
+  // diceGroups: [{count, sides, dtype}]  — supports multi-die expressions like 3d6+2d8, each with optional damage type
+  const [custDiceGroups,setCustDiceGroups]=us2([{count:1,sides:20,dtype:""}]);
   const [custFormula,setCustFormula]=us2(null); // FormulaModal formula object for bonus
   const [custFormulaOpen,setCustFormulaOpen]=us2(false);
   const [qrOpen,setQrOpen]=us2(true);
@@ -7363,26 +7537,22 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
     const bonus=calcCustBonus(custFormula);
     const groups=custDiceGroups.map(function(g){
       const n=Math.max(1,Math.min(20,g.count||1));
-      return {label:n+"d"+g.sides, dice:Array.from({length:n},function(){return {sides:g.sides,val:rollDie(g.sides)};})};
+      return {label:n+"d"+g.sides, dtype:(g.dtype||"").trim(), dice:Array.from({length:n},function(){return {sides:g.sides,val:rollDie(g.sides)};})};
     });
-    const diceExpr=custDiceGroups.map(function(g){return g.count+"d"+g.sides;}).join("+");
+    const diceExpr=custDiceGroups.map(function(g){return g.count+"d"+g.sides+((g.dtype||"").trim()?" "+(g.dtype||"").trim():"");}).join(" + ");
     const lbl=custName.trim()||diceExpr+(bonus!==0?fmtBonus(bonus):"");
     const noteParts=custFormula?[
       (custFormula.abls||[]).map(function(a){return a+"("+fmtBonus(getStatMod2(a))+")";}).join(" "),
       formulaHasProf(custFormula)?formulaProfLabel(custFormula)+"(+"+formulaProfVal(custFormula,c)+")":"",
       parseInt(custFormula.flat||0)?fmtBonus(parseInt(custFormula.flat||0)):""
     ].filter(Boolean):[];
-    if(groups.length===1){
-      addResult(lbl,groups[0].dice,bonus,noteParts.join(" "));
-    } else {
-      addResult(lbl,groups[0].dice,bonus,noteParts.join(" "),groups);
-    }
+    addResult(lbl,groups[0].dice,bonus,noteParts.join(" "),groups);
   };
 
   const saveCustom=function(){
     const nm=custName.trim();
     if(!nm) return;
-    const newRoll={id:Date.now(),nm,diceGroups:custDiceGroups.map(function(g){return {count:Math.max(1,g.count||1),sides:g.sides};}),formula:custFormula};
+    const newRoll={id:Date.now(),nm,diceGroups:custDiceGroups.map(function(g){return {count:Math.max(1,g.count||1),sides:g.sides,dtype:(g.dtype||"").trim()};}),formula:custFormula};
     saveSRApp(function(prev){return [...prev,newRoll];});
   };
 
@@ -7390,21 +7560,17 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
     // backward compat: old saves had count/sides/bonus/prof/abls
     const groups=(sr.diceGroups||[{count:sr.count||1,sides:sr.sides||20}]).map(function(g){
       const n=Math.max(1,Math.min(20,g.count));
-      return {label:n+"d"+g.sides, dice:Array.from({length:n},function(){return {sides:g.sides,val:rollDie(g.sides)};})};
+      return {label:n+"d"+g.sides, dtype:(g.dtype||"").trim(), dice:Array.from({length:n},function(){return {sides:g.sides,val:rollDie(g.sides)};})};
     });
     const formula=sr.formula||{flat:""+( sr.bonus||0),abls:sr.abls||[],prof:sr.prof?"full":"none",lvlType:"none",lvlClass:""};
     const bonus=calcCustBonus(formula);
     const noteParts=[(formula.abls||[]).map(function(a){return a+"("+fmtBonus(getStatMod2(a))+")";}).join(" "),formulaHasProf(formula)?formulaProfLabel(formula)+"(+"+formulaProfVal(formula,c)+")":"",parseInt(formula.flat||0)?fmtBonus(parseInt(formula.flat||0)):""].filter(Boolean);
-    if(groups.length===1){
-      addResult(sr.nm,groups[0].dice,bonus,noteParts.join(" "));
-    } else {
-      addResult(sr.nm,groups[0].dice,bonus,noteParts.join(" "),groups);
-    }
+    addResult(sr.nm,groups[0].dice,bonus,noteParts.join(" "),groups);
   };
 
   const srFormula=function(sr){
     const groups=sr.diceGroups||[{count:sr.count||1,sides:sr.sides||20}];
-    const diceStr=groups.map(function(g){return g.count+"d"+g.sides;}).join("+");
+    const diceStr=groups.map(function(g){return g.count+"d"+g.sides+(g.dtype?" "+g.dtype:"");}).join(" + ");
     const formula=sr.formula;
     if(!formula) return diceStr;
     const parts=[diceStr];
@@ -7811,7 +7977,7 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
           {/* Dice groups */}
           <div style={{display:"flex",flexDirection:"column",gap:5}}>
             {custDiceGroups.map(function(g,gi){
-              return <div key={gi} style={{display:"flex",alignItems:"center",gap:6}}>
+              return <div key={gi} style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
                 {gi>0&&<span style={{fontFamily:"'Cinzel',serif",fontSize:12,color:"rgba(201,150,42,.4)",width:10,textAlign:"center"}}>+</span>}
                 {gi===0&&<span style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"rgba(201,150,42,.35)",width:10}}/>}
                 <input type="number" min="1" max="20" value={g.count===0?"":g.count}
@@ -7824,11 +7990,14 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
                   style={{background:"rgba(0,0,0,.4)",border:"1px solid rgba(201,150,42,.2)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:12,padding:"2px 4px",outline:"none",cursor:"pointer",borderRadius:2}}>
                   {[4,6,8,10,12,20,100].map(function(d){return <option key={d} value={d} style={{background:"#1a1208"}}>{d}</option>;})}
                 </select>
+                <input value={g.dtype||""} placeholder="type (optional)"
+                  onChange={function(e){setCustDiceGroups(function(prev){const a=[...prev];a[gi]={...a[gi],dtype:e.target.value};return a;});}}
+                  style={{width:118,background:"rgba(123,79,207,.06)",border:"1px solid rgba(123,79,207,.22)",color:"var(--arcane-l)",fontFamily:"'EB Garamond',serif",fontSize:12,outline:"none",padding:"3px 7px",borderRadius:10}} />
                 {custDiceGroups.length>1&&<span onClick={function(){setCustDiceGroups(function(prev){return prev.filter(function(_,i){return i!==gi;});});}}
                   style={{cursor:"pointer",color:"rgba(201,74,42,.4)",fontSize:14,lineHeight:1,marginLeft:2,userSelect:"none"}} title="Remove this die group">×</span>}
               </div>;
             })}
-            <div onClick={function(){setCustDiceGroups(function(prev){return [...prev,{count:1,sides:6}];});}}
+            <div onClick={function(){setCustDiceGroups(function(prev){return [...prev,{count:1,sides:6,dtype:""}];});}}
               style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(201,150,42,.4)",border:"1px dashed rgba(201,150,42,.2)",padding:"2px 8px",borderRadius:2,display:"inline-block",userSelect:"none",alignSelf:"flex-start"}}>
               + Add Die Type
             </div>
@@ -7889,6 +8058,13 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
               const total=diceSum+(r.bonus||0);
               const isCrit=!isMultiGroup&&r.dice.length===1&&r.dice[0].sides===20&&r.dice[0].val===20;
               const isFumble=!isMultiGroup&&r.dice.length===1&&r.dice[0].sides===20&&r.dice[0].val===1;
+              const dmgMap=(function(){
+                if(!r.groups||!r.groups.some(function(g){return g.dtype&&(""+g.dtype).trim();})) return null;
+                var m={},order=[];
+                r.groups.forEach(function(g){var t=(""+(g.dtype||"")).trim()||"untyped";if(order.indexOf(t)<0)order.push(t);m[t]=(m[t]||0)+g.dice.reduce(function(a,d){return a+d.val;},0);});
+                if(r.bonus){var ts=order.filter(function(t){return t!=="untyped";});if(ts.length===1)m[ts[0]]+=r.bonus;else{if(order.indexOf("untyped")<0)order.push("untyped");m["untyped"]=(m["untyped"]||0)+r.bonus;}}
+                return {map:m,order:order};
+              })();
               return (
                 <div key={r.id} style={{padding:"10px 14px",background:"rgba(0,0,0,.25)",border:"1px solid rgba(201,150,42,.15)",borderRadius:2,borderLeft:"3px solid "+(isCrit?"#4a9c5c":isFumble?"#c94a2a":"rgba(201,150,42,.3)")}}>
                   <div style={{display:"flex",alignItems:"baseline",gap:10,marginBottom:6,flexWrap:"wrap"}}>
@@ -7954,6 +8130,14 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
                     </div>
                   </div>
                   )}
+                  {dmgMap&&<div style={{display:"flex",gap:6,flexWrap:"wrap",marginTop:8}}>
+                    {dmgMap.order.map(function(t){
+                      return <span key={t} style={{display:"inline-flex",alignItems:"baseline",gap:4,fontFamily:"'Cinzel',serif",color:"var(--gold-l)",background:"rgba(201,150,42,.1)",border:"1px solid rgba(201,150,42,.3)",padding:"2px 9px",borderRadius:10}}>
+                        <span style={{fontWeight:700,fontSize:13}}>{dmgMap.map[t]}</span>
+                        <span style={{textTransform:"uppercase",fontSize:9,color:"rgba(232,213,176,.55)",letterSpacing:1}}>{t}</span>
+                      </span>;
+                    })}
+                  </div>}
                 </div>
               );
             })}
@@ -9853,11 +10037,15 @@ function CreaturesPage({c,s}){
   const [mdText,setMdText]=us("");           // markdown textarea content
   const [mdTag,setMdTag]=us("Companion");    // tag for imported creature
   const [mdErr,setMdErr]=us("");             // parse status / error
+  const [crSub,setCrSub]=us(null);           // active creature subtab (tag); null = first available
   const groupHide=c.crGroupHide||{};         // which tag-groups are collapsed (saved with the character)
   const setGroupHide=function(fn){s("crGroupHide",function(prev){var base=prev||{};return typeof fn==="function"?fn(base):fn;});};
   // Collapse / expand every creature card (optionally only within one tag-group)
   const setAllCollapsed=function(val){s("creatures",creatures.map(function(cr){return {...cr,collapsed:val};}));};
   const setGroupCollapsed=function(tag,val){s("creatures",creatures.map(function(cr){return cr.tag===tag?{...cr,collapsed:val}:cr;}));};
+  // Creature subtab helpers — tag order and which subtab is active
+  const crOrder=function(){var order=TAGS.slice();creatures.forEach(function(cr){if(order.indexOf(cr.tag)<0)order.push(cr.tag);});return order;};
+  const activeCrSub=function(){var order=crOrder();var a=(crSub&&order.indexOf(crSub)>=0)?crSub:null;if(!a){for(var i=0;i<order.length;i++){if(creatures.some(function(cr){return cr.tag===order[i];})){a=order[i];break;}}if(!a)a=order[0];}return a;};
 
   const SKILLS=[
     {n:"Acrobatics",a:"DEX"},{n:"Animal Handling",a:"WIS"},{n:"Arcana",a:"INT"},
@@ -10062,6 +10250,7 @@ function CreaturesPage({c,s}){
       if(!cr.nm){setMdErr("Couldn't find a name (start with '## Creature Name').");return;}
       var _vs=expandCreatureVariants(cr);
       s("creatures",[...creatures,..._vs]);
+      setCrSub(mdTag);
       setMdText("");setMdErr("");setMdModal(false);
     }catch(e){setMdErr("Parse error: "+(e&&e.message?e.message:e));}
   }
@@ -10071,33 +10260,50 @@ function CreaturesPage({c,s}){
     <div style={{marginTop:32}}>
       {creatures.length===0&&<div style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgba(232,213,176,.3)",fontStyle:"italic",textAlign:"center",padding:"32px 0"}}>No creatures yet — add one below, or use “✦ From Markdown” to paste a statblock.</div>}
 
-      {creatures.length>1&&(function(){
-        var bs={cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",color:"rgba(232,213,176,.55)",border:"1px solid rgba(201,150,42,.25)",padding:"3px 10px",borderRadius:2,userSelect:"none"};
-        return <div style={{display:"flex",gap:6,alignItems:"center",marginBottom:14,flexWrap:"wrap"}}>
-          <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.35)",textTransform:"uppercase",marginRight:2}}>All</span>
-          <span style={bs} onClick={function(){setAllCollapsed(false);}}>Expand</span>
-          <span style={bs} onClick={function(){setAllCollapsed(true);}}>Collapse</span>
+      {creatures.length>0&&(function(){
+        var order=crOrder();
+        var activeSub=activeCrSub();
+        return <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:18}}>
+          {order.map(function(tag){
+            var cnt=creatures.filter(function(cr){return cr.tag===tag;}).length;
+            var col=tagColor(tag);var active=activeSub===tag;
+            return <button key={tag} onClick={function(){setCrSub(tag);}}
+              style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",padding:"7px 13px",cursor:"pointer",borderRadius:2,transition:"all .2s",display:"flex",alignItems:"center",gap:7,
+                background:active?col.replace(",1)",",0.16)"):"rgba(20,14,8,.8)",
+                border:"1px solid "+(active?col.replace(",1)",",0.6)"):"rgba(201,150,42,.2)"),
+                color:active?col.replace(",1)",",0.95)"):"rgba(232,213,176,.4)"}}>
+              {tag}s
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:9,minWidth:16,textAlign:"center",padding:"1px 5px",borderRadius:9,
+                background:active?col.replace(",1)",",0.22)"):"rgba(0,0,0,.35)",
+                color:active?col.replace(",1)",",0.95)"):"rgba(232,213,176,.4)",
+                border:"1px solid "+(active?col.replace(",1)",",0.4)"):"rgba(201,150,42,.12)")}}>{cnt}</span>
+            </button>;
+          })}
         </div>;
       })()}
 
       {(function(){
-        var order=TAGS.slice();
-        creatures.forEach(function(cr){if(order.indexOf(cr.tag)<0)order.push(cr.tag);});
-        return order.map(function(gtag){
+        var activeSub=activeCrSub();
+        var grp=creatures.filter(function(cr){return cr.tag===activeSub;});
+        if(grp.length<1) return null;
+        var col=tagColor(activeSub);
+        var bs={cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:11,color:col.replace(",1)",",0.75)"),border:"1px solid "+col.replace(",1)",",0.3)"),padding:"0 8px",borderRadius:2,userSelect:"none",lineHeight:"17px"};
+        return <div style={{display:"flex",gap:6,alignItems:"center",marginBottom:14,flexWrap:"wrap"}}>
+          <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.35)",textTransform:"uppercase",marginRight:2}}>All</span>
+          <span style={bs} onClick={function(){setGroupCollapsed(activeSub,false);}} title="Expand all">+</span>
+          <span style={bs} onClick={function(){setGroupCollapsed(activeSub,true);}} title="Collapse all">−</span>
+        </div>;
+      })()}
+
+      {(function(){
+        var order=crOrder();
+        var activeSub=activeCrSub();
+        return order.filter(function(gtag){return gtag===activeSub;}).map(function(gtag){
           var group=creatures.filter(function(cr){return cr.tag===gtag;});
-          if(!group.length) return null;
+          if(!group.length) return <div key={"empty-"+gtag} style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgba(232,213,176,.3)",fontStyle:"italic",textAlign:"center",padding:"28px 0"}}>No {gtag.toLowerCase()}s yet — add one with the button below.</div>;
           var gcol=tagColor(gtag), gcolL=gcol.replace(",1)",",0.75)");
-          var ghidden=!!groupHide[gtag];
-          var gbtn={cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:11,color:gcolL,border:"1px solid "+gcol.replace(",1)",",0.3)"),padding:"0 8px",borderRadius:2,userSelect:"none",lineHeight:"17px"};
-          var toggleHide=function(){setGroupHide(function(p){var n=Object.assign({},p);n[gtag]=!n[gtag];return n;});};
           return <div key={"grp-"+gtag} style={{marginBottom:18}}>
-            <div style={{display:"flex",alignItems:"center",gap:8,padding:"6px 10px",marginBottom:ghidden?0:10,background:gcol.replace(",1)",",0.10)"),border:"1px solid "+gcol.replace(",1)",",0.3)"),borderRadius:2}}>
-              <span onClick={toggleHide} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:11,color:gcolL,width:12,textAlign:"center",userSelect:"none"}}>{ghidden?"▸":"▾"}</span>
-              <span onClick={toggleHide} style={{cursor:"pointer",flex:1,fontFamily:"'Cinzel',serif",fontSize:12,letterSpacing:1.5,textTransform:"uppercase",color:gcolL}}>{gtag}s <span style={{opacity:.55,fontSize:10}}>· {group.length}</span></span>
-              {!ghidden&&<span onClick={function(){setGroupCollapsed(gtag,false);}} title="Expand all in this group" style={gbtn}>+</span>}
-              {!ghidden&&<span onClick={function(){setGroupCollapsed(gtag,true);}} title="Collapse all in this group" style={gbtn}>−</span>}
-            </div>
-            {!ghidden&&group.map(function(cr){
+            {group.map(function(cr){
         var col=tagColor(cr.tag);
         var colLight=col.replace(",1)",",0.7)");
         // +/- expand-all / collapse-all buttons for a list field's description bodies
@@ -10586,7 +10792,7 @@ function CreaturesPage({c,s}){
       <div style={{display:"flex",gap:8,flexWrap:"wrap",marginTop:12,alignItems:"center"}}>
         {TAGS.map(function(tag){
           var col=tagColor(tag);
-          return <button key={tag} className="arb" onClick={function(){s("creatures",[...creatures,mkCreature(tag)]);}}
+          return <button key={tag} className="arb" onClick={function(){setCrSub(tag);s("creatures",[...creatures,mkCreature(tag)]);}}
             style={{borderColor:col.replace(",1)",",0.4)"),color:col.replace(",1)",",0.8)")}}>+ Add {tag}</button>;
         })}
         <button className="arb" onClick={function(){setMdErr("");setMdModal(true);}}
@@ -11067,7 +11273,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.9.30</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.9.38</div>
 
 </script>
 </body>
