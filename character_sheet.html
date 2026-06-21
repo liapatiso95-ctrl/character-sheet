@@ -506,6 +506,7 @@ const CSS = `
     animation:tipIn .12s ease-out;
   }
   @keyframes tipIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes rollFlash{0%{opacity:0;transform:scale(.55)}12%{opacity:1;transform:scale(1.1)}24%{transform:scale(1)}72%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.94)}}
   .trunc-tip::before{
     content:'';position:absolute;bottom:100%;left:14px;
     border:5px solid transparent;
@@ -2196,6 +2197,9 @@ function Page1({c,s}){
 
 function Page2({c,s}){
   const [drag,setDrag]=useState(null);
+  const [invSearch,setInvSearch]=useState("");
+  const iq=invSearch.trim().toLowerCase();
+  const invMatch=(it)=>{ if(!iq) return true; try{return ["nm","desc","nt"].some(function(k){var v=it[k];return typeof v==="string"&&v.toLowerCase().indexOf(iq)>=0;});}catch(e){return true;} };
   const [dragOver,setDragOver]=useState(null);
   const [splitDragModal,setSplitDragModal]=useState(null); // {src,idx,dest,type:'item'|'coin',denom,available}
   const [splitQty,setSplitQty]=useState("");
@@ -2530,6 +2534,13 @@ function Page2({c,s}){
     <div>
       <div className="orn">Inventory</div>
 
+      <div style={{display:"flex",alignItems:"center",gap:8,marginTop:18,marginBottom:-8}}>
+        <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(201,150,42,.4)"}}>⌕</span>
+        <input value={invSearch} onChange={e=>setInvSearch(e.target.value)} placeholder="Search items by name or description…"
+          style={{flex:1,maxWidth:360,background:"rgba(0,0,0,.3)",border:"none",borderBottom:"1px solid rgba(201,150,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"5px 4px",outline:"none"}} />
+        {invSearch&&<span onClick={()=>setInvSearch("")} title="Clear search" style={{cursor:"pointer",color:"rgba(201,74,42,.5)",fontSize:16,userSelect:"none"}}>×</span>}
+      </div>
+
       {/* Weight summary */}
       <div style={{display:"flex",gap:12,marginTop:24,marginBottom:4,flexWrap:"wrap",alignItems:"stretch"}}>
         <div style={{background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,150,42,.2)",padding:"8px 16px",flex:2,minWidth:180}}>
@@ -2711,7 +2722,7 @@ function Page2({c,s}){
             <th></th>
           </tr></thead>
           <tbody>
-            {sortItems(c.inv,invSort).map(({item:it,i})=>(
+            {sortItems(c.inv,invSort).filter(function(x){return invMatch(x.item);}).map(({item:it,i})=>(
               [
                 <tr key={i+"a"} draggable onDragStart={()=>onDragStart("inv",i)} onDragEnd={onDragEnd} style={rowStyle(drag&&drag.src==="inv"&&drag.idx===i)}>
                   <td style={{textAlign:"center",cursor:"grab",color:"rgba(184,154,240,.3)",fontSize:12}}>::</td>
@@ -2867,7 +2878,7 @@ function Page2({c,s}){
                   <th></th>
                 </tr></thead>
                 <tbody>
-                  {sortItems(bagInv,bagSorts[bag.id]||null).map(({item:it,i})=>(
+                  {sortItems(bagInv,bagSorts[bag.id]||null).filter(function(x){return invMatch(x.item);}).map(({item:it,i})=>(
                     [
                     <tr key={i+"a"} draggable onDragStart={()=>onDragStart(dropTarget,i)} onDragEnd={onDragEnd} style={rowStyle(drag&&drag.src===dropTarget&&drag.idx===i)}>
                       <td style={{textAlign:"center",cursor:"grab",color:"rgba(184,154,240,.3)",fontSize:12}}>::</td>
@@ -3069,6 +3080,12 @@ function Page4({c,s}){
     style={{cursor:"pointer",color:"rgba(232,213,176,.3)",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",padding:"4px 2px"}}>{mdPreview(t)||"(empty — click to add notes)"}</div>;
   const {useState:us}=React;
   const [sub,setSub]=us("npc");
+  const [noteSearch,setNoteSearch]=us("");
+  const nq=noteSearch.trim().toLowerCase();
+  const fIdx=(arr)=>(arr||[]).map(function(it,i){return {it:it,i:i};}).filter(function(x){
+    if(!nq) return true;
+    try{return Object.keys(x.it).some(function(k){var v=x.it[k];return typeof v==="string"&&v.toLowerCase().indexOf(nq)>=0;});}catch(e){return true;}
+  });
   // Custom user-defined sections — each {id, name, items:[{ti,tx,showDesc}]}
   const csList=c.customSections||[];
   const csUpd=(id,fn)=>s("customSections",(c.customSections||[]).map(cs=>cs.id===id?fn(cs):cs));
@@ -3109,9 +3126,15 @@ function Page4({c,s}){
           style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1,textTransform:"uppercase",padding:"7px 12px",cursor:"pointer",borderRadius:2,transition:"all .2s",
             background:"transparent",border:"1px dashed rgba(123,79,207,.4)",color:"rgba(184,154,240,.7)"}}>+ Section</button>
       </div>
+      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:18,marginTop:-18}}>
+        <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(201,150,42,.4)"}}>⌕</span>
+        <input value={noteSearch} onChange={e=>setNoteSearch(e.target.value)} placeholder="Search notes by name or text…"
+          style={{flex:1,maxWidth:360,background:"rgba(0,0,0,.3)",border:"none",borderBottom:"1px solid rgba(201,150,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"5px 4px",outline:"none"}} />
+        {noteSearch&&<span onClick={()=>setNoteSearch("")} title="Clear search" style={{cursor:"pointer",color:"rgba(201,74,42,.5)",fontSize:16,userSelect:"none"}}>×</span>}
+      </div>
       {sub==="npc"&&<div>
       <div className="sh">NPCs {descBtns("npc")}</div>
-      {c.npc.map((n,i)=>{var open=n.showDesc!==false;return (
+      {fIdx(c.npc).map(function(x){var n=x.it,i=x.i;var open=n.showDesc!==false;return (
         <div key={i} className="nc">
           <span onClick={()=>toggleDesc("npc",i)} title={open?"Hide notes":"Show notes"} style={chevSt}>{open?"▾":"▸"}</span>
           <div style={{display:"flex",flexDirection:"column",gap:4,flexShrink:0}}>
@@ -3142,7 +3165,7 @@ function Page4({c,s}){
 
       {sub==="locations"&&<div>
       <div className="sh">Locations {descBtns("locations")}</div>
-      {(c.locations||[]).map((n,i)=>{var open=n.showDesc!==false;return (
+      {fIdx(c.locations).map(function(x){var n=x.it,i=x.i;var open=n.showDesc!==false;return (
         <div key={i} className="nc">
           <span onClick={()=>toggleDesc("locations",i)} title={open?"Hide notes":"Show notes"} style={chevSt}>{open?"▾":"▸"}</span>
           <div style={{flex:1,minWidth:0}}>
@@ -3160,7 +3183,7 @@ function Page4({c,s}){
 
       {sub==="lore"&&<div>
       <div className="sh">Lore {descBtns("lore")}</div>
-      {(c.lore||[]).map((n,i)=>{var open=n.showDesc!==false;return (
+      {fIdx(c.lore).map(function(x){var n=x.it,i=x.i;var open=n.showDesc!==false;return (
         <div key={i} className="nc" style={{borderLeft:"3px solid rgba(201,150,42,.35)"}}>
           <span onClick={()=>toggleDesc("lore",i)} title={open?"Hide notes":"Show notes"} style={chevSt}>{open?"▾":"▸"}</span>
           <div style={{flex:1,minWidth:0}}>
@@ -3177,7 +3200,7 @@ function Page4({c,s}){
 
       {sub==="factions"&&<div>
       <div className="sh">Organisations {descBtns("factions")}</div>
-      {(c.factions||[]).map((f,i)=>{var open=f.showDesc!==false;return (
+      {fIdx(c.factions).map(function(x){var f=x.it,i=x.i;var open=f.showDesc!==false;return (
         <div key={i} className="nc">
           <span onClick={()=>toggleDesc("factions",i)} title={open?"Hide notes":"Show notes"} style={chevSt}>{open?"▾":"▸"}</span>
           <div style={{flex:1,minWidth:0}}>
@@ -3196,7 +3219,7 @@ function Page4({c,s}){
       {sub==="nt1"&&<div>
       <div className="sh">Session Notes {descBtns("nt1")}</div>
       <div style={{marginBottom:6}}>
-        {(c.nt1||[]).map((n,i)=>{var open=n.showDesc!==false;return (
+        {fIdx(c.nt1).map(function(x){var n=x.it,i=x.i;var open=n.showDesc!==false;return (
           <div key={i} className="nc" style={{borderLeft:"3px solid rgba(123,79,207,.4)"}}>
             <span onClick={()=>toggleDesc("nt1",i)} title={open?"Hide notes":"Show notes"} style={chevSt}>{open?"▾":"▸"}</span>
             <div style={{flex:1,minWidth:0}}>
@@ -3215,7 +3238,7 @@ function Page4({c,s}){
       {sub==="nt3"&&<div>
       <div className="sh">Other Notes {descBtns("nt3")}</div>
       <div style={{marginBottom:6}}>
-        {(c.nt3||[]).map((n,i)=>{var open=n.showDesc!==false;return (
+        {fIdx(c.nt3).map(function(x){var n=x.it,i=x.i;var open=n.showDesc!==false;return (
           <div key={i} className="nc" style={{borderLeft:"3px solid rgba(42,140,156,.3)"}}>
             <span onClick={()=>toggleDesc("nt3",i)} title={open?"Hide notes":"Show notes"} style={chevSt}>{open?"▾":"▸"}</span>
             <div style={{flex:1,minWidth:0}}>
@@ -3246,7 +3269,7 @@ function Page4({c,s}){
               style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(201,74,42,.6)",background:"transparent",border:"1px solid rgba(201,74,42,.3)",padding:"2px 7px",borderRadius:2,flexShrink:0}}>Delete</button>
             {csDescBtns}
           </div>
-          {items.map((n,i)=>{var open=n.showDesc!==false;return (
+          {fIdx(items).map(function(x){var n=x.it,i=x.i;var open=n.showDesc!==false;return (
             <div key={i} className="nc" style={{borderLeft:"3px solid rgba(184,154,240,.4)"}}>
               <span onClick={()=>csItemToggle(cs.id,i)} title={open?"Hide notes":"Show notes"} style={chevSt}>{open?"▾":"▸"}</span>
               <div style={{flex:1,minWidth:0}}>
@@ -4229,6 +4252,13 @@ function Page3({c,s}){
     s("fts",a);
   };
 
+  const [featSearch,setFeatSearch]=React.useState("");
+  const fq=featSearch.trim().toLowerCase();
+  const ffIdx=(arr)=>(arr||[]).map(function(it,i){return {it:it,i:i};}).filter(function(x){
+    if(!fq) return true;
+    try{return ["nm","ds","src"].some(function(k){var v=x.it[k];return typeof v==="string"&&v.toLowerCase().indexOf(fq)>=0;});}catch(e){return true;}
+  });
+
   return (
     <div>
       <div className="orn">Features</div>
@@ -4253,8 +4283,14 @@ function Page3({c,s}){
           }} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",color:"rgba(232,213,176,.4)",border:"1px solid rgba(232,213,176,.12)",padding:"3px 8px",borderRadius:2,userSelect:"none"}}>− All</div>
         </div>
       </div>
+      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
+        <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(201,150,42,.4)"}}>⌕</span>
+        <input value={featSearch} onChange={e=>setFeatSearch(e.target.value)} placeholder="Search features &amp; feats by name, source or text…"
+          style={{flex:1,maxWidth:360,background:"rgba(0,0,0,.3)",border:"none",borderBottom:"1px solid rgba(201,150,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"5px 4px",outline:"none"}} />
+        {featSearch&&<span onClick={()=>setFeatSearch("")} title="Clear search" style={{cursor:"pointer",color:"rgba(201,74,42,.5)",fontSize:16,userSelect:"none"}}>×</span>}
+      </div>
       <div className="sh">Class and Race Features</div>
-      {(c.feat||[]).map((f,i)=>{
+      {ffIdx(c.feat).map(function(x){var f=x.it,i=x.i;
         const limited=!!f.limited;
         const limits=f.limits||[{name:"",uses:"",exp:"",die:"NO",recharge:""}];
         const dsKey="feat-"+i;
@@ -4301,7 +4337,7 @@ function Page3({c,s}){
           </span>;
         })()}
       </div>
-      {(c.fts||[]).map((f,i)=>{
+      {ffIdx(c.fts).map(function(x){var f=x.it,i=x.i;
         const limited=!!f.limited;
         const limits=f.limits||[{name:"",uses:"",exp:"",die:"NO",recharge:""}];
         const dsKey="fts-"+i;
@@ -6667,6 +6703,10 @@ function SpellPage({c,s,from,to}){
   const [spellPtsModal,setSpellPtsModal]=us2(false);
   const [sptMsg,setSptMsg]=us2(null); // {text, timer}
   const [activeLv,setActiveLv]=us2(null); // active spell-level subtab (null = first available)
+  const [spellSearch,setSpellSearch]=us2("");
+  const [spellSearchAll,setSpellSearchAll]=us2(false);
+  const spq=spellSearch.trim().toLowerCase();
+  const spellMatch=(sp)=>{ if(!spq) return true; try{return ["nm","nt","note","sc"].some(function(k){var v=sp[k];return typeof v==="string"&&v.toLowerCase().indexOf(spq)>=0;});}catch(e){return true;} };
   const showSptMsg=function(text){
     setSptMsg(function(prev){if(prev&&prev.timer)clearTimeout(prev.timer);return null;});
     var t=setTimeout(function(){setSptMsg(null);},2200);
@@ -6727,6 +6767,7 @@ function SpellPage({c,s,from,to}){
   // Per-class-group collapse within a level (keyed "lv|ClassName"), saved with the character
   const spGroupCollapsed=c.spGroupCollapsed||{};
   const toggleSpGroup=(lv,name)=>{var k=lv+"|"+name;s("spGroupCollapsed",{...(c.spGroupCollapsed||{}),[k]:!spGroupCollapsed[k]});};
+  const setAllSpGroups=(lv,names,collapsed)=>{var m={...(c.spGroupCollapsed||{})};names.forEach(function(nm){m[lv+"|"+nm]=collapsed;});s("spGroupCollapsed",m);};
 
   const countForClass=(clsName,lv)=>{
     var total=0,prepared=0;
@@ -7098,7 +7139,17 @@ function SpellPage({c,s,from,to}){
       })()}
 
       {/* Spell levels */}
-      {visLvls.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:6,marginTop:24,marginBottom:20}}>
+      {(visLvls.length>0||spq)&&<div style={{display:"flex",alignItems:"center",gap:10,marginTop:24,marginBottom:16,flexWrap:"wrap"}}>
+        <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(184,154,240,.4)"}}>⌕</span>
+        <input value={spellSearch} onChange={e=>setSpellSearch(e.target.value)} placeholder="Search spells by name or text…"
+          style={{flex:1,maxWidth:300,background:"rgba(0,0,0,.3)",border:"none",borderBottom:"1px solid rgba(184,154,240,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"5px 4px",outline:"none"}} />
+        {spellSearch&&<span onClick={()=>setSpellSearch("")} title="Clear search" style={{cursor:"pointer",color:"rgba(201,74,42,.5)",fontSize:16,userSelect:"none"}}>×</span>}
+        <label style={{display:"inline-flex",alignItems:"center",gap:5,cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",color:spellSearchAll?"var(--arcane-l)":"rgba(184,154,240,.5)",userSelect:"none"}}>
+          <input type="checkbox" className="cc" checked={spellSearchAll} onChange={e=>setSpellSearchAll(e.target.checked)} />
+          All levels
+        </label>
+      </div>}
+      {visLvls.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:20}}>
         {visLvls.map(function(lv){
           var active=curLv===lv;
           var cnt=(c.sp[lv]||[]).length;
@@ -7115,7 +7166,7 @@ function SpellPage({c,s,from,to}){
           </button>;
         })}
       </div>}
-      {allLvls.filter(function(lv){return lv===curLv;}).map(lv=>{
+      {allLvls.filter(function(lv){return (spq&&spellSearchAll)?(c.sp[lv]||[]).some(spellMatch):lv===curLv;}).map(lv=>{
         const classesForThisLevel=spCls.filter(function(sc){
           if(!(sc.nm||"")) return false;
           const mx=sc.maxLv!==undefined?sc.maxLv:9;
@@ -7132,13 +7183,13 @@ function SpellPage({c,s,from,to}){
 
         const groups=[];
         if(classNames.length===0){
-          groups.push({name:"",sc:null,spells:allSpells.map(function(sp,i){return {sp,i};})});
+          groups.push({name:"",sc:null,spells:allSpells.map(function(sp,i){return {sp,i};}).filter(function(x){return spellMatch(x.sp);})});
         } else {
           classesForThisLevel.filter(function(sc){return (sc.nm||"");}).forEach(function(sc){
             const cn=sc.nm;
-            groups.push({name:cn,sc:sc,spells:allSpells.map(function(sp,i){return {sp,i};}).filter(function(x){return (x.sp.cls||"")===cn;})});
+            groups.push({name:cn,sc:sc,spells:allSpells.map(function(sp,i){return {sp,i};}).filter(function(x){return (x.sp.cls||"")===cn&&spellMatch(x.sp);})});
           });
-          var unassigned=allSpells.map(function(sp,i){return {sp,i};}).filter(function(x){return classNames.indexOf(x.sp.cls||"")<0;});
+          var unassigned=allSpells.map(function(sp,i){return {sp,i};}).filter(function(x){return classNames.indexOf(x.sp.cls||"")<0&&spellMatch(x.sp);});
           if(unassigned.length>0) groups.push({name:"Other",sc:null,spells:unassigned});
         }
 
@@ -7146,7 +7197,17 @@ function SpellPage({c,s,from,to}){
           <div key={lv} style={{marginBottom:20}}>
             <div className="slh">
               <span className="slb">{lv===0?"*":lv}</span>
-              <span style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,color:"var(--arcane-g)",opacity:.7,textTransform:"uppercase"}}>{lv===0?"Cantrips":"Level "+lv}</span>
+              {(function(){
+                var gNames=groups.filter(function(g){return g.name;}).map(function(g){return g.name;});
+                var nameStyle={fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,color:"var(--arcane-g)",opacity:.7,textTransform:"uppercase"};
+                if(gNames.length===0) return <span style={nameStyle}>{lv===0?"Cantrips":"Level "+lv}</span>;
+                var allCol=gNames.every(function(nm){return spGroupCollapsed[lv+"|"+nm];});
+                return <span onClick={function(){setAllSpGroups(lv,gNames,!allCol);}} title={allCol?"Open all classes":"Close all classes"}
+                  style={{cursor:"pointer",display:"inline-flex",alignItems:"center",gap:6,userSelect:"none"}}>
+                  <span style={{fontFamily:"'Cinzel',serif",fontSize:11,color:"rgba(184,154,240,.7)"}}>{allCol?"▸":"▾"}</span>
+                  <span style={nameStyle}>{lv===0?"Cantrips":"Level "+lv}</span>
+                </span>;
+              })()}
               {lv===0&&<>
                 <div onClick={function(){const sp2=c.sp[0]||[];s("sp",{...c.sp,[0]:sp2.map(function(x){return {...x,showDesc:true};})});}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,flexShrink:0,userSelect:"none",marginLeft:"auto"}} title="Expand all">+</div>
                 <div onClick={function(){const sp2=c.sp[0]||[];s("sp",{...c.sp,[0]:sp2.map(function(x){return {...x,showDesc:false};})});}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,flexShrink:0,userSelect:"none"}} title="Collapse all">−</div>
@@ -7181,8 +7242,9 @@ function SpellPage({c,s,from,to}){
             </div>
             {groups.map(function(group,gi){
               const cnt=group.spells.length;
+              if(spq&&cnt===0) return null;
               const prep=group.spells.filter(function(x){return x.sp.prep&&!x.sp.bonus;}).length;
-              const grpCollapsed=!!(group.name&&spGroupCollapsed[lv+"|"+group.name]);
+              const grpCollapsed=!spq&&!!(group.name&&spGroupCollapsed[lv+"|"+group.name]);
               return (
                 <div key={gi} style={{marginBottom:gi<groups.length-1?12:0}}>
                   {group.name&&(
@@ -7237,6 +7299,10 @@ function SpellPage({c,s,from,to}){
 function ExploitPage({c,s}){
   const {useState:ues}=React;
   const [activeDeg,setActiveDeg]=ues(1); // active exploit-degree subtab
+  const [exSearch,setExSearch]=ues("");
+  const [exSearchAll,setExSearchAll]=ues(false);
+  const exq=exSearch.trim().toLowerCase();
+  const exMatch=(ex)=>{ if(!exq) return true; try{return ["nm","desc","nt","prereq"].some(function(k){var v=ex[k];return typeof v==="string"&&v.toLowerCase().indexOf(exq)>=0;});}catch(e){return true;} };
   const exploitSorts=(c.sortPrefs&&c.sortPrefs.exploits)||{}; // key: "deg-gi" => {col,dir}
   const onExploitSort=(deg,gi,col)=>{var k=deg+"-"+gi;var cur=exploitSorts[k];var next={...exploitSorts,[k]:cycleSort(cur,col)};s("sortPrefs",{...(c.sortPrefs||{}),exploits:next});};
   const ABLTS=["STR","DEX","CON","INT","WIS","CHA"];
@@ -7259,6 +7325,7 @@ function ExploitPage({c,s}){
   // Per-class-group collapse within a degree (keyed "deg|ClassName"), saved with the character
   const exGroupCollapsed=c.exGroupCollapsed||{};
   const toggleExGroup=(deg,name)=>{var k=deg+"|"+name;s("exGroupCollapsed",{...(c.exGroupCollapsed||{}),[k]:!exGroupCollapsed[k]});};
+  const setAllExGroups=(deg,names,collapsed)=>{var m={...(c.exGroupCollapsed||{})};names.forEach(function(nm){m[deg+"|"+nm]=collapsed;});s("exGroupCollapsed",m);};
 
   // Shared exploit dice
   const diceMax=parseInt(c.exploitDice)||0;
@@ -7353,6 +7420,17 @@ function ExploitPage({c,s}){
           </div>
       </div>
 
+      <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:16,flexWrap:"wrap"}}>
+        <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(201,74,42,.4)"}}>⌕</span>
+        <input value={exSearch} onChange={e=>setExSearch(e.target.value)} placeholder="Search exploits by name or text…"
+          style={{flex:1,maxWidth:300,background:"rgba(0,0,0,.3)",border:"none",borderBottom:"1px solid rgba(201,74,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"5px 4px",outline:"none"}} />
+        {exSearch&&<span onClick={()=>setExSearch("")} title="Clear search" style={{cursor:"pointer",color:"rgba(201,74,42,.5)",fontSize:16,userSelect:"none"}}>×</span>}
+        <label style={{display:"inline-flex",alignItems:"center",gap:5,cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",color:exSearchAll?"#e07060":"rgba(232,213,176,.4)",userSelect:"none"}}>
+          <input type="checkbox" className="cc" checked={exSearchAll} onChange={e=>setExSearchAll(e.target.checked)} />
+          All degrees
+        </label>
+      </div>
+
       <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:18}}>
         {[1,2,3,4,5].map(function(deg){
           var active=activeDeg===deg;
@@ -7372,23 +7450,33 @@ function ExploitPage({c,s}){
         })}
       </div>
 
-      {[1,2,3,4,5].filter(function(deg){return deg===activeDeg;}).map(deg=>{
+      {[1,2,3,4,5].filter(function(deg){return (exq&&exSearchAll)?(c.expl[deg]||[]).some(exMatch):deg===activeDeg;}).map(deg=>{
         const allEx=c.expl[deg]||[];
         const col=degColors[""+deg];
         const borderCol=borderCols[""+deg];
         const hasUsed=deg>=3;
         const groups=classNames.length>0
-          ?classNames.map(function(cn){return {name:cn,exploits:allEx.map(function(ex,i){return {ex,i};}).filter(function(x){return (x.ex.cls||"")===cn;})};})
-          :[{name:"",exploits:allEx.map(function(ex,i){return {ex,i};})}];
+          ?classNames.map(function(cn){return {name:cn,exploits:allEx.map(function(ex,i){return {ex,i};}).filter(function(x){return (x.ex.cls||"")===cn&&exMatch(x.ex);})};})
+          :[{name:"",exploits:allEx.map(function(ex,i){return {ex,i};}).filter(function(x){return exMatch(x.ex);})}];
         if(classNames.length>0){
-          var unassigned=allEx.map(function(ex,i){return {ex,i};}).filter(function(x){return classNames.indexOf(x.ex.cls||"")<0;});
+          var unassigned=allEx.map(function(ex,i){return {ex,i};}).filter(function(x){return classNames.indexOf(x.ex.cls||"")<0&&exMatch(x.ex);});
           if(unassigned.length>0) groups.push({name:"Other",exploits:unassigned});
         }
         return (
           <div key={deg} style={{marginBottom:16}}>
             <div className="slh">
               <span style={{fontFamily:"'Cinzel Decorative',serif",fontSize:16,color:col,width:28,textAlign:"center",flexShrink:0}}>{deg}</span>
-              <span style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,color:col,opacity:.85,textTransform:"uppercase"}}>{degNames[""+deg]}</span>
+              {(function(){
+                var gNames=groups.filter(function(g){return g.name;}).map(function(g){return g.name;});
+                var nameStyle={fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,color:col,opacity:.85,textTransform:"uppercase"};
+                if(gNames.length===0) return <span style={nameStyle}>{degNames[""+deg]}</span>;
+                var allCol=gNames.every(function(nm){return exGroupCollapsed[deg+"|"+nm];});
+                return <span onClick={function(){setAllExGroups(deg,gNames,!allCol);}} title={allCol?"Open all classes":"Close all classes"}
+                  style={{cursor:"pointer",display:"inline-flex",alignItems:"center",gap:6,userSelect:"none"}}>
+                  <span style={{fontFamily:"'Cinzel',serif",fontSize:11,color:col}}>{allCol?"▸":"▾"}</span>
+                  <span style={nameStyle}>{degNames[""+deg]}</span>
+                </span>;
+              })()}
               <span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.3)",fontStyle:"italic",letterSpacing:0,textTransform:"none",marginLeft:4}}>{degNotes[""+deg]}</span>
               <div style={{marginLeft:"auto",display:"flex",gap:4}}>
                 <div onClick={function(){const expl2=c.expl[deg]||[];s("expl",{...c.expl,[deg]:expl2.map(function(x){return {...x,showDesc:true};})});}}
@@ -7399,7 +7487,8 @@ function ExploitPage({c,s}){
             </div>
             {groups.map(function(group,gi){
               const cnt=group.exploits.length;
-              const grpCollapsed=!!(group.name&&exGroupCollapsed[deg+"|"+group.name]);
+              if(exq&&cnt===0) return null;
+              const grpCollapsed=!exq&&!!(group.name&&exGroupCollapsed[deg+"|"+group.name]);
               return (
                 <div key={gi} style={{marginBottom:gi<groups.length-1?10:0}}>
                   {group.name&&(
@@ -7491,10 +7580,21 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
   // A roll result is {id, label, dice:[{sides,val}], bonus, note}
   const [results,setResults]=us2([]);
 
+  const flashTimer=React.useRef(null);
+  const [flash,setFlash]=us2(null);
   const addResult=function(label,dice,bonus,note,groups){
     setResults(function(prev){
       return [{id:Date.now()+Math.random(),label,dice,bonus,note,groups:groups||null},...prev].slice(0,20);
     });
+    var allDice=(groups&&groups.length)?groups.reduce(function(a,g){return a.concat(g.dice||[]);},[]):(dice||[]);
+    var total=allDice.reduce(function(a,d){return a+(d.val||0);},0)+(bonus||0);
+    var isD20=allDice.length===1&&allDice[0].sides===20;
+    var crit=isD20&&allDice[0].val===20;
+    var fumble=isD20&&allDice[0].val===1;
+    if(flashTimer.current) clearTimeout(flashTimer.current);
+    var fid=Date.now()+Math.random();
+    setFlash({id:fid,total:total,label:label,crit:crit,fumble:fumble});
+    flashTimer.current=setTimeout(function(){setFlash(function(cur){return (cur&&cur.id===fid)?null:cur;});},1600);
   };
 
   const rerollDie=function(rid,di){
@@ -7527,6 +7627,7 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
   const [custFormula,setCustFormula]=us2(null); // FormulaModal formula object for bonus
   const [custFormulaOpen,setCustFormulaOpen]=us2(false);
   const [qrOpen,setQrOpen]=us2(true);
+  const [custOpen,setCustOpen]=us2(true);
 
   const calcCustBonus=function(formula){
     if(!formula) return 0;
@@ -7713,6 +7814,19 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
   return (
     <div style={{marginTop:26}}>
       <div className="orn">Dice Roller</div>
+      {flash&&ReactDOM.createPortal(
+        <div style={{position:"fixed",inset:0,display:"flex",alignItems:"center",justifyContent:"center",zIndex:99999,pointerEvents:"none"}}>
+          <div key={flash.id} style={{animation:"rollFlash 1.6s ease-out forwards",textAlign:"center",padding:"22px 44px",borderRadius:10,maxWidth:"86vw",
+            background:"radial-gradient(circle, rgba(20,14,8,.97), rgba(20,14,8,.8))",
+            border:"2px solid "+(flash.crit?"#4a9c5c":flash.fumble?"#c94a2a":"rgba(201,150,42,.6)"),
+            boxShadow:"0 0 70px rgba(0,0,0,.75)"}}>
+            <div style={{fontFamily:"'Cinzel Decorative',serif",fontSize:"clamp(64px,20vw,150px)",fontWeight:700,lineHeight:1,
+              color:flash.crit?"#6dbb80":flash.fumble?"#e07060":"var(--gold-l)",
+              textShadow:"0 0 24px "+(flash.crit?"rgba(74,156,92,.5)":flash.fumble?"rgba(201,74,42,.5)":"rgba(201,150,42,.4)")}}>{flash.total}</div>
+            {(flash.crit||flash.fumble)&&<div style={{fontFamily:"'Cinzel',serif",fontSize:"clamp(13px,4vw,20px)",letterSpacing:3,textTransform:"uppercase",fontWeight:700,marginTop:6,color:flash.crit?"#6dbb80":"#e07060"}}>{flash.crit?"Critical!":"Fumble!"}</div>}
+            {flash.label&&<div style={{fontFamily:"'Cinzel',serif",fontSize:"clamp(10px,3vw,15px)",letterSpacing:2,textTransform:"uppercase",color:"rgba(232,213,176,.55)",marginTop:8,maxWidth:"80vw",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{flash.label}</div>}
+          </div>
+        </div>, document.body)}
 
       {/* Quick Rolls — Attacks / Saves / Initiative / Checks / Skills */}
       <div style={{marginBottom:16,display:"flex",flexDirection:"column",gap:8}}>
@@ -7968,8 +8082,11 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
 
       {/* Custom roller */}
       <div style={{marginBottom:16}}>
-        <div className="sh">Custom Roll</div>
-        <div style={{display:"flex",flexDirection:"column",gap:8,padding:"10px 12px",background:"rgba(0,0,0,.18)",border:"1px solid rgba(201,150,42,.12)",borderRadius:2}}>
+        <div className="sh" style={{display:"flex",alignItems:"center",justifyContent:"space-between",cursor:"pointer"}} onClick={function(){setCustOpen(function(v){return !v;});}}>
+          <span>Custom Roll</span>
+          <span style={{fontFamily:"'Cinzel',serif",fontSize:14,color:"rgba(201,150,42,.5)",lineHeight:1,userSelect:"none"}}>{custOpen?"−":"+"}</span>
+        </div>
+        {custOpen&&<div style={{display:"flex",flexDirection:"column",gap:8,padding:"10px 12px",background:"rgba(0,0,0,.18)",border:"1px solid rgba(201,150,42,.12)",borderRadius:2}}>
           {/* Name */}
           <input value={custName} onChange={function(e){setCustName(e.target.value);}} placeholder="Roll name (optional)..."
             style={{width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.2)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"2px 0"}} />
@@ -8018,7 +8135,7 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
             <div onClick={rollCustom} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,color:"var(--gold-l)",border:"1px solid rgba(201,150,42,.4)",padding:"4px 14px",borderRadius:10,userSelect:"none",background:"rgba(201,150,42,.1)"}}>🎲 Roll</div>
             <div onClick={saveCustom} title="Save (requires name)" style={{cursor:custName.trim()?"pointer":"default",fontFamily:"'Cinzel',serif",fontSize:10,color:custName.trim()?"var(--arcane-l)":"rgba(184,154,240,.2)",border:"1px solid "+(custName.trim()?"rgba(123,79,207,.4)":"rgba(123,79,207,.12)"),padding:"4px 10px",borderRadius:10,userSelect:"none",background:custName.trim()?"rgba(123,79,207,.1)":"transparent"}}>+ Save</div>
           </div>
-        </div>
+        </div>}
 
         {custFormulaOpen&&<FormulaModal c={c}
           initialFormula={custFormula||{flat:"",abls:[],prof:"none",lvlType:"none",lvlClass:""}}
@@ -10038,6 +10155,7 @@ function CreaturesPage({c,s}){
   const [mdTag,setMdTag]=us("Companion");    // tag for imported creature
   const [mdErr,setMdErr]=us("");             // parse status / error
   const [crSub,setCrSub]=us(null);           // active creature subtab (tag); null = first available
+  const [crSearch,setCrSearch]=us("");        // search creatures by name
   const groupHide=c.crGroupHide||{};         // which tag-groups are collapsed (saved with the character)
   const setGroupHide=function(fn){s("crGroupHide",function(prev){var base=prev||{};return typeof fn==="function"?fn(base):fn;});};
   // Collapse / expand every creature card (optionally only within one tag-group)
@@ -10282,6 +10400,13 @@ function CreaturesPage({c,s}){
         </div>;
       })()}
 
+      {creatures.length>0&&<div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
+        <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(201,150,42,.4)"}}>⌕</span>
+        <input value={crSearch} onChange={e=>setCrSearch(e.target.value)} placeholder="Search by name…"
+          style={{flex:1,maxWidth:300,background:"rgba(0,0,0,.3)",border:"none",borderBottom:"1px solid rgba(201,150,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"5px 4px",outline:"none"}} />
+        {crSearch&&<span onClick={()=>setCrSearch("")} title="Clear search" style={{cursor:"pointer",color:"rgba(201,74,42,.5)",fontSize:16,userSelect:"none"}}>×</span>}
+      </div>}
+
       {(function(){
         var activeSub=activeCrSub();
         var grp=creatures.filter(function(cr){return cr.tag===activeSub;});
@@ -10299,8 +10424,9 @@ function CreaturesPage({c,s}){
         var order=crOrder();
         var activeSub=activeCrSub();
         return order.filter(function(gtag){return gtag===activeSub;}).map(function(gtag){
-          var group=creatures.filter(function(cr){return cr.tag===gtag;});
-          if(!group.length) return <div key={"empty-"+gtag} style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgba(232,213,176,.3)",fontStyle:"italic",textAlign:"center",padding:"28px 0"}}>No {gtag.toLowerCase()}s yet — add one with the button below.</div>;
+          var cq=crSearch.trim().toLowerCase();
+          var group=creatures.filter(function(cr){return cr.tag===gtag&&(!cq||(""+(cr.nm||"")).toLowerCase().indexOf(cq)>=0);});
+          if(!group.length) return <div key={"empty-"+gtag} style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgba(232,213,176,.3)",fontStyle:"italic",textAlign:"center",padding:"28px 0"}}>{cq?"No "+gtag.toLowerCase()+"s match \""+crSearch.trim()+"\".":"No "+gtag.toLowerCase()+"s yet — add one with the button below."}</div>;
           var gcol=tagColor(gtag), gcolL=gcol.replace(",1)",",0.75)");
           return <div key={"grp-"+gtag} style={{marginBottom:18}}>
             {group.map(function(cr){
@@ -11273,7 +11399,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.9.38</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.9.42</div>
 
 </script>
 </body>
