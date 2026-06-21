@@ -16832,7 +16832,7 @@ The reincarnated creature makes any choices that a species' description offers, 
 | 18-19    | Rare|
 | 20  | Mishap, reincarnated creature keeps its body but with a twist|
 
-
+{{note
 ##### Common (1d8)
 | Roll | Species    |
 |------|------------|
@@ -16844,7 +16844,9 @@ The reincarnated creature makes any choices that a species' description offers, 
 | 6    | Halfling*   |
 | 7    | Human      |
 | 8    | Orc        |
-
+}}
+\column
+{{note
 ##### Uncommon (1d20)
 | Roll | Species     |
 |------|-------------|
@@ -16861,7 +16863,9 @@ The reincarnated creature makes any choices that a species' description offers, 
 | 15   | Tabaxi      |
 | 16-19| Tiefling*    |
 | 20   | Triton      |
+}}
 
+{{note
 ##### Rare  (1d20)
 | Roll | Species     |
 |------|-------------|
@@ -16871,15 +16875,20 @@ The reincarnated creature makes any choices that a species' description offers, 
 | 16-18    | Gith*        |
 | 19   | Vedalken    |
 | 20   | Verdan      |
+}}
 
-
+{{note
 ##### Mishap (1d4) 
 | Roll | Species     |
 |------|-------------|
 | 1    | Dhampir     |
 | 2    | Hexblood    |
 | 3-4  | Reborn      |
+}}
 
+\page
+{{pageNumber,auto}}
+{{note
 #### Subtables 
 
 ##### Bestial (1d12) 
@@ -16923,8 +16932,10 @@ The reincarnated creature makes any choices that a species' description offers, 
 | 4    | Medusa       |
 | 5    | Minotaur     |
 | 6    | Yuan-Ti      |
+}}
 \page
 {{pageNumber,auto}}
+{{note,wide
 #### Sub-Species Tables
 ##### Aasimar
 | d4 | Celestial Relevation Type             |
@@ -17030,7 +17041,7 @@ The reincarnated creature makes any choices that a species' description offers, 
 | 2  | Longtooth     |
 | 3  | Swiftstride   |
 | 4  | Wildhunt      |
-
+}}
 
 \page
 {{pageNumber,auto}}
