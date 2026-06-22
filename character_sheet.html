@@ -7166,7 +7166,7 @@ function SpellPage({c,s,from,to}){
           </button>;
         })}
       </div>}
-      {allLvls.filter(function(lv){return (spq&&spellSearchAll)?(c.sp[lv]||[]).some(spellMatch):lv===curLv;}).map(lv=>{
+      {allLvls.filter(function(lv){return spellSearchAll?(spq?(c.sp[lv]||[]).some(spellMatch):lvVisible(lv)):lv===curLv;}).map(lv=>{
         const classesForThisLevel=spCls.filter(function(sc){
           if(!(sc.nm||"")) return false;
           const mx=sc.maxLv!==undefined?sc.maxLv:9;
@@ -7450,7 +7450,7 @@ function ExploitPage({c,s}){
         })}
       </div>
 
-      {[1,2,3,4,5].filter(function(deg){return (exq&&exSearchAll)?(c.expl[deg]||[]).some(exMatch):deg===activeDeg;}).map(deg=>{
+      {[1,2,3,4,5].filter(function(deg){return exSearchAll?(exq?(c.expl[deg]||[]).some(exMatch):true):deg===activeDeg;}).map(deg=>{
         const allEx=c.expl[deg]||[];
         const col=degColors[""+deg];
         const borderCol=borderCols[""+deg];
@@ -11399,7 +11399,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.9.42</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.9.43</div>
 
 </script>
 </body>
