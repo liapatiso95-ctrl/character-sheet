@@ -2,6 +2,13 @@
 <html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>DM Screen — Combat, Compendium &amp; Codex</title>
+<link rel="manifest" href="manifest-dm.json">
+<meta name="theme-color" content="#0d0a08">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DM Screen">
+<link rel="apple-touch-icon" href="icon-dm-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js"></script>
@@ -3526,6 +3533,31 @@ function parseCreaturesMd(text){
   }
   return out;
 }
+// Parse pasted markdown (one or many GMBinder statblocks) into compendium-style
+// entries — the exact same pipeline as creatures.md, but fully offline. Falls
+// back to treating the whole text as a single statblock when there's no leading
+// "# Heading" (e.g. a name written with ### or no heading at all).
+function parseCreaturesFromText(text){
+  var out=[];
+  if(!text||!text.trim()) return out;
+  var md=parseCreaturesMd(text);
+  var keys=Object.keys(md);
+  if(keys.length){ keys.forEach(function(k){out.push(md[k]);}); return out; }
+  if(/\*\*\s*Armor Class\s*\*\*/i.test(text)||/\|\s*>?\s*STR\b/i.test(text)){
+    try{
+      var creature=cmpParseStatblock(text,"Companion");
+      var nm=(creature.nm&&creature.nm.trim())||"Creature";
+      if(/^(Actions|Reactions|Bonus Actions|Legendary Actions|Mythic Actions|Lair Actions)$/i.test(nm))nm="Creature";
+      creature.nm=nm;
+      var disp=text.replace(/^[ \t]*>+[ \t]?/gm,"")
+        .replace(/^\s*#{1,6}\s+.+\n/,"")
+        .replace(/(\*\*[^*\n]+\*\*)\s*::\s*/g,"$1 ")
+        .replace(/\{\{\s*bonus\s+/gi,"").replace(/\{\{/g,"").replace(/\}\}/g,"");
+      out.push({name:nm,src:"file",desc:disp,creature:creature,cr:"",size:creature.size,ctype:creature.subtype,_kind:"creature"});
+    }catch(e){}
+  }
+  return out;
+}
 function ensureCreatureCacheLoading(){
   if(_creatureCache.status!=="idle") return;
   _creatureCache.status="loading";_creatureCache.data={};
@@ -4757,7 +4789,7 @@ function RollerPanel({c,pos,setPos,onClose,onRoll}){
 function sortOrder(cs){return cs.slice().sort(function(a,b){var ai=a.init==null?-999:a.init,bi=b.init==null?-999:b.init;if(bi!==ai)return bi-ai;if((b.dexMod||0)!==(a.dexMod||0))return (b.dexMod||0)-(a.dexMod||0);return (a.name||"").localeCompare(b.name||"");});}
 function tickTimers(list){return (list||[]).map(function(t){return t.timer==null?t:Object.assign({},t,{timer:t.timer-1});}).filter(function(t){return t.timer==null||t.timer>0;});}
 
-function CombatTracker({combat,setCombat,setLightbox}){
+function CombatTracker({combat,setCombat,setLightbox,onAddCreature}){
   const order=sortOrder(combat.combatants||[]);
   const [rolls,setRolls]=useState([]);
   const [roller,setRoller]=useState(null);
@@ -4816,9 +4848,10 @@ function CombatTracker({combat,setCombat,setLightbox}){
       <div onClick={rollCreatures} style={btn("201,150,42")} title="Roll d20 + DEX for every creature">⚄ Roll Creatures</div>
       <div onClick={rollAll} style={btn("201,150,42")} title="Roll initiative for everyone">⚄ Roll All</div>
     </div>
-    {order.length===0&&<div style={{textAlign:"center",padding:"30px 0",fontFamily:"'EB Garamond',serif",fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>No combatants yet. Add PCs below, or add creatures from the Compendium tab.</div>}
+    {order.length===0&&<div style={{textAlign:"center",padding:"30px 0",fontFamily:"'EB Garamond',serif",fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>No combatants yet. Add PCs or paste a creature's Markdown below, or add creatures from the Compendium tab.</div>}
     {order.map(function(c){return <CombatRow key={c.id} c={c} isTurn={combat.started&&combat.turnId===c.id} upd={upd} remove={remove} setLightbox={setLightbox} onOpenRoller={openRoller}/>;})}
     <AddPCForm onAdd={addPC}/>
+    <AddCreatureMdForm onAdd={onAddCreature}/>
     <div style={{marginTop:18,display:"flex",gap:8,alignItems:"center",flexWrap:"wrap"}}>
       <div style={lbl}>Custom roll</div>
       <input value={customExpr} onChange={function(e){setCustomExpr(e.target.value);setCustomErr(false);}} onKeyDown={function(e){if(e.key==="Enter")rollCustom();}} placeholder="2d6 + 1d8 + 3 − 1d4" style={Object.assign({},inp,{flex:1,minWidth:160,padding:"7px 10px",borderColor:customErr?"rgba(201,74,42,.6)":"rgba(201,150,42,.25)"})}/>
@@ -4927,6 +4960,37 @@ function AddPCForm({onAdd}){
   </div>;
 }
 
+// Paste a creature's Markdown statblock and drop it straight into combat — same
+// parser the Compendium uses on creatures.md, so it works with no network/repo.
+function AddCreatureMdForm({onAdd}){
+  const [open,setOpen]=useState(false);
+  const [md,setMd]=useState("");
+  const [err,setErr]=useState("");
+  const PH="# Goblin\n*Small humanoid, neutral evil*\n___\n**Armor Class** 15 (leather armor, shield)\n**Hit Points** 7 (2d6)\n**Speed** 30 ft.\n___\n| STR | DEX | CON | INT | WIS | CHA |\n|:---:|:---:|:---:|:---:|:---:|:---:|\n| 8 (-1) | 14 (+2) | 10 (+0) | 10 (+0) | 8 (-1) | 8 (-1) |\n___\n**Skills** Stealth +6\n**Senses** darkvision 60 ft.\n**Challenge** 1/4\n### Actions\n***Scimitar.*** Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) slashing damage.";
+  const submit=function(){
+    var entries=parseCreaturesFromText(md);
+    if(!entries.length){setErr("Couldn't find a statblock. Paste a GMBinder-style creature — it needs a name heading (# Name), an **Armor Class** / **Hit Points** line, and the STR/DEX/… ability table.");return;}
+    setErr("");
+    entries.forEach(function(r){
+      var _vs=expandCreatureVariants(r.creature||{});
+      var _add=(_vs&&_vs.length)?_vs:[r.creature];
+      _add.forEach(function(v){var nc=JSON.parse(JSON.stringify(v));_applySummonClass(nc,0);onAdd(Object.assign({},r,{name:nc.nm||r.name,creature:nc}));});
+    });
+    setMd("");setOpen(false);
+  };
+  if(!open) return <div onClick={function(){setOpen(true);}} style={Object.assign(btn("123,79,207"),{display:"inline-block",marginTop:10,marginLeft:8})}>+ Add Creature from Markdown</div>;
+  return <div style={{marginTop:12,padding:"12px 14px",border:"1px dashed rgba(123,79,207,.4)",borderRadius:4}}>
+    <div style={Object.assign({},lbl,{marginBottom:6})}>Paste a creature statblock (Markdown) — works offline</div>
+    <textarea value={md} onChange={function(e){setMd(e.target.value);setErr("");}} placeholder={PH} spellCheck={false} style={Object.assign({},inp,{width:"100%",minHeight:150,fontFamily:"'Courier New',monospace",fontSize:12,lineHeight:1.5,resize:"vertical"})} autoFocus/>
+    {err&&<div style={{marginTop:6,fontFamily:"'EB Garamond',serif",fontSize:12,color:"#e07060"}}>{err}</div>}
+    <div style={{marginTop:10,display:"flex",gap:8,alignItems:"center",flexWrap:"wrap"}}>
+      <div onClick={submit} style={btn("123,79,207")}>Add to Combat</div>
+      <div onClick={function(){setMd("");setErr("");setOpen(false);}} style={btn("232,213,176")}>Cancel</div>
+      <span style={{fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>Read exactly like the Compendium — pulls attacks, saves, skills & the dice roller. Paste several at once and each becomes its own combatant.</span>
+    </div>
+  </div>;
+}
+
 // ─── App shell ────────────────────────────────────────────────────────────────
 function App(){
   const NOTE_KEYS=["npc","locations","lore","factions","nt1","nt3","customSections"];
@@ -4999,7 +5063,7 @@ function App(){
     <style>{CSS}</style>
     <div style={{maxWidth:980,margin:"0 auto"}}>
       <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:18,flexWrap:"wrap"}}>
-        <div style={{flex:1,display:"flex",alignItems:"baseline",gap:8}}><span style={{fontFamily:"'Cinzel Decorative',cursive",fontSize:18,color:GOLDL,letterSpacing:1}}>Dungeon Master Screen</span><span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.35)"}}>v13 · combat-ux</span></div>
+        <div style={{flex:1,display:"flex",alignItems:"baseline",gap:8}}><span style={{fontFamily:"'Cinzel Decorative',cursive",fontSize:18,color:GOLDL,letterSpacing:1}}>Dungeon Master Screen</span><span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.35)"}}>v14 · md-creature</span></div>
         <div onClick={doSave} style={btn("201,150,42")} title="Save everything to a JSON file (choose location & name)">Save</div>
         <div onClick={doSaveAs} style={btn("201,150,42")} title="Save to a new file / location">Save As</div>
         <div onClick={function(){if(fileRef.current)fileRef.current.click();}} style={btn("201,150,42")} title="Load from a JSON file">Load</div>
@@ -5009,7 +5073,7 @@ function App(){
         {saveMsg&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(143,214,160,.9)",marginLeft:4}}>{saveMsg}</span>}
       </div>
     </div>
-    <div style={{display:tab==="combat"?"block":"none"}}><CombatTracker combat={combat} setCombat={setCombat} setLightbox={setLightbox}/></div>
+    <div style={{display:tab==="combat"?"block":"none"}}><CombatTracker combat={combat} setCombat={setCombat} setLightbox={setLightbox} onAddCreature={addToCombat}/></div>
     {tab==="compendium"&&<div style={{maxWidth:980,margin:"0 auto"}}><CompendiumPage onAddCreature={addToCombat}/></div>}
     {tab==="codex"&&<div style={{maxWidth:980,margin:"0 auto"}}><Page4 c={notes} s={notesS}/></div>}
     <datalist id="cond-list">{COMMON_CONDITIONS.map(function(x){return <option key={x} value={x}/>;})}</datalist>
@@ -5025,5 +5089,12 @@ function App(){
   </div>;
 }
 ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
-
-</script></body></html>
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  });
+}
+</script>
+</body></html>
