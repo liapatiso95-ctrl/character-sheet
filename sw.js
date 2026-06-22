@@ -1,18 +1,20 @@
-const CACHE = 'dnd-sheet-v5';
+const CACHE = 'dnd-sheet-v6';
 const FILES = [
   './character_sheet.html',
+  './dm_screen.html',
   './manifest.json',
+  './manifest-dm.json',
   './icon-192.png',
-  './icon-512.png'
+  './icon-512.png',
+  './icon-dm-192.png',
+  './icon-dm-512.png'
 ];
-
 // Install: cache all files, activate immediately
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())
   );
 });
-
 // Activate: delete old caches, take control of open pages
 self.addEventListener('activate', e => {
   e.waitUntil(
@@ -21,7 +23,6 @@ self.addEventListener('activate', e => {
     ).then(() => self.clients.claim())
   );
 });
-
 // Network-first for HTML/navigation, cache-first for static assets
 self.addEventListener('fetch', e => {
   const req = e.request;
@@ -30,8 +31,12 @@ self.addEventListener('fetch', e => {
     req.mode === 'navigate' ||
     url.pathname.endsWith('.html') ||
     url.pathname.endsWith('/');
-
   if (isHTML) {
+    // Pick the canonical key for whichever app is being loaded, so the
+    // two apps never overwrite each other's offline copy.
+    const canonicalKey = url.pathname.endsWith('dm_screen.html')
+      ? './dm_screen.html'
+      : './character_sheet.html';
     e.respondWith(
       (async () => {
         try {
@@ -43,14 +48,14 @@ self.addEventListener('fetch', e => {
             await cache.put(req, response.clone());
             // Also update the canonical HTML key so the PWA launch
             // (start_url) always reads the same fresh copy.
-            await cache.put('./character_sheet.html', response.clone());
+            await cache.put(canonicalKey, response.clone());
           }
           return response;
         } catch (err) {
-          // Offline: serve whatever was last saved.
+          // Offline: serve whatever was last saved for THIS app.
           const cached =
             (await caches.match(req)) ||
-            (await caches.match('./character_sheet.html'));
+            (await caches.match(canonicalKey));
           return cached || Response.error();
         }
       })()
