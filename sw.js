@@ -1,4 +1,4 @@
-const CACHE = 'dnd-sheet-v6';
+const CACHE = 'dnd-sheet-v7';
 const FILES = [
   './character_sheet.html',
   './dm_screen.html',
