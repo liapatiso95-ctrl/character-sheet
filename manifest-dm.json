@@ -1,7 +1,7 @@
 {
   "name": "D&D 5e DM Screen",
   "short_name": "DM Screen",
-  "description": "A D&D 5e dungeon master screen; combat tracker, compendium & notes",
+  "description": "A D&D 5e dungeon master screen — combat tracker, compendium & codex",
   "id": "/character-sheet/dm-screen",
   "start_url": "./dm_screen.html",
   "display": "standalone",
