@@ -1066,6 +1066,7 @@ function Page1({c,s}){
   const [acOpen,setAcOpen]=useState(false);
   const [iniModal,setIniModal]=useState(false);
   const [wpnOpen,setWpnOpen]=useState(null); // {idx, mode:"atk"|"dmg"}
+  const [wpnExpand,setWpnExpand]=useState(null); // idx of attack whose parts/DC editor is open
   const [wpnRef,setWpnRef]=useState(false);
   const [condRef,setCondRef]=useState(false);
   const wpnSort=(c.sortPrefs&&c.sortPrefs.wpn)||null;
@@ -1125,6 +1126,20 @@ function Page1({c,s}){
   const abilChkBon=c.abilCheckBonusFormula?computeBonusFromFormula(c.abilCheckBonusFormula,c):(parseInt((c.abilCheckBonus||"").replace("+",""))||0);
   const abilChkBonPerAbl=(abl)=>{const f=(c.abilCheckBonusPerAblFormula||{})[abl];return f?computeBonusFromFormula(f,c):(parseInt(((c.abilCheckBonusPerAbl||{})[abl]||"").replace("+",""))||0);};
   const halfPb=c.halfProfChecks||c.halfProfSkills?Math.floor(pb/2):0;
+
+  // Compute a save-DC for an attack/spell row when w.isSave is on.
+  // Either drawn from a character DC source (w.dcCharKey) or a manual ability+flat.
+  const charDCList=getCharDCSources(c);
+  const attackDC=function(w){
+    if(w.dcMode==="manual"){
+      var abl=w.dcAbl||"INT";
+      var flat=parseInt((w.dcFlat||"").replace("+",""))||0;
+      return 8+pb+getStatMod(abl)+flat+exhPenalty;
+    }
+    // default: char source
+    var src=charDCList.find(function(x){return x.key===w.dcCharKey;})||charDCList[0];
+    return src?src.value:null;
+  };
 
   // "Has any prof" helpers — only used by the two toggle half-prof features
   const skillHasAnyProf=(sk)=>{
@@ -1985,7 +2000,7 @@ function Page1({c,s}){
         </div>
       </div>
 
-      <div className="sh" style={{display:"flex",alignItems:"baseline",gap:10}}>Attacks / Weapons
+      <div className="sh" style={{display:"flex",alignItems:"baseline",gap:10}}>Attacks / Weapons / Spells
         <span onClick={function(){setWpnRef(true);}} title="Weapons reference (PHB 2024)"
           style={{cursor:"pointer",width:15,height:15,borderRadius:"50%",border:"1px solid rgba(201,74,42,.45)",color:"rgba(201,74,42,.8)",fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",display:"inline-flex",alignItems:"center",justifyContent:"center",userSelect:"none",background:"rgba(201,74,42,.08)",lineHeight:1,alignSelf:"center"}}>i</span>
         <span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.3)",fontStyle:"italic",letterSpacing:0,textTransform:"none",fontWeight:"normal"}}>rolls appear in the Dice Roller tab</span></div>
@@ -1993,8 +2008,8 @@ function Page1({c,s}){
       <div className="stbl-wrap"><table className="itbl" style={{minWidth:520}}>
         <thead><tr>
           <SortableTh label="Name" col="nm" sort={wpnSort} onSort={onWpnSort} style={{width:"20%"}} />
-          <th style={{width:"28%"}}>Atk Bonus</th>
-          <th style={{width:"28%"}}>Damage</th>
+          <th style={{width:"24%"}}>+Atk / DC</th>
+          <th style={{width:"32%"}}>Damage</th>
           <SortableTh label="Notes" col="pr" sort={wpnSort} onSort={onWpnSort} />
           <th></th>
         </tr></thead>
@@ -2017,18 +2032,41 @@ function Page1({c,s}){
             const dmgBonTotal=dmgFormulaBon!==null?dmgFormulaBon:dmgAblSum+dmgProfBon+(parseInt((w.dmgFlat||"").replace("+",""))||0);
             const atkIsOpen=wpnOpen&&wpnOpen.idx===i&&wpnOpen.mode==="atk";
             const dmgIsOpen=wpnOpen&&wpnOpen.idx===i&&wpnOpen.mode==="dmg";
+            const isSave=!!w.isSave;
+            const dcVal=isSave?attackDC(w):null;
+            const dmgParts=Array.isArray(w.dmgParts)?w.dmgParts:[];
+            const expandOpen=wpnExpand===i;
+            const updW=function(patch){const a=[...c.wpn];a[i]={...a[i],...patch};s("wpn",a);};
+            const updPart=function(pi,patch){const a=[...c.wpn];const np=(a[i].dmgParts||[]).map(function(p,k){return k===pi?{...p,...patch}:p;});a[i]={...a[i],dmgParts:np};s("wpn",a);};
             return (
-              <tr key={i}>
+              <React.Fragment key={i}>
+              <tr>
                 <td><TipInput value={w.nm||""} onChange={e=>{const a=[...c.wpn];a[i]={...a[i],nm:e.target.value};s("wpn",a);}} placeholder="Name..." style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
                 <td>
                   <div style={{display:"flex",alignItems:"center",gap:4,padding:"2px 0"}}>
-                    <div onClick={function(e){e.stopPropagation();setWpnOpen(atkIsOpen?null:{idx:i,mode:"atk"});}}
-                      title="Click to configure attack bonus"
-                      style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,
-                              color:w.atkFormula||atkAbls.length>0||atkProfMode!=="none"||atkFlat?"var(--gold-l)":"rgba(232,213,176,.3)",
-                              borderBottom:"1px solid rgba(201,150,42,.2)",padding:"1px 5px",minWidth:32,textAlign:"center"}}>
-                      {atkTotalStr}
-                    </div>
+                    {isSave?(
+                      <div onClick={function(){setWpnExpand(expandOpen?null:i);}}
+                        title="Save DC — click to configure (in the panel below)"
+                        style={{cursor:"pointer",display:"flex",alignItems:"baseline",gap:3,fontFamily:"'Cinzel',serif",fontWeight:700,
+                                color:dcVal!=null?"var(--arcane-l)":"rgba(232,213,176,.3)",borderBottom:"1px solid rgba(123,79,207,.3)",padding:"1px 5px"}}>
+                        <span style={{fontSize:8,letterSpacing:1,color:"rgba(184,154,240,.6)"}}>DC</span>
+                        <span style={{fontSize:14}}>{dcVal!=null?dcVal:"—"}</span>
+                      </div>
+                    ):(
+                      <div onClick={function(e){e.stopPropagation();setWpnOpen(atkIsOpen?null:{idx:i,mode:"atk"});}}
+                        title="Click to configure attack bonus"
+                        style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,
+                                color:w.atkFormula||atkAbls.length>0||atkProfMode!=="none"||atkFlat?"var(--gold-l)":"rgba(232,213,176,.3)",
+                                borderBottom:"1px solid rgba(201,150,42,.2)",padding:"1px 5px",minWidth:32,textAlign:"center"}}>
+                        {atkTotalStr}
+                      </div>
+                    )}
+                    {/* save toggle */}
+                    <span onClick={function(){updW({isSave:!isSave});}} title={isSave?"Switch to attack roll":"Switch to saving throw (DC)"}
+                      style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:7,letterSpacing:.5,padding:"1px 4px",borderRadius:8,userSelect:"none",
+                              border:"1px solid "+(isSave?"rgba(123,79,207,.4)":"rgba(201,150,42,.25)"),color:isSave?"var(--arcane-l)":"rgba(201,150,42,.5)",background:isSave?"rgba(123,79,207,.1)":"transparent"}}>
+                      {isSave?"SAVE":"ATK"}
+                    </span>
                   </div>
                 </td>
                 <td>
@@ -2044,18 +2082,82 @@ function Page1({c,s}){
                               borderBottom:"1px solid rgba(201,74,42,.2)",padding:"1px 4px",minWidth:24,textAlign:"center"}}>
                       {dmgBonTotal>=0?"+"+dmgBonTotal:""+dmgBonTotal}
                     </div>
-                    {/* Full damage display */}
-                    {(()=>{
-                      const base=w.dmgBase||w.dmg;
-                      if(!base) return null;
-                      const totalStr=dmgBonTotal!==0?(dmgBonTotal>=0?"+"+dmgBonTotal:""+dmgBonTotal):"";
-                      return <span style={{fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"var(--ember)",marginLeft:2,flexShrink:0,lineHeight:1}}>{base+totalStr}</span>;
-                    })()}
+                    {/* base damage type (compact, with tooltip) */}
+                    <TipInput value={w.dmgType||""} onChange={e=>{updW({dmgType:e.target.value});}} placeholder="type"
+                      style={{width:54,background:"rgba(201,74,42,.05)",border:"1px solid rgba(201,74,42,.18)",borderRadius:8,color:"rgba(224,112,96,.85)",fontFamily:"'EB Garamond',serif",fontSize:11,textAlign:"center",outline:"none",padding:"1px 4px",flexShrink:0}} title={w.dmgType||"damage type"} />
+                    {/* extra-part count chip */}
+                    {dmgParts.length>0&&<span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"var(--ember)",opacity:.8}}>+{dmgParts.length}</span>}
+                    {/* expander */}
+                    <span onClick={function(){setWpnExpand(expandOpen?null:i);}} title="Add extra damage dice / types and configure save DC"
+                      style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:.5,padding:"1px 6px",borderRadius:8,userSelect:"none",
+                              border:"1px solid "+(expandOpen?"rgba(201,74,42,.45)":"rgba(201,74,42,.2)"),color:"rgba(224,112,96,.8)",background:expandOpen?"rgba(201,74,42,.1)":"transparent"}}>
+                      {expandOpen?"▴ parts":"⊕ parts"}
+                    </span>
                   </div>
                 </td>
                 <td><TipInput value={w.pr||""} onChange={e=>{const a=[...c.wpn];a[i]={...a[i],pr:e.target.value};s("wpn",a);}} placeholder="..." style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} /></td>
-                <td><button className="db" onClick={()=>window.__confirm("Delete this attack?",()=>s("wpn",c.wpn.filter((_,j)=>j!==i)))}>x</button></td>
+                <td><button className="db" onClick={()=>window.__confirm("Delete this attack?",()=>{s("wpn",c.wpn.filter((_,j)=>j!==i));setWpnExpand(null);})}>x</button></td>
               </tr>
+              {expandOpen&&(
+                <tr>
+                  <td colSpan={5} style={{padding:0}}>
+                    <div style={{background:"rgba(0,0,0,.22)",border:"1px solid rgba(201,74,42,.18)",borderRadius:4,margin:"2px 4px 8px",padding:"10px 12px",display:"flex",flexDirection:"column",gap:10}}>
+                      {/* Extra damage parts */}
+                      <div style={{display:"flex",flexDirection:"column",gap:6}}>
+                        <div style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1.5,color:"rgba(224,112,96,.7)",textTransform:"uppercase"}}>Extra Damage (added to the same attack)</div>
+                        {dmgParts.map(function(p,pi){
+                          return <div key={pi} style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+                            <span style={{fontFamily:"'Cinzel',serif",fontSize:11,color:"rgba(201,74,42,.5)"}}>+</span>
+                            <input value={p.dice||""} onChange={function(e){updPart(pi,{dice:e.target.value});}} placeholder="1d6"
+                              style={{width:46,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.2)",color:"var(--parch)",fontFamily:"'Cinzel',serif",fontSize:11,textAlign:"center",outline:"none"}} />
+                            <BonusField c={c} value={(p.formula&&p.formula.flat)||""} formula={p.formula}
+                              onApply={function(total,frm){updPart(pi,{formula:frm||null});}}
+                              label="Extra Damage Bonus"
+                              inputStyle={{width:30,fontSize:11,borderBottom:"1px solid rgba(201,74,42,.2)"}} />
+                            <input value={p.type||""} onChange={function(e){updPart(pi,{type:e.target.value});}} placeholder="type"
+                              style={{width:78,background:"rgba(201,74,42,.05)",border:"1px solid rgba(201,74,42,.18)",borderRadius:8,color:"rgba(224,112,96,.85)",fontFamily:"'EB Garamond',serif",fontSize:11,textAlign:"center",outline:"none",padding:"2px 5px"}} />
+                            <span onClick={function(){const a=[...c.wpn];a[i]={...a[i],dmgParts:(a[i].dmgParts||[]).filter(function(_,k){return k!==pi;})};s("wpn",a);}}
+                              style={{cursor:"pointer",color:"rgba(201,74,42,.4)",fontSize:13,lineHeight:1,userSelect:"none"}} title="Remove">×</span>
+                          </div>;
+                        })}
+                        <div onClick={function(){const a=[...c.wpn];a[i]={...a[i],dmgParts:[...(a[i].dmgParts||[]),{dice:"",type:"",formula:null}]};s("wpn",a);}}
+                          style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:"rgba(201,74,42,.55)",border:"1px dashed rgba(201,74,42,.25)",padding:"2px 8px",borderRadius:2,display:"inline-block",userSelect:"none",alignSelf:"flex-start"}}>+ Add Damage Type</div>
+                      </div>
+                      {/* Save DC config */}
+                      <div style={{borderTop:"1px solid rgba(201,150,42,.1)",paddingTop:8,display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
+                        <div onClick={function(){updW({isSave:!isSave});}} style={{cursor:"pointer",display:"flex",alignItems:"center",gap:5,userSelect:"none"}}>
+                          <div style={{width:12,height:12,borderRadius:3,border:"1px solid "+(isSave?"var(--arcane)":"rgba(184,154,240,.3)"),background:isSave?"var(--arcane)":"transparent"}} />
+                          <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:isSave?"var(--arcane-l)":"rgba(184,154,240,.45)"}}>SAVING THROW (DC instead of attack)</span>
+                        </div>
+                        {isSave&&<>
+                          <select value={w.dcMode||"char"} onChange={function(e){updW({dcMode:e.target.value});}}
+                            style={{background:"rgba(0,0,0,.4)",border:"1px solid rgba(123,79,207,.25)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:9,padding:"2px 4px",outline:"none",cursor:"pointer",borderRadius:3}}>
+                            <option value="char" style={{background:"#1a1208"}}>Character DC</option>
+                            <option value="manual" style={{background:"#1a1208"}}>Manual</option>
+                          </select>
+                          {(w.dcMode||"char")==="char"&&(charDCList.length>0?(
+                            <select value={w.dcCharKey||(charDCList[0]&&charDCList[0].key)||""} onChange={function(e){updW({dcCharKey:e.target.value});}}
+                              style={{background:"rgba(0,0,0,.4)",border:"1px solid rgba(123,79,207,.25)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:9,padding:"2px 4px",outline:"none",cursor:"pointer",borderRadius:3,maxWidth:200}}>
+                              {charDCList.map(function(o){return <option key={o.key} value={o.key} style={{background:"#1a1208"}}>{o.label} = {o.value}</option>;})}
+                            </select>
+                          ):<span style={{fontFamily:"'EB Garamond',serif",fontSize:10,fontStyle:"italic",color:"rgba(224,112,96,.7)"}}>No class DCs — add one above, or use Manual</span>)}
+                          {(w.dcMode||"char")==="manual"&&<>
+                            <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(232,213,176,.45)"}}>8+prof+</span>
+                            <select value={w.dcAbl||"INT"} onChange={function(e){updW({dcAbl:e.target.value});}}
+                              style={{background:"rgba(0,0,0,.4)",border:"1px solid rgba(123,79,207,.25)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:10,padding:"2px 3px",outline:"none",cursor:"pointer",borderRadius:3}}>
+                              {["STR","DEX","CON","INT","WIS","CHA"].map(function(a){return <option key={a} value={a} style={{background:"#1a1208"}}>{a}</option>;})}
+                            </select>
+                            <input value={w.dcFlat||""} onChange={function(e){updW({dcFlat:e.target.value});}} placeholder="+0"
+                              style={{width:36,background:"transparent",border:"none",borderBottom:"1px solid rgba(123,79,207,.25)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:11,textAlign:"center",outline:"none"}} />
+                          </>}
+                          {dcVal!=null&&<span style={{fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:700,color:"var(--arcane-l)"}}>= {dcVal}</span>}
+                        </>}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              )}
+              </React.Fragment>
             );
           })}
         </tbody>
@@ -3571,6 +3673,44 @@ function FormulaModal({c,initialFormula,onApply,onClose,title,minResult,onClear,
 
 // Extended formula evaluator for creature statblocks
 // ctx = {c, creature, spellLevel}
+// Build a flat list of every "character DC" the user has defined, drawn from
+// page-1 per-class Save DCs (cl.dcs), spellcasting classes (c.spellClasses) and
+// exploit classes (c.exploitClasses). Each entry: {key, label, abl, value}.
+// `key` is a stable string "kind:idx[:subidx]" used for selection.
+function getCharDCSources(c){
+  if(!c) return [];
+  const out=[];
+  const allCls=(c.classes&&c.classes.length>0?c.classes:[{nm:c.cls||"",lv:"",hd:"d6"}]).filter(function(cl){return (cl.nm||"").trim()||(cl.dcs&&cl.dcs.length);});
+  const totalLv=allCls.reduce(function(t,cl){return t+(parseInt(cl.lv)||0);},0);
+  const pb=(totalLv<1?2:Math.ceil(totalLv/4)+1)+(parseInt((c.pbBonus||"").replace("+",""))||0);
+  const mod=function(abl){var base=parseInt((c.statsBase&&c.statsBase[abl])||(c.stats&&c.stats[abl]))||10;var bon=parseInt((c.statsBon&&c.statsBon[abl])||0)||0;return Math.floor((base+bon-10)/2);};
+  const exhPen=Math.min(5,Math.max(0,parseInt(c.exhaustion)||0))*-2;
+  // Page-1 per-class Save DCs
+  (c.classes||[]).forEach(function(cl,ci){
+    (cl.dcs||[]).forEach(function(dc,di){
+      var abl=dc.abl||"INT";
+      var bon=dc.bonusFormula?computeBonusFromFormula(dc.bonusFormula,c):(parseInt((dc.bonus||"").replace("+",""))||0);
+      var pen=(dc.isSpell?(c.exhAffectAllDC||c.exhAffectSpellDC):c.exhAffectAllDC)?exhPen:0;
+      out.push({key:"class:"+ci+":"+di,label:(dc.nm||((cl.nm||"Class")+" DC"))+" ("+abl+")",abl:abl,value:8+pb+mod(abl)+bon+pen});
+    });
+  });
+  // Spellcasting classes
+  (c.spellClasses||[]).forEach(function(sc,i){
+    var abl=sc.abl||"INT";
+    var bon=sc.dcBonusFormula?computeBonusFromFormula(sc.dcBonusFormula,c):(parseInt((sc.dcBonus||"").replace("+",""))||0);
+    var pen=(c.exhAffectAllDC||c.exhAffectSpellDC)?exhPen:0;
+    out.push({key:"spell:"+i,label:(sc.nm||("Spellcasting "+(i+1)))+" DC ("+abl+")",abl:abl,value:8+pb+mod(abl)+bon+pen});
+  });
+  // Exploit classes
+  (c.exploitClasses||[]).forEach(function(ec,i){
+    var abl=ec.abl||"STR";
+    var bon=ec.dcBonusFormula?computeBonusFromFormula(ec.dcBonusFormula,c):(parseInt((ec.dcBonus||"").replace("+",""))||0);
+    var pen=c.exhAffectAllDC?exhPen:0;
+    out.push({key:"exploit:"+i,label:(ec.nm||("Exploit "+(i+1)))+" DC ("+abl+")",abl:abl,value:8+pb+mod(abl)+bon+pen});
+  });
+  return out;
+}
+
 function computeCreatureFormula(formula, ctx){
   if(!formula) return 0;
   const c=ctx.c, creature=ctx.creature||{}, spellLevel=ctx.spellLevel||0;
@@ -7591,9 +7731,21 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
     var isD20=allDice.length===1&&allDice[0].sides===20;
     var crit=isD20&&allDice[0].val===20;
     var fumble=isD20&&allDice[0].val===1;
+    // Per-type damage breakdown (only when at least one group carries a damage type)
+    var typeBreak=null;
+    if(groups&&groups.some(function(g){return g.dtype&&(""+g.dtype).trim();})){
+      var m={},order=[];
+      groups.forEach(function(g){
+        var t=(""+(g.dtype||"")).trim()||"untyped";
+        if(order.indexOf(t)<0)order.push(t);
+        m[t]=(m[t]||0)+(g.dice||[]).reduce(function(a,d){return a+(d.val||0);},0);
+      });
+      if(bonus){var ts=order.filter(function(t){return t!=="untyped";});if(ts.length===1)m[ts[0]]+=bonus;else{if(order.indexOf("untyped")<0)order.push("untyped");m["untyped"]=(m["untyped"]||0)+bonus;}}
+      typeBreak=order.map(function(t){return {type:t,amount:m[t]};});
+    }
     if(flashTimer.current) clearTimeout(flashTimer.current);
     var fid=Date.now()+Math.random();
-    setFlash({id:fid,total:total,label:label,crit:crit,fumble:fumble});
+    setFlash({id:fid,total:total,label:label,crit:crit,fumble:fumble,typeBreak:typeBreak});
     flashTimer.current=setTimeout(function(){setFlash(function(cur){return (cur&&cur.id===fid)?null:cur;});},1600);
   };
 
@@ -7607,14 +7759,14 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
             if(remaining<0) return g; // already rerolled in a previous group
             if(remaining>=g.dice.length){ remaining-=g.dice.length; return g; }
             const nd=[...g.dice];
-            nd[remaining]={...nd[remaining],val:rollDie(nd[remaining].sides)};
+            if(!nd[remaining].flat) nd[remaining]={...nd[remaining],val:rollDie(nd[remaining].sides)};
             remaining=-1;
             return {...g,dice:nd};
           });
           return {...r,groups:newGroups,dice:newGroups[0].dice};
         }
         const nd=[...r.dice];
-        nd[di]={...nd[di],val:rollDie(nd[di].sides)};
+        if(!nd[di].flat) nd[di]={...nd[di],val:rollDie(nd[di].sides)};
         return {...r,dice:nd};
       });
     });
@@ -7628,17 +7780,344 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
   const [custFormulaOpen,setCustFormulaOpen]=us2(false);
   const [qrOpen,setQrOpen]=us2(true);
   const [custOpen,setCustOpen]=us2(true);
+  // Transient per-quick-roll modifiers, keyed by a stable roll key (e.g. "dmg:Fireball").
+  // A mod set here applies to the NEXT roll of that key, then auto-clears.
+  const [qrMods,setQrMods]=us2({});      // {key: modObject}
+  const [qrModEdit,setQrModEdit]=us2(null); // key whose editor popover is open, or null
+  const setQrMod=function(key,part,patch){
+    setQrMods(function(prev){
+      const m={...(prev||{})};
+      const cur={...(m[key]||{})};
+      cur[part]={...(cur[part]||{}),...patch};
+      m[key]=cur;
+      return m;
+    });
+  };
+  // Set a top-level meta field on a qrMod (e.g. _type damage filter, _perm permanence flag).
+  const setQrModMeta=function(key,field,val){
+    setQrMods(function(prev){const m={...(prev||{})};const cur={...(m[key]||{})};cur[field]=val;m[key]=cur;return m;});
+  };
+  const clearQrMod=function(key){
+    setQrMods(function(prev){const m={...(prev||{})};delete m[key];return m;});
+  };
+  const qrModActive=function(key){
+    const md=(qrMods||{})[key];
+    if(!md) return 0;
+    return (md.turn&&md.turn.on?1:0)+(md.reroll&&md.reroll.on?1:0)+(md.explode&&md.explode.on?1:0);
+  };
+  // Extract the {turn,reroll,explode} part of a qrMod (drop meta fields).
+  const qrModCore=function(md){
+    if(!md) return null;
+    const core={};
+    if(md.turn) core.turn=md.turn;
+    if(md.reroll) core.reroll=md.reroll;
+    if(md.explode) core.explode=md.explode;
+    return (core.turn||core.reroll||core.explode)?core:null;
+  };
+  // Consume the transient mod for a key against rolled damage-part groups.
+  // `persistPerm(core, type)` is called if the mod is marked permanent so the caller
+  // can store it on the attack; in that case the transient is still cleared from the editor.
+  const consumeQrMod=function(key,rolledGroups,persistPerm){
+    const md=(qrMods||{})[key];
+    const core=qrModCore(md);
+    if(!core){return rolledGroups;}
+    const type=(md._type||"").trim();
+    if(md._perm&&persistPerm){
+      persistPerm(core,type);
+      clearQrMod(key);
+      return rolledGroups; // the permanent mod will apply via the part's stored mods on this and future rolls
+    }
+    // type-scoped transient application
+    const out=rolledGroups.map(function(g){
+      const gType=(g.dtype||"").trim().toLowerCase();
+      if(type&&type.toLowerCase()!==gType) return g;
+      const sides=(g.dice&&g.dice.find(function(d){return !d.flat;})||{}).sides||g.sides||6;
+      const real=g.dice.filter(function(d){return !d.flat;});
+      const flats=g.dice.filter(function(d){return d.flat;});
+      const res=applyModsToDice(real,core,sides);
+      return {...g,dice:res.dice.concat(flats),modNotes:(g.modNotes||[]).concat(res.modNotes)};
+    });
+    clearQrMod(key);
+    return out;
+  };
+
+  // Compact editor popover for a transient quick-roll mod. Mirrors the Custom Roll mods,
+  // but applies once then clears. `sides` is a hint for the explode-threshold placeholder.
+  const renderQrModEditor=function(key,sides){
+    const md=(qrMods||{})[key]||{};
+    const chk=function(on){return {cursor:"pointer",width:13,height:13,borderRadius:3,flexShrink:0,border:"1px solid "+(on?"var(--arcane)":"rgba(184,154,240,.3)"),background:on?"var(--arcane)":"transparent"};};
+    const inp={background:"rgba(0,0,0,.3)",border:"1px solid rgba(123,79,207,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:12,textAlign:"center",outline:"none",padding:"2px 4px",borderRadius:3};
+    const sel={background:"rgba(0,0,0,.4)",border:"1px solid rgba(123,79,207,.25)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:9,padding:"2px 4px",outline:"none",cursor:"pointer",borderRadius:3};
+    const lbl={fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.6)",whiteSpace:"nowrap"};
+    return <div style={{position:"absolute",left:0,top:"100%",marginTop:4,zIndex:300,background:"#15100a",border:"1px solid rgba(123,79,207,.4)",borderRadius:6,padding:"10px 12px",boxShadow:"0 6px 28px rgba(0,0,0,.7)",display:"flex",flexDirection:"column",gap:8,minWidth:268}}>
+      <div style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1.5,color:"rgba(184,154,240,.55)",textTransform:"uppercase"}}>{md._perm?"Permanent modifier · saved on attack":"One-shot modifier · clears after roll"}</div>
+      {/* TURN */}
+      <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+        <span onClick={function(){setQrMod(key,"turn",{on:!(md.turn&&md.turn.on)});}} style={chk(md.turn&&md.turn.on)} />
+        <span style={lbl}>TURN ANY</span>
+        <input value={(md.turn&&md.turn.from)||""} placeholder="1,2,3" onChange={function(e){setQrMod(key,"turn",{from:e.target.value,on:true});}} style={{...inp,width:56}} />
+        <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(232,213,176,.45)"}}>into</span>
+        <input type="number" value={(md.turn&&md.turn.to)||""} placeholder="4" onChange={function(e){setQrMod(key,"turn",{to:e.target.value,on:true});}} style={{...inp,width:38,color:"var(--gold-l)"}} />
+      </div>
+      {/* REROLL */}
+      <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+        <span onClick={function(){setQrMod(key,"reroll",{on:!(md.reroll&&md.reroll.on)});}} style={chk(md.reroll&&md.reroll.on)} />
+        <span style={lbl}>REROLL ANY</span>
+        <input value={(md.reroll&&md.reroll.vals)||""} placeholder="1,2" onChange={function(e){setQrMod(key,"reroll",{vals:e.target.value,on:true});}} style={{...inp,width:50}} />
+        <select value={(md.reroll&&md.reroll.mode)||"once"} onChange={function(e){setQrMod(key,"reroll",{mode:e.target.value,on:true});}} style={sel}>
+          <option value="once" style={{background:"#1a1208"}}>once (keep new)</option>
+          <option value="until" style={{background:"#1a1208"}}>until clear</option>
+        </select>
+        {((md.reroll&&md.reroll.mode)==="until")&&<span style={{display:"flex",alignItems:"center",gap:3}}>
+          <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>max</span>
+          <input type="number" min="1" value={(md.reroll&&md.reroll.max)||""} placeholder="∞" title="Max rerolls per die (blank = unlimited)" onChange={function(e){setQrMod(key,"reroll",{max:e.target.value,on:true});}} style={{...inp,width:32,color:"var(--arcane-l)"}} />
+          <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>×</span>
+        </span>}
+      </div>
+      {/* EXPLODE */}
+      <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+        <span onClick={function(){setQrMod(key,"explode",{on:!(md.explode&&md.explode.on)});}} style={chk(md.explode&&md.explode.on)} />
+        <span style={lbl}>EXPLODE ON</span>
+        <input type="number" value={(md.explode&&md.explode.threshold)||""} placeholder={""+(sides||"")} onChange={function(e){setQrMod(key,"explode",{threshold:e.target.value,on:true});}} style={{...inp,width:38,color:"var(--gold-l)"}} />
+        <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,fontStyle:"italic",color:"rgba(232,213,176,.35)"}}>+</span>
+        <select value={(md.explode&&md.explode.mode)||"perdie"} onChange={function(e){setQrMod(key,"explode",{mode:e.target.value,on:true});}} style={sel}>
+          <option value="once" style={{background:"#1a1208"}}>once per dice</option>
+          <option value="perdie" style={{background:"#1a1208"}}>once per die</option>
+          <option value="until" style={{background:"#1a1208"}}>until no new</option>
+        </select>
+      </div>
+      {/* DAMAGE TYPE FILTER + PERMANENCE */}
+      <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",borderTop:"1px solid rgba(123,79,207,.15)",paddingTop:7}}>
+        <span style={lbl}>DMG TYPE</span>
+        <input value={md._type||""} placeholder="all types" onChange={function(e){setQrModMeta(key,"_type",e.target.value);}}
+          title="Limit this mod to one damage type (blank = every damage type in the attack)"
+          style={{...inp,width:88,textAlign:"left",padding:"2px 7px"}} />
+        <div style={{flex:1}} />
+        <div onClick={function(){setQrModMeta(key,"_perm",!md._perm);}} title="Once = applies to the next roll then clears. Permanent = saved on this attack and applies every time."
+          style={{cursor:"pointer",display:"flex",alignItems:"center",gap:4,padding:"2px 8px",borderRadius:9,border:"1px solid "+(md._perm?"rgba(232,184,75,.5)":"rgba(123,79,207,.3)"),background:md._perm?"rgba(232,184,75,.12)":"rgba(123,79,207,.08)",userSelect:"none"}}>
+          <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:md._perm?"var(--gold-l)":"var(--arcane-l)"}}>{md._perm?"PERMANENT":"ONCE"}</span>
+        </div>
+      </div>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",borderTop:"1px solid rgba(123,79,207,.15)",paddingTop:6}}>
+        <span onClick={function(){clearQrMod(key);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:"rgba(201,74,42,.5)",textTransform:"uppercase"}}>Clear</span>
+        <span onClick={function(){setQrModEdit(null);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:"rgba(201,150,42,.55)",textTransform:"uppercase"}}>Done</span>
+      </div>
+    </div>;
+  };
+  // The little gear toggle that sits next to a quick-roll chip.
+  const qrModGear=function(key,sides){
+    const n=qrModActive(key);
+    return <span style={{position:"relative",display:"inline-flex"}}>
+      <span onClick={function(e){e.stopPropagation();setQrModEdit(function(v){return v===key?null:key;});}}
+        title="One-shot dice modifier (turn / reroll / explode) — applies to next roll, then clears"
+        style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,lineHeight:1,color:n?"var(--arcane-l)":"rgba(184,154,240,.4)",border:"1px solid "+(n?"rgba(123,79,207,.5)":"rgba(123,79,207,.18)"),background:n?"rgba(123,79,207,.16)":"transparent",padding:"2px 5px",borderRadius:9,userSelect:"none"}}>
+        ⚙{n?" "+n:""}
+      </span>
+      {qrModEdit===key&&renderQrModEditor(key,sides)}
+    </span>;
+  };
 
   const calcCustBonus=function(formula){
     if(!formula) return 0;
     return computeBonusFromFormula(formula,c);
   };
 
+  // Parse a comma-separated list like "1,2,3" into a unique sorted array of ints within [1,sides]
+  const parseValList=function(str,sides){
+    const out=[];
+    (""+(str||"")).split(",").forEach(function(p){
+      const n=parseInt(p.trim());
+      if(!isNaN(n)&&n>=1&&n<=sides&&out.indexOf(n)<0) out.push(n);
+    });
+    return out.sort(function(a,b){return a-b;});
+  };
+
+  // Apply modifiers to an already-rolled dice array. Returns {dice, modNotes:[...]} where each die
+  // may carry tag metadata for the log: d.orig (pre-turn value), d.turned (bool), d.rr (reroll count),
+  // d.exploded (this die triggered an explosion), d.fromExplode (this die was added by explosion).
+  const SAFETY_CAP=200; // guard against infinite "until" loops
+  const applyModsToDice=function(dice,mods,sides){
+    mods=mods||{};
+    const modNotes=[];
+
+    // 1) Reroll any (must run before turn, so turned values aren't rerolled)
+    if(mods.reroll&&mods.reroll.on){
+      const vals=parseValList(mods.reroll.vals,sides);
+      if(vals.length){
+        const until=mods.reroll.mode==="until";
+        // Optional cap on how many times a single die may be rerolled in "until" mode.
+        const rawMax=parseInt(mods.reroll.max);
+        const maxRR=(!isNaN(rawMax)&&rawMax>0)?Math.min(rawMax,SAFETY_CAP):SAFETY_CAP;
+        dice.forEach(function(d){
+          if(vals.indexOf(d.val)>=0){
+            let guard=0;
+            if(until){
+              do{ d.val=rollDie(sides); d.rr=(d.rr||0)+1; guard++; }
+              while(vals.indexOf(d.val)>=0&&guard<maxRR);
+            }else{
+              d.val=rollDie(sides); d.rr=(d.rr||0)+1;
+            }
+          }
+        });
+        const capLbl=(until&&!isNaN(rawMax)&&rawMax>0)?(" ≤"+rawMax+"×"):"";
+        modNotes.push("reroll "+vals.join(",")+(until?" until clear":" once")+capLbl);
+      }
+    }
+
+    // 2) Turn any (X,Y,Z) into N — applied to the post-reroll values
+    if(mods.turn&&mods.turn.on){
+      const from=parseValList(mods.turn.from,sides);
+      const to=parseInt(mods.turn.to);
+      if(from.length&&!isNaN(to)){
+        dice.forEach(function(d){
+          if(from.indexOf(d.val)>=0){ d.orig=d.val; d.val=to; d.turned=true; }
+        });
+        modNotes.push("turn "+from.join(",")+"→"+to);
+      }
+    }
+
+    // 3) Exploding dice — a roll of `threshold` (or higher) adds another die of the same kind
+    if(mods.explode&&mods.explode.on){
+      const trig=parseInt(mods.explode.threshold);
+      if(!isNaN(trig)){
+        const mode=mods.explode.mode||"perdie"; // "once" | "perdie" | "until"
+        // Mark which of the original dice trigger, then add dice accordingly.
+        const added=[];
+        const explodeFrom=function(d){
+          d.exploded=true;
+          let guard=0;
+          let cur=d;
+          // "once": only the original triggering dice explode one time each (handled by not chaining)
+          // "perdie": each original triggering die explodes exactly once (one extra die), even if the new die also triggers? -> one extra per original.
+          // "until": keep adding while the newest die triggers.
+          if(mode==="until"){
+            while(cur.val>=trig&&guard<SAFETY_CAP){
+              const nd={sides:sides,val:rollDie(sides),fromExplode:true};
+              added.push(nd);
+              if(nd.val>=trig){nd.exploded=true;}
+              cur=nd;
+              guard++;
+            }
+          }else{
+            // once & perdie both add a single extra die per triggering original die
+            const nd={sides:sides,val:rollDie(sides),fromExplode:true};
+            added.push(nd);
+          }
+        };
+        if(mode==="once"){
+          // explode only the FIRST triggering die in the group, a single time
+          const first=dice.find(function(d){return d.val>=trig;});
+          if(first) explodeFrom(first);
+        }else{
+          // perdie & until: every original die that triggers
+          dice.slice().forEach(function(d){ if(d.val>=trig) explodeFrom(d); });
+        }
+        dice=dice.concat(added);
+        const modeLbl=mode==="until"?"until clear":mode==="once"?"once":"per die";
+        modNotes.push("explode on "+trig+(sides!==trig?"+":"")+" ("+modeLbl+")");
+      }
+    }
+
+    return {dice:dice, modNotes:modNotes};
+  };
+
+  // Roll a fresh group from {count,sides,mods} then apply its modifiers.
+  const applyGroupMods=function(g,sides){
+    const n=Math.max(1,Math.min(20,g.count||1));
+    const dice=Array.from({length:n},function(){return {sides:sides,val:rollDie(sides)};});
+    return applyModsToDice(dice,g.mods||{},sides);
+  };
+
+  // Apply a single transient mod (one mods object) across already-rolled groups.
+  // Each group's dice are processed independently; modNotes are attached per group.
+  // Returns {groups, anyNotes}.
+  const applyTransientModToGroups=function(rolledGroups,mod){
+    if(!mod) return {groups:rolledGroups,anyNotes:false};
+    let anyNotes=false;
+    const groups=rolledGroups.map(function(g){
+      const sides=(g.dice&&g.dice[0]&&g.dice[0].sides)||g.sides||6;
+      const res=applyModsToDice(g.dice.slice(),mod,sides);
+      if(res.modNotes.length) anyNotes=true;
+      return {...g,dice:res.dice,modNotes:(g.modNotes||[]).concat(res.modNotes)};
+    });
+    return {groups:groups,anyNotes:anyNotes};
+  };
+
+  // ── Unified multi-part damage roller ──────────────────────────────────────
+  // `parts`: [{dice:"2d6", type:"fire", formula:<bonus formula|null>, mods:<permanent mod|null>}]
+  // `opts`: {bonusFn} optional — converts a part's formula to a number.
+  //         {transient} optional — a {mod, type} transient quick-roll modifier to apply this roll.
+  //                     If transient.type is blank → applies to all parts; else only matching type.
+  // Returns {groups, flatBonus} where groups feed addResult (multi-type aware) and
+  // flatBonus is the summed numeric bonus across all parts (shown as overall bonus).
+  const parseDiceExpr=function(expr){
+    const re=/(\d+)d(\d+)/gi; const gs=[]; let m;
+    while((m=re.exec(""+(expr||"")))!==null){ gs.push({n:Math.min(parseInt(m[1])||1,40),s:parseInt(m[2])||6}); }
+    return gs;
+  };
+  const rollDamageParts=function(parts,opts){
+    opts=opts||{};
+    const bonusFn=opts.bonusFn||function(f){return f?computeBonusFromFormula(f,c):0;};
+    const transient=opts.transient||null;
+    const groups=[];
+    let flatBonus=0;
+    (parts||[]).forEach(function(part){
+      if(!part) return;
+      const type=(part.type||"").trim();
+      const partBonus=part.formula?(bonusFn(part.formula)||0):0;
+      flatBonus+=partBonus;
+      const diceGroups=parseDiceExpr(part.dice);
+      if(diceGroups.length===0){
+        // A flat-only part (e.g. "+3 fire" with no dice) still surfaces as a typed group so the bonus is typed.
+        if(partBonus!==0||type){
+          groups.push({label:"",dtype:type,dice:partBonus!==0?[{sides:0,val:partBonus,flat:true}]:[],modNotes:[]});
+        }
+        return;
+      }
+      diceGroups.forEach(function(dg,dgi){
+        let dice=Array.from({length:dg.n},function(){return {sides:dg.s,val:rollDie(dg.s)};});
+        let modNotes=[];
+        // 1) Permanent mod stored on the part
+        if(part.mods){
+          const r1=applyModsToDice(dice,part.mods,dg.s); dice=r1.dice; modNotes=modNotes.concat(r1.modNotes.map(function(x){return x+" [perm]";}));
+        }
+        // 2) Transient quick-roll mod, type-scoped
+        if(transient&&transient.mod){
+          const tType=(transient.type||"").trim().toLowerCase();
+          if(!tType||tType===type.toLowerCase()){
+            const r2=applyModsToDice(dice,transient.mod,dg.s); dice=r2.dice; modNotes=modNotes.concat(r2.modNotes);
+          }
+        }
+        // Fold this part's flat bonus into the first dice-group of the part as a flat die.
+        if(dgi===0&&partBonus!==0) dice=dice.concat([{sides:0,val:partBonus,flat:true}]);
+        groups.push({label:dg.n+"d"+dg.s,dtype:type,dice:dice,modNotes:modNotes});
+      });
+    });
+    return {groups:groups,flatBonus:flatBonus};
+  };
+
+  // Normalize any attack object (weapon / creature action / trait) into a parts array.
+  // Weapons: dmgBase/dmg (+dmgFormula) as part 0, plus dmgParts[] extras.
+  // Creatures: dmgDice (+dmgFormula,dmgType) as part 0, plus dmgParts[] extras.
+  const attackDamageParts=function(atk,kind){
+    const parts=[];
+    if(!atk) return parts;
+    if(kind==="weapon"){
+      const base=(atk.dmgBase||atk.dmg||"").trim();
+      if(base||atk.dmgFormula||atk.dmgType) parts.push({dice:base,type:atk.dmgType||"",formula:atk.dmgFormula||null,mods:atk.dmgMods||null});
+    } else {
+      const base=(atk.dmgDice||"").trim();
+      if(base||atk.dmgFormula||atk.dmgType) parts.push({dice:base,type:atk.dmgType||"",formula:atk.dmgFormula||null,mods:atk.dmgMods||null});
+    }
+    (atk.dmgParts||[]).forEach(function(p){ if(p&&(p.dice||p.formula||p.type)) parts.push({dice:p.dice||"",type:p.type||"",formula:p.formula||null,mods:p.mods||null}); });
+    return parts;
+  };
+
   const rollCustom=function(){
     const bonus=calcCustBonus(custFormula);
     const groups=custDiceGroups.map(function(g){
-      const n=Math.max(1,Math.min(20,g.count||1));
-      return {label:n+"d"+g.sides, dtype:(g.dtype||"").trim(), dice:Array.from({length:n},function(){return {sides:g.sides,val:rollDie(g.sides)};})};
+      const res=applyGroupMods(g,g.sides);
+      return {label:Math.max(1,Math.min(20,g.count||1))+"d"+g.sides, dtype:(g.dtype||"").trim(), dice:res.dice, modNotes:res.modNotes};
     });
     const diceExpr=custDiceGroups.map(function(g){return g.count+"d"+g.sides+((g.dtype||"").trim()?" "+(g.dtype||"").trim():"");}).join(" + ");
     const lbl=custName.trim()||diceExpr+(bonus!==0?fmtBonus(bonus):"");
@@ -7653,15 +8132,15 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
   const saveCustom=function(){
     const nm=custName.trim();
     if(!nm) return;
-    const newRoll={id:Date.now(),nm,diceGroups:custDiceGroups.map(function(g){return {count:Math.max(1,g.count||1),sides:g.sides,dtype:(g.dtype||"").trim()};}),formula:custFormula};
+    const newRoll={id:Date.now(),nm,diceGroups:custDiceGroups.map(function(g){return {count:Math.max(1,g.count||1),sides:g.sides,dtype:(g.dtype||"").trim(),mods:g.mods||null};}),formula:custFormula};
     saveSRApp(function(prev){return [...prev,newRoll];});
   };
 
   const rollSaved=function(sr){
     // backward compat: old saves had count/sides/bonus/prof/abls
     const groups=(sr.diceGroups||[{count:sr.count||1,sides:sr.sides||20}]).map(function(g){
-      const n=Math.max(1,Math.min(20,g.count));
-      return {label:n+"d"+g.sides, dtype:(g.dtype||"").trim(), dice:Array.from({length:n},function(){return {sides:g.sides,val:rollDie(g.sides)};})};
+      const res=applyGroupMods(g,g.sides);
+      return {label:Math.max(1,Math.min(20,g.count))+"d"+g.sides, dtype:(g.dtype||"").trim(), dice:res.dice, modNotes:res.modNotes};
     });
     const formula=sr.formula||{flat:""+( sr.bonus||0),abls:sr.abls||[],prof:sr.prof?"full":"none",lvlType:"none",lvlClass:""};
     const bonus=calcCustBonus(formula);
@@ -7682,6 +8161,16 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
   };
 
   const exhPenalty2=Math.min(5,Math.max(0,parseInt(c.exhaustion)||0))*-2;
+  // Save-DC value for a save-based attack/spell (mirrors Page1.attackDC).
+  const drCharDCList=getCharDCSources(c);
+  const attackDCVal=function(w){
+    if(w.dcMode==="manual"){
+      var abl=w.dcAbl||"INT";var flat=parseInt((w.dcFlat||"").replace("+",""))||0;
+      return 8+pb+getStatMod2(abl)+flat+exhPenalty2;
+    }
+    var src=drCharDCList.find(function(x){return x.key===w.dcCharKey;})||drCharDCList[0];
+    return src?src.value:null;
+  };
   const mkNote2=function(parts){return parts.filter(Boolean).join(" · ");};
   const mkNote=mkNote2;
 
@@ -7698,40 +8187,65 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
   };
 
   const rollDmg=function(w){
-    const dmgAbls=Array.isArray(w.dmgAbls)?w.dmgAbls:[];
-    const ablSum=dmgAbls.reduce(function(t,a){return t+getStatMod2(a);},0);
-    const dmgFlat=parseInt((w.dmgFlat||"").replace("+",""))||0;
-    const dmgProfMode=w.dmgProfMode||(w.dmgProf?"full":"none");
-    const dmgProfBon=dmgProfMode==="full"?pb:dmgProfMode==="half"?Math.floor(pb/2):dmgProfMode==="half-up"?Math.ceil(pb/2):0;
-    const bonus=ablSum+dmgProfBon+dmgFlat;
-    const base=(w.dmgBase||w.dmg||"1d6").trim();
-
-    // Parse all NdS groups from the expression (e.g. "1d6+2d8+2d6" → [{n:1,s:6},{n:2,s:8},{n:2,s:6}])
-    const groupRe=/(\d+)d(\d+)/gi;
-    const parsedGroups=[];
-    let gm;
-    while((gm=groupRe.exec(base))!==null){
-      parsedGroups.push({n:Math.min(parseInt(gm[1]),20),s:parseInt(gm[2])});
+    const parts=attackDamageParts(w,"weapon");
+    if(parts.length===0){ addResult((w.nm||"Attack")+" – Dmg",[{sides:6,val:rollDie(6)}],0,""); return; }
+    const key="dmg:"+(w.nm||"Attack");
+    let res=rollDamageParts(parts,{});
+    // Apply transient/permanent quick-roll mod (type-scoped). Permanent → save onto matching weapon part.
+    res.groups=consumeQrMod(key,res.groups,function(core,type){ persistWeaponMod(w,core,type); });
+    // Build a concise bonus note from part 0's formula
+    const noteParts=[];
+    if(w.dmgFormula){
+      (w.dmgFormula.abls||w.dmgFormula.charAbls||[]).forEach(function(a){noteParts.push(a+"("+fmtBonus(getStatMod2(a))+")");});
+      if(formulaHasProf(w.dmgFormula)) noteParts.push(formulaProfLabel(w.dmgFormula)+"(+"+formulaProfVal(w.dmgFormula,c)+")");
+      if(parseInt(w.dmgFormula.flat||0)) noteParts.push("Flat("+fmtBonus(parseInt(w.dmgFormula.flat))+")");
     }
-    if(parsedGroups.length===0) parsedGroups.push({n:1,s:6});
+    addResult((w.nm||"Attack")+" – Dmg",res.groups[0].dice,0,mkNote(noteParts),res.groups);
+  };
 
-    const profNote=dmgProfMode==="full"?"PROF(+"+pb+")":dmgProfMode==="half"?"½↓PROF(+"+Math.floor(pb/2)+")":dmgProfMode==="half-up"?"½↑PROF(+"+Math.ceil(pb/2)+")":"";
-    const noteParts=[dmgAbls.map(function(a){return a+"("+fmtBonus(getStatMod2(a))+")";}).join(" "),profNote,dmgFlat?"Flat("+fmtBonus(dmgFlat)+")":""];
+  // Persist a permanent mod onto the matching damage part of a weapon (page-1 attack).
+  // type blank → base part (part 0). Otherwise the first part whose type matches.
+  const persistWeaponMod=function(w,core,type){
+    const idx=(c.wpn||[]).findIndex(function(x){return x===w||(x.nm&&x.nm===w.nm);});
+    if(idx<0) return;
+    s("wpn",(c.wpn||[]).map(function(x,i){
+      if(i!==idx) return x;
+      const nw={...x};
+      const t=(type||"").trim().toLowerCase();
+      if(!t||((nw.dmgType||"").toLowerCase()===t)){ nw.dmgMods=core; }
+      else {
+        const dp=(nw.dmgParts||[]).map(function(p){return {...p};});
+        const pi=dp.findIndex(function(p){return (p.type||"").toLowerCase()===t;});
+        if(pi>=0){ dp[pi].mods=core; nw.dmgParts=dp; }
+        else { nw.dmgMods=core; } // fallback: no matching type, apply to base
+      }
+      return nw;
+    }));
+  };
 
-    if(parsedGroups.length===1){
-      // Single group — existing flat format
-      const dice=Array.from({length:parsedGroups[0].n},function(){return {sides:parsedGroups[0].s,val:rollDie(parsedGroups[0].s)};});
-      addResult((w.nm||"Attack")+" – Dmg",dice,bonus,mkNote(noteParts));
-    } else {
-      // Multiple groups — store as groups array, bonus only on last group
-      const rolledGroups=parsedGroups.map(function(g){
-        return {
-          label:g.n+"d"+g.s,
-          dice:Array.from({length:g.n},function(){return {sides:g.s,val:rollDie(g.s)};})
-        };
+  // Persist a permanent mod onto a creature attack's matching damage part.
+  const persistCreatureMod=function(cr,atk,core,type){
+    const t=(type||"").trim().toLowerCase();
+    const baseName=(atk.nm||"").replace(/\s+\((?:BA|R)\)$/,"");
+    s("creatures",(c.creatures||[]).map(function(x){
+      if(x.id!==cr.id) return x;
+      const nx={...x};
+      ["actions","attacks","bonusActions","reactions"].forEach(function(akey){
+        if(!Array.isArray(nx[akey])) return;
+        nx[akey]=nx[akey].map(function(a){
+          if(a.nm!==baseName&&a.nm!==atk.nm) return a;
+          const na={...a};
+          if(!t||((na.dmgType||"").toLowerCase()===t)){ na.dmgMods=core; }
+          else {
+            const dp=(na.dmgParts||[]).map(function(p){return {...p};});
+            const pi=dp.findIndex(function(p){return (p.type||"").toLowerCase()===t;});
+            if(pi>=0){ dp[pi].mods=core; na.dmgParts=dp; } else { na.dmgMods=core; }
+          }
+          return na;
+        });
       });
-      addResult((w.nm||"Attack")+" – Dmg",rolledGroups[0].dice,bonus,mkNote(noteParts),rolledGroups);
-    }
+      return nx;
+    }));
   };
 
   // All skills list for skill roller
@@ -7824,6 +8338,14 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
               color:flash.crit?"#6dbb80":flash.fumble?"#e07060":"var(--gold-l)",
               textShadow:"0 0 24px "+(flash.crit?"rgba(74,156,92,.5)":flash.fumble?"rgba(201,74,42,.5)":"rgba(201,150,42,.4)")}}>{flash.total}</div>
             {(flash.crit||flash.fumble)&&<div style={{fontFamily:"'Cinzel',serif",fontSize:"clamp(13px,4vw,20px)",letterSpacing:3,textTransform:"uppercase",fontWeight:700,marginTop:6,color:flash.crit?"#6dbb80":"#e07060"}}>{flash.crit?"Critical!":"Fumble!"}</div>}
+            {flash.typeBreak&&flash.typeBreak.length>0&&<div style={{display:"flex",gap:10,flexWrap:"wrap",justifyContent:"center",marginTop:8}}>
+              {flash.typeBreak.map(function(tb,ti){
+                return <span key={ti} style={{display:"inline-flex",alignItems:"baseline",gap:4,fontFamily:"'EB Garamond',serif",fontSize:"clamp(11px,2.6vw,15px)",color:"rgba(232,213,176,.65)"}}>
+                  <span style={{fontFamily:"'Cinzel',serif",fontWeight:700,color:"var(--gold-l)"}}>{tb.amount}</span>
+                  {tb.type!=="untyped"&&<span style={{textTransform:"lowercase",letterSpacing:.5}}>{tb.type}</span>}
+                </span>;
+              })}
+            </div>}
             {flash.label&&<div style={{fontFamily:"'Cinzel',serif",fontSize:"clamp(10px,3vw,15px)",letterSpacing:2,textTransform:"uppercase",color:"rgba(232,213,176,.55)",marginTop:8,maxWidth:"80vw",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{flash.label}</div>}
           </div>
         </div>, document.body)}
@@ -7889,16 +8411,35 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
                 return (
                   <div key={i} style={{display:"flex",alignItems:"center",gap:3,flexWrap:"wrap"}}>
                     <span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.5)",minWidth:60,marginRight:2}}>{w.nm}</span>
-                    {hasAtkRoll&&<div onClick={function(){rollAtk(w);}}
+                    {w.isSave?(function(){
+                      const dcv=attackDCVal(w);
+                      return <div title="Save DC (no attack roll)" style={{display:"flex",alignItems:"center",gap:3,padding:"2px 7px",background:"rgba(123,79,207,.1)",border:"1px solid rgba(123,79,207,.3)",borderRadius:10,userSelect:"none"}}>
+                        <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.6)"}}>DC</span>
+                        <span style={{fontFamily:"'Cinzel',serif",fontSize:10,fontWeight:700,color:"var(--arcane-l)"}}>{dcv!=null?dcv:"—"}</span>
+                      </div>;
+                    })():(hasAtkRoll&&<div onClick={function(){rollAtk(w);}}
                       style={{cursor:"pointer",display:"flex",alignItems:"center",gap:3,padding:"2px 7px",background:"rgba(123,79,207,.1)",border:"1px solid rgba(123,79,207,.3)",borderRadius:10,userSelect:"none"}}>
                       <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.6)"}}>ATK</span>
                       <span style={{fontFamily:"'Cinzel',serif",fontSize:10,fontWeight:700,color:"var(--arcane-l)"}}>{fmtBonus(atkTotal)}</span>
-                    </div>}
-                    {(w.dmgBase||w.dmg)&&<div onClick={function(){rollDmg(w);}}
-                      style={{cursor:"pointer",display:"flex",alignItems:"center",gap:3,padding:"2px 7px",background:"rgba(201,74,42,.1)",border:"1px solid rgba(201,74,42,.3)",borderRadius:10,userSelect:"none"}}>
-                      <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(201,74,42,.6)"}}>DMG</span>
-                      <span style={{fontFamily:"'Cinzel',serif",fontSize:10,fontWeight:700,color:"var(--ember)"}}>{(w.dmgBase||w.dmg)+(dmgTotal!==0?fmtBonus(dmgTotal):"")}</span>
-                    </div>}
+                    </div>)}
+                    {(function(){
+                      const parts=attackDamageParts(w,"weapon");
+                      if(parts.length===0) return null;
+                      // Compact summary like "1d8+3 slashing + 1d6 fire"
+                      const summ=parts.map(function(p){
+                        const b=p.formula?computeBonusFromFormula(p.formula,c):0;
+                        const d=(p.dice||"").trim();
+                        return (d||"")+(b!==0?fmtBonus(b):"")+(p.type?" "+p.type:"");
+                      }).filter(function(x){return x.trim();}).join(" + ");
+                      return <>
+                        <div onClick={function(){rollDmg(w);}}
+                          style={{cursor:"pointer",display:"flex",alignItems:"center",gap:3,padding:"2px 7px",background:"rgba(201,74,42,.1)",border:"1px solid rgba(201,74,42,.3)",borderRadius:10,userSelect:"none",maxWidth:200}}>
+                          <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(201,74,42,.6)",flexShrink:0}}>DMG</span>
+                          <span style={{fontFamily:"'Cinzel',serif",fontSize:10,fontWeight:700,color:"var(--ember)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}} title={summ}>{summ}</span>
+                        </div>
+                        {qrModGear("dmg:"+(w.nm||"Attack"),(function(){var m=summ.match(/d(\d+)/);return m?parseInt(m[1]):"";})())}
+                      </>;
+                    })()}
                   </div>
                 );
               })}
@@ -7928,7 +8469,7 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
                   var ctx={c:c,creature:cr,spellLevel:cr.spellLevel||1};
                   var _tagNm=function(arr,suffix){return (arr||[]).map(function(a){return suffix&&a.nm&&a.nm.indexOf(suffix)<0?{...a,nm:a.nm+suffix}:a;});};
                   var allActions=[...(cr.actions||[]),...(cr.attacks||[]),..._tagNm(cr.bonusActions," (BA)"),..._tagNm(cr.reactions," (R)")];
-                  var crAtks=allActions.filter(function(atk){return atk.nm&&(atk.atkFormula||atk.dmgDice||atk.dmgFormula);});
+                  var crAtks=allActions.filter(function(atk){return atk.nm&&(atk.atkFormula||atk.dmgDice||atk.dmgFormula||(atk.dmgParts&&atk.dmgParts.length));});
                   // Creature saves
                   var crPbCalc=(function(){if(cr.pbFormula) return computeCreatureFormula(cr.pbFormula,{c,creature:cr,spellLevel:cr.spellLevel||1});return parseInt(cr.pbFlat)||2;})();
                   var crSaves=["STR","DEX","CON","INT","WIS","CHA"].map(function(abl){
@@ -7966,20 +8507,26 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
                           var usesSpellAtkDR=atk.atkFormula&&atk.atkFormula.useSpellAtk!=null;
                           var crExhPenDR=(usesSpellAtkDR?0:Math.min(5,Math.max(0,parseInt(cr.exhaustion)||0))*-2);
                           var atkTot=hasAtk?(computeCreatureFormula(atk.atkFormula,ctx)+crExhPenDR):null;
-                          var hasDmg=!!(atk.dmgDice||atk.dmgFormula);
-                          var dmgBon=atk.dmgFormula?computeCreatureFormula(atk.dmgFormula,ctx):0;
-                          var dmgBonStr=dmgBon!==0?(dmgBon>=0?"+"+dmgBon:""+dmgBon):"";
-                          var dmgBase=atk.dmgDice||"";
-                          var parsedGroups=(function(){var re=/(\d+)d(\d+)/gi,m,gs=[];while((m=re.exec(dmgBase))!==null) gs.push({n:Math.min(parseInt(m[1]),20),s:parseInt(m[2])});return gs.length>0?gs:[{n:1,s:6}];})();
-                          var dmgStr=dmgBase+dmgBonStr;
+                          var crDmgParts=attackDamageParts(atk,"creature");
+                          var hasDmg=crDmgParts.length>0;
+                          var crBonusFn=function(f){return f?computeCreatureFormula(f,ctx):0;};
+                          var dmgStr=crDmgParts.map(function(p){var b=p.formula?crBonusFn(p.formula):0;return (p.dice||"")+(b!==0?(b>=0?"+"+b:""+b):"")+(p.type?" "+p.type:"");}).filter(function(x){return x.trim();}).join(" + ");
+                          var crSidesHint=(function(){var m=(dmgStr).match(/d(\d+)/);return m?parseInt(m[1]):"";})();
                           return <div key={ai} style={{display:"flex",alignItems:"center",gap:2,flexWrap:"wrap"}}>
                             <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,color:"rgba(232,213,176,.45)"}}>{atk.nm}</span>
                             {hasAtk&&<div onClick={function(){var noteParts=[cr.nm+" "+atk.nm,cr.tag==="Summon"?"SL "+cr.spellLevel:"",atk.reach||""].filter(Boolean);addResult(cr.nm+" — "+atk.nm+" (ATK)",[{sides:20,val:rollDie(20)}],atkTot,mkNote(noteParts));}} style={{cursor:"pointer",display:"flex",alignItems:"center",gap:2,padding:"1px 6px",background:col.replace(",1)",",0.1)"),border:"1px solid "+col.replace(",1)",",0.3)"),borderRadius:10,userSelect:"none"}}>
                               <span style={{fontFamily:"'Cinzel',serif",fontSize:8,color:col.replace(",1)",",0.6)")}}>{fmtBonus(atkTot)}</span>
                             </div>}
-                            {hasDmg&&<div onClick={function(){var noteParts=[cr.nm+" "+atk.nm,cr.tag==="Summon"?"SL "+cr.spellLevel:"",atk.dmgType||""].filter(Boolean);if(parsedGroups.length===1){var dice=Array.from({length:parsedGroups[0].n},function(){return {sides:parsedGroups[0].s,val:rollDie(parsedGroups[0].s)};});addResult(cr.nm+" — "+atk.nm+" (DMG)",dice,dmgBon,mkNote(noteParts));}else{var rolledGroups=parsedGroups.map(function(g){return {label:g.n+"d"+g.s,dice:Array.from({length:g.n},function(){return {sides:g.s,val:rollDie(g.s)};})};});addResult(cr.nm+" — "+atk.nm+" (DMG)",rolledGroups[0].dice,dmgBon,mkNote(noteParts),rolledGroups);}}} style={{cursor:"pointer",display:"flex",alignItems:"center",gap:2,padding:"1px 6px",background:"rgba(201,74,42,.1)",border:"1px solid rgba(201,74,42,.3)",borderRadius:10,userSelect:"none"}}>
-                              <span style={{fontFamily:"'Cinzel',serif",fontSize:8,color:"rgba(201,74,42,.7)"}}>{dmgStr||"—"}</span>
+                            {hasDmg&&<div onClick={function(){
+                              var noteParts=[cr.nm+" "+atk.nm,cr.tag==="Summon"?"SL "+cr.spellLevel:""].filter(Boolean);
+                              var crKey="dmg:"+cr.id+":"+atk.nm;
+                              var res=rollDamageParts(crDmgParts,{bonusFn:crBonusFn});
+                              res.groups=consumeQrMod(crKey,res.groups,function(core,type){persistCreatureMod(cr,atk,core,type);});
+                              addResult(cr.nm+" — "+atk.nm+" (DMG)",res.groups[0].dice,0,mkNote(noteParts),res.groups);
+                            }} style={{cursor:"pointer",display:"flex",alignItems:"center",gap:2,padding:"1px 6px",background:"rgba(201,74,42,.1)",border:"1px solid rgba(201,74,42,.3)",borderRadius:10,userSelect:"none",maxWidth:190}}>
+                              <span style={{fontFamily:"'Cinzel',serif",fontSize:8,color:"rgba(201,74,42,.7)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}} title={dmgStr}>{dmgStr||"—"}</span>
                             </div>}
+                            {hasDmg&&qrModGear("dmg:"+cr.id+":"+atk.nm,crSidesHint)}
                           </div>;
                         })}
                       </div>}
@@ -8006,6 +8553,31 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
                           <span style={{fontFamily:"'Cinzel',serif",fontSize:9,fontWeight:700,color:"var(--gold-l)"}}>{fmtBonus(sk.tot)}</span>
                         </div>;})}
                       </div>
+                      {/* Traits with dice → rollable */}
+                      {(function(){
+                        var rollableTraits=(cr.traits||[]).map(function(tr){return {tr:tr,r:traitRollable(tr.desc)};}).filter(function(x){return x.r;});
+                        if(rollableTraits.length===0) return null;
+                        return <div style={{display:"flex",alignItems:"center",gap:3,flexWrap:"wrap"}}>
+                          <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:"rgba(232,213,176,.45)",minWidth:36}}>TRAIT</span>
+                          {rollableTraits.map(function(x,xi){
+                            var tr=x.tr, parts=x.r.parts;
+                            var summ=parts.map(function(p){var b=p.formula?computeBonusFromFormula(p.formula,c):0;return (p.dice||"")+(b!==0?fmtBonus(b):"")+(p.type?" "+p.type:"");}).filter(function(z){return z.trim();}).join(" + ");
+                            var trKey="dmg:"+cr.id+":trait:"+(tr.nm||xi);
+                            var sidesHint=(function(){var mm=summ.match(/d(\d+)/);return mm?parseInt(mm[1]):"";})();
+                            return <React.Fragment key={xi}>
+                              <div onClick={function(){
+                                var res=rollDamageParts(parts,{});
+                                res.groups=consumeQrMod(trKey,res.groups,null);
+                                addResult(cr.nm+" — "+(tr.nm||"Trait"),res.groups[0].dice,0,mkNote([cr.nm,tr.nm].filter(Boolean)),res.groups);
+                              }} title={tr.nm+": "+summ}
+                                style={{cursor:"pointer",display:"flex",alignItems:"center",gap:3,padding:"1px 7px",background:"rgba(201,150,42,.07)",border:"1px solid rgba(201,150,42,.2)",borderRadius:10,userSelect:"none",maxWidth:200}}>
+                                <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,color:"rgba(232,213,176,.6)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{(tr.nm||"Trait")+": "+summ}</span>
+                              </div>
+                              {qrModGear(trKey,sidesHint)}
+                            </React.Fragment>;
+                          })}
+                        </div>;
+                      })()}
                     </div>}
                   </div>;
                 })}
@@ -8094,7 +8666,19 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
           {/* Dice groups */}
           <div style={{display:"flex",flexDirection:"column",gap:5}}>
             {custDiceGroups.map(function(g,gi){
-              return <div key={gi} style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+              const mods=g.mods||{};
+              const setMod=function(key,patch){
+                setCustDiceGroups(function(prev){
+                  const a=[...prev];
+                  const m={...(a[gi].mods||{})};
+                  m[key]={...(m[key]||{}),...patch};
+                  a[gi]={...a[gi],mods:m};
+                  return a;
+                });
+              };
+              const modCount=(mods.turn&&mods.turn.on?1:0)+(mods.reroll&&mods.reroll.on?1:0)+(mods.explode&&mods.explode.on?1:0);
+              return <div key={gi} style={{display:"flex",flexDirection:"column",gap:4,padding:modCount||g.modsOpen?"6px 7px":0,background:modCount||g.modsOpen?"rgba(123,79,207,.04)":"transparent",border:modCount||g.modsOpen?"1px solid rgba(123,79,207,.14)":"none",borderRadius:4}}>
+                <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
                 {gi>0&&<span style={{fontFamily:"'Cinzel',serif",fontSize:12,color:"rgba(201,150,42,.4)",width:10,textAlign:"center"}}>+</span>}
                 {gi===0&&<span style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"rgba(201,150,42,.35)",width:10}}/>}
                 <input type="number" min="1" max="20" value={g.count===0?"":g.count}
@@ -8110,8 +8694,70 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
                 <input value={g.dtype||""} placeholder="type (optional)"
                   onChange={function(e){setCustDiceGroups(function(prev){const a=[...prev];a[gi]={...a[gi],dtype:e.target.value};return a;});}}
                   style={{width:118,background:"rgba(123,79,207,.06)",border:"1px solid rgba(123,79,207,.22)",color:"var(--arcane-l)",fontFamily:"'EB Garamond',serif",fontSize:12,outline:"none",padding:"3px 7px",borderRadius:10}} />
+                <span onClick={function(){setCustDiceGroups(function(prev){const a=[...prev];a[gi]={...a[gi],modsOpen:!a[gi].modsOpen};return a;});}}
+                  title="Per-die modifiers (turn / reroll / explode)"
+                  style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:modCount?"var(--arcane-l)":"rgba(184,154,240,.45)",border:"1px solid "+(modCount?"rgba(123,79,207,.45)":"rgba(123,79,207,.2)"),background:modCount?"rgba(123,79,207,.12)":"transparent",padding:"2px 7px",borderRadius:9,userSelect:"none",whiteSpace:"nowrap"}}>
+                  {modCount?"⚙ MODS · "+modCount:"⚙ mods"}{g.modsOpen?" ▴":" ▾"}
+                </span>
                 {custDiceGroups.length>1&&<span onClick={function(){setCustDiceGroups(function(prev){return prev.filter(function(_,i){return i!==gi;});});}}
                   style={{cursor:"pointer",color:"rgba(201,74,42,.4)",fontSize:14,lineHeight:1,marginLeft:2,userSelect:"none"}} title="Remove this die group">×</span>}
+                </div>
+
+                {g.modsOpen&&<div style={{display:"flex",flexDirection:"column",gap:7,padding:"4px 2px 2px 18px"}}>
+                  {/* TURN ANY */}
+                  <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+                    <span onClick={function(){setMod("turn",{on:!(mods.turn&&mods.turn.on)});}}
+                      style={{cursor:"pointer",width:13,height:13,borderRadius:3,flexShrink:0,border:"1px solid "+(mods.turn&&mods.turn.on?"var(--arcane)":"rgba(184,154,240,.3)"),background:mods.turn&&mods.turn.on?"var(--arcane)":"transparent"}} />
+                    <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.6)",whiteSpace:"nowrap"}}>TURN ANY</span>
+                    <input value={(mods.turn&&mods.turn.from)||""} placeholder="1,2,3"
+                      onChange={function(e){setMod("turn",{from:e.target.value,on:true});}}
+                      style={{width:60,background:"rgba(0,0,0,.3)",border:"1px solid rgba(123,79,207,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:12,textAlign:"center",outline:"none",padding:"2px 4px",borderRadius:3}} />
+                    <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(232,213,176,.45)"}}>into</span>
+                    <input type="number" value={(mods.turn&&mods.turn.to)||""} placeholder="4"
+                      onChange={function(e){setMod("turn",{to:e.target.value,on:true});}}
+                      style={{width:40,background:"rgba(0,0,0,.3)",border:"1px solid rgba(123,79,207,.25)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:12,textAlign:"center",outline:"none",padding:"2px 4px",borderRadius:3}} />
+                  </div>
+                  {/* REROLL ANY */}
+                  <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+                    <span onClick={function(){setMod("reroll",{on:!(mods.reroll&&mods.reroll.on)});}}
+                      style={{cursor:"pointer",width:13,height:13,borderRadius:3,flexShrink:0,border:"1px solid "+(mods.reroll&&mods.reroll.on?"var(--arcane)":"rgba(184,154,240,.3)"),background:mods.reroll&&mods.reroll.on?"var(--arcane)":"transparent"}} />
+                    <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.6)",whiteSpace:"nowrap"}}>REROLL ANY</span>
+                    <input value={(mods.reroll&&mods.reroll.vals)||""} placeholder="1,2,3"
+                      onChange={function(e){setMod("reroll",{vals:e.target.value,on:true});}}
+                      style={{width:60,background:"rgba(0,0,0,.3)",border:"1px solid rgba(123,79,207,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:12,textAlign:"center",outline:"none",padding:"2px 4px",borderRadius:3}} />
+                    <select value={(mods.reroll&&mods.reroll.mode)||"once"}
+                      onChange={function(e){setMod("reroll",{mode:e.target.value,on:true});}}
+                      style={{background:"rgba(0,0,0,.4)",border:"1px solid rgba(123,79,207,.25)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:9,padding:"2px 4px",outline:"none",cursor:"pointer",borderRadius:3}}>
+                      <option value="once" style={{background:"#1a1208"}}>once (keep new)</option>
+                      <option value="until" style={{background:"#1a1208"}}>until clear</option>
+                    </select>
+                    {((mods.reroll&&mods.reroll.mode)==="until")&&<span style={{display:"flex",alignItems:"center",gap:4}}>
+                      <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>max</span>
+                      <input type="number" min="1" value={(mods.reroll&&mods.reroll.max)||""} placeholder="∞"
+                        onChange={function(e){setMod("reroll",{max:e.target.value,on:true});}}
+                        title="Max rerolls per die (blank = unlimited)"
+                        style={{width:34,background:"rgba(0,0,0,.3)",border:"1px solid rgba(123,79,207,.25)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:11,textAlign:"center",outline:"none",padding:"2px 2px",borderRadius:3}} />
+                      <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>×</span>
+                    </span>}
+                  </div>
+                  {/* EXPLODING */}
+                  <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+                    <span onClick={function(){setMod("explode",{on:!(mods.explode&&mods.explode.on)});}}
+                      style={{cursor:"pointer",width:13,height:13,borderRadius:3,flexShrink:0,border:"1px solid "+(mods.explode&&mods.explode.on?"var(--arcane)":"rgba(184,154,240,.3)"),background:mods.explode&&mods.explode.on?"var(--arcane)":"transparent"}} />
+                    <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.6)",whiteSpace:"nowrap"}}>EXPLODE ON</span>
+                    <input type="number" value={(mods.explode&&mods.explode.threshold)||""} placeholder={""+g.sides}
+                      onChange={function(e){setMod("explode",{threshold:e.target.value,on:true});}}
+                      style={{width:40,background:"rgba(0,0,0,.3)",border:"1px solid rgba(123,79,207,.25)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:12,textAlign:"center",outline:"none",padding:"2px 4px",borderRadius:3}} />
+                    <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,fontStyle:"italic",color:"rgba(232,213,176,.35)"}}>+</span>
+                    <select value={(mods.explode&&mods.explode.mode)||"perdie"}
+                      onChange={function(e){setMod("explode",{mode:e.target.value,on:true});}}
+                      style={{background:"rgba(0,0,0,.4)",border:"1px solid rgba(123,79,207,.25)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:9,padding:"2px 4px",outline:"none",cursor:"pointer",borderRadius:3}}>
+                      <option value="once" style={{background:"#1a1208"}}>once per dice</option>
+                      <option value="perdie" style={{background:"#1a1208"}}>once per die</option>
+                      <option value="until" style={{background:"#1a1208"}}>until no new</option>
+                    </select>
+                  </div>
+                </div>}
               </div>;
             })}
             <div onClick={function(){setCustDiceGroups(function(prev){return [...prev,{count:1,sides:6,dtype:""}];});}}
@@ -8166,6 +8812,21 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
             <div className="sh" style={{margin:0}}>Results</div>
             <button onClick={function(){setResults([]);}} style={{background:"transparent",border:"none",color:"rgba(201,74,42,.4)",cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1}}>Clear All</button>
           </div>
+          {(function(){
+            // Show a legend only when a die in the visible results carries a mod mark.
+            const anyMarked=results.some(function(r){
+              const all=(r.groups&&r.groups.length)?r.groups.reduce(function(a,g){return a.concat(g.dice||[]);},[]):(r.dice||[]);
+              return all.some(function(d){return d.fromExplode||d.rr||d.turned||d.exploded;});
+            });
+            if(!anyMarked) return null;
+            const item=function(sym,txt){return <span style={{display:"inline-flex",alignItems:"center",gap:3}}><span style={{color:"var(--gold-l)",fontSize:10}}>{sym}</span><span>{txt}</span></span>;};
+            return <div style={{display:"flex",gap:10,flexWrap:"wrap",marginBottom:8,fontFamily:"'EB Garamond',serif",fontSize:10,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>
+              {item("✦","from explosion")}
+              {item("↻","rerolled")}
+              {item("↦","turned")}
+              {item("✸","exploded")}
+            </div>;
+          })()}
           <div style={{display:"flex",flexDirection:"column",gap:8}}>
             {results.map(function(r){
               const isMultiGroup=r.groups&&r.groups.length>1;
@@ -8182,6 +8843,19 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
                 if(r.bonus){var ts=order.filter(function(t){return t!=="untyped";});if(ts.length===1)m[ts[0]]+=r.bonus;else{if(order.indexOf("untyped")<0)order.push("untyped");m["untyped"]=(m["untyped"]||0)+r.bonus;}}
                 return {map:m,order:order};
               })();
+              // Decoration for a single die badge based on applied modifiers
+              const dieDeco=function(d){
+                const tips=["d"+d.sides];
+                const marks=[];
+                // Lifecycle order mirrors processing: born-from-explosion → reroll → turn → explode.
+                if(d.fromExplode){tips.push("from explosion");marks.push("✦");}
+                if(d.rr){tips.push("rerolled"+(d.rr>1?" ×"+d.rr:""));marks.push("↻");}
+                if(d.turned){tips.push("turned "+d.orig+"→"+d.val);marks.push("↦");}
+                if(d.exploded){tips.push("exploded");marks.push("✸");}
+                tips.push("click to reroll");
+                const special=!!(d.turned||d.rr||d.fromExplode||d.exploded);
+                return {title:tips.join(" · "),mark:marks.join(""),marks:marks,special:special};
+              };
               return (
                 <div key={r.id} style={{padding:"10px 14px",background:"rgba(0,0,0,.25)",border:"1px solid rgba(201,150,42,.15)",borderRadius:2,borderLeft:"3px solid "+(isCrit?"#4a9c5c":isFumble?"#c94a2a":"rgba(201,150,42,.3)")}}>
                   <div style={{display:"flex",alignItems:"baseline",gap:10,marginBottom:6,flexWrap:"wrap"}}>
@@ -8190,6 +8864,22 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
                     {isCrit&&<span style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"#4a9c5c",letterSpacing:1}}>CRIT!</span>}
                     {isFumble&&<span style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"#c94a2a",letterSpacing:1}}>FUMBLE</span>}
                   </div>
+                  {(function(){
+                    if(!r.groups) return null;
+                    const notes=[];
+                    r.groups.forEach(function(g){
+                      (g.modNotes||[]).forEach(function(mn){
+                        const pre=r.groups.length>1?g.label+": ":"";
+                        notes.push(pre+mn);
+                      });
+                    });
+                    if(!notes.length) return null;
+                    return <div style={{display:"flex",gap:5,flexWrap:"wrap",marginBottom:7,marginTop:-2}}>
+                      {notes.map(function(mn,mi){
+                        return <span key={mi} style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:.5,color:"var(--arcane-l)",background:"rgba(123,79,207,.12)",border:"1px solid rgba(123,79,207,.3)",padding:"2px 7px",borderRadius:9,textTransform:"uppercase"}}>{mn}</span>;
+                      })}
+                    </div>;
+                  })()}
                   {isMultiGroup?(
                     <div style={{display:"flex",flexDirection:"column",gap:6}}>
                       {/* Grand total */}
@@ -8205,18 +8895,21 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
                             {gi>0&&<span style={{fontFamily:"'Cinzel',serif",fontSize:14,color:"rgba(201,150,42,.35)",userSelect:"none"}}>|</span>}
                             <div style={{display:"flex",alignItems:"center",gap:4}}>
                               <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(232,213,176,.3)",letterSpacing:1}}>{g.label}</span>
-                              <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.5)"}}>{"("+g.dice.map(function(d){return d.val;}).join("+")+")"}</span>
+                              <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.5)"}}>{"("+g.dice.map(function(d){return d.flat?(d.val>=0?"+"+d.val:""+d.val):d.val;}).join("+").replace(/\+\+/g,"+").replace(/\+-/g,"-")+")"}</span>
                               <span style={{fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"var(--arcane-l)"}}>{gSum}</span>
                               <div style={{display:"flex",gap:3}}>
                                 {g.dice.map(function(d,di){
                                   const globalDi=r.groups.slice(0,gi).reduce(function(t,pg){return t+pg.dice.length;},0)+di;
-                                  return <div key={di} onClick={function(){rerollDie(r.id,globalDi);}} title={"d"+d.sides+" – click to reroll"}
-                                    style={{fontFamily:"'Cinzel',serif",fontSize:11,fontWeight:700,
+                                  if(d.flat) return <span key={di} title="flat bonus" style={{fontFamily:"'Cinzel',serif",fontSize:11,fontWeight:700,color:"rgba(232,213,176,.55)",border:"1px dashed rgba(201,150,42,.3)",background:"rgba(201,150,42,.06)",padding:"2px 5px",borderRadius:3,userSelect:"none",minWidth:22,textAlign:"center"}}>{d.val>=0?"+"+d.val:""+d.val}</span>;
+                                  const dc=dieDeco(d);
+                                  return <div key={di} onClick={function(){rerollDie(r.id,globalDi);}} title={dc.title}
+                                    style={{position:"relative",fontFamily:"'Cinzel',serif",fontSize:11,fontWeight:700,
                                       color:d.val===d.sides?"#4a9c5c":d.val===1?"#c94a2a":"var(--arcane-l)",
-                                      border:"1px solid "+(d.val===d.sides?"rgba(74,156,92,.5)":d.val===1?"rgba(201,74,42,.5)":"rgba(123,79,207,.4)"),
-                                      background:d.val===d.sides?"rgba(74,156,92,.1)":d.val===1?"rgba(201,74,42,.1)":"rgba(123,79,207,.08)",
+                                      border:"1px solid "+(dc.special?"rgba(232,184,75,.65)":d.val===d.sides?"rgba(74,156,92,.5)":d.val===1?"rgba(201,74,42,.5)":"rgba(123,79,207,.4)"),
+                                      background:d.val===d.sides?"rgba(74,156,92,.1)":d.val===1?"rgba(201,74,42,.1)":dc.special?"rgba(232,184,75,.08)":"rgba(123,79,207,.08)",
                                       padding:"2px 5px",borderRadius:3,cursor:"pointer",userSelect:"none",minWidth:22,textAlign:"center"}}>
                                     {d.val}
+                                    {dc.marks.length>0&&<span style={{position:"absolute",top:-6,right:-3,display:"flex",gap:1,fontSize:8,lineHeight:1,letterSpacing:-.5,color:"var(--gold-l)",textShadow:"0 0 2px #15100a,0 0 2px #15100a"}}>{dc.marks.map(function(mk,mi){return <span key={mi}>{mk}</span>;})}</span>}
                                   </div>;
                                 })}
                               </div>
@@ -8229,18 +8922,21 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
                   <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
                     <span style={{fontFamily:"'Cinzel Decorative',serif",fontSize:28,fontWeight:700,color:isCrit?"#4a9c5c":isFumble?"#c94a2a":"var(--gold-l)",lineHeight:1}}>{total}</span>
                     <span style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgba(232,213,176,.4)"}}>
-                      {"("+r.dice.map(function(d){return d.val;}).join("+")+")"}
+                      {"("+r.dice.map(function(d){return d.flat?(d.val>=0?"+"+d.val:""+d.val):d.val;}).join("+").replace(/\+\+/g,"+").replace(/\+-/g,"-")+")"}
                       {r.bonus!==0?fmtBonus(r.bonus):""}
                     </span>
                     <div style={{display:"flex",gap:5,flexWrap:"wrap",marginLeft:8}}>
                       {r.dice.map(function(d,di){
+                        if(d.flat) return <span key={di} title="flat bonus" style={{fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"rgba(232,213,176,.55)",border:"1px dashed rgba(201,150,42,.3)",background:"rgba(201,150,42,.06)",padding:"3px 7px",borderRadius:3,userSelect:"none",minWidth:28,textAlign:"center"}}>{d.val>=0?"+"+d.val:""+d.val}</span>;
+                        const dc=dieDeco(d);
                         return (
-                          <div key={di} onClick={function(){rerollDie(r.id,di);}} title={"d"+d.sides+" – click to reroll"}
-                            style={{fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:d.val===d.sides?"#4a9c5c":d.val===1?"#c94a2a":"var(--arcane-l)",
-                              border:"1px solid "+(d.val===d.sides?"rgba(74,156,92,.5)":d.val===1?"rgba(201,74,42,.5)":"rgba(123,79,207,.4)"),
-                              background:d.val===d.sides?"rgba(74,156,92,.1)":d.val===1?"rgba(201,74,42,.1)":"rgba(123,79,207,.08)",
+                          <div key={di} onClick={function(){rerollDie(r.id,di);}} title={dc.title}
+                            style={{position:"relative",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:d.val===d.sides?"#4a9c5c":d.val===1?"#c94a2a":"var(--arcane-l)",
+                              border:"1px solid "+(dc.special?"rgba(232,184,75,.65)":d.val===d.sides?"rgba(74,156,92,.5)":d.val===1?"rgba(201,74,42,.5)":"rgba(123,79,207,.4)"),
+                              background:d.val===d.sides?"rgba(74,156,92,.1)":d.val===1?"rgba(201,74,42,.1)":dc.special?"rgba(232,184,75,.08)":"rgba(123,79,207,.08)",
                               padding:"3px 7px",borderRadius:3,cursor:"pointer",transition:"all .15s",userSelect:"none",minWidth:28,textAlign:"center"}}>
                             {d.val}
+                            {dc.marks.length>0&&<span style={{position:"absolute",top:-6,right:-2,display:"flex",gap:1,fontSize:9,lineHeight:1,letterSpacing:-.5,color:"var(--gold-l)",textShadow:"0 0 2px #15100a,0 0 2px #15100a"}}>{dc.marks.map(function(mk,mi){return <span key={mi}>{mk}</span>;})}</span>}
                           </div>
                         );
                       })}
@@ -8472,6 +9168,8 @@ function mdBuildAction(name,body,dcSink){
     var dtype=txt.slice(dmg.index).match(/([A-Za-z]+)\s+damage/i);
     if(dtype)entry.dmgType=dtype[1].toLowerCase();
     if(entry.actionType==="other")entry.actionType="damage";
+    var _extra=_extraDamageParts(txt,dmg.index+dmg[0].length);
+    if(_extra.length)entry.dmgParts=_extra;
   }
   // Save DC -> add a custom flat DC to the creature (handles both 2014 "DC 15 Dexterity saving throw" and 2024 "Dexterity Saving Throw: DC 15")
   var dc=txt.match(/DC\s*(\d+)\s+([A-Za-z]+)\s+saving throw/i);
@@ -8972,6 +9670,39 @@ function _scaleSegFormula(out,txt){
   if(/\+\s*(?:the\s+)?(?:summonSpellLevel|spell.?s?\s+level|level of the spell|spell level)/i.test(txt)){if(!out.dmgFormula)out.dmgFormula=_crmkF(0);out.dmgFormula.spellLevelMult=1;}
   if(/(?:plus|\+)\s+your\s+(?:Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma)\s+modifier|(?:plus|\+)\s+(?:your\s+)?(?:PB\b|proficiency bonus)|spellcasting ability modifier/i.test(txt)){if(!out.dmgFormula)out.dmgFormula=_crmkF(0);_applyCharScaling(out.dmgFormula,txt);}
 }
+// Detect additional damage segments like "plus 3 (1d6) Fire damage" or "and 1d6 poison damage"
+// that follow the primary damage. Returns an array of {dice, type, formula} parts (the EXTRAS only).
+function _extraDamageParts(txt, afterIndex){
+  txt=""+(txt||"");
+  var parts=[];
+  // Connector + optional avg + dice (maybe in parens) + optional +N + optional intervening word + "<type> damage"
+  var re=/(?:\bplus\b|\band\b)\s+(?:\d+\s*)?\(?\s*(\d+)d(\d+)\s*([+-]\s*\d+)?\s*\)?\s*(?:[A-Za-z]+\s+)?([A-Za-z]+)\s+damage/gi;
+  var m, count=0;
+  while((m=re.exec(txt))!==null){
+    if(typeof afterIndex==="number" && m.index<afterIndex) continue;
+    var type=(m[4]||"").toLowerCase();
+    if(!type||type==="damage") continue;
+    var bn=m[3]?parseInt(m[3].replace(/\s+/g,"")):0;
+    parts.push({dice:m[1]+"d"+m[2],type:type,formula:(bn!==0)?_crmkF(bn):null});
+    if(++count>6) break;
+  }
+  return parts;
+}
+// Extract a rollable dice expression (and optional damage type) from a trait/feature
+// description. Returns {dice, type, parts} or null. Picks the first "NdM (+X)" and any
+// additional "plus NdM TYPE damage" extras, mirroring attack parsing.
+function traitRollable(desc){
+  var txt=""+(desc||"");
+  var m=txt.match(/(\d+)d(\d+)(?:\s*([+-]\s*\d+))?/);
+  if(!m) return null;
+  var bn=m[3]?parseInt(m[3].replace(/\s+/g,"")):0;
+  var typeM=txt.slice(m.index).match(/([A-Za-z]+)\s+damage/i);
+  var type=typeM?typeM[1].toLowerCase():"";
+  var parts=[{dice:m[1]+"d"+m[2],type:type,formula:(bn!==0)?{flat:String(bn),charAbls:[],profs:[],lvlEntries:[]}:null}];
+  var extra=_extraDamageParts(txt,m.index+m[0].length);
+  extra.forEach(function(p){parts.push(p);});
+  return {dice:m[1]+"d"+m[2],type:type,parts:parts};
+}
 function _parseDamageSeg(seg,spellLevel){
   var out={dmgDice:"",dmgFormula:null,dmgType:""};
   var dyn=seg.match(/\(\s*summonSpellLevel\s*([+\-]\s*\d+)?\s*\)d(\d+)/i);
@@ -9037,7 +9768,7 @@ function _expandSizedAttacks(cr){
 function _applySummonClass(cr,idx){
   if(!cr) return cr;
   function fix(f){if(f){if(f.useSpellAtk!=null)f.useSpellAtk=idx;if(f.useSpellAbl!=null)f.useSpellAbl=idx;}}
-  ["actions","bonusActions","reactions"].forEach(function(k){(cr[k]||[]).forEach(function(a){fix(a.atkFormula);fix(a.dmgFormula);});});
+  ["actions","bonusActions","reactions"].forEach(function(k){(cr[k]||[]).forEach(function(a){fix(a.atkFormula);fix(a.dmgFormula);(a.dmgParts||[]).forEach(function(p){fix(p.formula);});});});
   fix(cr.acFormula);fix(cr.hpFormula);fix(cr.pbFormula);fix(cr.iniFormula);fix(cr.hdFormula);
   (cr.dcs||[]).forEach(function(d){fix(d.customFormula);});
   cr.spellClassIdx=idx;
@@ -9048,7 +9779,7 @@ function _usesSpellcasting(cr){
   if(!cr) return false;
   var hit=false;
   function chk(f){if(f&&(f.useSpellAtk!=null||f.useSpellAbl!=null))hit=true;}
-  ["actions","bonusActions","reactions"].forEach(function(k){(cr[k]||[]).forEach(function(a){chk(a.atkFormula);chk(a.dmgFormula);});});
+  ["actions","bonusActions","reactions"].forEach(function(k){(cr[k]||[]).forEach(function(a){chk(a.atkFormula);chk(a.dmgFormula);(a.dmgParts||[]).forEach(function(p){chk(p.formula);});});});
   chk(cr.acFormula);chk(cr.hpFormula);chk(cr.pbFormula);(cr.dcs||[]).forEach(function(d){chk(d.customFormula);});
   return hit;
 }
@@ -10234,6 +10965,8 @@ function CreaturesPage({c,s}){
       var dtype=txt.slice(dmg.index).match(/([A-Za-z]+)\s+damage/i);
       if(dtype)entry.dmgType=dtype[1].toLowerCase();
       if(entry.actionType==="other")entry.actionType="damage";
+      var _extra2=_extraDamageParts(txt,dmg.index+dmg[0].length);
+      if(_extra2.length)entry.dmgParts=_extra2;
     }
     // Save DC -> add a custom flat DC to the creature
     var dc=txt.match(/DC\s*(\d+)\s+([A-Za-z]+)\s+saving throw/i);
@@ -10800,10 +11533,46 @@ function CreaturesPage({c,s}){
                             style={{width:56,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,74,42,.1)",color:"rgba(232,213,176,.5)",fontFamily:"'EB Garamond',serif",fontSize:11,outline:"none"}} />
                         </div>
                       </div>}
+                      {/* Extra damage parts toggle */}
+                      {isDmg&&(function(){
+                        var dp=Array.isArray(entry.dmgParts)?entry.dmgParts:[];
+                        return <span onClick={function(){updNested(cr.id,section.key,ei,"_dpOpen",!entry._dpOpen);}}
+                          title="Add extra damage dice / types to this attack"
+                          style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:.5,padding:"2px 6px",borderRadius:8,userSelect:"none",alignSelf:"flex-end",marginBottom:1,
+                            border:"1px solid "+(dp.length?"rgba(201,74,42,.4)":"rgba(201,74,42,.2)"),color:"rgba(224,112,96,.8)",background:dp.length?"rgba(201,74,42,.1)":"transparent"}}>
+                          {entry._dpOpen?"▴":(dp.length?"+"+dp.length+" type"+(dp.length>1?"s":""):"⊕ type")}
+                        </span>;
+                      })()}
                       <span onClick={function(){window.__confirm("Delete this action?",function(){
                         s("creatures",creatures.map(function(x){return x.id===cr.id?{...x,[section.key]:(x[section.key]||[]).filter(function(_,j){return j!==ei;})}:x;}));
                       });}} style={{cursor:"pointer",color:"rgba(201,74,42,.35)",fontSize:13,alignSelf:"flex-end",paddingBottom:2}}>×</span>
                     </div>
+                    {isDmg&&entry._dpOpen&&(function(){
+                      var dp=Array.isArray(entry.dmgParts)?entry.dmgParts:[];
+                      var setParts=function(np){updNested(cr.id,section.key,ei,"dmgParts",np);};
+                      return <div style={{display:"flex",flexDirection:"column",gap:5,padding:"6px 4px 8px 26px",marginBottom:4}}>
+                        <div style={{fontFamily:"'Cinzel',serif",fontSize:7,letterSpacing:1.5,color:"rgba(224,112,96,.6)",textTransform:"uppercase"}}>Extra Damage (same attack)</div>
+                        {dp.map(function(p,pi){
+                          var pbon=p.formula?evalF(p.formula,cr):0;
+                          return <div key={pi} style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+                            <span style={{fontFamily:"'Cinzel',serif",fontSize:11,color:"rgba(201,74,42,.5)"}}>+</span>
+                            <input value={p.dice||""} onChange={function(e){setParts(dp.map(function(x,k){return k===pi?{...x,dice:e.target.value}:x;}));}} placeholder="1d6"
+                              style={{width:44,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,74,42,.2)",color:"var(--ember)",fontFamily:"'Cinzel',serif",fontSize:12,textAlign:"center",outline:"none"}} />
+                            <div onClick={function(){setAtkModal({crId:cr.id,section:section.key,atkIdx:ei,mode:"dmgpart",partIdx:pi});}}
+                              title="Click to configure this part's bonus"
+                              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:11,fontWeight:700,color:p.formula?"rgba(201,150,42,.6)":pbon?"var(--ember)":"rgba(232,213,176,.25)",borderBottom:"1px solid rgba(201,74,42,.2)",minWidth:22,textAlign:"center"}}>
+                              {pbon?(pbon>=0?"+"+pbon:""+pbon):"+0"}
+                            </div>
+                            <input value={p.type||""} onChange={function(e){setParts(dp.map(function(x,k){return k===pi?{...x,type:e.target.value}:x;}));}} placeholder="type"
+                              style={{width:70,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,74,42,.1)",color:"rgba(232,213,176,.5)",fontFamily:"'EB Garamond',serif",fontSize:11,outline:"none"}} />
+                            <span onClick={function(){setParts(dp.filter(function(_,k){return k!==pi;}));}}
+                              style={{cursor:"pointer",color:"rgba(201,74,42,.4)",fontSize:13,lineHeight:1,userSelect:"none"}}>×</span>
+                          </div>;
+                        })}
+                        <div onClick={function(){setParts([...dp,{dice:"",type:"",formula:null}]);}}
+                          style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:"rgba(201,74,42,.55)",border:"1px dashed rgba(201,74,42,.25)",padding:"2px 8px",borderRadius:2,display:"inline-block",userSelect:"none",alignSelf:"flex-start"}}>+ Add Damage Type</div>
+                      </div>;
+                    })()}
                     {open&&<MdField value={entry.description||""} onChange={function(e){updNested(cr.id,section.key,ei,"description",e.target.value);}} placeholder="Description..."
                       rows={2} style={{width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.08)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:12,outline:"none",resize:"vertical",minHeight:36,lineHeight:1.5}} />}
                   </div>;
@@ -10832,52 +11601,48 @@ function CreaturesPage({c,s}){
                 var getCharModLocal=function(abl){var base=parseInt((c.statsBase&&c.statsBase[abl])||c.stats[abl])||10;var bon=parseInt((c.statsBon&&c.statsBon[abl])||0)||0;return Math.floor((base+bon-10)/2);};
                 var dcVal=null;
                 var charExhPenDC=Math.min(5,Math.max(0,parseInt(c.exhaustion)||0))*-2;
-                if(dc.sourceType==="spell"){
-                  // Character's class DC — apply character exhaustion if spell or all DCs affected
-                  var sc=(c.spellClasses||[])[dc.sourceIdx||0];
-                  if(sc){var bon2=sc.dcBonusFormula?computeBonusFromFormula(sc.dcBonusFormula,c):(parseInt((sc.dcBonus||"").replace("+",""))||0);var spDcExhPen=(c.exhAffectAllDC||c.exhAffectSpellDC)?charExhPenDC:0;dcVal=8+pb2+getCharModLocal(sc.abl||"INT")+bon2+spDcExhPen;}
-                } else if(dc.sourceType==="exploit"){
-                  // Character's exploit DC — apply character exhaustion if all DCs affected
-                  var ec=(c.exploitClasses||[])[dc.sourceIdx||0];
-                  if(ec){var bon3=ec.dcBonusFormula?computeBonusFromFormula(ec.dcBonusFormula,c):(parseInt((ec.dcBonus||"").replace("+",""))||0);var exDcExhPen=c.exhAffectAllDC?charExhPenDC:0;dcVal=8+pb2+getCharModLocal(ec.abl||"STR")+bon3+exDcExhPen;}
+                var charDCSources=getCharDCSources(c);
+                // Migrate legacy spell/exploit sourceType to the unified "char" key
+                var effKey=dc.charKey;
+                if(!effKey&&(dc.sourceType==="spell"||dc.sourceType==="exploit")){
+                  effKey=dc.sourceType+":"+(dc.sourceIdx||0);
+                }
+                if(dc.sourceType==="char"||dc.sourceType==="spell"||dc.sourceType==="exploit"){
+                  var src=charDCSources.find(function(s2){return s2.key===effKey;})||charDCSources[0];
+                  if(src) dcVal=src.value;
                 } else if(dc.sourceType==="custom"&&dc.customFormula){
                   // Creature's own DC — apply exhaustion only if "Affects All DCs" is checked on page 1
                   var dcExhPen2=c.exhAffectAllDC?crExhPen(cr):0;
                   dcVal=computeCreatureFormula(dc.customFormula,{c,creature:cr,spellLevel:cr.spellLevel||1})+dcExhPen2;
                 }
                 var updDC=function(field,val){s("creatures",creatures.map(function(x){return x.id===cr.id?{...x,dcs:(x.dcs||[]).map(function(d,dii){return dii===di?{...d,[field]:val}:d;})}:x;}));};
+                var isCharDC=(dc.sourceType==="char"||dc.sourceType==="spell"||dc.sourceType==="exploit");
                 return <div key={di} style={{display:"flex",gap:8,alignItems:"flex-end",flexWrap:"wrap",marginBottom:6}}>
                   <input value={dc.nm||""} onChange={function(e){updDC("nm",e.target.value);}} placeholder="Spell DC..."
                     style={{flex:2,minWidth:80,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.15)",color:"var(--parch)",fontFamily:"'Cinzel',serif",fontSize:11,outline:"none"}} />
-                  <select value={(dc.sourceType==="spell"||dc.sourceType==="exploit")?"character":"custom"} onChange={function(e){
-                    if(e.target.value==="character"){
-                      // Default to first available class type
-                      var firstType=(c.spellClasses||[]).length>0?"spell":"exploit";
-                      updDC("sourceType",firstType);updDC("sourceIdx",0);
+                  <select value={isCharDC?"char":"custom"} onChange={function(e){
+                    if(e.target.value==="char"){
+                      updDC("sourceType","char");
+                      var first=charDCSources[0];
+                      updDC("charKey",first?first.key:"");
                     } else {
                       updDC("sourceType","custom");
                     }
                   }}
                     style={{background:"rgba(0,0,0,.4)",border:"none",borderBottom:"1px solid rgba(201,150,42,.15)",color:"rgba(232,213,176,.6)",fontFamily:"'Cinzel',serif",fontSize:10,padding:"2px 4px",outline:"none",cursor:"pointer"}}>
-                    <option value="character" style={{background:"#1a1208"}}>Character DC</option>
+                    <option value="char" style={{background:"#1a1208"}}>Character DC</option>
                     <option value="custom" style={{background:"#1a1208"}}>Custom Formula</option>
                   </select>
-                  {(dc.sourceType==="spell"||dc.sourceType==="exploit")&&(function(){
-                    // Build combined list of all character classes
-                    var allOpts=[
-                      ...(c.spellClasses||[]).map(function(sc,i){return {type:"spell",idx:i,label:sc.nm||"Spell "+(i+1)};}),
-                      ...(c.exploitClasses||[]).map(function(ec,i){return {type:"exploit",idx:i,label:ec.nm||"Exploit "+(i+1)};})
-                    ];
-                    if(allOpts.length<=1) return null;
-                    var curVal=dc.sourceType+"::"+(dc.sourceIdx||0);
-                    return <select value={curVal} onChange={function(e){
-                      var parts=e.target.value.split("::");
-                      updDC("sourceType",parts[0]);updDC("sourceIdx",parseInt(parts[1]));
+                  {isCharDC&&(charDCSources.length>0?(
+                    <select value={effKey||(charDCSources[0]&&charDCSources[0].key)||""} onChange={function(e){
+                      updDC("sourceType","char");updDC("charKey",e.target.value);
                     }}
-                      style={{background:"rgba(0,0,0,.4)",border:"none",borderBottom:"1px solid rgba(201,150,42,.15)",color:"rgba(232,213,176,.6)",fontFamily:"'Cinzel',serif",fontSize:10,padding:"2px 4px",outline:"none",cursor:"pointer"}}>
-                      {allOpts.map(function(o){return <option key={o.type+"::"+o.idx} value={o.type+"::"+o.idx} style={{background:"#1a1208"}}>{o.label}</option>;})}
-                    </select>;
-                  })()}
+                      style={{background:"rgba(0,0,0,.4)",border:"none",borderBottom:"1px solid rgba(201,150,42,.15)",color:"rgba(232,213,176,.6)",fontFamily:"'Cinzel',serif",fontSize:10,padding:"2px 4px",outline:"none",cursor:"pointer",maxWidth:170}}>
+                      {charDCSources.map(function(o){return <option key={o.key} value={o.key} style={{background:"#1a1208"}}>{o.label}</option>;})}
+                    </select>
+                  ):(
+                    <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,fontStyle:"italic",color:"rgba(224,112,96,.7)"}}>No character DCs — add one on page 1</span>
+                  ))}
                   {dc.sourceType==="custom"&&(
                     <div onClick={function(){setDcModal({crId:cr.id,dcIdx:di});}}
                       title="Click to configure DC formula"
@@ -10892,7 +11657,7 @@ function CreaturesPage({c,s}){
                     style={{cursor:"pointer",color:"rgba(201,74,42,.35)",fontSize:13,alignSelf:"flex-end",paddingBottom:2}}>×</span>
                 </div>;
               })}
-              <div onClick={function(){upd(cr.id,"dcs",[...(cr.dcs||[]),{nm:"",sourceType:"custom",sourceIdx:0,customFormula:null}]);}}
+              <div onClick={function(){var srcs=getCharDCSources(c);var nd=srcs.length>0?{nm:"",sourceType:"char",charKey:srcs[0].key}:{nm:"",sourceType:"custom",sourceIdx:0,customFormula:null};upd(cr.id,"dcs",[...(cr.dcs||[]),nd]);}}
                 style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:"rgba(201,150,42,.35)",border:"1px dashed rgba(201,150,42,.15)",padding:"2px 8px",borderRadius:2,display:"inline-block",userSelect:"none"}}>+ Add DC</div>
             </div>
 
@@ -11056,15 +11821,17 @@ function CreaturesPage({c,s}){
       var atk=(cr[section]||[])[atkModal.atkIdx];
       if(!atk) return null;
       var isAtk=atkModal.mode==="atk";
-      var curFormula=isAtk?atk.atkFormula:atk.dmgFormula;
+      var isPart=atkModal.mode==="dmgpart";
+      var curFormula=isPart?((atk.dmgParts||[])[atkModal.partIdx]||{}).formula:(isAtk?atk.atkFormula:atk.dmgFormula);
       return <CreatureFormulaModal c={c} creature={cr} spellLevel={cr.spellLevel||1}
         initialFormula={curFormula||{flat:"",charAbls:[],creatureAbls:[],profs:[],lvlEntries:[],spellLevelMult:0,useSpellAtk:null}}
-        title={(atk.nm||"Action")+(isAtk?" — To Hit":" — Damage Bonus")}
+        title={(atk.nm||"Action")+(isAtk?" — To Hit":isPart?" — Extra Damage Bonus":" — Damage Bonus")}
         onApply={function(total,frm){
           s("creatures",creatures.map(function(x){
             if(x.id!==atkModal.crId) return x;
             var newArr=[...(x[section]||[])];
-            newArr[atkModal.atkIdx]=isAtk?{...newArr[atkModal.atkIdx],atkFormula:frm}:{...newArr[atkModal.atkIdx],dmgFormula:frm};
+            if(isPart){var np=[...(newArr[atkModal.atkIdx].dmgParts||[])];np[atkModal.partIdx]={...np[atkModal.partIdx],formula:frm};newArr[atkModal.atkIdx]={...newArr[atkModal.atkIdx],dmgParts:np};}
+            else newArr[atkModal.atkIdx]=isAtk?{...newArr[atkModal.atkIdx],atkFormula:frm}:{...newArr[atkModal.atkIdx],dmgFormula:frm};
             return {...x,[section]:newArr};
           }));
           setAtkModal(null);
@@ -11074,7 +11841,8 @@ function CreaturesPage({c,s}){
           s("creatures",creatures.map(function(x){
             if(x.id!==atkModal.crId) return x;
             var newArr=[...(x[section]||[])];
-            newArr[atkModal.atkIdx]=isAtk?{...newArr[atkModal.atkIdx],atkFormula:null}:{...newArr[atkModal.atkIdx],dmgFormula:null};
+            if(isPart){var np=[...(newArr[atkModal.atkIdx].dmgParts||[])];np[atkModal.partIdx]={...np[atkModal.partIdx],formula:null};newArr[atkModal.atkIdx]={...newArr[atkModal.atkIdx],dmgParts:np};}
+            else newArr[atkModal.atkIdx]=isAtk?{...newArr[atkModal.atkIdx],atkFormula:null}:{...newArr[atkModal.atkIdx],dmgFormula:null};
             return {...x,[section]:newArr};
           }));
           setAtkModal(null);
@@ -11399,7 +12167,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.9.43</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.10.1</div>
 
 </script>
 </body>
