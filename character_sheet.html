@@ -303,6 +303,25 @@ window.__characterLoad=function(def){
 <script type="text/babel" data-presets="react">
 const { useState } = React;
 
+// Session-only roll log: keeps the last 20 results in memory so they persist across
+// tab changes, but starts empty on a fresh page load (never written to the saved file).
+const _rollLog = { items: [], subs: new Set() };
+function rollLogGet(){ return _rollLog.items; }
+function rollLogSet(updater){
+  const next = (typeof updater === "function") ? updater(_rollLog.items) : updater;
+  _rollLog.items = Array.isArray(next) ? next.slice(0, 20) : [];
+  _rollLog.subs.forEach(function(fn){ try{ fn(_rollLog.items); }catch(e){} });
+}
+function useRollLog(){
+  const [, force] = React.useState(0);
+  React.useEffect(function(){
+    const fn = function(){ force(function(n){ return n + 1; }); };
+    _rollLog.subs.add(fn);
+    return function(){ _rollLog.subs.delete(fn); };
+  }, []);
+  return [_rollLog.items, rollLogSet];
+}
+
 const init=()=>{ const d=({
   name:"",race:"",bg:"",cls:"",sub:"",aln:"",age:"",plr:"",xp:"",
   classes:[{nm:"",lv:"",hd:"d6",sub:"",hpBonus:"",dcs:[]}],
@@ -3208,8 +3227,8 @@ function Page4({c,s}){
   ].concat(csList.map(function(cs){return {key:"cs:"+cs.id,label:cs.name||"Untitled",n:(cs.items||[]).length};}));
   return (
     <div>
-      <div className="orn">Notes</div>
-      <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:34,marginTop:14}}>
+      <div className="orn">Journal</div>
+      <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:34,marginTop:30}}>
         {subTabs.map(function(t){
           var active=sub===t.key;
           return <button key={t.key} onClick={function(){setSub(t.key);}}
@@ -7717,8 +7736,9 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
 
   const rollDie=function(sides){return Math.floor(Math.random()*sides)+1;};
 
-  // A roll result is {id, label, dice:[{sides,val}], bonus, note}
-  const [results,setResults]=us2([]);
+  // A roll result is {id, label, dice:[{sides,val}], bonus, note}. Backed by a session
+  // store so the log survives tab changes (but resets on a fresh page load).
+  const [results,setResults]=useRollLog();
 
   const flashTimer=React.useRef(null);
   const [flash,setFlash]=us2(null);
@@ -7753,23 +7773,52 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
     setResults(function(prev){
       return prev.map(function(r){
         if(r.id!==rid) return r;
+        // Reroll one die (recording its pre-reroll value), remove any explosion dice that
+        // descended from it previously, then reapply the group's mods so the new value can
+        // turn / reroll-rule / explode fresh (or end with no explosion + no orphan children).
+        const doOne=function(dice,mods,idx){
+          let nd=dice.map(function(d){return {...d};});
+          const d=nd[idx];
+          if(!d||d.flat) return dice; // flat bonus dice aren't rerollable
+          if(d.uid===undefined) d.uid=_dieUid();
+          // Collect all transitive descendants of d (its old explosion subtree).
+          const removeUids={};
+          let frontier=[d.uid];
+          while(frontier.length){
+            const next=[];
+            nd.forEach(function(x){ if(x.parent!==undefined&&frontier.indexOf(x.parent)>=0&&!removeUids[x.uid]){removeUids[x.uid]=true;next.push(x.uid);} });
+            frontier=next;
+          }
+          nd=nd.filter(function(x){return !removeUids[x.uid];});
+          // Reset d's explosion mark; it will be re-evaluated by reprocessOneDie.
+          d.exploded=false;
+          if(d.rrFrom===undefined) d.rrFrom=d.val;
+          d.val=rollDie(d.sides); d.rr=(d.rr||0)+1;
+          const added=reprocessOneDie(d,mods||{},d.sides);
+          // Insert the new children right after d to keep a sensible visual order.
+          const at=nd.indexOf(d);
+          nd.splice(at+1,0,...added);
+          return nd;
+        };
         if(r.groups){
           let remaining=di;
           const newGroups=r.groups.map(function(g){
-            if(remaining<0) return g; // already rerolled in a previous group
+            if(remaining<0) return g;
             if(remaining>=g.dice.length){ remaining-=g.dice.length; return g; }
-            const nd=[...g.dice];
-            if(!nd[remaining].flat) nd[remaining]={...nd[remaining],val:rollDie(nd[remaining].sides)};
+            const nd=doOne(g.dice,g.mods,remaining);
             remaining=-1;
             return {...g,dice:nd};
           });
-          return {...r,groups:newGroups,dice:newGroups[0].dice};
+          return {...r,groups:newGroups,dice:newGroups[0].dice,rrCount:countRR(newGroups)};
         }
-        const nd=[...r.dice];
-        if(!nd[di].flat) nd[di]={...nd[di],val:rollDie(nd[di].sides)};
-        return {...r,dice:nd};
+        const nd=doOne(r.dice,r.mods,di);
+        return {...r,dice:nd,rrCount:(nd.filter(function(d){return d.rr;}).length)};
       });
     });
+  };
+  // Count dice rerolled at least once across all groups of a result.
+  const countRR=function(groups){
+    return groups.reduce(function(t,g){return t+(g.dice||[]).filter(function(d){return d.rr;}).length;},0);
   };
 
   // Custom roller state
@@ -7868,10 +7917,10 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
           <option value="once" style={{background:"#1a1208"}}>once (keep new)</option>
           <option value="until" style={{background:"#1a1208"}}>until clear</option>
         </select>
-        {((md.reroll&&md.reroll.mode)==="until")&&<span style={{display:"flex",alignItems:"center",gap:3}}>
+        {(md.reroll&&md.reroll.on)&&<span style={{display:"flex",alignItems:"center",gap:3}}>
           <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>max</span>
-          <input type="number" min="1" value={(md.reroll&&md.reroll.max)||""} placeholder="∞" title="Max rerolls per die (blank = unlimited)" onChange={function(e){setQrMod(key,"reroll",{max:e.target.value,on:true});}} style={{...inp,width:32,color:"var(--arcane-l)"}} />
-          <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>×</span>
+          <input type="number" min="1" value={(md.reroll&&md.reroll.max)||""} placeholder="∞" title="Maximum TOTAL rerolls for this die group (blank = unlimited). Per-die in 'until' mode is always capped at 200." onChange={function(e){setQrMod(key,"reroll",{max:e.target.value,on:true});}} style={{...inp,width:34,color:"var(--arcane-l)"}} />
+          <span style={{fontFamily:"'EB Garamond',serif",fontSize:9,fontStyle:"italic",color:"rgba(232,213,176,.35)"}}>total</span>
         </span>}
       </div>
       {/* EXPLODE */}
@@ -7935,90 +7984,192 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
   // Apply modifiers to an already-rolled dice array. Returns {dice, modNotes:[...]} where each die
   // may carry tag metadata for the log: d.orig (pre-turn value), d.turned (bool), d.rr (reroll count),
   // d.exploded (this die triggered an explosion), d.fromExplode (this die was added by explosion).
-  const SAFETY_CAP=200; // guard against infinite "until" loops
+  const SAFETY_CAP=200; // hard per-die cap for "until clear" reroll loops (user cannot change)
+  const EXPLODE_CAP=200; // hard cap on total exploded dice added in a group
+  let _dieUidCtr=0;
+  const _dieUid=function(){ _dieUidCtr+=1; return "u"+Date.now().toString(36)+"_"+_dieUidCtr; };
+  // Apply turn / reroll / explode to a freshly-rolled dice array.
+  // Order PER DIE: turn → reroll → explode, applied recursively (an exploded child
+  // is itself turned/rerolled/exploded). Reroll has a TOTAL budget across the group
+  // (mods.reroll.max) for both "once" and "until" modes; blank = unlimited (still
+  // bounded per-die by SAFETY_CAP in until mode). Returns {dice, modNotes, rrCount}.
   const applyModsToDice=function(dice,mods,sides){
     mods=mods||{};
     const modNotes=[];
+    const turnOn=mods.turn&&mods.turn.on;
+    const turnFrom=turnOn?parseValList(mods.turn.from,sides):[];
+    const turnTo=turnOn?parseInt(mods.turn.to):NaN;
+    const turnValid=turnOn&&turnFrom.length&&!isNaN(turnTo);
+    const rrOn=mods.reroll&&mods.reroll.on;
+    const rrVals=rrOn?parseValList(mods.reroll.vals,sides):[];
+    const rrValid=rrOn&&rrVals.length;
+    const rrUntil=mods.reroll&&mods.reroll.mode==="until";
+    const rawMax=parseInt(mods.reroll&&mods.reroll.max);
+    let rrBudget=(!isNaN(rawMax)&&rawMax>0)?rawMax:Infinity; // TOTAL rerolls left for the group
+    const expOn=mods.explode&&mods.explode.on;
+    const expTrig=expOn?parseInt(mods.explode.threshold):NaN;
+    const expValid=expOn&&!isNaN(expTrig);
+    const expMode=(mods.explode&&mods.explode.mode)||"perdie"; // once | perdie | until
 
-    // 1) Reroll any (must run before turn, so turned values aren't rerolled)
-    if(mods.reroll&&mods.reroll.on){
-      const vals=parseValList(mods.reroll.vals,sides);
-      if(vals.length){
-        const until=mods.reroll.mode==="until";
-        // Optional cap on how many times a single die may be rerolled in "until" mode.
-        const rawMax=parseInt(mods.reroll.max);
-        const maxRR=(!isNaN(rawMax)&&rawMax>0)?Math.min(rawMax,SAFETY_CAP):SAFETY_CAP;
-        dice.forEach(function(d){
-          if(vals.indexOf(d.val)>=0){
-            let guard=0;
-            if(until){
-              do{ d.val=rollDie(sides); d.rr=(d.rr||0)+1; guard++; }
-              while(vals.indexOf(d.val)>=0&&guard<maxRR);
-            }else{
-              d.val=rollDie(sides); d.rr=(d.rr||0)+1;
-            }
-          }
-        });
-        const capLbl=(until&&!isNaN(rawMax)&&rawMax>0)?(" ≤"+rawMax+"×"):"";
-        modNotes.push("reroll "+vals.join(",")+(until?" until clear":" once")+capLbl);
-      }
-    }
+    const added=[];           // dice produced by explosions
+    let explodeCount=0;       // total exploded dice added (capped at EXPLODE_CAP)
+    // Ensure every die has a stable uid (for parent/child explosion tracking on manual reroll).
+    dice.forEach(function(d){ if(d.uid===undefined) d.uid=_dieUid(); });
 
-    // 2) Turn any (X,Y,Z) into N — applied to the post-reroll values
-    if(mods.turn&&mods.turn.on){
-      const from=parseValList(mods.turn.from,sides);
-      const to=parseInt(mods.turn.to);
-      if(from.length&&!isNaN(to)){
-        dice.forEach(function(d){
-          if(from.indexOf(d.val)>=0){ d.orig=d.val; d.val=to; d.turned=true; }
-        });
-        modNotes.push("turn "+from.join(",")+"→"+to);
-      }
-    }
-
-    // 3) Exploding dice — a roll of `threshold` (or higher) adds another die of the same kind
-    if(mods.explode&&mods.explode.on){
-      const trig=parseInt(mods.explode.threshold);
-      if(!isNaN(trig)){
-        const mode=mods.explode.mode||"perdie"; // "once" | "perdie" | "until"
-        // Mark which of the original dice trigger, then add dice accordingly.
-        const added=[];
-        const explodeFrom=function(d){
-          d.exploded=true;
+    // Turn a single die in place (records original once).
+    const doTurn=function(d){
+      if(turnValid&&turnFrom.indexOf(d.val)>=0){ if(d.orig===undefined)d.orig=d.val; d.val=turnTo; d.turned=true; }
+    };
+    // Reroll a single die one time (records first pre-reroll value, marks rr).
+    const doReroll=function(d){
+      if(d.rrFrom===undefined) d.rrFrom=d.val;
+      d.val=rollDie(sides); d.rr=(d.rr||0)+1;
+    };
+    // Full per-die pipeline: turn → reroll(respecting budget/mode) → explode(recursive).
+    const processDie=function(d,isChild){
+      // 1) turn
+      doTurn(d);
+      // 2) reroll
+      if(rrValid&&rrVals.indexOf(d.val)>=0&&rrBudget>0){
+        if(rrUntil){
           let guard=0;
-          let cur=d;
-          // "once": only the original triggering dice explode one time each (handled by not chaining)
-          // "perdie": each original triggering die explodes exactly once (one extra die), even if the new die also triggers? -> one extra per original.
-          // "until": keep adding while the newest die triggers.
-          if(mode==="until"){
-            while(cur.val>=trig&&guard<SAFETY_CAP){
-              const nd={sides:sides,val:rollDie(sides),fromExplode:true};
-              added.push(nd);
-              if(nd.val>=trig){nd.exploded=true;}
-              cur=nd;
-              guard++;
-            }
-          }else{
-            // once & perdie both add a single extra die per triggering original die
-            const nd={sides:sides,val:rollDie(sides),fromExplode:true};
-            added.push(nd);
+          while(rrVals.indexOf(d.val)>=0&&rrBudget>0&&guard<SAFETY_CAP){
+            doReroll(d); rrBudget--; guard++;
+            doTurn(d); // a freshly rerolled value may itself be turned
           }
-        };
-        if(mode==="once"){
-          // explode only the FIRST triggering die in the group, a single time
-          const first=dice.find(function(d){return d.val>=trig;});
-          if(first) explodeFrom(first);
         }else{
-          // perdie & until: every original die that triggers
-          dice.slice().forEach(function(d){ if(d.val>=trig) explodeFrom(d); });
+          // once: a single reroll, keep the new value even if still a listed number
+          doReroll(d); rrBudget--;
+          doTurn(d);
         }
-        dice=dice.concat(added);
-        const modeLbl=mode==="until"?"until clear":mode==="once"?"once":"per die";
-        modNotes.push("explode on "+trig+(sides!==trig?"+":"")+" ("+modeLbl+")");
       }
+      // 3) explode (recursive on children)
+      if(expValid&&d.val>=expTrig){
+        d.exploded=true;
+        // Spawn one child; whether the chain continues depends on mode.
+        const spawn=function(parentDie){
+          if(explodeCount>=EXPLODE_CAP) return null;
+          const nd={sides:sides,val:rollDie(sides),fromExplode:true,uid:_dieUid(),parent:parentDie.uid};
+          added.push(nd); explodeCount++;
+          return nd;
+        };
+        if(expMode==="until"){
+          // keep spawning while the newest (fully processed) child still triggers
+          let cur=d, guard=0;
+          while(cur.val>=expTrig&&explodeCount<EXPLODE_CAP&&guard<EXPLODE_CAP){
+            const nd=spawn(cur); if(!nd) break;
+            doTurn(nd);
+            if(rrValid&&rrVals.indexOf(nd.val)>=0&&rrBudget>0){
+              if(rrUntil){let g2=0;while(rrVals.indexOf(nd.val)>=0&&rrBudget>0&&g2<SAFETY_CAP){doReroll(nd);rrBudget--;g2++;doTurn(nd);}}
+              else{doReroll(nd);rrBudget--;doTurn(nd);}
+            }
+            if(nd.val>=expTrig) nd.exploded=true;
+            cur=nd; guard++;
+          }
+        }
+        // once / perdie: a single child, processed (turn+reroll) but no further chaining
+        else {
+          const nd=spawn(d);
+          if(nd){
+            doTurn(nd);
+            if(rrValid&&rrVals.indexOf(nd.val)>=0&&rrBudget>0){
+              if(rrUntil){let g3=0;while(rrVals.indexOf(nd.val)>=0&&rrBudget>0&&g3<SAFETY_CAP){doReroll(nd);rrBudget--;g3++;doTurn(nd);}}
+              else{doReroll(nd);rrBudget--;doTurn(nd);}
+            }
+            if(nd.val>=expTrig) nd.exploded=true;
+          }
+        }
+      }
+    };
+
+    // Drive the group. For explode "once" mode, only the first triggering die explodes;
+    // we handle that by temporarily disabling explode for the rest.
+    if(expValid&&expMode==="once"){
+      let firstDone=false;
+      dice.forEach(function(d){
+        doTurn(d);
+        if(rrValid&&rrVals.indexOf(d.val)>=0&&rrBudget>0){
+          if(rrUntil){let g=0;while(rrVals.indexOf(d.val)>=0&&rrBudget>0&&g<SAFETY_CAP){doReroll(d);rrBudget--;g++;doTurn(d);}}
+          else{doReroll(d);rrBudget--;doTurn(d);}
+        }
+        if(!firstDone&&d.val>=expTrig){
+          firstDone=true; d.exploded=true;
+          if(explodeCount<EXPLODE_CAP){const nd={sides:sides,val:rollDie(sides),fromExplode:true,uid:_dieUid(),parent:d.uid};added.push(nd);explodeCount++;doTurn(nd);
+            if(rrValid&&rrVals.indexOf(nd.val)>=0&&rrBudget>0){if(rrUntil){let g=0;while(rrVals.indexOf(nd.val)>=0&&rrBudget>0&&g<SAFETY_CAP){doReroll(nd);rrBudget--;g++;doTurn(nd);}}else{doReroll(nd);rrBudget--;doTurn(nd);}}
+            if(nd.val>=expTrig)nd.exploded=true;}
+        }
+      });
+    } else {
+      dice.forEach(function(d){ processDie(d,false); });
     }
 
-    return {dice:dice, modNotes:modNotes};
+    const allDice=dice.concat(added);
+    const rrCount=allDice.filter(function(d){return d.rr;}).length; // dice rerolled ≥1×
+
+    // Notes
+    if(rrValid){
+      const cap=(rrBudget!==Infinity||!isNaN(rawMax));
+      const maxLbl=(!isNaN(rawMax)&&rawMax>0)?(" ≤"+rawMax+" total"):"";
+      modNotes.push("reroll "+rrVals.join(",")+(rrUntil?" until clear":" once")+maxLbl);
+    }
+    if(turnValid) modNotes.push("turn "+turnFrom.join(",")+"→"+turnTo);
+    if(expValid){const modeLbl=expMode==="until"?"until clear":expMode==="once"?"once":"per die";modNotes.push("explode on "+expTrig+(sides!==expTrig?"+":"")+" ("+modeLbl+")"+(explodeCount>=EXPLODE_CAP?" [cap]":""));}
+
+    return {dice:allDice, modNotes:modNotes, rrCount:rrCount};
+  };
+
+  // Apply the full per-die pipeline (turn → reroll-rule → explode) to a SINGLE die that is
+  // already present (e.g. after a manual reroll). Mutates `d`; returns array of new explosion dice.
+  // Honors a remaining reroll budget loosely (manual context): until-mode keeps rerolling listed
+  // values up to SAFETY_CAP, once-mode does nothing extra (the manual click was the reroll).
+  const reprocessOneDie=function(d,mods,sides){
+    mods=mods||{};
+    const added=[];
+    const turnOn=mods.turn&&mods.turn.on;
+    const turnFrom=turnOn?parseValList(mods.turn.from,sides):[];
+    const turnTo=turnOn?parseInt(mods.turn.to):NaN;
+    const turnValid=turnOn&&turnFrom.length&&!isNaN(turnTo);
+    const rrOn=mods.reroll&&mods.reroll.on;
+    const rrVals=rrOn?parseValList(mods.reroll.vals,sides):[];
+    const rrValid=rrOn&&rrVals.length;
+    const rrUntil=mods.reroll&&mods.reroll.mode==="until";
+    const expOn=mods.explode&&mods.explode.on;
+    const expTrig=expOn?parseInt(mods.explode.threshold):NaN;
+    const expValid=expOn&&!isNaN(expTrig);
+    const expMode=(mods.explode&&mods.explode.mode)||"perdie";
+    const doTurn=function(x){ if(turnValid&&turnFrom.indexOf(x.val)>=0){ if(x.orig===undefined)x.orig=x.val; x.val=turnTo; x.turned=true; } };
+    const doReroll=function(x){ if(x.rrFrom===undefined)x.rrFrom=x.val; x.val=rollDie(sides); x.rr=(x.rr||0)+1; };
+    if(d.uid===undefined) d.uid=_dieUid();
+    const procChain=function(x){
+      // Clear any stale explosion mark before re-evaluating (a reroll may now NOT trigger).
+      x.exploded=false;
+      doTurn(x);
+      if(rrValid&&rrVals.indexOf(x.val)>=0){
+        if(rrUntil){let g=0;while(rrVals.indexOf(x.val)>=0&&g<SAFETY_CAP){doReroll(x);g++;doTurn(x);}}
+        // once: the manual reroll already counts; for children we still allow a single rule-reroll
+        else{doReroll(x);doTurn(x);}
+      }
+      if(expValid&&x.val>=expTrig){
+        x.exploded=true;
+        if(expMode==="until"){
+          let cur=x,guard=0;
+          while(cur.val>=expTrig&&added.length<EXPLODE_CAP&&guard<EXPLODE_CAP){
+            const nd={sides:sides,val:rollDie(sides),fromExplode:true,uid:_dieUid(),parent:cur.uid};added.push(nd);
+            doTurn(nd);
+            if(rrValid&&rrVals.indexOf(nd.val)>=0){if(rrUntil){let g=0;while(rrVals.indexOf(nd.val)>=0&&g<SAFETY_CAP){doReroll(nd);g++;doTurn(nd);}}else{doReroll(nd);doTurn(nd);}}
+            if(nd.val>=expTrig)nd.exploded=true;
+            cur=nd;guard++;
+          }
+        } else {
+          if(added.length<EXPLODE_CAP){const nd={sides:sides,val:rollDie(sides),fromExplode:true,uid:_dieUid(),parent:x.uid};added.push(nd);
+            doTurn(nd);
+            if(rrValid&&rrVals.indexOf(nd.val)>=0){if(rrUntil){let g=0;while(rrVals.indexOf(nd.val)>=0&&g<SAFETY_CAP){doReroll(nd);g++;doTurn(nd);}}else{doReroll(nd);doTurn(nd);}}
+            if(nd.val>=expTrig)nd.exploded=true;}
+        }
+      }
+    };
+    procChain(d);
+    return added;
   };
 
   // Roll a fresh group from {count,sides,mods} then apply its modifiers.
@@ -8090,7 +8241,7 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
         }
         // Fold this part's flat bonus into the first dice-group of the part as a flat die.
         if(dgi===0&&partBonus!==0) dice=dice.concat([{sides:0,val:partBonus,flat:true}]);
-        groups.push({label:dg.n+"d"+dg.s,dtype:type,dice:dice,modNotes:modNotes});
+        groups.push({label:dg.n+"d"+dg.s,dtype:type,dice:dice,modNotes:modNotes,mods:part.mods||null});
       });
     });
     return {groups:groups,flatBonus:flatBonus};
@@ -8114,43 +8265,45 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
   };
 
   const rollCustom=function(){
-    const bonus=calcCustBonus(custFormula);
     const groups=custDiceGroups.map(function(g){
       const res=applyGroupMods(g,g.sides);
-      return {label:Math.max(1,Math.min(20,g.count||1))+"d"+g.sides, dtype:(g.dtype||"").trim(), dice:res.dice, modNotes:res.modNotes};
+      let dice=res.dice;
+      // Per-group (per damage-type) bonus, folded in as a flat die so it sums & types correctly.
+      const gBon=g.bonusFormula?computeBonusFromFormula(g.bonusFormula,c):0;
+      if(gBon!==0) dice=dice.concat([{sides:0,val:gBon,flat:true}]);
+      return {label:Math.max(1,Math.min(20,g.count||1))+"d"+g.sides, dtype:(g.dtype||"").trim(), dice:dice, modNotes:res.modNotes, mods:g.mods||null};
     });
     const diceExpr=custDiceGroups.map(function(g){return g.count+"d"+g.sides+((g.dtype||"").trim()?" "+(g.dtype||"").trim():"");}).join(" + ");
-    const lbl=custName.trim()||diceExpr+(bonus!==0?fmtBonus(bonus):"");
-    const noteParts=custFormula?[
-      (custFormula.abls||[]).map(function(a){return a+"("+fmtBonus(getStatMod2(a))+")";}).join(" "),
-      formulaHasProf(custFormula)?formulaProfLabel(custFormula)+"(+"+formulaProfVal(custFormula,c)+")":"",
-      parseInt(custFormula.flat||0)?fmtBonus(parseInt(custFormula.flat||0)):""
-    ].filter(Boolean):[];
-    addResult(lbl,groups[0].dice,bonus,noteParts.join(" "),groups);
+    const lbl=custName.trim()||diceExpr;
+    addResult(lbl,groups[0].dice,0,"",groups);
   };
 
   const saveCustom=function(){
     const nm=custName.trim();
     if(!nm) return;
-    const newRoll={id:Date.now(),nm,diceGroups:custDiceGroups.map(function(g){return {count:Math.max(1,g.count||1),sides:g.sides,dtype:(g.dtype||"").trim(),mods:g.mods||null};}),formula:custFormula};
+    const newRoll={id:Date.now(),nm,diceGroups:custDiceGroups.map(function(g){return {count:Math.max(1,g.count||1),sides:g.sides,dtype:(g.dtype||"").trim(),mods:g.mods||null,bonusFormula:g.bonusFormula||null};})};
     saveSRApp(function(prev){return [...prev,newRoll];});
   };
 
   const rollSaved=function(sr){
-    // backward compat: old saves had count/sides/bonus/prof/abls
     const groups=(sr.diceGroups||[{count:sr.count||1,sides:sr.sides||20}]).map(function(g){
       const res=applyGroupMods(g,g.sides);
-      return {label:Math.max(1,Math.min(20,g.count))+"d"+g.sides, dtype:(g.dtype||"").trim(), dice:res.dice, modNotes:res.modNotes};
+      let dice=res.dice;
+      const gBon=g.bonusFormula?computeBonusFromFormula(g.bonusFormula,c):0;
+      if(gBon!==0) dice=dice.concat([{sides:0,val:gBon,flat:true}]);
+      return {label:Math.max(1,Math.min(20,g.count))+"d"+g.sides, dtype:(g.dtype||"").trim(), dice:dice, modNotes:res.modNotes, mods:g.mods||null};
     });
-    const formula=sr.formula||{flat:""+( sr.bonus||0),abls:sr.abls||[],prof:sr.prof?"full":"none",lvlType:"none",lvlClass:""};
-    const bonus=calcCustBonus(formula);
-    const noteParts=[(formula.abls||[]).map(function(a){return a+"("+fmtBonus(getStatMod2(a))+")";}).join(" "),formulaHasProf(formula)?formulaProfLabel(formula)+"(+"+formulaProfVal(formula,c)+")":"",parseInt(formula.flat||0)?fmtBonus(parseInt(formula.flat||0)):""].filter(Boolean);
-    addResult(sr.nm,groups[0].dice,bonus,noteParts.join(" "),groups);
+    // Back-compat: old saves may carry an overall formula bonus → fold as untyped flat die on group 0.
+    if(sr.formula){var ob=calcCustBonus(sr.formula);if(ob!==0&&groups[0])groups[0]={...groups[0],dice:groups[0].dice.concat([{sides:0,val:ob,flat:true}])};}
+    addResult(sr.nm,groups[0].dice,0,"",groups);
   };
 
   const srFormula=function(sr){
     const groups=sr.diceGroups||[{count:sr.count||1,sides:sr.sides||20}];
-    const diceStr=groups.map(function(g){return g.count+"d"+g.sides+(g.dtype?" "+g.dtype:"");}).join(" + ");
+    const diceStr=groups.map(function(g){
+      var gb=g.bonusFormula?computeBonusFromFormula(g.bonusFormula,c):0;
+      return g.count+"d"+g.sides+(gb!==0?fmtBonus(gb):"")+(g.dtype?" "+g.dtype:"");
+    }).join(" + ");
     const formula=sr.formula;
     if(!formula) return diceStr;
     const parts=[diceStr];
@@ -8693,7 +8846,11 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
                 </select>
                 <input value={g.dtype||""} placeholder="type (optional)"
                   onChange={function(e){setCustDiceGroups(function(prev){const a=[...prev];a[gi]={...a[gi],dtype:e.target.value};return a;});}}
-                  style={{width:118,background:"rgba(123,79,207,.06)",border:"1px solid rgba(123,79,207,.22)",color:"var(--arcane-l)",fontFamily:"'EB Garamond',serif",fontSize:12,outline:"none",padding:"3px 7px",borderRadius:10}} />
+                  style={{width:96,background:"rgba(123,79,207,.06)",border:"1px solid rgba(123,79,207,.22)",color:"var(--arcane-l)",fontFamily:"'EB Garamond',serif",fontSize:12,outline:"none",padding:"3px 7px",borderRadius:10}} />
+                <BonusField c={c} value={(g.bonusFormula&&g.bonusFormula.flat)||""} formula={g.bonusFormula}
+                  onApply={function(total,frm){setCustDiceGroups(function(prev){const a=[...prev];a[gi]={...a[gi],bonusFormula:frm||null};return a;});}}
+                  label={"Bonus"+((g.dtype||"").trim()?" — "+(g.dtype||"").trim():" (this die group)")}
+                  inputStyle={{width:30,fontSize:11}} />
                 <span onClick={function(){setCustDiceGroups(function(prev){const a=[...prev];a[gi]={...a[gi],modsOpen:!a[gi].modsOpen};return a;});}}
                   title="Per-die modifiers (turn / reroll / explode)"
                   style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:modCount?"var(--arcane-l)":"rgba(184,154,240,.45)",border:"1px solid "+(modCount?"rgba(123,79,207,.45)":"rgba(123,79,207,.2)"),background:modCount?"rgba(123,79,207,.12)":"transparent",padding:"2px 7px",borderRadius:9,userSelect:"none",whiteSpace:"nowrap"}}>
@@ -8731,13 +8888,13 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
                       <option value="once" style={{background:"#1a1208"}}>once (keep new)</option>
                       <option value="until" style={{background:"#1a1208"}}>until clear</option>
                     </select>
-                    {((mods.reroll&&mods.reroll.mode)==="until")&&<span style={{display:"flex",alignItems:"center",gap:4}}>
+                    {(mods.reroll&&mods.reroll.on)&&<span style={{display:"flex",alignItems:"center",gap:4}}>
                       <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>max</span>
                       <input type="number" min="1" value={(mods.reroll&&mods.reroll.max)||""} placeholder="∞"
                         onChange={function(e){setMod("reroll",{max:e.target.value,on:true});}}
-                        title="Max rerolls per die (blank = unlimited)"
+                        title="Maximum TOTAL rerolls for this die group (blank = unlimited). Per-die in 'until' mode is always capped at 200."
                         style={{width:34,background:"rgba(0,0,0,.3)",border:"1px solid rgba(123,79,207,.25)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:11,textAlign:"center",outline:"none",padding:"2px 2px",borderRadius:3}} />
-                      <span style={{fontFamily:"'EB Garamond',serif",fontSize:10,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>×</span>
+                      <span style={{fontFamily:"'EB Garamond',serif",fontSize:9,fontStyle:"italic",color:"rgba(232,213,176,.35)"}}>total</span>
                     </span>}
                   </div>
                   {/* EXPLODING */}
@@ -8766,30 +8923,13 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
             </div>
           </div>
 
-          {/* Bonus via FormulaModal */}
+          {/* Roll / Save */}
           <div style={{display:"flex",alignItems:"center",gap:8}}>
-            <div onClick={function(){setCustFormulaOpen(true);}}
-              style={{cursor:"pointer",display:"flex",alignItems:"center",gap:6,padding:"3px 10px",border:"1px solid "+(custFormula?"rgba(201,150,42,.4)":"rgba(201,150,42,.15)"),borderRadius:10,background:custFormula?"rgba(201,150,42,.08)":"transparent",userSelect:"none"}}>
-              <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(201,150,42,.5)",letterSpacing:1}}>BONUS</span>
-              <span style={{fontFamily:"'Cinzel',serif",fontSize:11,fontWeight:700,color:custFormula?"var(--gold-l)":"rgba(232,213,176,.25)"}}>
-                {custFormula?fmtBonus(calcCustBonus(custFormula)):"+0"}
-              </span>
-            </div>
-            {custFormula&&<span onClick={function(){setCustFormula(null);}}
-              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,color:"rgba(201,74,42,.4)",userSelect:"none"}}>clear</span>}
             <div style={{flex:1}}/>
             <div onClick={rollCustom} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,color:"var(--gold-l)",border:"1px solid rgba(201,150,42,.4)",padding:"4px 14px",borderRadius:10,userSelect:"none",background:"rgba(201,150,42,.1)"}}>🎲 Roll</div>
             <div onClick={saveCustom} title="Save (requires name)" style={{cursor:custName.trim()?"pointer":"default",fontFamily:"'Cinzel',serif",fontSize:10,color:custName.trim()?"var(--arcane-l)":"rgba(184,154,240,.2)",border:"1px solid "+(custName.trim()?"rgba(123,79,207,.4)":"rgba(123,79,207,.12)"),padding:"4px 10px",borderRadius:10,userSelect:"none",background:custName.trim()?"rgba(123,79,207,.1)":"transparent"}}>+ Save</div>
           </div>
         </div>}
-
-        {custFormulaOpen&&<FormulaModal c={c}
-          initialFormula={custFormula||{flat:"",abls:[],prof:"none",lvlType:"none",lvlClass:""}}
-          title="Roll Bonus"
-          onApply={function(total,frm){setCustFormula(frm&&((frm.abls||[]).length>0||formulaHasProf(frm)||parseInt(frm.flat||0)||(frm.lvlEntries&&frm.lvlEntries.length>0)||(frm.lvlType&&frm.lvlType!=="none"))?frm:null);setCustFormulaOpen(false);}}
-          onClose={function(){setCustFormulaOpen(false);}}
-          onClear={custFormula?function(){setCustFormula(null);setCustFormulaOpen(false);}:null}
-        />}
 
         {savedRolls.length>0&&(
           <div style={{display:"flex",gap:5,flexWrap:"wrap",marginTop:8}}>
@@ -8847,10 +8987,10 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
               const dieDeco=function(d){
                 const tips=["d"+d.sides];
                 const marks=[];
-                // Lifecycle order mirrors processing: born-from-explosion → reroll → turn → explode.
+                // Lifecycle order mirrors processing: born-from-explosion → turn → reroll → explode.
                 if(d.fromExplode){tips.push("from explosion");marks.push("✦");}
-                if(d.rr){tips.push("rerolled"+(d.rr>1?" ×"+d.rr:""));marks.push("↻");}
-                if(d.turned){tips.push("turned "+d.orig+"→"+d.val);marks.push("↦");}
+                if(d.turned){tips.push("turned "+(d.orig!==undefined?d.orig:"?")+"→"+d.val);marks.push("↦");}
+                if(d.rr){tips.push("rerolled"+(d.rrFrom!==undefined?" "+d.rrFrom+"→"+d.val:"")+(d.rr>1?" (×"+d.rr+")":""));marks.push("↻");}
                 if(d.exploded){tips.push("exploded");marks.push("✸");}
                 tips.push("click to reroll");
                 const special=!!(d.turned||d.rr||d.fromExplode||d.exploded);
@@ -8873,8 +9013,13 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
                         notes.push(pre+mn);
                       });
                     });
-                    if(!notes.length) return null;
-                    return <div style={{display:"flex",gap:5,flexWrap:"wrap",marginBottom:7,marginTop:-2}}>
+                    // Count dice rerolled at least once (auto + manual), live from current dice.
+                    // Rerolls can exceed dice-rerolled (a die may be rerolled multiple times).
+                    let rrRolls=0, rrDice=0;
+                    r.groups.forEach(function(g){(g.dice||[]).forEach(function(d){ if(d.rr){ rrRolls+=d.rr; rrDice+=1; } });});
+                    if(!notes.length&&!rrRolls) return null;
+                    return <div style={{display:"flex",gap:5,flexWrap:"wrap",marginBottom:7,marginTop:-2,alignItems:"center"}}>
+                      {rrRolls>0&&<span title="Total rerolls performed (a die can be rerolled more than once) · distinct dice that were rerolled at least once" style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:.5,color:"var(--gold-l)",background:"rgba(201,150,42,.12)",border:"1px solid rgba(201,150,42,.35)",padding:"2px 7px",borderRadius:9}}>↻ {rrRolls} reroll{rrRolls>1?"s":""} · {rrDice} {rrDice>1?"dice":"die"} rerolled</span>}
                       {notes.map(function(mn,mi){
                         return <span key={mi} style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:.5,color:"var(--arcane-l)",background:"rgba(123,79,207,.12)",border:"1px solid rgba(123,79,207,.3)",padding:"2px 7px",borderRadius:9,textTransform:"uppercase"}}>{mn}</span>;
                       })}
@@ -10776,7 +10921,7 @@ const PAGES=[
   {label:"I - Character",hideable:false},
   {label:"II - Features",hideable:false},
   {label:"III - Inventory",hideable:false},
-  {label:"IV - Notes",hideable:true},
+  {label:"IV - Journal",hideable:true},
   {label:"V - Spells",hideable:true,group:"spells"},
   {label:"VI - Exploits",hideable:true},
   {label:"VII - Creatures",hideable:true},
@@ -12167,7 +12312,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.10.1</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.11.5</div>
 
 </script>
 </body>
