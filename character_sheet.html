@@ -313,7 +313,7 @@ const { useState } = React;
 // by the controller below rather than CSS position:sticky, because an ancestor
 // (.sheet / .app) computes its overflow to "auto", which would otherwise
 // neutralise sticky against the window scroll.
-function SectionRail({accent,onExpand,onCollapse,label}){
+function SectionRail({accent,onExpand,onCollapse,label,inset}){
   var a=accent||"184,154,240";
   var btn={
     cursor:"pointer",userSelect:"none",
@@ -328,7 +328,7 @@ function SectionRail({accent,onExpand,onCollapse,label}){
   var hov=function(on){return function(e){e.currentTarget.style.background="rgba("+a+","+(on?".30":".16")+")";e.currentTarget.style.borderColor="rgba("+a+","+(on?".9":".55")+")";};};
   var click=function(fn){return function(e){e.stopPropagation();if(fn)fn();};};
   return (
-    <div className="secrail" style={{position:"absolute",left:-34,top:0,width:30,display:"flex",flexDirection:"column",gap:6,alignItems:"center",zIndex:6,willChange:"transform"}}>
+    <div className="secrail" data-inset={inset||null} style={{position:"absolute",left:-34,top:0,width:30,display:"flex",flexDirection:"column",gap:6,alignItems:"center",zIndex:6,willChange:"transform"}}>
       <div onClick={click(onExpand)} title={(label?label+" — ":"")+"Expand all"} style={btn} onMouseEnter={hov(true)} onMouseLeave={hov(false)}>+</div>
       <div onClick={click(onCollapse)} title={(label?label+" — ":"")+"Collapse all"} style={btn} onMouseEnter={hov(true)} onMouseLeave={hov(false)}>−</div>
     </div>
@@ -351,12 +351,23 @@ function SectionRail({accent,onExpand,onCollapse,label}){
       var hr=host.getBoundingClientRect();
       var H=rail.offsetHeight||62;
       var W=rail.offsetWidth||30;
-      // Vertical: centre in viewport, clamped to the section's own height so the
-      // rail pins to the section top as it enters and the bottom as it leaves.
+      // Top inset: by default the rail starts just below the section's header (the
+      // rail's next sibling) so it doesn't sit over it. data-inset="none" disables
+      // this for sections whose header lives outside the rail's container.
+      var inset=0;
+      if(rail.getAttribute("data-inset")!=="none"){
+        var hd=rail.nextElementSibling;
+        if(hd) inset=hd.offsetTop+hd.offsetHeight+6;
+      }
+      // Vertical: centre in viewport, clamped between the header inset and the
+      // section bottom so the rail pins below the header on entry, the section
+      // bottom on exit, and tracks the viewport centre in between.
       var maxTop=hr.height-H;
+      var minTop=inset;
+      if(minTop>maxTop) minTop=Math.max(0,maxTop);
       var t=(vh/2-H/2)-hr.top;
       if(t>maxTop) t=maxTop;
-      if(t<0) t=0;
+      if(t<minTop) t=minTop;
       if(maxTop<0) t=0;
       rail.style.transform="translateY("+Math.round(t)+"px)";
       // Horizontal: sit in the sheet's existing left frame (the empty .si padding)
@@ -2860,7 +2871,7 @@ function Page2({c,s}){
         </div>
         <div onDragOver={e=>{e.preventDefault();setDragOver("attuned");}} onDragLeave={()=>setDragOver(null)} onDrop={()=>onDrop("attuned")}
           style={{border:dragOver==="attuned"?"1px dashed rgba(201,150,42,.5)":"1px dashed rgba(201,150,42,.15)",borderRadius:2,transition:"border .2s",minHeight:36,padding:"2px 0",position:"relative"}}>
-          <SectionRail accent="201,150,42" label="Attuned Items"
+          <SectionRail accent="201,150,42" label="Attuned Items" inset="none"
             onExpand={function(){s("attuned_inv",(c.attuned_inv||[]).map(function(it){return Object.assign({},it,{showDesc:true});}));}}
             onCollapse={function(){s("attuned_inv",(c.attuned_inv||[]).map(function(it){return Object.assign({},it,{showDesc:false});}));}} />
           <div className="stbl-wrap"><table className="itbl" style={{minWidth:520}}>
@@ -2926,7 +2937,7 @@ function Page2({c,s}){
       </div>
       <div onDragOver={e=>{e.preventDefault();setDragOver("inv");}} onDragLeave={()=>setDragOver(null)} onDrop={()=>onDrop("inv")}
         style={{border:dragOver==="inv"?"1px dashed rgba(123,79,207,.6)":"1px solid transparent",borderRadius:2,transition:"border .2s",minHeight:40,position:"relative"}}>
-        <SectionRail accent="201,150,42" label="Equipment"
+        <SectionRail accent="201,150,42" label="Equipment" inset="none"
           onExpand={function(){s("inv",(c.inv||[]).map(function(it){return Object.assign({},it,{showDesc:true});}));}}
           onCollapse={function(){s("inv",(c.inv||[]).map(function(it){return Object.assign({},it,{showDesc:false});}));}} />
         <div className="stbl-wrap"><table className="itbl" style={{minWidth:520}}>
@@ -3048,7 +3059,7 @@ function Page2({c,s}){
             <div onDragOver={e=>{e.preventDefault();setDragOver(dropTarget);}} onDragLeave={()=>setDragOver(null)}
               onDrop={()=>onDrop(dropTarget)}
               style={{border:dragOver===dropTarget?"2px dashed rgba(123,79,207,.8)":"2px dashed rgba(123,79,207,.25)",borderRadius:4,padding:"0 0 8px",marginBottom:8,background:dragOver===dropTarget?"rgba(123,79,207,.08)":"rgba(0,0,0,.2)",transition:"all .2s",minHeight:60,position:"relative"}}>
-              <SectionRail accent="201,150,42" label={bag.nm||"Bag"}
+              <SectionRail accent="201,150,42" label={bag.nm||"Bag"} inset="none"
                 onExpand={function(){var a=bagInv.map(function(it){return Object.assign({},it,{showDesc:true});});s("bags",bags.map(function(b){return b.id===bag.id?Object.assign({},b,{inv:a}):b;}));}}
                 onCollapse={function(){var a=bagInv.map(function(it){return Object.assign({},it,{showDesc:false});});s("bags",bags.map(function(b){return b.id===bag.id?Object.assign({},b,{inv:a}):b;}));}} />
               {/* Currency in this bag */}
@@ -10732,7 +10743,7 @@ function CompendiumPage({c,s}){
 
       {/* Results */}
       <div style={{border:"1px solid rgba(201,150,42,.12)",borderRadius:2,position:"relative"}}>
-        {pageResults.length>0&&<SectionRail accent="184,154,240" label="Results"
+        {pageResults.length>0&&<SectionRail accent="184,154,240" label="Results" inset="none"
           onExpand={function(){setExpanded(function(e){var n=Object.assign({},e);pageResults.forEach(function(r,idx){n[rowId(r,curPage*PER_PAGE+idx)]=true;});return n;});}}
           onCollapse={function(){setExpanded(function(e){var n=Object.assign({},e);pageResults.forEach(function(r,idx){delete n[rowId(r,curPage*PER_PAGE+idx)];});return n;});}} />}
         {results.length===0&&<div style={{padding:"20px",textAlign:"center",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.3)"}}>No matches. {kind==="spells"&&spellCache.status==="loading"?"Loading spells…":kind==="feats"&&featCache.status==="loading"?"Loading feats…":kind==="items"&&itemCache.status==="loading"?"Loading items…":kind==="exploits"&&exploitCache.status==="loading"?"Loading exploits…":kind==="creatures"&&creatureCache.status==="loading"?"Loading creatures…":kind==="creatures"&&creatureCache.status==="ready"?"No creatures found — add creatures.md or a creatures/ JSON folder to the repo.":kind==="exploits"&&exploitCache.status==="error"?"Exploits file unavailable — check exploits.md in repo.":"Try a different search."}</div>}
@@ -11437,7 +11448,7 @@ function CreaturesPage({c,s}){
           if(!group.length) return <div key={"empty-"+gtag} style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgba(232,213,176,.3)",fontStyle:"italic",textAlign:"center",padding:"28px 0"}}>{cq?"No "+gtag.toLowerCase()+"s match \""+crSearch.trim()+"\".":"No "+gtag.toLowerCase()+"s yet — add one with the button below."}</div>;
           var gcol=tagColor(gtag), gcolL=gcol.replace(",1)",",0.75)");
           return <div key={"grp-"+gtag} style={{marginBottom:18,position:"relative"}}>
-            <SectionRail accent="201,150,42" label={gtag} onExpand={function(){setGroupCollapsed(gtag,false);}} onCollapse={function(){setGroupCollapsed(gtag,true);}} />
+            <SectionRail accent="201,150,42" label={gtag} inset="none" onExpand={function(){setGroupCollapsed(gtag,false);}} onCollapse={function(){setGroupCollapsed(gtag,true);}} />
             {group.map(function(cr){
         var col=tagColor(cr.tag);
         var colLight=col.replace(",1)",",0.7)");
@@ -12443,7 +12454,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.13.1</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.13.2</div>
 
 </script>
 </body>
