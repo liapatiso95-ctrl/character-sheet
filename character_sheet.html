@@ -303,9 +303,88 @@ window.__characterLoad=function(def){
 <script type="text/babel" data-presets="react">
 const { useState } = React;
 
+// ── Sticky section rail ──────────────────────────────────────────────────────
+// A left-gutter pair of expand(+)/collapse(−) buttons for a section. It stays
+// vertically centred in the viewport while the section is on screen, and is
+// clamped to the section's own height so it never drifts into a neighbouring
+// section (it pins to the top as the section enters and to the bottom as it
+// leaves). Render it as a direct child of a position:relative host that has
+// enough left padding to hold the gutter (~40px). Positioning is handled in JS
+// by the controller below rather than CSS position:sticky, because an ancestor
+// (.sheet / .app) computes its overflow to "auto", which would otherwise
+// neutralise sticky against the window scroll.
+function SectionRail({accent,onExpand,onCollapse,label}){
+  var a=accent||"184,154,240";
+  var btn={
+    cursor:"pointer",userSelect:"none",
+    fontFamily:"'Cinzel',serif",fontSize:17,fontWeight:700,lineHeight:1,
+    width:28,height:28,display:"flex",alignItems:"center",justifyContent:"center",
+    color:"rgba("+a+",.95)",
+    border:"1px solid rgba("+a+",.55)",
+    background:"rgba("+a+",.16)",
+    borderRadius:6,
+    boxShadow:"0 1px 6px rgba(0,0,0,.45)"
+  };
+  var hov=function(on){return function(e){e.currentTarget.style.background="rgba("+a+","+(on?".30":".16")+")";e.currentTarget.style.borderColor="rgba("+a+","+(on?".9":".55")+")";};};
+  var click=function(fn){return function(e){e.stopPropagation();if(fn)fn();};};
+  return (
+    <div className="secrail" style={{position:"absolute",left:-34,top:0,width:30,display:"flex",flexDirection:"column",gap:6,alignItems:"center",zIndex:6,willChange:"transform"}}>
+      <div onClick={click(onExpand)} title={(label?label+" — ":"")+"Expand all"} style={btn} onMouseEnter={hov(true)} onMouseLeave={hov(false)}>+</div>
+      <div onClick={click(onCollapse)} title={(label?label+" — ":"")+"Collapse all"} style={btn} onMouseEnter={hov(true)} onMouseLeave={hov(false)}>−</div>
+    </div>
+  );
+}
+(function(){
+  if(typeof window==="undefined"||window.__secRailInit) return;
+  window.__secRailInit=true;
+  var raf=null;
+  function place(){
+    raf=null;
+    var vh=window.innerHeight||document.documentElement.clientHeight;
+    var sheet=document.querySelector(".sheet");
+    var sheetLeft=sheet?sheet.getBoundingClientRect().left:0;
+    var rails=document.getElementsByClassName("secrail");
+    for(var i=0;i<rails.length;i++){
+      var rail=rails[i];
+      var host=rail.parentElement;
+      if(!host) continue;
+      var hr=host.getBoundingClientRect();
+      var H=rail.offsetHeight||62;
+      var W=rail.offsetWidth||30;
+      // Vertical: centre in viewport, clamped to the section's own height so the
+      // rail pins to the section top as it enters and the bottom as it leaves.
+      var maxTop=hr.height-H;
+      var t=(vh/2-H/2)-hr.top;
+      if(t>maxTop) t=maxTop;
+      if(t<0) t=0;
+      if(maxTop<0) t=0;
+      rail.style.transform="translateY("+Math.round(t)+"px)";
+      // Horizontal: sit in the sheet's existing left frame (the empty .si padding)
+      // rather than reserving space in the content. Place it just left of the
+      // section content, but never let it spill outside the sheet's left edge.
+      var leftVp=hr.left-6-W;            // just left of the content
+      var minVp=sheetLeft+3;             // keep it inside the frame
+      if(leftVp<minVp) leftVp=minVp;
+      rail.style.left=Math.round(leftVp-hr.left)+"px";
+    }
+  }
+  function schedule(){ if(raf==null) raf=requestAnimationFrame(place); }
+  window.addEventListener("scroll",schedule,{passive:true});
+  window.addEventListener("resize",schedule);
+  if(window.MutationObserver){
+    var mo=new MutationObserver(schedule);
+    var start=function(){ if(document.body){ mo.observe(document.body,{childList:true,subtree:true}); schedule(); } else { setTimeout(start,50); } };
+    start();
+  } else { setInterval(schedule,200); }
+})();
+
 // Session-only roll log: keeps the last 20 results in memory so they persist across
 // tab changes, but starts empty on a fresh page load (never written to the saved file).
 const _rollLog = { items: [], subs: new Set() };
+// Session-only compendium memory: remembers each list's filters, search text and
+// pagination per kind, so they survive switching compendium sub-tabs and leaving/
+// re-entering the Compendium. Never written to the saved character file.
+const _compMem = { kind: null, byKind: {} };
 function rollLogGet(){ return _rollLog.items; }
 function rollLogSet(updater){
   const next = (typeof updater === "function") ? updater(_rollLog.items) : updater;
@@ -526,6 +605,7 @@ const CSS = `
   }
   @keyframes tipIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
   @keyframes rollFlash{0%{opacity:0;transform:scale(.55)}12%{opacity:1;transform:scale(1.1)}24%{transform:scale(1)}72%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.94)}}
+  @keyframes toastPop{0%{opacity:0;transform:translateY(-16px) scale(.96)}8%{opacity:1;transform:translateY(0) scale(1)}88%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.98)}}
   .trunc-tip::before{
     content:'';position:absolute;bottom:100%;left:14px;
     border:5px solid transparent;
@@ -2325,6 +2405,16 @@ function Page2({c,s}){
   const [splitDragModal,setSplitDragModal]=useState(null); // {src,idx,dest,type:'item'|'coin',denom,available}
   const [splitQty,setSplitQty]=useState("");
   const [bohErr,setBohErr]=useState("");
+  // Transient pop-up banner (like the dice-roller flash) for hard-block warnings.
+  // Auto-dismisses after 2 seconds.
+  const [invToast,setInvToast]=useState(null);
+  const invToastTimer=React.useRef(null);
+  const showInvToast=(msg)=>{
+    const id=Date.now()+"-"+Math.random();
+    setInvToast({id:id,msg:msg});
+    if(invToastTimer.current) clearTimeout(invToastTimer.current);
+    invToastTimer.current=setTimeout(function(){setInvToast(function(cur){return (cur&&cur.id===id)?null:cur;});},5000);
+  };
   const [attunedMaxModal,setAttunedMaxModal]=useState(false);
   const [removeBagModal,setRemoveBagModal]=useState(null);
   const [bagMaxModal,setBagMaxModal]=useState(null); // bagId
@@ -2413,8 +2503,7 @@ function Page2({c,s}){
 
 
   // Drag handlers
-  const onDragStart=(src,idx)=>{
-    setDrag({src,idx});
+  const startDragAutoScroll=()=>{
     if(window.__dragScrollRAF) cancelAnimationFrame(window.__dragScrollRAF);
     window.__dragScrollActive=true;
     window.__dragScrollY=0;
@@ -2431,6 +2520,10 @@ function Page2({c,s}){
     }
     window.__dragScrollRAF=requestAnimationFrame(loop);
   };
+  const onDragStart=(src,idx)=>{
+    setDrag({src,idx});
+    startDragAutoScroll();
+  };
   const getCoinPouch=(src)=>{
     if(src==="on_person") return c.cur||{};
     if(src&&src.startsWith("bag_")){const bid=src.slice(4);const bag=bags.find(b=>b.id===bid);return bag?(bag.cur||{}):{};} 
@@ -2442,6 +2535,7 @@ function Page2({c,s}){
     if(!hasCoins) return;
     e.dataTransfer.effectAllowed="move";
     setDrag({src,idx:-1,isCoin:true,pouch});
+    startDragAutoScroll();
   };
   const onDragEnd=()=>{
     window.__dragScrollActive=false;
@@ -2501,7 +2595,7 @@ function Page2({c,s}){
     // Hard attuned guard — before ANY source removal
     if(dest==="attuned"&&!dr.isCoin){
       const curUsedNow=(c.attuned_inv||[]).reduce((t,it)=>t+(parseFloat(it.qt)||1),0);
-      if(curUsedNow>=attunedSlots){setBohErr("Attunement limit ("+attunedSlots+") reached — no slots left");setDrag(null);setDragOver(null);setSplitDragModal(null);return;}
+      if(curUsedNow>=attunedSlots){showInvToast("Attunement limit ("+attunedSlots+") reached — no slots left");setDrag(null);setDragOver(null);setSplitDragModal(null);return;}
     }
     // Coin drop — qty is an object {cp,sp,ep,gp,pp} of amounts to move
     if(dr.isCoin){
@@ -2519,7 +2613,7 @@ function Page2({c,s}){
       if(dest&&dest.startsWith("bag_")){
         let destBagW=0,destBagMax=500;
         {const bid=dest.slice(4);const db=bags.find(b=>b.id===bid);if(db){destBagW=(db.inv||[]).reduce((t,it)=>t+itemWeight(it),0)+countCoins(db.cur||{})*0.02;destBagMax=getBohMax(db);}}
-        if(destBagW+coinMoveWeight>destBagMax){setBohErr("Bag weight limit ("+destBagMax+" lbs) would be exceeded.");setDrag(null);setDragOver(null);setSplitDragModal(null);return;}
+        if(destBagW+coinMoveWeight>destBagMax){showInvToast("Bag weight limit ("+destBagMax+" lbs) would be exceeded.");setDrag(null);setDragOver(null);setSplitDragModal(null);return;}
       }
       const subtractFrom=(curObj)=>{const o={...curObj};for(const d of ["cp","sp","ep","gp","pp"]) o[d]=String(Math.max(0,(parseFloat(curObj[d])||0)-actual[d]));return o;};
       const addTo=(curObj)=>{const o={...curObj};for(const d of ["cp","sp","ep","gp","pp"]) o[d]=String((parseFloat(curObj[d])||0)+actual[d]);return o;};
@@ -2553,7 +2647,7 @@ function Page2({c,s}){
       const maxAtt=attunedSlots;
       const curUsed=(c.attuned_inv||[]).reduce((t,it)=>t+(parseFloat(it.qt)||1),0);
       const slotsLeft=Math.max(0,maxAtt-curUsed);
-      if(slotsLeft<=0){setBohErr("Attunement limit ("+maxAtt+") reached — no slots left");setDrag(null);setDragOver(null);setSplitDragModal(null);return;}
+      if(slotsLeft<=0){showInvToast("Attunement limit ("+maxAtt+") reached — no slots left");setDrag(null);setDragOver(null);setSplitDragModal(null);return;}
       const canMove=Math.min(moveQty,slotsLeft);
       const leftOver=moveQty-canMove;
       const movedItem={...fullItem,qt:String(canMove)};
@@ -2568,7 +2662,7 @@ function Page2({c,s}){
         removeFromSrc(dr.src,dr.idx);
       }
       s("attuned_inv",mergeIntoList(c.attuned_inv||[],movedItem));
-      setBohErr(leftOver>0?"Attunement limit ("+maxAtt+"): only "+canMove+" of "+moveQty+" moved, "+leftOver+" left in source":"");
+      if(leftOver>0) showInvToast("Attunement limit ("+maxAtt+"): only "+canMove+" of "+moveQty+" moved, "+leftOver+" left in source");
       setDrag(null);setDragOver(null);setSplitDragModal(null);
       return;
     }
@@ -2583,7 +2677,7 @@ function Page2({c,s}){
       const bagW2=bagInv2.reduce((s2,it2)=>s2+itemWeight(it2),0);
       const bohMaxThis2=getBohMax(bag);
       if(bagW2+itemWeight(item)>bohMaxThis2){
-        setBohErr("Bag of Holding weight limit ("+bohMaxThis2+" lbs) would be exceeded.");
+        showInvToast("Bag of Holding weight limit ("+bohMaxThis2+" lbs) would be exceeded.");
         setDrag(null);setDragOver(null);setSplitDragModal(null);return;
       }
     }
@@ -2735,6 +2829,17 @@ function Page2({c,s}){
         {(function(){var gp=toGP(c.cur);var coins=countCoins(c.cur);return coins>0&&<span style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"rgba(201,150,42,.6)",marginLeft:4}}>{gp.toFixed(2)} gp · {coinWeight.toFixed(2)} lbs</span>;})()} 
       </div>
 
+      {invToast&&ReactDOM.createPortal(
+        <div style={{position:"fixed",top:0,left:0,right:0,display:"flex",justifyContent:"center",zIndex:99999,pointerEvents:"none",padding:"18px 12px 0"}}>
+          <div key={invToast.id} style={{animation:"toastPop 5s ease-out forwards",
+            background:"radial-gradient(circle, rgba(20,14,8,.98), rgba(20,14,8,.88))",
+            border:"2px solid rgba(201,74,42,.6)",borderRadius:10,boxShadow:"0 0 50px rgba(0,0,0,.7)",
+            padding:"13px 22px",maxWidth:"86vw",display:"flex",alignItems:"center",gap:12}}>
+            <span style={{fontFamily:"'Cinzel',serif",fontSize:22,fontWeight:700,color:"#e07060",lineHeight:1,flexShrink:0}}>!</span>
+            <span style={{fontFamily:"'EB Garamond',serif",fontSize:15,color:"rgba(232,213,176,.92)",letterSpacing:.3}}>{invToast.msg}</span>
+          </div>
+        </div>, document.body)}
+
       {bohErr&&(
         <div style={{background:"rgba(201,74,42,.12)",border:"1px solid rgba(201,74,42,.4)",borderRadius:2,padding:"8px 14px",marginBottom:8,fontFamily:"'EB Garamond',serif",fontSize:13,color:"#e07060",display:"flex",gap:10,alignItems:"center"}}>
           <span style={{fontSize:16}}>!</span><span style={{flex:1}}>{bohErr}</span>
@@ -2751,16 +2856,13 @@ function Page2({c,s}){
               background:"rgba(201,150,42,.08)",border:"1px solid rgba(201,150,42,.2)",color:"rgba(201,150,42,.5)",borderRadius:10,userSelect:"none"}}>
             {attunedUsed} / {attunedSlots}
           </span>
-          <div style={{marginLeft:"auto",display:"flex",gap:4}}>
-            <div onClick={function(){const a=(c.attuned_inv||[]).map(function(it){return {...it,showDesc:true};});s("attuned_inv",a);}}
-              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Expand all descriptions">+</div>
-            <div onClick={function(){const a=(c.attuned_inv||[]).map(function(it){return {...it,showDesc:false};});s("attuned_inv",a);}}
-              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Collapse all descriptions">−</div>
-          </div>
 
         </div>
         <div onDragOver={e=>{e.preventDefault();setDragOver("attuned");}} onDragLeave={()=>setDragOver(null)} onDrop={()=>onDrop("attuned")}
-          style={{border:dragOver==="attuned"?"1px dashed rgba(201,150,42,.5)":"1px dashed rgba(201,150,42,.15)",borderRadius:2,transition:"border .2s",minHeight:36,padding:"2px 0"}}>
+          style={{border:dragOver==="attuned"?"1px dashed rgba(201,150,42,.5)":"1px dashed rgba(201,150,42,.15)",borderRadius:2,transition:"border .2s",minHeight:36,padding:"2px 0",position:"relative"}}>
+          <SectionRail accent="201,150,42" label="Attuned Items"
+            onExpand={function(){s("attuned_inv",(c.attuned_inv||[]).map(function(it){return Object.assign({},it,{showDesc:true});}));}}
+            onCollapse={function(){s("attuned_inv",(c.attuned_inv||[]).map(function(it){return Object.assign({},it,{showDesc:false});}));}} />
           <div className="stbl-wrap"><table className="itbl" style={{minWidth:520}}>
             <thead><tr>
               <th style={{width:"2%"}}></th>
@@ -2811,7 +2913,7 @@ function Page2({c,s}){
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:4}}>
           <button className="arb" style={{borderColor:"rgba(201,150,42,.25)",color:"rgba(201,150,42,.6)",fontSize:10}} onClick={()=>{
             const maxAtt=attunedSlots;
-            if(attunedUsed>=maxAtt){setBohErr("Attunement limit ("+maxAtt+") reached");return;}
+            if(attunedUsed>=maxAtt){showInvToast("Attunement limit ("+maxAtt+") reached");return;}
             s("attuned_inv",[...(c.attuned_inv||[]),{nm:"",qt:"",wt:"",nt:"",eq:false,wl:false}]);
           }}>+ Add Attuned</button>
           <div style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"rgba(201,150,42,.5)",letterSpacing:1}}>Subtotal: {attunedWeight.toFixed(2)} lbs</div>
@@ -2821,15 +2923,12 @@ function Page2({c,s}){
       {/* Main inventory list */}
       <div style={{display:"flex",alignItems:"center",gap:8,padding:"4px 0",marginBottom:4,marginTop:8}}>
         <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:2,color:"rgba(201,150,42,.6)",textTransform:"uppercase"}}>Equipment & Other Items</span>
-        <div style={{marginLeft:"auto",display:"flex",gap:4}}>
-          <div onClick={function(){s("inv",(c.inv||[]).map(function(it){return {...it,showDesc:true};}));}}
-            style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Expand all descriptions">+</div>
-          <div onClick={function(){s("inv",(c.inv||[]).map(function(it){return {...it,showDesc:false};}));}}
-            style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Collapse all descriptions">−</div>
-        </div>
       </div>
       <div onDragOver={e=>{e.preventDefault();setDragOver("inv");}} onDragLeave={()=>setDragOver(null)} onDrop={()=>onDrop("inv")}
-        style={{border:dragOver==="inv"?"1px dashed rgba(123,79,207,.6)":"1px solid transparent",borderRadius:2,transition:"border .2s",minHeight:40}}>
+        style={{border:dragOver==="inv"?"1px dashed rgba(123,79,207,.6)":"1px solid transparent",borderRadius:2,transition:"border .2s",minHeight:40,position:"relative"}}>
+        <SectionRail accent="201,150,42" label="Equipment"
+          onExpand={function(){s("inv",(c.inv||[]).map(function(it){return Object.assign({},it,{showDesc:true});}));}}
+          onCollapse={function(){s("inv",(c.inv||[]).map(function(it){return Object.assign({},it,{showDesc:false});}));}} />
         <div className="stbl-wrap"><table className="itbl" style={{minWidth:520}}>
           <thead><tr>
             <th style={{width:"2%"}}></th>
@@ -2899,8 +2998,7 @@ function Page2({c,s}){
               const kept=attuned.slice(0,newSlots);
               s("attuned_inv",kept);
               s("inv",[...c.inv,...ejected]);
-              setBohErr("Attunement reduced to "+newSlots+" slot"+(newSlots!==1?"s":"")+": "+ejected.map(function(it){return it.nm||"unnamed item";}).join(", ")+" moved to inventory.");
-              setTimeout(function(){setBohErr("");},6000);
+              showInvToast("Attunement reduced to "+newSlots+" slot"+(newSlots!==1?"s":"")+": "+ejected.map(function(it){return it.nm||"unnamed item";}).join(", ")+" moved to inventory.");
             }
             s("attuned_bonus",""+total);
             s("attuned_bonus_formula",frm||null);
@@ -2915,8 +3013,7 @@ function Page2({c,s}){
               const kept=attuned.slice(0,newSlots);
               s("attuned_inv",kept);
               s("inv",[...c.inv,...ejected]);
-              setBohErr("Attunement reset to 3 slots: "+ejected.map(function(it){return it.nm||"unnamed item";}).join(", ")+" moved to inventory.");
-              setTimeout(function(){setBohErr("");},6000);
+              showInvToast("Attunement reset to 3 slots: "+ejected.map(function(it){return it.nm||"unnamed item";}).join(", ")+" moved to inventory.");
             }
             s("attuned_bonus","0");
             s("attuned_bonus_formula",null);
@@ -2947,16 +3044,13 @@ function Page2({c,s}){
               </span>
               <button onClick={()=>setRemoveBagModal(bag.id)}
                 style={{fontFamily:"'Cinzel',serif",fontSize:9,padding:"3px 10px",background:"transparent",border:"1px solid rgba(201,74,42,.3)",color:"rgba(201,74,42,.5)",cursor:"pointer",borderRadius:2}}>Remove</button>
-              <div style={{display:"flex",gap:4}}>
-                <div onClick={function(){const a=bagInv.map(function(it){return {...it,showDesc:true};});s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}}
-                  style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Expand all descriptions">+</div>
-                <div onClick={function(){const a=bagInv.map(function(it){return {...it,showDesc:false};});s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}}
-                  style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Collapse all descriptions">−</div>
-              </div>
             </div>
             <div onDragOver={e=>{e.preventDefault();setDragOver(dropTarget);}} onDragLeave={()=>setDragOver(null)}
               onDrop={()=>onDrop(dropTarget)}
-              style={{border:dragOver===dropTarget?"2px dashed rgba(123,79,207,.8)":"2px dashed rgba(123,79,207,.25)",borderRadius:4,padding:"0 0 8px",marginBottom:8,background:dragOver===dropTarget?"rgba(123,79,207,.08)":"rgba(0,0,0,.2)",transition:"all .2s",minHeight:60}}>
+              style={{border:dragOver===dropTarget?"2px dashed rgba(123,79,207,.8)":"2px dashed rgba(123,79,207,.25)",borderRadius:4,padding:"0 0 8px",marginBottom:8,background:dragOver===dropTarget?"rgba(123,79,207,.08)":"rgba(0,0,0,.2)",transition:"all .2s",minHeight:60,position:"relative"}}>
+              <SectionRail accent="201,150,42" label={bag.nm||"Bag"}
+                onExpand={function(){var a=bagInv.map(function(it){return Object.assign({},it,{showDesc:true});});s("bags",bags.map(function(b){return b.id===bag.id?Object.assign({},b,{inv:a}):b;}));}}
+                onCollapse={function(){var a=bagInv.map(function(it){return Object.assign({},it,{showDesc:false});});s("bags",bags.map(function(b){return b.id===bag.id?Object.assign({},b,{inv:a}):b;}));}} />
               {/* Currency in this bag */}
               <div
                 onDragOver={function(e){if(drag&&drag.isCoin){e.preventDefault();setDragOver("bag_"+bag.id+"_coins");}}}
@@ -3192,10 +3286,7 @@ function Page4({c,s}){
   const toggleDesc=(k,i)=>s(k,prev=>(prev||[]).map((it,j)=>j===i?{...it,showDesc:it.showDesc===false}:it));
   const ecBtn={cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.5)",border:"1px solid rgba(184,154,240,.2)",padding:"0 6px",borderRadius:2,userSelect:"none",lineHeight:"15px"};
   const chevSt={cursor:"pointer",flexShrink:0,fontFamily:"'Cinzel',serif",fontSize:12,color:"rgba(184,154,240,.55)",userSelect:"none",alignSelf:"flex-start",paddingTop:6,width:12,textAlign:"center"};
-  const descBtns=(k)=>((c[k]||[]).length>0?<span style={{display:"inline-flex",gap:3}}>
-    <span onClick={()=>setAllDesc(k,true)} title="Expand all" style={ecBtn}>+</span>
-    <span onClick={()=>setAllDesc(k,false)} title="Collapse all" style={ecBtn}>−</span>
-  </span>:null);
+  const descBtns=(k)=>null;
   const mdPreview=(t)=>((t||"").replace(/[*_#>`~]/g," ").replace(/\s+/g," ").trim());
   const collapsedRow=(k,i,t)=><div onClick={()=>toggleDesc(k,i)} title="Show notes"
     style={{cursor:"pointer",color:"rgba(232,213,176,.3)",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",padding:"4px 2px"}}>{mdPreview(t)||"(empty — click to add notes)"}</div>;
@@ -3253,7 +3344,7 @@ function Page4({c,s}){
           style={{flex:1,maxWidth:360,background:"rgba(0,0,0,.3)",border:"none",borderBottom:"1px solid rgba(201,150,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"5px 4px",outline:"none"}} />
         {noteSearch&&<span onClick={()=>setNoteSearch("")} title="Clear search" style={{cursor:"pointer",color:"rgba(201,74,42,.5)",fontSize:16,userSelect:"none"}}>×</span>}
       </div>
-      {sub==="npc"&&<div>
+      {sub==="npc"&&<div style={{position:"relative"}}><SectionRail accent="184,154,240" label="NPCs" onExpand={()=>setAllDesc("npc",true)} onCollapse={()=>setAllDesc("npc",false)} />
       <div className="sh">NPCs {descBtns("npc")}</div>
       {fIdx(c.npc).map(function(x){var n=x.it,i=x.i;var open=n.showDesc!==false;return (
         <div key={i} className="nc">
@@ -3284,7 +3375,7 @@ function Page4({c,s}){
       <button className="arb" onClick={()=>ai("npc",{nm:"",rl:"",nt:"",ty:"neutral"})}>+ Add NPC</button>
       </div>}
 
-      {sub==="locations"&&<div>
+      {sub==="locations"&&<div style={{position:"relative"}}><SectionRail accent="184,154,240" label="Locations" onExpand={()=>setAllDesc("locations",true)} onCollapse={()=>setAllDesc("locations",false)} />
       <div className="sh">Locations {descBtns("locations")}</div>
       {fIdx(c.locations).map(function(x){var n=x.it,i=x.i;var open=n.showDesc!==false;return (
         <div key={i} className="nc">
@@ -3302,7 +3393,7 @@ function Page4({c,s}){
       <button className="arb" onClick={()=>ai("locations",{nm:"",rg:"",nt:""})}>+ Add Location</button>
       </div>}
 
-      {sub==="lore"&&<div>
+      {sub==="lore"&&<div style={{position:"relative"}}><SectionRail accent="184,154,240" label="Lore" onExpand={()=>setAllDesc("lore",true)} onCollapse={()=>setAllDesc("lore",false)} />
       <div className="sh">Lore {descBtns("lore")}</div>
       {fIdx(c.lore).map(function(x){var n=x.it,i=x.i;var open=n.showDesc!==false;return (
         <div key={i} className="nc" style={{borderLeft:"3px solid rgba(201,150,42,.35)"}}>
@@ -3319,7 +3410,7 @@ function Page4({c,s}){
       <button className="arb" onClick={()=>ai("lore",{ti:"",tx:""})}>+ Add Lore</button>
       </div>}
 
-      {sub==="factions"&&<div>
+      {sub==="factions"&&<div style={{position:"relative"}}><SectionRail accent="184,154,240" label="Organisations" onExpand={()=>setAllDesc("factions",true)} onCollapse={()=>setAllDesc("factions",false)} />
       <div className="sh">Organisations {descBtns("factions")}</div>
       {fIdx(c.factions).map(function(x){var f=x.it,i=x.i;var open=f.showDesc!==false;return (
         <div key={i} className="nc">
@@ -3337,7 +3428,7 @@ function Page4({c,s}){
       <button className="arb" onClick={()=>s("factions",[...(c.factions||[]),{nm:"",rl:"",nt:""}])}>+ Add Faction</button>
       </div>}
 
-      {sub==="nt1"&&<div>
+      {sub==="nt1"&&<div style={{position:"relative"}}><SectionRail accent="184,154,240" label="Session Notes" onExpand={()=>setAllDesc("nt1",true)} onCollapse={()=>setAllDesc("nt1",false)} />
       <div className="sh">Session Notes {descBtns("nt1")}</div>
       <div style={{marginBottom:6}}>
         {fIdx(c.nt1).map(function(x){var n=x.it,i=x.i;var open=n.showDesc!==false;return (
@@ -3356,7 +3447,7 @@ function Page4({c,s}){
       </div>
       </div>}
 
-      {sub==="nt3"&&<div>
+      {sub==="nt3"&&<div style={{position:"relative"}}><SectionRail accent="184,154,240" label="Other Notes" onExpand={()=>setAllDesc("nt3",true)} onCollapse={()=>setAllDesc("nt3",false)} />
       <div className="sh">Other Notes {descBtns("nt3")}</div>
       <div style={{marginBottom:6}}>
         {fIdx(c.nt3).map(function(x){var n=x.it,i=x.i;var open=n.showDesc!==false;return (
@@ -3378,17 +3469,14 @@ function Page4({c,s}){
       {csList.map(function(cs){
         if(sub!=="cs:"+cs.id) return null;
         var items=cs.items||[];
-        var csDescBtns=items.length>0?<span style={{display:"inline-flex",gap:3}}>
-          <span onClick={()=>csSetAllDesc(cs.id,true)} title="Expand all" style={ecBtn}>+</span>
-          <span onClick={()=>csSetAllDesc(cs.id,false)} title="Collapse all" style={ecBtn}>−</span>
-        </span>:null;
-        return <div key={cs.id}>
+        var csDescBtns=null;
+        return <div key={cs.id} style={{position:"relative"}}>
+          <SectionRail accent="184,154,240" label={cs.name||"Section"} onExpand={()=>csSetAllDesc(cs.id,true)} onCollapse={()=>csSetAllDesc(cs.id,false)} />
           <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap",marginTop:26,marginBottom:14}}>
             <input value={cs.name||""} onChange={e=>csUpd(cs.id,function(x){return {...x,name:e.target.value};})} placeholder="Section name..."
               style={{minWidth:140,maxWidth:"60vw",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.35)",color:"var(--gold)",fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:600,letterSpacing:3,textTransform:"uppercase",outline:"none",padding:"2px 0"}} />
             <button onClick={()=>window.__confirm("Delete the whole \""+(cs.name||"Untitled")+"\" section and all its notes?",()=>csDelete(cs.id))} title="Delete this section"
               style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(201,74,42,.6)",background:"transparent",border:"1px solid rgba(201,74,42,.3)",padding:"2px 7px",borderRadius:2,flexShrink:0}}>Delete</button>
-            {csDescBtns}
           </div>
           {fIdx(items).map(function(x){var n=x.it,i=x.i;var open=n.showDesc!==false;return (
             <div key={i} className="nc" style={{borderLeft:"3px solid rgba(184,154,240,.4)"}}>
@@ -4427,20 +4515,6 @@ function Page3({c,s}){
           s("fts",(c.fts||[]).map(function(f){return f.limited?{...f,limits:(f.limits||[]).map(function(l){return {...l,exp:"0"};})}:f;}));
         }} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(74,156,92,.8)",border:"1px solid rgba(74,156,92,.35)",padding:"4px 12px",borderRadius:2,transition:"all .15s",userSelect:"none"}}
           title="Reset all expended uses to 0">↺ Recharge All</div>
-        <div style={{display:"flex",gap:6}}>
-          <div onClick={function(){
-            const allOpen={};
-            (c.feat||[]).forEach(function(_,i){allOpen["feat-"+i]=true;});
-            (c.fts||[]).forEach(function(_,i){allOpen["fts-"+i]=true;});
-            s("dsOpen",allOpen);
-          }} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",color:"rgba(232,213,176,.4)",border:"1px solid rgba(232,213,176,.12)",padding:"3px 8px",borderRadius:2,userSelect:"none"}}>+ All</div>
-          <div onClick={function(){
-            const allClosed={};
-            (c.feat||[]).forEach(function(_,i){allClosed["feat-"+i]=false;});
-            (c.fts||[]).forEach(function(_,i){allClosed["fts-"+i]=false;});
-            s("dsOpen",allClosed);
-          }} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",color:"rgba(232,213,176,.4)",border:"1px solid rgba(232,213,176,.12)",padding:"3px 8px",borderRadius:2,userSelect:"none"}}>− All</div>
-        </div>
       </div>
       <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
         <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(201,150,42,.4)"}}>⌕</span>
@@ -4448,6 +4522,10 @@ function Page3({c,s}){
           style={{flex:1,maxWidth:360,background:"rgba(0,0,0,.3)",border:"none",borderBottom:"1px solid rgba(201,150,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"5px 4px",outline:"none"}} />
         {featSearch&&<span onClick={()=>setFeatSearch("")} title="Clear search" style={{cursor:"pointer",color:"rgba(201,74,42,.5)",fontSize:16,userSelect:"none"}}>×</span>}
       </div>
+      <div style={{position:"relative"}}>
+      <SectionRail accent="201,150,42" label="Features"
+        onExpand={function(){var o=Object.assign({},c.dsOpen||{});(c.feat||[]).forEach(function(_,i){o["feat-"+i]=true;});(c.fts||[]).forEach(function(_,i){o["fts-"+i]=true;});s("dsOpen",o);}}
+        onCollapse={function(){var o=Object.assign({},c.dsOpen||{});(c.feat||[]).forEach(function(_,i){o["feat-"+i]=false;});(c.fts||[]).forEach(function(_,i){o["fts-"+i]=false;});s("dsOpen",o);}} />
       <div className="sh">Class and Race Features</div>
       {ffIdx(c.feat).map(function(x){var f=x.it,i=x.i;
         const limited=!!f.limited;
@@ -4546,6 +4624,7 @@ function Page3({c,s}){
         );
       })}
       <button className="arb" onClick={()=>s("fts",[...c.fts,{nm:"",ds:"",lv:"",limited:false,limits:[{name:"",uses:"",exp:"",die:"NO",recharge:""}]}])}>+ Add Feat</button>
+      </div>
 
       <div className="sh">Proficiencies and Languages</div>
       <div className="tc">
@@ -7353,7 +7432,10 @@ function SpellPage({c,s,from,to}){
         }
 
         return (
-          <div key={lv} style={{marginBottom:20}}>
+          <div key={lv} style={{marginBottom:20,position:"relative"}}>
+            <SectionRail accent="184,154,240" label={lv===0?"Cantrips":"Level "+lv}
+              onExpand={function(){var sp2=c.sp[lv]||[];s("sp",Object.assign({},c.sp,{[lv]:sp2.map(function(x){return Object.assign({},x,{showDesc:true});})}));}}
+              onCollapse={function(){var sp2=c.sp[lv]||[];s("sp",Object.assign({},c.sp,{[lv]:sp2.map(function(x){return Object.assign({},x,{showDesc:false});})}));}} />
             <div className="slh">
               <span className="slb">{lv===0?"*":lv}</span>
               {(function(){
@@ -7367,10 +7449,7 @@ function SpellPage({c,s,from,to}){
                   <span style={nameStyle}>{lv===0?"Cantrips":"Level "+lv}</span>
                 </span>;
               })()}
-              {lv===0&&<>
-                <div onClick={function(){const sp2=c.sp[0]||[];s("sp",{...c.sp,[0]:sp2.map(function(x){return {...x,showDesc:true};})});}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,flexShrink:0,userSelect:"none",marginLeft:"auto"}} title="Expand all">+</div>
-                <div onClick={function(){const sp2=c.sp[0]||[];s("sp",{...c.sp,[0]:sp2.map(function(x){return {...x,showDesc:false};})});}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,flexShrink:0,userSelect:"none"}} title="Collapse all">−</div>
-              </>}
+              {lv===0&&<></>}
               {lv>0&&(
                 <>
                   <div style={{display:"flex",alignItems:"center",gap:6,marginLeft:12,flexWrap:"wrap",flex:1}}>
@@ -7394,8 +7473,6 @@ function SpellPage({c,s,from,to}){
                   </div>
                   <div onClick={()=>rechargeLevel(lv)} title="Recharge: reset expended slots to 0"
                     style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(74,156,92,.7)",border:"1px solid rgba(74,156,92,.3)",padding:"2px 5px",borderRadius:2,flexShrink:0,transition:"all .15s",userSelect:"none",marginLeft:"auto"}}>↺</div>
-                  <div onClick={function(){var sp2=c.sp[lv]||[];s("sp",Object.assign({},c.sp,{[lv]:sp2.map(function(x){return Object.assign({},x,{showDesc:true});})}));}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,flexShrink:0,userSelect:"none"}} title="Expand all descriptions">+</div>
-                  <div onClick={function(){var sp2=c.sp[lv]||[];s("sp",Object.assign({},c.sp,{[lv]:sp2.map(function(x){return Object.assign({},x,{showDesc:false});})}));}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,flexShrink:0,userSelect:"none"}} title="Collapse all descriptions">−</div>
                 </>
               )}
             </div>
@@ -7622,7 +7699,10 @@ function ExploitPage({c,s}){
           if(unassigned.length>0) groups.push({name:"Other",exploits:unassigned});
         }
         return (
-          <div key={deg} style={{marginBottom:16}}>
+          <div key={deg} style={{marginBottom:16,position:"relative"}}>
+            <SectionRail accent="201,74,42" label={degNames[""+deg]}
+              onExpand={function(){var expl2=c.expl[deg]||[];s("expl",Object.assign({},c.expl,{[deg]:expl2.map(function(x){return Object.assign({},x,{showDesc:true});})}));}}
+              onCollapse={function(){var expl2=c.expl[deg]||[];s("expl",Object.assign({},c.expl,{[deg]:expl2.map(function(x){return Object.assign({},x,{showDesc:false});})}));}} />
             <div className="slh">
               <span style={{fontFamily:"'Cinzel Decorative',serif",fontSize:16,color:col,width:28,textAlign:"center",flexShrink:0}}>{deg}</span>
               {(function(){
@@ -7637,12 +7717,6 @@ function ExploitPage({c,s}){
                 </span>;
               })()}
               <span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.3)",fontStyle:"italic",letterSpacing:0,textTransform:"none",marginLeft:4}}>{degNotes[""+deg]}</span>
-              <div style={{marginLeft:"auto",display:"flex",gap:4}}>
-                <div onClick={function(){const expl2=c.expl[deg]||[];s("expl",{...c.expl,[deg]:expl2.map(function(x){return {...x,showDesc:true};})});}}
-                  style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Expand all">+</div>
-                <div onClick={function(){const expl2=c.expl[deg]||[];s("expl",{...c.expl,[deg]:expl2.map(function(x){return {...x,showDesc:false};})});}}
-                  style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.4)",border:"1px solid rgba(184,154,240,.15)",padding:"2px 5px",borderRadius:2,userSelect:"none"}} title="Collapse all">−</div>
-              </div>
             </div>
             {groups.map(function(group,gi){
               const cnt=group.exploits.length;
@@ -10090,45 +10164,49 @@ function CompendiumPage({c,s}){
   const [creaturesEnabled,setCreaturesEnabled]=us(false);
   const [lightbox,setLightbox]=us(null); // enlarged fluff image URL, or null
   const creatureCache=useCreatureCompendium(creaturesEnabled);
-  const [kind,setKind]=us("spells"); // spells | feats | items | exploits | creatures
-  const [query,setQuery]=us("");
-  const [descQuery,setDescQuery]=us("");
+  // Restore this list's remembered filters/search/pagination for the session.
+  const _ini=(_compMem.byKind&&_compMem.byKind[_compMem.kind||"spells"])||{};
+  const [kind,setKind]=us(_compMem.kind||"spells"); // spells | feats | items | exploits | creatures
+  const [query,setQuery]=us(_ini.query ?? "");
+  const [descQuery,setDescQuery]=us(_ini.descQuery ?? "");
   // Debounced copies — used when filtering the large item set so typing stays responsive.
-  const [dQuery,setDQuery]=us("");
-  const [dDescQuery,setDDescQuery]=us("");
+  const [dQuery,setDQuery]=us(_ini.dQuery ?? "");
+  const [dDescQuery,setDDescQuery]=us(_ini.dDescQuery ?? "");
   React.useEffect(function(){var t=setTimeout(function(){setDQuery(query);},140);return function(){clearTimeout(t);};},[query]);
   React.useEffect(function(){var t=setTimeout(function(){setDDescQuery(descQuery);},140);return function(){clearTimeout(t);};},[descQuery]);
   const qEff=kind==="items"?dQuery:query;
   const dqEff=kind==="items"?dDescQuery:descQuery;
-  const [fLevel,setFLevel]=us("any");
-  const [fSchool,setFSchool]=us("any");
-  const [fClass,setFClass]=us("");
-  const [fCast,setFCast]=us("any");
-  const [fRitual,setFRitual]=us("any"); // any | yes | no
-  const [fConc,setFConc]=us("any");
-  const [fRarity,setFRarity]=us("any");
-  const [fAttune,setFAttune]=us("any");
-  const [fType,setFType]=us("");
-  const [fAttuneTag,setFAttuneTag]=us("");
-  const [showGeneric,setShowGeneric]=us(false); // show variant/generic item parents (default off)
+  const [fLevel,setFLevel]=us(_ini.fLevel ?? "any");
+  const [fSchool,setFSchool]=us(_ini.fSchool ?? "any");
+  const [fClass,setFClass]=us(_ini.fClass ?? "");
+  const [fCast,setFCast]=us(_ini.fCast ?? "any");
+  const [fRitual,setFRitual]=us(_ini.fRitual ?? "any"); // any | yes | no
+  const [fConc,setFConc]=us(_ini.fConc ?? "any");
+  const [fRarity,setFRarity]=us(_ini.fRarity ?? "any");
+  const [fAttune,setFAttune]=us(_ini.fAttune ?? "any");
+  const [fType,setFType]=us(_ini.fType ?? "");
+  const [fAttuneTag,setFAttuneTag]=us(_ini.fAttuneTag ?? "");
+  const [showGeneric,setShowGeneric]=us(_ini.showGeneric ?? false); // show variant/generic item parents (default off)
   const [pickedId,setPickedId]=us(null); // id of the randomly-chosen item to highlight
+  const pickedRef=React.useRef(null);    // DOM node of the currently picked row (for scroll-to)
+  const [scrollNonce,setScrollNonce]=us(0); // bumped on each random pick to trigger a scroll
   const [showQueryHelp,setShowQueryHelp]=us(false); // search-syntax help popup
-  const [fPrereq,setFPrereq]=us("any"); // any | yes | no
-  const [fPrereqText,setFPrereqText]=us("");
-  const [fAbilities,setFAbilities]=us([]); // selected ability codes
-  const [fDegree,setFDegree]=us("any"); // exploit degree filter
-  const [fExec,setFExec]=us(""); // exploit execution textbox filter
-  const [fExClass,setFExClass]=us(""); // exploit class textbox filter
-  const [fCType,setFCType]=us("any"); // creature type
-  const [fCrMin,setFCrMin]=us("any"); // creature CR minimum
-  const [fCrMax,setFCrMax]=us("any"); // creature CR maximum
-  const [fEnv,setFEnv]=us("any"); // creature environment
-  const [fAbl,setFAbl]=us("any"); // creature ability to filter (STR/DEX/.../any)
-  const [fAblMin,setFAblMin]=us(""); // ability score minimum
-  const [fAblMax,setFAblMax]=us(""); // ability score maximum
+  const [fPrereq,setFPrereq]=us(_ini.fPrereq ?? "any"); // any | yes | no
+  const [fPrereqText,setFPrereqText]=us(_ini.fPrereqText ?? "");
+  const [fAbilities,setFAbilities]=us(_ini.fAbilities ?? []); // selected ability codes
+  const [fDegree,setFDegree]=us(_ini.fDegree ?? "any"); // exploit degree filter
+  const [fExec,setFExec]=us(_ini.fExec ?? ""); // exploit execution textbox filter
+  const [fExClass,setFExClass]=us(_ini.fExClass ?? ""); // exploit class textbox filter
+  const [fCType,setFCType]=us(_ini.fCType ?? "any"); // creature type
+  const [fCrMin,setFCrMin]=us(_ini.fCrMin ?? "any"); // creature CR minimum
+  const [fCrMax,setFCrMax]=us(_ini.fCrMax ?? "any"); // creature CR maximum
+  const [fEnv,setFEnv]=us(_ini.fEnv ?? "any"); // creature environment
+  const [fAbl,setFAbl]=us(_ini.fAbl ?? "any"); // creature ability to filter (STR/DEX/.../any)
+  const [fAblMin,setFAblMin]=us(_ini.fAblMin ?? ""); // ability score minimum
+  const [fAblMax,setFAblMax]=us(_ini.fAblMax ?? ""); // ability score maximum
   const [expanded,setExpanded]=us({});
   const [page,setPage]=us(0);
-  const [pageSize,setPageSize]=us(20); // results per page: 10/20/50/100
+  const [pageSize,setPageSize]=us(_ini.pageSize ?? 20); // results per page: 10/20/50/100/200/500
   const [confirmAdd,setConfirmAdd]=us(null); // the result object pending confirmation
   const [crAdd,setCrAdd]=us(null); // {entry, tag, cls} pending creature add (spell-class pick for summons)
   const [addCls,setAddCls]=us(""); // selected class when adding a spell
@@ -10138,8 +10216,41 @@ function CompendiumPage({c,s}){
   const [weightVal,setWeightVal]=us("");
   const [srdResults,setSrdResults]=us([]);
   const [srdLoading,setSrdLoading]=us(false);
-  const [includeSrd,setIncludeSrd]=us(true);
+  const [includeSrd,setIncludeSrd]=us(_ini.includeSrd ?? true);
   const debounceRef=React.useRef(null);
+
+  // ── Session-only per-list memory (filters / search / pagination) ─────────────
+  // Every persisted piece of state as [name, value, setter, default].
+  const _FIELDS=[
+    ["query",query,setQuery,""],["descQuery",descQuery,setDescQuery,""],
+    ["dQuery",dQuery,setDQuery,""],["dDescQuery",dDescQuery,setDDescQuery,""],
+    ["fLevel",fLevel,setFLevel,"any"],["fSchool",fSchool,setFSchool,"any"],
+    ["fClass",fClass,setFClass,""],["fCast",fCast,setFCast,"any"],
+    ["fRitual",fRitual,setFRitual,"any"],["fConc",fConc,setFConc,"any"],
+    ["fRarity",fRarity,setFRarity,"any"],["fAttune",fAttune,setFAttune,"any"],
+    ["fType",fType,setFType,""],["fAttuneTag",fAttuneTag,setFAttuneTag,""],
+    ["showGeneric",showGeneric,setShowGeneric,false],
+    ["fPrereq",fPrereq,setFPrereq,"any"],["fPrereqText",fPrereqText,setFPrereqText,""],
+    ["fAbilities",fAbilities,setFAbilities,[]],
+    ["fDegree",fDegree,setFDegree,"any"],["fExec",fExec,setFExec,""],["fExClass",fExClass,setFExClass,""],
+    ["fCType",fCType,setFCType,"any"],["fCrMin",fCrMin,setFCrMin,"any"],["fCrMax",fCrMax,setFCrMax,"any"],
+    ["fEnv",fEnv,setFEnv,"any"],["fAbl",fAbl,setFAbl,"any"],["fAblMin",fAblMin,setFAblMin,""],["fAblMax",fAblMax,setFAblMax,""],
+    ["includeSrd",includeSrd,setIncludeSrd,true],
+    ["pageSize",pageSize,setPageSize,20]
+  ];
+  const _KEEP_ON_CLEAR={pageSize:1,includeSrd:1};   // view prefs the Clear button keeps
+  const _SIG_SKIP={page:1,dQuery:1,dDescQuery:1};    // excluded from the page-reset signature
+  function _snap(){var o={};_FIELDS.forEach(function(f){o[f[0]]=f[1];});return o;}
+  function _applyFields(s){_FIELDS.forEach(function(f){var v=(s&&(f[0] in s))?s[f[0]]:f[3];f[2](v);});}
+  function _sigFrom(vals,k){var o={__k:k};_FIELDS.forEach(function(f){if(!_SIG_SKIP[f[0]])o[f[0]]=(vals&&(f[0] in vals))?vals[f[0]]:f[3];});return JSON.stringify(o);}
+  const _sig=_sigFrom(_snap(),kind);
+  const lastSigRef=React.useRef(undefined);
+  // Persist this list's state to session memory whenever it changes.
+  React.useEffect(function(){_compMem.kind=kind;_compMem.byKind[kind]=_snap();},[_sig,page,dQuery,dDescQuery]);
+  // Whether this list currently has any non-default filter/search applied.
+  const hasActiveFilters=_FIELDS.some(function(f){return !_KEEP_ON_CLEAR[f[0]]&&f[0]!=="page"&&f[0]!=="dQuery"&&f[0]!=="dDescQuery"&&JSON.stringify(f[1])!==JSON.stringify(f[3]);});
+  // Clear just THIS list's filters/search (per-list, not global). Page resets via the signature effect.
+  function clearFilters(){_FIELDS.forEach(function(f){if(!_KEEP_ON_CLEAR[f[0]]&&f[0]!=="page")f[2](f[3]);});}
 
   // Convert a CR string ("1/4", "2", "") to a number, or null if unknown.
   function crToNum(x){
@@ -10151,11 +10262,24 @@ function CompendiumPage({c,s}){
   var CREATURE_TYPES=["aberration","beast","celestial","construct","dragon","elemental","fey","fiend","giant","humanoid","monstrosity","ooze","plant","undead"];
   var ENVIRONMENTS=["arctic","coastal","desert","forest","grassland","hill","mountain","planar","swamp","underdark","underwater","urban"];
 
-  // Reset filters when switching kind
-  function switchKind(k){setKind(k);setExpanded({});setSrdResults([]);setPage(0);setFDegree("any");setFExec("");setFExClass("");setFCType("any");setFCrMin("any");setFCrMax("any");setFEnv("any");setFAbl("any");setFAblMin("");setFAblMax("");}
+  // Switch compendium list, restoring that list's remembered filters/search.
+  // The page is intentionally NOT remembered — every list opens on page 1.
+  function switchKind(k){
+    var s=_compMem.byKind[k]||null;
+    setKind(k);
+    _applyFields(s);
+    setExpanded({});
+    setSrdResults([]);
+    setPickedId(null);
+    setPage(0);
+  }
 
-  // Reset to first page whenever a search or filter changes
-  React.useEffect(function(){setPage(0);setPickedId(null);},[query,descQuery,fLevel,fSchool,fClass,fCast,fRitual,fConc,fRarity,fAttune,fType,fAttuneTag,fPrereq,fPrereqText,fAbilities,fDegree,fExec,fExClass,fCType,fCrMin,fCrMax,fEnv,fAbl,fAblMin,fAblMax,includeSrd,kind,showGeneric,pageSize]);
+  // Reset to the first page when the user changes a search/filter — but not while a
+  // kind switch or mount is restoring a list's remembered state (sig is pre-seeded then).
+  React.useEffect(function(){
+    if(lastSigRef.current===undefined){lastSigRef.current=_sig;return;}
+    if(lastSigRef.current!==_sig){lastSigRef.current=_sig;setPage(0);setPickedId(null);}
+  },[_sig]);
 
   // SRD fetch (debounced) — only when there's a query
   React.useEffect(function(){
@@ -10272,16 +10396,25 @@ function CompendiumPage({c,s}){
   // render loop below so expand/highlight state lines up).
   function rowId(r,i){return r.src+"-"+(r.srdVer||"")+"-"+r.name+"-"+i;}
   // Pick one item at random from the currently-shown (filtered) results, jump to
-  // its page, expand it, and highlight it. Uses `results` (all pages), not just
-  // the current page, so it honours every active filter and search term.
+  // its page, close the previously-picked item, open and highlight the new one, and
+  // scroll it into view. Uses `results` (all pages), so it honours every filter.
   function chooseRandomItem(){
     if(!results.length) return;
     var i=Math.floor(Math.random()*results.length);
     var id=rowId(results[i],i);
+    var prev=pickedId;
     setPage(Math.floor(i/PER_PAGE));
+    setExpanded(function(e){var n=Object.assign({},e); if(prev&&prev!==id) delete n[prev]; n[id]=true; return n;});
     setPickedId(id);
-    setExpanded(function(e){var n=Object.assign({},e);n[id]=true;return n;});
+    setScrollNonce(function(x){return x+1;});
   }
+  // After a random pick lands (page/row committed), scroll the chosen row into view.
+  React.useEffect(function(){
+    if(scrollNonce>0&&pickedRef.current){
+      try{pickedRef.current.scrollIntoView({behavior:"smooth",block:"center"});}
+      catch(e){try{pickedRef.current.scrollIntoView();}catch(_){}}
+    }
+  },[scrollNonce]);
 
   var SCHOOLS=["Abjuration","Conjuration","Divination","Enchantment","Evocation","Illusion","Necromancy","Transmutation"];
   var inputStyle={background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,150,42,.2)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"5px 8px",borderRadius:2};
@@ -10431,6 +10564,14 @@ function CompendiumPage({c,s}){
         <div onClick={function(){setShowQueryHelp(function(v){return !v;});}}
           title="How to write complex search queries"
           style={{flexShrink:0,width:24,height:24,borderRadius:"50%",border:"1px solid rgba(123,79,207,.5)",color:"var(--arcane)",background:showQueryHelp?"rgba(123,79,207,.2)":"rgba(123,79,207,.08)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'EB Garamond',serif",fontSize:14,fontStyle:"italic",fontWeight:700,userSelect:"none"}}>i</div>
+        <div onClick={function(){if(hasActiveFilters)clearFilters();}}
+          title="Clear this list's filters and search"
+          style={{flexShrink:0,cursor:hasActiveFilters?"pointer":"default",opacity:hasActiveFilters?1:.4,
+            fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",
+            border:"1px solid rgba(201,74,42,.45)",color:"#e07060",background:"rgba(201,74,42,.1)",
+            padding:"5px 10px",borderRadius:2,userSelect:"none",whiteSpace:"nowrap"}}>
+          ✕ Clear filters
+        </div>
         {showQueryHelp&&(
           <div style={{position:"absolute",top:"100%",right:0,marginTop:6,zIndex:300,width:"min(420px,92vw)",background:"#1a1410",border:"1px solid rgba(123,79,207,.4)",borderRadius:3,padding:"14px 16px",boxShadow:"0 6px 28px rgba(0,0,0,.6)"}}>
             <div style={{display:"flex",alignItems:"baseline",justifyContent:"space-between",marginBottom:8}}>
@@ -10566,20 +10707,12 @@ function CompendiumPage({c,s}){
           Include SRD
         </label>}
         {srdLoading&&<span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(201,150,42,.5)",textTransform:"uppercase"}}>Searching SRD…</span>}
-        {/* Expand / collapse all on the current page */}
-        {pageResults.length>0&&(
-          <div style={{display:"flex",alignItems:"center",gap:4}}>
-            <div onClick={function(){setExpanded(function(e){var n=Object.assign({},e);pageResults.forEach(function(r,idx){n[rowId(r,curPage*PER_PAGE+idx)]=true;});return n;});}}
-              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.55)",border:"1px solid rgba(184,154,240,.2)",padding:"2px 6px",borderRadius:2,userSelect:"none"}} title="Expand all on this page">+</div>
-            <div onClick={function(){setExpanded(function(e){var n=Object.assign({},e);pageResults.forEach(function(r,idx){delete n[rowId(r,curPage*PER_PAGE+idx)];});return n;});}}
-              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(184,154,240,.55)",border:"1px solid rgba(184,154,240,.2)",padding:"2px 6px",borderRadius:2,userSelect:"none"}} title="Collapse all on this page">−</div>
-          </div>
-        )}
+        {/* Expand / collapse all moved to the sticky left rail on the results list */}
         {/* Results per page */}
         <label style={{display:"flex",alignItems:"center",gap:5,fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.5)",textTransform:"uppercase"}}>
           Per page
           <select value={""+pageSize} onChange={function(e){setPageSize(parseInt(e.target.value));}} style={Object.assign({},selStyle,{padding:"2px 6px",fontSize:11})}>
-            {[10,20,50,100].map(function(n){return <option key={n} value={""+n}>{n}</option>;})}
+            {[10,20,50,100,200,500].map(function(n){return <option key={n} value={""+n}>{n}</option>;})}
           </select>
         </label>
         <span style={{marginLeft:"auto",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.35)"}}>{totalResults} result{totalResults===1?"":"s"}{totalPages>1?" · showing "+(curPage*PER_PAGE+1)+"–"+Math.min(curPage*PER_PAGE+PER_PAGE,totalResults):""}</span>
@@ -10598,7 +10731,10 @@ function CompendiumPage({c,s}){
       </div>
 
       {/* Results */}
-      <div style={{border:"1px solid rgba(201,150,42,.12)",borderRadius:2}}>
+      <div style={{border:"1px solid rgba(201,150,42,.12)",borderRadius:2,position:"relative"}}>
+        {pageResults.length>0&&<SectionRail accent="184,154,240" label="Results"
+          onExpand={function(){setExpanded(function(e){var n=Object.assign({},e);pageResults.forEach(function(r,idx){n[rowId(r,curPage*PER_PAGE+idx)]=true;});return n;});}}
+          onCollapse={function(){setExpanded(function(e){var n=Object.assign({},e);pageResults.forEach(function(r,idx){delete n[rowId(r,curPage*PER_PAGE+idx)];});return n;});}} />}
         {results.length===0&&<div style={{padding:"20px",textAlign:"center",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.3)"}}>No matches. {kind==="spells"&&spellCache.status==="loading"?"Loading spells…":kind==="feats"&&featCache.status==="loading"?"Loading feats…":kind==="items"&&itemCache.status==="loading"?"Loading items…":kind==="exploits"&&exploitCache.status==="loading"?"Loading exploits…":kind==="creatures"&&creatureCache.status==="loading"?"Loading creatures…":kind==="creatures"&&creatureCache.status==="ready"?"No creatures found — add creatures.md or a creatures/ JSON folder to the repo.":kind==="exploits"&&exploitCache.status==="error"?"Exploits file unavailable — check exploits.md in repo.":"Try a different search."}</div>}
         {pageResults.map(function(r,idx){
           var id=rowId(r,curPage*PER_PAGE+idx);
@@ -10614,7 +10750,7 @@ function CompendiumPage({c,s}){
           var tag=r.source?r.source:(isLocal?"File":("SRD"+(r.srdVer||"")));
           var tagCol=isLocal?"rgba(74,156,92,.6)":"rgba(96,180,196,.55)";
           return (
-            <div key={id} style={{borderBottom:"1px solid rgba(201,150,42,.07)",background:isPicked?"rgba(201,150,42,.10)":"transparent",boxShadow:isPicked?"inset 3px 0 0 var(--gold)":"none"}}>
+            <div key={id} ref={isPicked?pickedRef:null} style={{borderBottom:"1px solid rgba(201,150,42,.07)",background:isPicked?"rgba(201,150,42,.10)":"transparent",boxShadow:isPicked?"inset 3px 0 0 var(--gold)":"none"}}>
               <div onClick={function(){toggle(id);}} style={{display:"flex",alignItems:"baseline",gap:10,padding:"8px 12px",cursor:"pointer"}}>
                 <span style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"rgba(201,150,42,.4)",width:12,flexShrink:0}}>{isOpen?"−":"+"}</span>
                 <span style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"var(--gold-l)",fontWeight:600,flex:1}}>{r.name}</span>
@@ -11289,13 +11425,7 @@ function CreaturesPage({c,s}){
         var activeSub=activeCrSub();
         var grp=creatures.filter(function(cr){return cr.tag===activeSub;});
         if(grp.length<1) return null;
-        var col=tagColor(activeSub);
-        var bs={cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:11,color:col.replace(",1)",",0.75)"),border:"1px solid "+col.replace(",1)",",0.3)"),padding:"0 8px",borderRadius:2,userSelect:"none",lineHeight:"17px"};
-        return <div style={{display:"flex",gap:6,alignItems:"center",marginBottom:14,flexWrap:"wrap"}}>
-          <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.35)",textTransform:"uppercase",marginRight:2}}>All</span>
-          <span style={bs} onClick={function(){setGroupCollapsed(activeSub,false);}} title="Expand all">+</span>
-          <span style={bs} onClick={function(){setGroupCollapsed(activeSub,true);}} title="Collapse all">−</span>
-        </div>;
+        return null;
       })()}
 
       {(function(){
@@ -11306,7 +11436,8 @@ function CreaturesPage({c,s}){
           var group=creatures.filter(function(cr){return cr.tag===gtag&&(!cq||(""+(cr.nm||"")).toLowerCase().indexOf(cq)>=0);});
           if(!group.length) return <div key={"empty-"+gtag} style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgba(232,213,176,.3)",fontStyle:"italic",textAlign:"center",padding:"28px 0"}}>{cq?"No "+gtag.toLowerCase()+"s match \""+crSearch.trim()+"\".":"No "+gtag.toLowerCase()+"s yet — add one with the button below."}</div>;
           var gcol=tagColor(gtag), gcolL=gcol.replace(",1)",",0.75)");
-          return <div key={"grp-"+gtag} style={{marginBottom:18}}>
+          return <div key={"grp-"+gtag} style={{marginBottom:18,position:"relative"}}>
+            <SectionRail accent="201,150,42" label={gtag} onExpand={function(){setGroupCollapsed(gtag,false);}} onCollapse={function(){setGroupCollapsed(gtag,true);}} />
             {group.map(function(cr){
         var col=tagColor(cr.tag);
         var colLight=col.replace(",1)",",0.7)");
@@ -12312,7 +12443,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.11.5</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.13.1</div>
 
 </script>
 </body>
