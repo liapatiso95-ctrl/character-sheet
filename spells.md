@@ -9735,9 +9735,9 @@ You touch a creature and can end either one disease or one condition afflicting 
 
 ***At Higher Levels.*** When you cast this spell using a 3rd level Spell Slot, you can remove as many of the given conditions or diseases as a single target has on it. When you cast this spell using a 4th level Spell Slot or higher, you can target an additional creature for each slot level above 3rd.
 
-{{descriptive
+{{note
 #### Restoration Variant
-During my travels, I have come upon an interesting variation of the Lesser Restoration Spell, called simply **Restoration** by the natives of the Golden Plains. This spell has the base effects of Lesser Restoration, but different upcasting effects:
+A variation of the **Lesser Restoration** Spell, called simply **Restoration**. This spell has the base effects of Lesser Restoration, but different upcasting effects:
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 3rd-level or higher, the conditions and effects you can end increase, but the spell requires you to expend diamond dust of a certain value, which is consumed during casting:
 
