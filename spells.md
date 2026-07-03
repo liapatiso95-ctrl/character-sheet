@@ -86,19 +86,19 @@ With these words, I bid you welcome, dear reader, to the pages of this spellbook
 {{toc,wide
 # Contents
 - ### [{{ Spell Lists}}{{ 10}}](#p10)
-- ### [{{ Artificer Spell List}}{{ 13}}](#p13)
-- ### [{{ Bard Spell List}}{{ 15}}](#p15)
-- ### [{{ Cleric Spell List}}{{ 17}}](#p17)
-- ### [{{ Druid Spell List}}{{ 19}}](#p19)
-- ### [{{ Magus Spell List}}{{ 23}}](#p23)
-- ### [{{ Paladin Spell List}}{{ 25}}](#p25)
-- ### [{{ Psion Spell List}}{{ 27}}](#p27)
-- ### [{{ Ranger Spell List}}{{ 29}}](#p29)
-- ### [{{ Shaman Spell List}}{{ 31}}](#p31)
-- ### [{{ Sorcerer Spell List}}{{ 33}}](#p33)
-- ### [{{ Vessel Spell List}}{{ 37}}](#p37)
-- ### [{{ Warlock Spell List}}{{ 39}}](#p39)
-- ### [{{ Wizard Spell List}}{{ 43}}](#p43)
+  - #### [{{ Artificer Spell List}}{{ 13}}](#p13)
+  - #### [{{ Bard Spell List}}{{ 15}}](#p15)
+  - #### [{{ Cleric Spell List}}{{ 17}}](#p17)
+  - #### [{{ Druid Spell List}}{{ 19}}](#p19)
+  - #### [{{ Magus Spell List}}{{ 23}}](#p23)
+  - #### [{{ Paladin Spell List}}{{ 25}}](#p25)
+  - #### [{{ Psion Spell List}}{{ 27}}](#p27)
+  - #### [{{ Ranger Spell List}}{{ 29}}](#p29)
+  - #### [{{ Shaman Spell List}}{{ 31}}](#p31)
+  - #### [{{ Sorcerer Spell List}}{{ 33}}](#p33)
+  - #### [{{ Vessel Spell List}}{{ 37}}](#p37)
+  - #### [{{ Warlock Spell List}}{{ 39}}](#p39)
+  - #### [{{ Wizard Spell List}}{{ 43}}](#p43)
 - ### [{{ Cantrips}}{{ 48}}](#p48)
   - #### [{{ Amanuensis}}{{ 48}}](#p48)
   - #### [{{ Acid Splash}}{{ 48}}](#p48)
@@ -11195,9 +11195,9 @@ For all templates, the creature retains its weapon and armor proficiencies, and 
 **Components:** V, S, M (a smoke stained mirror)  
 **Duration:** Concentration, up to 1 hour  
 
-Targeting a creature you can see within range, you bring its shadow to life under your control. If the creature has a CR of more than 3 or the creature has no shadow (either from the nature of the creature or from the lack of a light source to cast one) the spell fails and you don't expend the spell slot. If a creature has no CR, use its level or level of the spell used to summon it.
+Targeting a creature you can see within range, you bring its shadow to life under your control. If the creature has no shadow (either from the nature of the creature or from the lack of a light source to cast one) the spell fails and you don't expend the spell slot. If the creature has a CR of more than 3 the spell uses the *Shadow* monster statblock, instead of what described below. If a creature has no CR, use its level or level of the spell used to summon it.
 
-Otherwise a copy of the creature is created using its game statistics adjacent to the creature (on the side away from the brightest light near it). The shadow has no legendary actions, legendary resistance, and cannot cast spells. The shadow has Hit Points equal to half the target's Hit Points, and looks like mirrored version of the creature it was summoned from formed from inky black smoke. The shadow is resistant to Bludgeoning, Piercing, and Slashing damage from non-magical sources while in darkness. The shadow is vulnerable to all damage while in Bright Light, and always vulnerable to Fire, Lightning, and Radiant damage. If the shadow is killed, the target creature it was summoned from casts no shadows for the next 8 hours.
+Otherwise a copy of the creature is created using its game statistics adjacent to the creature (on the side away from the brightest light near it). The shadow has no legendary actions, legendary resistance, and cannot cast spells. The shadow has Hit Points equal to half the target's Hit Points, and looks like mirrored version of the creature it was summoned from formed from inky black smoke. The shadow is resistant to Bludgeoning, Piercing, and Slashing damage from non-magical sources while in dim light or darkness. The shadow is vulnerable to all damage while in Bright Light, and always vulnerable to Fire, Lightning, and Radiant damage. If the shadow is killed, the target creature it was summoned from casts no shadows for the next 8 hours.
 
 The shadow is an ally to you and your companions. It acts immediately after the creature's turn. It obeys your verbal commands (no action required by you). If you don't issue any, it attempts to follow and damage the creature it was summoned from.
 
