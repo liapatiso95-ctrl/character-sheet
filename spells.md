@@ -20936,8 +20936,8 @@ A creature that starts its turn within 100 feet of the Sphere must succeed on a 
 **Classes:** Bard, Cleric, Druid, Psion, Warlock, Wizard  
 **Casting Time:** 1 hour  
 **Range:** Touch  
+**Components:** V, S, M (a vial of water drawn from a spring untouched by mortal hands, a lock of the target's hair from their youth, and diamond dust worth 10,000 gp, which the spell consumes)  
 **Duration:** Instantaneous  
-**Components:** V, S, M (a vial of water drawn from a spring untouched by mortal hands, a lock of the target's hair from their youth, and diamond dust worth 10,000 gp, which the spell consumes)
 
 You channel the raw essence of time itself into a willing creature you touch, unraveling the ravages of age and restoring them to the prime of their life. When the spell is complete, the target's physical age regresses to their species' biological prime 
 (typically young adulthood) while retaining all memories, experiences, class features, ability scores, and personality.
