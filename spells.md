@@ -1052,7 +1052,8 @@ With these words, I bid you welcome, dear reader, to the pages of this spellbook
   - #### [{{ Prismatic Layers}}{{ 326}}](#p326)
   - #### [{{ Psychic Scream}}{{ 327}}](#p327)
   - #### [{{ Ravenous Void}}{{ 327}}](#p327)
-  - #### [{{ Shapechange}}{{ 327}}](#p327)
+  - #### [{{ Restore Youth}}{{ 327}}](#p327)
+  - #### [{{ Shapechange}}{{ 328}}](#p328)
   - #### [{{ Sphere of Ultimate Destruction}}{{ 328}}](#p328)
   - #### [{{ Storm of Vengeance}}{{ 328}}](#p328)
 }}
@@ -1606,6 +1607,7 @@ On a turn, you can only cast one spell of 1st level or higher. You cannot for ex
 - [{{ Power Word: Ruin}}{{ 326}}](#p326)
 - [{{ Prismatic Wall}}{{ 326}}](#p326)
 - [{{ Psychic Scream}}{{ 327}}](#p327)
+- [{{ Restore Youth}}{{ 327}}](#p327)
 - [{{ True Polymorph}}{{ 330}}](#p330)
 }}
 \page
@@ -1808,6 +1810,7 @@ On a turn, you can only cast one spell of 1st level or higher. You cannot for ex
 - [{{ Gate}}{{ 322}}](#p322)
 - [{{ Mass Heal}}{{ 324}}](#p324)
 - [{{ Power Word: Heal}}{{ 325}}](#p325)
+- [{{ Restore Youth}}{{ 327}}](#p327)
 - [{{ True Resurrection}}{{ 330}}](#p330)
 }}
 
@@ -2128,7 +2131,8 @@ On a turn, you can only cast one spell of 1st level or higher. You cannot for ex
 - [{{ Foresight}}{{ 321}}](#p321)
 - [{{ Form of the Elements}}{{ 322}}](#p322)
 - [{{ Frostfell}}{{ 322}}](#p322)
-- [{{ Shapechange}}{{ 327}}](#p327)
+- [{{ Restore Youth}}{{ 327}}](#p327)
+- [{{ Shapechange}}{{ 328}}](#p328)
 - [{{ Storm of Vengeance}}{{ 328}}](#p328)
 - [{{ Towering Thunderhead}}{{ 329}}](#p329)
 - [{{ True Resurrection}}{{ 330}}](#p330)
@@ -2693,6 +2697,7 @@ On a turn, you can only cast one spell of 1st level or higher. You cannot for ex
 - [{{ Power Word: Kill}}{{ 325}}](#p325)
 - [{{ Power Word: Ruin}}{{ 326}}](#p326)
 - [{{ Psychic Scream}}{{ 327}}](#p327)
+- [{{ Restore Youth}}{{ 327}}](#p327)
 - [{{ Time Ravage}}{{ 329}}](#p329)
 - [{{ Time Stop}}{{ 329}}](#p329)
 - [{{ Weird}}{{ 330}}](#p330)
@@ -4193,6 +4198,7 @@ On a turn, you can only cast one spell of 1st level or higher. You cannot for ex
 - [{{ Power Word: Kill}}{{ 325}}](#p325)
 - [{{ Power Word: Ruin}}{{ 326}}](#p326)
 - [{{ Psychic Scream}}{{ 327}}](#p327)
+- [{{ Restore Youth}}{{ 327}}](#p327)
 - [{{ Time Ravage}}{{ 329}}](#p329)
 - [{{ True Polymorph}}{{ 330}}](#p330)
 - [{{ Weird}}{{ 330}}](#p330)
@@ -4875,7 +4881,8 @@ On a turn, you can only cast one spell of 1st level or higher. You cannot for ex
 - [{{ Prismatic Wall}}{{ 326}}](#p326)
 - [{{ Psychic Scream}}{{ 327}}](#p327)
 - [{{ Ravenous Void}}{{ 327}}](#p327)
-- [{{ Shapechange}}{{ 327}}](#p327)
+- [{{ Restore Youth}}{{ 327}}](#p327)
+- [{{ Shapechange}}{{ 328}}](#p328)
 - [{{ Sphere of Ultimate Destruction}}{{ 328}}](#p328)
 - [{{ Supernova}}{{ 329}}](#p329)
 - [{{ Towering Thunderhead}}{{ 329}}](#p329)
@@ -20924,6 +20931,26 @@ When the Sphere appears and at the start of each of your turns until the spell e
 
 A creature that starts its turn within 100 feet of the Sphere must succeed on a Strength saving throw or be pulled straight toward the sphere's center, ending in an unoccupied space as close to the center as possible. A creature that enters the Sphere for the first time on a turn or starts its turn there takes 5d10 Force damage and is Restrained until it is no longer in the sphere. If the Sphere is in the air, the Restrained creature hovers inside the sphere. A creature can use its action to make a Strength check against your spell save DC, ending this Restrained condition on itself or another creature in the Sphere that it can reach. A creature reduced to 0 Hit Points by this spell is annihilated, along with any nonmagical items it is wearing or carrying.
 
+#### Restore Youth
+*9th-level Transmutation*  
+**Classes:** Bard, Cleric, Druid, Psion, Warlock, Wizard  
+**Casting Time:** 1 hour  
+**Range:** Touch  
+**Duration:** Instantaneous  
+**Components:** V, S, M (a vial of water drawn from a spring untouched by mortal hands, a lock of the target's hair from their youth, and diamond dust worth 10,000 gp, which the spell consumes)
+
+You channel the raw essence of time itself into a willing creature you touch, unraveling the ravages of age and restoring them to the prime of their life. When the spell is complete, the target's physical age regresses to their species' biological prime 
+(typically young adulthood) while retaining all memories, experiences, class features, ability scores, and personality.
+The spell produces the following effects:
+
+**Physical Restoration.** The target's body is restored to peak biological condition. Any ability score reductions caused by old age are reversed. Wrinkles, grey hair, and other physical signs of aging vanish. The target no longer suffers from age-related diseases or degenerative conditions that existed prior to casting.
+
+**Extended Lifespan.** The target's maximum age is reset as if they had just reached adulthood. They will age naturally from this point forward at the normal rate for their species.
+
+**Vitality Surge.** When the spell completes, the target is flooded with renewed life force. They regain all lost hit points, are cured of the Poisoned and Paralyzed conditions, and are freed from any diseases. Any lost limbs or missing body parts are restored, as per the *Regenerate* spell. Until the target finishes a Long Rest, they treat any Hit Dice spent to regain hit points as if each die rolled its maximum value.
+
+\page
+{{pageNumber,auto}}
 
 #### Shapechange
 *9th-level Transmutation*  
@@ -20940,9 +20967,6 @@ When you shape-shift, you gain a number of Temporary Hit Points equal to the Hit
 Your game statistics are replaced by the stat block of the chosen form, but you retain your creature type; alignment; personality; Intelligence, Wisdom, and Charisma scores; Hit Points; Hit Point Dice; proficiencies; and ability to communicate. If you have the Spellcasting feature, you retain it too.
 
 Upon shape-shifting, you determine whether your equipment drops to the ground or changes in size and shape to fit the new form while you're in it.
-
-\page
-{{pageNumber,auto}}
 
 #### Sphere of Ultimate Destruction
 *9th-level Conjuration*  
@@ -20961,7 +20985,7 @@ When you move the sphere, you can direct it over barriers up to 5 feet tall and 
 Damage from this spell that reduces a creature to 0 Hit Points disintegrates that creature. A disintegrated creature and everything it is wearing and carrying, except magic items, are reduced to a pile of fine gray dust. The creature can be restored to life only by means of a true resurrection or a wish spell.
 
 A Large or smaller nonmagical object or a creation of magical force that comes into contact with the Sphere is disintegrated. If the Sphere comes into contact with a Huge or larger object or creation of force, this spell disintegrates a 10-foot-cube portion of it. A magic item is unaffected by this spell.
-\column
+
 
 #### Storm of Vengeance
 *9th-level Conjuration*  
