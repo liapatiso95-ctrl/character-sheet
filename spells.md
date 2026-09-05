@@ -1160,11 +1160,12 @@ Spells with the casting time of "1 Attack" can be cast in place of an attack, wh
 {{font-family:WalterTurncoat In all my years studying the arcane, I’ve seen too many fledgling mages sabotage their own spellwork—tangled in armor they were never trained to bear, or grasping to cast more than the Weave allows. Let it be known: a spell of true power demands your full presence in time. You cannot split that moment, nor share it with another invocation. }}
 
 {{font-family:WalterTurncoat And armor—unless you have learned its language—muffles the flow of magic, disrupts the gesture, and binds the will. Leave the shield to those who are taught to carry it. One spell, one motion, one breath of clarity. That is the rhythm the Weave will answer. }}
+
 ##### Casting in Armor
 A spell of 1st level or higher gained through a class may only be cast with armor or shield equipped if that class (or its subclass) provides the training for that armor or shield, or if that training is a result of a feat taken as part of that class. This rule supersedes Laserllama's class features that disallow casting in armor.  
 
-##### One Spell of 1st level or higher per turn
-On a turn, you can only cast one spell of 1st level or higher. You cannot for example cast *Fireball* and then cast *Expeditious Retreat*. This restriction does not apply to spells that come from a racial trait, when cast without a Spell Slot.
+##### One Spell with a Spell Slot per Turn
+On a turn, you can expend only one spell slot to cast a spell. This rule means you can't, for example, cast a spell with a spell slot using the Magic action and another one using a Bonus Action on the same turn.
 }}
 
 \page
@@ -21107,7 +21108,7 @@ The spell can provide a new body if the original no longer exists, in which case
 **Components:** V, S  
 **Duration:** Concentration, up to 1 minute  
 
-You create horrifying illusions in the minds of creatures you can see. Select any number of creatures within 30 feet of a point you can see within range. Each target must make a Wisdom saving throw or become Frightened for the duration. While Frightened in this way, at the start of a creature's turn, it takes 6d10 Psychic damage and must roll 1d10, suffering an effect from the table below. Unless noted, effects last until the start of the creature's next turn.
+You create horrifying illusions in the minds of creatures you can see. Select any number of creatures within 30 feet of a point you can see within range. Each target must make a Wisdom saving throw or become Frightened for the duration. A creature can become Frightened by this spell even if it has Immunity to the Frightened condition. While Frightened in this way, at the start of a creature's turn, it takes 6d10 Psychic damage and must make a Wisdom saving throw. On a failure, roll 1d10, and the creature suffers an effect from the table below. Unless noted, effects last until the start of the creature's next turn. On a success, the spell ends for the creature.
 
 | d10 | Effect                                                                             |
 |-----|------------------------------------------------------------------------------------|
