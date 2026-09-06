@@ -12793,7 +12793,7 @@ You drastically reduce your weight, tripling your jump distance and allowing you
 **Components:** S  
 **Duration:** 1 minute  
 
-You attempt to prevent a creature from uttering words. The creature must succeed on a Wisdom saving throw, or lose its ability to speak as an illusory lock seals its mouth shut. The lock’s appearance may vary from stitches that seal its mouth, skin that covers it completely, or a chain that is wrapped around it. Casting knock on the lock immediately ends this spell’s effects. At the end of each of its turns, the target can make a Wisdom saving throw. On a success, the spell ends.
+You attempt to prevent a creature from uttering words. The creature must succeed on a Charisma saving throw, or lose its ability to speak as an illusory lock seals its mouth shut. The lock’s appearance may vary from stitches that seal its mouth, skin that covers it completely, or a chain that is wrapped around it. Casting knock on the lock immediately ends this spell’s effects. At the end of each of its turns, the target can make a Charisma saving throw. On a success, the spell ends.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.
 
