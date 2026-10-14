@@ -86,20 +86,18 @@ With these words, I bid you welcome, dear reader, to the pages of this spellbook
 {{toc,wide
 # Contents
 - ### [{{ Spell Lists}}{{ 10}}](#p10)
-- ### [{{ Artificer Spell List}}{{ 13}}](#p13)
-- ### [{{ Artificer Spell List}}{{ 13}}](#p13)
-- ### [{{ Bard Spell List}}{{ 15}}](#p15)
-- ### [{{ Cleric Spell List}}{{ 17}}](#p17)
-- ### [{{ Druid Spell List}}{{ 19}}](#p19)
-- ### [{{ Magus Spell List}}{{ 23}}](#p23)
-- ### [{{ Paladin Spell List}}{{ 25}}](#p25)
-- ### [{{ Psion Spell List}}{{ 27}}](#p27)
-- ### [{{ Ranger Spell List}}{{ 29}}](#p29)
-- ### [{{ Shaman Spell List}}{{ 31}}](#p31)
-- ### [{{ Sorcerer Spell List}}{{ 33}}](#p33)
-- ### [{{ Vessel Spell List}}{{ 37}}](#p37)
-- ### [{{ Warlock Spell List}}{{ 39}}](#p39)
-- ### [{{ Wizard Spell List}}{{ 43}}](#p43)
+  - #### [{{ Artificer Spell List}}{{ 13}}](#p13)
+  - #### [{{ Bard Spell List}}{{ 15}}](#p15)
+  - #### [{{ Cleric Spell List}}{{ 17}}](#p17)
+  - #### [{{ Magus Spell List}}{{ 23}}](#p23)
+  - #### [{{ Paladin Spell List}}{{ 25}}](#p25)
+  - #### [{{ Psion Spell List}}{{ 27}}](#p27)
+  - #### [{{ Ranger Spell List}}{{ 29}}](#p29)
+  - #### [{{ Shaman Spell List}}{{ 31}}](#p31)
+  - #### [{{ Sorcerer Spell List}}{{ 33}}](#p33)
+  - #### [{{ Vessel Spell List}}{{ 37}}](#p37)
+  - #### [{{ Warlock Spell List}}{{ 39}}](#p39)
+  - #### [{{ Wizard Spell List}}{{ 43}}](#p43)
 - ### [{{ Cantrips}}{{ 48}}](#p48)
   - #### [{{ Amanuensis}}{{ 48}}](#p48)
   - #### [{{ Acid Splash}}{{ 48}}](#p48)
@@ -6141,7 +6139,7 @@ You point at one creature you can see within range, and the single chime of a do
 **Components:** S, M (a weapon worth at least 1 sp)  
 **Duration:** 1 round  
 
-You infuse your weapon with divination magic and point it at one creature you can see. For the duration, you can use your spellcasting ability instead of Strength or Dexterity for the attack and damage rolls of melee attacks using that weapon against that target.
+You infuse your weapon with divination magic and point it at one creature you can see. For the duration, you can use your spellcasting ability instead of Strength or Dexterity for the attack and damage rolls of attacks using that weapon against that target.
 
 ***Cantrip Upgrade.*** The first attack you make using the weapon against the target deals additional damage when you reach level 5 (1d4), level 11 (2d4) and level 17 (3d4).
 \column
@@ -7095,9 +7093,9 @@ Choose up to five falling creatures within range. A falling creature's rate of d
 #### Find Familiar (Conjure Familiar)
 *1st-level Conjuration (ritual)*  
 **Classes:** Shaman, Wizard  
-**Casting	Time:** 1	hour or Ritual  
+**Casting Time:** 1	hour or Ritual  
 **Range:** 10	feet  
-**Component:** V,	S, M (a drop of the caster's blood that must be spilled in fire in a brass brazier)  
+**Components:** V, S, M (a drop of the caster's blood that must be spilled in fire in a brass brazier)  
 **Duration:** Instantaneous  
 
 Offering a drop of blood, reduce your maximum hit points by 1 to conjure a Familiar. You gain the service of a spirit that takes an animal form you choose: Bat, Cat, Frog, Hawk, Lizard, Octopus, Owl, Rat, Raven, Spider, Weasel, or another Beast that has a Challenge Rating of 0. Appearing in an unoccupied space within range, the familiar has the statistics of the chosen form, modified by the ***Otherwordly Familiar*** Statblock presented here, and it is a Celestial, Fey, or Fiend (your choice) instead of a Beast. Your familiar acts independently of you, but it obeys your commands.
