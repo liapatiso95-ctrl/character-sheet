@@ -2625,7 +2625,7 @@ Through intense focus, training, and dedication, you've harnessed the techniques
 
 **Ability Score Increase.** Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.
 
-**Dual Spellcasting.** On your turn, you can expend up to two spell slots to cast spells, instead of one, ignoring any restriction that would prevent you from casting a level 1+ spell after modifying a spell with the *Quickened Spell* metamagic (or a similar feature). However, if you cast two or more spells in a single turn, only one of them can be 3rd level or higher.
+**Dual Spellcasting.** On your turn, you can expend up to two spell slots to cast spells, instead of one, also ignoring any restriction that would prevent you from casting a level 1+ spell after modifying a spell with the *Quickened Spell* metamagic (or a similar feature). However, if you cast two or more spells in a single turn, only one of them can be 3rd level or higher.
 
 ### Spellfire Mastery
 ***Prerequisites: Level 4+, Spellfire Spark or Spellcasting or Pact Magic Feature***
