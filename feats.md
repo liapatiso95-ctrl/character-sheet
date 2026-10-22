@@ -140,45 +140,47 @@ A Collection of DnD 5e Feats
   - #### [{{ Sharp Eye}}{{ 19}}](#p19)
   - #### [{{ Sharpshooter}}{{ 19}}](#p19)
   - #### [{{ Shield Master}}{{ 19}}](#p19)
-  - #### [{{ Skilled}}{{ 19}}](#p19)
-  - #### [{{ Skill Expert}}{{ 19}}](#p19)
+  - #### [{{ Shifting Combatant}}{{ 20}}](#p20)
+  - #### [{{ Skilled}}{{ 20}}](#p20)
+  - #### [{{ Skill Expert}}{{ 20}}](#p20)
   - #### [{{ Skulker}}{{ 20}}](#p20)
   - #### [{{ Slasher}}{{ 20}}](#p20)
   - #### [{{ Sorcerous Spark}}{{ 20}}](#p20)
   - #### [{{ Spellfire Spark}}{{ 20}}](#p20)
   - #### [{{ Spell Resistant}}{{ 20}}](#p20)
-  - #### [{{ Spell Sniper}}{{ 20}}](#p20)
-  - #### [{{ Spellsword Adept}}{{ 20}}](#p20)
-  - #### [{{ Spell Subterfuge}}{{ 20}}](#p20)
-  - #### [{{ Spiritual Awakening}}{{ 20}}](#p20)
+  - #### [{{ Spell Sniper}}{{ 21}}](#p21)
+  - #### [{{ Spellsword Adept}}{{ 21}}](#p21)
+  - #### [{{ Spell Subterfuge}}{{ 21}}](#p21)
+  - #### [{{ Spiritual Awakening}}{{ 21}}](#p21)
   - #### [{{ Squire}}{{ 21}}](#p21)
   - #### [{{ Strategic Insight}}{{ 21}}](#p21)
   - #### [{{ Street Justice}}{{ 21}}](#p21)
-  - #### [{{ Streetwise Fighter}}{{ 21}}](#p21)
-  - #### [{{ Strike of the Giants}}{{ 21}}](#p21)
-  - #### [{{ Survivalist Training}}{{ 21}}](#p21)
-  - #### [{{ Survivor}}{{ 21}}](#p21)
+  - #### [{{ Streetwise Fighter}}{{ 22}}](#p22)
+  - #### [{{ Strike of the Giants}}{{ 22}}](#p22)
+  - #### [{{ Survivalist Training}}{{ 22}}](#p22)
+  - #### [{{ Survivor}}{{ 22}}](#p22)
+  - #### [{{ Tactical Combatant}}{{ 22}}](#p22)
   - #### [{{ Tactical Lieutenant}}{{ 22}}](#p22)
   - #### [{{ Tactical Training}}{{ 22}}](#p22)
-  - #### [{{ Tavern Brawler}}{{ 22}}](#p22)
-  - #### [{{ Telekinetic}}{{ 22}}](#p22)
-  - #### [{{ Telepathetic}}{{ 22}}](#p22)
-  - #### [{{ Thrown Arms Master}}{{ 22}}](#p22)
-  - #### [{{ Tireless Reveler}}{{ 22}}](#p22)
-  - #### [{{ Totemic Spirit}}{{ 22}}](#p22)
+  - #### [{{ Tavern Brawler}}{{ 23}}](#p23)
+  - #### [{{ Telekinetic}}{{ 23}}](#p23)
+  - #### [{{ Telepathetic}}{{ 23}}](#p23)
+  - #### [{{ Thrown Arms Master}}{{ 23}}](#p23)
+  - #### [{{ Tireless Reveler}}{{ 23}}](#p23)
+  - #### [{{ Totemic Spirit}}{{ 23}}](#p23)
   - #### [{{ Tough}}{{ 23}}](#p23)
   - #### [{{ Transmuted Anatomy}}{{ 23}}](#p23)
-  - #### [{{ Transmutation Adept}}{{ 23}}](#p23)
-  - #### [{{ Treacherous Allure}}{{ 23}}](#p23)
-  - #### [{{ Vampire Hunter}}{{ 23}}](#p23)
-  - #### [{{ Vampire’s Plaything}}{{ 23}}](#p23)
-  - #### [{{ Vampire Touched}}{{ 23}}](#p23)
+  - #### [{{ Transmutation Adept}}{{ 24}}](#p24)
+  - #### [{{ Treacherous Allure}}{{ 24}}](#p24)
+  - #### [{{ Vampire Hunter}}{{ 24}}](#p24)
+  - #### [{{ Vampire’s Plaything}}{{ 24}}](#p24)
+  - #### [{{ Vampire Touched}}{{ 24}}](#p24)
   - #### [{{ Vital Sacrifice}}{{ 24}}](#p24)
-  - #### [{{ War Caster}}{{ 24}}](#p24)
-  - #### [{{ Ward of the Wilds}}{{ 24}}](#p24)
-  - #### [{{ Weapon Master}}{{ 24}}](#p24)
-  - #### [{{ Wild Companion}}{{ 24}}](#p24)
-  - #### [{{ Wilderness Training}}{{ 24}}](#p24)
+  - #### [{{ War Caster}}{{ 25}}](#p25)
+  - #### [{{ Ward of the Wilds}}{{ 25}}](#p25)
+  - #### [{{ Weapon Master}}{{ 25}}](#p25)
+  - #### [{{ Wild Companion}}{{ 25}}](#p25)
+  - #### [{{ Wilderness Training}}{{ 25}}](#p25)
   - #### [{{ Wise One}}{{ 25}}](#p25)
 - ### [{{ Advanced Feats}}{{ 26}}](#p26)
   - #### [{{ Ability Score Improvement}}{{ 26}}](#p26)
@@ -198,8 +200,6 @@ A Collection of DnD 5e Feats
   - #### [{{ Keenness of the Stone Giant}}{{ 28}}](#p28)
   - #### [{{ Knight of the Crown}}{{ 28}}](#p28)
   - #### [{{ Knight of the Rose}}{{ 28}}](#p28)
-  - #### [{{ Knight of the Sword}}{{ 28}}](#p28)
-  - #### [{{ Magebane Resolve}}{{ 28}}](#p28)
 
 }}
 
@@ -218,7 +218,11 @@ A Collection of DnD 5e Feats
 
 
 {{toc,wide
-  - #### [{{ Nature’s Bond}}{{ 28}}](#p28)
+- ###
+  - #### [{{ Knight of the Sword}}{{ 28}}](#p28)
+  - #### [{{ Magebane Resolve}}{{ 28}}](#p28)
+  - #### [{{ Magic Connoisseur}}{{ 28}}](#p28)
+  - #### [{{ Nature’s Bond}}{{ 29}}](#p29)
   - #### [{{ Outlands Envoy}}{{ 29}}](#p29)
   - #### [{{ Otherworldly Familiar}}{{ 29}}](#p29)
   - #### [{{ Planar Wanderer}}{{ 29}}](#p29)
@@ -346,6 +350,9 @@ A Collection of DnD 5e Feats
   - #### [{{ Infernal Pact}}{{ 47}}](#p47)
   - #### [{{ Infernal Bulwark}}{{ 47}}](#p47)
   - #### [{{ Infernal Dragoon}}{{ 47}}](#p47)
+  - #### [{{ Shadow Pact}}{{ 48}}](#p48)
+  - #### [{{ Shadow Trapper}}{{ 48}}](#p48)
+  - #### [{{ Shadow Weaver}}{{ 48}}](#p48)
 }}
 
 
@@ -1665,7 +1672,6 @@ You have spent time learning everything there is to know about a specific area o
 \page
 {{pageNumber,auto}}
 
-
 ### Scion of the Outer Planes
 Your connection to an Outer Plane infuses you with the energy there. 
 
@@ -1705,15 +1711,14 @@ Whenever you cast *Hex*, taking damage does not break your concentration on the 
 
 **Curse Magic.** When a creature that you've cursed with *Hex* damages you, the creature takes Psychic damage equal to your Proficiency Bonus.
 
+\column
+
 ### Shadow Touched
 Your exposure to the Shadowfell's magic has changed you, granting you the following benefits:
 
 **Ability Score Increase.** Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.
 
 **Shadow Magic.** Choose one level 1 spell from the Illusion or Necromancy school of magic. You always have that spell and the Invisibility spell prepared. You can cast each of these spells without expending a spell slot. Once you cast either spell in this way, you can't cast that spell in this way again until you finish a Long Rest. You can also cast these spells using spell slots you have of the appropriate level. The spells' spellcasting ability is the ability increased by this feat.
-
-\column
-
 
 ### Sharp Eye
 You gain the following  benefits:
@@ -1744,6 +1749,19 @@ You have trained extensively with ranged weapons to become a master marksman. Yo
 
 **Interpose Shield.** If you are subjected to an effect that allows you to make a Dexterity Saving Throw to take only half damage, you can use your Reaction to take no damage if you succeed on the Saving Throw and are wielding a Shield, interposing your shield between yourself and the source of the effect.
 
+\page
+{{pageNumber,auto}}
+
+### Shifting Combatant
+
+You fight with a drover's sense of leverage, driving foes into one another and leaping into the thick of the fray. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Strength or Dexterity by 1, to a maximum of 20.
+
+**Domino Strike.** When you force a creature to move as part of the Attack action on your turn (such as with the Push mastery property or the Shove option of an Unarmed Strike), and that movement would put it in a space occupied by a Large or smaller creature, you can force the creatures to collide. Each creature makes a Dexterity saving throw (DC 8 plus the ability modifier of the score increased by this feat and your Proficiency Bonus), taking Bludgeoning damage on a failed save. The damage is 1d8, increasing to 1d10 at level 5, 1d12 at level 11, and 1d12 + 1 at level 17.
+
+**Fearless Leap.** When you make a Long Jump, moving at least 10 feet immediately before the jump, and land in a space within 10 feet of two or more enemies, attack rolls made against you have Disadvantage until the start of your next turn.
+
 ### Skilled 
 You have trained in a variety of skills. You gain the following benefits:
 
@@ -1762,11 +1780,6 @@ You have honed your proficiency with particular skills, granting you the followi
 
 **Expertise.** Choose one skill in which you have proficiency but lack Expertise. You gain Expertise with that skill.
 
-
-
-\page
-{{pageNumber,auto}}
-
 ### Skulker 
 ***Prerequisite: Dexterity 13+***
 
@@ -1780,6 +1793,8 @@ You are an expert at slinking through shadows and staying hidden. You gain the b
 
 **Sniper.** If you make an attack roll while hidden and the roll misses, making the attack roll doesn't reveal your location.
 
+\column
+
 ### Slasher
 
 You've learned where to cut to have the greatest results, granting you the following benefits:
@@ -1789,7 +1804,6 @@ You've learned where to cut to have the greatest results, granting you the follo
 **Hamstring.** Once per turn when you hit a creature with an attack that deals Slashing damage, you can reduce the Speed of that creature by 10 feet until the start of your next turn.
 
 **Enhanced Critical.** When you score a Critical Hit that deals Slashing damage to a creature, it has Disadvantage on attack rolls until the start of your next turn.
-
 
 ### Sorcerous Spark
 While you may not be a true Sorcerer, within you dwells a small spark of arcane power. You gain the benefits below:
@@ -1821,7 +1835,10 @@ You gain the following benefits.
 **Magical Resilience.** You have Resistance to one of the following damage types (choose when you gain this feat): Necrotic, Psychic, Radiant, or Thunder.
 
 **Magic Resistant.** When you would fail a saving throw against a spell or magical effect, you can roll 1d6 and add the number rolled to the save's total, potentially turning the failure into a success. You can use this benefit a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
-\column
+
+\page
+{{pageNumber,auto}}
+
 ### Spell Sniper
 ***Prerequisites: Spellcasting or Pact Magic feature***
 
@@ -1866,8 +1883,7 @@ Additionally, you learn the *Unseen Servant* spell, and you can cast it at-will 
 
 Wisdom is your spellcasting ability modifier for all spells gained by thie feat.
 
-\page
-{{pageNumber,auto}}
+\column
 
 ### Squire
 ***Prerequisites: Fighter, Paladin, or relevant background***
@@ -1914,6 +1930,9 @@ You gain the following benefits.
 
 **Tough Talk.** A creature's Hostile attitude doesn't impose Disadvantage on your Charisma (Intimidation) checks to influence that creature.
 
+\page
+{{pageNumber,auto}}
+
 ### Streetwise Fighter
 
 You are quick to exploit openings and look out for your allies, turning opportunity into advantage in the heat of combat.
@@ -1925,7 +1944,6 @@ You gain the following benefits.
 **Exploit Opening.** When you roll damage for an Opportunity Attack, you can roll the damage dice twice and use either roll against the target.
 
 **Family First.** If you have Heroic Inspiration when you roll Initiative, you can expend it to give yourself and your allies Advantage on that Initiative roll.
-\column
 
 ### Strike of the Giants
 ***Prerequisites: Martial Proficiency or relevant background***
@@ -1953,6 +1971,8 @@ You have been trained to survive, track, and explore in the wild, much like a Ra
 
 **Knack Mastery.** You learn one Knack of your choice from those available to the  Ranger or Wanderer. If the Knack requires you to roll a Quarry Die or Exploit Die, you roll a d4 unless your Quarry Die or Exploit Die is higher. If the Knack forces a saving throw, the DC is equal to 8 + your proficiency bonus + your Strength, Dexterity or Wisdom modifier (your choice when you select this feat.
 
+\column
+
 ### Survivor 
 You gain the following benefits.
 
@@ -1964,11 +1984,16 @@ You gain the following benefits.
 
 Once you take this Reaction, you can't do so again until you finish a Long Rest. If the roll still fails, you do not expend the use of this feature.
 
+### Tactical Combatant
+***Prerequisite: Strength or Dexterity 13+***
 
+You have learned to turn the momentum of battle to your favor, shrugging off hits and pressing on when your luck turns. You gain the following benefits.
 
+**Ability Score Increase.** Increase your Strength or Dexterity by 1, to a maximum of 20.
 
-\page
-{{pageNumber,auto}}
+**Buffering Strike.** When you hit a creature with a weapon, you can gain Temporary Hit Points equal to the weapon's damage roll result. Once you use this benefit, you can't use it again until you roll Initiative or finish a Short or Long Rest.
+
+**Honed Instincts.** When you fail an ability check, you can roll 1d6 and add the number rolled to the ability check, potentially turning it into a success. Once you use this benefit, you can't use it again until you roll Initiative or finish a Short or Long Rest.
 
 ### Tactical Lieutenant
 
@@ -1999,6 +2024,9 @@ You have studied greater combat strategies that allow you to perform Tactical Ex
 **Issuing an Order.** Once per turn, when you take the Attack action, you can use the Tactical Exploit in place of one attack. You can't use this Exploit more than once per turn unless you learn Tactical Exploits from a source other than this feat.
 
 **Repeatable.** You can choose this feat multiple times. Each time you do, raise one of the ability scores above by 1, and learn one new Tactical Exploit from the list above.
+
+\page
+{{pageNumber,auto}}
 
 ### Tavern Brawler
 Accustomed to brawling, you gain the following benefits:
@@ -2061,8 +2089,6 @@ You have formed a connection with one of the minor spirits bound to the natural 
 
 **Totem Change.** Whenever you gain a level, you can change the Totem you gain benefits from. If the new Totem has prerequisites, you must meet them in order to learn that Totem.
 
-\page
-{{pageNumber,auto}}
 ### Tough
 You are extremely hard to go down. You gain the following benefits:
 
@@ -2078,6 +2104,9 @@ You gain the following benefits.
 **Lengthened Stride.** Your Speed increases by 5 feet.
 
 **Resilient Anatomy.** You have Advantage on saving throws against effects that would compel you to shape-shift against your will. Additionally, when you fail a Constitution saving throw, you can take a Reaction to roll 1d4 and add the number rolled to the save, potentially turning the failure into a success. You can use this benefit a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
+
+\page
+{{pageNumber,auto}}
 
 ### Transmutation Adept
 ***Prerequisite: Ability to cast a level 1 Transmutation spell***
@@ -2111,7 +2140,6 @@ You gain the following benefits.
 
 **Inevitable Betrayal.** You have Advantage on attack rolls against creatures with the Charmed condition.  
 In addition, Charmed creatures have Disadvantage on saving throws against any effect you create.
-\column
 
 ### Vampire Hunter
 
@@ -2127,6 +2155,8 @@ You gain the following benefits.
 
 **Vitality Ward.** When you take Necrotic damage, you can mitigate the damage. Roll a number of d6s equal to your Proficiency Bonus, and add them together. Reduce the Necrotic damage you take by this total.  
 You can use this benefit a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
+
+\column
 
 ### Vampire's Plaything
 
@@ -2153,9 +2183,6 @@ You gain the following benefits.
 **Vampire Magic.** Choose one 1st-level spell from the Enchantment or Illusion schools of magic. You always have that spell and the *Spider Climb* spell prepared. You can cast each of these spells without expending a spell slot, but when you cast *Spider Climb* this way, you must target yourself, and you must finish a Long Rest before you can cast each spell in this way again.  
 You can also cast either spell using spell slots you have of the appropriate level. Your spellcasting ability for the spells is the ability increased by this feat.
 
-\page
-{{pageNumber,auto}}
-
 ### Vital Sacrifice
  You've learned secrets of hemocraft that grant you esoteric power at the price of your own life force. You gain the following benefits: 
  
@@ -2168,6 +2195,9 @@ You can also cast either spell using spell slots you have of the appropriate lev
 **Necrotic Surge.** When you hit with an attack or spell, you can expend one blood boon to deal an additional 2d6 necrotic damage.
 
 **Debilitating Save.** When you cause a creature to make a Strength, Dexterity, or Constitution saving throw, you can expend one blood boon to roll a d4 and reduce their save by the amount rolled.
+
+\page
+{{pageNumber,auto}}
 
 ### War Caster
 ***Prerequisite: Spellcasting or Pact Magic Feature***
@@ -2193,8 +2223,6 @@ You gain the following benefits.
 **Speak with Animals.** You always have the *Speak with Animals* spell prepared and can cast it with any spell slots you have. Intelligence, Wisdom, or Charisma is your spellcasting ability for this spell (choose when you select this feat). When you cast this spell as a Ritual, its duration is 8 hours.
 
 **Tag Team.** When you take the Help action, you can switch places with a willing ally within 5 feet of yourself as part of that same action. This movement doesn't provoke Opportunity Attacks. You can't use this benefit if the ally has the Incapacitated condition.
-
-\column
 
 ### Weapon Master
 ***Prerequisite: Proficiency with all simple and martial weapons***
@@ -2233,9 +2261,6 @@ You have studied combat techniques that allow you to perform Cunning Exploits, g
 
 If you already have Exploit Dice when you gain this feat, you instead gain one additional Exploit Die, which is the same size as your existing Exploit Dice.
 
-\page
-{{pageNumber,auto}}
-
 ### Wise One
 You find ways to learn from every experience in life, always growing in wisdom. 
 
@@ -2250,7 +2275,7 @@ You find ways to learn from every experience in life, always growing in wisdom.
 | +3       | **Insights of the Wise.** You gain proficiency in either Animal Handling, Insight, Medicine, or Perception.                        |
 | +4       | **Sage's Foresight.** When you make a Wisdom (Insight) check, you treat a d20 roll of 7 or lower as an 8.                         |
 | +5       | **Clarity of the Wise.** You have advantage on saving throws to resist enchantment and illusion spells. |
- 
+
 \page
 {{pageNumber,auto}}
 
@@ -2473,7 +2498,21 @@ Your mental fortitude strengthens as you battle spellcasters, allowing you to sh
 
 **Close-Quarters Spell Resistance.** You have advantage on saving throws against spells cast by creatures you can see or hear within 5 feet of you.
 
+### Magic Connoisseur
+***Prerequisites: Level 4+, magic initiate feat***
 
+Your knowledge of magic deepens. You gain the following benefits:
+
+**Ability Score Increase.** Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.
+
+**Additional Spells.** Choose a level 1 and a level 2 spell from the same list you selected for the Magic Initiate feat's cantrips. You always have those spells prepared. You can cast each spell once without a spell slot, and you regain the ability to cast it in this way when you finish a Long Rest. You can also cast those spells using any spell slots you have of the appropriate level. The spellcasting ability for these spells is the same as the spellcasting ability chosen for your Magic Initiate feat's spells.
+
+**Spell Change.** Whenever you gain a new level, you can replace one of the spells you chose for this feat with a different spell of the same level from the chosen spell list.
+
+
+ 
+\page
+{{pageNumber,auto}}
 
 ### Nature's Bond
 ***Prerequisites: Level 4+, Ward of the Wilds***
@@ -2488,10 +2527,6 @@ You gain the following benefits.
 
 **Two Hearts, One Mind.** You always have the *Beast Sense* spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. Whenever you cast it, it doesn't require Concentration. You can also cast the spell using any spell slots you have of the appropriate level. The spell's spellcasting ability is the ability increased by this feat.
 
-
- 
-\page
-{{pageNumber,auto}}
 ### Outlands Envoy
 ***Prerequisites: Level 4+, scion of the outer planes (the outlands) feat***  
 
@@ -2528,7 +2563,6 @@ You can draw on the forces of the multiverse to survive cosmic extremes and to t
 **Portal Sense.** You know the direction to the last planar portal you used while you and the portal are on the same plane of existence. Moreover, as an action, you can detect the location of any portals within 30 feet of you that aren’t behind total cover. Once you detect a portal with this action, you can’t use the action again until you finish a long rest.
 
 
-\column
 
 
 ### Righteous Heritor
@@ -4206,3 +4240,38 @@ The diabolic power within you surges to the surface, intimidating your foes and 
 
 **Diabolic Empowerment.** You always have the *Magic Weapon* spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. When you cast it without a spell slot using this feature, the spell's duration becomes 8 hours for that casting. You can also cast the spell using any spell slots you have of the appropriate level. Charisma is your spellcasting ability for this spell.
 
+\page
+{{pageNumber,auto}}
+
+### Shadow Pact
+***Prerequisites: Can't Have Another Planar Pact Feat***
+
+A pact with the gloom of the Shadowfell has attuned your body to darkness and dimmed the light around you. You gain the following benefits.
+
+**Darkvision.** You gain Darkvision with a range of 60 feet. If you already have Darkvision, its range increases by 30 feet.
+
+**Shadow Blood.** Whenever you roll a die to determine the number of Hit Points you regain, you can reroll the die if it rolls a 1 while you're entirely within Dim Light or Darkness, and you must use the new roll.
+
+**Shroud of Shadows.** You can take a Bonus Action to radiate a 5-foot Emanation of Dim Light around you for 1 minute. It ends early if you dismiss it (no action required) or you have the Incapacitated condition. Once you use this benefit, you can't use it again until you finish a Short or Long Rest.
+
+### Shadow Trapper
+***Prerequisites: Level 4+, Shadow Pact***
+
+Your affinity with the Shadowfell's melancholy grants you the following benefits.
+
+**Ability Score Increase.** Increase your Strength or Wisdom by 1, to a maximum of 20.
+
+**Dangerous Shroud.** You have Advantage on attack rolls against creatures within the Emanation of your Shroud of Shadows.
+
+**Sorrowful Embrace.** At the start of its turn, a creature Grappled by you must succeed on a Wisdom saving throw (DC equals 8 plus the ability modifier of the score increased by this feat plus your Proficiency Bonus) or take Psychic damage equal to 1d4 plus the ability modifier of the score increased by this feat.
+
+### Shadow Weaver
+***Prerequisites: Level 4+, Shadow Pact***
+
+Your commitment to your planar pact grants you the following benefits.
+
+**Ability Score Increase.** Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.
+
+**Create Shadow.** You always have the *Darkness* spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast the spell using any spell slots you have of the appropriate level. The spell's spellcasting ability is the ability increased by this feat.
+
+**Manipulate Shadow.** You can take a Bonus Action to increase or decrease the radius of a *Darkness* spell you cast by 5 feet (minimum 5-foot radius, maximum 25-foot radius) or move the area of Darkness to a space within 60 feet of you.
