@@ -1,11 +1,11 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Skill Challenge Tracker</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: sticky progress strip, main column of stage + skills + outcomes, aside of clock, modifiers, party, log. Palette follows the Complex Trap Tracker. */
 :root{
   --font-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
   --font-body:'Instrument Sans','Segoe UI',system-ui,sans-serif;
@@ -39,147 +39,264 @@ h1{font-size:clamp(28px,5vw,44px);font-weight:700;letter-spacing:-.01em}
 h2{font-size:21px;font-weight:650}
 h3{font-size:16px;font-weight:650}
 p{margin:0}
-.muted{color:var(--muted)}.small{font-size:13px}
+.muted{color:var(--muted)}
 .mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
 .eyebrow{font:500 11px/1.2 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.lbl{font:500 11px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-button,input,select,textarea{font:inherit;color:inherit}
-.head{padding-top:8px;display:grid;gap:4px}
+button,input,select{font:inherit;color:inherit}
+.head{padding-top:8px}
 .controls{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;padding-block:12px}
 .ctl{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lbl{font:500 11px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--surface)}
 .seg button{border:0;background:transparent;padding:8px 13px;cursor:pointer;font-weight:600;min-height:38px}
 .seg button+button{border-left:1px solid var(--line)}
 .seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
-.tabs{display:flex;gap:4px}
+.tabs{display:flex;gap:4px;margin-left:auto}
 .tabs button{border:0;background:transparent;padding:8px 14px;cursor:pointer;font-weight:650;border-bottom:2px solid transparent;min-height:38px}
 .tabs button[aria-pressed="true"]{border-bottom-color:var(--accent);color:var(--accent)}
 .btn{appearance:none;border:1px solid var(--line);background:var(--surface);padding:8px 13px;border-radius:8px;cursor:pointer;font-weight:600;font-size:14px;min-height:38px}
 .btn:hover:not([disabled]){border-color:var(--accent)}
 .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .btn.calm{background:var(--calm);color:var(--bg);border-color:var(--calm)}
-.btn.bad{color:var(--crit);border-color:color-mix(in srgb,var(--crit) 55%,var(--line))}
-.btn.sm{padding:3px 10px;min-height:32px;font-size:13px}
-.btn[disabled]{opacity:.4;cursor:not-allowed}
+.btn.sm{padding:3px 9px;min-height:30px;font-size:13px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
 .btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .strip{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-block:1px solid var(--line);padding-block:10px;margin-bottom:16px}
-.strip-in{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
-.stat{display:grid;gap:3px}
-.stat.grow{flex:1;min-width:180px}
-.stat b.ttl{font:700 24px/1.1 var(--font-display)}
-.stat .sub{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.strip-in{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
+.stat{display:grid;gap:2px}
+.stat b{font:700 26px/1 var(--font-display);font-variant-numeric:tabular-nums}
+.stat span.sub{font-size:12px;color:var(--muted)}
+.stat .row{display:flex;align-items:center;gap:6px}
 .strip .acts{display:flex;gap:8px;margin-left:auto}
-.pips{display:flex;gap:6px;flex-wrap:wrap}
-.pip{width:18px;height:18px;border-radius:50%;border:2px solid var(--calm)}
-.pip.f{background:var(--calm)}
-.pip.bad{border-color:var(--crit)}.pip.bad.f{background:var(--crit)}
-.step{width:28px;height:28px;border:1px solid var(--line);background:var(--surface);border-radius:8px;cursor:pointer;font-size:16px;font-weight:700;line-height:1}
+.pips{display:flex;gap:6px;margin-top:3px}.pip{width:20px;height:20px;border-radius:50%;border:2px solid var(--calm)}.pip.f{background:var(--calm)}
+.step{width:30px;height:30px;border:1px solid var(--line);background:var(--surface);border-radius:8px;cursor:pointer;font-size:17px;font-weight:700;line-height:1}
 .step:hover{border-color:var(--accent)}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;min-width:0}
-.card.bad{background:var(--crit-soft);border-color:var(--crit)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.card.trap{background:var(--accent-soft);border-color:var(--accent)}
 .card.calmc{background:var(--calm-soft);border-color:var(--calm)}
 .card h2{margin-block:4px 8px}
 .run{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
 @media(min-width:1080px){.run{grid-template-columns:minmax(0,1fr) 340px;align-items:start}}
-.run-main,.run-aside{display:grid;gap:16px;min-width:0;grid-template-columns:minmax(0,1fr);align-content:start}
-.setup summary{cursor:pointer;list-style:none;margin-bottom:8px}
-.setup[open] summary{margin-bottom:8px}
-.flavor{font-style:italic;color:var(--muted);margin-bottom:8px;max-width:70ch}
-.setup p{max-width:75ch}.setup p+p{margin-top:8px}
-.note{background:var(--surface-2);border-radius:8px;padding:8px 12px;font-size:14px;margin-block:8px}
-.actor{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-block:10px}
-.actor select,.actor input,.addf input,.picker input,textarea{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:7px 10px;min-height:38px;min-width:0}
-.actor input{width:76px}
-textarea{width:100%;margin-top:6px;resize:vertical}
-.stagenav,.quick,.tagrow{margin-block:6px}
+.run-main,.run-aside{display:grid;gap:16px;min-width:0;grid-template-columns:minmax(0,1fr)}
+.order{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;margin:0;list-style:none}
+.oc{flex:0 0 auto;display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 10px;white-space:nowrap}
+.oc .i{font:600 12px var(--font-mono);color:var(--muted)}
+.oc.trap{border-style:dashed;border-color:var(--accent);color:var(--accent);font-weight:600}
+.oc.cur{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.oc.cur .i{color:inherit}
+.oc.out{opacity:.5}
+.party-head{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.party-head h2,.party-head h3{margin-right:auto}
+.addf{display:flex;gap:8px;flex-wrap:wrap}
+.addf input{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 10px;min-height:38px;min-width:0}
+.addf #newHd{width:72px}
+.addf #newName{flex:1 1 150px}.addf #newInit{width:80px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(285px,100%),1fr))}
+.char{grid-template-columns:minmax(0,1fr);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.char.is-active{box-shadow:0 0 0 2px var(--accent)}
+.char.is-out{opacity:.78}
+.ch-head{display:flex;gap:8px;align-items:center}
+.ch-head .name{flex:1;min-width:0;border:1px solid transparent;background:transparent;font:650 17px var(--font-display);padding:3px 6px;border-radius:6px}
+.ch-head .name:hover,.ch-head .name:focus{border-color:var(--line);background:var(--bg)}
+.ch-head .init{width:56px;border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:4px 6px;text-align:center;font-family:var(--font-mono)}
+.x{border:0;background:transparent;cursor:pointer;color:var(--muted);font-size:20px;line-height:1;padding:4px 6px;border-radius:6px}
+.x:hover{color:var(--crit)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{display:inline-flex;align-items:center;padding:2px 9px;border-radius:999px;font:600 12px var(--font-body);background:var(--surface-2)}
 .chip.warn{background:var(--warn-soft);color:var(--warn)}
 .chip.crit{background:var(--crit-soft);color:var(--crit)}
 .chip.ok{background:var(--calm-soft);color:var(--calm)}
-.sks{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
-.sk{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 16px;padding-block:14px;border-top:1px solid var(--line)}
-.sk:first-child{border-top:0}
-.sk.off .sk-main{opacity:.55}
-.sk-h{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin-bottom:4px}
-.sk-main p{max-width:68ch;font-size:14px;margin-bottom:6px}
-.sk-act{display:flex;flex-wrap:wrap;gap:6px;align-items:flex-start;justify-content:flex-end;align-content:start;max-width:260px}
-.sk-tally{flex-basis:100%;text-align:right;font-size:12px;color:var(--muted)}
-@media(max-width:640px){.sk{grid-template-columns:minmax(0,1fr)}.sk-act{justify-content:flex-start;max-width:none}.sk-tally{text-align:left}}
-.dc{font:600 .85em var(--font-mono);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:0 .4em;white-space:nowrap}
+.ch-acts{display:flex;flex-wrap:wrap;gap:6px}
+.res{border-top:1px solid var(--line);padding-top:10px;margin-top:10px;display:grid;gap:8px}
+.res:first-of-type{border-top:0;margin-top:0}
+.res-top{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.res-top .who{flex:1;min-width:130px}
+.res-out{font-size:14px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;background:var(--bg);border-radius:8px;padding:8px 10px}
+.res-out input{width:64px;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:3px 6px;font-family:var(--font-mono);text-align:center}
+.res-out .eff{flex-basis:100%}
+.remind{border:1px solid var(--warn);background:var(--warn-soft);color:var(--warn);border-radius:8px;padding:8px 10px;font-size:14px;margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.glance{display:grid;gap:8px;margin:0}
+.glance div{display:grid;grid-template-columns:96px 1fr;gap:8px;font-size:14px}
+.glance dt{font:600 12px/1.6 var(--font-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.glance dd{margin:0}
+.banner{background:var(--calm-soft);border:1px solid var(--calm);color:var(--calm);border-radius:8px;padding:8px 12px;font-weight:600;margin-top:8px}
+.banner.bad{background:var(--crit-soft);border-color:var(--crit);color:var(--crit)}
+.log{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px;max-height:300px;overflow-y:auto;font-size:13px}
+.log li{display:flex;gap:8px}
+.log .r{font:500 11px/1.9 var(--font-mono);color:var(--muted);min-width:30px}
+.note{background:var(--surface-2);border-radius:8px;padding:8px 12px;font-size:14px}
+.ref{max-width:820px;display:grid;gap:22px}
+.ref section{display:grid;gap:8px}
+.ref h3{border-bottom:1px solid var(--line);padding-bottom:6px}
+.ref dl{margin:0;display:grid;gap:8px}
+.ref dt{font-weight:650}
+.ref dd{margin:0}
+.ref ul{margin:0;padding-left:20px;display:grid;gap:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 11px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+tr.hl td{background:var(--accent-soft)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* rules carried over from the Concentrated Magic Zone page */
+#hum{display:block;width:100%;height:34px;margin-top:6px}
+.btn.bad[aria-pressed="true"]{background:var(--crit-soft);border-color:var(--crit);color:var(--crit)}
+.strip .grow{flex:1;min-width:150px}
+.party-head h2{margin-right:auto}
+.sat-row{display:flex;align-items:center;gap:10px}
+.sat-num{font:700 40px/1 var(--font-display);font-variant-numeric:tabular-nums;min-width:48px;text-align:center}
+.meter{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;height:16px}
+.cell{border-radius:3px;background:color-mix(in srgb,var(--zone) 22%,var(--surface-2))}
+.cell.on{background:var(--zone)}
+.z0{--zone:var(--accent)}.z1{--zone:var(--warn)}.z2{--zone:var(--crit)}
+.mlab{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;font:500 10px var(--font-mono);color:var(--muted);margin-top:-4px}
+.mlab span{white-space:nowrap;overflow:hidden}
+.muts{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.mut{display:flex;gap:8px;justify-content:space-between;border-top:1px solid var(--line);padding-top:8px;font-size:13px}
+.mut p+p{margin-top:2px}
+.mut-x{color:var(--warn);font-weight:600}
+.sup{list-style:none;padding:0;margin:8px 0;display:grid;gap:6px}
+.sup li{display:flex;gap:8px;align-items:flex-start}
+body[data-trap="cmz"]{--bg:#edf1ef;--surface:#f8faf9;--surface-2:#e0e8e5;--line:#c3cfca;--fg:#13201c;--muted:#4b5e58;--accent:#17695d;--accent-ink:#ffffff;--accent-soft:#d2e8e3;--calm:#17695d;--calm-soft:#d2e8e3;--warn:#8f5a0e;--warn-soft:#f3e2c0;--crit:#a1302a;--crit-soft:#f3d5d1}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body[data-trap="cmz"]{--bg:#0d1412;--surface:#141e1b;--surface-2:#1c2a26;--line:#2a3b36;--fg:#e4eeea;--muted:#9bb0a9;--accent:#4cc5b2;--accent-ink:#04201b;--accent-soft:#183a34;--calm:#4cc5b2;--calm-soft:#183a34;--warn:#e8b155;--warn-soft:#3b2e13;--crit:#f08a7f;--crit-soft:#3d1c19}}
+:root[data-theme="dark"] body[data-trap="cmz"]{--bg:#0d1412;--surface:#141e1b;--surface-2:#1c2a26;--line:#2a3b36;--fg:#e4eeea;--muted:#9bb0a9;--accent:#4cc5b2;--accent-ink:#04201b;--accent-soft:#183a34;--calm:#4cc5b2;--calm-soft:#183a34;--warn:#e8b155;--warn-soft:#3b2e13;--crit:#f08a7f;--crit-soft:#3d1c19}
+.picker{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding-bottom:6px}
+.seg.wrap{flex-wrap:wrap}
+.seg.wrap button{min-width:0}
+body[data-trap="owz"]{--bg:#f2ede1;--surface:#faf6ec;--surface-2:#e8dfc9;--line:#d1c5a8;--fg:#241f12;--muted:#66593f;--accent:#9a5b0c;--accent-ink:#ffffff;--accent-soft:#f1dfba;--calm:#17695d;--calm-soft:#d2e8e3;--warn:#8f5a0e;--warn-soft:#f3e2c0;--crit:#a1302a;--crit-soft:#f3d5d1}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body[data-trap="owz"]{--bg:#17130b;--surface:#201a10;--surface-2:#2c2417;--line:#46391f;--fg:#f0e8d4;--muted:#b5a784;--accent:#e6a53c;--accent-ink:#2a1a04;--accent-soft:#43310f;--calm:#4cc5b2;--calm-soft:#183a34;--warn:#e8b155;--warn-soft:#3b2e13;--crit:#f08a7f;--crit-soft:#3d1c19}}
+:root[data-theme="dark"] body[data-trap="owz"]{--bg:#17130b;--surface:#201a10;--surface-2:#2c2417;--line:#46391f;--fg:#f0e8d4;--muted:#b5a784;--accent:#e6a53c;--accent-ink:#2a1a04;--accent-soft:#43310f;--calm:#4cc5b2;--calm-soft:#183a34;--warn:#e8b155;--warn-soft:#3b2e13;--crit:#f08a7f;--crit-soft:#3d1c19}
+body[data-trap="gwg"]{--bg:#E7EBDF;--surface:#F5F7F0;--surface-2:#DCE2D1;--line:#BAC4AB;--fg:#1D2517;--muted:#4B5740;--accent:#47652A;--accent-ink:#F5F7F0;--accent-soft:#DCE6C8;--calm:#3B7436;--calm-soft:#D6E8CF;--warn:#8A4F08;--warn-soft:#F1E0BE;--crit:#A3361A;--crit-soft:#F3D5CC}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body[data-trap="gwg"]{--bg:#12150E;--surface:#1A1E14;--surface-2:#242A1B;--line:#38412D;--fg:#E5E9D6;--muted:#A5AF92;--accent:#8FB85A;--accent-ink:#12150E;--accent-soft:#27321B;--calm:#8CC97E;--calm-soft:#1E3019;--warn:#EDAA3A;--warn-soft:#3A2D12;--crit:#EE8062;--crit-soft:#3d1c19}}
+:root[data-theme="dark"] body[data-trap="gwg"]{--bg:#12150E;--surface:#1A1E14;--surface-2:#242A1B;--line:#38412D;--fg:#E5E9D6;--muted:#A5AF92;--accent:#8FB85A;--accent-ink:#12150E;--accent-soft:#27321B;--calm:#8CC97E;--calm-soft:#1E3019;--warn:#EDAA3A;--warn-soft:#3A2D12;--crit:#EE8062;--crit-soft:#3d1c19}
+.dc{font:600 .88em var(--font-mono);background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:0 .35em;white-space:nowrap}
+.dice{font:600 .9em var(--font-mono);color:var(--crit);background:transparent;border:1px solid color-mix(in srgb,var(--crit) 50%,transparent);border-radius:4px;padding:0 .4em;cursor:pointer;white-space:nowrap;font-variant-numeric:tabular-nums}
+.dice:hover{background:color-mix(in srgb,var(--crit) 14%,transparent)}
 .pill{display:inline-flex;align-items:baseline;gap:6px;font:600 12px var(--font-body);border:1px solid var(--line);border-radius:999px;padding:2px 10px;background:var(--surface)}
 .pill i{font-style:normal;font-weight:500;color:var(--muted)}
 .pill.live{border-color:var(--warn);color:var(--warn)}
 .pill.done{border-color:var(--calm);color:var(--calm)}
-.pill.off{border-color:var(--crit);color:var(--crit)}
-.out{margin:10px 0 0;display:grid;gap:8px}
-.out div{padding:8px 10px;border-radius:8px;border:1px solid transparent}
-.out div.hit{background:var(--surface);border-color:var(--accent)}
-.out dt{font:600 11px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.out dd{margin:2px 0 0;font-size:14px;max-width:70ch}
-.banner{background:var(--calm-soft);border:1px solid var(--calm);color:var(--calm);border-radius:8px;padding:8px 12px;font-weight:700;margin-top:4px}
-.banner.bad{background:var(--crit-soft);border-color:var(--crit);color:var(--crit)}
-.remind{border:1px solid var(--warn);background:var(--warn-soft);color:var(--warn);border-radius:8px;padding:8px 10px;font-size:14px;margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.party-head{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.party-head h3{margin-right:auto}
-.rdn{min-width:70px;text-align:center}
-.haz{border-top:1px solid var(--line);margin-top:12px;padding-top:12px;display:grid;gap:8px}
-.meter{display:flex;gap:3px;height:14px}
-.cell{flex:1;border-radius:3px;background:color-mix(in srgb,var(--accent) 22%,var(--surface-2))}
-.cell.on{background:var(--accent)}
+.pill.off{border-color:var(--muted);color:var(--muted);text-decoration:line-through}
+.chk{display:flex;align-items:center;gap:8px;min-height:36px;cursor:pointer}
+.chk input{width:18px;height:18px;accent-color:var(--accent);flex:none}
+.chk.lock{opacity:.55;cursor:default}
+.nowl{display:grid;gap:10px;margin-top:12px}
+.item{border:1px solid var(--accent);background:var(--surface);border-radius:8px;padding:12px}
+.item h4{margin:0 0 6px;font:650 16px var(--font-display)}
+.item p{margin:0 0 8px}
+.tgt{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 8px}
+.pcs{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(285px,100%),1fr))}
+.pc{border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:8px;background:var(--surface);min-width:0;grid-template-columns:minmax(0,1fr)}
+.pc-top{display:flex;align-items:center;gap:8px}
+.pc-top strong{flex:1;min-width:0;overflow-wrap:anywhere;font:650 16px var(--font-display)}
+.pp{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--muted)}
+.pp input{width:56px;font:500 14px var(--font-mono);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:4px 6px}
+.zones{display:grid;grid-template-columns:repeat(4,1fr)}
+.zones button{min-height:36px;padding:4px}
+.conds{display:flex;flex-wrap:wrap;gap:6px}
+.cond{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;font:600 12px var(--font-body);padding:3px 10px;cursor:pointer;min-height:30px}
+.cond[aria-pressed="true"]{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+.cmlist{display:grid;gap:10px}
+.cmr{border-top:1px solid var(--line);padding-top:8px;display:grid;gap:4px}
+.cmr:first-child{border-top:0;padding-top:0}
+.stepper,.num{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px}
+.num input{width:76px;font:500 14px var(--font-mono);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:4px 6px}
+.last{display:flex;gap:12px;align-items:center}
+.tot{font:600 34px/1 var(--font-mono);min-width:2ch;text-align:center}
+.tot.crit{color:var(--calm)}.tot.fumble{color:var(--crit)}
+.lf{font-size:13px;color:var(--muted)}
+.rl{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px;font-size:13px}
+.rl li{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:3px 0;color:var(--muted)}
+.rl b{font-family:var(--font-mono);color:var(--fg)}
+.ids{display:grid;gap:10px}
+.id{border-top:1px solid var(--line);padding-top:10px;display:grid;gap:4px}
+.id:first-child{border-top:0;padding-top:0}
+.id-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.id p{margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--muted);font-size:13px}
+.meta b{color:var(--fg);font-family:var(--font-mono)}
+.els{display:grid;gap:14px}
+.el{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+.el header{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.el h3{flex:1 1 auto;min-width:0;border:0;padding:0}
+.tag{font:600 11px var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.fx{margin:10px 0 0}
+.cm{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}
+.cm p{margin:4px 0 0;font-size:14px}
+.dyn{margin:10px 0 0;padding:8px 10px;border:1px dashed var(--line);border-radius:8px;font-size:14px}
+body[data-trap="fw"]{--bg:#E4EDF3;--surface:#F3F8FB;--surface-2:#D6E3EC;--line:#B3C8D7;--fg:#112230;--muted:#425A6B;--accent:#1D6A96;--accent-ink:#F3F8FB;--accent-soft:#CFE4F1;--calm:#2F7A5C;--calm-soft:#D3EADF;--warn:#8A5410;--warn-soft:#F2E2C4;--crit:#A6362F;--crit-soft:#F4D8D4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body[data-trap="fw"]{--bg:#0C151D;--surface:#132029;--surface-2:#1B2D3A;--line:#2D4556;--fg:#E1EEF6;--muted:#9DB5C5;--accent:#6CB8E6;--accent-ink:#0C151D;--accent-soft:#17303F;--calm:#7CCBA3;--calm-soft:#163227;--warn:#EBB05A;--warn-soft:#3A2D14;--crit:#F08A80;--crit-soft:#3E1D1B}}
+:root[data-theme="dark"] body[data-trap="fw"]{--bg:#0C151D;--surface:#132029;--surface-2:#1B2D3A;--line:#2D4556;--fg:#E1EEF6;--muted:#9DB5C5;--accent:#6CB8E6;--accent-ink:#0C151D;--accent-soft:#17303F;--calm:#7CCBA3;--calm-soft:#163227;--warn:#EBB05A;--warn-soft:#3A2D14;--crit:#F08A80;--crit-soft:#3E1D1B}
+.tbl{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.tbl th{font:600 12px var(--font-body);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+body[data-trap="fw"] .cmr{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;min-width:0}
+body[data-trap="fw"] .cmr>*{min-width:0;overflow-wrap:anywhere}
+body[data-trap="fw"] .cmr .chk{align-items:flex-start}
+body[data-trap="fw"] .stepper{flex-wrap:wrap}
+body[data-trap="pob"]{--bg:#EBE4E1;--surface:#F8F3F1;--surface-2:#E2D6D1;--line:#C9B5AD;--fg:#2A1714;--muted:#6A4A44;--accent:#9B2C2C;--accent-ink:#F8F3F1;--accent-soft:#F0D3CE;--calm:#2F7A5C;--calm-soft:#D3EADF;--warn:#8A5410;--warn-soft:#F2E2C4;--crit:#A6362F;--crit-soft:#F4D8D4}
+body[data-trap="ptp"]{--bg:#E6E8DA;--surface:#F4F5EA;--surface-2:#DADDC6;--line:#B9BE9A;--fg:#1D2412;--muted:#505A36;--accent:#5E7A12;--accent-ink:#F4F5EA;--accent-soft:#DDE8B8;--calm:#2F7A5C;--calm-soft:#D3EADF;--warn:#8A5410;--warn-soft:#F2E2C4;--crit:#A6362F;--crit-soft:#F4D8D4}
+body[data-trap="scd"]{--bg:#E9E7E2;--surface:#F6F4EF;--surface-2:#DDD9CF;--line:#C2BBA9;--fg:#23201A;--muted:#5C564A;--accent:#8A5A12;--accent-ink:#F6F4EF;--accent-soft:#EFDDB6;--calm:#2F7A5C;--calm-soft:#D3EADF;--warn:#8A5410;--warn-soft:#F2E2C4;--crit:#A6362F;--crit-soft:#F4D8D4}
+@media (prefers-color-scheme: dark){
+:root:not([data-theme="light"]) body[data-trap="pob"]{--bg:#17100F;--surface:#211716;--surface-2:#2D1F1D;--line:#4A3431;--fg:#F0E4E1;--muted:#BBA29D;--accent:#E57A72;--accent-ink:#17100F;--accent-soft:#3B1F1D;--calm:#7CCBA3;--calm-soft:#163227;--warn:#EBB05A;--warn-soft:#3A2D14;--crit:#F08A80;--crit-soft:#3E1D1B}
+:root:not([data-theme="light"]) body[data-trap="ptp"]{--bg:#12150B;--surface:#1B2010;--surface-2:#252C17;--line:#3E4727;--fg:#E7EBD3;--muted:#A8B287;--accent:#A9D04A;--accent-ink:#12150B;--accent-soft:#2A3414;--calm:#7CCBA3;--calm-soft:#163227;--warn:#EBB05A;--warn-soft:#3A2D14;--crit:#F08A80;--crit-soft:#3E1D1B}
+:root:not([data-theme="light"]) body[data-trap="scd"]{--bg:#141310;--surface:#1D1B16;--surface-2:#28251D;--line:#443F31;--fg:#EDEAE0;--muted:#B0A993;--accent:#E0A648;--accent-ink:#141310;--accent-soft:#35290F;--calm:#7CCBA3;--calm-soft:#163227;--warn:#EBB05A;--warn-soft:#3A2D14;--crit:#F08A80;--crit-soft:#3E1D1B}}
+:root[data-theme="dark"] body[data-trap="pob"]{--bg:#17100F;--surface:#211716;--surface-2:#2D1F1D;--line:#4A3431;--fg:#F0E4E1;--muted:#BBA29D;--accent:#E57A72;--accent-ink:#17100F;--accent-soft:#3B1F1D;--calm:#7CCBA3;--calm-soft:#163227;--warn:#EBB05A;--warn-soft:#3A2D14;--crit:#F08A80;--crit-soft:#3E1D1B}
+:root[data-theme="dark"] body[data-trap="ptp"]{--bg:#12150B;--surface:#1B2010;--surface-2:#252C17;--line:#3E4727;--fg:#E7EBD3;--muted:#A8B287;--accent:#A9D04A;--accent-ink:#12150B;--accent-soft:#2A3414;--calm:#7CCBA3;--calm-soft:#163227;--warn:#EBB05A;--warn-soft:#3A2D14;--crit:#F08A80;--crit-soft:#3E1D1B}
+:root[data-theme="dark"] body[data-trap="scd"]{--bg:#141310;--surface:#1D1B16;--surface-2:#28251D;--line:#443F31;--fg:#EDEAE0;--muted:#B0A993;--accent:#E0A648;--accent-ink:#141310;--accent-soft:#35290F;--calm:#7CCBA3;--calm-soft:#163227;--warn:#EBB05A;--warn-soft:#3A2D14;--crit:#F08A80;--crit-soft:#3E1D1B}
+.trows{display:grid;gap:0;margin-top:8px}
+.trow{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding:6px 0;min-width:0}
+.trow .acts{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.btn.crit{background:transparent;color:var(--crit);border-color:var(--crit)}
+.btn.calm{background:transparent;color:var(--calm);border-color:var(--calm)}
+.picker{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.trapsel{font:600 15px var(--font-body);color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 34px 8px 12px;min-height:40px;max-width:100%;min-width:min(260px,100%);cursor:pointer}
+.trapsel:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+body[data-trap="mfg"]{--bg:#E3E8E6;--surface:#F2F6F4;--surface-2:#D3DCD8;--line:#AEBDB7;--fg:#16221E;--muted:#475A54;--accent:#3F7A6B;--accent-ink:#F2F6F4;--accent-soft:#CDE3DB;--calm:#2F7A5C;--calm-soft:#D3EADF;--warn:#8A5410;--warn-soft:#F2E2C4;--crit:#A6362F;--crit-soft:#F4D8D4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) body[data-trap="mfg"]{--bg:#0F1614;--surface:#18211E;--surface-2:#222E2A;--line:#38483F;--fg:#E0EBE7;--muted:#9DB3AB;--accent:#7FC9B3;--accent-ink:#0F1614;--accent-soft:#1B3029;--calm:#7CCBA3;--calm-soft:#163227;--warn:#EBB05A;--warn-soft:#3A2D14;--crit:#F08A80;--crit-soft:#3E1D1B}}
+:root[data-theme="dark"] body[data-trap="mfg"]{--bg:#0F1614;--surface:#18211E;--surface-2:#222E2A;--line:#38483F;--fg:#E0EBE7;--muted:#9DB3AB;--accent:#7FC9B3;--accent-ink:#0F1614;--accent-soft:#1B3029;--calm:#7CCBA3;--calm-soft:#163227;--warn:#EBB05A;--warn-soft:#3A2D14;--crit:#F08A80;--crit-soft:#3E1D1B}
+.pip.bad{border-color:var(--crit)}.pip.bad.f{background:var(--crit)}
+.strip .stat .row{min-height:30px}
+.flavor{font-style:italic;color:var(--muted)}
+.small{font-size:13px}
 .crit-t{color:var(--crit)}.ok-t{color:var(--calm)}
-.mods{list-style:none;margin:8px 0;padding:0;display:grid;gap:6px}
-.mods li{display:flex;align-items:center;gap:6px}
-.x{border:0;background:transparent;cursor:pointer;color:var(--muted);font-size:20px;line-height:1;padding:4px 6px;border-radius:6px}
-.x:hover{color:var(--crit)}
-.pl{display:grid;gap:10px;margin-block:10px}
-.pc{border:1px solid var(--line);border-radius:8px;padding:8px 10px;display:grid;gap:6px;background:var(--bg)}
-.pc-h{display:flex;gap:6px;align-items:center}
-.pname{flex:1;min-width:0;border:1px solid transparent;background:transparent;font:650 16px var(--font-display);padding:3px 6px;border-radius:6px}
-.pname:hover,.pname:focus{border-color:var(--line);background:var(--surface)}
-.pc-r{display:flex;gap:8px;align-items:center}
-.pc-r .lbl{flex:1}
-.pc-r b{min-width:38px;text-align:center}
-.addf{display:flex;gap:8px;flex-wrap:wrap}
-.addf #newName{flex:1 1 130px}.addf #newHd{width:70px}
-.log,.tbl{list-style:none;margin:8px 0;padding:0;display:grid;gap:5px;max-height:320px;overflow-y:auto;font-size:13px}
-.tbl{list-style:decimal;padding-left:22px;max-height:none}
-.log li{display:flex;gap:8px}
-.log .r{font:500 11px/1.9 var(--font-mono);color:var(--muted);min-width:30px}
-.subs{display:grid;gap:1px;color:var(--muted);font-size:12px}
-.subs i{font-style:normal}
-.picker{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding-bottom:6px}
-.picker input{flex:1 1 220px}
-.count{margin-block:8px 12px;font-size:13px}
-.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr))}
-.lib{display:grid;gap:8px;align-content:start}
-.lib-top{display:flex;justify-content:space-between;gap:8px;align-items:center}
-.lib .btn{justify-self:start}
-.nh{margin-top:12px;font-size:14px}
-.notes{margin:6px 0 0;padding-left:20px;display:grid;gap:4px;font-size:14px;max-width:75ch}
-.ref{max-width:820px;display:grid;gap:22px}
-.ref section{display:grid;gap:8px}
-.ref h3{border-bottom:1px solid var(--line);padding-bottom:6px}
-.ref ul{margin:0;padding-left:20px;display:grid;gap:4px}
-.tw{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
-table{border-collapse:collapse;width:100%;font-size:14px;min-width:420px}
-th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font:600 11px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
-tr:last-child td{border-bottom:0}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+.sks{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
+.sk{border-top:1px solid var(--line);padding:12px 0;display:grid;gap:8px;grid-template-columns:minmax(0,1fr)}
+.sk:first-child{border-top:0}
+.sk.off{opacity:.55}
+.sk-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.sk-h h3{margin-right:4px}
+.sk p{margin:0}
+.sk-act{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sk-tally{margin-right:auto;color:var(--muted);font-size:13px}
+.outc{display:grid;gap:4px;font-size:14px}
+.o{margin:0;padding:6px 10px;border-radius:8px;font-size:14px}
+.o.ok{background:var(--calm-soft)}.o.ok b{color:var(--calm)}
+.o.bad{background:var(--crit-soft)}.o.bad b{color:var(--crit)}
+.o b{margin-right:6px}
+.cr{display:flex;align-items:center;gap:8px}
+.cr .lbl{min-width:84px}
+.actor{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0}
+.haz{border-top:1px solid var(--line);padding-top:10px;margin-top:10px;display:grid;gap:6px}
+.meter{--zone:var(--accent)}
+.ta{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:8px 10px;font:inherit;color:inherit;resize:vertical}
+.tbl-l{margin:8px 0 0;padding-left:22px;display:grid;gap:4px;font-size:14px}
+.glance .hit{background:var(--calm-soft);border-radius:6px;padding:2px 6px}
+.card.now{border-color:var(--accent)}
+.ref dl div{display:block}
+.ref .glance div{display:grid}
+.ref section>.sks{margin-top:4px}
+
+</style></head><body>
 <div class="wrap">
-<header class="head">
-  <span class="eyebrow">Challenge Accepted · Books 1 and 2 · Custom</span>
-  <h1>Skill Challenge Tracker</h1>
-  <p class="muted">The 34 challenges from the books plus 5 of your own, with successes, failures, advantage and disadvantage, Hit Dice and exhaustion tracked for you. Progress is saved in this browser.</p>
-</header>
-<div class="controls">
-  <div class="tabs" id="tabs" role="group" aria-label="View"></div>
-  <div class="ctl"><span class="lbl">DC tier shift</span><div class="seg" id="shift" role="group" aria-label="DC tier shift"></div></div>
-</div>
-<main id="view"></main>
+  <div id="picker" class="picker"></div>
+  <header class="head" id="head"></header>
+  <div id="controls"></div>
+  <div id="strip"></div>
+  <main id="view"></main>
 </div>
 <script>
 /* ---------- DATA: every skill challenge from Challenge Accepted 1 and 2 ---------- */
@@ -246,7 +363,7 @@ out:{total:"The characters identify the poison, quickly give aid and gather a cu
 C({id:"flood",b:"1",name:"Flooding Chamber",tags:["combat","trap"],cx:1,scale:"Combat rounds. The room fills at initiative 20.",
 fl:"An octagonal chamber with corpses on the floor and two stone doors carved with fish heads. A stone door slams behind you. Water gushes through the fish-heads and the corpses rise.",
 setup:"A pressure plate seals the chamber and floods it. Three zombies attack, grappling and slowing the characters. The room fills at initiative 20 each round and is full in 5 rounds unless the party acts. The zombies hold the keys that stop the water. Once all keys are used, the doors open.",
-haz:{n:"Rising water",limit:5,nosave:true,t:"Room is full after round 5. Athletics or Sleight of Hand successes add 2 rounds. Once full, characters who can’t breathe underwater are suffocating (DMG p183)."},
+haz:{n:"Rising water",limit:5,nosave:true,t:"The water rises at initiative 20 each round and the room is completely full after round 5. A success that pries a door open or props the jaws closed (Athletics or Sleight of Hand) adds 2 rounds. Once the room is full, characters who can’t breathe underwater are suffocating (DMG p183)."},
 stages:[{skills:[
 K("Athletics","vh","Pry open one of the doors.",{ok:["time:2"],bad:["dc"]}),
 K("Investigation","m","The carved fish-face has a hinged jaw. A character fighting a zombie with passive Perception 14 spots a key in its mouth."),
@@ -348,7 +465,7 @@ out:{total:"The rift implodes. Demons within 10 feet must succeed on a Moderate 
 C({id:"rapids",b:"1",name:"River Rapids",tags:["survival"],cx:3,scale:"Hours down the river. Saves time on a long journey.",
 fl:"A raging stream merges into a larger river downstream. There’s timber nearby to build a raft, a swifter way than mount or foot, and a chance to rest.",
 setup:"The party is on a time-sensitive journey and can build a raft and ride the river. Parts of the river are treacherous.",
-haz:{n:"Thrashing raft",stat:"Dexterity",dc:"e",t:"On a failure the character falls into the river and must spend their turn on a Moderate Athletics check to get back aboard. A character ending their turn in the water loses one Hit Die.",fail:["text:Overboard! Athletics (Moderate) to climb back, or lose 1 Hit Die at end of turn"]},
+haz:{n:"Thrashing raft",stat:"Dexterity",dc:"e",t:"The thrashing raft can throw a character into the water.",fail:["text:The character falls into the river and must spend their turn on a Moderate Athletics check to climb back aboard. A character who ends their turn in the water loses 1 Hit Die."]},
 stages:[{skills:[
 K("Athletics","m","Direct the raft or stabilize it against the waves. If a check fails by 5 or more, lose 2 Hit Dice instead.",{ok:["adv:Hazard"],bad:["hd:1"]}),
 K("Constitution","h","Weather the dangerous rapids, waiting for a calm stretch to help others aboard.",{ok:["adv:Athletics"]}),
@@ -398,7 +515,7 @@ out:{total:"The incubus is tired of being enslaved and agrees to help, even fini
 C({id:"buried",b:"2",name:"Buried Alive",tags:["survival","combat"],cx:1,scale:"Each round is 1 minute without air.",
 fl:"The air is thick, hot and sweaty. Every breath makes you feel you’ll pass out. If you don’t find a way out quickly, you will soon take your last breath.",
 setup:"A cave-in or collapsed building traps the party. Debris is piled tight around them and the air is running out. See Suffocating (PHB).",
-haz:{n:"No air",nosave:true,t:"Each round represents 1 minute with no air to breathe. Track suffocation (PHB) for each character."},
+haz:{n:"No air",nosave:true,t:"Each round is 1 minute with no air to breathe. Every character is suffocating: track it for each character with the Suffocating rules (PHB)."},
 stages:[{skills:[
 K("Athletics","h","Lift, push and pull heavy rocks to make a path. A failure moves debris that collapses on the party: each character takes moderate damage.",{bad:["text:Debris falls: each character takes moderate damage"]}),
 K("Constitution","h","Slow controlled breaths, or holding breath to buy the party extra time.",{ok:["adv:Athletics"]}),
@@ -474,7 +591,7 @@ out:{total:"The characters avoid the blades. If the pendulums weren’t disabled
 C({id:"underground",b:"2",name:"Going Underground",tags:["chase","social","stealth"],cx:3,scale:"Each character makes one check per hour.",
 fl:"Your pursuers fill the city. Escaping will be no easy task. Where do you go? Who do you trust? Is escape even possible? Exits are in lockdown and sentries fill every alley.",
 setup:"The party ran afoul of a noble or merchant house that sent assassins or guards. The gates are in lockdown, so they must lie low until the threat passes. Prepare a couple of hard combat encounters beforehand, which represent the enemy closing in on failed checks.",
-haz:{n:"Exhausting evasion",stat:"Constitution",dc:"m",t:"At the start of every round, succeed or lose 1 Hit Die. A character who loses all Hit Dice falls behind and is captured.",fail:["hd:1"]},
+haz:{n:"Exhausting evasion",stat:"Constitution",dc:"m",t:"At the start of every round each character makes the save.",noExh:1,fail:["hd:1","text:A character who loses their last Hit Die falls behind and is captured."]},
 stages:[{skills:[
 K("Acrobatics","m","Leap, somersault or cross by clothes line or small beam to throw off pursuers.",{bad:["hd:1"]}),
 K("Athletics","m","Climb walls, bull through crowds, leap rooftops or knock over carts."),
@@ -587,12 +704,13 @@ K("Acrobatics","h","Leap, slide and flip to avoid flying debris.",{bad:["dis:Haz
 K("Medicine","e","Tend those wounded by winds and debris. Only a single success.",{cap:1}),
 K("Perception","m","Spot cover and guide allies behind carts, buildings and fences. Gains up to 2 successes.",{cap:2,ok:["adv:Athletics"]})]}],
 out:{total:"The characters reach the villagers and protect them from flying debris on the way to a building or cellar.",ok:"They reach the villagers, but one has died by the time they arrive.",fail:"They reach the villagers but only one has survived. They escort the survivor to safety, but they are traumatized."}});
+
 /* ---------- CUSTOM CHALLENGES (your own) ---------- */
 C({id:"veiled-cave",b:"Custom",name:"The Veiled Cave",tags:["survival","magic","investigation"],cx:2,scale:"Each round is roughly an hour of searching. No short or long rest while inside the Veil’s reach.",
 fl:"An ancient ward hides the way into a cave, and it works on attention as much as on sight. The party must reach the right ridge, learn how the ward fools them, and open it before the mountain wears them down.",
 setup:"The trail ends where the map says it should, and there is nothing here: a wall of grey rock streaked with old rain, wearing a skin of moss. Somewhere behind it is a cave sealed on purpose, a vault, shrine, bandit hold or lair, whatever your adventure needs. Its keepers sealed it with the Veil, a ward that bends light, sound and the sense of direction. It doesn’t hide the entrance so much as persuade the mind to look elsewhere. To get in, the party must work out where to look, learn how the Veil fools them, and open it. Three stages, 2 successes each. Failures carry over between stages.",
 notes:["Spotlight: each stage offers an interaction, a knowledge and a physical option. If a skill is short, call a group check.","Pacing: Stage 1 fits overland travel, Stage 2 a tense arrival, Stage 3 a cliffhanger before the cave itself.","Seed the clues: show the closed-eye sigil earlier in the campaign (a coin, a ruin, a dying cultist’s ring) so the History and Religion successes feel earned.","Reskin: swap the cave for a buried temple door, a fey grove, a goblin warren or a smugglers’ cove.","Arcana in Stage 3: for dispel magic, treat the Veil as a 5th-level spell. Backlash is Moderate force damage.","Religion in Stage 3 has advantage if the History success was earned in Stage 1 (the tracker queues it for you)."],
-haz:{n:"The Veil’s Lure",stat:"Wisdom",stageDc:["e","m","h"],t:"Failure: the character chases false paths and phantom openings and loses 1 Hit Die (exhaustion if none). The DC is Easy in Stage 1, Moderate in Stage 2, Hard in Stage 3. Optional flourish: failing by 5 or more, the character sees a phantom cave mouth and walks toward it until an ally breaks the spell with an Easy Insight or Persuasion check. Until then they can’t contribute a check.",fail:["hd:1"]},
+haz:{n:"The Veil’s Lure",stat:"Wisdom",stageDc:["e","m","h"],t:"The Veil pulls at the mind every round. The save DC is Easy in Stage 1, Moderate in Stage 2 and Hard in Stage 3.",fail:["text:The character chases false paths and phantom openings.","hd:1","text:Optional: if they fail by 5 or more, they see a phantom cave mouth and walk toward it until an ally uses their action and succeeds on an Easy Insight or Persuasion check. Until then they can’t contribute a check."]},
 onF:{1:{t:"The mist thickens: every character has disadvantage on their next hazard save. The hazard DC does not change.",e:["dis:Hazard"]},
 2:{t:"A warden stirs: a level-appropriate guardian bound to the Veil (a pair of gargoyles, animated armor, an earth elemental) comes to drive off the intruders. Pause the challenge and run a normal combat. No skill checks or hazard saves during it. Resume where it stopped."}},
 quick:[
@@ -631,7 +749,7 @@ C({id:"moon-gate",b:"Custom",name:"The Moon Gate",tags:["social","magic"],cx:2,s
 fl:"The full moon hangs silver over the clearing. A ring of tiny lights swirls among the mushrooms: the fey. Their song is almost music, almost language. At the center of the circle hovers an aura like heat that refuses to fade. It is the veil between worlds, thin enough to cross if you know how to ask.",
 setup:"For a party of 4–5 characters around 5th level. The characters must win the fey’s blessing and attune to the thinning veil to open a portal to the Feywild. The fey are capricious: they are impressed by beauty, cleverness and respect, and dislike aggression, boredom and iron. A character holding iron or steel weapons without hiding them or setting them aside at the edge of the clearing has disadvantage on all Charisma checks until they do. Primary skills are DC 15; secondary skills are DC 18 and stand out in the fey’s eyes.",
 notes:["Each character makes one check per round. If someone has no fitting skill, call a group check: if at least half succeed, it counts as one success.","Fey Touched feat or Feywild origin: advantage on Persuasion, at your discretion.","Light and illusion spells (dancing lights, minor illusion, prestidigitation) impress the fey automatically and can stand in for a Performance check.","Failure doesn’t stop the story. Even with no portal tonight, the fey know what the characters seek and can become the start of the next adventure.","Players may propose other skills or spells. A stretch gets a higher DC and a single success."],
-haz:{n:"The Wandering Light",stat:"Wisdom",dcNum:13,t:"At initiative 20 each round a dancing light-spirit draws the attention of a random character. They make a Wisdom save, DC 13. On a failure they are charmed until the end of their next turn and spend their action following the light away from the circle. On a success they resist with a smile. Doesn’t count toward the challenge.",fail:["text:Charmed until the end of their next turn, following the light away from the circle"]},
+haz:{n:"The Wandering Light",stat:"Wisdom",dcNum:13,t:"At initiative 20 each round a dancing light-spirit draws the attention of one random character, who makes the save.",pass:"They resist with a smile.",fail:["text:The character is charmed until the end of their next turn and spends their action following the light away from the circle."]},
 quick:[{l:"Light or illusion spell (replaces a Performance check)",s:1,e:["adv:Persuasion,Nature"],t:"Dancing lights, minor illusion or prestidigitation impress the fey automatically"}],
 stages:[{n:"Primary skills (DC 15) and secondary skills (DC 18)",skills:[
 K("Performance","m","Join the fey’s dance or offer a song, poem or melody that moves them.",{ok:["adv:Persuasion,Nature","text:The circle glows brighter"],bad:["text:The nearest fey turns her back and a cold wind snuffs three lights of the circle"]}),
@@ -652,7 +770,7 @@ notes:["Tier 1 (levels 1–4): house or tavern, 2–4 victims, Moderate 5 (1d10)
 phases:[{from:1,n:"Rounds 1–2: Smoke",t:"The ground floor is choked with smoke but passable. Screams come from above and behind jammed doors. Hazard saves begin on round 2."},
 {from:3,n:"Rounds 3–4: Spread",t:"Fire climbs the stairwell and eats the floors. Beams groan, and the heat makes steel too hot to hold."},
 {from:5,n:"Round 5 onward: Flashover",t:"Everything flammable ignites at once. Ceilings sag and every route out is closing. After round 6, roll on the Collapse table each round."}],
-haz:{n:"Smoke and heat",stat:"Constitution",dc:"m",esc:2,from:2,t:"On initiative 20 each round after the first, every character in the building makes a Constitution save or takes Moderate fire damage and loses 1 Hit Die. The DC rises one level every two rounds: 15 on rounds 2–3, 20 on rounds 4–5, 25 on rounds 6–7, 30 from round 8. A character with no Hit Dice gains a level of exhaustion instead.",fail:["hd:1","text:Moderate fire damage"]},
+haz:{n:"Smoke and heat",stat:"Constitution",dc:"m",esc:2,from:2,t:"On initiative 20 each round after the first, every character in the building makes the save. The DC rises one level every two rounds: 15 on rounds 2–3, 20 on rounds 4–5, 25 on rounds 6–7, 30 from round 8.",fail:["text:The character takes Moderate fire damage from smoke and heat.","hd:1"]},
 rtable:{n:"Collapse table",from:7,note:"Once the challenge runs past round 6, roll a d6 at the start of each round (the tracker rolls it for you). 1–2 Minor collapse. 3–4 Smoke surge. 5 Flash fire. 6 Major collapse.",rows:[
 "Minor collapse. Each character makes a Dexterity save (Moderate DC) or takes Moderate bludgeoning damage.",
 "Minor collapse. Each character makes a Dexterity save (Moderate DC) or takes Moderate bludgeoning damage.",
@@ -687,7 +805,7 @@ fl:"Steam hisses from cracks in the black rock. The air shimmers above a plain o
 setup:"The characters must cross a volcanic plateau: a caldera floor of hardened lava, geyser fields, sulfur vents and half-cooled flows. Ground temperature near the vents reaches 200°F and the crust over old lava tubes is thinner than it looks. There is no way around: the slopes are sheer and the only other route costs days the party doesn’t have. No character gains the benefit of a short or long rest on the plateau.",
 notes:["A creature with fire resistance has advantage on the hazard save. A creature immune to fire ignores the heat, though not the fumes.","Wet cloth over the mouth and nose, or a spell like gust of wind or create or destroy water, can earn advantage at your discretion.","Midpoint Tremor: when the party earns its 3rd success, every character makes a Dexterity save (Moderate, DC 15). On a failure, knocked prone and Moderate fire damage from scalding steam. Doesn’t count toward the challenge. A vent that was safe is now spewing and a new crack splits the path.","Harder: start the hazard DC at Moderate for a brutal crossing. Easier: add a fourth failure. Shift skill DCs one level to match the party.","Reward clever ideas: wetting a cloak, wrapping boots in wet hides, or freezing a vent with ray of frost deserves a success or advantage.","A failed challenge never ends the story. The party always reaches the other side, only more battered, with new enemies, or on a longer road."],
 onS:{3:"Midpoint Tremor! Every character makes a Dexterity save (Moderate, DC 15). Failure: knocked prone and Moderate fire damage from scalding steam. Doesn’t count toward the challenge. A safe vent is now spewing and a new crack splits the path."},
-haz:{n:"Heat and fumes",stat:"Constitution",dc:"e",esc:1,cap:"h",t:"At the start of each round every character makes a Constitution save. The DC begins at Easy (10) and rises one level each round to a maximum of Hard (20). On a failure the character loses 1 Hit Die (exhaustion if none).",fail:["hd:1"]},
+haz:{n:"Heat and fumes",stat:"Constitution",dc:"e",esc:1,cap:"h",t:"At the start of each round every character makes the save. The DC begins at Easy (10) and rises one level each round to a maximum of Hard (20).",fail:["hd:1"]},
 table:{n:"Vent events",rows:[
 "Geyser burst. Each character makes a Dexterity save (Moderate, DC 15), taking Dangerous fire damage on a failure, or half on a success.",
 "Sulfur fumes. Each character makes a Constitution save (Moderate, DC 15) or is poisoned until the end of the next round.",
@@ -715,7 +833,7 @@ C({id:"snowstorm",b:"Custom",name:"Snowstorm",tags:["survival"],cx:2,scale:"One 
 fl:"The wind drops to a whisper for a single breath. Then the sky closes like a fist, the horizon vanishes, and the snow comes sideways. Your own footprints fill in behind you before you can turn to look at them.",
 setup:"The characters are caught in the open when a blizzard rolls in and must find shelter or reach their destination before the cold takes them apart. No character gains the benefit of a short or long rest in the storm without shelter. Characters with cold resistance have advantage on the hazard save, and those immune to cold skip it.",
 notes:["No back-to-back: a character can’t use the same skill on two of their own turns in a row.","Share freely: different characters can use the same skill in the same round, up to the limits listed on each skill.","Fresh approach: a character who wants to repeat a skill they used earlier must describe a different method, and the DC rises one level for that check.","Group check: if too few characters can contribute, call a group check. If at least half succeed, it counts as one success.","Dig In (emergency shelter), once per challenge: one character makes a Survival check (Hard) while others assist with Athletics (Moderate), using their action this round. Success counts as 2 successes and the party skips the next hazard. Failure counts as 1 failure: the roof caves in and everyone makes their next hazard save with disadvantage. Use the buttons above the skills.","Tie it to the campaign: if your winter has a ruler, the storm can be hers. A Nature success might reveal that the snow falls upward in a spiral, or that the wind carries a voice."],
-haz:{n:"Biting cold",stat:"Constitution",dc:"m",t:"At initiative 20 each round every character makes a Constitution save (Moderate DC). On a failure the character loses 1 Hit Die (exhaustion if none). Hazard saves never count as successes or failures.",fail:["hd:1"]},
+haz:{n:"Biting cold",stat:"Constitution",dc:"m",t:"At initiative 20 each round every character makes the save (Moderate DC).",fail:["hd:1"]},
 table:{n:"Storm surprises",rows:[
 "A half-frozen traveler stumbles out of the white and begs for help. Aiding them costs a round but earns an ally or a clue.",
 "A pack of winter wolves circles at the edge of sight. Combat, or a Survival check (Hard) to slip away.",
@@ -742,48 +860,265 @@ out:{total:"The party finds shelter, such as a waystation, a hamlet or a dry cav
 ok:"The party reaches shelter, but the storm has cost them. Every character loses 1 Hit Die and can’t short rest until the storm clears.",
 fail:"The party staggers into shelter by luck, not skill. Every character gains a level of exhaustion, and the shelter is already occupied: winter wolves, a yeti, a frost giant hunting party or a white dragon wyrmling. The story keeps moving, but the cost is real.",
 okFx:["hdAll:1"],failFx:["exhAll:1"]}});
-/* ---------- STATE ---------- */
-const KEY="skill-challenge-tracker-v2",OLD_KEY="skill-challenge-tracker-v1";
-const BY={};CH.forEach(c=>BY[c.id]=c);
-const REQ=[4,6,8];
-const $=s=>document.querySelector(s);
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const uid=()=>Math.random().toString(36).slice(2,8);
-let S,UNDO={},confirmReset=false;
 
-function defaults(){
-  return{tab:"run",cur:"blizzard",shift:0,mod:0,actor:"party",party:[],
-    runs:{},q:"",bk:"all",cxf:0,tag:"all"};
+/* ---------- Full flavor text restored for your own challenges ---------- */
+function setFl(id,list){
+  const c=CH.find(x=>x.id===id);if(!c)throw new Error("no challenge "+id);
+  list.forEach(([si,name,t])=>{const k=c.stages[si].skills.find(x=>x.n===name);if(!k)throw new Error("no skill "+id+" "+name);k.d=t;});
 }
-function load(){try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){S=null}
-  if(!S){try{S=JSON.parse(localStorage.getItem(OLD_KEY));if(S)S.party=[];}catch(e){S=null}}
-  if(!S||!S.party||!BY[S.cur])S=defaults();}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function setStage(id,si,fl,intro){const s=CH.find(x=>x.id===id).stages[si];if(fl)s.fl=fl;if(intro!==undefined)s.intro=intro;}
 
-const bookLbl=c=>/\d/.test(c.b)?"Book "+c.b:c.b;
+setFl("veiled-cave",[
+[0,"Survival","The character reads the land: game trails that bend around one slope, a spring seeping from a place with no source, the way wind funnels through the valley. They steer the party toward the ridge the animals avoid."],
+[0,"Investigation","The character compares the map fragment, a rubbing, or the stories they were told against the real ridgelines, matching the notched peak on the sketch to the one on the horizon."],
+[0,"Perception","The character spots an old waymarker: a cairn of three stacked stones, a rusted iron peg driven into the rock, or a faded carving shaped like a closed eye."],
+[0,"History","The character remembers who sealed the cave. The order that built it (the Ashen Wardens, or whoever suits your campaign) sited its vaults where three ridges meet and marked them with a closed-eye sigil. They also left a rite for opening such places."],
+[0,"Athletics","The character scrambles up a scree slope or rocky spur to see the whole valley at once, and spots where three ridges meet at a hidden cleft."],
+[1,"Arcana","The character feels the faint prickle of an illusion woven over an abjuration. This is a ward, and a deliberate one. It is not a wall but a push on the mind."],
+[1,"Perception","The character notices a draft blowing the wrong way, a faint whistle from solid rock, or a line where bats and swallows veer off in mid-flight."],
+[1,"Nature","Thick ferns and damp-loving lichen grow in a ring on a dry, sun-baked slope. Guano streaks the rock beneath a bare patch. Something below the surface is breathing cool, wet air."],
+[1,"Investigation","The character watches how shadows fall. A boulder’s shadow bends around a corner that is not there, and the line of sunlight on the rock face breaks where an opening should be. Along one edge that should be weathered smooth, they find fresh chisel marks."],
+[1,"Insight","The character notices a companion’s gaze sliding off the same patch of rock again and again. The Veil works on attention itself. They tell the party to watch each other’s eyes and call out when someone looks away."],
+[2,"Arcana","The character pulls at the ward’s threads and unpicks the pattern a strand at a time."],
+[2,"Religion","The character recognizes the closed-eye sigil carved at the base of the entrance and recites the old blessing the keepers used to pass their own wards."],
+[2,"Investigation","Three carved rings are set into the rock around the opening, each with an eye. The character works out that they must be turned until all three eyes face the same way, toward the light."],
+[2,"Sleight of Hand","The character eases the stone rings around with careful hands, coaxing the old mechanism without setting off the wards. Requires thieves’ tools."],
+[2,"Performance","The Veil hums at a low note. The character matches it with a hum, a tap on the stone or a chant, so the ward hears a friend instead of a thief."]]);
+setStage("veiled-cave",0,"The old directions run out in a valley where every ridge looks like the last. Grey slopes, dark pines, a cold wind that never settles. If the cave is here, it is hiding well.","Goal: work out which ridge the cave sits behind. Hazard save: Wisdom, Easy DC.");
+setStage("veiled-cave",1,"Everything agrees: the map, the cairn, the three ridges. And still the rock in front of you is only rock. A cold breath brushes the back of your neck, and for a heartbeat you swear the stone shifted.","Goal: the party is in the right place but cannot see the cave. Learn what the Veil is doing and where the entrance really is. Hazard save: Wisdom, Moderate DC.");
+setStage("veiled-cave",2,"The ward is plain to you now: a pattern of pale lines rippling through the stone like light on water. Behind it is an opening tall enough to walk through, and the sense of something very old that does not want to be disturbed.","Goal: the entrance is found but sealed behind the ward. Open it. Hazard save: Wisdom, Hard DC.");
+
+setFl("moon-gate",[
+[0,"Performance","The character joins the fey’s dance or offers a song, poem or melody that moves them."],
+[0,"Arcana","The character reads the weave of magic within the circle and places their hands at the right points of flow, tuning the veil’s resonance."],
+[0,"Nature","The character recognizes the right herbs, the moon’s dew or the offerings left at the edge of the circle, things the fey consider sacred."],
+[0,"Persuasion","The character speaks to the queen of the fey at the edge of the circle and offers flattery, a bargain or an honest plea. The fey love a good story."],
+[0,"Insight","The character reads the fey’s moods: which are delighted, which bored, which suspicious. They adjust the party’s approach accordingly."],
+[0,"History / Religion","The character recalls specific fey customs, ancient names for the gates of the Feywild, or the words of the ritual that predate even the Elvish language."],
+[0,"Acrobatics / Athletics","The character performs a striking physical display: leaping over the stones of the circle, whirling, or imitating the aerial turns of the fey. It can be used once per challenge, because the fey get bored of the same trick."]]);
+
+setFl("burning-building",[
+[0,"Acrobatics","Leap over fallen beams, slide under a falling lintel, cross a burning joist to reach a window ledge."],
+[0,"Athletics","Force a jammed door, hold up a beam while others pass, shoulder through a weakened wall or carry an unconscious victim."],
+[0,"Constitution","Breathe in slow, controlled draws and push on through heat and smoke to keep searching or to shield a companion."],
+[0,"Investigation","Read the building: where the stairs and load-bearing walls are, where a nursery or sickroom would sit, which beams are still sound."],
+[0,"Medicine","Treat burns and smoke inhalation, stabilize a victim for the carry, revive a companion who has been overcome."],
+[0,"Perception","Find a survivor through the smoke, hear a faint cry behind a wall, notice the creak that means a floor is about to go."],
+[0,"Survival","Read how the fire is moving, find the pocket of clean air near the floor, wet a cloth and tie it over faces."],
+[0,"Nature","Recall how fire runs through different timbers and thatch, and where a firebreak will hold."],
+[1,"Acrobatics",""],[1,"Athletics",""]]);
+
+setFl("volcanic-passage",[
+[0,"Acrobatics","The character hops between slabs of cooled basalt, vaults steaming fissures, and picks the one safe line across a crust that flexes underfoot."],
+[0,"Athletics","The character hauls an ally out of a sinking patch, shoves aside a fallen boulder, climbs a ridge to find a better path, or ropes the party across a gap."],
+[0,"Nature","The character reads the land: the yellow bloom of sulfur around a vent, the color of the rock, the way steam bends. They know which ground is old and solid and which is a thin skin over a lava tube."],
+[0,"Survival (Step 1)","The character picks a route, following the cooled flows, wind direction and the tracks of the few animals bold enough to cross here."],
+[0,"Survival (Step 2)","The character times the party’s passage between geyser eruptions, counting the long pauses and shouting when to run."],
+[0,"Investigation","The character studies the geysers’ rhythm, sorting real patterns from false pauses, and spots the telltale ridges that mark a hollow lava tube below."],
+[0,"Perception","The character notices heat shimmer over a hidden vent, a faint rumble through the soles of their boots, or a gap in the haze that shows a clear line forward."],
+[0,"Medicine","The character treats scalds, cools blistered skin with water, and tells the party how to breathe through the fumes."],
+[0,"Arcana","The character senses the elemental energy bleeding from the rock and turns it aside, bending the heat away from the party or briefly calming a nearby vent. Spells such as absorb elements, protection from energy or gust of wind can stand in for or boost this check."],
+[0,"History","The character remembers an old survey, a dwarven mining road, or a pilgrim’s tale of a safe line across the plateau marked by stone cairns."]]);
+
+setFl("snowstorm",[
+[0,"Athletics","The character breaks trail through waist-deep drifts, hauls a sled over a ridge, or carries a flagging ally across an ice-glazed slope."],
+[0,"Constitution","The character sets a punishing pace, breathes through the scarf, and refuses to stop moving. Their stubbornness steadies the rest of the group."],
+[0,"Medicine","The character thaws numb fingers, wraps frostnipped toes, and forces warm broth past chattering teeth."],
+[0,"Nature","The character reads the layered grey of the clouds, the way the snow bunches on the north side of trunks, and the silence of the birds. They call the next lull before it arrives."],
+[0,"Perception","The character spots a wind-scoured cairn, the dark line of a tree wall, a thread of chimney smoke, or the amber blink of a distant window."],
+[0,"Survival","The character keeps the wind on their left cheek, follows the slope of the ground, and steers the party around ice-skinned ponds, hidden crevasses and wind tunnels."]]);
+
+(function(){
+'use strict';
+/* =====================================================================
+   SKILL CHALLENGE TRACKER: shared shell
+   Same shell as the Complex Trap Tracker. A challenge is a module passed to
+   core.register({...}) with:
+     id, name, eyebrow, tagline, pal      header text and colour palette
+     tierLabel, tiers:[{id,label}]       the DC shift selector
+     refLabel                            label of the text tab
+     roster:'chars'                      the party array that is shared between challenges
+     fresh()                             returns a new state object (it must hold .tier)
+     bind(state)                         called before every render/action with this challenge's state
+     actions{name:(id,m,el)=>}           handlers for data-act="name" (use core.commit / core.quick)
+     fields{name:(id,value,el)=>}        handlers for data-field="name" change events
+     addChar(name,init,hd)               used by the #addForm party form
+     strip()  run()  ref()               sticky strip html, Run tab, Text tab
+   The shell handles: picker, tier, tabs, undo, saving and the shared party.
+   ===================================================================== */
+const KEY='skill-challenges-v1';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const items=[];
+let root={v:1,sel:null,tab:'run',data:{}};
+const hist=[];
+let headFor=null;
+const cur=()=>items.find(t=>t.id===root.sel)||items[0];
+function layout(o){
+  const g=k=>o[k]||'';
+  return '<div class="run"><div class="run-main">'+g('pend')+g('now')+g('order')+g('cm')+g('out')+'</div><aside class="run-aside">'+g('party')+g('mods')+g('glance')+g('log')+g('reset')+'</aside></div>';
+}
+const getRoster=(t,S)=>Array.isArray(S.chars)?S.chars.map(c=>({name:c.name,init:c.init===undefined||c.init===null?'':c.init,hd:c.hd,hdMax:c.hdMax,exh:c.exh})):null;
+function setRoster(t,S,list){
+  const arr=S.chars;if(!Array.isArray(arr))return;
+  const pool=arr.slice(),out=[];
+  t.bind(S);
+  list.forEach(r=>{
+    const i=pool.findIndex(c=>c.name===r.name);
+    let c;
+    if(i>=0){c=pool.splice(i,1)[0];c.init=r.init;}
+    else{t.addChar(r.name,r.init,r.hdMax);c=arr.pop();}
+    c.hd=r.hd;c.hdMax=r.hdMax;c.exh=r.exh;out.push(c);
+  });
+  S.chars=out;
+}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(root));}catch(e){}}
+function load(){try{const raw=localStorage.getItem(KEY);if(raw){const r=JSON.parse(raw);if(r&&r.v===1&&r.data)root=Object.assign(root,r);}}catch(e){}}
+function state(t){
+  if(!root.data[t.id])root.data[t.id]=t.fresh();
+  const S=root.data[t.id];S.tab=root.tab;return S;
+}
+function commit(fn){hist.push(JSON.stringify(root));if(hist.length>60)hist.shift();fn();save();render();}
+function quick(fn){fn();save();render();}
+const core={register:t=>{items.push(t);},commit,quick,save,canUndo:()=>hist.length>0,start};
+
+function switchTo(t){
+  commit(()=>{
+    if(Array.isArray(root.roster)){const S=state(t);setRoster(t,S,root.roster);}
+    root.sel=t.id;
+  });
+}
+const own={
+  trap:id=>{const t=items.find(x=>x.id===id);if(t)switchTo(t);},
+  tier:id=>quick(()=>{state(cur()).tier=+id;}),
+  tab:id=>quick(()=>{root.tab=id;}),
+  undo:()=>{const h=hist.pop();if(!h)return;root=JSON.parse(h);save();render();}
+};
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b||b.disabled)return;
+  const a=b.dataset.act;
+  if(own[a]){own[a](b.dataset.id);return;}
+  const t=cur(),f=t.actions[a];if(f){t.bind(state(t));f(b.dataset.id,b.dataset.m,b);}
+});
+document.addEventListener('change',e=>{
+  const el=e.target;
+  if(el&&el.id==='trapSel'){own.trap(el.value);return;}
+  const t=cur(),f=el.dataset&&el.dataset.field;
+  if(f&&t.fields&&t.fields[f]){t.bind(state(t));t.fields[f](el.dataset.id,el.value,el);}
+});
+document.addEventListener('submit',e=>{
+  if(e.target.id!=='addForm')return;
+  e.preventDefault();
+  const t=cur();if(!t.addChar)return;
+  const n=$('#newName').value.trim(),ie=$('#newInit'),i=ie?ie.value:'',he=$('#newHd'),hd=he?he.value:'';if(!n)return;
+  t.bind(state(t));
+  commit(()=>{t.addChar(n,i,hd);});
+  const nn=$('#newName');if(nn)nn.focus();
+});
+
+function renderPicker(){
+  const key=t=>t.name.replace(/^The /,'');
+  const list=items.slice().sort((a,b)=>key(a).localeCompare(key(b)));
+  $('#picker').innerHTML='<label class="lbl" for="trapSel">Challenge</label><select id="trapSel" class="trapsel" aria-label="Choose a skill challenge">'+
+    list.map(t=>'<option value="'+esc(t.id)+'"'+(t.id===cur().id?' selected':'')+'>'+esc(t.name)+'</option>').join('')+'</select>';
+}
+function renderHead(t){
+  if(headFor===t.id)return;headFor=t.id;
+  $('#head').innerHTML='<p class="eyebrow">'+esc(t.eyebrow)+'</p><h1>'+esc(t.name)+'</h1><p class="muted" style="margin-top:4px;max-width:78ch">'+esc(t.tagline)+'</p>';
+}
+function renderControls(t,S){
+  const tiers=t.tiers&&t.tiers.length?'<div class="ctl"><span class="lbl">'+esc(t.tierLabel||'Tier')+'</span><div class="seg" role="group" aria-label="'+esc(t.tierLabel||'Tier')+'">'+
+    t.tiers.map(x=>'<button data-act="tier" data-id="'+x.id+'" aria-pressed="'+(S.tier===x.id)+'">'+esc(x.label)+'</button>').join('')+'</div></div>':'';
+  $('#controls').innerHTML='<div class="controls">'+tiers+
+    '<div class="tabs" role="group" aria-label="View"><button data-act="tab" data-id="run" aria-pressed="'+(root.tab==='run')+'">Run</button><button data-act="tab" data-id="ref" aria-pressed="'+(root.tab==='ref')+'">'+esc(t.refLabel||'Text')+'</button></div></div>';
+}
+function render(){
+  const t=cur();root.sel=t.id;
+  const S=state(t);t.bind(S);
+  dmApply(t,S);
+  document.body.dataset.trap=t.pal||'';
+  const ae=document.activeElement;let sel=null;
+  if(ae&&ae.dataset&&(ae.dataset.act||ae.dataset.field)){
+    const d=ae.dataset;
+    sel=(d.field?'[data-field="'+d.field+'"]':'[data-act="'+d.act+'"]')+(d.id!==undefined?'[data-id="'+d.id+'"]':'');
+  }
+  const y=window.scrollY;
+  renderPicker();renderHead(t);renderControls(t,S);
+  $('#strip').innerHTML=root.tab==='run'?t.strip():'';
+  root.roster=getRoster(t,S);
+  let rv=root.tab==='ref'?t.ref():t.run();if(rv&&typeof rv==='object')rv=layout(rv);
+  $('#view').innerHTML=rv;
+  window.scrollTo(0,y);
+  if(sel){const n=document.querySelector(sel);if(n&&n.focus)n.focus({preventScroll:true});}
+  if(t.after)t.after();
+  dmAgenda();
+  dmBadge();
+}
+/* ---------- DM SCREEN BRIDGE: the party (name + initiative) comes from the Combat tab ---------- */
+let dmPcs=null;
+window.addEventListener('message',e=>{
+  const m=e.data;if(!m||m.dm!=='party'||!Array.isArray(m.pcs))return;
+  dmPcs=m.pcs;render();
+});
+function dmApply(t,S){
+  if(!dmPcs||window.parent===window)return;
+  const arr=()=>S.chars||S.party;
+  if(!Array.isArray(arr())||!t.addChar)return;
+  let ch=false;
+  if(S.example&&dmPcs.length){arr().length=0;S.example=false;ch=true;}
+  dmPcs.forEach(h=>{
+    const iv=(h.init===null||h.init===undefined)?'':h.init;
+    let c=arr().find(x=>x.hid===h.id)||arr().find(x=>!x.hid&&x.name===h.name);
+    if(!c){const n0=arr().length;t.addChar(h.name,iv,'');if(arr().length>n0){arr()[arr().length-1].hid=h.id;ch=true;}}
+    else{if(!c.hid){c.hid=h.id;ch=true;}if(c.name!==h.name){c.name=h.name;ch=true;}if(c.init!==iv){c.init=iv;ch=true;}}
+  });
+  const ids=new Set(dmPcs.map(h=>h.id)),a=arr(),keep=a.filter(x=>!x.hid||ids.has(x.hid));
+  if(keep.length!==a.length){a.length=0;keep.forEach(x=>a.push(x));ch=true;}
+  if(ch)save();
+}
+function dmBadge(){
+  try{
+    if(window.parent===window||!dmPcs)return;
+    document.querySelectorAll('.dm-badge').forEach(n=>n.remove());
+    const h=document.querySelector('#view .party-head h2, #view .party-head h3');
+    if(h){const s=document.createElement('span');s.className='dm-badge muted';s.style.cssText='font:500 12px var(--font-body);margin-left:8px';s.textContent='synced from Combat';h.appendChild(s);}
+  }catch(e){}
+}
+function dmAgenda(){}
+function start(){load();if(!root.sel||!items.some(x=>x.id===root.sel))root.sel=(items.find(x=>x.id==='blizzard')||items[0]).id;render();}
+window.core=core;
+if(window.parent!==window){try{window.parent.postMessage({dm:'hello'},'*');}catch(e){}}
+})();
+
+(function(){
+'use strict';
+/* =====================================================================
+   SKILL CHALLENGE MODULES: one generic module per challenge, all on the shared shell
+   ===================================================================== */
+const commit=core.commit,quick=core.quick;
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num=v=>{const n=parseFloat(v);return isNaN(n)?0:n;};
+const rnd=n=>1+Math.floor(Math.random()*n);
+const REQ=[4,6,8];
 const reqOf=c=>c.req||REQ[c.cx-1];
-function newRun(c){return{s:0,f:0,stage:0,st:c.stages.map(()=>({s:0,f:0})),mods:[],lock:{},dcUp:{},dcAll:0,stats:{},
-  round:1,timeAdd:0,hazAdj:0,hazNext:0,qUsed:{},log:[],enc:[],done:null,applied:false,lim:3,need:reqOf(c),notes:""};}
-function runOf(c){if(!S.runs[c.id])S.runs[c.id]=newRun(c);return S.runs[c.id];}
-const cur=()=>BY[S.cur];
+const PALX={blizzard:'fw',snowstorm:'fw','frost-raiders':'fw',rapids:'fw',flood:'fw',storm:'fw'};
+const PALT={social:'owz',survival:'gwg',magic:'cmz',chase:'scd',investigation:'mfg',combat:'pob',trap:'pob',stealth:'ptp'};
+const palOf=c=>PALX[c.id]||PALT[c.tags[0]]||'';
+const CUSTOM_SRC={"veiled-cave":"NvcGys4YmzGJKj3CmC8ofm","moon-gate":"BpwkcigLT8HmNCj3mxcGJg","burning-building":"6Sc3cuYqsHmfBt1jNqGQMF","volcanic-passage":"K5LUntFNV3K8W6SVu7HeDB","snowstorm":"3dHGSwZQDJwo5pDdSP5eg6"};
+let S,Cc; /* the bound state and challenge */
 
-function snap(){const c=cur();const a=UNDO[c.id]=UNDO[c.id]||[];
-  a.push(JSON.stringify({r:S.runs[c.id],p:S.party}));if(a.length>40)a.shift();}
-function undo(){const c=cur();const a=UNDO[c.id];if(!a||!a.length)return;
-  const o=JSON.parse(a.pop());S.runs[c.id]=o.r;S.party=o.p;render();}
-
-/* ---------- RULES ENGINE ---------- */
+/* ---------- Rules engine ---------- */
 const tierIdx=(code,extra)=>Math.max(0,Math.min(5,TK[code]+extra));
 function skillDC(r,key,sk){
   if(sk.af)return null;
-  const off=(r.dcUp[key]||0)+r.dcAll+S.shift;
+  const off=(r.dcUp[key]||0)+r.dcAll+(r.tier||0);
   if(sk.dcN)return{i:-1,name:"DC",n:sk.dcN+5*off,mod:off};
   const i=tierIdx(sk.dc,off);
   return{i,name:TIERS[i][0],n:TIERS[i][1],mod:off};
 }
 function hazDC(r,h){
   if(h.dcNum)return{i:-1,name:"DC",n:h.dcNum};
-  const adj=S.shift+(r.hazAdj||0)+(r.hazNext||0);
+  const adj=(r.tier||0)+(r.hazAdj||0)+(r.hazNext||0);
   let base;
   if(h.stageDc)base=TK[h.stageDc[Math.min(r.stage,h.stageDc.length-1)]];
   else{let off=0;if(h.esc){const ev=h.esc===true?1:h.esc;off=Math.max(0,Math.floor((r.round-(h.from||1))/ev));}
@@ -797,16 +1132,40 @@ function modsFor(r,sk){
   r.mods.forEach(m=>{if(m.skills==="*"||m.skills.includes(b)){if(m.kind==="adv")adv=true;else dis=true;}});
   return{adv,dis};
 }
+const sent=x=>/[.!?)]$/.test(x)?x:x+".";
 function parse(e){const i=e.indexOf(":");return i<0?[e,""]:[e.slice(0,i),e.slice(i+1)];}
 function list(v){return v==="*"?"*":v.split(",");}
+function effText(e){
+  const[t,v]=parse(e);
+  const nm=v==="*"?"any skill":v==="Hazard"?"hazard saving throw":v.split(",").join(" or ");
+  const chk=v==="Hazard"?"hazard saving throw":nm+" check";
+  const NOHD="(1 level of exhaustion instead if they have none left)";
+  switch(t){
+    case"adv":return v==="*"?"Advantage on the next check, any skill.":"Advantage on the next "+chk+".";
+    case"dis":return v==="*"?"Disadvantage on the next check, any skill.":"Disadvantage on the next "+chk+".";
+    case"advAll":return v==="Hazard"?"Advantage on every hazard saving throw for the rest of the challenge.":"Advantage on every "+nm+" check for the rest of the challenge.";
+    case"disAll":return v==="Hazard"?"Disadvantage on every hazard saving throw for the rest of the challenge.":"Disadvantage on every "+nm+" check for the rest of the challenge.";
+    case"hd":return"That character loses "+v+" Hit Die "+NOHD+".";
+    case"hdAll":return v==="all"?"Every character loses all their Hit Dice.":v==="fails"?"Every character loses Hit Dice equal to the number of failures.":"Every character loses "+v+" Hit Die "+NOHD+".";
+    case"exh":return"That character gains "+v+" level"+(+v>1?"s":"")+" of exhaustion.";
+    case"exhAll":return"Every character gains "+v+" level"+(+v>1?"s":"")+" of exhaustion.";
+    case"lock":return"This skill can’t be used again.";
+    case"dc":return"This skill’s DC goes up one tier (for example Easy becomes Moderate).";
+    case"dcAll":return"Every skill’s DC goes up one tier.";
+    case"time":return"Adds "+v+" rounds before the room is full.";
+    case"hazdc":return +v>0?"The hazard save DC goes up one tier for the rest of the challenge.":"The hazard save DC goes down one tier for the rest of the challenge.";
+    case"hazNext":return"The next hazard save DC goes up one tier.";
+    default:return sent(v);
+  }
+}
 function effLabel(e){
   const[t,v]=parse(e);
   const nm=v==="*"?"any":v.split(",").join(" or ");
   switch(t){
-    case"adv":return"Advantage on next "+nm+" check";
-    case"dis":return"Disadvantage on next "+nm+" check";
-    case"advAll":return"Advantage on all "+nm+" checks from now";
-    case"disAll":return"Disadvantage on all "+nm+" checks from now";
+    case"adv":return v==="Hazard"?"Advantage on the next hazard saving throw":"Advantage on next "+nm+" check";
+    case"dis":return v==="Hazard"?"Disadvantage on the next hazard saving throw":"Disadvantage on next "+nm+" check";
+    case"advAll":return v==="Hazard"?"Advantage on all hazard saving throws from now":"Advantage on all "+nm+" checks from now";
+    case"disAll":return v==="Hazard"?"Disadvantage on all hazard saving throws from now":"Disadvantage on all "+nm+" checks from now";
     case"hd":return"Lose "+v+" Hit Die";
     case"hdAll":return v==="all"?"Each character loses all Hit Dice":v==="fails"?"Each character loses Hit Dice equal to failures":"Each character loses "+v+" Hit Die";
     case"exh":return"Gain "+v+" exhaustion";
@@ -821,19 +1180,67 @@ function effLabel(e){
     default:return v;
   }
 }
-function targets(who){return who==="party"?S.party:S.party.filter(p=>p.id===who);}
+function outLines(c,r,si,sk){
+  const stg=c.stages[si],side=!!stg.side;
+  const eff=a=>(a||[]).filter(e=>!e.startsWith("succ:")).map(effText);
+  const sc=(sk.ok||[]).find(e=>e.startsWith("succ:"));const n=sc?+sc.slice(5):1;
+  let sb,fb;
+  if(side){sb=fb="Counts within this side stage only, not toward the main challenge.";}
+  else{sb=sk.ns?"Does not count as a success.":"Counts as "+(n>1?n+" successes":"1 success")+" (of "+r.need+" needed).";
+    fb="Counts as 1 failure (of "+r.lim+" allowed).";}
+  const lim=[];
+  if(sk.cap===1)lim.push("This skill can only ever give 1 success.");else if(sk.cap>1)lim.push("At most "+sk.cap+" successes can come from this skill.");
+  const mx=sk.max||(sk.once?1:0);if(mx)lim.push(mx===1?"Only one attempt is allowed.":"At most "+mx+" attempts are allowed.");
+  const eo=eff(sk.ok),eb=eff(sk.bad);
+  const ok=sk.af?"":'<p class="o ok"><b>Success</b> '+esc([sb].concat(eo.length?eo:["No other effect."],lim).join(" "))+"</p>";
+  const bad='<p class="o bad"><b>Failure</b> '+esc([sk.af?"Automatic failure.":"",fb].concat(eb.length?eb:(sk.af?[]:["No other effect."])).filter(Boolean).join(" "))+"</p>";
+  return'<div class="outc">'+ok+bad+"</div>";
+}
+function qDesc(q){
+  const p=[];
+  if(q.s)p.push("Counts as "+q.s+" success"+(q.s>1?"es":"")+".");
+  if(q.f)p.push("Counts as "+q.f+" failure"+(q.f>1?"s":"")+".");
+  (q.e||[]).forEach(e=>p.push(effText(e)));
+  if(q.t)p.push(sent(q.t));
+  if(q.done)p.push("Ends the challenge as a "+(q.done==="total"?"Total Success":"Success")+".");
+  if(q.st!=null)p.push("Use in Stage "+(q.st+1)+".");
+  if(q.min!=null)p.push("Available once Stage "+q.min+" is complete.");
+  if(q.once)p.push("Once per challenge.");
+  return p.join(" ");
+}
+function hazFailText(h){
+  if(!h.fail||!h.fail.length)return"";
+  return h.fail.map(e=>{const[t,v]=parse(e);let x;
+    if(t==="hd")x="The character loses "+v+" Hit Die"+(h.noExh?"":" (or gains 1 level of exhaustion if they have none left)");
+    else if(t==="text")x=v;
+    else x=effLabel(e);
+    return /[.!?]$/.test(x)?x:x+".";}).join(" ");
+}
+function hazDcInfo(h){
+  if(h.dcNum)return"DC "+h.dcNum;
+  const nm=k=>TIERS[TK[k]][0]+" ("+TIERS[TK[k]][1]+")";
+  if(h.stageDc)return"Stage DC: "+h.stageDc.map((k,i)=>"stage "+(i+1)+" "+nm(k)).join(", ");
+  let s=nm(h.dc);
+  if(h.esc){const ev=h.esc===true?1:h.esc;s+=", one tier higher every "+(ev>1?ev+" rounds":"round")+(h.from?" from round "+(h.from+ev):"")+(h.cap?", up to "+nm(h.cap):"");}
+  return s;
+}
+function newRef(c){return{need:reqOf(c),lim:3,dcUp:{},dcAll:0,tier:0,stage:0,round:1,hazAdj:0,hazNext:0};}
+
+/* ---------- Party and effects ---------- */
+const get=id=>S.chars.find(c=>c.id===id);
+const targets=who=>who==="party"?S.chars:S.chars.filter(p=>p.id===who);
 function hdLose(p,n){const take=Math.min(p.hd,n);p.hd-=take;const over=n-take;
   if(over>0)p.exh=Math.min(6,p.exh+over);
   return p.name+" "+(over>0?"has no Hit Dice left, +"+over+" exhaustion":"loses "+take+" Hit Die");}
 function applyEff(e,ctx){
-  const{r,key,who}=ctx;const[t,v]=parse(e);const out=ctx.out;
+  const r=S,key=ctx.key,who=ctx.who,out=ctx.out;const[t,v]=parse(e);
   switch(t){
     case"adv":case"dis":r.mods.push({kind:t,skills:list(v),persist:false,src:ctx.src});out.push(effLabel(e));break;
     case"advAll":case"disAll":r.mods.push({kind:t==="advAll"?"adv":"dis",skills:list(v),persist:true,src:ctx.src});out.push(effLabel(e));break;
     case"hd":{const ts=targets(who);if(!ts.length)out.push(effLabel(e)+" (nobody selected)");else ts.forEach(p=>out.push(hdLose(p,+v)));break;}
-    case"hdAll":{S.party.forEach(p=>{if(v==="all"){p.hd=0}else{const n=v==="fails"?r.f:+v;if(n>0)hdLose(p,n);}});out.push(effLabel(e));break;}
+    case"hdAll":{S.chars.forEach(p=>{if(v==="all"){p.hd=0}else{const n=v==="fails"?r.f:+v;if(n>0)hdLose(p,n);}});out.push(effLabel(e));break;}
     case"exh":{const ts=targets(who);ts.forEach(p=>p.exh=Math.min(6,p.exh+ +v));out.push(effLabel(e)+(ts.length===1?" ("+ts[0].name+")":""));break;}
-    case"exhAll":S.party.forEach(p=>p.exh=Math.min(6,p.exh+ +v));out.push(effLabel(e));break;
+    case"exhAll":S.chars.forEach(p=>p.exh=Math.min(6,p.exh+ +v));out.push(effLabel(e));break;
     case"lock":if(key)r.lock[key]=1;out.push(effLabel(e));break;
     case"dc":if(key)r.dcUp[key]=(r.dcUp[key]||0)+1;out.push(effLabel(e));break;
     case"dcAll":r.dcAll++;out.push(effLabel(e));break;
@@ -844,31 +1251,42 @@ function applyEff(e,ctx){
     default:out.push(v);
   }
 }
-function whoName(who){if(who==="party")return"Group";const p=S.party.find(x=>x.id===who);return p?p.name:"Group";}
+const whoName=who=>{if(who==="party")return"Group";const p=get(who);return p?p.name:"Group";};
+function L(text,ok,subs){S.log.unshift({rd:S.round,t:text,ok:ok===undefined?null:ok,subs:subs||[]});if(S.log.length>200)S.log.pop();}
 
-function addLog(r,text,ok,subs){r.log.unshift({rd:r.round,t:text,ok,subs:subs||[]});if(r.log.length>200)r.log.pop();}
-
-function rollEnc(c,r,t){
-  t=t||c.table;if(!t)return;const d=1+Math.floor(Math.random()*6);
-  const tx=t.rows[d-1];r.enc.unshift({n:t.n,d,t:tx,rd:r.round});addLog(r,t.n+" rolled (d6 "+d+")",null,[tx]);
+function rollEnc(t){
+  t=t||Cc.table;if(!t)return;const d=rnd(6);
+  const tx=t.rows[d-1];S.enc.unshift({n:t.n,d,t:tx,rd:S.round});L(t.n+" rolled (d6 "+d+")",null,[tx]);
 }
-function advStage(c,r){
-  const si=r.stage,stg=c.stages[si];
-  if(stg.adv&&si<c.stages.length-1){const ss=r.st[si];
-    if((stg.adv.s&&ss.s>=stg.adv.s)||(stg.adv.f&&ss.f>=stg.adv.f)){r.stage++;addLog(r,"Advanced to "+(c.stages[r.stage].n||"next stage"),null);}}
+function advStage(){
+  const si=S.stage,stg=Cc.stages[si];
+  if(stg.adv&&si<Cc.stages.length-1){const ss=S.st[si];
+    if((stg.adv.s&&ss.s>=stg.adv.s)||(stg.adv.f&&ss.f>=stg.adv.f)){S.stage++;L("Advanced to "+(Cc.stages[S.stage].n||"next stage"),null);}}
 }
-function triggers(c,r,os,of){
-  Object.keys(c.onS||{}).forEach(k=>{if(os<+k&&r.s>=+k)addLog(r,"Success "+k+" reached",null,[c.onS[k]]);});
-  Object.keys(c.onF||{}).forEach(k=>{if(of<+k&&r.f>=+k){const o=c.onF[k];const subs=[o.t];
-    (o.e||[]).forEach(e=>applyEff(e,{r,who:"party",out:subs,src:"Failure "+k}));addLog(r,"Failure "+k+" reached",false,subs);}});
+function triggers(os,of){
+  const c=Cc;
+  Object.keys(c.onS||{}).forEach(k=>{if(os<+k&&S.s>=+k)L("Success "+k+" reached",null,[c.onS[k]]);});
+  Object.keys(c.onF||{}).forEach(k=>{if(of<+k&&S.f>=+k){const o=c.onF[k];const subs=[o.t];
+    (o.e||[]).forEach(e=>applyEff(e,{who:"party",out:subs,src:"Failure "+k}));L("Failure "+k+" reached",false,subs);}});
 }
-function record(key,ok,rollInfo){
-  const c=cur(),r=runOf(c);
+function finish(){
+  if(S.done)return;
+  if(S.s>=S.need){S.done=S.f===0?"total":"ok";L(S.f===0?"Total success":"Success",true);}
+  else if(S.f>=S.lim){S.done="fail";L("Failure",false);}
+}
+function curChar(){return S.key&&S.key.indexOf("c:")===0?get(S.key.slice(2)):null;}
+function whoId(){
+  const w=S.who||"turn";
+  if(w==="turn"){const ch=curChar();return ch?ch.id:"party";}
+  if(w==="party")return"party";
+  return get(w)?w:"party";
+}
+function record(key,ok){
+  const c=Cc,r=S;
   const[si,ki]=key.split(":").map(Number);const stg=c.stages[si];const sk=stg.skills[ki];
   if(r.done&&!stg.side)return;
-  snap();
   const os=r.s,of=r.f;
-  const who=S.actor;const subs=[];
+  const who=whoId();const subs=[];
   const consumed=r.mods.filter(m=>!m.persist&&(m.skills==="*"||m.skills.includes(baseOf(sk))));
   r.mods=r.mods.filter(m=>m.persist||!(m.skills==="*"||m.skills.includes(baseOf(sk))));
   if(consumed.length)subs.push("Used "+consumed.map(m=>(m.kind==="adv"?"advantage":"disadvantage")+(m.src?" from "+m.src:"")).join(", "));
@@ -882,271 +1300,328 @@ function record(key,ok,rollInfo){
   if(ok&&sk.cap&&stat.s>=sk.cap){r.lock[key]=1;subs.push("Used up: this skill can’t gain more successes");}
   const maxU=sk.max||(sk.once?1:0);
   if(maxU&&stat.s+stat.f>=maxU){r.lock[key]=1;subs.push("Used up: "+(maxU===1?"one attempt only":maxU+" attempts maximum"));}
-  effs.forEach(e=>applyEff(e,{r,key,who,out:subs,src:sk.n}));
-  const res=rollInfo?rollInfo+" – ":"";
-  addLog(r,whoName(who)+": "+sk.n+" "+res+(ok?"success":"failure")+(gain>1?" (×"+gain+")":""),ok,subs);
-  if(!ok&&c.table&&!stg.side)rollEnc(c,r);
-  if(!stg.side){if(si===r.stage)advStage(c,r);triggers(c,r,os,of);finish(c,r);}
-  render();
+  effs.forEach(e=>applyEff(e,{key,who,out:subs,src:sk.n}));
+  L(whoName(who)+": "+sk.n+" "+(ok?"success":"failure")+(gain>1?" (×"+gain+")":""),ok,subs);
+  if(!ok&&c.table&&!stg.side)rollEnc();
+  if(!stg.side){if(si===r.stage)advStage();triggers(os,of);finish();}
 }
-function finish(c,r){
-  if(r.done)return;
-  if(r.s>=r.need){r.done=r.f===0?"total":"ok";addLog(r,r.f===0?"Total success":"Success",true);}
-  else if(r.f>=r.lim){r.done="fail";addLog(r,"Failure",false);}
-}
-function quick(i){
-  const c=cur(),r=runOf(c),q=c.quick[i];if(r.done)return;
-  r.qUsed=r.qUsed||{};if(q.once&&r.qUsed[i])return;
-  snap();const os=r.s,of=r.f;const subs=[];
+function doQuick(i){
+  const c=Cc,r=S,q=c.quick[i];if(r.done)return;
+  if(q.once&&r.qUsed[i])return;
+  const os=r.s,of=r.f;const subs=[];
   const si=q.st!=null?q.st:r.stage;
   if(q.s){r.s+=q.s;r.st[si].s+=q.s;}
   if(q.f){r.f+=q.f;r.st[si].f+=q.f;}
   if(q.stage!=null&&r.stage<q.stage)r.stage=q.stage;
-  (q.e||[]).forEach(e=>applyEff(e,{r,who:"party",out:subs,src:q.l}));
+  (q.e||[]).forEach(e=>applyEff(e,{who:"party",out:subs,src:q.l}));
   if(q.t)subs.push(q.t);
   if(q.once)r.qUsed[i]=1;
-  addLog(r,q.l,q.s?true:q.f?false:null,subs);
-  if(q.f&&c.table)rollEnc(c,r);
-  if(q.done){r.done=q.done;addLog(r,q.done==="total"?"Total success":"Success",true);}
-  else{if(si===r.stage)advStage(c,r);triggers(c,r,os,of);finish(c,r);}
-  render();
-}
-function d20(){return 1+Math.floor(Math.random()*20);}
-function rollSkill(key){
-  const c=cur(),r=runOf(c);if(r.done)return;
-  const[si,ki]=key.split(":").map(Number);const sk=c.stages[si].skills[ki];
-  const mf=modsFor(r,sk);const a=d20(),b=d20();let used=a;
-  let adv=mf.adv&&!mf.dis,dis=mf.dis&&!mf.adv;
-  if(adv)used=Math.max(a,b);if(dis)used=Math.min(a,b);
-  const tot=used+S.mod;
-  const dc=skillDC(r,key,sk);const ok=sk.af?false:tot>=dc.n;
-  const info="d20 "+(adv||dis?"("+a+", "+b+") → ":"")+used+(S.mod?(S.mod>0?" +":" ")+S.mod:"")+" = "+tot+" vs DC "+(dc?dc.n:"—");
-  record(key,ok,info);
+  L(q.l,q.s?true:q.f?false:null,subs);
+  if(q.f&&c.table)rollEnc();
+  if(q.done){r.done=q.done;L(q.done==="total"?"Total success":"Success",true);}
+  else{if(si===r.stage)advStage();triggers(os,of);finish();}
 }
 function applyOutcome(){
-  const c=cur(),r=runOf(c);if(!r.done||r.applied)return;
+  const c=Cc,r=S;if(!r.done||r.applied)return;
   const fx=r.done==="ok"?c.out.okFx:r.done==="fail"?c.out.failFx:null;
-  if(!fx||!fx.length){r.applied=true;render();return;}
-  snap();const subs=[];fx.forEach(e=>applyEff(e,{r,who:"party",out:subs,src:"Outcome"}));
-  r.applied=true;addLog(r,"Outcome applied to party",null,subs);render();
+  r.applied=true;
+  if(!fx||!fx.length)return;
+  const subs=[];fx.forEach(e=>applyEff(e,{who:"party",out:subs,src:"Outcome"}));
+  L("Outcome applied to party",null,subs);
 }
 function hazFail(id){
-  const c=cur(),r=runOf(c),h=c.haz;if(!h||!h.fail)return;snap();const subs=[];
-  const p=S.party.find(x=>x.id===id);if(!p)return;
-  h.fail.forEach(e=>applyEff(e,{r,who:id,out:subs,src:h.n}));
-  addLog(r,p.name+" failed the "+h.n+" save",false,subs);render();
+  const h=Cc.haz;if(!h||!h.fail)return;const p=get(id);if(!p)return;const subs=[];
+  h.fail.forEach(e=>applyEff(e,{who:id,out:subs,src:h.n}));
+  L(p.name+" failed the "+h.n+" save",false,subs);
 }
-function nextRound(d){
-  const c=cur(),r=runOf(c);snap();r.round=Math.max(1,r.round+d);
-  if(d>0){r.hazNext=0;r.mods=r.mods.filter(m=>m.persist||!(m.skills!=="*"&&m.skills.includes("Hazard")));}
-  addLog(r,"Round "+r.round+(c.haz?" begins. "+c.haz.n+" at initiative 20":" begins"),null);
-  if(d>0&&c.rtable&&r.round>=c.rtable.from)rollEnc(c,r,c.rtable);
-  render();
+function newRound(){
+  S.hazNext=0;S.mods=S.mods.filter(m=>m.persist||!(m.skills!=="*"&&m.skills.includes("Hazard")));
+  const c=Cc;
+  L("Round "+S.round+" begins"+(c.haz&&!c.haz.limit&&!c.haz.nosave?". "+c.haz.n+" at initiative 20":""),null);
+  if(c.rtable&&S.round>=c.rtable.from)rollEnc(c.rtable);
 }
 
-/* ---------- VIEWS ---------- */
+/* ---------- Turn order ---------- */
+const hazStep=()=>{const h=Cc.haz;return h&&!h.limit&&!h.nosave;};
+function buildOrder(){
+  const cs=S.chars.map((c,i)=>({c,i})).sort((a,b)=>(num(b.c.init)-num(a.c.init))||(a.i-b.i));
+  const out=[];let placed=!hazStep();
+  for(const{c}of cs){
+    if(!placed&&num(c.init)<20){out.push({k:"haz",haz:true});placed=true;}
+    out.push({k:"c:"+c.id,id:c.id});
+  }
+  if(!placed)out.push({k:"haz",haz:true});
+  return out;
+}
+const skipStep=s=>s.haz&&(S.done||(Cc.haz.from&&S.round<Cc.haz.from));
+function stepLabel(s){if(s.haz)return Cc.haz.n;const c=get(s.id);return c?c.name:"?";}
+function nextStep(){
+  commit(()=>{
+    const order=buildOrder();
+    if(S.round===0){S.round=1;newRound();}
+    else if(!order.length){S.round++;S.key=null;newRound();return;}
+    let idx=S.round>0&&S.key?order.findIndex(s=>s.k===S.key):-1;
+    for(let g=0;g<order.length+2;g++){
+      idx++;
+      if(idx>=order.length){idx=0;S.round++;newRound();}
+      if(order[idx]&&!skipStep(order[idx])){S.key=order[idx].k;return;}
+    }
+    S.key=null;
+  });
+}
+
+/* ---------- Views ---------- */
 const chip=(t,k)=>'<span class="chip '+(k||"")+'">'+esc(t)+"</span>";
-function renderHead(){
-  const tabs=[["run","Run"],["lib","Library"],["rules","Rules"]];
-  $("#tabs").innerHTML=tabs.map(t=>'<button data-a="tab" data-v="'+t[0]+'" aria-pressed="'+(S.tab===t[0])+'">'+t[1]+"</button>").join("");
-  const sh=[[-2,"−2"],[-1,"−1"],[0,"Book"],[1,"+1"],[2,"+2"]];
-  $("#shift").innerHTML=sh.map(x=>'<button data-a="shift" data-v="'+x[0]+'" aria-pressed="'+(S.shift===x[0])+'">'+x[1]+"</button>").join("");
-}
-function statusPill(c){
-  const r=S.runs[c.id];if(!r)return"";
-  if(r.done==="total")return'<span class="pill done">Total success</span>';
-  if(r.done==="ok")return'<span class="pill done">Success</span>';
-  if(r.done==="fail")return'<span class="pill off">Failed</span>';
-  if(r.s+r.f>0)return'<span class="pill live">In progress <i>'+r.s+"/"+r.need+" · "+r.f+" fail</i></span>";
-  return"";
-}
-function libCards(){
-  const q=S.q.trim().toLowerCase();
-  const rows=CH.filter(c=>(S.bk==="all"||c.b.includes(S.bk))&&(!S.cxf||c.cx===S.cxf)&&(S.tag==="all"||c.tags.includes(S.tag))&&
-    (!q||(c.name+" "+c.fl+" "+c.setup+" "+c.tags.join(" ")).toLowerCase().includes(q)));
-  if(!rows.length)return'<p class="muted">No challenge matches. Clear a filter or the search.</p>';
-  return rows.map(c=>{
-    const n=c.stages.reduce((a,s)=>a+s.skills.length,0);
-    return'<article class="card lib"><div class="lib-top"><span class="eyebrow">'+bookLbl(c)+'</span>'+statusPill(c)+"</div>"+
-    "<h3>"+esc(c.name)+'</h3><p class="muted">'+esc(c.fl.length>150?c.fl.slice(0,147)+"…":c.fl)+"</p>"+
-    '<div class="chips">'+chip("Complexity "+c.cx+" · "+reqOf(c)+" before 3")+chip(n+" skills")+(c.haz?chip("Hazard","warn"):"")+(c.stages.length>1?chip(c.stages.length+" stages"):"")+c.tags.map(t=>chip(t)).join("")+"</div>"+
-    '<button class="btn primary sm" data-a="open" data-v="'+c.id+'">'+(S.runs[c.id]&&(S.runs[c.id].s+S.runs[c.id].f>0)&&!S.runs[c.id].done?"Resume":"Run")+"</button></article>";
-  }).join("");
-}
-function renderLib(){
-  const tags=["all"].concat([...new Set(CH.flatMap(c=>c.tags))].sort());
-  $("#view").innerHTML='<div class="picker"><input id="q" type="search" placeholder="Search challenges" value="'+esc(S.q)+'" aria-label="Search challenges">'+
-  '<div class="seg" id="bkseg">'+[["all","All"],["1","Book 1"],["2","Book 2"],["Custom","Custom"]].map(x=>'<button data-a="bk" data-v="'+x[0]+'" aria-pressed="'+(S.bk===x[0])+'">'+x[1]+"</button>").join("")+"</div>"+
-  '<div class="seg">'+[[0,"Any"],[1,"Cx 1"],[2,"Cx 2"],[3,"Cx 3"]].map(x=>'<button data-a="cx" data-v="'+x[0]+'" aria-pressed="'+(S.cxf===x[0])+'">'+x[1]+"</button>").join("")+"</div></div>"+
-  '<div class="chips tagrow">'+tags.map(t=>'<button class="btn sm" data-a="tag" data-v="'+t+'" aria-pressed="'+(S.tag===t)+'">'+(t==="all"?"All types":t)+"</button>").join("")+"</div>"+
-  '<p class="muted count">'+CH.length+' challenges · 34 from the books (Book 1 has 16, Book 2 adds 18, Defenders in Need is in both) and '+CH.filter(c=>c.b==="Custom").length+' of your own</p>'+
-  '<div class="grid libgrid" id="libgrid">'+libCards()+"</div>";
-  $("#q").addEventListener("input",e=>{S.q=e.target.value;$("#libgrid").innerHTML=libCards();save();});
-}
+function pips(n,filled,cls){let h="";for(let i=0;i<n;i++)h+='<span class="pip '+cls+(i<filled?" f":"")+'"></span>';return h;}
+const stageNow=()=>Math.min(S.stage,Cc.stages.length-1);
 
-function effChips(sk){
-  let h="";
-  (sk.ok||[]).filter(e=>!e.startsWith("succ:")).forEach(e=>h+=chip("✓ "+effLabel(e),"ok"));
-  (sk.ok||[]).filter(e=>e.startsWith("succ:")).forEach(e=>h+=chip("✓ "+effLabel(e),"ok"));
-  (sk.bad||[]).forEach(e=>h+=chip("✗ "+effLabel(e),"crit"));
-  return h;
-}
-function skRow(c,r,si,ki,sk,dis){
-  const key=si+":"+ki;const st=r.stats[key]||{s:0,f:0};const dc=skillDC(r,key,sk);
+function skRow(si,ki,sk,dis){
+  const c=Cc,r=S,key=si+":"+ki;const st=r.stats[key]||{s:0,f:0};const dc=skillDC(r,key,sk);
   const locked=r.lock[key];
   let need=false;
   if(sk.req){const idx=c.stages[si].skills.findIndex(x=>x.n===sk.req);const s2=r.stats[si+":"+idx];need=!(s2&&s2.s>=1);}
   const off=dis||locked||need;
   const m=modsFor(r,sk);
-  const mchip=m.adv&&m.dis?chip("Advantage and disadvantage cancel","")
-    :m.adv?chip("Advantage","ok"):m.dis?chip("Disadvantage","crit"):"";
+  const mchip=m.adv&&m.dis?chip("Advantage and disadvantage cancel",""):m.adv?chip("Advantage","ok"):m.dis?chip("Disadvantage","crit"):"";
   const dcTxt=sk.af?'<span class="dc">auto-fail</span>':'<span class="dc">'+dcLabel(dc)+(dc.mod?(dc.mod>0?" ▲":" ▼"):"")+"</span>";
-  const note=locked?'<span class="chip">'+(sk.cap&&st.s>=sk.cap?"Used up":"Locked")+"</span>":need?'<span class="chip warn">Needs '+esc(sk.req)+"</span>":"";
-  return'<li class="sk'+(off?" off":"")+'"><div class="sk-main"><div class="sk-h"><h3>'+esc(sk.n)+"</h3>"+dcTxt+mchip+note+
+  const note=locked?chip(sk.cap&&st.s>=sk.cap?"Used up":"Locked"):need?chip("Needs "+sk.req,"warn"):"";
+  return'<li class="sk'+(off?" off":"")+'"><div class="sk-h"><h3>'+esc(sk.n)+"</h3>"+dcTxt+mchip+note+
     (sk.added?chip("added","warn"):"")+(sk.cap===1&&!sk.af?chip("1 success max"):sk.cap>1?chip(sk.cap+" successes max"):"")+((sk.max||sk.once)?chip((sk.max||1)===1?"one attempt":(sk.max+" attempts max")):"")+
-    (sk.ns?chip("no success counted"):"")+"</div><p>"+esc(sk.d)+'</p><div class="chips">'+effChips(sk)+"</div></div>"+
-    '<div class="sk-act"><div class="sk-tally mono" title="successes / failures from this skill">'+st.s+"✓ "+st.f+"✗</div>"+
-    (sk.af?'<button class="btn bad sm" data-a="fail" data-v="'+key+'"'+(off?" disabled":"")+">Attempt (fails)</button>":
-    '<button class="btn sm" data-a="roll" data-v="'+key+'"'+(off?" disabled":"")+">Roll d20</button>"+
-    '<button class="btn calm sm" data-a="ok" data-v="'+key+'"'+(off?" disabled":"")+">Success</button>"+
-    '<button class="btn bad sm" data-a="fail" data-v="'+key+'"'+(off?" disabled":"")+">Fail</button>")+"</div></li>";
+    (sk.ns?chip("no success counted"):"")+"</div>"+(sk.d?"<p>"+esc(sk.d)+"</p>":"")+outLines(c,r,si,sk)+
+    '<div class="sk-act"><span class="sk-tally mono" title="successes / failures from this skill">'+st.s+"✓ "+st.f+"✗</span>"+
+    (sk.af?'<button class="btn sm crit" data-act="fail" data-id="'+key+'"'+(off?" disabled":"")+">Attempt (fails)</button>":
+    '<button class="btn sm calm" data-act="ok" data-id="'+key+'"'+(off?" disabled":"")+">Success</button>"+
+    '<button class="btn sm crit" data-act="fail" data-id="'+key+'"'+(off?" disabled":"")+">Failure</button>")+"</div></li>";
 }
-function pips(n,filled,cls){let h="";for(let i=0;i<n;i++)h+='<span class="pip '+cls+(i<filled?" f":"")+'"></span>';return h;}
 
-function renderRun(){
-  const c=cur(),r=runOf(c);
-  if(S.actor!=="party"&&!S.party.find(p=>p.id===S.actor))S.actor="party";
-  const stg=c.stages[Math.min(r.stage,c.stages.length-1)];
-  const tierLbl=r.done==="total"?"Total success":r.done==="ok"?"Success":r.done==="fail"?"Failure":"";
-  /* strip */
-  const strip='<div class="strip"><div class="strip-in">'+
-   '<div class="stat grow"><span class="eyebrow">'+bookLbl(c)+" · Complexity "+c.cx+'</span><b class="ttl">'+esc(c.name)+"</b></div>"+
-   '<div class="stat"><span class="sub">Successes <span class="mono">'+r.s+"/"+r.need+'</span> <button class="step" data-a="need" data-v="-1" aria-label="Fewer successes needed">−</button><button class="step" data-a="need" data-v="1" aria-label="More successes needed">+</button></span><div class="pips">'+pips(r.need,r.s,"ok")+"</div></div>"+
-   '<div class="stat"><span class="sub">Failures <span class="mono">'+r.f+"/"+r.lim+'</span> <button class="step" data-a="lim" data-v="-1" aria-label="Fewer failures allowed">−</button><button class="step" data-a="lim" data-v="1" aria-label="More failures allowed">+</button></span><div class="pips">'+pips(r.lim,r.f,"bad")+"</div></div>"+
-   '<div class="acts"><button class="btn" data-a="undo"'+((UNDO[c.id]||[]).length?"":" disabled")+'>Undo</button><button class="btn" data-a="reset">'+(confirmReset?"Click again to reset":"Reset")+"</button></div></div></div>";
-  /* actor */
-  const actor='<div class="actor"><label class="lbl" for="actor">Acting</label><select id="actor">'+
-    '<option value="party"'+(S.actor==="party"?" selected":"")+">Whole party (group check)</option>"+
-    S.party.map(p=>'<option value="'+p.id+'"'+(S.actor===p.id?" selected":"")+">"+esc(p.name)+"</option>").join("")+"</select>"+
-    '<label class="lbl" for="mod">Roll modifier</label><input id="mod" type="number" value="'+S.mod+'" step="1"></div>';
-  /* stages nav */
+function charCard(ch){
+  const active=S.key==="c:"+ch.id;
+  return'<article class="char'+(active?" is-active":"")+'">'+
+   '<div class="ch-head"><input class="name" data-field="name" data-id="'+ch.id+'" value="'+esc(ch.name)+'" aria-label="Name"><input class="init" type="number" inputmode="numeric" data-field="init" data-id="'+ch.id+'" value="'+esc(ch.init)+'" placeholder="Init" aria-label="Initiative"><button class="x" data-act="remove" data-id="'+ch.id+'" aria-label="Remove '+esc(ch.name)+'">×</button></div>'+
+   '<div class="cr"><span class="lbl">Hit Dice</span><button class="step" data-act="hd" data-id="'+ch.id+'" data-m="-1" aria-label="Lose a Hit Die">−</button><b class="mono">'+ch.hd+"/"+ch.hdMax+'</b><button class="step" data-act="hd" data-id="'+ch.id+'" data-m="1" aria-label="Regain a Hit Die">+</button></div>'+
+   '<div class="cr"><span class="lbl">Exhaustion</span><button class="step" data-act="ex" data-id="'+ch.id+'" data-m="-1" aria-label="Lower exhaustion">−</button><b class="mono'+(ch.exh>=4?" crit-t":"")+'">'+ch.exh+'</b><button class="step" data-act="ex" data-id="'+ch.id+'" data-m="1" aria-label="Raise exhaustion">+</button></div></article>';
+}
+function partyCard(){
+  return'<section><div class="party-head"><h2>Party</h2>'+(S.chars.length?'<button class="btn sm" data-act="clearParty">Clear party</button>':'')+'</div>'+
+   '<p class="muted" style="margin:4px 0 10px">Add each character once with their initiative and Hit Dice. The party is shared with every challenge, and effects that cost Hit Dice or add exhaustion are applied to the right character for you.</p>'+
+   '<form id="addForm" class="addf" style="margin-bottom:12px"><input id="newName" placeholder="Character name" aria-label="New character name" autocomplete="off"><input id="newInit" type="number" inputmode="numeric" placeholder="Init" aria-label="New character initiative"><input id="newHd" type="number" inputmode="numeric" min="1" value="5" aria-label="Hit Dice" title="Hit Dice"><button class="btn primary" type="submit">Add</button></form>'+
+   '<div class="grid">'+S.chars.map(charCard).join("")+"</div>"+(S.chars.length?"":'<p class="muted">No characters yet.</p>')+"</section>";
+}
+function orderCard(order){
+  return'<section><h2 style="margin-bottom:8px">Turn order</h2>'+(order.length?'<ol class="order">'+order.map(s=>{
+    const ch=s.id?get(s.id):null;
+    const i=s.haz?20:(ch&&ch.init!==""?ch.init:"–");
+    const dim=s.haz&&skipStep(s);
+    return'<li class="oc'+(s.haz?" trap":"")+(S.key===s.k&&S.round>0?" cur":"")+(dim?" out":"")+'"><span class="i">'+i+"</span><span>"+esc(stepLabel(s))+"</span></li>";
+  }).join("")+"</ol>":'<p class="muted">Add characters to build the turn order. Next still counts rounds without them.</p>')+
+  '<p class="muted small" style="margin-top:6px">Turn order only decides whose turn the results are recorded for. Skill challenges are narrative, so you can also record a skill for the whole party or for anyone at any time with the Acting list.</p></section>';
+}
+function hazardCard(){
+  const h=Cc.haz,d=hazDC(S,h);
+  return'<section class="card trap"><p class="eyebrow">Round '+S.round+" · Initiative 20</p><h2>Hazard: "+esc(h.n)+"</h2>"+
+   '<p><span class="dc">'+esc(h.stat)+" save · "+esc(dcLabel(d))+"</span> Every character makes this save.</p><p style=\"margin-top:6px\">"+esc(h.t)+"</p>"+
+   (h.fail&&h.fail.length?'<p class="o ok" style="margin-top:8px"><b>Save succeeds</b> '+esc(h.pass||"No effect.")+'</p><p class="o bad"><b>Save fails</b> '+esc(hazFailText(h))+"</p>":"")+
+   '<p class="muted small" style="margin-top:6px">Hazard saves never count toward the challenge’s successes or failures. Press a character who failed the save and the Hit Die loss or exhaustion is applied for you. Damage and other effects you apply at the table.</p>'+
+   '<div class="ch-acts" style="margin-top:8px">'+(S.chars.length?S.chars.map(p=>'<button class="btn sm crit" data-act="hf" data-id="'+p.id+'">'+esc(p.name)+" failed the save</button>").join(""):'<span class="muted">Add characters to record failed saves.</span>')+"</div></section>";
+}
+function turnCard(){
+  if(S.round===0)return'<section class="card now"><p class="eyebrow">Ready</p><h2>Set up, then press Start</h2><p class="muted">Add the party, enter each initiative and press Start. Next moves through the turn order'+(hazStep()?", with the hazard acting at initiative 20":"")+'. The skills below can be recorded at any time.</p></section>';
+  if(S.key==="haz"&&hazStep())return hazardCard();
+  const ch=curChar();
+  if(!ch)return'<section class="card now"><p class="eyebrow">Round '+S.round+"</p><h2>Press Next to continue</h2></section>";
+  return'<section class="card now"><p class="eyebrow">Round '+S.round+" · Turn</p><h2>"+esc(ch.name)+'</h2><div class="chips" style="margin-top:6px">'+chip("Hit Dice "+ch.hd+"/"+ch.hdMax,ch.hd===0?"crit":"")+chip("Exhaustion "+ch.exh,ch.exh>=4?"crit":ch.exh?"warn":"")+
+   '</div><p class="muted" style="margin-top:8px">Choose a skill below. Success and Failure are recorded for '+esc(ch.name)+" unless you change the Acting list.</p></section>";
+}
+function skillsCard(){
+  const c=Cc,r=S,si=stageNow(),stg=c.stages[si];
   let nav="";
-  if(c.stages.length>1)nav='<div class="chips stagenav">'+c.stages.map((s,i)=>'<button class="btn sm" data-a="stage" data-v="'+i+'" aria-pressed="'+(i===r.stage)+'">'+esc(s.n||"Stage "+(i+1))+(s.side?" · side":"")+' <span class="mono">'+r.st[i].s+"✓ "+r.st[i].f+"✗</span></button>").join("")+"</div>";
-  const quick=(c.quick||[]).map((q,i)=>{const off=r.done||(q.st!=null&&r.stage!==q.st)||(q.min!=null&&r.stage<q.min)||(q.once&&r.qUsed&&r.qUsed[i]);
-    return'<button class="btn sm" data-a="quick" data-v="'+i+'"'+(off?" disabled":"")+">"+esc(q.l)+"</button>";}).join("");
-  const stageCard='<section class="card"><h2>'+(stg.n?esc(stg.n):"Skills")+"</h2>"+
-    (stg.side?'<p class="note">Side stage. Tracked on its own: its successes and failures don’t count toward the main challenge.</p>':"")+
-    (stg.intro?'<p class="note">'+esc(stg.intro)+"</p>":"")+
-    (stg.adv?'<p class="muted small">Advances after '+(stg.adv.s?stg.adv.s+" successes":"")+(stg.adv.s&&stg.adv.f?" or ":"")+(stg.adv.f?stg.adv.f+" failures":"")+" in this stage.</p>":"")+
-    nav+actor+(quick?'<div class="chips quick">'+quick+"</div>":"")+
-    '<ul class="sks">'+stg.skills.map((sk,i)=>skRow(c,r,Math.min(r.stage,c.stages.length-1),i,sk,!!r.done&&!stg.side)).join("")+"</ul>"+
-    '<p class="muted small">Players may propose skills not listed. Allow them: a stretch is a high DC for a single success, or advantage on a complementary check. Use + Advantage below to add it.</p></section>';
-  /* outcome */
-  const ot=["total","ok","fail"],ol={total:"Total success",ok:"Success",fail:"Failure"};
+  if(c.stages.length>1)nav='<div class="chips" style="margin:8px 0">'+c.stages.map((s,i)=>'<button class="btn sm" data-act="stage" data-id="'+i+'" aria-pressed="'+(i===r.stage)+'">'+esc(s.n||"Stage "+(i+1))+(s.side?" · side":"")+' <span class="mono">'+r.st[i].s+"✓ "+r.st[i].f+"✗</span></button>").join("")+"</div>";
+  const w=r.who||"turn";
+  const actor='<div class="actor"><label class="lbl" for="who">Acting</label><select id="who" class="trapsel" style="min-width:0" data-field="who">'+
+    '<option value="turn"'+(w==="turn"?" selected":"")+">Current turn"+(curChar()?" ("+esc(curChar().name)+")":" (whole party)")+"</option>"+
+    '<option value="party"'+(w==="party"?" selected":"")+">Whole party (group check)</option>"+
+    r.chars.map(p=>'<option value="'+p.id+'"'+(w===p.id?" selected":"")+">"+esc(p.name)+"</option>").join("")+"</select></div>";
+  return'<section class="card"><p class="eyebrow">'+(stg.side?"Side stage":"Skills")+'</p><h2>'+(stg.n?esc(stg.n):"What can the characters try?")+"</h2>"+
+    (stg.side?'<p class="note" style="margin-top:6px">Side stage. Tracked on its own: its successes and failures don’t count toward the main challenge.</p>':"")+
+    (stg.fl?'<p class="flavor" style="margin-top:6px">'+esc(stg.fl)+"</p>":"")+
+    (stg.intro?'<p class="note" style="margin-top:6px">'+esc(stg.intro)+"</p>":"")+
+    (stg.adv?'<p class="muted small" style="margin-top:6px">Advances after '+(stg.adv.s?stg.adv.s+" successes":"")+(stg.adv.s&&stg.adv.f?" or ":"")+(stg.adv.f?stg.adv.f+" failures":"")+" in this stage.</p>":"")+
+    nav+actor+'<ul class="sks">'+stg.skills.map((sk,i)=>skRow(si,i,sk,!!r.done&&!stg.side)).join("")+"</ul>"+
+    '<p class="muted small">Players may propose skills that aren’t listed. Allow them: a stretch is a high DC for a single success, or advantage on a complementary check (use + Advantage under Pending modifiers).</p></section>';
+}
+function nowCard(){return turnCard()+skillsCard();}
+function pendCard(){
+  const c=Cc,r=S;if(!r.done)return"";
+  const lbl=r.done==="total"?"Total success":r.done==="ok"?"Success":"Failure";
   const fx=r.done==="ok"?c.out.okFx:r.done==="fail"?c.out.failFx:null;
-  const outcome='<section class="card'+(r.done?(r.done==="fail"?" bad":" calmc"):"")+'"><h2>Outcomes</h2>'+
-    (r.done?'<div class="banner'+(r.done==="fail"?" bad":"")+'">'+tierLbl+(r.done==="total"?": no failures":"")+"</div>":'<p class="muted small">Total success means no failures. Failure never ends the story; it opens a new branch with a cost.</p>')+
-    '<dl class="out">'+ot.map(k=>'<div class="'+(r.done===k?"hit":"")+'"><dt>'+ol[k]+"</dt><dd>"+esc(c.out[k])+"</dd></div>").join("")+"</dl>"+(c.out.alt?'<div class="note"><b>'+esc(c.out.alt.n)+":</b> "+esc(c.out.alt.t)+"</div>":"")+
-    (r.done&&fx&&fx.length?'<div class="remind">'+(r.applied?"Outcome effects applied to the party.":"Outcome effects: "+fx.map(effLabel).join(", ")+'. <button class="btn sm primary" data-a="applyout">Apply to party</button>')+"</div>":"")+"</section>";
-  /* setup */
-  const setup='<details class="card setup" open><summary><span class="eyebrow">Setup</span></summary><p class="flavor">'+esc(c.fl)+"</p><p>"+esc(c.setup)+'</p><p class="muted small">Scale: '+esc(c.scale)+"</p>"+(c.notes?'<h3 class="nh">DM notes</h3><ul class="notes">'+c.notes.map(n=>"<li>"+esc(n)+"</li>").join("")+"</ul>":"")+"</details>";
-  /* aside: clock/hazard */
-  let clock='<section class="card"><div class="party-head"><h3>Clock</h3><button class="step" data-a="rd" data-v="-1" aria-label="Previous round">−</button><b class="mono rdn">Round '+r.round+'</b><button class="step" data-a="rd" data-v="1" aria-label="Next round">+</button></div>'+
-    '<p class="muted small">'+esc(c.scale)+"</p>";
-  if(c.phases){const p=c.phases.filter(x=>x.from<=r.round).pop();if(p)clock+='<div class="haz"><h3>Now: '+esc(p.n)+"</h3><p>"+esc(p.t)+"</p></div>";}
+  return'<section class="card '+(r.done==="fail"?"trap":"calmc")+'"><p class="eyebrow">Challenge over</p><h2>'+lbl+(r.done==="total"?": no failures":"")+"</h2><p>"+esc(c.out[r.done])+"</p>"+
+    (fx&&fx.length?'<div class="remind">'+(r.applied?"Outcome effects applied to the party.":"Outcome effects: "+esc(fx.map(effLabel).join(", "))+'. <button class="btn sm primary" data-act="applyout">Apply to party</button>')+"</div>":"")+"</section>";
+}
+function outCard(){
+  const c=Cc,r=S,ot=["total","ok","fail"],ol={total:"Total success",ok:"Success",fail:"Failure"};
+  return'<section class="card"><h3 style="margin-bottom:8px">Outcomes</h3><p class="muted small" style="margin-bottom:8px">Total success means no failures. Failure never ends the story; it opens a new branch with a cost.</p><dl class="glance">'+
+    ot.map(k=>'<div'+(r.done===k?' class="hit"':"")+"><dt>"+ol[k]+"</dt><dd>"+esc(c.out[k])+"</dd></div>").join("")+"</dl>"+
+    (c.out.alt?'<div class="note" style="margin-top:8px"><b>'+esc(c.out.alt.n)+":</b> "+esc(c.out.alt.t)+"</div>":"")+"</section>";
+}
+function cmCard(){
+  const c=Cc,r=S;let h="";
+  if(c.quick&&c.quick.length){
+    h+='<section class="card"><h3 style="margin-bottom:10px">Shortcuts</h3><div class="cmlist">'+c.quick.map((q,i)=>{
+      const off=r.done||(q.st!=null&&r.stage!==q.st)||(q.min!=null&&r.stage<q.min)||(q.once&&r.qUsed[i]);
+      return'<div class="cmr"><b>'+esc(q.l)+'</b><p class="muted">'+esc(qDesc(q))+'</p><p><button class="btn sm" data-act="quick" data-id="'+i+'"'+(off?" disabled":"")+">Use</button></p></div>";}).join("")+"</div></section>";
+  }
+  [c.table,c.rtable].filter(Boolean).forEach(t=>{
+    h+='<section class="card"><div class="party-head"><h3>'+esc(t.n)+'</h3><button class="btn sm" data-act="enc" data-id="'+(t===c.rtable?"r":"f")+'">Roll d6</button></div>'+(t.note?'<p class="muted small" style="margin-top:4px">'+esc(t.note)+"</p>":"")+
+      '<ol class="tbl-l">'+t.rows.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ol></section>";
+  });
+  if(r.enc.length)h+='<section class="card"><h3>Rolled</h3><ul class="log">'+r.enc.map(e=>'<li><span class="r">R'+e.rd+"</span><span>"+esc(e.n)+" d6 "+e.d+": "+esc(e.t)+"</span></li>").join("")+"</ul></section>";
+  return h;
+}
+function modsCard(){
+  const r=S;
+  return'<section class="card"><h3 style="margin-bottom:8px">Pending modifiers</h3>'+
+    (r.mods.length?'<div class="conds">'+r.mods.map((m,i)=>'<span class="chip '+(m.kind==="adv"?"ok":"crit")+'">'+esc((m.kind==="adv"?"Advantage":"Disadvantage")+" · "+(m.skills==="*"?"any check":m.skills.map(x=>x==="Hazard"?"hazard save":x).join(" / "))+(m.persist?" · rest of challenge":" · next roll"))+
+      ' <button class="x" data-act="rmmod" data-id="'+i+'" aria-label="Remove modifier" style="padding:0 0 0 4px;font-size:16px">×</button></span>').join("")+"</div>":'<p class="muted small">None. Successes and failures that grant advantage or disadvantage appear here and are used automatically.</p>')+
+    '<div class="ch-acts" style="margin-top:8px"><button class="btn sm" data-act="addmod" data-id="adv">+ Advantage</button><button class="btn sm" data-act="addmod" data-id="dis">+ Disadvantage</button></div></section>';
+}
+function clockCard(){
+  const c=Cc,r=S;
+  let h='<section class="card"><h3 style="margin-bottom:6px">Clock &amp; hazard</h3><p class="muted small">'+esc(c.scale)+"</p>"+(r.round?'<p style="margin-top:6px"><b class="mono">Round '+r.round+"</b></p>":"");
+  if(c.phases){const p=c.phases.filter(x=>x.from<=Math.max(1,r.round)).pop();if(p)h+='<div class="haz"><b>Now: '+esc(p.n)+"</b><p>"+esc(p.t)+"</p></div>";}
   if(c.haz){
-    const h=c.haz;
-    if(h.limit){const lim=h.limit+r.timeAdd;const left=lim-r.round;
-      clock+='<div class="haz"><h3>'+esc(h.n)+"</h3><p>"+esc(h.t)+'</p><div class="meter" aria-label="Rounds until full">'+Array.from({length:Math.max(lim,1)},(_,i)=>'<span class="cell'+(i<r.round?" on":"")+'"></span>').join("")+"</div>"+
+    const hz=c.haz;
+    if(hz.limit){const lim=hz.limit+r.timeAdd;const left=lim-r.round;
+      h+='<div class="haz"><b>'+esc(hz.n)+"</b><p>"+esc(hz.t)+'</p><div class="meter" style="grid-template-columns:repeat('+Math.max(lim,1)+',1fr)">'+Array.from({length:Math.max(lim,1)},(_,i)=>'<span class="cell'+(i<r.round?" on":"")+'"></span>').join("")+"</div>"+
         '<p class="'+(left<0?"crit-t":"")+'"><b class="mono">'+Math.max(0,left)+"</b> rounds until full"+(left<0?" · the room is full":"")+"</p></div>";}
-    else if(h.nosave){clock+='<div class="haz"><h3>'+esc(h.n)+"</h3><p>"+esc(h.t)+"</p></div>";}
-    else{const d=hazDC(r,h);
-      clock+='<div class="haz"><h3>Hazard: '+esc(h.n)+'</h3><p><span class="dc">'+h.stat+" save · "+dcLabel(d)+"</span> at initiative 20 each round."+(h.from&&r.round<h.from?" <b>No save yet: saves begin round "+h.from+".</b>":"")+"</p><p>"+esc(h.t)+
-        '</p><p class="muted small">Saves don’t count toward successes or failures.</p><div class="chips">'+
-        S.party.map(p=>'<button class="btn sm" data-a="hf" data-v="'+p.id+'">'+esc(p.name)+" failed</button>").join("")+"</div></div>";}
+    else if(hz.nosave)h+='<div class="haz"><b>'+esc(hz.n)+"</b><p>"+esc(hz.t)+"</p></div>";
+    else{const d=hazDC(r,hz);
+      h+='<div class="haz"><b>Hazard: '+esc(hz.n)+'</b><p><span class="dc">'+esc(hz.stat)+" save · "+esc(dcLabel(d))+"</span> at initiative 20 each round."+(hz.from&&r.round<hz.from?" <b>No save yet: saves begin round "+hz.from+".</b>":"")+"</p><p>"+esc(hz.t)+"</p>"+
+        (hz.fail&&hz.fail.length?'<p class="o ok"><b>Save succeeds</b> '+esc(hz.pass||"No effect.")+'</p><p class="o bad"><b>Save fails</b> '+esc(hazFailText(hz))+"</p>":"")+"</div>";}
   }
-  clock+="</section>";
-  /* mods */
-  const mods='<section class="card"><h3>Pending modifiers</h3>'+
-    (r.mods.length?'<ul class="mods">'+r.mods.map((m,i)=>'<li>'+chip((m.kind==="adv"?"Advantage":"Disadvantage")+" · "+(m.skills==="*"?"any check":m.skills.join(" / "))+(m.persist?" · rest of challenge":" · next check"),m.kind==="adv"?"ok":"crit")+
-      '<button class="x" data-a="rmmod" data-v="'+i+'" aria-label="Remove modifier">×</button></li>').join("")+"</ul>":'<p class="muted small">None. Successes and failures that grant advantage or disadvantage appear here and are used automatically.</p>')+
-    '<div class="chips"><button class="btn sm" data-a="addmod" data-v="adv">+ Advantage</button><button class="btn sm" data-a="addmod" data-v="dis">+ Disadvantage</button></div></section>';
-  /* enc */
-  const tbls=[c.table,c.rtable].filter(Boolean);
-  const enc=tbls.length?'<section class="card">'+tbls.map(t=>'<div class="party-head"><h3>'+esc(t.n)+'</h3><button class="btn sm" data-a="enc" data-v="'+(t===c.rtable?"r":"f")+'">Roll d6</button></div>'+(t.note?'<p class="muted small">'+esc(t.note)+"</p>":"")+'<ol class="tbl">'+t.rows.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ol>").join("")+
-    (r.enc.length?'<h3>Rolled</h3><ul class="log">'+r.enc.map(e=>'<li><span class="r">R'+e.rd+'</span><span>'+esc(e.n)+" d6 "+e.d+": "+esc(e.t)+"</span></li>").join("")+"</ul>":"")+"</section>":"";
-  /* party */
-  const party='<section class="card"><div class="party-head"><h3>Party</h3></div>'+(S.party.length?"":'<p class="muted small">No players yet. Add each character below with their Hit Dice, and they will appear in the Acting list and the hazard buttons.</p>')+'<div class="pl">'+
-    S.party.map(p=>'<div class="pc"><div class="pc-h"><input class="pname" data-id="'+p.id+'" value="'+esc(p.name)+'" aria-label="Character name"><button class="x" data-a="rmchar" data-v="'+p.id+'" aria-label="Remove '+esc(p.name)+'">×</button></div>'+
-    '<div class="pc-r"><span class="lbl">Hit Dice</span><button class="step" data-a="hd" data-v="'+p.id+'|-1" aria-label="Lose a Hit Die">−</button><b class="mono">'+p.hd+"/"+p.hdMax+'</b><button class="step" data-a="hd" data-v="'+p.id+'|1" aria-label="Regain a Hit Die">+</button></div>'+
-    '<div class="pc-r"><span class="lbl">Exhaustion</span><button class="step" data-a="ex" data-v="'+p.id+'|-1" aria-label="Lower exhaustion">−</button><b class="mono'+(p.exh>=4?" crit-t":"")+'">'+p.exh+'</b><button class="step" data-a="ex" data-v="'+p.id+'|1" aria-label="Raise exhaustion">+</button></div></div>').join("")+"</div>"+
-    '<form class="addf" id="addf"><input id="newName" placeholder="Add character" aria-label="New character name"><input id="newHd" type="number" min="1" value="5" aria-label="Hit Dice" title="Hit Dice"><button class="btn sm" type="submit">Add</button></form></section>';
-  /* log */
-  const log='<section class="card"><h3>Log</h3>'+(r.log.length?'<ul class="log">'+r.log.map(l=>'<li><span class="r">R'+l.rd+'</span><span class="'+(l.ok===true?"ok-t":l.ok===false?"crit-t":"")+'">'+esc(l.t)+(l.subs.length?'<span class="subs">'+l.subs.map(s=>"<i>"+esc(s)+"</i>").join("")+"</span>":"")+"</span></li>").join("")+"</ul>":'<p class="muted small">Checks, effects and rounds appear here.</p>')+
-    '<label class="lbl" for="notes">DM notes</label><textarea id="notes" rows="3" placeholder="Rewards, NPC moods, what happens on failure…">'+esc(r.notes||"")+"</textarea></section>";
-  $("#view").innerHTML=strip+'<div class="run"><div class="run-main">'+setup+stageCard+outcome+'</div><div class="run-aside">'+clock+mods+enc+party+log+"</div></div>";
-  bindRun();
+  return h+"</section>";
 }
-function bindRun(){
-  const a=$("#actor");if(a)a.addEventListener("change",e=>{S.actor=e.target.value;save();});
-  const m=$("#mod");if(m)m.addEventListener("change",e=>{S.mod=parseInt(e.target.value,10)||0;save();});
-  const n=$("#notes");if(n)n.addEventListener("change",e=>{runOf(cur()).notes=e.target.value;save();});
-  document.querySelectorAll(".pname").forEach(i=>i.addEventListener("change",e=>{const p=S.party.find(x=>x.id===e.target.dataset.id);if(p){p.name=e.target.value||p.name;render();}}));
-  const f=$("#addf");if(f)f.addEventListener("submit",e=>{e.preventDefault();const nm=$("#newName").value.trim();if(!nm)return;
-    const hd=Math.max(1,parseInt($("#newHd").value,10)||5);S.party.push({id:uid(),name:nm,hd,hdMax:hd,exh:0});render();});
+function logCard(){
+  const r=S;
+  return'<section class="card"><div class="party-head"><h3>Rolls &amp; log</h3>'+(r.log.length?'<button class="btn sm" data-act="clearLog">Clear</button>':"")+"</div>"+
+    (r.log.length?'<ul class="log">'+r.log.slice(0,60).map(l=>'<li><span class="r">R'+l.rd+'</span><span class="'+(l.ok===true?"ok-t":l.ok===false?"crit-t":"")+'">'+esc(l.t)+(l.subs.length?'<span class="subs">'+l.subs.map(s=>"<i>"+esc(s)+"</i>").join("")+"</span>":"")+"</span></li>").join("")+"</ul>":'<p class="muted" style="margin-top:6px">Checks, effects and rounds appear here as you play.</p>')+
+    '<label class="lbl" for="notes" style="display:block;margin-top:10px">DM notes</label><textarea id="notes" class="ta" rows="3" data-field="notes" placeholder="Rewards, NPC moods, what happens on failure…">'+esc(r.notes||"")+"</textarea></section>";
 }
-
-function renderRules(){
-  $("#view").innerHTML='<div class="ref">'+
-  "<section><h3>How a challenge ends</h3><ul><li><b>Total success:</b> the needed successes with zero failures. No cost.</li><li><b>Success:</b> the needed successes before 3 failures. Minor detriment, a lost resource or a complication.</li><li><b>Failure:</b> 3 failures first. Lost time, extra encounters, reinforcements, lost Hit Dice or exhaustion. The story always continues down a new branch.</li></ul></section>"+
-  '<section><h3>Complexity</h3><div class="tw"><table><thead><tr><th>Complexity</th><th>Successes</th><th>Failures</th></tr></thead><tbody><tr><td>1</td><td>4</td><td>3</td></tr><tr><td>2</td><td>6</td><td>3</td></tr><tr><td>3</td><td>8</td><td>3</td></tr></tbody></table></div><p class="muted">You can raise or lower the failures allowed to ease or tighten a challenge. The dials in the strip do this per run.</p></section>'+
-  '<section><h3>Difficulty classes</h3><div class="tw"><table><thead><tr><th>Task</th><th>DC</th></tr></thead><tbody>'+TIERS.map(t=>"<tr><td>"+t[0]+"</td><td class=\"mono\">"+t[1]+"</td></tr>").join("")+'</tbody></table></div><p class="muted">The Book / −1 / +1 / +2 control at the top shifts every DC by whole tiers. “One level” effects in a challenge move a DC one tier up.</p></section>'+
-  '<section><h3>Damage by tier</h3><p class="muted">For effects that deal damage (from Xanathar’s Guide, as listed in Book 2).</p><div class="tw"><table><thead><tr><th>Tier</th><th>Levels</th><th>Moderate</th><th>Dangerous</th><th>Deadly</th></tr></thead><tbody><tr><td>1</td><td>1–4</td><td class="mono">5 (1d10)</td><td class="mono">11 (2d10)</td><td class="mono">22 (4d10)</td></tr><tr><td>2</td><td>5–10</td><td class="mono">11 (2d10)</td><td class="mono">22 (4d10)</td><td class="mono">55 (10d10)</td></tr><tr><td>3</td><td>11–16</td><td class="mono">22 (4d10)</td><td class="mono">55 (10d10)</td><td class="mono">99 (18d10)</td></tr><tr><td>4</td><td>17–20</td><td class="mono">55 (10d10)</td><td class="mono">99 (18d10)</td><td class="mono">132 (24d10)</td></tr></tbody></table></div></section>'+
-  "<section><h3>Hazards</h3><p>Some challenges have a hazard on initiative 20 each round: poison gas, freezing cold, volleys of arrows. Every character involved makes a saving throw. Success avoids it, failure suffers it. These saves don’t count toward the challenge’s successes or failures. The Clock card tracks the round and logs failed saves.</p></section>"+
-  "<section><h3>Hit Dice as currency</h3><p>Losing Hit Dice weakens short rests later in the day without crippling the current scene. A long rest only restores half your Hit Dice. A character who must lose a Hit Die but has none suffers a level of exhaustion instead. The tracker does this automatically.</p></section>"+
-  "<section><h3>Group checks</h3><p>Everyone rolls once. If at least half succeed, it counts as a single success. Choose Whole party under Acting to record one. Effects that hit “the character” hit the whole party in a group check.</p></section>"+
-  "<section><h3>Staying flexible</h3><ul><li>Allow clever uses of skills, spells and features that aren’t listed. A stretch gets a hard DC for a single success, or advantage on a complementary check.</li><li>Give every character a moment. Mix interaction, knowledge and physical skills.</li><li>Long challenges can be split across sessions. Progress is saved in this browser per challenge.</li><li>Failure is a branch, not a dead end. Use the failed check to explain it: the character who tried to vault now trips.</li></ul></section></div>";
+let sure=false,sureT=0;
+function doReset(){
+  if(!sure){sure=true;clearTimeout(sureT);sureT=setTimeout(()=>{sure=false;quick(()=>{});},4000);quick(()=>{});return;}
+  sure=false;clearTimeout(sureT);
+  commit(()=>{
+    const keep=S.chars,tier=S.tier,nid=S.nid,f=freshFor(Cc);
+    Object.keys(S).forEach(k=>{if(k!=="tab")delete S[k];});
+    Object.assign(S,f,{tier,chars:keep,nid});
+  });
+}
+const resetBtn=()=>'<p><button type="button" class="btn sm" data-act="reset">'+(sure?"Tap again to reset":"Reset challenge")+"</button></p>";
+function viewRun(){
+  return{pend:pendCard(),now:nowCard(),order:orderCard(buildOrder()),cm:cmCard(),out:outCard(),party:partyCard(),mods:modsCard(),glance:clockCard(),log:logCard(),reset:resetBtn()};
+}
+function strip(){
+  const r=S,c=Cc,start=r.round===0;
+  const stat=(lbl,v,cnt,max,cls,kind)=>'<div class="stat"><span class="lbl">'+lbl+'</span><div class="row"><button class="step" data-act="'+kind+'" data-m="-1" aria-label="Fewer '+lbl.toLowerCase()+'">−</button><b>'+v+'</b><button class="step" data-act="'+kind+'" data-m="1" aria-label="More '+lbl.toLowerCase()+'">+</button></div><div class="pips">'+pips(max,cnt,cls)+"</div></div>";
+  return'<div class="strip"><div class="strip-in">'+
+   '<div class="stat"><span class="lbl">Round</span><b>'+(r.round||"–")+"</b></div>"+
+   stat("Successes",r.s+"/"+r.need,r.s,r.need,"ok","need")+
+   stat("Failures",r.f+"/"+r.lim,r.f,r.lim,"bad","lim")+
+   (c.stages.length>1?'<div class="stat"><span class="lbl">Stage</span><b>'+(stageNow()+1)+"/"+c.stages.length+"</b></div>":"")+
+   (r.done?'<div class="stat"><span class="lbl">Result</span><b>'+(r.done==="total"?"Total success":r.done==="ok"?"Success":"Failure")+"</b></div>":"")+
+   '<div class="acts"><button class="btn" data-act="undo"'+(core.canUndo()?"":" disabled")+'>Undo</button><button class="btn primary" data-act="next">'+(start?"Start":"Next")+"</button></div></div></div>";
 }
 
-function render(){
-  renderHead();
-  if(S.tab==="lib")renderLib();else if(S.tab==="rules")renderRules();else renderRun();
-  save();
+/* ---------- Text tab ---------- */
+function srcHtml(c){
+  if(CUSTOM_SRC[c.id])return"Your original artifact, <a href=\"https://claude.ai/artifact/"+CUSTOM_SRC[c.id]+"\" target=\"_blank\" rel=\"noopener\">open it</a>. This page keeps all the rules and trims some of the surrounding prose.";
+  const p={"1":"Challenge Accepted - Skill Challenges.pdf","2":"Challenge Accepted 2.pdf"};
+  const l=c.b.split(" + ").map(x=>p[x]).filter(Boolean).map(x=>"<b>"+esc(x)+"</b>");
+  return l.join(" and ")+" in your D&amp;D Challenges project. This page condenses the book’s flavor text and sidebars but keeps every rule.";
 }
-
-/* ---------- EVENTS ---------- */
-document.addEventListener("click",e=>{
-  const b=e.target.closest("[data-a]");if(!b||b.disabled)return;
-  const a=b.dataset.a,v=b.dataset.v;const c=cur();
-  switch(a){
-    case"tab":S.tab=v;render();window.scrollTo(0,0);break;
-    case"shift":S.shift=+v;render();break;
-    case"open":S.cur=v;S.tab="run";render();window.scrollTo(0,0);break;
-    case"bk":S.bk=v;renderLib();save();break;
-    case"cx":S.cxf=+v;renderLib();save();break;
-    case"tag":S.tag=v;renderLib();save();break;
-    case"ok":record(v,true);break;
-    case"fail":record(v,false);break;
-    case"roll":rollSkill(v);break;
-    case"undo":undo();break;
-    case"reset":if(confirmReset){S.runs[c.id]=newRun(c);UNDO[c.id]=[];confirmReset=false;render();}
-      else{confirmReset=true;render();setTimeout(()=>{if(confirmReset){confirmReset=false;if(S.tab==="run")render();}},3500);}break;
-    case"need":{const r=runOf(c);r.need=Math.max(1,r.need+ +v);finish(c,r);render();break;}
-    case"lim":{const r=runOf(c);r.lim=Math.max(1,r.lim+ +v);finish(c,r);render();break;}
-    case"stage":runOf(c).stage=+v;render();break;
-    case"quick":quick(+v);break;
-    case"applyout":applyOutcome();break;
-    case"hf":hazFail(v);break;
-    case"rd":nextRound(+v);break;
-    case"rmmod":{snap();runOf(c).mods.splice(+v,1);render();break;}
-    case"addmod":{snap();runOf(c).mods.push({kind:v,skills:"*",persist:false,src:"DM"});render();break;}
-    case"enc":{const r=runOf(c);snap();rollEnc(c,r,v==="r"?c.rtable:c.table);render();break;}
-    case"hd":{const[id,d]=v.split("|");const p=S.party.find(x=>x.id===id);if(p){p.hd=Math.max(0,Math.min(p.hdMax,p.hd+ +d));render();}break;}
-    case"ex":{const[id,d]=v.split("|");const p=S.party.find(x=>x.id===id);if(p){p.exh=Math.max(0,Math.min(6,p.exh+ +d));render();}break;}
-    case"rmchar":S.party=S.party.filter(p=>p.id!==v);render();break;
+function viewRef(){
+  const c=Cc,r0=newRef(c);
+  let h='<article class="ref">';
+  h+="<section>"+(c.fl?'<p class="flavor">'+esc(c.fl)+"</p>":"")+"<p>"+esc(c.setup)+"</p></section>";
+  h+='<section><h3>At a glance</h3><dl class="glance"><div><dt>Complexity</dt><dd>'+c.cx+": "+reqOf(c)+" successes before 3 failures.</dd></div><div><dt>Pace</dt><dd>"+esc(c.scale)+"</dd></div><div><dt>Stages</dt><dd>"+c.stages.length+" · "+c.stages.reduce((a,s)=>a+s.skills.length,0)+" skills</dd></div></dl></section>";
+  c.stages.forEach((stg,si)=>{
+    h+="<section><h3>"+(stg.n?esc(stg.n):"Skills")+(stg.side?" · side stage":"")+"</h3>"+
+      (stg.fl?'<p class="flavor">'+esc(stg.fl)+"</p>":"")+(stg.intro?"<p>"+esc(stg.intro)+"</p>":"")+
+      (stg.side?'<p class="muted">Tracked on its own: its successes and failures don’t count toward the main challenge.</p>':"")+
+      (stg.adv?'<p class="muted">Advances after '+(stg.adv.s?stg.adv.s+" successes":"")+(stg.adv.s&&stg.adv.f?" or ":"")+(stg.adv.f?stg.adv.f+" failures":"")+" in this stage.</p>":"")+
+      '<ul class="sks">'+stg.skills.map((sk,ki)=>{
+        const key=si+":"+ki,dc=skillDC(r0,key,sk);
+        return'<li class="sk"><div class="sk-h"><h3>'+esc(sk.n)+"</h3>"+(sk.af?'<span class="dc">auto-fail</span>':'<span class="dc">'+dcLabel(dc)+"</span>")+
+          (sk.req?chip("Needs "+sk.req,"warn"):"")+(sk.cap===1&&!sk.af?chip("1 success max"):sk.cap>1?chip(sk.cap+" successes max"):"")+((sk.max||sk.once)?chip((sk.max||1)===1?"one attempt":(sk.max+" attempts max")):"")+"</div>"+
+          (sk.d?"<p>"+esc(sk.d)+"</p>":"")+outLines(c,r0,si,sk)+"</li>";}).join("")+"</ul></section>";
+  });
+  if(c.phases)h+="<section><h3>Phases</h3><dl>"+c.phases.map(p=>"<div><dt>"+esc(p.n)+"</dt><dd>"+esc(p.t)+"</dd></div>").join("")+"</dl></section>";
+  if(c.haz){
+    const hz=c.haz;
+    h+="<section><h3>Hazard: "+esc(hz.n)+"</h3><p>"+esc(hz.t)+"</p>";
+    if(hz.limit)h+="<p>The room is full after <b>"+hz.limit+" rounds</b>.</p>";
+    else if(!hz.nosave){
+      h+="<p><b>"+esc(hz.stat)+" save</b> at initiative 20 each round. "+esc(hazDcInfo(hz))+".</p>"+(hz.from?"<p>Saves begin on round "+hz.from+".</p>":"")+
+        (hz.fail&&hz.fail.length?'<p class="o ok"><b>Save succeeds</b> '+esc(hz.pass||"No effect.")+'</p><p class="o bad"><b>Save fails</b> '+esc(hazFailText(hz))+"</p>":"")+
+        "<p class=\"muted\">Hazard saves never count toward the challenge’s successes or failures.</p>";
+    }
+    h+="</section>";
   }
+  if(c.quick&&c.quick.length)h+="<section><h3>Shortcuts</h3><dl>"+c.quick.map(q=>"<div><dt>"+esc(q.l)+"</dt><dd>"+esc(qDesc(q))+"</dd></div>").join("")+"</dl></section>";
+  [c.table,c.rtable].filter(Boolean).forEach(t=>{
+    h+="<section><h3>"+esc(t.n)+"</h3>"+(t.note?'<p class="muted">'+esc(t.note)+"</p>":"")+'<div class="tw"><table><tr><th>d6</th><th>Result</th></tr>'+t.rows.map((x,i)=>'<tr><td class="mono">'+(i+1)+"</td><td>"+esc(x)+"</td></tr>").join("")+"</table></div></section>";
+  });
+  h+="<section><h3>Outcomes</h3><dl>"+[["total","Total success"],["ok","Success"],["fail","Failure"]].map(x=>"<div><dt>"+x[1]+"</dt><dd>"+esc(c.out[x[0]])+"</dd></div>").join("")+(c.out.alt?"<div><dt>"+esc(c.out.alt.n)+"</dt><dd>"+esc(c.out.alt.t)+"</dd></div>":"")+"</dl></section>";
+  if(c.notes&&c.notes.length)h+="<section><h3>DM notes</h3><ul>"+c.notes.map(n=>"<li>"+esc(n)+"</li>").join("")+"</ul></section>";
+  h+='<section><h3>Source</h3><p class="muted">'+srcHtml(c)+"</p></section></article>";
+  return h;
+}
+
+/* ---------- Actions ---------- */
+const actions={
+  next:()=>nextStep(),
+  ok:id=>commit(()=>record(id,true)),
+  fail:id=>commit(()=>record(id,false)),
+  quick:id=>commit(()=>doQuick(+id)),
+  applyout:()=>commit(()=>applyOutcome()),
+  hf:id=>commit(()=>hazFail(id)),
+  stage:id=>commit(()=>{S.stage=+id;}),
+  need:(id,m)=>commit(()=>{S.need=Math.max(1,S.need+ +m);finish();}),
+  lim:(id,m)=>commit(()=>{S.lim=Math.max(1,S.lim+ +m);finish();}),
+  rmmod:id=>commit(()=>{S.mods.splice(+id,1);}),
+  addmod:id=>commit(()=>{S.mods.push({kind:id,skills:"*",persist:false,src:"DM"});}),
+  enc:id=>commit(()=>rollEnc(id==="r"?Cc.rtable:Cc.table)),
+  hd:(id,m)=>commit(()=>{const p=get(id);if(p)p.hd=Math.max(0,Math.min(p.hdMax,p.hd+ +m));}),
+  ex:(id,m)=>commit(()=>{const p=get(id);if(p)p.exh=Math.max(0,Math.min(6,p.exh+ +m));}),
+  remove:id=>commit(()=>{S.chars=S.chars.filter(p=>p.id!==id);if(S.key==="c:"+id)S.key=null;if(S.who===id)S.who="turn";}),
+  clearParty:()=>commit(()=>{S.chars=[];S.key=S.key==="haz"?"haz":null;S.who="turn";}),
+  clearLog:()=>commit(()=>{S.log=[];S.enc=[];}),
+  reset:()=>doReset()
+};
+const fields={
+  name:(id,v)=>commit(()=>{const p=get(id);if(p&&v.trim())p.name=v.trim();}),
+  init:(id,v)=>commit(()=>{const p=get(id);if(p)p.init=v===""?"":num(v);}),
+  who:(id,v)=>quick(()=>{S.who=v;}),
+  notes:(id,v)=>quick(()=>{S.notes=v;})
+};
+function mkChar(n,i,hd){
+  const h=Math.max(1,parseInt(hd,10)||5);
+  return{id:"c"+(S.nid++),name:n,init:i===""||i===undefined||i===null?"":num(i),hd:h,hdMax:h,exh:0};
+}
+function addChar(n,i,hd){S.chars.push(mkChar(n,i,hd));}
+function freshFor(c){
+  return{tier:0,chars:[],nid:1,round:0,key:null,who:"turn",s:0,f:0,stage:0,st:c.stages.map(()=>({s:0,f:0})),mods:[],lock:{},dcUp:{},dcAll:0,stats:{},
+    timeAdd:0,hazAdj:0,hazNext:0,qUsed:{},log:[],enc:[],done:null,applied:false,lim:3,need:reqOf(c),notes:""};
+}
+
+CH.forEach(c=>{
+  core.register({id:c.id,name:c.name,eyebrow:"Skill challenge · Complexity "+c.cx+" · "+reqOf(c)+" successes before 3 failures",
+    tagline:c.fl||c.setup,pal:palOf(c),tierLabel:"DC shift",tiers:[-2,-1,0,1,2].map(n=>({id:n,label:n===0?"Book":n>0?"+"+n:"−"+(-n)})),refLabel:"Text",roster:"chars",
+    fresh:()=>freshFor(c),bind:s=>{S=s;Cc=c;},actions,fields,addChar,strip,run:viewRun,ref:viewRef});
 });
-load();render();
-</script>
+core.start();
+})();
+
+</script></body></html>
 
 </body></html>

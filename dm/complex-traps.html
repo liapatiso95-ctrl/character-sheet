@@ -79,6 +79,11 @@ button,input,select{font:inherit;color:inherit}
 .run{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
 @media(min-width:1080px){.run{grid-template-columns:minmax(0,1fr) 340px;align-items:start}}
 .run-main,.run-aside{display:grid;gap:16px;min-width:0;grid-template-columns:minmax(0,1fr)}
+.dm-agenda{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:4px;font-size:13px;color:var(--muted)}
+.dm-agenda li{display:flex;gap:10px;align-items:baseline;padding:4px 8px;border-radius:6px;border-left:3px solid var(--line)}
+.dm-agenda li.cur{border-left-color:var(--accent);background:var(--accent-soft);color:var(--fg)}
+.dm-agenda li.out{opacity:.5}
+.dm-agenda .mono{min-width:22px;text-align:right}
 .order{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;margin:0;list-style:none}
 .oc{flex:0 0 auto;display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 10px;white-space:nowrap}
 .oc .i{font:600 12px var(--font-mono);color:var(--muted)}
@@ -303,6 +308,23 @@ const cur=()=>traps.find(t=>t.id===root.sel)||traps[0];
 const gid=t=>t.group||t.id;
 const gname=t=>t.groupName||t.name;
 const members=t=>traps.filter(x=>gid(x)===gid(t));
+function layout(o){
+  const g=k=>o[k]||'';
+  return '<div class="run"><div class="run-main">'+g('pend')+g('now')+g('order')+g('cm')+'</div><aside class="run-aside">'+g('party')+g('glance')+g('ident')+g('log')+g('reset')+'</aside></div>';
+}
+const getRoster=(t,S)=>t.roster&&Array.isArray(S[t.roster])?S[t.roster].map(c=>({name:c.name,init:c.init===undefined||c.init===null?'':c.init,pp:c.pp==null?'':c.pp})):null;
+function setRoster(t,S,list){
+  const arr=S[t.roster];if(!Array.isArray(arr))return;
+  const pool=arr.slice(),out=[];
+  t.bind(S);
+  list.forEach(r=>{
+    const i=pool.findIndex(c=>c.name===r.name);
+    if(i>=0){const c=pool.splice(i,1)[0];c.init=r.init;if(r.pp!==''&&'pp' in c)c.pp=r.pp;out.push(c);}
+    else{t.addChar(r.name,r.init,r.pp);out.push(arr.pop());}
+  });
+  S[t.roster]=out;
+  if(t.roster==='chars'&&out.length&&!out.some(c=>c.marked)&&'marked' in out[0])out[0].marked=true;
+}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(root));}catch(e){}}
 function load(){try{const raw=localStorage.getItem(KEY);if(raw){const r=JSON.parse(raw);if(r&&r.v===1&&r.data)root=Object.assign(root,r);}}catch(e){}}
 function state(t){
@@ -318,6 +340,10 @@ function switchTo(t){
   commit(()=>{
     if(!root.data[t.id]&&from&&from!==t&&t.adopt&&root.data[from.id]&&Array.isArray(root.data[from.id].chars)){
       const S=t.fresh();t.adopt(S,root.data[from.id]);root.data[t.id]=S;
+    }
+    if(t.roster&&root.roster&&root.roster.length){
+      const S=state(t);
+      if(S.example!==true||!from||root.data[from.id]===undefined||root.data[from.id].example!==true)setRoster(t,S,root.roster);
     }
     root.sel=t.id;root.last[gid(t)]=t.id;
   });
@@ -376,6 +402,7 @@ function renderControls(t,S){
 function render(){
   const t=cur();root.sel=t.id;
   const S=state(t);t.bind(S);
+  dmApply(t,S);
   document.body.dataset.trap=t.id;
   const ae=document.activeElement;let sel=null;
   if(ae&&ae.dataset&&(ae.dataset.act||ae.dataset.field)){
@@ -385,13 +412,67 @@ function render(){
   const y=window.scrollY;
   renderPicker();renderHead(t);renderControls(t,S);
   $('#strip').innerHTML=t.strip();
-  $('#view').innerHTML=root.tab==='ref'?t.ref():t.run();
+  if(t.roster&&S.example!==true){const r=getRoster(t,S);if(r&&r.length)root.roster=r;}
+  else if(t.roster&&!root.roster)root.roster=getRoster(t,S);
+  let rv=root.tab==='ref'?t.ref():t.run();if(rv&&typeof rv==='object')rv=layout(rv);
+  $('#view').innerHTML=rv;
   window.scrollTo(0,y);
   if(sel){const n=document.querySelector(sel);if(n&&n.focus)n.focus({preventScroll:true});}
   if(t.after)t.after();
+  dmAgenda();
+  dmBadge();
+}
+/* ---------- DM SCREEN BRIDGE: the party (name + initiative) comes from the Combat tab ---------- */
+let dmPcs=null;
+window.addEventListener('message',e=>{
+  const m=e.data;if(!m||m.dm!=='party'||!Array.isArray(m.pcs))return;
+  dmPcs=m.pcs;render();
+});
+function dmApply(t,S){
+  if(!dmPcs||window.parent===window)return;
+  const arr=()=>S.chars||S.party;
+  if(!Array.isArray(arr())||!t.addChar)return;
+  let ch=false;
+  if(S.example&&dmPcs.length){arr().length=0;S.example=false;ch=true;}
+  dmPcs.forEach(h=>{
+    const iv=(h.init===null||h.init===undefined)?'':h.init;
+    let c=arr().find(x=>x.hid===h.id)||arr().find(x=>!x.hid&&x.name===h.name);
+    if(!c){const n0=arr().length;t.addChar(h.name,iv,'');if(arr().length>n0){arr()[arr().length-1].hid=h.id;ch=true;}}
+    else{if(!c.hid){c.hid=h.id;ch=true;}if(c.name!==h.name){c.name=h.name;ch=true;}if(c.init!==iv){c.init=iv;ch=true;}}
+  });
+  const ids=new Set(dmPcs.map(h=>h.id)),a=arr(),keep=a.filter(x=>!x.hid||ids.has(x.hid));
+  if(keep.length!==a.length){a.length=0;keep.forEach(x=>a.push(x));ch=true;}
+  if(ch)save();
+}
+function dmBadge(){
+  try{
+    if(window.parent===window||!dmPcs)return;
+    document.querySelectorAll('.dm-badge').forEach(n=>n.remove());
+    const h=document.querySelector('#view .party-head h2, #view .party-head h3');
+    if(h){const s=document.createElement('span');s.className='dm-badge muted';s.style.cssText='font:500 12px var(--font-body);margin-left:8px';s.textContent='synced from Combat';h.appendChild(s);}
+  }catch(e){}
+}
+function dmAgenda(){
+  try{
+    document.querySelectorAll('.dm-agenda').forEach(n=>n.remove());
+    const ord=document.querySelector('#view .order');if(!ord)return;
+    const rows=[...document.querySelectorAll('#view .glance > div')].map(d=>{
+      const dt=(d.querySelector('dt')||{}).textContent||'',dd=(d.querySelector('dd')||{}).textContent||'';
+      const m=/init(?:iative)?\s*(\d+)|[\u00b7]\s*(\d+)\s*$/i.exec(dt);
+      return m?{n:+(m[1]||m[2]),dt:dt.trim(),dd:dd.trim()}:null;}).filter(Boolean);
+    if(!rows.length)return;
+    const items=[...ord.querySelectorAll('.oc.trap')].map(li=>{
+      const n=+((li.querySelector('.i')||{}).textContent),r=rows.find(x=>x.n===n);
+      return r?{li,n,name:(li.children[1]||{}).textContent||'',r}:null;}).filter(Boolean);
+    if(!items.length)return;
+    const ul=document.createElement('ul');ul.className='dm-agenda';
+    ul.innerHTML=items.map(x=>'<li class="'+(x.li.classList.contains('cur')?'cur':'')+(x.li.classList.contains('out')?' out':'')+'"><b class="mono">'+x.n+'</b><span><b>'+x.name.replace(/</g,'&lt;')+'</b> '+x.r.dd.replace(/</g,'&lt;')+'</span></li>').join('');
+    ord.insertAdjacentElement('afterend',ul);
+  }catch(e){}
 }
 function start(){load();if(!root.last)root.last={};if(!root.sel||!traps.some(x=>x.id===root.sel))root.sel=traps[0].id;render();}
 window.core=core;
+if(window.parent!==window){try{window.parent.postMessage({dm:'hello'},'*');}catch(e){}}
 })();
 
 core.register((function(){
@@ -479,6 +560,7 @@ function nextStep(){
 
 /* ---------- Actions ---------- */
 const actions={
+  reset:()=>doReset(),
   next:()=>nextStep(),
   endEnc:()=>commit(()=>{state.round=0;state.key=null;state.res={};state.pend=[];L('Encounter ended.');}),
   pp:()=>commit(()=>{addP('manual');}),
@@ -512,6 +594,7 @@ const actions={
   clearLog:()=>quick(()=>{state.log=[];})
 };
 const fields={
+  rev:(id,v,el)=>commit(()=>{state.rv=state.rv||{};state.rv[id]=el.checked;}),
   name:(id,v)=>quick(()=>{const c=get(id);if(c)c.name=v.trim()||c.name;}),
   init:(id,v)=>quick(()=>{const c=get(id);if(c)c.init=v===''?'':num(v);})
 };
@@ -611,9 +694,17 @@ function nowCard(){
   if(!c)return '<section class="card now"><p class="eyebrow">Round '+state.round+'</p><h2>Press Next to continue</h2>'+endBtn()+'</section>';
   return turnCard(c);
 }
+function cmCard(){
+  const k=TI(),d=D();
+  return '<section class="card"><h3 style="margin-bottom:10px">Countermeasures</h3><div class="cmlist">'+
+   '<div class="cmr"><b>Placation <span class="chip'+(state.calm?' ok':'')+'">'+(state.calm?'zone calm':state.pl+'/3 successes')+'</span></b><p class="muted">Action, one attempt per creature per round. DC 15 Intelligence (Arcana), Wisdom (Insight), Wisdom (Religion) or Charisma (Performance). Success adds to the shared counter (3 needed, then the Mark reacts if a marked PC is present). Failure: no progress, +1 Provocation and a self-surge (DC 10, '+k.sn+'d'+k.sd+', half on a success). Record attempts with the Placation buttons on the party cards.</p></div>'+
+   '<div class="cmr"><b>Collective Warding</b><p class="muted">One creature makes an Intelligence (Arcana) check, DC 18. Failure: nothing happens and there is no Provocation. Success: every creature in the zone has advantage on saves against Pulsing Instability and Chaos Burst until the start of the caster\'s next turn.</p></div>'+
+   '<div class="cmr"><b>Dispel Magic <span class="chip">'+state.P+' Provocation'+(state.P===1?'':'s')+' · '+d.radius+' ft</span></b><p class="muted">DC 18. Undoes the most recent Provocation (−5 ft, −1 DC, and the extra die if it came with it) but does not calm the zone.</p><p><button class="btn sm" data-act="dispel">Dispel: undo latest Provocation</button></p></div>'+
+  '</div></section>';
+}
 function glance(){
   const k=TI(),d=D();
-  return '<section class="card"><h3 style="margin-bottom:10px">Rules at a glance</h3><dl class="glance">'+
+  return '<section class="card"><h3 style="margin-bottom:10px">Elements</h3><dl class="glance">'+
    '<div><dt>Constant</dt><dd>Pulsing Instability: Con DC '+(15+d.dcb)+', '+d.pn+'d10 force, half on a success. At the start of a turn in the zone, or on entering.</dd></div>'+
    '<div><dt>Init 20</dt><dd>Chaos Burst: DC '+(20+d.dcb)+', '+d.bn+'d10. d8 sets the type.</dd></div>'+
    '<div><dt>Init 10</dt><dd>Core Pulse: Str DC 10 or pushed '+k.push+' ft and prone.</dd></div>'+
@@ -624,19 +715,29 @@ function glance(){
    '<div><dt>Dispel</dt><dd>DC 18. Undoes the latest Provocation. Does not calm the zone.</dd></div></dl></section>';
 }
 function identCard(){
-  return '<section class="card"><h3 style="margin-bottom:10px">Identification</h3><dl class="glance">'+
-   '<div><dt>Passive Perc.</dt><dd>DC 15. The zone is visible and can be heard pulsing.</dd></div>'+
-   '<div><dt>Investigation</dt><dd>DC 15. Beat it by 5+: a faint symbol at the center pulsing in rhythm with something or someone.</dd></div>'+
-   '<div><dt>Arcana</dt><dd>DC 10. A brand-new, extremely unstable rift. No anchors, guardians, or known method to close it.</dd></div>'+
-   '<div><dt>Arcana / Nature</dt><dd>DC 15. It can be attuned to with calm, targeted actions (Placation). Spells inside cause surges and grow the zone.</dd></div></dl></section>';
+  const rv=state.rv||{};
+  const rowH=(k,h,dc,t)=>'<div class="id"><div class="id-h"><b>'+h+'</b><span class="dc">DC&nbsp;'+dc+'</span><label class="chk" style="margin-left:auto"><input type="checkbox" data-field="rev" data-id="'+k+'" '+(rv[k]?'checked':'')+'> Revealed</label></div><p>'+t+'</p></div>';
+  return '<section class="card"><h3 style="margin-bottom:10px">Identification</h3><div class="ids">'+rowH('pp','Passive Perc.',15,'The zone is visible and can be heard pulsing.')+rowH('inv','Investigation',15,'Beat it by 5+: a faint symbol at the center pulsing in rhythm with something or someone.')+rowH('ar','Arcana',10,'A brand-new, extremely unstable rift. No anchors, guardians, or known method to close it.')+rowH('an','Arcana / Nature',15,'It can be attuned to with calm, targeted actions (Placation). Spells inside cause surges and grow the zone.')+'</div></section>';
 }
+let sure=false,sureT=0;
+function doReset(){
+  if(!sure){sure=true;clearTimeout(sureT);sureT=setTimeout(()=>{sure=false;quick(()=>{});},4000);quick(()=>{});return;}
+  sure=false;clearTimeout(sureT);
+  commit(()=>{
+    const keep=state.chars.map(c=>({n:c.name,i:c.init})),tier=state.tier,age=state.age,f=fresh();
+    Object.keys(state).forEach(k=>{if(k!=='tab')delete state[k];});
+    Object.assign(state,f,{tier});if(age!==undefined)state.age=age;
+    state.chars=keep.map((k,i)=>mk('c'+(i+1),k.n,k.i,i===0));state.nid=keep.length+1;state.example=false;
+  });
+}
+const resetBtn=()=>'<p><button type="button" class="btn sm" data-act="reset">'+(sure?'Tap again to reset':'Reset trap')+'</button></p>';
 function logCard(){
-  return '<section class="card"><div class="party-head"><h3>Log</h3>'+(state.log.length?'<button class="btn sm" data-act="clearLog">Clear</button>':'')+'</div>'+
+  return '<section class="card"><div class="party-head"><h3>Rolls &amp; log</h3>'+(state.log.length?'<button class="btn sm" data-act="clearLog">Clear</button>':'')+'</div>'+
    (state.log.length?'<ul class="log">'+state.log.slice(0,60).map(e=>'<li><span class="r">R'+e.r+'</span><span>'+esc(e.t)+'</span></li>').join('')+'</ul>':'<p class="muted" style="margin-top:6px">Events appear here as you play.</p>')+'</section>';
 }
 function viewRun(){
   const order=buildOrder();
-  return '<div class="run"><div class="run-main">'+pendCard()+nowCard()+orderCard(order)+partyCard()+'</div><aside class="run-aside">'+glance()+identCard()+logCard()+'</aside></div>';
+  return {pend:pendCard(),now:nowCard(),order:orderCard(order),cm:cmCard(),party:partyCard(),glance:glance(),ident:identCard(),log:logCard(),reset:resetBtn()};
 }
 
 /* ---------- Reference view ---------- */
@@ -698,7 +799,7 @@ function strip(){
 function addChar(n,i){state.chars.push(mk('c'+(state.nid++),n,i===''?'':num(i),state.chars.length===0));state.example=false;}
 return {id:'wmz',group:'wild',groupName:'Wild Magic Zone',variant:'young',variantLabel:'Young',name:'Wild Magic Zone',eyebrow:'Complex trap · Dangerous · Magical',tagline:'The Chaos Rift. A brand-new rift that attacks, until the party can soothe it.',
   tierLabel:'Party level',tiers:[1,2,3,4].map(n=>({id:n,label:TIERS[n].lv.replace('Level ','')})),refLabel:'The Trap',
-  decor:'',adopt:(S,p)=>{S.chars=p.chars.map((c,i)=>mk(c.id,c.name,c.init,c.marked!==undefined?c.marked:i===0));S.nid=Math.max(S.nid,p.nid||5);S.example=false;},fresh,bind:s=>{state=s;},actions,fields,addChar,controls:()=>'',strip,run:viewRun,ref:viewRef,after:()=>{}};
+  decor:'',roster:'chars',adopt:(S,p)=>{S.chars=p.chars.map((c,i)=>mk(c.id,c.name,c.init,c.marked!==undefined?c.marked:i===0));S.nid=Math.max(S.nid,p.nid||5);S.example=false;},fresh,bind:s=>{state=s;},actions,fields,addChar,controls:()=>'',strip,run:viewRun,ref:viewRef,after:()=>{}};
 })());
 
 core.register((function(){
@@ -849,6 +950,7 @@ function nextStep(){
 
 /* ---------- Actions ---------- */
 const actions={
+  reset:()=>doReset(),
   age:id=>quick(()=>{state.age=id;if(id==='old'){state.sup=[false,false,false];state.suppressed=false;}}),
   next:()=>nextStep(),
   endEnc:()=>commit(()=>{state.round=0;state.key=null;state.note='';state.res={};state.rolls={};L('Encounter ended. Saturation and mutations carry over.');}),
@@ -895,6 +997,7 @@ const actions={
   clearLog:()=>quick(()=>{state.log=[];})
 };
 const fields={
+  rev:(id,v,el)=>commit(()=>{state.rv=state.rv||{};state.rv[id]=el.checked;}),
   name:(id,v)=>quick(()=>{const c=get(id);if(c)c.name=v.trim()||c.name;}),
   init:(id,v)=>quick(()=>{const c=get(id);if(c)c.init=v===''?'':num(v);}),
   d10:(id,v)=>commit(()=>{
@@ -1008,7 +1111,7 @@ function nowCard(th){
 }
 function glance(th){
   const T=TI(),nd=nextDrop(state.round);
-  return '<section class="card"><h3 style="margin-bottom:10px">Rules at a glance</h3><dl class="glance">'+
+  return '<section class="card"><h3 style="margin-bottom:10px">Elements</h3><dl class="glance">'+
    '<div><dt>Each turn</dt><dd>+1 Saturation in the zone. Casting makes it 2 that turn.</dd></div>'+
    '<div><dt>Casting</dt><dd>Slot counts as 2 levels higher (max 9th). Save DC +2. Cantrips get the DC bonus only.</dd></div>'+
    '<div><dt>Surge · 20</dt><dd>Saturation ≥ '+th+(nd?' (drops at round '+nd+')':' (minimum)')+'. DC 15 Con or '+T.surge.a+' ('+T.surge.d+') force, then mutation.</dd></div>'+
@@ -1019,26 +1122,47 @@ function glance(th){
 }
 function identCard(){
   const d=TI().dc;
-  return '<section class="card"><h3 style="margin-bottom:10px">Identification</h3><dl class="glance">'+
-   '<div><dt>Passive Perc.</dt><dd>DC '+d.pp+'. A steady hum felt in teeth and skin.</dd></div>'+
-   '<div><dt>Perception</dt><dd>DC '+d.pe+'. Pinpoint where the hum is loudest.</dd></div>'+
-   '<div><dt>Nature</dt><dd>DC '+d.na+'. Warped plants and animals nearby.</dd></div>'+
-   '<div><dt>Arcana</dt><dd>DC '+d.ar+'. A stable convergence that saturates. Beat it by 5 to learn if it is young or old, and that casting is empowered.</dd></div></dl></section>';
+  const rv=state.rv||{};
+  const rowH=(k,h,dc,t)=>'<div class="id"><div class="id-h"><b>'+h+'</b><span class="dc">DC&nbsp;'+dc+'</span><label class="chk" style="margin-left:auto"><input type="checkbox" data-field="rev" data-id="'+k+'" '+(rv[k]?'checked':'')+'> Revealed</label></div><p>'+t+'</p></div>';
+  return '<section class="card"><h3 style="margin-bottom:10px">Identification</h3><div class="ids">'+rowH('pp','Passive Perc.',d.pp,'A steady hum felt in teeth and skin.')+rowH('pe','Perception',d.pe,'Pinpoint where the hum is loudest.')+rowH('na','Nature',d.na,'Warped plants and animals nearby.')+rowH('ar','Arcana',d.ar,'A stable convergence that saturates. Beat it by 5 to learn if it is young or old, and that casting is empowered.')+'</div></section>';
 }
 function suppressCard(){
-  if(state.age==='old')return '<section class="card"><h3>Old zone</h3><p class="muted" style="margin-top:6px">It has fully stabilized. Nothing can suppress it. Avoid it, insulate against it, or endure it.</p></section>';
-  const st=[['Arcana','Trace where the concentration is thickest and study how it still gathers.'],['Investigation or Arcana','Identify a counter-resonance that interrupts its formation.'],['Arcana','Impose the counter-resonance.']];
-  return '<section class="card"><h3>Suppress a young zone</h3><p class="muted" style="margin:6px 0">Three checks in order, DC 15 each. No two attempted by the same creature in a row. After a success, nobody attempts the next step until the start of that character\'s next turn.</p><ol class="sup">'+
+  const T=TI();
+  const list=[
+   ['Step back','Leaving the zone stops further Saturation gain immediately. Existing Saturation remains.'],
+   ['Recover','Lose 1 Saturation per short rest outside the zone, or all of it after a long rest outside the zone.'],
+   ['Arcane Insulation','Action, DC 15 Intelligence (Arcana). Success: that creature gains no Saturation for 1 minute (10 rounds), even inside the zone. Use the Insulate button on the party card.'],
+   ['Mutation effects',esc(T.fix)]
+  ].map(r=>'<div class="cmr"><b>'+r[0]+'</b><p class="muted">'+r[1]+'</p></div>').join('');
+  let sup;
+  if(state.age==='old')sup='<div class="cmr"><b>Old zone</b><p class="muted">It has fully stabilized and cannot be suppressed. Avoid it, insulate against it, or endure it.</p></div>';
+  else{
+   const st=[['Arcana','Trace where the concentration is thickest and study how it still gathers.'],['Investigation or Arcana','Identify a counter-resonance that interrupts its formation.'],['Arcana','Impose the counter-resonance.']];
+   sup='<div class="cmr"><b>Suppress a young zone <span class="chip'+(state.suppressed?' ok':'')+'">'+(state.suppressed?'suppressed':state.sup.filter(Boolean).length+'/3 done')+'</span></b><p class="muted">Three checks in order, DC 15 each. No two attempted by the same creature in a row. After a success, nobody attempts the next step until the start of that character\'s next turn.</p><ol class="sup">'+
    st.map((s,i)=>'<li><button class="btn sm" data-act="supstep" data-id="'+i+'" aria-pressed="'+state.sup[i]+'"'+(i>0&&!state.sup[i-1]&&!state.sup[i]?' disabled':'')+'>'+(state.sup[i]?'Done':'Mark')+'</button><span><b>'+s[0]+'.</b> '+s[1]+'</span></li>').join('')+'</ol>'+
-   (state.suppressed?'<div class="banner">Suppressed. Effects stop now, but the zone reconverges within weeks or months. Nothing known closes it for good.</div><p style="margin-top:8px"><button class="btn sm" data-act="reconv">Zone reconverges</button></p>':'')+'</section>';
+   (state.suppressed?'<div class="banner">Suppressed. Effects stop now, but the zone reconverges within weeks or months. Nothing known closes it for good.</div><p style="margin-top:8px"><button class="btn sm" data-act="reconv">Zone reconverges</button></p>':'')+'</div>';
+  }
+  return '<section class="card"><h3 style="margin-bottom:10px">Countermeasures</h3><div class="cmlist">'+list+sup+'</div></section>';
 }
+let sure=false,sureT=0;
+function doReset(){
+  if(!sure){sure=true;clearTimeout(sureT);sureT=setTimeout(()=>{sure=false;quick(()=>{});},4000);quick(()=>{});return;}
+  sure=false;clearTimeout(sureT);
+  commit(()=>{
+    const keep=state.chars.map(c=>({n:c.name,i:c.init})),tier=state.tier,age=state.age,f=fresh();
+    Object.keys(state).forEach(k=>{if(k!=='tab')delete state[k];});
+    Object.assign(state,f,{tier});if(age!==undefined)state.age=age;
+    state.chars=keep.map((k,i)=>mk('c'+(i+1),k.n,k.i,i===0));state.nid=keep.length+1;state.example=false;
+  });
+}
+const resetBtn=()=>'<p><button type="button" class="btn sm" data-act="reset">'+(sure?'Tap again to reset':'Reset trap')+'</button></p>';
 function logCard(){
-  return '<section class="card"><div class="party-head"><h3>Log</h3>'+(state.log.length?'<button class="btn sm" data-act="clearLog">Clear</button>':'')+'</div>'+
+  return '<section class="card"><div class="party-head"><h3>Rolls &amp; log</h3>'+(state.log.length?'<button class="btn sm" data-act="clearLog">Clear</button>':'')+'</div>'+
    (state.log.length?'<ul class="log">'+state.log.slice(0,60).map(e=>'<li><span class="r">R'+e.r+'</span><span>'+esc(e.t)+'</span></li>').join('')+'</ul>':'<p class="muted" style="margin-top:6px">Events appear here as you play.</p>')+'</section>';
 }
 function viewRun(){
   const th=threshold(Math.max(1,state.round)),order=buildOrder();
-  return '<div class="run"><div class="run-main">'+nowCard(th)+orderCard(order)+partyCard(th)+'</div><aside class="run-aside">'+glance(th)+identCard()+suppressCard()+logCard()+'</aside></div>';
+  return {now:nowCard(th),order:orderCard(order),cm:suppressCard(),party:partyCard(th),glance:glance(th),ident:identCard(),log:logCard(),reset:resetBtn()};
 }
 
 /* ---------- Rendering: reference, controls, strip ---------- */
@@ -1109,7 +1233,7 @@ window.addEventListener('resize',()=>{humSize();if(rm)humDraw(0);});
 document.addEventListener('visibilitychange',kick);
 return {id:'cmz',name:'Concentrated Magic Zone',eyebrow:'Complex trap · Dangerous · Magical',tagline:'A patch of reality where ambient magic has pooled too deep.',
   tierLabel:'Party level',tiers:[1,2,3,4].map(n=>({id:n,label:TIERS[n].short})),refLabel:'Trap text',
-  decor:'<canvas id="hum" aria-hidden="true"></canvas>',
+  decor:'<canvas id="hum" aria-hidden="true"></canvas>',roster:'chars',
   fresh,bind:s=>{state=s;},actions,fields,addChar,controls,strip:viewStrip,run:viewRun,ref:viewRef,after};
 })());
 
@@ -1209,6 +1333,7 @@ function nextStep(){
 
 /* ---------- Actions ---------- */
 const actions={
+  reset:()=>doReset(),
   next:()=>nextStep(),
   endEnc:()=>commit(()=>{state.round=0;state.key=null;state.res={};state.pend=[];state.feed=0;L('Encounter ended.');}),
   feedp:()=>commit(()=>{state.feed++;}),
@@ -1240,6 +1365,7 @@ const actions={
   clearLog:()=>quick(()=>{state.log=[];})
 };
 const fields={
+  rev:(id,v,el)=>commit(()=>{state.rv=state.rv||{};state.rv[id]=el.checked;}),
   name:(id,v)=>quick(()=>{const c=get(id);if(c)c.name=v.trim()||c.name;}),
   init:(id,v)=>quick(()=>{const c=get(id);if(c)c.init=v===''?'':num(v);})
 };
@@ -1335,9 +1461,19 @@ function nowCard(){
   if(!c)return '<section class="card now"><p class="eyebrow">Round '+state.round+'</p><h2>Press Next to continue</h2>'+endBtn()+'</section>';
   return turnCard(c);
 }
+function cmCard(){
+  return '<section class="card"><h3 style="margin-bottom:10px">Countermeasures</h3><div class="cmlist">'+
+   '<div class="cmr"><b>Attunement</b><p class="muted">Action, DC 15 Intelligence (Arcana), Wisdom (Nature) or Wisdom (Survival). Success raises Attunement by 1 (max 3). Failure: no progress and Backlash. Level 1: advantage on saves against the Tide and the Wild Gust. Level 2: also resistance to damage from the Tide. Level 3: also no damage from the Tide on a successful save and immunity to Tide riders. It ends when the creature leaves the zone.</p>'+
+    '<div>'+state.chars.map(c=>'<div class="trow" style="display:flex;justify-content:space-between;gap:8px;padding:4px 0"><span>'+esc(c.name)+(c.inZone?'':' <span class="muted">(outside)</span>')+'</span>'+pips(c)+'</div>').join('')+'</div></div>'+
+   '<div class="cmr"><b>Brace</b><p class="muted">A creature that takes the Dodge action has advantage on saves against the Tide and the Wild Gust until the start of its next turn. It does not stack with Attunement advantage.</p></div>'+
+   '<div class="cmr"><b>Step out</b><p class="muted">Leaving the zone ends all effects on the creature immediately, but it loses its Attunement.</p></div>'+
+   '<div class="cmr"><b>Cast less</b><p class="muted">Every spell of level 1 or higher feeds the Tide and strips Attunement. Casting from outside the zone has no effect.</p></div>'+
+   '<div class="cmr"><b>No way to close it</b><p class="muted">The zone cannot be closed, suppressed or dispelled. Dispel Magic and similar effects have nothing to target. The only options are avoiding it, resisting it, and crossing it quickly.</p></div>'+
+  '</div></section>';
+}
 function glance(){
   const k=TI();
-  return '<section class="card"><h3 style="margin-bottom:10px">Rules at a glance</h3><dl class="glance">'+
+  return '<section class="card"><h3 style="margin-bottom:10px">Elements</h3><dl class="glance">'+
    '<div><dt>Init 20</dt><dd>The Tide: d6 + Feed. Ebb 1–2, Flow 3–4 (one creature, '+k.flow+'d10), Flood 5+ (all, '+k.flood+'d10). d8 sets the type. Save DC 15, half on a success.</dd></div>'+
    '<div><dt>Init 10</dt><dd>Wild Gust: Str DC 10 or pushed '+k.push+' ft and prone.</dd></div>'+
    '<div><dt>Feed</dt><dd>+1 for each spell of level 1+ cast in the zone since the last Tide. Resets after the Tide.</dd></div>'+
@@ -1350,18 +1486,28 @@ function glance(){
 }
 function identCard(){
   const d=TI().dc;
-  return '<section class="card"><h3 style="margin-bottom:10px">Identification</h3><dl class="glance">'+
-   '<div><dt>Passive Perc.</dt><dd>DC '+d.pp+'. The air shimmers, hair lifts, and the ground hums in slow swells.</dd></div>'+
-   '<div><dt>Investigation</dt><dd>DC '+d.pe+'. The effects arrive in waves with a rhythm: lulls, then one-creature strikes, then zone-wide floods.</dd></div>'+
-   '<div><dt>Nature</dt><dd>DC '+d.na+'. The local life is shaped by it. Animals shelter during the floods.</dd></div>'+
-   '<div><dt>Arcana</dt><dd>DC '+d.ar+'. An ancient, fully settled zone: no source, no caster, no way to close it. Beat it by 5+: spells feed it, and calm attunement can resist it.</dd></div></dl></section>';
+  const rv=state.rv||{};
+  const rowH=(k,h,dc,t)=>'<div class="id"><div class="id-h"><b>'+h+'</b><span class="dc">DC&nbsp;'+dc+'</span><label class="chk" style="margin-left:auto"><input type="checkbox" data-field="rev" data-id="'+k+'" '+(rv[k]?'checked':'')+'> Revealed</label></div><p>'+t+'</p></div>';
+  return '<section class="card"><h3 style="margin-bottom:10px">Identification</h3><div class="ids">'+rowH('pp','Passive Perc.',d.pp,'The air shimmers, hair lifts, and the ground hums in slow swells.')+rowH('inv','Investigation',d.pe,'The effects arrive in waves with a rhythm: lulls, then one-creature strikes, then zone-wide floods.')+rowH('na','Nature',d.na,'The local life is shaped by it. Animals shelter during the floods.')+rowH('ar','Arcana',d.ar,'An ancient, fully settled zone: no source, no caster, no way to close it. Beat it by 5+: spells feed it, and calm attunement can resist it.')+'</div></section>';
 }
+let sure=false,sureT=0;
+function doReset(){
+  if(!sure){sure=true;clearTimeout(sureT);sureT=setTimeout(()=>{sure=false;quick(()=>{});},4000);quick(()=>{});return;}
+  sure=false;clearTimeout(sureT);
+  commit(()=>{
+    const keep=state.chars.map(c=>({n:c.name,i:c.init})),tier=state.tier,age=state.age,f=fresh();
+    Object.keys(state).forEach(k=>{if(k!=='tab')delete state[k];});
+    Object.assign(state,f,{tier});if(age!==undefined)state.age=age;
+    state.chars=keep.map((k,i)=>mk('c'+(i+1),k.n,k.i,i===0));state.nid=keep.length+1;state.example=false;
+  });
+}
+const resetBtn=()=>'<p><button type="button" class="btn sm" data-act="reset">'+(sure?'Tap again to reset':'Reset trap')+'</button></p>';
 function logCard(){
-  return '<section class="card"><div class="party-head"><h3>Log</h3>'+(state.log.length?'<button class="btn sm" data-act="clearLog">Clear</button>':'')+'</div>'+
+  return '<section class="card"><div class="party-head"><h3>Rolls &amp; log</h3>'+(state.log.length?'<button class="btn sm" data-act="clearLog">Clear</button>':'')+'</div>'+
    (state.log.length?'<ul class="log">'+state.log.slice(0,60).map(e=>'<li><span class="r">R'+e.r+'</span><span>'+esc(e.t)+'</span></li>').join('')+'</ul>':'<p class="muted" style="margin-top:6px">Events appear here as you play.</p>')+'</section>';
 }
 function viewRun(){
-  return '<div class="run"><div class="run-main">'+pendCard()+nowCard()+orderCard(buildOrder())+partyCard()+'</div><aside class="run-aside">'+glance()+identCard()+logCard()+'</aside></div>';
+  return {pend:pendCard(),now:nowCard(),order:orderCard(buildOrder()),cm:cmCard(),party:partyCard(),glance:glance(),ident:identCard(),log:logCard(),reset:resetBtn()};
 }
 function strip(){
   const k=TI(),start=state.round===0;
@@ -1410,7 +1556,7 @@ function viewRef(){
 }
 return {id:'owz',group:'wild',groupName:'Wild Magic Zone',variant:'old',variantLabel:'Old',name:'Ancient Wild Magic Zone',eyebrow:'Complex trap · Dangerous · Magical',tagline:'Wild magic that settled long ago. It cannot be closed, only resisted.',
   tierLabel:'Party level',tiers:[1,2,3,4].map(n=>({id:n,label:TIERS[n].short})),refLabel:'The Trap',
-  decor:'',adopt:(S,p)=>{S.chars=p.chars.map(c=>mk(c.id,c.name,c.init));S.nid=Math.max(S.nid,p.nid||5);S.example=false;},fresh,bind:s=>{state=s;},actions,fields,addChar,controls:()=>'',strip,run:viewRun,ref:viewRef,after:()=>{}};
+  decor:'',roster:'chars',adopt:(S,p)=>{S.chars=p.chars.map(c=>mk(c.id,c.name,c.init));S.nid=Math.max(S.nid,p.nid||5);S.example=false;},fresh,bind:s=>{state=s;},actions,fields,addChar,controls:()=>'',strip,run:viewRun,ref:viewRef,after:()=>{}};
 })());
 
 core.register((function(){
@@ -1447,8 +1593,8 @@ en:{
   round:'Round',next:'Next step',back:'Back',steps:{start:'Start of round',i20:'Initiative 20',i10:'Initiative 10'},
   trapActs:'The trap acts after creatures on the same count.',now:'Resolve now',nothing:'Nothing acts on this step.',resolved:'Resolved',
   pick:'Pick random target',pool:'In reach',none:'Nobody in reach',target:'Target',
-  last:'Last roll',rolls:'Roll log',tapRoll:'Tap any figure with dice to roll it.',
-  elements:'Trap elements',constant:'Constant',init20:'Initiative 20',init10:'Initiative 10',once:'once only',every:'every round',start3:'Start of round 3',
+  last:'Last roll',rolls:'Rolls & log',tapRoll:'Tap any figure with dice to roll it.',
+  elements:'Elements',constant:'Constant',init20:'Initiative 20',init10:'Initiative 10',once:'once only',every:'every round',start3:'Start of round 3',
   cmH:'Countermeasures',inZone:'In the zone',
   cleared:'squares cleared',dealt:'Damage dealt',left:'left',muffledT:'Gong muffled',j1:'Trapdoor 1 jammed',j2:'Trapdoor 2 jammed',blockedT:'Barrel blocked',redirT:'Barrel redirected',pickT:'Mechanism jammed',locked:'Locked: too late to change',
   accelNow:'Increases so far',accelExtra:'Extra damage now',accelMax:'of 2',
@@ -1700,7 +1846,7 @@ function logCard(){
 }
 function viewRun(){
  const ui=XL().ui;
- return `<div class="run"><div class="run-main">${nowCard()}${orderCard()}${partyCard()}</div><aside class="run-aside">${glance()}${cmCard()}${identCard(true)}${logCard()}<p><button type="button" class="btn sm" data-act="reset">${sure?ui.resetSure:ui.reset}</button></p></aside></div>`;
+ return {now:nowCard(),order:orderCard(),cm:cmCard(),party:partyCard(),glance:glance(),ident:identCard(true),log:logCard(),reset:`<p><button type="button" class="btn sm" data-act="reset">${sure?ui.resetSure:ui.reset}</button></p>`};
 }
 
 /* ───────────── Strip ───────────── */
@@ -1775,7 +1921,7 @@ const fields={
 function addChar(n,i,pp){S.party.push({id:S.nid++,name:n,init:i===''||i==null?'':num(i),z:0,pp:pp===''||pp==null?null:Math.max(0,Math.min(40,parseInt(pp,10)||0)),pr:false,pt:false,sl:false});}
 return {id:'gwg',name:'Goblin Warren Gauntlet',eyebrow:'Complex trap · Dangerous threat',tagline:'A scavenged gauntlet of rope, nails and lumber, set in a 60-ft goblin tunnel.',
   tierLabel:'Party level',tiers:[1,2,3,4].map(n=>({id:n,label:TIERS[n].lv})),refLabel:'The Trap',
-  decor:'',fresh:def,bind:s=>{S=s;S.lang='en';},actions,fields,addChar,controls:()=>'',strip,run:viewRun,ref:viewRef,after:()=>{}};
+  decor:'',roster:'party',fresh:def,bind:s=>{S=s;S.lang='en';},actions,fields,addChar,controls:()=>'',strip,run:viewRun,ref:viewRef,after:()=>{}};
 
 })());
 
@@ -2069,7 +2215,7 @@ function logCard(){
 }
 let sure=false,sureTimer=0;
 function viewRun(){
- return `<div class="run"><div class="run-main">${nowCard()}${orderCard()}${partyCard()}</div><aside class="run-aside">${glance()}${cmCard()}${identCard(true)}${logCard()}<p><button type="button" class="btn sm" data-act="reset">${sure?'Tap again to reset':'Reset trap'}</button></p></aside></div>`;
+ return {now:nowCard(),order:orderCard(),cm:cmCard(),party:partyCard(),glance:glance(),ident:identCard(true),log:logCard(),reset:`<p><button type="button" class="btn sm" data-act="reset">${sure?'Tap again to reset':'Reset trap'}</button></p>`};
 }
 function strip(){
  const l=S.last;
@@ -2119,7 +2265,7 @@ function viewRef(){
  ${elc('Organ Crescendo','From round 5','Starting on round 5, roll 1d6 twice on the organ table and apply both effects. If you roll the same number twice, double the effect (double damage for damage effects, disadvantage on saves for status effects).')}
  ${elc('Sealed Exit','Initiative 5 · round 1','On initiative count 5 of round 1 the entrance doors freeze shut under a <i>wall of ice</i>. Characters must break through to escape. From then on all teleportation magic to leave the ballroom automatically fails, but the spell slot or ability use is not expended.')}
  </div></section>
- <section><h3>Complete shutdown</h3><p>The trap can be fully disabled from the master controls beneath the central dais.</p><p><b>The control chamber</b> is a 20 ft × 20 ft room carved from solid ice. A frozen ladder descends 30 ft from the ballroom into its north wall. Three glowing control crystals are embedded in the south wall, directly opposite the ladder, so characters must cross the full 20 feet. Characters with halved speed may need two turns.</p>
+ <section><h3>Countermeasures</h3><p><b>Complete shutdown.</b> The trap can be fully disabled from the master controls beneath the central dais.</p><p><b>The control chamber</b> is a 20 ft × 20 ft room carved from solid ice. A frozen ladder descends 30 ft from the ballroom into its north wall. Three glowing control crystals are embedded in the south wall, directly opposite the ladder, so characters must cross the full 20 feet. Characters with halved speed may need two turns.</p>
  <ol><li>Investigation ${dcc(v.sd.loc)}: locate the hidden access panel in the floor beneath the central dais.</li><li>Thieves’ tools ${dcc(v.sd.open)}: open the crystalline lock. Descending the ladder carefully is an Athletics or Acrobatics check ${dcc(v.sd.lad)}; on a failure the character slips, takes ${dd(v.fall,'Ladder fall')} bludgeoning damage and lands prone. Standing from prone is an Acrobatics check ${dcc(v.sd.stand)} (half movement); on a failure it stays prone.</li><li>Arcana ${dcc(v.sd.idc)}: identify the three crystals and learn that they must all be disrupted in the same round.</li><li>Arcana or thieves’ tools ${dcc(v.sd.crys)}: disrupt one crystal (one action per crystal). Three characters must each disrupt one on the same round. If not all three are disrupted in the same round, the crystals renew and piercing cold fills the ballroom: ${dd(v.ctrl,'Crystal backlash')} cold damage to all creatures in the ballroom (${dcc(v.sd.back)} Constitution save for half).</li></ol><p>Success shuts down all trap elements immediately.</p></section>
  <section><h3>Running the trap</h3><ul><li>Map the ballroom as 120 ft (N–S) × 60 ft (E–W). Entrance on the east wall; throne room doors and organ on the west wall.</li><li>8 ice columns (4 north, 4 south); 4 braziers (2 north, 2 south). 12 sculptures. 3 chandelier positions (West, Center, East, each 25-ft radius). Central dais, 15 ft across.</li><li>Initiative: <b>20</b> chandeliers (d3), <b>15</b> ice dancers (d6, all active sculptures act), <b>10</b> organ (d6), <b>5</b> sealed exit (round 1). End of each creature’s turn: Numbing Cold save.</li><li>Tips: describe the cold draining color from the characters’ skin; stress the elegant, deadly beauty of the dancers; use the organ’s music to build tension; allow creative solutions.</li></ul><p><b>Experience award:</b> ${t.xp} XP for overcoming this trap.</p></section></article>`;
 }
@@ -2175,7 +2321,7 @@ const fields={
 function addChar(n,i,pp){S.party.push(mk(S.nid++,n,i,pp));}
 return {id:'fw',name:'The Frozen Waltz',eyebrow:'Complex trap · Deadly',tagline:'A frozen ballroom of falling chandeliers, waltzing ice sculptures and a murderous organ.',
  tierLabel:'Party level',tiers:[1,2,3,4].map(n=>({id:n,label:TI[n].lvl})),refLabel:'The Trap',
- decor:'',fresh:def,bind:s=>{S=s;},actions,fields,addChar,controls:()=>'',strip,run:viewRun,ref:viewRef,after:()=>{}};
+ decor:'',roster:'party',fresh:def,bind:s=>{S=s;},actions,fields,addChar,controls:()=>'',strip,run:viewRun,ref:viewRef,after:()=>{}};
 })());
 
 /* ───────── Shared kit for the XGE / DMG-style complex traps ───────── */
@@ -2221,7 +2367,7 @@ function make(build){
  const pcOf=K.pc;
  const steps=()=>sp.steps.slice().sort((a,b)=>b.v-a.v);
  const isTrapKey=k=>sp.steps.some(s=>s.k===k);
- const skip=s=>s.trap&&(sp.over()||!sp.on(s.k));
+ const skip=()=>false;
  function orderFor(){
   const cs=S.party.map((c,i)=>({c,i})).sort((a,b)=>(num(b.c.init)-num(a.c.init))||(a.i-b.i));
   const tr=steps(),out=[];let t=0;
@@ -2257,6 +2403,7 @@ function make(build){
  function nowCard(){
   if(!run())return K.card('Armed','Not triggered yet',`<p style="margin-top:10px"><button type="button" class="btn primary" data-act="trigger">Trigger the trap</button></p><p class="muted" style="margin-top:8px">${sp.trigger}</p>`);
   if(sp.over())return K.card('Neutralized','The trap is neutralized',`<p>${sp.overText()}</p>`,'calmc');
+  if(isTrapKey(S.key)&&!sp.on(S.key)){const st=sp.steps.find(q=>q.k===S.key);return K.card(`Round ${S.round} · Initiative ${st.v}`,esc(st.label),`<p class="muted">Nothing acts on this count right now: no creature in its area, it hasn’t started yet, or it is disabled. Press Next.</p>`,'now');}
   if(isTrapKey(S.key))return sp.step(S.key);
   const c=S.key&&S.key.indexOf('c:')===0?pcOf(S.key.slice(2)):null;
   if(!c)return `<section class="card now"><p class="eyebrow">Round ${S.round}</p><h2>Press Next</h2></section>`;
@@ -2297,7 +2444,7 @@ function make(build){
    (S.log.length?`<ul class="log">${S.log.slice(0,60).map(e=>`<li><span class="r">R${e.r}</span><span>${esc(e.t)}</span></li>`).join('')}</ul>`:`<p class="muted" style="margin-top:6px">Tap any dice or attack button to roll it here.</p>`)+`</section>`;
  }
  let sure=false,sureTimer=0;
- const viewRun=()=>`<div class="run"><div class="run-main">${nowCard()}${orderCard()}${cmCard()}</div><aside class="run-aside">${partyCard()}${glance()}${identCard(true)}${logCard()}<p><button type="button" class="btn sm" data-act="reset">${sure?'Tap again to reset':'Reset trap'}</button></p></aside></div>`;
+ const viewRun=()=>({now:nowCard(),order:orderCard(),cm:cmCard(),party:partyCard(),glance:glance(),ident:identCard(true),log:logCard(),reset:`<p><button type="button" class="btn sm" data-act="reset">${sure?'Tap again to reset':'Reset trap'}</button></p>`});
  function strip(){
   const l=S.last;
   const stat=(a,b,c)=>`<div class="stat"><span class="lbl">${a}</span><b>${b}</b>${c?`<span class="sub">${c}</span>`:''}</div>`;
@@ -2335,7 +2482,7 @@ function make(build){
   init:(id,v)=>core.quick(()=>{const c=pcOf(id);if(c)c.init=v===''?'':num(v);})
  },sp.fields||{});
  return {id:sp.id,name:sp.name,eyebrow:sp.eyebrow,tagline:sp.tagline,tierLabel:'Party level',tiers:[1,2,3,4].map(n=>({id:n,label:LV[n]})),refLabel:'The Trap',decor:'',
-  fresh:def,bind:s=>{S=s;},actions,fields,addChar:(n,i,pp)=>{S.party.push(mk(S.nid++,n,i,pp));},controls:()=>'',strip,run:viewRun,ref:viewRef,after:()=>{}};
+  roster:'party',fresh:def,bind:s=>{S=s;},actions,fields,addChar:(n,i,pp)=>{S.party.push(mk(S.nid++,n,i,pp));},controls:()=>'',strip,run:viewRun,ref:viewRef,after:()=>{}};
 }
 return {make};
 })();
