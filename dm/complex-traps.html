@@ -433,7 +433,7 @@ function dmApply(t,S){
   const arr=()=>S.chars||S.party;
   if(!Array.isArray(arr())||!t.addChar)return;
   let ch=false;
-  if(S.example&&dmPcs.length){arr().length=0;S.example=false;ch=true;}
+  if(S.example){arr().length=0;S.example=false;ch=true;}
   dmPcs.forEach(h=>{
     const iv=(h.init===null||h.init===undefined)?'':h.init;
     let c=arr().find(x=>x.hid===h.id)||arr().find(x=>!x.hid&&x.name===h.name);
@@ -503,8 +503,8 @@ function surge(i,tier){const v=tier===4;return [null,
 
 /* ---------- State ---------- */
 const mk=(id,name,init,marked)=>({id,name,init,marked:!!marked,inZone:true,att:false});
-const fresh=()=>({v:2,tier:1,tab:'run',round:0,key:null,P:0,pl:0,calm:false,ward:null,nid:5,example:true,
-  chars:[mk('c1','Aria',21,true),mk('c2','Borin',15),mk('c3','Cael',12),mk('c4','Dree',8)],
+const fresh=()=>({v:2,tier:1,tab:'run',round:0,key:null,P:0,pl:0,calm:false,ward:null,nid:5,example:false,
+  chars:[],
   res:{},pend:[],log:[]});
 const TI=()=>TIERS[state.tier];
 const get=id=>state.chars.find(c=>c.id===id);
@@ -886,8 +886,8 @@ function cureText(row,n){
 
 /* ---------- State ---------- */
 const mk=(id,name,init)=>({id,name,init,inZone:true,sat:0,cast:false,ward:0,muts:[]});
-const fresh=()=>({v:1,tier:1,age:'young',tab:'run',round:0,key:null,note:'',suppressed:false,sup:[false,false,false],nid:5,mid:1,example:true,
-  chars:[mk('c1','Aria',21),mk('c2','Borin',15),mk('c3','Cael',12),mk('c4','Dree',8)],res:{},rolls:{},log:[]});
+const fresh=()=>({v:1,tier:1,age:'young',tab:'run',round:0,key:null,note:'',suppressed:false,sup:[false,false,false],nid:5,mid:1,example:false,
+  chars:[],res:{},rolls:{},log:[]});
 const TI=()=>TIERS[state.tier];
 const get=id=>state.chars.find(c=>c.id===id);
 function L(t){state.log.unshift({r:state.round,t});if(state.log.length>120)state.log.pop();}
@@ -1266,8 +1266,8 @@ function surge(i,tier){const v=tier===4;return [null,
 
 /* ---------- State ---------- */
 const mk=(id,name,init)=>({id,name,init,att:0,inZone:true,brace:false});
-const fresh=()=>({v:1,tier:1,round:0,key:null,feed:0,last:null,example:true,nid:5,
-  chars:[mk('c1','Aria',21),mk('c2','Borin',15),mk('c3','Cael',12),mk('c4','Dree',8)],res:{},pend:[],log:[]});
+const fresh=()=>({v:1,tier:1,round:0,key:null,feed:0,last:null,example:false,nid:5,
+  chars:[],res:{},pend:[],log:[]});
 const TI=()=>TIERS[state.tier];
 const get=id=>state.chars.find(c=>c.id===id);
 function L(t){state.log.unshift({r:state.round,t});if(state.log.length>120)state.log.pop();}
