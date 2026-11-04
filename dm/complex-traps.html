@@ -2297,7 +2297,7 @@ function make(build){
    (S.log.length?`<ul class="log">${S.log.slice(0,60).map(e=>`<li><span class="r">R${e.r}</span><span>${esc(e.t)}</span></li>`).join('')}</ul>`:`<p class="muted" style="margin-top:6px">Tap any dice or attack button to roll it here.</p>`)+`</section>`;
  }
  let sure=false,sureTimer=0;
- const viewRun=()=>`<div class="run"><div class="run-main">${nowCard()}${orderCard()}${partyCard()}</div><aside class="run-aside">${glance()}${cmCard()}${identCard(true)}${logCard()}<p><button type="button" class="btn sm" data-act="reset">${sure?'Tap again to reset':'Reset trap'}</button></p></aside></div>`;
+ const viewRun=()=>`<div class="run"><div class="run-main">${nowCard()}${orderCard()}${cmCard()}</div><aside class="run-aside">${partyCard()}${glance()}${identCard(true)}${logCard()}<p><button type="button" class="btn sm" data-act="reset">${sure?'Tap again to reset':'Reset trap'}</button></p></aside></div>`;
  function strip(){
   const l=S.last;
   const stat=(a,b,c)=>`<div class="stat"><span class="lbl">${a}</span><b>${b}</b>${c?`<span class="sub">${c}</span>`:''}</div>`;
