@@ -225,5 +225,7 @@
   "bestiary-au.json",
   "fluff-bestiary-au.json",
   "bestiary-aud.json",
-  "fluff-bestiary-aud.json"
+  "fluff-bestiary-aud.json",
+  "bestiary-wow.json",
+  "fluff-bestiary-wow.json"
 ]
