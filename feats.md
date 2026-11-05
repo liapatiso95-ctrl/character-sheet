@@ -48,158 +48,158 @@ A Collection of DnD 5e Feats
   - #### [{{ Chef}}{{ 6}}](#p6)
   - #### [{{ Child of the Moon}}{{ 6}}](#p6)
   - #### [{{ Classical Artist}}{{ 6}}](#p6)
-  - #### [{{ Cloying Mists}}{{ 6}}](#p6)
-  - #### [{{ Cold Caster}}{{ 6}}](#p6)
+  - #### [{{ Clearcasting}}{{ 6}}](#p6)
+  - #### [{{ Cloying Mists}}{{ 7}}](#p7)
+  - #### [{{ Cold Caster}}{{ 7}}](#p7)
   - #### [{{ Conjuration Adept}}{{ 7}}](#p7)
   - #### [{{ Crafter}}{{ 7}}](#p7)
   - #### [{{ Crossbow Expert}}{{ 7}}](#p7)
-  - #### [{{ Cruel}}{{ 7}}](#p7)
-  - #### [{{ Crusher}}{{ 7}}](#p7)
-  - #### [{{ Cunning Minstrel}}{{ 7}}](#p7)
-  - #### [{{ Defensive Duelist}}{{ 7}}](#p7)
+  - #### [{{ Cruel}}{{ 8}}](#p8)
+  - #### [{{ Crusher}}{{ 8}}](#p8)
+  - #### [{{ Cunning Minstrel}}{{ 8}}](#p8)
+  - #### [{{ Defensive Duelist}}{{ 8}}](#p8)
   - #### [{{ Delicious Pain}}{{ 8}}](#p8)
   - #### [{{ Devious Training}}{{ 8}}](#p8)
   - #### [{{ Divination Adept}}{{ 8}}](#p8)
-  - #### [{{ Divinely Favored}}{{ 8}}](#p8)
-  - #### [{{ Dragon Initiate}}{{ 8}}](#p8)
-  - #### [{{ Dual Wielding Master}}{{ 8}}](#p8)
+  - #### [{{ Divinely Favored}}{{ 9}}](#p9)
+  - #### [{{ Dragon Initiate}}{{ 9}}](#p9)
+  - #### [{{ Dual Wielding Master}}{{ 9}}](#p9)
   - #### [{{ Dungeon Delver}}{{ 9}}](#p9)
   - #### [{{ Durable}}{{ 9}}](#p9)
   - #### [{{ Eldritch Adept}}{{ 9}}](#p9)
   - #### [{{ Elemental Adept}}{{ 9}}](#p9)
-  - #### [{{ Enchantment Adept}}{{ 9}}](#p9)
-  - #### [{{ Evocation Adept}}{{ 9}}](#p9)
-  - #### [{{ Fairy Trickster}}{{ 9}}](#p9)
+  - #### [{{ Elusive Brawler}}{{ 9}}](#p9)
+  - #### [{{ Enchantment Adept}}{{ 10}}](#p10)
+  - #### [{{ Enveloping Mist}}{{ 10}}](#p10)
+  - #### [{{ Evocation Adept}}{{ 10}}](#p10)
+  - #### [{{ Fairy Trickster}}{{ 10}}](#p10)
   - #### [{{ Familiar Friend}}{{ 10}}](#p10)
   - #### [{{ Fey Touched}}{{ 10}}](#p10)
   - #### [{{ Fighting Initiate}}{{ 10}}](#p10)
-  - #### [{{ Flash Recall}}{{ 10}}](#p10)
-  - #### [{{ Genie Magic}}{{ 10}}](#p10)
-  - #### [{{ Gift of the Chromatic Dragon}}{{ 10}}](#p10)
-  - #### [{{ Gift of the Gem Dragon}}{{ 10}}](#p10)
+  - #### [{{ Fists of Fury}}{{ 11}}](#p11)
+  - #### [{{ Flash Recall}}{{ 11}}](#p11)
+  - #### [{{ Genie Magic}}{{ 11}}](#p11)
+  - #### [{{ Gift of the Chromatic Dragon}}{{ 11}}](#p11)
+  - #### [{{ Gift of the Gem Dragon}}{{ 11}}](#p11)
   - #### [{{ Gift of the Metallic Dragon}}{{ 11}}](#p11)
   - #### [{{ Grappler}}{{ 11}}](#p11)
-  - #### [{{ Great Weapon Master}}{{ 11}}](#p11)
-  - #### [{{ Gunner}}{{ 11}}](#p11)
-  - #### [{{ Guardian Initiate}}{{ 11}}](#p11)
-  - #### [{{ Hardy Physique}}{{ 11}}](#p11)
-  - #### [{{ Healer}}{{ 11}}](#p11)
-  - #### [{{ Heavily Armored}}{{ 11}}](#p11)
+  - #### [{{ Great Weapon Master}}{{ 12}}](#p12)
+  - #### [{{ Gunner}}{{ 12}}](#p12)
+  - #### [{{ Guardian Initiate}}{{ 12}}](#p12)
+  - #### [{{ Hardy Physique}}{{ 12}}](#p12)
+  - #### [{{ Healer}}{{ 12}}](#p12)
+  - #### [{{ Heavily Armored}}{{ 12}}](#p12)
   - #### [{{ Heavy Armor Master}}{{ 12}}](#p12)
   - #### [{{ Helpful Insights}}{{ 12}}](#p12)
   - #### [{{ Illusion Adept}}{{ 12}}](#p12)
-  - #### [{{ Initiate of High Sorcery}}{{ 12}}](#p12)
-  - #### [{{ Inspiring Leader}}{{ 12}}](#p12)
-  - #### [{{ Intimidating Leader}}{{ 12}}](#p12)
+  - #### [{{ Initiate of High Sorcery}}{{ 13}}](#p13)
+  - #### [{{ Inscription Adept}}{{ 13}}](#p13)
+  - #### [{{ Inspiring Leader}}{{ 13}}](#p13)
+  - #### [{{ Intimidating Leader}}{{ 13}}](#p13)
   - #### [{{ Keen Mind}}{{ 13}}](#p13)
   - #### [{{ Knightly Champion}}{{ 13}}](#p13)
-  - #### [{{ Legendary Might}}{{ 13}}](#p13)
-  - #### [{{ Lifelong Learner}}{{ 13}}](#p13)
-  - #### [{{ Light Bringer}}{{ 13}}](#p13)
-  - #### [{{ Lightly Armored}}{{ 13}}](#p13)
+  - #### [{{ Legendary Might}}{{ 14}}](#p14)
+  - #### [{{ Lifelong Learner}}{{ 14}}](#p14)
+  - #### [{{ Light Bringer}}{{ 14}}](#p14)
+  - #### [{{ Lightly Armored}}{{ 14}}](#p14)
   - #### [{{ Linguist}}{{ 14}}](#p14)
   - #### [{{ Love Bites}}{{ 14}}](#p14)
-  - #### [{{ Lucky}}{{ 14}}](#p14)
-  - #### [{{ Mage Slayer}}{{ 14}}](#p14)
-  - #### [{{ Magic Initiate}}{{ 14}}](#p14)
-  - #### [{{ Martial Arts Initiate}}{{ 14}}](#p14)
+  - #### [{{ Lucky}}{{ 15}}](#p15)
+  - #### [{{ Mage Slayer}}{{ 15}}](#p15)
+  - #### [{{ Magic Initiate}}{{ 15}}](#p15)
+  - #### [{{ Martial Arts Initiate}}{{ 15}}](#p15)
   - #### [{{ Martial Adept}}{{ 15}}](#p15)
   - #### [{{ Medium Armor Master}}{{ 15}}](#p15)
   - #### [{{ Mental Acuity}}{{ 15}}](#p15)
   - #### [{{ Metamagic Adept}}{{ 15}}](#p15)
-  - #### [{{ Mobile}}{{ 15}}](#p15)
-  - #### [{{ Moderately Armored}}{{ 15}}](#p15)
-  - #### [{{ Mounted Combatant}}{{ 15}}](#p15)
-  - #### [{{ Musician}}{{ 15}}](#p15)
-  - #### [{{ Mystic Conflux}}{{ 15}}](#p15)
+  - #### [{{ Mobile}}{{ 16}}](#p16)
+  - #### [{{ Moderately Armored}}{{ 16}}](#p16)
+  - #### [{{ Mounted Combatant}}{{ 16}}](#p16)
+  - #### [{{ Musician}}{{ 16}}](#p16)
+  - #### [{{ Mystic Conflux}}{{ 16}}](#p16)
   - #### [{{ Mystic Warrior}}{{ 16}}](#p16)
   - #### [{{ Mythal-Touched}}{{ 16}}](#p16)
-  - #### [{{ Natural Magnetism}}{{ 16}}](#p16)
-  - #### [{{ Necromancy Adept}}{{ 16}}](#p16)
-  - #### [{{ Observant}}{{ 16}}](#p16)
+  - #### [{{ Natural Magnetism}}{{ 17}}](#p17)
+  - #### [{{ Necromancy Adept}}{{ 17}}](#p17)
+  - #### [{{ Observant}}{{ 17}}](#p17)
   - #### [{{ Overwhelming Strength}}{{ 17}}](#p17)
+  - #### [{{ Paralysing Cold}}{{ 17}}](#p17)
   - #### [{{ Piercer}}{{ 17}}](#p17)
   - #### [{{ Poisoner}}{{ 17}}](#p17)
-  - #### [{{ Polearm Master}}{{ 17}}](#p17)
-  - #### [{{ Portal Jumper}}{{ 17}}](#p17)
-  - #### [{{ Putrefy}}{{ 17}}](#p17)
-  - #### [{{ Rebuke}}{{ 17}}](#p17)
-  - #### [{{ Remarkable Recovery}}{{ 17}}](#p17)
-  - #### [{{ Resilient}}{{ 17}}](#p17)
+  - #### [{{ Polearm Master}}{{ 18}}](#p18)
+  - #### [{{ Portal Jumper}}{{ 18}}](#p18)
+  - #### [{{ Putrefy}}{{ 18}}](#p18)
+  - #### [{{ Pyromaniac}}{{ 18}}](#p18)
+  - #### [{{ Rebuke}}{{ 18}}](#p18)
+  - #### [{{ Remarkable Recovery}}{{ 18}}](#p18)
+  - #### [{{ Resilient}}{{ 18}}](#p18)
   - #### [{{ Revenant Blade}}{{ 18}}](#p18)
   - #### [{{ Ritual Caster}}{{ 18}}](#p18)
-  - #### [{{ Roguish Initiate}}{{ 18}}](#p18)
-  - #### [{{ Rune Shaper}}{{ 18}}](#p18)
-  - #### [{{ Savage Attacker}}{{ 18}}](#p18)
-  - #### [{{ Savage Training}}{{ 18}}](#p18)
-  - #### [{{ Scholar of Lore}}{{ 18}}](#p18)
+  - #### [{{ Roguish Initiate}}{{ 19}}](#p19)
+  - #### [{{ Rune Shaper}}{{ 19}}](#p19)
+  - #### [{{ Savage Attacker}}{{ 19}}](#p19)
+  - #### [{{ Savage Training}}{{ 19}}](#p19)
+  - #### [{{ Scholar of Lore}}{{ 19}}](#p19)
   - #### [{{ Scion of the Outer Planes}}{{ 19}}](#p19)
-  - #### [{{ Sentinel}}{{ 19}}](#p19)
-  - #### [{{ Shadowbound Hexer}}{{ 19}}](#p19)
-  - #### [{{ Shadow Touched}}{{ 19}}](#p19)
-  - #### [{{ Sharp Eye}}{{ 19}}](#p19)
-  - #### [{{ Sharpshooter}}{{ 19}}](#p19)
-  - #### [{{ Shield Master}}{{ 19}}](#p19)
+  - #### [{{ Sentinel}}{{ 20}}](#p20)
+  - #### [{{ Shadowbound Hexer}}{{ 20}}](#p20)
+  - #### [{{ Shadow Touched}}{{ 20}}](#p20)
+  - #### [{{ Sharp Eye}}{{ 20}}](#p20)
+  - #### [{{ Sharpshooter}}{{ 20}}](#p20)
+  - #### [{{ Shield Master}}{{ 20}}](#p20)
   - #### [{{ Shifting Combatant}}{{ 20}}](#p20)
   - #### [{{ Skilled}}{{ 20}}](#p20)
-  - #### [{{ Skill Expert}}{{ 20}}](#p20)
-  - #### [{{ Skulker}}{{ 20}}](#p20)
-  - #### [{{ Slasher}}{{ 20}}](#p20)
-  - #### [{{ Sorcerous Spark}}{{ 20}}](#p20)
-  - #### [{{ Spellfire Spark}}{{ 20}}](#p20)
-  - #### [{{ Spell Resistant}}{{ 20}}](#p20)
+  - #### [{{ Skill Expert}}{{ 21}}](#p21)
+  - #### [{{ Skulker}}{{ 21}}](#p21)
+  - #### [{{ Slasher}}{{ 21}}](#p21)
+  - #### [{{ Sorcerous Spark}}{{ 21}}](#p21)
+  - #### [{{ Spellfire Spark}}{{ 21}}](#p21)
+  - #### [{{ Spell Resistant}}{{ 21}}](#p21)
   - #### [{{ Spell Sniper}}{{ 21}}](#p21)
   - #### [{{ Spellsword Adept}}{{ 21}}](#p21)
   - #### [{{ Spell Subterfuge}}{{ 21}}](#p21)
-  - #### [{{ Spiritual Awakening}}{{ 21}}](#p21)
-  - #### [{{ Squire}}{{ 21}}](#p21)
-  - #### [{{ Strategic Insight}}{{ 21}}](#p21)
-  - #### [{{ Street Justice}}{{ 21}}](#p21)
+  - #### [{{ Spiritual Awakening}}{{ 22}}](#p22)
+  - #### [{{ Squire}}{{ 22}}](#p22)
+  - #### [{{ Stagger and Sway}}{{ 22}}](#p22)
+  - #### [{{ Strategic Insight}}{{ 22}}](#p22)
+  - #### [{{ Street Justice}}{{ 22}}](#p22)
   - #### [{{ Streetwise Fighter}}{{ 22}}](#p22)
   - #### [{{ Strike of the Giants}}{{ 22}}](#p22)
-  - #### [{{ Survivalist Training}}{{ 22}}](#p22)
-  - #### [{{ Survivor}}{{ 22}}](#p22)
-  - #### [{{ Tactical Combatant}}{{ 22}}](#p22)
-  - #### [{{ Tactical Lieutenant}}{{ 22}}](#p22)
-  - #### [{{ Tactical Training}}{{ 22}}](#p22)
+  - #### [{{ Survivalist Training}}{{ 23}}](#p23)
+  - #### [{{ Survivor}}{{ 23}}](#p23)
+  - #### [{{ Tactical Combatant}}{{ 23}}](#p23)
+  - #### [{{ Tactical Lieutenant}}{{ 23}}](#p23)
+  - #### [{{ Tactical Training}}{{ 23}}](#p23)
   - #### [{{ Tavern Brawler}}{{ 23}}](#p23)
   - #### [{{ Telekinetic}}{{ 23}}](#p23)
-  - #### [{{ Telepathetic}}{{ 23}}](#p23)
-  - #### [{{ Thrown Arms Master}}{{ 23}}](#p23)
-  - #### [{{ Tireless Reveler}}{{ 23}}](#p23)
-  - #### [{{ Totemic Spirit}}{{ 23}}](#p23)
-  - #### [{{ Tough}}{{ 23}}](#p23)
-  - #### [{{ Transmuted Anatomy}}{{ 23}}](#p23)
+  - #### [{{ Telepathetic}}{{ 24}}](#p24)
+  - #### [{{ Thrown Arms Master}}{{ 24}}](#p24)
+  - #### [{{ Tireless Reveler}}{{ 24}}](#p24)
+  - #### [{{ Totemic Spirit}}{{ 24}}](#p24)
+  - #### [{{ Tough}}{{ 24}}](#p24)
+  - #### [{{ Transmuted Anatomy}}{{ 24}}](#p24)
   - #### [{{ Transmutation Adept}}{{ 24}}](#p24)
-  - #### [{{ Treacherous Allure}}{{ 24}}](#p24)
-  - #### [{{ Vampire Hunter}}{{ 24}}](#p24)
-  - #### [{{ Vampire’s Plaything}}{{ 24}}](#p24)
-  - #### [{{ Vampire Touched}}{{ 24}}](#p24)
-  - #### [{{ Vital Sacrifice}}{{ 24}}](#p24)
+  - #### [{{ Treacherous Allure}}{{ 25}}](#p25)
+  - #### [{{ Vampire Hunter}}{{ 25}}](#p25)
+  - #### [{{ Vampire’s Plaything}}{{ 25}}](#p25)
+  - #### [{{ Vampire Touched}}{{ 25}}](#p25)
+  - #### [{{ Vital Sacrifice}}{{ 25}}](#p25)
   - #### [{{ War Caster}}{{ 25}}](#p25)
-  - #### [{{ Ward of the Wilds}}{{ 25}}](#p25)
-  - #### [{{ Weapon Master}}{{ 25}}](#p25)
-  - #### [{{ Wild Companion}}{{ 25}}](#p25)
-  - #### [{{ Wilderness Training}}{{ 25}}](#p25)
-  - #### [{{ Wise One}}{{ 25}}](#p25)
-- ### [{{ Advanced Feats}}{{ 26}}](#p26)
-  - #### [{{ Ability Score Improvement}}{{ 26}}](#p26)
-  - #### [{{ Adept of the Black Magic}}{{ 26}}](#p26)
-  - #### [{{ Adept of Red Magic}}{{ 26}}](#p26)
-  - #### [{{ Adept of White Magic}}{{ 26}}](#p26)
-  - #### [{{ Agent of Order}}{{ 26}}](#p26)
-  - #### [{{ Baleful Scion}}{{ 26}}](#p26)
-  - #### [{{ Battlefield Commander}}{{ 27}}](#p27)
-  - #### [{{ Champion’s Resolve}}{{ 27}}](#p27)
-  - #### [{{ Cohort of Chaos}}{{ 27}}](#p27)
-  - #### [{{ Dragonscarred}}{{ 27}}](#p27)
-  - #### [{{ Elemental Familiar}}{{ 27}}](#p27)
-  - #### [{{ Ember of the Fire Giants}}{{ 27}}](#p27)
-  - #### [{{ Fury of the Frost Giant}}{{ 28}}](#p28)
-  - #### [{{ Guile of the Cloud Giant}}{{ 28}}](#p28)
-  - #### [{{ Keenness of the Stone Giant}}{{ 28}}](#p28)
-  - #### [{{ Knight of the Crown}}{{ 28}}](#p28)
-  - #### [{{ Knight of the Rose}}{{ 28}}](#p28)
+  - #### [{{ Ward of the Wilds}}{{ 26}}](#p26)
+  - #### [{{ Weapon Master}}{{ 26}}](#p26)
+  - #### [{{ Wild Companion}}{{ 26}}](#p26)
+  - #### [{{ Wilderness Training}}{{ 26}}](#p26)
+  - #### [{{ Will to Survive}}{{ 26}}](#p26)
+  - #### [{{ Wise One}}{{ 26}}](#p26)
+- ### [{{ Advanced Feats}}{{ 27}}](#p27)
+  - #### [{{ Ability Score Improvement}}{{ 27}}](#p27)
+  - #### [{{ Adept of the Black Magic}}{{ 27}}](#p27)
+  - #### [{{ Adept of Red Magic}}{{ 27}}](#p27)
+  - #### [{{ Adept of White Magic}}{{ 27}}](#p27)
+  - #### [{{ Agent of Order}}{{ 27}}](#p27)
+  - #### [{{ Baleful Scion}}{{ 27}}](#p27)
+  - #### [{{ Battlefield Commander}}{{ 28}}](#p28)
+  - #### [{{ Champion’s Resolve}}{{ 28}}](#p28)
 
 }}
 
@@ -219,140 +219,149 @@ A Collection of DnD 5e Feats
 
 {{toc,wide
 - ###
-  - #### [{{ Knight of the Sword}}{{ 28}}](#p28)
-  - #### [{{ Magebane Resolve}}{{ 28}}](#p28)
-  - #### [{{ Magic Connoisseur}}{{ 28}}](#p28)
-  - #### [{{ Nature’s Bond}}{{ 29}}](#p29)
-  - #### [{{ Outlands Envoy}}{{ 29}}](#p29)
-  - #### [{{ Otherworldly Familiar}}{{ 29}}](#p29)
-  - #### [{{ Planar Wanderer}}{{ 29}}](#p29)
-  - #### [{{ Righteous Heritor}}{{ 29}}](#p29)
-  - #### [{{ Ritual Master}}{{ 29}}](#p29)
-  - #### [{{ Signature Technique}}{{ 29}}](#p29)
-  - #### [{{ Soothing Familiar}}{{ 29}}](#p29)
-  - #### [{{ Soul of the Storm Giant}}{{ 30}}](#p30)
-  - #### [{{ Spelldriver}}{{ 30}}](#p30)
-  - #### [{{ Spellfire Mastery}}{{ 30}}](#p30)
-  - #### [{{ Streetwise Tactician}}{{ 30}}](#p30)
-  - #### [{{ Trickster’s Collaboration}}{{ 30}}](#p30)
-  - #### [{{ Unyielding Unity}}{{ 30}}](#p30)
-  - #### [{{ Vigor of the Hill Giant}}{{ 30}}](#p30)
-  - #### [{{ Warlike Familiar}}{{ 30}}](#p30)
-- ### [{{ Epic Boons}}{{ 31}}](#p31)
-  - #### [{{ Boon of Ascendant Magic}}{{ 31}}](#p31)
-  - #### [{{ Boon of Blazing Dawn}}{{ 31}}](#p31)
-  - #### [{{ Boon of Bloodshed}}{{ 31}}](#p31)
-  - #### [{{ Boon of Bountiful Health}}{{ 31}}](#p31)
-  - #### [{{ Boon of Combat Prowess}}{{ 31}}](#p31)
-  - #### [{{ Boon of Communication}}{{ 31}}](#p31)
-  - #### [{{ Boon of Desperate Resilience}}{{ 31}}](#p31)
-  - #### [{{ Boon of Dimensional Travel}}{{ 32}}](#p32)
-  - #### [{{ Boon of Energy Resistance}}{{ 32}}](#p32)
-  - #### [{{ Boon of Erupting Spellpower}}{{ 32}}](#p32)
-  - #### [{{ Boon of Exquisite Radiance}}{{ 32}}](#p32)
-  - #### [{{ Boon of Fate}}{{ 32}}](#p32)
-  - #### [{{ Boon of Fluid Forms}}{{ 32}}](#p32)
-  - #### [{{ Boon of Fortitude}}{{ 32}}](#p32)
-  - #### [{{ Boon of Fortune’s Favor}}{{ 32}}](#p32)
-  - #### [{{ Boon of Irresistible Offense}}{{ 32}}](#p32)
-  - #### [{{ Boon of Looming Shadows}}{{ 33}}](#p33)
-  - #### [{{ Boon of Magic School Mastery}}{{ 33}}](#p33)
-  - #### [{{ Boon of Misty Escape}}{{ 33}}](#p33)
-  - #### [{{ Boon of Poison Mastery}}{{ 33}}](#p33)
-  - #### [{{ Boon of Recovery}}{{ 33}}](#p33)
-  - #### [{{ Boon of Revelry}}{{ 33}}](#p33)
-  - #### [{{ Boon of Skill}}{{ 33}}](#p33)
-  - #### [{{ Boon of Speed}}{{ 33}}](#p33)
-  - #### [{{ Boon of Spell Recall}}{{ 33}}](#p33)
-  - #### [{{ Boon of Terror}}{{ 34}}](#p34)
-  - #### [{{ Boon of the Bright Sun}}{{ 34}}](#p34)
-  - #### [{{ Boon of the Furious Storm}}{{ 34}}](#p34)
-  - #### [{{ Boon of the Iron Mind}}{{ 34}}](#p34)
-  - #### [{{ Boon of the Night Spirit}}{{ 34}}](#p34)
-  - #### [{{ Boon of the Soul Drinker}}{{ 34}}](#p34)
-  - #### [{{ Boon of Truesight}}{{ 34}}](#p34)
-- ### [{{ Species Feats}}{{ 35}}](#p35)
-  - #### [{{ Aarakocra Magic}}{{ 35}}](#p35)
-  - #### [{{ Angelic Wings}}{{ 35}}](#p35)
-  - #### [{{ Bountiful Luck}}{{ 35}}](#p35)
-  - #### [{{ Celestial Awakening}}{{ 35}}](#p35)
-  - #### [{{ Changeling Metamorphosis}}{{ 35}}](#p35)
-  - #### [{{ Demonic Wings}}{{ 35}}](#p35)
-  - #### [{{ Divine Power}}{{ 35}}](#p35)
-  - #### [{{ Draconic Wings}}{{ 35}}](#p35)
-  - #### [{{ Dragon Fear}}{{ 36}}](#p36)
-  - #### [{{ Dragon Hide}}{{ 36}}](#p36)
-  - #### [{{ Drow High Magic}}{{ 36}}](#p36)
-  - #### [{{ Dwarven Fortitude}}{{ 36}}](#p36)
-  - #### [{{ Elemental Tempest}}{{ 36}}](#p36)
-  - #### [{{ Elven Accuracy}}{{ 36}}](#p36)
-  - #### [{{ Envoy Specialist}}{{ 36}}](#p36)
-  - #### [{{ Fade Away}}{{ 36}}](#p36)
-  - #### [{{ Feline Grace}}{{ 37}}](#p37)
-  - #### [{{ Fey Enchantment}}{{ 37}}](#p37)
-  - #### [{{ Firbolg Beast Magic}}{{ 37}}](#p37)
-  - #### [{{ Flames of Phlegethos}}{{ 37}}](#p37)
-  - #### [{{ Focused Personas}}{{ 37}}](#p37)
-  - #### [{{ Hexbound Anchor}}{{ 37}}](#p37)
-  - #### [{{ Infernal Constitution}}{{ 37}}](#p37)
-  - #### [{{ Juggernaut Plating}}{{ 37}}](#p37)
-  - #### [{{ Master of Mimicry}}{{ 38}}](#p38)
-  - #### [{{ Mountain’s Endurance}}{{ 38}}](#p38)
-  - #### [{{ Orcish Fury}}{{ 38}}](#p38)
-  - #### [{{ Prodigy}}{{ 38}}](#p38)
-  - #### [{{ Quori Bond}}{{ 38}}](#p38)
-  - #### [{{ Second Chance}}{{ 38}}](#p38)
-  - #### [{{ Sky Warden}}{{ 38}}](#p38)
-  - #### [{{ Squat Nimbleness}}{{ 38}}](#p38)
-  - #### [{{ Superior Shifting}}{{ 39}}](#p39)
-  - #### [{{ Svirfneblin Magic}}{{ 39}}](#p39)
-  - #### [{{ Thoughtsinger}}{{ 39}}](#p39)
-  - #### [{{ Tortle Protector}}{{ 39}}](#p39)
-  - #### [{{ Triton Deep Magic}}{{ 39}}](#p39)
-  - #### [{{ Wood Elf Magic}}{{ 39}}](#p39)
-- ### [{{ Spellmark Feats}}{{ 40}}](#p40)
-  - #### [{{ Abberant Spellmark}}{{ 40}}](#p40)
-  - #### [{{ Mark of Death}}{{ 40}}](#p40)
-  - #### [{{ Mark of Detection}}{{ 40}}](#p40)
-  - #### [{{ Mark of Finding}}{{ 41}}](#p41)
-  - #### [{{ Mark of Handling}}{{ 41}}](#p41)
-  - #### [{{ Mark of Healing}}{{ 41}}](#p41)
-  - #### [{{ Mark of Hospitality}}{{ 41}}](#p41)
-  - #### [{{ Mark of Making}}{{ 42}}](#p42)
-  - #### [{{ Mark of Passage}}{{ 42}}](#p42)
-  - #### [{{ Mark of Scribing}}{{ 42}}](#p42)
-  - #### [{{ Mark of Sentinel}}{{ 42}}](#p42)
-  - #### [{{ Mark of Shadow}}{{ 43}}](#p43)
-  - #### [{{ Mark of Storm}}{{ 43}}](#p43)
-  - #### [{{ Mark of Warding}}{{ 43}}](#p43)
-  - #### [{{ Greater Aberrant Mark}}{{ 43}}](#p43)
-  - #### [{{ Greater Mark of Death}}{{ 43}}](#p43)
-  - #### [{{ Greater Mark of Detection}}{{ 44}}](#p44)
-  - #### [{{ Greater Mark of Finding}}{{ 44}}](#p44)
-  - #### [{{ Greater Mark of Handling}}{{ 44}}](#p44)
-  - #### [{{ Greater Mark of Healing}}{{ 44}}](#p44)
-  - #### [{{ Greater Mark of Hospitality}}{{ 44}}](#p44)
-  - #### [{{ Greater Mark of Making}}{{ 44}}](#p44)
-  - #### [{{ Greater Mark of Passage}}{{ 44}}](#p44)
-  - #### [{{ Greater Mark of Scribing}}{{ 44}}](#p44)
-  - #### [{{ Greater Mark of Sentinel}}{{ 45}}](#p45)
-  - #### [{{ Greater Mark of Shadow}}{{ 45}}](#p45)
-  - #### [{{ Greater Mark of Storm}}{{ 45}}](#p45)
-  - #### [{{ Greater Mark of Warding}}{{ 45}}](#p45)
-  - #### [{{ Potent Spellmark}}{{ 45}}](#p45)
-- ### [{{ Planar Pact Feats}}{{ 46}}](#p46)
-  - #### [{{ Celestial Pact}}{{ 46}}](#p46)
-  - #### [{{ Celestial Radiance}}{{ 46}}](#p46)
-  - #### [{{ Celestial Grace}}{{ 46}}](#p46)
-  - #### [{{ Fey Pact}}{{ 46}}](#p46)
-  - #### [{{ Fey Sentinel}}{{ 46}}](#p46)
-  - #### [{{ Veil of the Fey}}{{ 47}}](#p47)
-  - #### [{{ Infernal Pact}}{{ 47}}](#p47)
-  - #### [{{ Infernal Bulwark}}{{ 47}}](#p47)
-  - #### [{{ Infernal Dragoon}}{{ 47}}](#p47)
-  - #### [{{ Shadow Pact}}{{ 48}}](#p48)
-  - #### [{{ Shadow Trapper}}{{ 48}}](#p48)
-  - #### [{{ Shadow Weaver}}{{ 48}}](#p48)
+  - #### [{{ Cohort of Chaos}}{{ 28}}](#p28)
+  - #### [{{ Dragonscarred}}{{ 28}}](#p28)
+  - #### [{{ Elemental Familiar}}{{ 28}}](#p28)
+  - #### [{{ Ember of the Fire Giants}}{{ 28}}](#p28)
+  - #### [{{ Fury of the Frost Giant}}{{ 29}}](#p29)
+  - #### [{{ Guile of the Cloud Giant}}{{ 29}}](#p29)
+  - #### [{{ Keenness of the Stone Giant}}{{ 29}}](#p29)
+  - #### [{{ Knight of the Crown}}{{ 29}}](#p29)
+  - #### [{{ Knight of the Rose}}{{ 29}}](#p29)
+  - #### [{{ Knight of the Sword}}{{ 29}}](#p29)
+  - #### [{{ Magebane Resolve}}{{ 29}}](#p29)
+  - #### [{{ Magic Connoisseur}}{{ 29}}](#p29)
+  - #### [{{ Nature’s Bond}}{{ 30}}](#p30)
+  - #### [{{ Outlands Envoy}}{{ 30}}](#p30)
+  - #### [{{ Otherworldly Familiar}}{{ 30}}](#p30)
+  - #### [{{ Planar Wanderer}}{{ 30}}](#p30)
+  - #### [{{ Righteous Heritor}}{{ 30}}](#p30)
+  - #### [{{ Ritual Master}}{{ 30}}](#p30)
+  - #### [{{ Signature Technique}}{{ 30}}](#p30)
+  - #### [{{ Soothing Familiar}}{{ 30}}](#p30)
+  - #### [{{ Soul of the Storm Giant}}{{ 31}}](#p31)
+  - #### [{{ Spelldriver}}{{ 31}}](#p31)
+  - #### [{{ Spellfire Mastery}}{{ 31}}](#p31)
+  - #### [{{ Streetwise Tactician}}{{ 31}}](#p31)
+  - #### [{{ Trickster’s Collaboration}}{{ 31}}](#p31)
+  - #### [{{ Unyielding Unity}}{{ 31}}](#p31)
+  - #### [{{ Vigor of the Hill Giant}}{{ 31}}](#p31)
+  - #### [{{ Warlike Familiar}}{{ 31}}](#p31)
+- ### [{{ Epic Boons}}{{ 32}}](#p32)
+  - #### [{{ Boon of Ascendant Magic}}{{ 32}}](#p32)
+  - #### [{{ Boon of Blazing Dawn}}{{ 32}}](#p32)
+  - #### [{{ Boon of Bloodshed}}{{ 32}}](#p32)
+  - #### [{{ Boon of Bountiful Health}}{{ 32}}](#p32)
+  - #### [{{ Boon of Combat Prowess}}{{ 32}}](#p32)
+  - #### [{{ Boon of Communication}}{{ 32}}](#p32)
+  - #### [{{ Boon of Desperate Resilience}}{{ 32}}](#p32)
+  - #### [{{ Boon of Dimensional Travel}}{{ 33}}](#p33)
+  - #### [{{ Boon of Energy Resistance}}{{ 33}}](#p33)
+  - #### [{{ Boon of Erupting Spellpower}}{{ 33}}](#p33)
+  - #### [{{ Boon of Exquisite Radiance}}{{ 33}}](#p33)
+  - #### [{{ Boon of Fate}}{{ 33}}](#p33)
+  - #### [{{ Boon of Fluid Forms}}{{ 33}}](#p33)
+  - #### [{{ Boon of Fortitude}}{{ 33}}](#p33)
+  - #### [{{ Boon of Fortune’s Favor}}{{ 33}}](#p33)
+  - #### [{{ Boon of Irresistible Offense}}{{ 33}}](#p33)
+  - #### [{{ Boon of Looming Shadows}}{{ 34}}](#p34)
+  - #### [{{ Boon of Magic School Mastery}}{{ 34}}](#p34)
+  - #### [{{ Boon of Misty Escape}}{{ 34}}](#p34)
+  - #### [{{ Boon of Poison Mastery}}{{ 34}}](#p34)
+  - #### [{{ Boon of Recovery}}{{ 34}}](#p34)
+  - #### [{{ Boon of Revelry}}{{ 34}}](#p34)
+  - #### [{{ Boon of Skill}}{{ 34}}](#p34)
+  - #### [{{ Boon of Speed}}{{ 34}}](#p34)
+  - #### [{{ Boon of Spell Recall}}{{ 34}}](#p34)
+  - #### [{{ Boon of Terror}}{{ 35}}](#p35)
+  - #### [{{ Boon of the Bright Sun}}{{ 35}}](#p35)
+  - #### [{{ Boon of the Furious Storm}}{{ 35}}](#p35)
+  - #### [{{ Boon of the Iron Mind}}{{ 35}}](#p35)
+  - #### [{{ Boon of the Night Spirit}}{{ 35}}](#p35)
+  - #### [{{ Boon of the Soul Drinker}}{{ 35}}](#p35)
+  - #### [{{ Boon of Truesight}}{{ 35}}](#p35)
+- ### [{{ Species Feats}}{{ 36}}](#p36)
+  - #### [{{ Aarakocra Magic}}{{ 36}}](#p36)
+  - #### [{{ Angelic Wings}}{{ 36}}](#p36)
+  - #### [{{ Bountiful Luck}}{{ 36}}](#p36)
+  - #### [{{ Celestial Awakening}}{{ 36}}](#p36)
+  - #### [{{ Changeling Metamorphosis}}{{ 36}}](#p36)
+  - #### [{{ Demonic Wings}}{{ 36}}](#p36)
+  - #### [{{ Divine Power}}{{ 36}}](#p36)
+  - #### [{{ Draconic Wings}}{{ 36}}](#p36)
+  - #### [{{ Dragon Fear}}{{ 37}}](#p37)
+  - #### [{{ Dragon Hide}}{{ 37}}](#p37)
+  - #### [{{ Drow High Magic}}{{ 37}}](#p37)
+  - #### [{{ Dwarven Fortitude}}{{ 37}}](#p37)
+  - #### [{{ Elemental Tempest}}{{ 37}}](#p37)
+  - #### [{{ Elven Accuracy}}{{ 37}}](#p37)
+  - #### [{{ Envoy Specialist}}{{ 37}}](#p37)
+  - #### [{{ Fade Away}}{{ 37}}](#p37)
+  - #### [{{ Feline Grace}}{{ 38}}](#p38)
+  - #### [{{ Fey Enchantment}}{{ 38}}](#p38)
+  - #### [{{ Firbolg Beast Magic}}{{ 38}}](#p38)
+  - #### [{{ Flames of Phlegethos}}{{ 38}}](#p38)
+  - #### [{{ Focused Personas}}{{ 38}}](#p38)
+  - #### [{{ Hexbound Anchor}}{{ 38}}](#p38)
+  - #### [{{ Infernal Constitution}}{{ 38}}](#p38)
+  - #### [{{ Juggernaut Plating}}{{ 38}}](#p38)
+  - #### [{{ Master of Mimicry}}{{ 39}}](#p39)
+  - #### [{{ Mountain’s Endurance}}{{ 39}}](#p39)
+  - #### [{{ Orcish Fury}}{{ 39}}](#p39)
+  - #### [{{ Prodigy}}{{ 39}}](#p39)
+  - #### [{{ Quori Bond}}{{ 39}}](#p39)
+  - #### [{{ Second Chance}}{{ 39}}](#p39)
+  - #### [{{ Sky Warden}}{{ 39}}](#p39)
+  - #### [{{ Squat Nimbleness}}{{ 39}}](#p39)
+  - #### [{{ Superior Shifting}}{{ 40}}](#p40)
+  - #### [{{ Svirfneblin Magic}}{{ 40}}](#p40)
+  - #### [{{ Thoughtsinger}}{{ 40}}](#p40)
+  - #### [{{ Tortle Protector}}{{ 40}}](#p40)
+  - #### [{{ Triton Deep Magic}}{{ 40}}](#p40)
+  - #### [{{ Wood Elf Magic}}{{ 40}}](#p40)
+- ### [{{ Spellmark Feats}}{{ 41}}](#p41)
+  - #### [{{ Abberant Spellmark}}{{ 41}}](#p41)
+  - #### [{{ Mark of Death}}{{ 41}}](#p41)
+  - #### [{{ Mark of Detection}}{{ 41}}](#p41)
+  - #### [{{ Mark of Finding}}{{ 42}}](#p42)
+  - #### [{{ Mark of Handling}}{{ 42}}](#p42)
+  - #### [{{ Mark of Healing}}{{ 42}}](#p42)
+  - #### [{{ Mark of Hospitality}}{{ 42}}](#p42)
+  - #### [{{ Mark of Making}}{{ 43}}](#p43)
+  - #### [{{ Mark of Passage}}{{ 43}}](#p43)
+  - #### [{{ Mark of Scribing}}{{ 43}}](#p43)
+  - #### [{{ Mark of Sentinel}}{{ 43}}](#p43)
+  - #### [{{ Mark of Shadow}}{{ 44}}](#p44)
+  - #### [{{ Mark of Storm}}{{ 44}}](#p44)
+  - #### [{{ Mark of Warding}}{{ 44}}](#p44)
+  - #### [{{ Greater Aberrant Mark}}{{ 44}}](#p44)
+  - #### [{{ Greater Mark of Death}}{{ 44}}](#p44)
+  - #### [{{ Greater Mark of Detection}}{{ 45}}](#p45)
+  - #### [{{ Greater Mark of Finding}}{{ 45}}](#p45)
+  - #### [{{ Greater Mark of Handling}}{{ 45}}](#p45)
+  - #### [{{ Greater Mark of Healing}}{{ 45}}](#p45)
+  - #### [{{ Greater Mark of Hospitality}}{{ 45}}](#p45)
+  - #### [{{ Greater Mark of Making}}{{ 45}}](#p45)
+  - #### [{{ Greater Mark of Passage}}{{ 45}}](#p45)
+  - #### [{{ Greater Mark of Scribing}}{{ 45}}](#p45)
+  - #### [{{ Greater Mark of Sentinel}}{{ 46}}](#p46)
+  - #### [{{ Greater Mark of Shadow}}{{ 46}}](#p46)
+  - #### [{{ Greater Mark of Storm}}{{ 46}}](#p46)
+  - #### [{{ Greater Mark of Warding}}{{ 46}}](#p46)
+  - #### [{{ Potent Spellmark}}{{ 46}}](#p46)
+- ### [{{ Planar Pact Feats}}{{ 47}}](#p47)
+  - #### [{{ Celestial Pact}}{{ 47}}](#p47)
+  - #### [{{ Celestial Radiance}}{{ 47}}](#p47)
+  - #### [{{ Celestial Grace}}{{ 47}}](#p47)
+  - #### [{{ Fey Pact}}{{ 47}}](#p47)
+  - #### [{{ Fey Sentinel}}{{ 47}}](#p47)
+  - #### [{{ Fey Tormentor}}{{ 48}}](#p48)
+  - #### [{{ Infernal Pact}}{{ 48}}](#p48)
+  - #### [{{ Infernal Bulwark}}{{ 48}}](#p48)
+  - #### [{{ Infernal Dragoon}}{{ 48}}](#p48)
+  - #### [{{ Shadow Pact}}{{ 49}}](#p49)
+  - #### [{{ Shadow Trapper}}{{ 49}}](#p49)
+  - #### [{{ Shadow Weaver}}{{ 49}}](#p49)
 }}
 
 
@@ -570,6 +579,7 @@ You gain the following benefits.
 
 **Faerie Fire.** You learn the *Faerie Fire* spell. Intelligence, Wisdom, or Charisma is your spellcasting ability for this spell (choose when you select this feat). You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast the spell using any spell slots you have.  
 Whenever you cast *Faerie Fire*, the area increases to 30-foot cube instead of the normal 20-foot cube, and taking damage does not break your Concentration on the spell.
+
 \column
 
 ### Classical Artist
@@ -584,6 +594,20 @@ Your great intellect has allowed you to master what many would consider the fine
 You can have a number of masterpieces equal to half your proficiency bonus (rounded down). If you create a masterpiece above that limit, you must choose one to become non-magical.
 
 **Art Appraisal.** You have advantage on checks to assess the value of art. 
+
+### Clearcasting
+***Prerequisite: Ability to cast a spell that deals Force damage***
+
+Your mind is so clear and focused that spells sometimes leave you with power to spare. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Intelligence score by 1, to a maximum of 20.
+
+**Clearcasting.** When you score a Critical Hit with a spell's attack roll, you can take a Reaction to cast a cantrip with a casting time of an action.
+
+**Force Adept.** When you roll damage for a spell you cast that deals Force damage, you can treat any 1 on a damage die as a 2.
+
+\page
+{{pageNumber,auto}}
 
 ### Cloying Mists
 
@@ -610,10 +634,6 @@ You gain the following benefits.
 
 **Frostbite.** Once per turn when you hit a creature with an attack roll and deal Cold damage, you can temporarily negate the creature's defenses. The creature subtracts 1d4 from the next saving throw it makes before the end of your next turn.
 
-
-\page
-{{pageNumber,auto}}
-
 ### Conjuration Adept
 ***Prerequisite: Ability to cast a level 1 Conjuration spell***
 
@@ -633,6 +653,8 @@ You gain the following benefits.
 | 3 | *Conjure Animals* |
 | 4 | *Dimension Door* |
 | 5 | *Conjure Elemental* |
+
+\column
 
 ### Crafter 
 You gain the following benefits:
@@ -668,6 +690,8 @@ You have trained extensively with the crossbow and can use it more efficiently t
 
 **Dual Wielding.** When you make the extra attack of the Light property, you can add your ability modifier to the damage of the extra attack if that attack is with a crossbow that has the Light property and you aren't already adding that modifier to the damage.  
 
+\page
+{{pageNumber,auto}}
 
 ### Cruel
 The challenges and struggles you've faced throughout your life have led you to delight in inflicting pain and anguish upon others. 
@@ -714,9 +738,7 @@ You gain the following benefits:
 
 **Parry.** If you're holding a Finesse or Light melee weapon and another creature hits you with a melee attack, you can take a Reaction to add your Proficiency Bonus to your Armor Class, potentially causing the attack to miss you. If the attack misses, you can make an attack with that Finesse or Light melee weapon against the attacker as part of the same reaction.  
 
-
-\page
-{{pageNumber,auto}}
+\column
 
 ### Delicious Pain
 
@@ -764,7 +786,9 @@ Once you use this benefit, you can't do so again until you finish a Long Rest. Y
 | 4 | *Divination* |
 | 5 | *Scrying* |
 
-\column
+\page
+{{pageNumber,auto}}
+
 ### Divinely Favored
 A god chose you to carry a spark of their power.
 
@@ -799,7 +823,6 @@ You gain the following benefits.
 
 **Inspired by Fear.** When you cause a creature to have the Frightened condition and you are the source of its fear, you can gain Heroic Inspiration if you lack it. Once you use this benefit, you can't use it again until you finish a Short or Long Rest.
 
-
 ### Dual Wielding Master
 ***Prerequisites: Strength or Dexterity 13+***  
 You master fighting with two weapons, gaining the following benefits:  
@@ -812,10 +835,7 @@ You master fighting with two weapons, gaining the following benefits:
 
 **Quick Draw.** You can draw or stow two weapons that lack the Two-Handed property when you would normally be able to draw or stow only one.  
 
-
-
-\page
-{{pageNumber,auto}}
+\column
 
 ### Dungeon Delver
 You are as skilled as one can be at exploring dungeons and disarming deadly traps. You gain the benefits listed below:
@@ -859,6 +879,18 @@ You gain the following benefits:
 
 **Repeatable.** You can take this feat more than once, but you must choose a different damage type each time for Energy Mastery. 
 
+### Elusive Brawler
+***Prerequisite: Dexterity and Wisdom 13+***
+
+You fight with a boxer's footwork, rolling with every blow that lands. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Dexterity or Wisdom by 1, to a maximum of 20.
+
+**Reactive Dodge.** When you take damage, you can take a Reaction to take the Dodge action.
+
+\page
+{{pageNumber,auto}}
+
 ### Enchantment Adept
 ***Prerequisite: Ability to cast a level 1 Enchantment spell***
 
@@ -878,6 +910,19 @@ You gain the following benefits.
 | 3 | *Hold Person* |
 | 4 | *Dominate Beast* |
 | 5 | *Modify Memory* |
+
+### Enveloping Mist
+***Prerequisite: Dexterity and Wisdom 13+***
+
+You have learned to wrap those you heal in a protective, restorative mist. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Dexterity or Wisdom by 1, to a maximum of 20.
+
+**Enveloping Mist.** When you cast a spell or use a feature to restore Hit Points to a creature, the creature is wrapped in a healing mist. Roll one of the dice from the feature that healed it, and note that number as the creature's Life Cocoon value.
+
+If the creature is hit by an attack roll before the start of its next turn, you can take a Reaction to reduce the damage it takes from that attack by its Life Cocoon value. The mist then disappears.
+
+At the start of the creature's next turn, if the mist persists, the creature gains Temporary Hit Points equal to its Life Cocoon value.
 
 ### Evocation Adept
 ***Prerequisite: Ability to cast a level 1 Evocation spell***
@@ -899,6 +944,8 @@ You gain the following benefits.
 | 4 | *Vitriolic Sphere* |
 | 5 | *Wall of Force* |
 
+\column
+
 ### Fairy Trickster
 
 You move with a playful cunning, weaving mischief into your attacks and slipping through danger with ease.
@@ -911,9 +958,6 @@ You gain the following benefits.
 
 **Flustering Strike.** When you hit a creature with an attack roll, you can attempt to fluster the target. The target must succeed on a Wisdom saving throw (DC 8 plus the ability modifier of the score increased by this feat and your Proficiency Bonus) or have Disadvantage on saving throws until the end of your next turn.  
 You can use this benefit a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
-
-\page
-{{pageNumber,auto}}
 
 ### Familiar Friend
 You gain the following benefits.
@@ -942,6 +986,19 @@ Your martial training has helped you develop a particular style of fighting.
 
 **Fighting Style.** You learn one Fighting Style option of your choice from the Fighter class. If you already have a style, the one you choose must be different. In order to learn a Fighting Style you must meet any prerequisites it has.
 
+\page
+{{pageNumber,auto}}
+
+### Fists of Fury
+***Prerequisite: Dexterity and Wisdom 13+***
+
+Your strikes come in a flurry, each blow building on the last. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Dexterity or Wisdom by 1, to a maximum of 20.
+
+**Clean Hits.** When you roll damage for an attack you make with an Unarmed Strike or a weapon that has the Light property, you can treat any 1 on a damage die as a 2.
+
+**Combo Strikes.** When you deal damage to a creature with an Unarmed Strike, you gain a +1 bonus to the damage roll for each time you previously hit that creature with a melee attack roll in the same turn.
 
 ### Flash Recall
 ***Prerequisite: Spellcasting feature from a class that prepares spells***  
@@ -952,7 +1009,6 @@ You've developed the ability to instantly recall an unprepared spell in moments 
 
 **Quick Preparation.** As a bonus action, you prepare a spell of 1st level or higher from your spellbook (if you're a wizard) or from your class spell list (if you're not a wizard). This spell must be of a level for which you have spell slots, and it replaces another spell of an equal or higher level that you had previously prepared. Once you use this feat to recall a spell, you can't do so again until you complete a Short or Long rest.  
 
-\column
 ### Genie Magic
 
 You have learned to harness mystical energies in the blink of an eye, bending magic to your will with precision and flair.
@@ -966,7 +1022,7 @@ You gain the following benefits.
 When you reach level 11, the spell you cast with this feat is cast as though using a level 2 spell slot.  
 
 When you reach level 17, the spell is cast as though using a level 3 spell slot.
- 
+
 ### Gift of the Chromatic Dragon
 You've manifested some of the power of chromatic dragons, granting you the following benefits:
 
@@ -976,6 +1032,8 @@ You've manifested some of the power of chromatic dragons, granting you the follo
 
 **Reactive Resistance.** When you take acid, cold, fire, lightning, or poison damage, you can use your reaction to give yourself resistance to that instance of damage. You can use this reaction a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.
 
+\column
+
 ### Gift of the Gem Dragon   
 You've manifested some of the power of gem dragons, granting you the following benefits:
 
@@ -984,9 +1042,6 @@ You've manifested some of the power of gem dragons, granting you the following b
 **Telekinetic Reprisal.** When you take damage from a creature that is within 10 feet of you, you can use your reaction to emanate telekinetic energy. The creature that dealt damage to you must make a Strength saving throw (DC equals 8 + your proficiency bonus + the ability modifier of the score increased by this feat). On a failed save, the creature takes 2d8 force damage and is pushed up to 10 feet away from you. On a successful save, the creature takes half as much damage and isn't pushed. You can use this reaction a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.
 
 **Psionic Aegis.** Once per day, when you take damage from a creature within 10 feet of you, you can unleash a wave of psionic energy as a reaction. All creatures of your choice within a 10-foot radius of you must make an Intelligence saving throw (DC equals 8 + your proficiency bonus + the ability modifier of the score increased by this feat). On a failed save, they are affected by your *Telekinetic Reprisal* ability. You also gain temporary hit points equal to your proficiency bonus.
-\page
-{{pageNumber,auto}}
-
 
 ### Gift of the Metallic Dragon
 You've manifested some of the power of metallic dragons, granting you the following benefits:
@@ -996,7 +1051,6 @@ You've manifested some of the power of metallic dragons, granting you the follow
 **Draconic Healing.** You learn the *cure wounds* spell. You can cast this spell without expending a spell slot. Once you cast this spell in this way, you can't do so again until you finish a long rest. You can also cast this spell using spell slots you have. The spell's spellcasting ability is Intelligence, Wisdom, or Charisma when you cast it with this feat (choose when you gain the feat).
 
 **Protective Wings.** You can manifest protective wings that can shield you or others. When you or another creature you can see within 5 feet of you is hit by an attack roll, you can use your reaction to manifest spectral wings from your back for a moment. You grant a bonus to the target's AC equal to your proficiency bonus against that attack roll, potentially causing it to miss. You can use this reaction a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.
-
 
 ### Grappler
 ***Prerequisite: Strength or Dexterity 13+***  
@@ -1011,6 +1065,9 @@ You’re an accomplished wrestler, granting you the following benefits:
 
 **Fast Wrestler.** You don't have to spend extra movement to move a creature Grappled by you if the creature is your size or smaller. 
 
+\page
+{{pageNumber,auto}}
+
 ### Great Weapon Master
 ***Prerequisite: Strength 13+***
 
@@ -1022,7 +1079,6 @@ You’ve learned to use the weight of a weapon to your advantage, letting its mo
 
 **Hew.** Immediately after you score a Critical Hit with a Melee weapon or reduce a creature to 0 Hit Points with one, you can make one attack with the same weapon as a Bonus Action.  
 
-\column
 ### Gunner 
 You have a quick hand and keen eye when employing firearms, granting you the following benefits:
 
@@ -1066,7 +1122,6 @@ You are an able physician, allowing you to mend wounds quickly and get your alli
 
 **Healing Rerolls.** Whenever you roll a die to determine the number of Hit Points you restore with an abiltiy, spell or with this feat's Battle Medic benefit, you can reroll the die if it rolls a 1, and you must use the new roll.  
 
-
 ### Heavily Armored
 ***Prerequisite: Medium Armor Training***
 
@@ -1075,10 +1130,6 @@ You have trained to master the use of heavy armor, gaining the following benefit
 **Ability Score Increase.** Increase your Constitution or Strength by 1, to a maximum of 20.  
 
 **Armor Training.** You gain training with Heavy armor.
-
-
-\page
-{{pageNumber,auto}}
 
 ### Heavy Armor Master
 ***Prerequisite: Heavy Armor Training***  
@@ -1118,7 +1169,9 @@ You gain the following benefits.
 | 4 | *Hallucinatory Terrain* |
 | 5 | *Seeming* |
 
-\column
+\page
+{{pageNumber,auto}}
+
 ### Initiate of High Sorcery
 ***Prerequisite: Spellcasting or Pact Magic feature or relevant background***  
 You've received training from magic-users affiliated with the Mages of High Sorcery.
@@ -1138,6 +1191,25 @@ You can cast each of the chosen 1st-level spells without a spell slot, and you m
 
 Your spellcasting ability for this feat's spells is Intelligence, Wisdom, or Charisma (choose when you select this feat).
 
+### Inscription Adept
+***Prerequisite: Proficiency with Calligrapher's Supplies, Cartographer's Tools, or Painter's Supplies***
+
+Your mastery of inscription allows you to duplicate the effects of certain spells with your written magic. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.
+
+**Inscription Magic.** You learn the *Illusory Script* spell and always have it prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast the spell using any spell slots you have of the appropriate level. You can use herbalism resources of the appropriate value in place of the Material component specified for that spell. The spell's spellcasting ability is the ability increased by this feat.
+
+When you reach higher levels of proficiency in inscription, you learn higher-level spells and can cast them in the same way, as shown on the table.
+
+#### Inscription Adept Spells
+| Proficiency | Spell |
+|:-----------:|:------|
+| Journeyman (+3) | *Glyph of Warding* |
+| Artisan (+5) | *Symbol* |
+
+\column
+
 ### Inspiring Leader
 ***Prerequisite: Wisdom or Charisma 13+***
 
@@ -1146,9 +1218,6 @@ You are adept at encouraging others, granting you the following benefits:
 **Ability Score Increase.** Increase your Wisdom or Charisma score by 1, to a maximum of 20.
 
 **Encouraging Performance.** If you do not have a *Leadership Ability*, it is the ability you increased with this feat. When you finish a Short or Long Rest, you can give an inspiring performance: a speech, song, or dance. When you do so, choose up to six allies (which can include yourself) within 30 feet of yourself who witness the performance. The chosen creatures each gain Temporary Hit Points equal to your character level plus your *Leadership Ability* modifier.
-
- 
-
 
 ### Intimidating Leader
 ***Prerequisite: At least one Fighting Style Known***
@@ -1160,8 +1229,7 @@ You use fear and intimidation to rally those who follow you into battle. You gai
 **Intimidating Presence.** When another creature within 30 feet of you that can also see or hear you fails a saving throw to resist the Charmed or Frightened condition, you can use a reaction to make an Intimidation check against the same save DC. On a success, the creature is not Charmed or Frightened.
 
 You can use this reaction a number of times equal to your Proficiency Bonus, and you regain all expended uses of this feature when you finish a long rest.
-\page
-{{pageNumber,auto}}
+
 ### Keen Mind
 ***Prerequisite: Intelligence 13+***
 
@@ -1185,6 +1253,9 @@ You gain the following benefits.
 
 **Reassert Honor.** When an enemy you can see deals damage to an ally of yours that is within 5 feet of you, you have Advantage on your next attack roll against that enemy before the end of your next turn.
 
+\page
+{{pageNumber,auto}}
+
 ### Legendary Might
 You have always found ways to leverage your great might for additional benefits.
 
@@ -1201,7 +1272,7 @@ Should your Strength modifier increase, the benefits that you gain from this Fea
 | +3       | You gain a climbing speed and a swimming speed equal to your walking speed.|
 | +4       | 	When making an Athletics check, you treat any roll of 7 or lower on a d20 as an 8.|
 | +5       | When forced to make a Constitution saving throw, you can choose to make a Strength saving throw instead.|
-\column
+
 ### Lifelong Learner
 You have made a vow to never stop learning, no matter how old or educated you become. 
 
@@ -1216,6 +1287,8 @@ You have made a vow to never stop learning, no matter how old or educated you be
 | +3    | **Skill Proficiency.** You gain proficiency in either Arcana, History, or Religion. |
 | +4    | **Enhanced Skill.** For one skill proficiency of your choice, you treat a roll of 7 or lower on the d20 as an 8. |
 | +5    | **Flexible Resilience.** Whenever you are forced to make a Wisdom saving throw, you can choose to make an Intelligence saving throw instead. |
+
+\column
 
 ### Light Bringer
 
@@ -1237,8 +1310,7 @@ You gain the following benefits:
 **Ability Score Increase.** Increase your Strength or Dexterity by 1, to a maximum of 20.  
 
 **Armor Training.** You gain training with Light armor and Shields. 
-\page
-{{pageNumber,auto}}
+
 ### Linguist
 You have studied languages and codes, gaining the following benefits:  
 
@@ -1263,6 +1335,9 @@ You gain the following benefits.
 **Endearing Pain.** Immediately after you damage a creature with a Melee weapon or an Unarmed Strike, you can take a Bonus Action to give the target the Charmed condition until the end of your next turn or until you or your allies damage it.  
 You can use this feature a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
 
+\page
+{{pageNumber,auto}}
+
 ### Lucky
 You have inexplicable luck that seems to kick in at just the right moment. You gain the following benefits:
 
@@ -1274,7 +1349,6 @@ You have inexplicable luck that seems to kick in at just the right moment. You g
 
 **Lucky Dodge.** When a creature rolls a d20 for an attack roll against you, you can spend 1 Luck Point to roll a d20. You then choose whether the attack uses the attacker's roll or yours.
 
-\column
 ### Mage Slayer
 You have trained extensively to counter sinister spellcasters and foil their arcane abilities. You gain the following benefits:
 
@@ -1283,7 +1357,7 @@ You have trained extensively to counter sinister spellcasters and foil their arc
 **Opportunity Spellbreaker.** When you can see or hear a creature within the reach of a melee weapon you are wielding or your unarmed strikes cast a spell, you can make an opportunity attack against it. On a hit, the creature must succeed on a Constitution saving throw as if it were doing so to maintain concentration. On a failure, its spell fails to take effect, but the spell slot is not expended.
 
 **Concentration Breaker.** When you damage a creature that is concentrating on a spell, that creature has disadvantage on the Constitution saving throw it makes to maintain its concentration.
- 
+
 ### Magic Initiate
 You gain the following benefits:
 
@@ -1307,8 +1381,8 @@ You have some basic martial arts training, giving you some skill in both unarmed
 **Agile Strikes.** You can use Dexterity, instead of Strength, for the attack rolls of unarmed strikes. Your unarmed strikes deal bludgeoning damage equal to 1d4 + your Strength or Dexterity modifier on hit.
 
 **Bonus Strike.** When you take the Attack action on your turn and only make unarmed strikes, you can make a single unarmed strike as a bonus action on that same turn.
-\page
-{{pageNumber,auto}}
+
+
 ### Martial Adept
 ***Prerequisite: Proficiency with all simple and martial weapons***  
 
@@ -1322,7 +1396,6 @@ You have studied combat techniques which allow you to perform Martial Exploits. 
 
 **Exploit Dice.** You gain two d4 Exploit Dice to fuel your Exploits. An Exploit Die is expended when you use it. You regain all of your Exploit Dice when you finish a short or long rest. If you already have Exploit Dice from another source, you only gain one Exploit Die equal to your other Exploit Dice.
 
- 
 ### Medium Armor Master 
 ***Prerequisite: Proficiency with medium armor***
 
@@ -1343,7 +1416,6 @@ Your mind is a wonderful thing, capable of bursts of insight and mental fortitud
 
 **Enhanced Expertise.** Choose any two skills from the list above. Whenever you make an ability check with either of the chosen skills, you can treat a roll of 7 or lower on the d20 as an 8.
 
-
 ### Metamagic Adept
 ***Prerequisite: Spellcasting or Pact Magic feature***
 
@@ -1354,7 +1426,10 @@ You've learned how to exert your will on your spells to alter how they function:
 **Metamagic Mastery.** You learn two Metamagic options of your choice from the sorcerer class. You can use only one Metamagic option on a spell when you cast it, unless the option says otherwise. Whenever you reach a level that grants the Ability Score Improvement feature, you can replace one of these Metamagic options with another one from the sorcerer class.
 
 **Sorcery Points.** You gain a number of sorcery points equal to your proficiency bonus to spend on Metamagic (these points are added to any sorcery points you have from another source). You regain all spent sorcery points when you finish a long rest.
-\column
+
+\page
+{{pageNumber,auto}}
+
 ### Mobile
 You are exceptionally speedy and agile. You gain the following benefits:
 
@@ -1373,7 +1448,6 @@ You have trained to master the use of armor and shields, gaining the following b
 
 **Armor Training.** You gain training with Medium armor. 
 
- 
 ### Mounted Combatant
 You are a dangerous foe to face while mounted. While you are mounted and aren't incapacitated, you gain the following benefits:
 
@@ -1385,7 +1459,6 @@ You are a dangerous foe to face while mounted. While you are mounted and aren't 
 
 **Veer.** While mounted, you can force an attack that hits your mount to hit you instead if you don't have the Incapacitated condition.  
 
-
 ### Musician
 You are a practiced musician, granting you the following benefits:
 
@@ -1395,6 +1468,8 @@ You are a practiced musician, granting you the following benefits:
 
 **Inspiring Song.** As you finish a Short Rest or a Long Rest, you can play a song on a Musical Instrument with which you have Tool Proficiency and give Heroic Inspiration to allies who hear the song. The Number of allies you can affect in this way equals your Proficiency Bonus.
 
+\column
+
 ### Mystic Conflux
 You possess an intuitive understanding of the way magic ebbs and flows within enchanted items. Such items attune easily to you, and you are able to sound out their secrets. You gain the following benefits:
 
@@ -1403,8 +1478,6 @@ You possess an intuitive understanding of the way magic ebbs and flows within en
 **Increased Attunement.** You can attune to up to four magic items at once.  
 
 **Identification.** You can cast the identify spell without expending a spell slot or material components. You must finish a long rest before you can do so again.  
-\page
-{{pageNumber,auto}}
 
 ### Mystic Warrior 
 You have studied and mastered monastic Techniques which allow you to perform supernatural feats of spiritual power.
@@ -1429,7 +1502,10 @@ Your body and soul have been permanently altered by ancient, reality-shaping mag
 You can use this reaction a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.
 
 **Mythal Resonance.** Whenever you successfully negate or reduce the effect of a spell using your Mythal Ward, you gain temporary hit points equal to your proficiency bonus + the ability modifier increased by this feat.
-\column
+
+\page
+{{pageNumber,auto}}
+
 ### Natural Magnetism
 Something about your personality and bearing makes others want to be near you. 
 
@@ -1478,11 +1554,7 @@ Quick to notice details around you, you gain the following benefits:
 
 **Quick Search.** You can take the Search Action as a Bonus Action.
 
- 
-
-
-\page
-{{pageNumber,auto}}
+\column
 
 ### Overwhelming Strength
 Your sheer physical might dwarfs that of nearly all other mortal creatures. You gain the following benefits:
@@ -1493,6 +1565,14 @@ Your sheer physical might dwarfs that of nearly all other mortal creatures. You 
 
 **Mighty Presence.** You count as one size larger for the purposes of your carrying capacity, the weight that you can push, pull, lift, or drag, and for the size of creatures that you can attempt to grapple.  
 
+### Paralysing Cold
+You pour winter's bite into your magic, freezing foes where they stand. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Intelligence score by 1, to a maximum of 20.
+
+**Cold Mastery.** Spells you cast ignore Resistance to Cold damage.
+
+**Frostbite.** When you deal Cold damage to a creature that has the Restrained condition, the creature takes extra Cold damage. To determine the extra damage, roll a number of d4s equal to your Proficiency Bonus and add them together.
 
 ### Piercer
 
@@ -1513,6 +1593,9 @@ You can prepare and deliver deadly poisons, granting you proficiency with poison
 
 **Brew Poison.** You gain proficiency with the Poisoner's Kit. With 1 hour of work as part of a long rest, you can create a number of poison doses equal to your Proficiency Bonus. As a Bonus Action, you can apply a poison dose to a weapon or piece of ammunition. Once applied, the poison retains its potency for 1 minute or until you hit with the poisoned item, whichever is shorter. When a creature takes damage from the poisoned item, that creature must succeed on a Constitution saving throw (DC 8 plus the modifier of the ability increased by this feat and your Proficiency Bonus) or take 1d8 Poison damage and have the Poisoned condition until the end of your next turn.
 When you use this feature to create poison, you can expend up 10 gold pieces per dose of poison to create a more deadly poison. When you do so, creatures that fail their Constitution saving throw against it take an additional 1d8 poison damage. 
+
+\page
+{{pageNumber,auto}}
 
 ### Polearm Master
 ***Prerequisites: Strength or Dexterity 13+***
@@ -1545,6 +1628,17 @@ You gain the following benefits.
 **Necrosis.** When you make a damage roll that deals Necrotic damage, you can cause one creature taking that damage to have the Poisoned condition until the end of your next turn.  
 You can use this feature a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
 
+### Pyromaniac
+You delight in setting things alight and fanning the flames. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Intelligence score by 1, to a maximum of 20.
+
+**Fire Mastery.** Spells you cast ignore Resistance to Fire damage.
+
+**Ignite.** When a spell you cast deals Fire damage to a creature, the target starts burning. When you deal Fire damage to a creature that is already burning, the flames become more severe, increasing the burning damage by 1d4, to a maximum of a number of d4s equal to half your Proficiency Bonus (rounded down).
+
+\column
+
 ### Rebuke
 
 You wield the power of radiant energy to strike down your foes, leaving them unbalanced and vulnerable.
@@ -1572,12 +1666,6 @@ Choose one ability score. You gain the following benefits:
 
 **Saving Throw Proficiency.** You gain saving throw proficiency with the chosen ability.
 
-
-
-\page
-{{pageNumber,auto}}
-
-
 ### Revenant Blade
 You have mastered the use of the double-bladed scimitar. You gain the following benefits:
 
@@ -1597,6 +1685,9 @@ You gain the following benefits:
 **Ritual Spells.** Choose a number of level 1 spells equal to your Proficiency Bonus that have the Ritual tag. You always have those spells prepared, and you can cast them with any spell slots you have. The spells' spellcasting ability is the ability increased by this feat. Whenever your Proficiency Bonus increases thereafter, you can add an additional level 1 spell with the Ritual tag to the spells always prepared with this feature.
 
 **Quick Ritual.** With this benefit, you can cast a Ritual spell that you have prepared using its regular casting time rather than the extended time for a Ritual. Doing so doesn't require a spell slot. Once you cast the spell in this way, you can't use this benefit again until you finish a Long Rest.
+
+\page
+{{pageNumber,auto}}
 
 ### Roguish Initiate
 You have spent time honing talents associated with the criminal underworld. You gain the following benefits:
@@ -1638,6 +1729,8 @@ Each time you gain a level, you can replace one of the runes you know with anoth
 |Stone|	Sanctuary
 |Storm|	Thunderwave
 
+\column
+
 ### Savage Attacker
 Your savage battle instincts let you exploit even the smallest weakness. You gain the following benefits:
 
@@ -1669,9 +1762,6 @@ You have spent time learning everything there is to know about a specific area o
 
 **Intellect Die.** If the Scholarly Pursuit requires that you roll an Intellect Die, you roll a d4 unless your Intellect Die is higher.
 
-\page
-{{pageNumber,auto}}
-
 ### Scion of the Outer Planes
 Your connection to an Outer Plane infuses you with the energy there. 
 
@@ -1686,6 +1776,9 @@ Your connection to an Outer Plane infuses you with the energy there.
 |Good Outer Plane|	Radiant|	Sacred flame
 |Lawful Outer Plane|	Force|	Guidance
 |The Outlands|	Psychic|	Mage hand
+
+\page
+{{pageNumber,auto}}
 
 ### Sentinel
 ***Prerequisite: Proficiency with Any Martial Weapon***
@@ -1711,8 +1804,6 @@ Whenever you cast *Hex*, taking damage does not break your concentration on the 
 
 **Curse Magic.** When a creature that you've cursed with *Hex* damages you, the creature takes Psychic damage equal to your Proficiency Bonus.
 
-\column
-
 ### Shadow Touched
 Your exposure to the Shadowfell's magic has changed you, granting you the following benefits:
 
@@ -1726,6 +1817,8 @@ You gain the following  benefits:
 **Ability Score Increase.** Increase your Intelligence or Wisdom score by 1, to a maximum of 20.
 
 **Detail-oriented.** When you take the Search or Study action, you can choose to reroll any ability check made as part of that action. You can do so after you see your roll, but before any results of the roll are determined. You can use this feature a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest. If the check fails, the use of this feature isn't expended.
+
+\column
 
 ### Sharpshooter
 ***Prerequisites: Dexterity 13+***
@@ -1749,9 +1842,6 @@ You have trained extensively with ranged weapons to become a master marksman. Yo
 
 **Interpose Shield.** If you are subjected to an effect that allows you to make a Dexterity Saving Throw to take only half damage, you can use your Reaction to take no damage if you succeed on the Saving Throw and are wielding a Shield, interposing your shield between yourself and the source of the effect.
 
-\page
-{{pageNumber,auto}}
-
 ### Shifting Combatant
 
 You fight with a drover's sense of leverage, driving foes into one another and leaping into the thick of the fray. You gain the following benefits.
@@ -1770,6 +1860,9 @@ You have trained in a variety of skills. You gain the following benefits:
 **Skill Proficiency.** You gain proficiency in any three skills of your choice.
 
 **Repeatable.** You can take this feat more than once.
+
+\page
+{{pageNumber,auto}}
 
 ### Skill Expert
 You have honed your proficiency with particular skills, granting you the following benefits:
@@ -1792,8 +1885,6 @@ You are an expert at slinking through shadows and staying hidden. You gain the b
 **Fog of War.** You exploit the distractions of battle, gaining Advantage on any Dexterity (Stealth) check you make as part of the Hide action during combat.
 
 **Sniper.** If you make an attack roll while hidden and the roll misses, making the attack roll doesn't reveal your location.
-
-\column
 
 ### Slasher
 
@@ -1826,6 +1917,8 @@ You gain the following benefits.
 
 **Spellfire Flame.** You learn the Sacred Flame cantrip. Intelligence, Wisdom, or Charisma is your spellcasting ability for this spell (choose when you select this feat). You can also cast this cantrip as a Bonus Action a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
 
+\column
+
 ### Spell Resistant
 
 You gain the following benefits.
@@ -1835,9 +1928,6 @@ You gain the following benefits.
 **Magical Resilience.** You have Resistance to one of the following damage types (choose when you gain this feat): Necrotic, Psychic, Radiant, or Thunder.
 
 **Magic Resistant.** When you would fail a saving throw against a spell or magical effect, you can roll 1d6 and add the number rolled to the save's total, potentially turning the failure into a success. You can use this benefit a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
-
-\page
-{{pageNumber,auto}}
 
 ### Spell Sniper
 ***Prerequisites: Spellcasting or Pact Magic feature***
@@ -1872,6 +1962,9 @@ You gain the following benefits.
 
 **Sneaky Casting.** If you are Hidden, casting a spell with a Verbal component or making a spell attack doesn't reveal your position if you end the turn behind Three-Quarters Cover or Total Cover.
 
+\page
+{{pageNumber,auto}}
+
 ### Spiritual Awakening
 You have spent many quiet hours learning to commune with the invisible world of Spirits. You gain the following benefits:
 
@@ -1883,8 +1976,6 @@ Additionally, you learn the *Unseen Servant* spell, and you can cast it at-will 
 
 Wisdom is your spellcasting ability modifier for all spells gained by thie feat.
 
-\column
-
 ### Squire
 ***Prerequisites: Fighter, Paladin, or relevant background***
 
@@ -1895,6 +1986,17 @@ Your training in the ways of the Knights grants you these benefits:
 **Mount Up.** Mounting or dismounting costs you only 5 feet of movement.
 
 **Precise Strike.** Once per turn, when you make a weapon attack roll against a creature, you can cause the attack roll to have advantage. If the attack hits, you roll a d8 and add the number rolled as a bonus to the attack's damage roll. You can use this benefit a number of times equal to your proficiency bonus, but a use is expended only if the attack hits. You regain all expended uses when you finish a long rest.
+
+### Stagger and Sway
+***Prerequisite: Dexterity and Wisdom 13+***
+
+You roll with the punches, letting the pain catch up with you later. You gain the following benefits.
+
+**Ability Score Increase.** Increase your Dexterity or Wisdom by 1, to a maximum of 20.
+
+**Defer Damage.** When you take damage, reduce the damage you take by your Dexterity modifier (minimum of 1). Then add a d6 to your Delayed Reaction pool. At the end of your turn, remove all the dice from your Delayed Reaction pool and roll them. You take Force damage equal to the total rolled.
+
+**Purify.** As a Bonus Action, you can remove a number of dice equal to your Wisdom modifier from your Delayed Reaction pool.
 
 ### Strategic Insight
 ***Prerequisite: Intelligence or Wisdom 13+***
@@ -1917,6 +2019,8 @@ On a success, you learn one characteristic of your choice from the following:
 
 Once you use this feature on a creature, you cannot target it again until you finish a long rest.
 
+\column
+
 ### Street Justice
 You are skilled in subduing foes and turning their struggles to your advantage, whether through physical control or sheer intimidation.
 
@@ -1929,9 +2033,6 @@ You gain the following benefits.
 **Sturdy Knot.** When you use Chain, Manacles, or Rope to bind a creature, add your Proficiency Bonus to the DC to escape or burst the Chain, Manacles, or Rope.
 
 **Tough Talk.** A creature's Hostile attitude doesn't impose Disadvantage on your Charisma (Intimidation) checks to influence that creature.
-
-\page
-{{pageNumber,auto}}
 
 ### Streetwise Fighter
 
@@ -1964,14 +2065,15 @@ The saving throw DC for these effects equals 8 + your proficiency bonus + your S
 
 You can use this ability a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.
 
+\page
+{{pageNumber,auto}}
+
 ### Survivalist Training 
 You have been trained to survive, track, and explore in the wild, much like a Ranger. You gain the benefits listed below:
 
 **Ability Score Increase.** Increase your Strength, Dexterity, Constitution or Wisdom by 1, to a maximum of 20.
 
 **Knack Mastery.** You learn one Knack of your choice from those available to the  Ranger or Wanderer. If the Knack requires you to roll a Quarry Die or Exploit Die, you roll a d4 unless your Quarry Die or Exploit Die is higher. If the Knack forces a saving throw, the DC is equal to 8 + your proficiency bonus + your Strength, Dexterity or Wisdom modifier (your choice when you select this feat.
-
-\column
 
 ### Survivor 
 You gain the following benefits.
@@ -2006,6 +2108,8 @@ You gain the following benefits.
 
 **Rallying Cry.** When you roll Initiative and don't have the Incapacitated condition, you can choose a number of creatures equal to your Proficiency Bonus that you can see within 30 feet of yourself. Those creatures gain Heroic Inspiration. Once you use this benefit, you can't do so again until you finish a Long Rest.
 
+\column
+
 ### Tactical Training
 You have studied greater combat strategies that allow you to perform Tactical Exploits.
 
@@ -2024,9 +2128,6 @@ You have studied greater combat strategies that allow you to perform Tactical Ex
 **Issuing an Order.** Once per turn, when you take the Attack action, you can use the Tactical Exploit in place of one attack. You can't use this Exploit more than once per turn unless you learn Tactical Exploits from a source other than this feat.
 
 **Repeatable.** You can choose this feat multiple times. Each time you do, raise one of the ability scores above by 1, and learn one new Tactical Exploit from the list above.
-
-\page
-{{pageNumber,auto}}
 
 ### Tavern Brawler
 Accustomed to brawling, you gain the following benefits:
@@ -2049,6 +2150,9 @@ You learn to move things with your mind, granting you the following benefits:
 **Minor Telekinesis.** You learn the *Mage Hand* spell. You can cast it without Verbal or Somatic components, you can make the spectral hand Invisible, and its range and the distance it can be away from you both increase by 30 feet when you cast it. The spell's spellcasting ability is the ability increased by this feat.
 
 **Telekinetic Shove.** As a Bonus Action, you can telekinetically shove one creature you can see within 30 feet of yourself. When you do so, the target must succeed on a Strength saving throw (DC 8 plus the ability modifier of the score increased by this feat and your Proficiency Bonus) or be moved 5 feet toward or away from you.
+
+\page
+{{pageNumber,auto}}
 
 ### Telepathetic
 You awaken the ability to mentally connect with others, granting you the following benefits:
@@ -2080,6 +2184,8 @@ Your infectious energy and unshakable spirit turn every victory into a celebrati
 
 You can use this benefit a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Short or Long rest.
 
+\column
+
 ### Totemic Spirit
 You have formed a connection with one of the minor spirits bound to the natural world. You gain the following benefits:
 
@@ -2105,9 +2211,6 @@ You gain the following benefits.
 
 **Resilient Anatomy.** You have Advantage on saving throws against effects that would compel you to shape-shift against your will. Additionally, when you fail a Constitution saving throw, you can take a Reaction to roll 1d4 and add the number rolled to the save, potentially turning the failure into a success. You can use this benefit a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
 
-\page
-{{pageNumber,auto}}
-
 ### Transmutation Adept
 ***Prerequisite: Ability to cast a level 1 Transmutation spell***
 
@@ -2127,6 +2230,9 @@ You gain the following benefits.
 | 3 | *Slow* |
 | 4 | *Polymorph* |
 | 5 | *Animate Objects* |
+
+\page
+{{pageNumber,auto}}
 
 ### Treacherous Allure
 
@@ -2156,8 +2262,6 @@ You gain the following benefits.
 **Vitality Ward.** When you take Necrotic damage, you can mitigate the damage. Roll a number of d6s equal to your Proficiency Bonus, and add them together. Reduce the Necrotic damage you take by this total.  
 You can use this benefit a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
 
-\column
-
 ### Vampire's Plaything
 
 You bear the lingering connection to a vampire who once held power over you, granting uncanny versatility and a link to otherworldly insight.
@@ -2171,6 +2275,8 @@ You gain the following benefits.
 **Timely Retreat.** You can take a Bonus Action to both Dash and Disengage. You can use this benefit a number of times equal to your Proficiency Bonus, and you recover all expended uses when you finish a Long Rest.
 
 **Vampiric Connection.** The DM determines the fate of your former vampire master. While you and your former vampire master are on the same plane of existence, the vampire can communicate with you telepathically, and you can choose to allow the vampire to perceive through your senses.
+
+\column
 
 ### Vampire Touched
 
@@ -2196,9 +2302,6 @@ You can also cast either spell using spell slots you have of the appropriate lev
 
 **Debilitating Save.** When you cause a creature to make a Strength, Dexterity, or Constitution saving throw, you can expend one blood boon to roll a d4 and reduce their save by the amount rolled.
 
-\page
-{{pageNumber,auto}}
-
 ### War Caster
 ***Prerequisite: Spellcasting or Pact Magic Feature***
 
@@ -2211,6 +2314,9 @@ You have practiced casting spells in the midst of combat, learning techniques th
 **Reactive Spell.** When a creature provokes an Opportunity Attack from you by leaving your reach, you can take a Reaction to cast a spell at the creature rather than making an Opportunity Attack. The spell must have a casting time of one action and must target only that creature. Additionally, when you hit a creature with an opportunity attack, you can cast a spell with a casting time of On Hit.
 
 **Somatic Components.** You can use a weapon or shield to perform the Somatic components of your spells. You must be proficient with the weapon or shield to do so. If you are proficient with armor, you can cast spells in that armor with any spellcasting class.
+
+\page
+{{pageNumber,auto}}
 
 ### Ward of the Wilds
 
@@ -2249,6 +2355,8 @@ In combat, your Wild Companion acts during your turn. It can move and use its re
 
 If your Companion dies, you can spend 8 hours tracking and training a new Wild Companion, but only if a suitable beast of CR 1/8 or lower can be found in your local area within an 8-hour period.
 
+\column
+
 ### Wilderness Training
 
 You have studied combat techniques that allow you to perform Cunning Exploits, granting you the following benefits:
@@ -2260,6 +2368,13 @@ You have studied combat techniques that allow you to perform Cunning Exploits, g
 **Exploit Dice.** You gain two d4 Exploit Dice to fuel your Cunning Exploits. These dice are expended when you use them, and you regain all expended Exploit Dice when you finish a short or long rest.
 
 If you already have Exploit Dice when you gain this feat, you instead gain one additional Exploit Die, which is the same size as your existing Exploit Dice.
+
+### Will to Survive
+You gain the following benefits.
+
+**Ability Score Increase.** Increase your Constitution or Wisdom by 1, to a maximum of 20.
+
+**Will to Survive.** When you have the Incapacitated condition but not the Unconscious condition, you can ignore the Incapacitated condition on your turn. If you do, you gain 1 Exhaustion level.
 
 ### Wise One
 You find ways to learn from every experience in life, always growing in wisdom. 
@@ -4186,18 +4301,20 @@ When you reach character level 5, you also always have the *Plant Growth* spell 
 {{pageNumber,auto}}
 
 
-### Veil of the Fey
+### Fey Tormentor
 ***Prerequisites: Level 4+, Fey Pact***
 
-The boundary between your waking world and the fey dream grows thin around you, wrapping you in glamour and leaving those who peer too closely lost in a waking stupor. You gain the following benefits.
+Your bargain with the Feywild has taught you to twist time and fortune against your enemies. You gain the following benefits:
 
 **Ability Score Increase.** Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.
 
-**Fey Glamour.** You always have the *Disguise Self* spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast it using any spell slots you have. The spell's spellcasting ability is the ability increased by this feat. Additionally, creatures have Disadvantage on ability checks made to see through your illusions and disguises. 
+**Faerie Time Warp.** As a Bonus Action, choose up to three creatures you can see within 60 feet of yourself. Each target makes a Wisdom saving throw (DC 8 plus the ability modifier of the score increased by this feat and your Proficiency Bonus). On a failed save, the target's Speed is reduced by 10 feet, and it takes a -2 penalty to AC until the end of your next turn.
 
-**Dreaming Glamour.** You can take a Magic action to weave a dream-like enchantment in a 30-foot Emanation originating from yourself. Each creature of your choice in that area makes a Wisdom saving throw (DC 8 plus the modifier of the ability increased by this feat plus your Proficiency Bonus). On a failed save, it has the Charmed condition until the end of its next turn. On a successful save, a creature is unaffected, and it is immune to this ability for 24 hours.
+Once you use this benefit, you can't use it again until you finish a Long Rest.
 
-**Veil Spell.** You always have the *Sleep* spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. When you cast it without a spell slot using this feature, you cast it as its level 2 version. You can also cast it using any spell slots you have. The spell's spellcasting ability is the ability increased by this feat.
+**Hag's Hex.** You always have the *Hex* spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast it using any spell slots you have. The spell's spellcasting ability is the ability increased by this feat.
+
+When you reach character level 5, you also have the *Bestow Curse* spell prepared and can cast it in the same way.
 
 ### Infernal Pact
 ***Prerequisites: Can't Have Another Planar Pact Feat***
