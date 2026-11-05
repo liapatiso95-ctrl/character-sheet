@@ -89,6 +89,7 @@ With these words, I bid you welcome, dear reader, to the pages of this spellbook
   - #### [{{ Artificer Spell List}}{{ 13}}](#p13)
   - #### [{{ Bard Spell List}}{{ 15}}](#p15)
   - #### [{{ Cleric Spell List}}{{ 17}}](#p17)
+  - #### [{{ Druid Spell List}}{{ 19}}](#p19)
   - #### [{{ Magus Spell List}}{{ 23}}](#p23)
   - #### [{{ Paladin Spell List}}{{ 25}}](#p25)
   - #### [{{ Psion Spell List}}{{ 27}}](#p27)
@@ -102,6 +103,7 @@ With these words, I bid you welcome, dear reader, to the pages of this spellbook
   - #### [{{ Amanuensis}}{{ 48}}](#p48)
   - #### [{{ Acid Splash}}{{ 48}}](#p48)
   - #### [{{ Alchemical Grenade}}{{ 48}}](#p48)
+  - #### [{{ Arcane Pulse}}{{ 49}}](#p49)
   - #### [{{ Blade Ward}}{{ 49}}](#p49)
   - #### [{{ Blood Bolt}}{{ 49}}](#p49)
   - #### [{{ Booming Blade}}{{ 49}}](#p49)
@@ -176,6 +178,7 @@ With these words, I bid you welcome, dear reader, to the pages of this spellbook
   - #### [{{ Water Bullet}}{{ 64}}](#p64)
   - #### [{{ Windborne Weapon}}{{ 64}}](#p64)
   - #### [{{ Word of Radiance}}{{ 65}}](#p65)
+  - #### [{{ Wrath}}{{ 65}}](#p65)
 - ### [{{ 1st Level Spells}}{{ 66}}](#p66)
   - #### [{{ Absorb Elements}}{{ 66}}](#p66)
   - #### [{{ Acid Bubble}}{{ 66}}](#p66)
@@ -187,21 +190,23 @@ With these words, I bid you welcome, dear reader, to the pages of this spellbook
   - #### [{{ Armor of Agathys}}{{ 67}}](#p67)
   - #### [{{ Arms of Hadar}}{{ 67}}](#p67)
   - #### [{{ Awaken Rope}}{{ 68}}](#p68)
+  - #### [{{ Azure Strike}}{{ 68}}](#p68)
   - #### [{{ Bad Blood}}{{ 68}}](#p68)
   - #### [{{ Bane}}{{ 68}}](#p68)
-  - #### [{{ Beast Bond}}{{ 68}}](#p68)
+  - #### [{{ Beast Bond}}{{ 69}}](#p69)
   - #### [{{ Befuddling Curse}}{{ 69}}](#p69)
   - #### [{{ Binding Curse}}{{ 69}}](#p69)
   - #### [{{ Blade Mirage}}{{ 69}}](#p69)
-  - #### [{{ Bless}}{{ 69}}](#p69)
+  - #### [{{ Bless}}{{ 70}}](#p70)
   - #### [{{ Bond Item}}{{ 70}}](#p70)
   - #### [{{ Bramble Binding}}{{ 70}}](#p70)
   - #### [{{ Burning Hands}}{{ 70}}](#p70)
   - #### [{{ Buzzing Bee}}{{ 70}}](#p70)
-  - #### [{{ Catapult}}{{ 70}}](#p70)
+  - #### [{{ Catapult}}{{ 71}}](#p71)
   - #### [{{ Cause Fear}}{{ 71}}](#p71)
   - #### [{{ Caustic Brew}}{{ 71}}](#p71)
   - #### [{{ Ceremony}}{{ 71}}](#p71)
+  - #### [{{ Chains of Ice}}{{ 72}}](#p72)
   - #### [{{ Chaos Bolt}}{{ 72}}](#p72)
   - #### [{{ Charm Person}}{{ 72}}](#p72)
   - #### [{{ Chromatic Orb}}{{ 72}}](#p72)
@@ -209,12 +214,14 @@ With these words, I bid you welcome, dear reader, to the pages of this spellbook
   - #### [{{ Command}}{{ 73}}](#p73)
   - #### [{{ Compelled Duel}}{{ 73}}](#p73)
   - #### [{{ Comprehend Languages}}{{ 73}}](#p73)
-  - #### [{{ Crashing Wave}}{{ 73}}](#p73)
+  - #### [{{ Consume Soul}}{{ 73}}](#p73)
+  - #### [{{ Crashing Wave}}{{ 74}}](#p74)
   - #### [{{ Create or Destroy Water}}{{ 74}}](#p74)
   - #### [{{ Create Pit}}{{ 74}}](#p74)
-  - #### [{{ Crimson Poison}}{{ 75}}](#p75)
+  - #### [{{ Crimson Poison}}{{ 74}}](#p74)
   - #### [{{ Crippling Agony}}{{ 75}}](#p75)
   - #### [{{ Cure Wounds}}{{ 75}}](#p75)
+  - #### [{{ Death Grip}}{{ 75}}](#p75)
   - #### [{{ Delusion}}{{ 75}}](#p75)
   - #### [{{ Detect Evil and Good}}{{ 75}}](#p75)
   - #### [{{ Detect Magic}}{{ 76}}](#p76)
@@ -224,906 +231,975 @@ With these words, I bid you welcome, dear reader, to the pages of this spellbook
   - #### [{{ Distort Value}}{{ 77}}](#p77)
   - #### [{{ Divine Favor}}{{ 77}}](#p77)
   - #### [{{ Earth Tremor}}{{ 77}}](#p77)
+  - #### [{{ Ebon Might}}{{ 77}}](#p77)
   - #### [{{ Electrify}}{{ 77}}](#p77)
-  - #### [{{ Ensnaring Strike}}{{ 77}}](#p77)
+  - #### [{{ Ensnaring Strike}}{{ 78}}](#p78)
   - #### [{{ Entangle}}{{ 78}}](#p78)
   - #### [{{ Entomb}}{{ 78}}](#p78)
-  - #### [{{ Ethereal Anchor}}{{ 78}}](#p78)
-  - #### [{{ Expeditious Retreat}}{{ 78}}](#p78)
-  - #### [{{ Explosive Deflection}}{{ 78}}](#p78)
+  - #### [{{ Entropic Embrace}}{{ 78}}](#p78)
+  - #### [{{ Ethereal Anchor}}{{ 79}}](#p79)
+  - #### [{{ Expeditious Retreat}}{{ 79}}](#p79)
+  - #### [{{ Explosive Deflection}}{{ 79}}](#p79)
+}}
+\page
+{{pageNumber,auto}}
+{{toc,wide
+- ##
   - #### [{{ Eyes of Immolation}}{{ 79}}](#p79)
   - #### [{{ Faerie Fire}}{{ 79}}](#p79)
-  - #### [{{ Fall}}{{ 79}}](#p79)
-  - #### [{{ False Life}}{{ 79}}](#p79)
-  - #### [{{ Fated Strike}}{{ 79}}](#p79)
-  - #### [{{ Feather Fall}}{{ 79}}](#p79)
-  - #### [{{ Find Familiar (Conjure Familiar)}}{{ 80}}](#p80)
+  - #### [{{ Fall}}{{ 80}}](#p80)
+  - #### [{{ False Life}}{{ 80}}](#p80)
+  - #### [{{ Fated Strike}}{{ 80}}](#p80)
+  - #### [{{ Feather Fall}}{{ 80}}](#p80)
+  - #### [{{ Feign Interest}}{{ 80}}](#p80)
+  - #### [{{ Find Familiar (Conjure Familiar)}}{{ 81}}](#p81)
+  - #### [{{ Fog Cloud}}{{ 82}}](#p82)
+  - #### [{{ Freezing Trap}}{{ 82}}](#p82)
+  - #### [{{ Frost Fingers}}{{ 82}}](#p82)
+  - #### [{{ Frost Nova}}{{ 82}}](#p82)
+  - #### [{{ Gale Bolt}}{{ 82}}](#p82)
+  - #### [{{ Ghastly Flight}}{{ 82}}](#p82)
+  - #### [{{ Gift of Alacrity}}{{ 83}}](#p83)
+  - #### [{{ Goodberry}}{{ 83}}](#p83)
+  - #### [{{ Grasping Roots}}{{ 83}}](#p83)
+  - #### [{{ Grease}}{{ 83}}](#p83)
+  - #### [{{ Grip of the Dead}}{{ 83}}](#p83)
+  - #### [{{ Guiding Bolt}}{{ 84}}](#p84)
+  - #### [{{ Hail of Thorns}}{{ 84}}](#p84)
+  - #### [{{ Healing Word}}{{ 84}}](#p84)
+  - #### [{{ Heavy Blow}}{{ 84}}](#p84)
+  - #### [{{ Hellish Rebuke}}{{ 84}}](#p84)
+  - #### [{{ Heroism}}{{ 84}}](#p84)
+  - #### [{{ Hex}}{{ 85}}](#p85)
+  - #### [{{ Hideous Laughter}}{{ 85}}](#p85)
+  - #### [{{ Hunter's Mark}}{{ 85}}](#p85)
+  - #### [{{ Ice Arrow}}{{ 85}}](#p85)
+  - #### [{{ Ice Knife}}{{ 85}}](#p85)
+  - #### [{{ Id Insinuation}}{{ 86}}](#p86)
+  - #### [{{ Identify}}{{ 86}}](#p86)
+  - #### [{{ Illusory Pit}}{{ 86}}](#p86)
+  - #### [{{ Illusory Script}}{{ 87}}](#p87)
+  - #### [{{ Induce Headache}}{{ 87}}](#p87)
+  - #### [{{ Infernal Rush}}{{ 87}}](#p87)
+  - #### [{{ Infernal Strike}}{{ 87}}](#p87)
+  - #### [{{ Infinite Edge}}{{ 88}}](#p88)
+  - #### [{{ Inflict Wounds}}{{ 88}}](#p88)
+  - #### [{{ Insidious Rhythm}}{{ 88}}](#p88)
+  - #### [{{ Inspiring Melody}}{{ 88}}](#p88)
+  - #### [{{ Jump}}{{ 89}}](#p89)
+  - #### [{{ Karmic Reflection}}{{ 89}}](#p89)
+  - #### [{{ Living Flame}}{{ 89}}](#p89)
+  - #### [{{ Longstrider}}{{ 89}}](#p89)
+  - #### [{{ Mage Armor}}{{ 89}}](#p89)
+  - #### [{{ Magic Missile}}{{ 89}}](#p89)
+  - #### [{{ Magnify Gravity}}{{ 90}}](#p90)
+  - #### [{{ Melting Glob}}{{ 90}}](#p90)
+  - #### [{{ Mind Ray}}{{ 90}}](#p90)
+  - #### [{{ Minor Drain}}{{ 91}}](#p91)
+  - #### [{{ Moonfire}}{{ 91}}](#p91)
+  - #### [{{ Multishot}}{{ 91}}](#p91)
+  - #### [{{ Nauseating Poison}}{{ 91}}](#p91)
+  - #### [{{ Prismatic Bolt}}{{ 92}}](#p92)
+  - #### [{{ Prismatic Flash}}{{ 92}}](#p92)
+  - #### [{{ Protection from Evil and Good}}{{ 92}}](#p92)
+  - #### [{{ Purify Food and Drink}}{{ 92}}](#p92)
+  - #### [{{ Quick Clothier}}{{ 93}}](#p93)
+  - #### [{{ Ray of Sickness}}{{ 93}}](#p93)
+  - #### [{{ Rotting Curse}}{{ 93}}](#p93)
+  - #### [{{ Rune Strike}}{{ 93}}](#p93)
+  - #### [{{ Sanctuary}}{{ 94}}](#p94)
+  - #### [{{ Scourge Strike}}{{ 94}}](#p94)
+  - #### [{{ Searing Smite}}{{ 94}}](#p94)
+  - #### [{{ Seeking Projectile}}{{ 94}}](#p94)
+  - #### [{{ Sense Blood}}{{ 94}}](#p94)
+  - #### [{{ Shadow Bind}}{{ 95}}](#p95)
+  - #### [{{ Shadow Word: Pain}}{{ 95}}](#p95)
+  - #### [{{ Shield}}{{ 95}}](#p95)
+  - #### [{{ Shield of Faith}}{{ 95}}](#p95)
+  - #### [{{ Silent Image}}{{ 95}}](#p95)
+  - #### [{{ Sleep}}{{ 96}}](#p96)
+  - #### [{{ Snare (Create Snare)}}{{ 96}}](#p96)
+  - #### [{{ Speak with Animals}}{{ 96}}](#p96)
+  - #### [{{ Spellfire Flare}}{{ 97}}](#p97)
+  - #### [{{ Spiritual Consultation}}{{ 97}}](#p97)
+  - #### [{{ Stone Fist}}{{ 97}}](#p97)
+  - #### [{{ Summon Ooze}}{{ 98}}](#p98)
+  - #### [{{ Tenser's Floating Disk}}{{ 99}}](#p99)
+  - #### [{{ Throw Glaive}}{{ 99}}](#p99)
+  - #### [{{ Thunder Punch}}{{ 99}}](#p99)
+  - #### [{{ Thunderous Smite}}{{ 99}}](#p99)
+  - #### [{{ Thunderwave}}{{ 100}}](#p100)
+  - #### [{{ Torrent}}{{ 100}}](#p100)
+  - #### [{{ Tranquil Moment}}{{ 100}}](#p100)
+  - #### [{{ Transfuse Life}}{{ 100}}](#p100)
+  - #### [{{ Unburden}}{{ 100}}](#p100)
+  - #### [{{ Unseen Servant}}{{ 101}}](#p101)
+  - #### [{{ Vampiric Blood}}{{ 101}}](#p101)
+  - #### [{{ Violent Updraft}}{{ 101}}](#p101)
+  - #### [{{ Warding Sigil}}{{ 101}}](#p101)
+  - #### [{{ Wardaway}}{{ 101}}](#p101)
+  - #### [{{ Water Blast}}{{ 102}}](#p102)
+  - #### [{{ Witch Bolt}}{{ 102}}](#p102)
+  - #### [{{ Wrathful Smite}}{{ 102}}](#p102)
+  - #### [{{ Zephyr Strike}}{{ 102}}](#p102)
+- ### [{{ 2nd Level Spells}}{{ 103}}](#p103)
+  - #### [{{ Aid}}{{ 103}}](#p103)
+  - #### [{{ Air Bubble}}{{ 103}}](#p103)
+  - #### [{{ Alacrity}}{{ 103}}](#p103)
+  - #### [{{ Alter Self}}{{ 104}}](#p104)
+  - #### [{{ Animal Messenger}}{{ 104}}](#p104)
+  - #### [{{ Animate Object}}{{ 105}}](#p105)
+  - #### [{{ Arcane Conduit}}{{ 105}}](#p105)
+  - #### [{{ Arcane Lock}}{{ 106}}](#p106)
+  - #### [{{ Arcane Scorcher}}{{ 106}}](#p106)
+  - #### [{{ Arcane Vigor}}{{ 106}}](#p106)
+  - #### [{{ Arcanist's Magic Aura}}{{ 106}}](#p106)
+  - #### [{{ Augury}}{{ 107}}](#p107)
+  - #### [{{ Aura of Frost}}{{ 107}}](#p107)
+  - #### [{{ Awaken Plant}}{{ 108}}](#p108)
+  - #### [{{ Barkskin}}{{ 108}}](#p108)
+  - #### [{{ Battle Familiar}}{{ 109}}](#p109)
+  - #### [{{ Beastial Sensors}}{{ 110}}](#p110)
+  - #### [{{ Beast Sense}}{{ 110}}](#p110)
+  - #### [{{ Become Fire}}{{ 110}}](#p110)
+  - #### [{{ Become Stone}}{{ 110}}](#p110)
+  - #### [{{ Become Water}}{{ 111}}](#p111)
+  - #### [{{ Become Wind}}{{ 111}}](#p111)
+  - #### [{{ Binding Promise}}{{ 111}}](#p111)
+  - #### [{{ Blazing Beacon}}{{ 111}}](#p111)
+  - #### [{{ Blindness/Deafness}}{{ 111}}](#p111)
+  - #### [{{ Blood Divination}}{{ 112}}](#p112)
+  - #### [{{ Blood Wave}}{{ 112}}](#p112)
+  - #### [{{ Bloody Burst}}{{ 112}}](#p112)
+  - #### [{{ Blur}}{{ 112}}](#p112)
+  - #### [{{ Boil Blood}}{{ 113}}](#p113)
+  - #### [{{ Borrowed Knowledge}}{{ 113}}](#p113)
+  - #### [{{ Branding Smite}}{{ 113}}](#p113)
+  - #### [{{ Burning Strike}}{{ 113}}](#p113)
+  - #### [{{ Calm Emotions}}{{ 114}}](#p114)
+  - #### [{{ Chromatic Blade (Elemental Blade)}}{{ 114}}](#p114)
+  - #### [{{ Clay Touch}}{{ 114}}](#p114)
+  - #### [{{ Cloud of Daggers}}{{ 114}}](#p114)
+  - #### [{{ Combust}}{{ 115}}](#p115)
+  - #### [{{ Compelled Convulsion}}{{ 115}}](#p115)
+  - #### [{{ Conjure Tools}}{{ 115}}](#p115)
+  - #### [{{ Consecration}}{{ 115}}](#p115)
+  - #### [{{ Continual Flame}}{{ 115}}](#p115)
+  - #### [{{ Cordon of Arrows}}{{ 116}}](#p116)
+  - #### [{{ Crackle}}{{ 116}}](#p116)
+  - #### [{{ Create Ooze}}{{ 116}}](#p116)
+  - #### [{{ Crescent Wind Slash}}{{ 116}}](#p116)
+  - #### [{{ Crown of Madness}}{{ 117}}](#p117)
+  - #### [{{ Curse of Agony}}{{ 117}}](#p117)
+  - #### [{{ Dancing Object}}{{ 117}}](#p117)
+  - #### [{{ Dancing Wave}}{{ 118}}](#p118)
+  - #### [{{ Darkness}}{{ 118}}](#p118)
+  - #### [{{ Darkvision}}{{ 118}}](#p118)
+  - #### [{{ Death and Decay}}{{ 118}}](#p118)
+  - #### [{{ Death Armor}}{{ 118}}](#p118)
+  - #### [{{ Detect Thoughts}}{{ 119}}](#p119)
+  - #### [{{ Disorient}}{{ 119}}](#p119)
+  - #### [{{ Disruptive Tune}}{{ 119}}](#p119)
+  - #### [{{ Divine Judgement}}{{ 120}}](#p120)
+  - #### [{{ Dragon Surge}}{{ 120}}](#p120)
+  - #### [{{ Dragon's Breath}}{{ 120}}](#p120)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
 - ##
-  - #### [{{ Fog Cloud}}{{ 81}}](#p81)
-  - #### [{{ Frost Fingers}}{{ 81}}](#p81)
-  - #### [{{ Gale Bolt}}{{ 81}}](#p81)
-  - #### [{{ Ghastly Flight}}{{ 81}}](#p81)
-  - #### [{{ Gift of Alacrity}}{{ 81}}](#p81)
-  - #### [{{ Goodberry}}{{ 81}}](#p81)
-  - #### [{{ Grasping Roots}}{{ 82}}](#p82)
-  - #### [{{ Grease}}{{ 82}}](#p82)
-  - #### [{{ Grip of the Dead}}{{ 82}}](#p82)
-  - #### [{{ Guiding Bolt}}{{ 82}}](#p82)
-  - #### [{{ Hail of Thorns}}{{ 82}}](#p82)
-  - #### [{{ Healing Word}}{{ 82}}](#p82)
-  - #### [{{ Heavy Blow}}{{ 83}}](#p83)
-  - #### [{{ Hellish Rebuke}}{{ 83}}](#p83)
-  - #### [{{ Heroism}}{{ 83}}](#p83)
-  - #### [{{ Hex}}{{ 83}}](#p83)
-  - #### [{{ Hideous Laughter}}{{ 83}}](#p83)
-  - #### [{{ Hunter's Mark}}{{ 84}}](#p84)
-  - #### [{{ Ice Arrow}}{{ 84}}](#p84)
-  - #### [{{ Ice Knife}}{{ 84}}](#p84)
-  - #### [{{ Id Insinuation}}{{ 84}}](#p84)
-  - #### [{{ Identify}}{{ 85}}](#p85)
-  - #### [{{ Illusory Pit}}{{ 85}}](#p85)
-  - #### [{{ Illusory Script}}{{ 85}}](#p85)
-  - #### [{{ Induce Headache}}{{ 85}}](#p85)
-  - #### [{{ Infinite Edge}}{{ 86}}](#p86)
-  - #### [{{ Inflict Wounds}}{{ 86}}](#p86)
-  - #### [{{ Insidious Rhythm}}{{ 86}}](#p86)
-  - #### [{{ Inspiring Melody}}{{ 86}}](#p86)
-  - #### [{{ Jump}}{{ 86}}](#p86)
-  - #### [{{ Karmic Reflection}}{{ 86}}](#p86)
-  - #### [{{ Longstrider}}{{ 87}}](#p87)
-  - #### [{{ Mage Armor}}{{ 87}}](#p87)
-  - #### [{{ Magic Missile}}{{ 87}}](#p87)
-  - #### [{{ Magnify Gravity}}{{ 87}}](#p87)
-  - #### [{{ Melting Glob}}{{ 87}}](#p87)
-  - #### [{{ Mind Ray}}{{ 88}}](#p88)
-  - #### [{{ Minor Drain}}{{ 88}}](#p88)
-  - #### [{{ Multishot}}{{ 88}}](#p88)
-  - #### [{{ Nauseating Poison}}{{ 88}}](#p88)
-  - #### [{{ Prismatic Bolt}}{{ 89}}](#p89)
-  - #### [{{ Prismatic Flash}}{{ 89}}](#p89)
-  - #### [{{ Protection from Evil and Good}}{{ 89}}](#p89)
-  - #### [{{ Purify Food and Drink}}{{ 89}}](#p89)
-  - #### [{{ Ray of Sickness}}{{ 90}}](#p90)
-  - #### [{{ Rotting Curse}}{{ 90}}](#p90)
-  - #### [{{ Sanctuary}}{{ 90}}](#p90)
-  - #### [{{ Searing Smite}}{{ 90}}](#p90)
-  - #### [{{ Seeking Projectile}}{{ 90}}](#p90)
-  - #### [{{ Sense Blood}}{{ 91}}](#p91)
-  - #### [{{ Shadow Bind}}{{ 91}}](#p91)
-  - #### [{{ Shield}}{{ 91}}](#p91)
-  - #### [{{ Shield of Faith}}{{ 91}}](#p91)
-  - #### [{{ Silent Image}}{{ 91}}](#p91)
-  - #### [{{ Sleep}}{{ 92}}](#p92)
-  - #### [{{ Snare (Create Snare)}}{{ 92}}](#p92)
-  - #### [{{ Speak with Animals}}{{ 92}}](#p92)
-  - #### [{{ Spellfire Flare}}{{ 93}}](#p93)
-  - #### [{{ Spiritual Consultation}}{{ 93}}](#p93)
-  - #### [{{ Stone Fist}}{{ 93}}](#p93)
-  - #### [{{ Summon Ooze}}{{ 94}}](#p94)
-  - #### [{{ Tenser's Floating Disk}}{{ 95}}](#p95)
-  - #### [{{ Thunder Punch}}{{ 95}}](#p95)
-  - #### [{{ Thunderous Smite}}{{ 95}}](#p95)
-  - #### [{{ Thunderwave}}{{ 95}}](#p95)
-  - #### [{{ Torrent}}{{ 96}}](#p96)
-  - #### [{{ Tranquil Moment}}{{ 96}}](#p96)
-  - #### [{{ Transfuse Life}}{{ 96}}](#p96)
-  - #### [{{ Unburden}}{{ 96}}](#p96)
-  - #### [{{ Unseen Servant}}{{ 96}}](#p96)
-  - #### [{{ Violent Updraft}}{{ 97}}](#p97)
-  - #### [{{ Warding Sigil}}{{ 97}}](#p97)
-  - #### [{{ Wardaway}}{{ 97}}](#p97)
-  - #### [{{ Water Blast}}{{ 97}}](#p97)
-  - #### [{{ Witch Bolt}}{{ 97}}](#p97)
-  - #### [{{ Wrathful Smite}}{{ 98}}](#p98)
-  - #### [{{ Zephyr Strike}}{{ 98}}](#p98)
-- ### [{{ 2nd Level Spells}}{{ 99}}](#p99)
-  - #### [{{ Aid}}{{ 99}}](#p99)
-  - #### [{{ Air Bubble}}{{ 99}}](#p99)
-  - #### [{{ Alacrity}}{{ 99}}](#p99)
-  - #### [{{ Alter Self}}{{ 100}}](#p100)
-  - #### [{{ Animal Messenger}}{{ 100}}](#p100)
-  - #### [{{ Animate Object}}{{ 101}}](#p101)
-  - #### [{{ Arcane Conduit}}{{ 101}}](#p101)
-  - #### [{{ Arcane Lock}}{{ 102}}](#p102)
-  - #### [{{ Arcane Scorcher}}{{ 102}}](#p102)
-  - #### [{{ Arcane Vigor}}{{ 102}}](#p102)
-  - #### [{{ Arcanist's Magic Aura}}{{ 102}}](#p102)
-  - #### [{{ Augury}}{{ 103}}](#p103)
-  - #### [{{ Aura of Frost}}{{ 103}}](#p103)
-  - #### [{{ Awaken Plant}}{{ 104}}](#p104)
-  - #### [{{ Barkskin}}{{ 104}}](#p104)
-  - #### [{{ Battle Familiar}}{{ 105}}](#p105)
-  - #### [{{ Beastial Sensors}}{{ 106}}](#p106)
-  - #### [{{ Beast Sense}}{{ 106}}](#p106)
-  - #### [{{ Become Fire}}{{ 106}}](#p106)
-  - #### [{{ Become Stone}}{{ 106}}](#p106)
-  - #### [{{ Become Water}}{{ 107}}](#p107)
-  - #### [{{ Become Wind}}{{ 107}}](#p107)
-  - #### [{{ Blazing Beacon}}{{ 107}}](#p107)
-  - #### [{{ Blindness/Deafness}}{{ 107}}](#p107)
-  - #### [{{ Blood Divination}}{{ 107}}](#p107)
-  - #### [{{ Blood Wave}}{{ 108}}](#p108)
-  - #### [{{ Bloody Burst}}{{ 108}}](#p108)
-  - #### [{{ Blur}}{{ 108}}](#p108)
-  - #### [{{ Boil Blood}}{{ 108}}](#p108)
-  - #### [{{ Borrowed Knowledge}}{{ 109}}](#p109)
-  - #### [{{ Branding Smite}}{{ 109}}](#p109)
-  - #### [{{ Burning Strike}}{{ 109}}](#p109)
-  - #### [{{ Calm Emotions}}{{ 109}}](#p109)
-  - #### [{{ Chromatic Blade (Elemental Blade)}}{{ 110}}](#p110)
-  - #### [{{ Clay Touch}}{{ 110}}](#p110)
-  - #### [{{ Cloud of Daggers}}{{ 110}}](#p110)
-  - #### [{{ Combust}}{{ 110}}](#p110)
-  - #### [{{ Compelled Convulsion}}{{ 111}}](#p111)
-  - #### [{{ Continual Flame}}{{ 111}}](#p111)
-  - #### [{{ Cordon of Arrows}}{{ 111}}](#p111)
-  - #### [{{ Crackle}}{{ 111}}](#p111)
-  - #### [{{ Create Ooze}}{{ 112}}](#p112)
-  - #### [{{ Crescent Wind Slash}}{{ 112}}](#p112)
-  - #### [{{ Crown of Madness}}{{ 113}}](#p113)
-  - #### [{{ Dancing Object}}{{ 113}}](#p113)
-  - #### [{{ Dancing Wave}}{{ 113}}](#p113)
-  - #### [{{ Darkness}}{{ 114}}](#p114)
-  - #### [{{ Darkvision}}{{ 114}}](#p114)
-  - #### [{{ Death Armor}}{{ 114}}](#p114)
-  - #### [{{ Detect Thoughts}}{{ 114}}](#p114)
-  - #### [{{ Disorient}}{{ 115}}](#p115)
-  - #### [{{ Disruptive Tune}}{{ 115}}](#p115)
-  - #### [{{ Divine Judgement}}{{ 115}}](#p115)
-  - #### [{{ Dragon Surge}}{{ 115}}](#p115)
-  - #### [{{ Dragon's Breath}}{{ 115}}](#p115)
-  - #### [{{ Dueling Ground}}{{ 116}}](#p116)
-  - #### [{{ Dust Devil}}{{ 116}}](#p116)
-  - #### [{{ Earth Ripple}}{{ 116}}](#p116)
-  - #### [{{ Earthbind}}{{ 116}}](#p116)
-  - #### [{{ Electric Loop}}{{ 117}}](#p117)
-  - #### [{{ Elemental Exhalation}}{{ 117}}](#p117)
-  - #### [{{ Enhance Ability}}{{ 117}}](#p117)
-  - #### [{{ Enlarge/Reduce}}{{ 117}}](#p117)
-  - #### [{{ Enthrall}}{{ 118}}](#p118)
-  - #### [{{ Ethereal Immolation}}{{ 118}}](#p118)
-  - #### [{{ Evil Mantra}}{{ 119}}](#p119)
-  - #### [{{ Find Steed}}{{ 119}}](#p119)
-  - #### [{{ Find Traps}}{{ 120}}](#p120)
-  - #### [{{ Flame Blade}}{{ 120}}](#p120)
-  - #### [{{ Flame Whip}}{{ 120}}](#p120)
-  - #### [{{ Flaming Sphere}}{{ 120}}](#p120)
-  - #### [{{ Fling}}{{ 121}}](#p121)
-  - #### [{{ Flock of Familiars}}{{ 121}}](#p121)
-  - #### [{{ Form of Familiar}}{{ 121}}](#p121)
-  - #### [{{ Fortune's Favor}}{{ 121}}](#p121)
-  - #### [{{ Gentle Repose}}{{ 122}}](#p122)
-  - #### [{{ Gift of Gab}}{{ 122}}](#p122)
-  - #### [{{ Gravity Surge}}{{ 122}}](#p122)
-  - #### [{{ Gust of Wind}}{{ 122}}](#p122)
-  - #### [{{ Healing Spirit}}{{ 123}}](#p123)
+  - #### [{{ Dream Breath}}{{ 120}}](#p120)
+  - #### [{{ Dueling Ground}}{{ 121}}](#p121)
+  - #### [{{ Dust Devil}}{{ 121}}](#p121)
+  - #### [{{ Earth Ripple}}{{ 121}}](#p121)
+  - #### [{{ Earthbind}}{{ 121}}](#p121)
+  - #### [{{ Electric Loop}}{{ 122}}](#p122)
+  - #### [{{ Elemental Exhalation}}{{ 122}}](#p122)
+  - #### [{{ Enhance Ability}}{{ 122}}](#p122)
+  - #### [{{ Enlarge/Reduce}}{{ 122}}](#p122)
+  - #### [{{ Enthrall}}{{ 123}}](#p123)
+  - #### [{{ Eruption}}{{ 123}}](#p123)
+  - #### [{{ Ethereal Immolation}}{{ 123}}](#p123)
+  - #### [{{ Evil Mantra}}{{ 123}}](#p123)
+  - #### [{{ Eye Beam}}{{ 124}}](#p124)
+  - #### [{{ Feral Prowl}}{{ 124}}](#p124)
+  - #### [{{ Fiery Brand}}{{ 124}}](#p124)
+  - #### [{{ Find Steed}}{{ 125}}](#p125)
+  - #### [{{ Find Traps}}{{ 126}}](#p126)
+  - #### [{{ Flame Blade}}{{ 126}}](#p126)
+  - #### [{{ Flame Whip}}{{ 126}}](#p126)
+  - #### [{{ Flaming Sphere}}{{ 126}}](#p126)
+  - #### [{{ Fling}}{{ 127}}](#p127)
+  - #### [{{ Flock of Familiars}}{{ 127}}](#p127)
+  - #### [{{ Form of Familiar}}{{ 127}}](#p127)
+  - #### [{{ Fortune's Favor}}{{ 127}}](#p127)
+  - #### [{{ Frostscythe}}{{ 128}}](#p128)
+  - #### [{{ Gentle Repose}}{{ 128}}](#p128)
+  - #### [{{ Gift of Gab}}{{ 128}}](#p128)
+  - #### [{{ Gravity Surge}}{{ 128}}](#p128)
+  - #### [{{ Gust of Wind}}{{ 128}}](#p128)
+  - #### [{{ Healing Spirit}}{{ 129}}](#p129)
+  - #### [{{ Heat Metal}}{{ 129}}](#p129)
+  - #### [{{ Helpful Homunculi}}{{ 129}}](#p129)
+  - #### [{{ Hold Person}}{{ 129}}](#p129)
+  - #### [{{ Hurricane Slash}}{{ 130}}](#p130)
+  - #### [{{ Imbue Luck}}{{ 130}}](#p130)
+  - #### [{{ Immovable Object}}{{ 130}}](#p130)
+  - #### [{{ Infernal Shackles}}{{ 130}}](#p130)
+  - #### [{{ Instant Counter}}{{ 131}}](#p131)
+  - #### [{{ Invisibility}}{{ 131}}](#p131)
+  - #### [{{ Invoke Beast (Conjure Beast)}}{{ 131}}](#p131)
+  - #### [{{ Iron Wind Strike}}{{ 131}}](#p131)
+  - #### [{{ Kinetic Jaunt}}{{ 131}}](#p131)
+  - #### [{{ Knock}}{{ 132}}](#p132)
+  - #### [{{ Lesser Restoration}}{{ 132}}](#p132)
+  - #### [{{ Levitate}}{{ 132}}](#p132)
+  - #### [{{ Lightning Charged}}{{ 133}}](#p133)
+  - #### [{{ Locate Animals or Plants}}{{ 133}}](#p133)
+  - #### [{{ Locate Creature (Alternative)}}{{ 133}}](#p133)
+  - #### [{{ Locate Object}}{{ 134}}](#p134)
+  - #### [{{ Lock/Unlock}}{{ 134}}](#p134)
+  - #### [{{ Magic Mouth}}{{ 134}}](#p134)
+  - #### [{{ Magic Weapon}}{{ 135}}](#p135)
+  - #### [{{ Maximilian's Earthen Grasp}}{{ 135}}](#p135)
+  - #### [{{ Melf's Acid Arrow}}{{ 135}}](#p135)
+  - #### [{{ Mind Spike}}{{ 135}}](#p135)
+  - #### [{{ Mind Whip (Mystic Spear)}}{{ 136}}](#p136)
+  - #### [{{ Mirror Image}}{{ 136}}](#p136)
+  - #### [{{ Misty Step}}{{ 136}}](#p136)
+  - #### [{{ Moonbeam}}{{ 136}}](#p136)
+  - #### [{{ Morbid Puppet}}{{ 137}}](#p137)
+  - #### [{{ Mystic Elusion}}{{ 137}}](#p137)
+  - #### [{{ Nebulous Mischief}}{{ 137}}](#p137)
+  - #### [{{ Painful Echoes}}{{ 137}}](#p137)
+  - #### [{{ Pass Without Trace}}{{ 138}}](#p138)
+  - #### [{{ Petal Storm}}{{ 138}}](#p138)
+  - #### [{{ Phantasmal Force}}{{ 138}}](#p138)
+  - #### [{{ Poison Dart}}{{ 139}}](#p139)
+  - #### [{{ Prayer of Healing}}{{ 139}}](#p139)
+  - #### [{{ Protection from Poison}}{{ 139}}](#p139)
+  - #### [{{ Pseudopod Slam}}{{ 139}}](#p139)
+  - #### [{{ Pyrotechnics}}{{ 139}}](#p139)
+  - #### [{{ Ray of Enfeeblement}}{{ 140}}](#p140)
+  - #### [{{ Reverberating Dash}}{{ 140}}](#p140)
+  - #### [{{ Rime's Binding Ice}}{{ 140}}](#p140)
+  - #### [{{ Roar of the Beast}}{{ 140}}](#p140)
+  - #### [{{ Rope Trick}}{{ 141}}](#p141)
+  - #### [{{ Sanctified Charge}}{{ 141}}](#p141)
+  - #### [{{ Scorching Ray}}{{ 141}}](#p141)
+  - #### [{{ Searing Orb}}{{ 141}}](#p141)
+  - #### [{{ See Invisibility}}{{ 141}}](#p141)
+  - #### [{{ Seeking Orb}}{{ 142}}](#p142)
+  - #### [{{ Shadow Blade}}{{ 142}}](#p142)
+  - #### [{{ Shatter}}{{ 142}}](#p142)
+  - #### [{{ Shattering Shield}}{{ 142}}](#p142)
+  - #### [{{ Sigil of Flame}}{{ 143}}](#p143)
+  - #### [{{ Silence}}{{ 143}}](#p143)
+  - #### [{{ Silvery Barbs}}{{ 143}}](#p143)
+  - #### [{{ Skywrite}}{{ 143}}](#p143)
+  - #### [{{ Snowball Swarm}}{{ 143}}](#p143)
+  - #### [{{ Song of Confidence}}{{ 144}}](#p144)
+  - #### [{{ Spelltrap}}{{ 144}}](#p144)
+  - #### [{{ Spider Climb}}{{ 144}}](#p144)
+  - #### [{{ Spike Growth}}{{ 144}}](#p144)
+  - #### [{{ Spirit Echo}}{{ 144}}](#p144)
+  - #### [{{ Spiritual Weapon}}{{ 145}}](#p145)
+  - #### [{{ Spray of Cards}}{{ 145}}](#p145)
+  - #### [{{ Sprout Tree}}{{ 145}}](#p145)
+  - #### [{{ Star Dust}}{{ 145}}](#p145)
+  - #### [{{ Star Scry}}{{ 146}}](#p146)
+  - #### [{{ Stone Pillar}}{{ 146}}](#p146)
+  - #### [{{ Suggestion}}{{ 146}}](#p146)
+  - #### [{{ Summon Archon}}{{ 147}}](#p147)
+  - #### [{{ Summon Beast}}{{ 148}}](#p148)
+  - #### [{{ Summon Swarm}}{{ 149}}](#p149)
+  - #### [{{ Thunderburst Mine}}{{ 150}}](#p150)
+  - #### [{{ Time Skip}}{{ 150}}](#p150)
+  - #### [{{ Time Slip}}{{ 150}}](#p150)
+  - #### [{{ Time Trap}}{{ 150}}](#p150)
+  - #### [{{ Tortoise Shell}}{{ 151}}](#p151)
+  - #### [{{ Totemic Cowl}}{{ 151}}](#p151)
+  - #### [{{ Tower of Iron Will}}{{ 151}}](#p151)
+  - #### [{{ Uncertain Footing}}{{ 151}}](#p151)
+  - #### [{{ Unholy Wave}}{{ 151}}](#p151)
+  - #### [{{ Unstable Explosion}}{{ 152}}](#p152)
+  - #### [{{ Vacuum Pull}}{{ 152}}](#p152)
+  - #### [{{ Vicious Hound}}{{ 152}}](#p152)
+  - #### [{{ Vicious Vapors}}{{ 152}}](#p152)
+  - #### [{{ Vortex Warp}}{{ 152}}](#p152)
+  - #### [{{ Warding Bond}}{{ 153}}](#p153)
+  - #### [{{ Warding Wind}}{{ 153}}](#p153)
+  - #### [{{ Warp Sense}}{{ 153}}](#p153)
+  - #### [{{ Web}}{{ 153}}](#p153)
+  - #### [{{ Wind Cutter}}{{ 154}}](#p154)
+  - #### [{{ Windsense}}{{ 154}}](#p154)
+  - #### [{{ Wither and Bloom}}{{ 154}}](#p154)
+  - #### [{{ Wristpocket}}{{ 154}}](#p154)
+  - #### [{{ Zone of Truth}}{{ 155}}](#p155)
+- ### [{{ 3rd Level Spells}}{{ 156}}](#p156)
+  - #### [{{ Acidic Pit}}{{ 156}}](#p156)
+  - #### [{{ Aether Lance}}{{ 156}}](#p156)
+  - #### [{{ Angelic Slash}}{{ 156}}](#p156)
+  - #### [{{ Animate Dead}}{{ 157}}](#p157)
+  - #### [{{ Animate Shadow}}{{ 158}}](#p158)
+  - #### [{{ Antagonize}}{{ 158}}](#p158)
+  - #### [{{ Arctic Aura}}{{ 158}}](#p158)
+  - #### [{{ Ashardalon's Stride}}{{ 158}}](#p158)
+  - #### [{{ Astral Flood}}{{ 159}}](#p159)
+  - #### [{{ Aura of Vitality}}{{ 159}}](#p159)
+  - #### [{{ Beacon of Hope}}{{ 159}}](#p159)
+  - #### [{{ Bestow Curse}}{{ 159}}](#p159)
+  - #### [{{ Blade Vortex}}{{ 160}}](#p160)
+  - #### [{{ Blinding Smite}}{{ 160}}](#p160)
+  - #### [{{ Blink}}{{ 160}}](#p160)
+  - #### [{{ Blistering Scales}}{{ 160}}](#p160)
+  - #### [{{ Blood Explosion}}{{ 160}}](#p160)
+  - #### [{{ Bramble Barrier}}{{ 161}}](#p161)
+  - #### [{{ Brilliant Blade}}{{ 161}}](#p161)
+  - #### [{{ Cacophonic Shield}}{{ 161}}](#p161)
+  - #### [{{ Call Lightning}}{{ 161}}](#p161)
+  - #### [{{ Catnap}}{{ 161}}](#p161)
+  - #### [{{ Cerebral Blast}}{{ 162}}](#p162)
+  - #### [{{ Clairvoyance}}{{ 162}}](#p162)
+  - #### [{{ Conjure Animals}}{{ 162}}](#p162)
+  - #### [{{ Conjure Barrage}}{{ 162}}](#p162)
+  - #### [{{ Conjure Constructs}}{{ 163}}](#p163)
+  - #### [{{ Corrosive Bolt}}{{ 163}}](#p163)
+  - #### [{{ Counterspell}}{{ 163}}](#p163)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
 - ##
-  - #### [{{ Heat Metal}}{{ 123}}](#p123)
-  - #### [{{ Helpful Homunculi}}{{ 123}}](#p123)
-  - #### [{{ Hold Person}}{{ 123}}](#p123)
-  - #### [{{ Hurricane Slash}}{{ 124}}](#p124)
-  - #### [{{ Imbue Luck}}{{ 124}}](#p124)
-  - #### [{{ Immovable Object}}{{ 124}}](#p124)
-  - #### [{{ Infernal Shackles}}{{ 124}}](#p124)
-  - #### [{{ Instant Counter}}{{ 125}}](#p125)
-  - #### [{{ Invisibility}}{{ 125}}](#p125)
-  - #### [{{ Invoke Beast (Conjure Beast)}}{{ 125}}](#p125)
-  - #### [{{ Iron Wind Strike}}{{ 125}}](#p125)
-  - #### [{{ Kinetic Jaunt}}{{ 125}}](#p125)
-  - #### [{{ Knock}}{{ 126}}](#p126)
-  - #### [{{ Lesser Restoration}}{{ 126}}](#p126)
-  - #### [{{ Levitate}}{{ 126}}](#p126)
-  - #### [{{ Lightning Charged}}{{ 127}}](#p127)
-  - #### [{{ Locate Animals or Plants}}{{ 127}}](#p127)
-  - #### [{{ Locate Creature (Alternative)}}{{ 127}}](#p127)
-  - #### [{{ Locate Object}}{{ 128}}](#p128)
-  - #### [{{ Lock/Unlock}}{{ 128}}](#p128)
-  - #### [{{ Magic Mouth}}{{ 128}}](#p128)
-  - #### [{{ Magic Weapon}}{{ 129}}](#p129)
-  - #### [{{ Maximilian's Earthen Grasp}}{{ 129}}](#p129)
-  - #### [{{ Melf's Acid Arrow}}{{ 129}}](#p129)
-  - #### [{{ Mind Spike}}{{ 129}}](#p129)
-  - #### [{{ Mind Whip (Mystic Spear)}}{{ 130}}](#p130)
-  - #### [{{ Mirror Image}}{{ 130}}](#p130)
-  - #### [{{ Misty Step}}{{ 130}}](#p130)
-  - #### [{{ Moonbeam}}{{ 130}}](#p130)
-  - #### [{{ Morbid Puppet}}{{ 131}}](#p131)
-  - #### [{{ Mystic Elusion}}{{ 131}}](#p131)
-  - #### [{{ Nebulous Mischief}}{{ 131}}](#p131)
-  - #### [{{ Painful Echoes}}{{ 131}}](#p131)
-  - #### [{{ Pass Without Trace}}{{ 132}}](#p132)
-  - #### [{{ Petal Storm}}{{ 132}}](#p132)
-  - #### [{{ Phantasmal Force}}{{ 132}}](#p132)
-  - #### [{{ Poison Dart}}{{ 133}}](#p133)
-  - #### [{{ Prayer of Healing}}{{ 133}}](#p133)
-  - #### [{{ Protection from Poison}}{{ 133}}](#p133)
-  - #### [{{ Pseudopod Slam}}{{ 133}}](#p133)
-  - #### [{{ Pyrotechnics}}{{ 133}}](#p133)
-  - #### [{{ Ray of Enfeeblement}}{{ 134}}](#p134)
-  - #### [{{ Reverberating Dash}}{{ 134}}](#p134)
-  - #### [{{ Rime's Binding Ice}}{{ 134}}](#p134)
-  - #### [{{ Rope Trick}}{{ 134}}](#p134)
-  - #### [{{ Sanctified Charge}}{{ 135}}](#p135)
-  - #### [{{ Scorching Ray}}{{ 135}}](#p135)
-  - #### [{{ Searing Orb}}{{ 135}}](#p135)
-  - #### [{{ See Invisibility}}{{ 135}}](#p135)
-  - #### [{{ Seeking Orb}}{{ 135}}](#p135)
-  - #### [{{ Shadow Blade}}{{ 136}}](#p136)
-  - #### [{{ Shatter}}{{ 136}}](#p136)
-  - #### [{{ Shattering Shield}}{{ 136}}](#p136)
-  - #### [{{ Silence}}{{ 136}}](#p136)
-  - #### [{{ Silvery Barbs}}{{ 136}}](#p136)
-  - #### [{{ Skywrite}}{{ 137}}](#p137)
-  - #### [{{ Snowball Swarm}}{{ 137}}](#p137)
-  - #### [{{ Song of Confidence}}{{ 137}}](#p137)
-  - #### [{{ Spelltrap}}{{ 137}}](#p137)
-  - #### [{{ Spider Climb}}{{ 137}}](#p137)
-  - #### [{{ Spike Growth}}{{ 138}}](#p138)
-  - #### [{{ Spirit Echo}}{{ 138}}](#p138)
-  - #### [{{ Spiritual Weapon}}{{ 138}}](#p138)
-  - #### [{{ Spray of Cards}}{{ 138}}](#p138)
-  - #### [{{ Sprout Tree}}{{ 139}}](#p139)
-  - #### [{{ Star Dust}}{{ 139}}](#p139)
-  - #### [{{ Star Scry}}{{ 139}}](#p139)
-  - #### [{{ Stone Pillar}}{{ 140}}](#p140)
-  - #### [{{ Suggestion}}{{ 140}}](#p140)
-  - #### [{{ Summon Archon}}{{ 141}}](#p141)
-  - #### [{{ Summon Beast}}{{ 142}}](#p142)
-  - #### [{{ Summon Swarm}}{{ 143}}](#p143)
-  - #### [{{ Thunderburst Mine}}{{ 144}}](#p144)
-  - #### [{{ Time Skip}}{{ 144}}](#p144)
-  - #### [{{ Time Slip}}{{ 144}}](#p144)
-  - #### [{{ Time Trap}}{{ 144}}](#p144)
-  - #### [{{ Tortoise Shell}}{{ 145}}](#p145)
-  - #### [{{ Totemic Cowl}}{{ 145}}](#p145)
-  - #### [{{ Tower of Iron Will}}{{ 145}}](#p145)
-  - #### [{{ Uncertain Footing}}{{ 145}}](#p145)
-  - #### [{{ Unholy Wave}}{{ 145}}](#p145)
-  - #### [{{ Unstable Explosion}}{{ 146}}](#p146)
-  - #### [{{ Vacuum Pull}}{{ 146}}](#p146)
-  - #### [{{ Vicious Hound}}{{ 146}}](#p146)
-  - #### [{{ Vicious Vapors}}{{ 146}}](#p146)
-  - #### [{{ Vortex Warp}}{{ 146}}](#p146)
-  - #### [{{ Warding Bond}}{{ 147}}](#p147)
-  - #### [{{ Warding Wind}}{{ 147}}](#p147)
-  - #### [{{ Warp Sense}}{{ 147}}](#p147)
-  - #### [{{ Web}}{{ 147}}](#p147)
-  - #### [{{ Wind Cutter}}{{ 148}}](#p148)
-  - #### [{{ Windsense}}{{ 148}}](#p148)
-  - #### [{{ Wither and Bloom}}{{ 148}}](#p148)
-  - #### [{{ Wristpocket}}{{ 148}}](#p148)
-  - #### [{{ Zone of Truth}}{{ 149}}](#p149)
-- ### [{{ 3rd Level Spells}}{{ 150}}](#p150)
-  - #### [{{ Acidic Pit}}{{ 150}}](#p150)
-  - #### [{{ Aether Lance}}{{ 150}}](#p150)
-  - #### [{{ Angelic Slash}}{{ 150}}](#p150)
-  - #### [{{ Animate Dead}}{{ 151}}](#p151)
-  - #### [{{ Animate Shadow}}{{ 152}}](#p152)
-  - #### [{{ Antagonize}}{{ 152}}](#p152)
-  - #### [{{ Arctic Aura}}{{ 152}}](#p152)
-  - #### [{{ Ashardalon's Stride}}{{ 152}}](#p152)
-  - #### [{{ Astral Flood}}{{ 153}}](#p153)
-  - #### [{{ Aura of Vitality}}{{ 153}}](#p153)
-  - #### [{{ Beacon of Hope}}{{ 153}}](#p153)
-  - #### [{{ Bestow Curse}}{{ 153}}](#p153)
-  - #### [{{ Blade Vortex}}{{ 154}}](#p154)
-  - #### [{{ Blinding Smite}}{{ 154}}](#p154)
-  - #### [{{ Blink}}{{ 154}}](#p154)
-  - #### [{{ Blood Explosion}}{{ 154}}](#p154)
-  - #### [{{ Bramble Barrier}}{{ 154}}](#p154)
-  - #### [{{ Brilliant Blade}}{{ 155}}](#p155)
-  - #### [{{ Cacophonic Shield}}{{ 155}}](#p155)
-  - #### [{{ Call Lightning}}{{ 155}}](#p155)
-  - #### [{{ Catnap}}{{ 155}}](#p155)
-  - #### [{{ Cerebral Blast}}{{ 155}}](#p155)
-  - #### [{{ Clairvoyance}}{{ 156}}](#p156)
-  - #### [{{ Conjure Animals}}{{ 156}}](#p156)
-  - #### [{{ Conjure Barrage}}{{ 156}}](#p156)
-  - #### [{{ Conjure Constructs}}{{ 157}}](#p157)
-  - #### [{{ Corrosive Bolt}}{{ 157}}](#p157)
-  - #### [{{ Counterspell}}{{ 157}}](#p157)
-  - #### [{{ Create Food and Water}}{{ 158}}](#p158)
-  - #### [{{ Crimson Tide}}{{ 158}}](#p158)
-  - #### [{{ Cruel Puppetry}}{{ 158}}](#p158)
-  - #### [{{ Crusader's Mantle}}{{ 158}}](#p158)
-  - #### [{{ Crushing Singularity}}{{ 159}}](#p159)
-  - #### [{{ Dancing Dweomer}}{{ 159}}](#p159)
-  - #### [{{ Dance Fever}}{{ 159}}](#p159)
-  - #### [{{ Daylight}}{{ 159}}](#p159)
-  - #### [{{ Dimensional Anchor}}{{ 160}}](#p160)
-  - #### [{{ Dire Wail}}{{ 160}}](#p160)
-  - #### [{{ Dispel Construct}}{{ 160}}](#p160)
-  - #### [{{ Dispel Magic}}{{ 160}}](#p160)
-  - #### [{{ Electrocute}}{{ 161}}](#p161)
-  - #### [{{ Elemental Weapon}}{{ 161}}](#p161)
-  - #### [{{ Enemies Abound}}{{ 161}}](#p161)
-  - #### [{{ Erode}}{{ 161}}](#p161)
-  - #### [{{ Erupting Earth}}{{ 162}}](#p162)
-  - #### [{{ Fast Friends}}{{ 162}}](#p162)
-  - #### [{{ Fear}}{{ 162}}](#p162)
-  - #### [{{ Feign Death}}{{ 162}}](#p162)
-  - #### [{{ Fire Cyclone}}{{ 163}}](#p163)
-  - #### [{{ Fireball}}{{ 163}}](#p163)
-  - #### [{{ Fireburst Mine}}{{ 163}}](#p163)
-  - #### [{{ Flame Arrows}}{{ 163}}](#p163)
-  - #### [{{ Flamethrower}}{{ 164}}](#p164)
-  - #### [{{ Flash Freeze}}{{ 164}}](#p164)
-  - #### [{{ Fly}}{{ 164}}](#p164)
-  - #### [{{ Freedom of the Waves}}{{ 164}}](#p164)
-  - #### [{{ Galder's Tower}}{{ 165}}](#p165)
-  - #### [{{ Gaseous Form}}{{ 165}}](#p165)
-  - #### [{{ Ghost Step}}{{ 165}}](#p165)
-  - #### [{{ Glyph of Warding}}{{ 166}}](#p166)
-  - #### [{{ Greenfire}}{{ 166}}](#p166)
-  - #### [{{ Haste}}{{ 167}}](#p167)
+  - #### [{{ Create Food and Water}}{{ 164}}](#p164)
+  - #### [{{ Crimson Tide}}{{ 164}}](#p164)
+  - #### [{{ Cruel Puppetry}}{{ 164}}](#p164)
+  - #### [{{ Crusader's Mantle}}{{ 164}}](#p164)
+  - #### [{{ Crushing Singularity}}{{ 165}}](#p165)
+  - #### [{{ Dancing Dweomer}}{{ 165}}](#p165)
+  - #### [{{ Dance Fever}}{{ 165}}](#p165)
+  - #### [{{ Daylight}}{{ 165}}](#p165)
+  - #### [{{ Demon Spikes}}{{ 166}}](#p166)
+  - #### [{{ Dimensional Anchor}}{{ 166}}](#p166)
+  - #### [{{ Dire Wail}}{{ 166}}](#p166)
+  - #### [{{ Dispel Construct}}{{ 166}}](#p166)
+  - #### [{{ Dispel Magic}}{{ 166}}](#p166)
+  - #### [{{ Electrocute}}{{ 167}}](#p167)
+  - #### [{{ Elemental Weapon}}{{ 167}}](#p167)
+  - #### [{{ Emerald Blossom}}{{ 167}}](#p167)
+  - #### [{{ Enemies Abound}}{{ 167}}](#p167)
+  - #### [{{ Erode}}{{ 168}}](#p168)
+  - #### [{{ Erupting Earth}}{{ 168}}](#p168)
+  - #### [{{ Fast Friends}}{{ 168}}](#p168)
+  - #### [{{ Fear}}{{ 168}}](#p168)
+  - #### [{{ Feign Death}}{{ 169}}](#p169)
+  - #### [{{ Fire Cyclone}}{{ 169}}](#p169)
+  - #### [{{ Fireball}}{{ 169}}](#p169)
+  - #### [{{ Fireburst Mine}}{{ 169}}](#p169)
+  - #### [{{ Flame Arrows}}{{ 170}}](#p170)
+  - #### [{{ Flamethrower}}{{ 170}}](#p170)
+  - #### [{{ Flash Freeze}}{{ 170}}](#p170)
+  - #### [{{ Fly}}{{ 170}}](#p170)
+  - #### [{{ Freedom of the Waves}}{{ 170}}](#p170)
+  - #### [{{ Frozen Flurry}}{{ 170}}](#p170)
+  - #### [{{ Galder's Tower}}{{ 171}}](#p171)
+  - #### [{{ Gaseous Form}}{{ 171}}](#p171)
+  - #### [{{ Ghost Step}}{{ 171}}](#p171)
+  - #### [{{ Glyph of Warding}}{{ 172}}](#p172)
+  - #### [{{ Greenfire}}{{ 172}}](#p172)
+  - #### [{{ Guided Prayer}}{{ 172}}](#p172)
+  - #### [{{ Haste}}{{ 173}}](#p173)
+  - #### [{{ Heroic Anthem}}{{ 173}}](#p173)
+  - #### [{{ Hunger of Hadar}}{{ 173}}](#p173)
+  - #### [{{ Hungering Void}}{{ 173}}](#p173)
+  - #### [{{ Hypnotic Pattern}}{{ 174}}](#p174)
+  - #### [{{ Illusionary Fireball}}{{ 174}}](#p174)
+  - #### [{{ Immutability}}{{ 174}}](#p174)
+  - #### [{{ Imp Storm}}{{ 174}}](#p174)
+  - #### [{{ Incite Greed}}{{ 175}}](#p175)
+  - #### [{{ Inflict Doubt}}{{ 175}}](#p175)
+  - #### [{{ Infernal Metamorphosis}}{{ 175}}](#p175)
+  - #### [{{ Instant Bulwark}}{{ 176}}](#p176)
+  - #### [{{ Intellect Fortress}}{{ 176}}](#p176)
+  - #### [{{ Invoke Elemental (Conjure Elemental)}}{{ 176}}](#p176)
+  - #### [{{ Invoke Fey (Conjure Fey)}}{{ 177}}](#p177)
+  - #### [{{ Invoke Fiend (Conjure Fiend)}}{{ 177}}](#p177)
+  - #### [{{ Leeching Strike}}{{ 177}}](#p177)
+  - #### [{{ Life Drain}}{{ 178}}](#p178)
+  - #### [{{ Life Transference}}{{ 178}}](#p178)
+  - #### [{{ Lightning Arrow}}{{ 178}}](#p178)
+  - #### [{{ Lightning Bolt}}{{ 178}}](#p178)
+  - #### [{{ Lightning Shot}}{{ 179}}](#p179)
+  - #### [{{ Linked Glyphs}}{{ 179}}](#p179)
+  - #### [{{ Magic Circle}}{{ 180}}](#p180)
+  - #### [{{ Major Image}}{{ 180}}](#p180)
+  - #### [{{ Maladweomer}}{{ 180}}](#p180)
+  - #### [{{ Mass Healing Word}}{{ 180}}](#p180)
+  - #### [{{ Meld into Stone}}{{ 181}}](#p181)
+  - #### [{{ Melf's Minute Meteors}}{{ 181}}](#p181)
+  - #### [{{ Meteor Jump}}{{ 181}}](#p181)
+  - #### [{{ Mouth Latch}}{{ 181}}](#p181)
+  - #### [{{ Motivational Speech}}{{ 182}}](#p182)
+  - #### [{{ Mounting Paranoia}}{{ 182}}](#p182)
+  - #### [{{ Mutate}}{{ 182}}](#p182)
+  - #### [{{ Nondetection}}{{ 183}}](#p183)
+  - #### [{{ Phantom Steed}}{{ 183}}](#p183)
+  - #### [{{ Pillar Of Salt}}{{ 183}}](#p183)
+  - #### [{{ Plant Growth}}{{ 183}}](#p183)
+  - #### [{{ Prayer of Mending}}{{ 183}}](#p183)
+  - #### [{{ Protection from Energy}}{{ 184}}](#p184)
+  - #### [{{ Pulse Wave}}{{ 184}}](#p184)
+  - #### [{{ Quick Sand}}{{ 184}}](#p184)
+  - #### [{{ Rain of Fire}}{{ 184}}](#p184)
+  - #### [{{ Rain of Spiders}}{{ 184}}](#p184)
+  - #### [{{ Remove Curse}}{{ 185}}](#p185)
+  - #### [{{ Remove Gravity}}{{ 185}}](#p185)
+  - #### [{{ Revelrous Dance (Irresistible Dance)}}{{ 185}}](#p185)
+  - #### [{{ Regrowth}}{{ 185}}](#p185)
+  - #### [{{ Remorseless Winter}}{{ 185}}](#p185)
+  - #### [{{ Revivify}}{{ 186}}](#p186)
+  - #### [{{ Sanguine Spears}}{{ 186}}](#p186)
+  - #### [{{ Seismic Wave}}{{ 186}}](#p186)
+  - #### [{{ Sending}}{{ 186}}](#p186)
+  - #### [{{ Serpent Sting}}{{ 186}}](#p186)
+  - #### [{{ Silver Lance}}{{ 187}}](#p187)
+  - #### [{{ Sleet Storm}}{{ 187}}](#p187)
+  - #### [{{ Slow}}{{ 187}}](#p187)
+  - #### [{{ Sonic Wave}}{{ 187}}](#p187)
+  - #### [{{ Soul Reap}}{{ 188}}](#p188)
+  - #### [{{ Speak with Dead}}{{ 188}}](#p188)
+  - #### [{{ Speak with Plants}}{{ 188}}](#p188)
+  - #### [{{ Spectral Passage}}{{ 188}}](#p188)
+  - #### [{{ Spectral Viper}}{{ 189}}](#p189)
+  - #### [{{ Spider Bite}}{{ 189}}](#p189)
+  - #### [{{ Spirit Guardians}}{{ 189}}](#p189)
+  - #### [{{ Spirit Shroud}}{{ 189}}](#p189)
+  - #### [{{ Static Field}}{{ 190}}](#p190)
+  - #### [{{ Stinking Cloud}}{{ 190}}](#p190)
+  - #### [{{ Summon Fey}}{{ 190}}](#p190)
+  - #### [{{ Summon Lesser Demons}}{{ 191}}](#p191)
+  - #### [{{ Summon Monstrosity}}{{ 192}}](#p192)
+  - #### [{{ Summon Plant}}{{ 193}}](#p193)
+  - #### [{{ Summon Shadowspawn}}{{ 194}}](#p194)
+  - #### [{{ Summon Undead}}{{ 195}}](#p195)
+  - #### [{{ Thunder Pulse}}{{ 196}}](#p196)
+  - #### [{{ Thunder Step}}{{ 196}}](#p196)
+  - #### [{{ Tidal Wave}}{{ 196}}](#p196)
+  - #### [{{ Tiny Hut}}{{ 196}}](#p196)
+  - #### [{{ Tiny Servant}}{{ 197}}](#p197)
+  - #### [{{ Tongues}}{{ 197}}](#p197)
+  - #### [{{ Vampiric Blade}}{{ 197}}](#p197)
+  - #### [{{ Vampiric Touch}}{{ 197}}](#p197)
+  - #### [{{ Vortex Blast}}{{ 198}}](#p198)
+  - #### [{{ Wall of Sand}}{{ 198}}](#p198)
+  - #### [{{ Wall of Water}}{{ 198}}](#p198)
+  - #### [{{ Wasp Barrage}}{{ 198}}](#p198)
+  - #### [{{ Water Breathing}}{{ 198}}](#p198)
+  - #### [{{ Water Cannon}}{{ 199}}](#p199)
+  - #### [{{ Water Walk}}{{ 199}}](#p199)
+  - #### [{{ Waterspout}}{{ 199}}](#p199)
+  - #### [{{ Whirling Conflagration}}{{ 199}}](#p199)
+  - #### [{{ Wind Wall}}{{ 200}}](#p200)
+  - #### [{{ Wither}}{{ 200}}](#p200)
+- ### [{{ 4th Level Spells}}{{ 201}}](#p201)
+  - #### [{{ Accursed Touch}}{{ 201}}](#p201)
+  - #### [{{ Aero Barrage}}{{ 201}}](#p201)
+  - #### [{{ Arcane Eye}}{{ 202}}](#p202)
+  - #### [{{ Arc of Lightning}}{{ 202}}](#p202)
+  - #### [{{ Aura of Life}}{{ 202}}](#p202)
+  - #### [{{ Aura of Purity}}{{ 202}}](#p202)
+  - #### [{{ Backlash}}{{ 202}}](#p202)
+  - #### [{{ Banishment}}{{ 203}}](#p203)
+  - #### [{{ Bile Beam}}{{ 203}}](#p203)
+  - #### [{{ Blight}}{{ 203}}](#p203)
+  - #### [{{ Blood Frenzy}}{{ 203}}](#p203)
+  - #### [{{ Breath of Eons}}{{ 204}}](#p204)
+  - #### [{{ Carnivorous Garden}}{{ 204}}](#p204)
+  - #### [{{ Chaos Nova}}{{ 204}}](#p204)
+  - #### [{{ Charm Monster}}{{ 204}}](#p204)
+  - #### [{{ Collapsing Star}}{{ 205}}](#p205)
+  - #### [{{ Cometfall}}{{ 205}}](#p205)
+  - #### [{{ Commandment}}{{ 205}}](#p205)
+  - #### [{{ Compulsion}}{{ 205}}](#p205)
+  - #### [{{ Confusion}}{{ 206}}](#p206)
+  - #### [{{ Conjure Aberration (Invoke Abberation)}}{{ 206}}](#p206)
+  - #### [{{ Conjure Minor Elementals}}{{ 207}}](#p207)
+  - #### [{{ Conjure Woodland Beings}}{{ 207}}](#p207)
+  - #### [{{ Control Water}}{{ 207}}](#p207)
+  - #### [{{ Death Ward}}{{ 208}}](#p208)
+  - #### [{{ Devour Shadow}}{{ 208}}](#p208)
+  - #### [{{ Dimension Cutter}}{{ 208}}](#p208)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
 - ##
-  - #### [{{ Heroic Anthem}}{{ 167}}](#p167)
-  - #### [{{ Hunger of Hadar}}{{ 167}}](#p167)
-  - #### [{{ Hungering Void}}{{ 167}}](#p167)
-  - #### [{{ Hypnotic Pattern}}{{ 168}}](#p168)
-  - #### [{{ Illusionary Fireball}}{{ 168}}](#p168)
-  - #### [{{ Immutability}}{{ 168}}](#p168)
-  - #### [{{ Incite Greed}}{{ 168}}](#p168)
-  - #### [{{ Inflict Doubt}}{{ 169}}](#p169)
-  - #### [{{ Instant Bulwark}}{{ 169}}](#p169)
-  - #### [{{ Intellect Fortress}}{{ 169}}](#p169)
-  - #### [{{ Invoke Elemental (Conjure Elemental)}}{{ 169}}](#p169)
-  - #### [{{ Invoke Fey (Conjure Fey)}}{{ 170}}](#p170)
-  - #### [{{ Invoke Fiend (Conjure Fiend)}}{{ 170}}](#p170)
-  - #### [{{ Life Drain}}{{ 170}}](#p170)
-  - #### [{{ Life Transference}}{{ 170}}](#p170)
-  - #### [{{ Lightning Arrow}}{{ 171}}](#p171)
-  - #### [{{ Lightning Bolt}}{{ 171}}](#p171)
-  - #### [{{ Lightning Shot}}{{ 171}}](#p171)
-  - #### [{{ Linked Glyphs}}{{ 172}}](#p172)
-  - #### [{{ Magic Circle}}{{ 172}}](#p172)
-  - #### [{{ Major Image}}{{ 173}}](#p173)
-  - #### [{{ Maladweomer}}{{ 173}}](#p173)
-  - #### [{{ Mass Healing Word}}{{ 173}}](#p173)
-  - #### [{{ Meld into Stone}}{{ 173}}](#p173)
-  - #### [{{ Melf's Minute Meteors}}{{ 174}}](#p174)
-  - #### [{{ Meteor Jump}}{{ 174}}](#p174)
-  - #### [{{ Mouth Latch}}{{ 174}}](#p174)
-  - #### [{{ Motivational Speech}}{{ 174}}](#p174)
-  - #### [{{ Mounting Paranoia}}{{ 175}}](#p175)
-  - #### [{{ Mutate}}{{ 175}}](#p175)
-  - #### [{{ Nondetection}}{{ 175}}](#p175)
-  - #### [{{ Phantom Steed}}{{ 176}}](#p176)
-  - #### [{{ Pillar Of Salt}}{{ 176}}](#p176)
-  - #### [{{ Plant Growth}}{{ 176}}](#p176)
-  - #### [{{ Protection from Energy}}{{ 176}}](#p176)
-  - #### [{{ Pulse Wave}}{{ 177}}](#p177)
-  - #### [{{ Quick Sand}}{{ 177}}](#p177)
-  - #### [{{ Rain of Spiders}}{{ 177}}](#p177)
-  - #### [{{ Remove Curse}}{{ 177}}](#p177)
-  - #### [{{ Remove Gravity}}{{ 178}}](#p178)
-  - #### [{{ Revelrous Dance (Irresistible Dance)}}{{ 178}}](#p178)
-  - #### [{{ Revivify}}{{ 178}}](#p178)
-  - #### [{{ Sanguine Spears}}{{ 178}}](#p178)
-  - #### [{{ Seismic Wave}}{{ 179}}](#p179)
-  - #### [{{ Sending}}{{ 179}}](#p179)
-  - #### [{{ Silver Lance}}{{ 179}}](#p179)
-  - #### [{{ Sleet Storm}}{{ 179}}](#p179)
-  - #### [{{ Slow}}{{ 180}}](#p180)
-  - #### [{{ Sonic Wave}}{{ 180}}](#p180)
-  - #### [{{ Speak with Dead}}{{ 180}}](#p180)
-  - #### [{{ Speak with Plants}}{{ 181}}](#p181)
-  - #### [{{ Spectral Passage}}{{ 181}}](#p181)
-  - #### [{{ Spectral Viper}}{{ 181}}](#p181)
-  - #### [{{ Spider Bite}}{{ 181}}](#p181)
-  - #### [{{ Spirit Guardians}}{{ 182}}](#p182)
-  - #### [{{ Spirit Shroud}}{{ 182}}](#p182)
-  - #### [{{ Static Field}}{{ 182}}](#p182)
-  - #### [{{ Stinking Cloud}}{{ 182}}](#p182)
-  - #### [{{ Summon Fey}}{{ 183}}](#p183)
-  - #### [{{ Summon Lesser Demons}}{{ 184}}](#p184)
-  - #### [{{ Summon Monstrosity}}{{ 185}}](#p185)
-  - #### [{{ Summon Plant}}{{ 186}}](#p186)
-  - #### [{{ Summon Shadowspawn}}{{ 187}}](#p187)
-  - #### [{{ Summon Undead}}{{ 188}}](#p188)
-  - #### [{{ Thunder Pulse}}{{ 189}}](#p189)
-  - #### [{{ Thunder Step}}{{ 189}}](#p189)
-  - #### [{{ Tidal Wave}}{{ 189}}](#p189)
-  - #### [{{ Tiny Hut}}{{ 189}}](#p189)
-  - #### [{{ Tiny Servant}}{{ 190}}](#p190)
-  - #### [{{ Tongues}}{{ 190}}](#p190)
-  - #### [{{ Vampiric Blade}}{{ 190}}](#p190)
-  - #### [{{ Vampiric Touch}}{{ 190}}](#p190)
-  - #### [{{ Vortex Blast}}{{ 191}}](#p191)
-  - #### [{{ Wall of Sand}}{{ 191}}](#p191)
-  - #### [{{ Wall of Water}}{{ 191}}](#p191)
-  - #### [{{ Wasp Barrage}}{{ 191}}](#p191)
-  - #### [{{ Water Breathing}}{{ 191}}](#p191)
-  - #### [{{ Water Cannon}}{{ 192}}](#p192)
-  - #### [{{ Water Walk}}{{ 192}}](#p192)
-  - #### [{{ Waterspout}}{{ 192}}](#p192)
-  - #### [{{ Whirling Conflagration}}{{ 192}}](#p192)
-  - #### [{{ Wind Wall}}{{ 193}}](#p193)
-  - #### [{{ Wither}}{{ 193}}](#p193)
-- ### [{{ 4th Level Spells}}{{ 194}}](#p194)
-  - #### [{{ Accursed Touch}}{{ 194}}](#p194)
-  - #### [{{ Aero Barrage}}{{ 194}}](#p194)
-  - #### [{{ Arcane Eye}}{{ 195}}](#p195)
-  - #### [{{ Arc of Lightning}}{{ 195}}](#p195)
-  - #### [{{ Aura of Life}}{{ 195}}](#p195)
-  - #### [{{ Aura of Purity}}{{ 195}}](#p195)
-  - #### [{{ Backlash}}{{ 195}}](#p195)
-  - #### [{{ Banishment}}{{ 196}}](#p196)
-  - #### [{{ Bile Beam}}{{ 196}}](#p196)
-  - #### [{{ Blight}}{{ 196}}](#p196)
-  - #### [{{ Blood Frenzy}}{{ 196}}](#p196)
-  - #### [{{ Carnivorous Garden}}{{ 197}}](#p197)
-  - #### [{{ Charm Monster}}{{ 197}}](#p197)
-  - #### [{{ Commandment}}{{ 197}}](#p197)
-  - #### [{{ Compulsion}}{{ 197}}](#p197)
-  - #### [{{ Confusion}}{{ 198}}](#p198)
-  - #### [{{ Conjure Aberration (Invoke Abberation)}}{{ 198}}](#p198)
-  - #### [{{ Conjure Minor Elementals}}{{ 198}}](#p198)
-  - #### [{{ Conjure Woodland Beings}}{{ 199}}](#p199)
-  - #### [{{ Control Water}}{{ 199}}](#p199)
-  - #### [{{ Death Ward}}{{ 200}}](#p200)
-  - #### [{{ Devour Shadow}}{{ 200}}](#p200)
-  - #### [{{ Dimension Cutter}}{{ 200}}](#p200)
-  - #### [{{ Dimension Door}}{{ 200}}](#p200)
-  - #### [{{ Distorted Distance}}{{ 201}}](#p201)
-  - #### [{{ Divination}}{{ 201}}](#p201)
-  - #### [{{ Dominate Beast}}{{ 201}}](#p201)
-  - #### [{{ Doomtide}}{{ 202}}](#p202)
-  - #### [{{ Echoing Lance}}{{ 202}}](#p202)
-  - #### [{{ Ego Scourge}}{{ 203}}](#p203)
-  - #### [{{ Eldritch Tentacles}}{{ 203}}](#p203)
-  - #### [{{ Elemental Bane}}{{ 203}}](#p203)
-  - #### [{{ Exsanguinate}}{{ 203}}](#p203)
-  - #### [{{ Fabricate}}{{ 204}}](#p204)
-  - #### [{{ Faithful Hound}}{{ 204}}](#p204)
-  - #### [{{ False Vision}}{{ 204}}](#p204)
-  - #### [{{ Festering Blast}}{{ 205}}](#p205)
-  - #### [{{ Fire Shield}}{{ 205}}](#p205)
-  - #### [{{ Force Blade}}{{ 205}}](#p205)
-  - #### [{{ Fount of Moonlight}}{{ 205}}](#p205)
-  - #### [{{ Freedom of Movement}}{{ 206}}](#p206)
-  - #### [{{ Galder's Speedy Courier}}{{ 206}}](#p206)
-  - #### [{{ Gale Shot}}{{ 206}}](#p206)
-  - #### [{{ Gate Seal}}{{ 206}}](#p206)
-  - #### [{{ Geyser}}{{ 207}}](#p207)
-  - #### [{{ Giant Insect}}{{ 207}}](#p207)
-  - #### [{{ Grasping Vine}}{{ 208}}](#p208)
-  - #### [{{ Grasp Of The Grave}}{{ 208}}](#p208)
-  - #### [{{ Gravecall (Create Undead)}}{{ 208}}](#p208)
-  - #### [{{ Gravity Sinkhole}}{{ 209}}](#p209)
-  - #### [{{ Greater Invisibility}}{{ 209}}](#p209)
-  - #### [{{ Guardian of Faith}}{{ 209}}](#p209)
-  - #### [{{ Guardian of Nature}}{{ 209}}](#p209)
-  - #### [{{ Hallucinatory Terrain}}{{ 210}}](#p210)
-  - #### [{{ Heavenly Ray}}{{ 210}}](#p210)
-  - #### [{{ Ice Spike}}{{ 210}}](#p210)
-  - #### [{{ Ice Storm}}{{ 211}}](#p211)
-  - #### [{{ Ichorous Blood}}{{ 211}}](#p211)
-  - #### [{{ Iron Garden}}{{ 211}}](#p211)
-  - #### [{{ Jumping Jolt}}{{ 211}}](#p211)
-  - #### [{{ Locate Creature}}{{ 212}}](#p212)
-  - #### [{{ Macabre Marionette}}{{ 212}}](#p212)
-  - #### [{{ Mirror Army}}{{ 212}}](#p212)
-  - #### [{{ Orbital Stones}}{{ 213}}](#p213)
-  - #### [{{ Phantasmal Killer}}{{ 213}}](#p213)
-  - #### [{{ Pillar of Fire}}{{ 213}}](#p213)
-  - #### [{{ Pillars of Earth}}{{ 213}}](#p213)
-  - #### [{{ Poison Puff}}{{ 214}}](#p214)
-  - #### [{{ Polymorph}}{{ 214}}](#p214)
-  - #### [{{ Private Sanctum}}{{ 214}}](#p214)
-  - #### [{{ Protection from Spells}}{{ 214}}](#p214)
-  - #### [{{ Psychic Lance}}{{ 215}}](#p215)
-  - #### [{{ Quicksilver Steps}}{{ 215}}](#p215)
-  - #### [{{ Repair}}{{ 215}}](#p215)
+  - #### [{{ Dimension Door}}{{ 208}}](#p208)
+  - #### [{{ Distorted Distance}}{{ 209}}](#p209)
+  - #### [{{ Divination}}{{ 209}}](#p209)
+  - #### [{{ Divine Shield}}{{ 209}}](#p209)
+  - #### [{{ Dominate Beast}}{{ 209}}](#p209)
+  - #### [{{ Doomtide}}{{ 210}}](#p210)
+  - #### [{{ Echoing Lance}}{{ 210}}](#p210)
+  - #### [{{ Ego Scourge}}{{ 210}}](#p210)
+  - #### [{{ Eldritch Tentacles}}{{ 210}}](#p210)
+  - #### [{{ Elemental Bane}}{{ 211}}](#p211)
+  - #### [{{ Emberstorm}}{{ 211}}](#p211)
+  - #### [{{ Exsanguinate}}{{ 211}}](#p211)
+  - #### [{{ Fabricate}}{{ 212}}](#p212)
+  - #### [{{ Faithful Hound}}{{ 212}}](#p212)
+  - #### [{{ False Vision}}{{ 212}}](#p212)
+  - #### [{{ Festering Blast}}{{ 213}}](#p213)
+  - #### [{{ Fire Shield}}{{ 213}}](#p213)
+  - #### [{{ Force Blade}}{{ 213}}](#p213)
+  - #### [{{ Fount of Moonlight}}{{ 213}}](#p213)
+  - #### [{{ Freedom of Movement}}{{ 214}}](#p214)
+  - #### [{{ Galder's Speedy Courier}}{{ 214}}](#p214)
+  - #### [{{ Gale Shot}}{{ 214}}](#p214)
+  - #### [{{ Gate Seal}}{{ 214}}](#p214)
+  - #### [{{ Geyser}}{{ 215}}](#p215)
+  - #### [{{ Giant Insect}}{{ 215}}](#p215)
+  - #### [{{ Grasping Vine}}{{ 216}}](#p216)
+  - #### [{{ Grasp Of The Grave}}{{ 216}}](#p216)
+  - #### [{{ Gravecall (Create Undead)}}{{ 216}}](#p216)
+  - #### [{{ Gravity Sinkhole}}{{ 217}}](#p217)
+  - #### [{{ Greater Invisibility}}{{ 217}}](#p217)
+  - #### [{{ Guardian of Faith}}{{ 217}}](#p217)
+  - #### [{{ Guardian of Nature}}{{ 217}}](#p217)
+  - #### [{{ Hallucinatory Terrain}}{{ 218}}](#p218)
+  - #### [{{ Heavenly Ray}}{{ 218}}](#p218)
+  - #### [{{ Holy Nova}}{{ 218}}](#p218)
+  - #### [{{ Ice Spike}}{{ 218}}](#p218)
+  - #### [{{ Ice Storm}}{{ 219}}](#p219)
+  - #### [{{ Ichorous Blood}}{{ 219}}](#p219)
+  - #### [{{ Iron Garden}}{{ 219}}](#p219)
+  - #### [{{ Jumping Jolt}}{{ 219}}](#p219)
+  - #### [{{ Locate Creature}}{{ 220}}](#p220)
+  - #### [{{ Macabre Marionette}}{{ 220}}](#p220)
+  - #### [{{ Mirror Army}}{{ 220}}](#p220)
+  - #### [{{ Orbital Stones}}{{ 221}}](#p221)
+  - #### [{{ Phantasmal Killer}}{{ 221}}](#p221)
+  - #### [{{ Pillar of Fire}}{{ 221}}](#p221)
+  - #### [{{ Pillars of Earth}}{{ 221}}](#p221)
+  - #### [{{ Poison Puff}}{{ 222}}](#p222)
+  - #### [{{ Polymorph}}{{ 222}}](#p222)
+  - #### [{{ Private Sanctum}}{{ 222}}](#p222)
+  - #### [{{ Protection from Spells}}{{ 222}}](#p222)
+  - #### [{{ Psychic Horror}}{{ 223}}](#p223)
+  - #### [{{ Psychic Lance}}{{ 223}}](#p223)
+  - #### [{{ Quicksilver Steps}}{{ 223}}](#p223)
+  - #### [{{ Repair}}{{ 223}}](#p223)
+  - #### [{{ Resilient Sphere}}{{ 224}}](#p224)
+  - #### [{{ Revitalizing Hymn}}{{ 224}}](#p224)
+  - #### [{{ Ribcage}}{{ 224}}](#p224)
+  - #### [{{ Secret Chest}}{{ 224}}](#p224)
+  - #### [{{ Shadow of Moil}}{{ 225}}](#p225)
+  - #### [{{ Sickening Radiance}}{{ 225}}](#p225)
+  - #### [{{ Song of Despair}}{{ 225}}](#p225)
+  - #### [{{ Spatial Swap}}{{ 225}}](#p225)
+  - #### [{{ Spellfire Storm}}{{ 226}}](#p226)
+  - #### [{{ Spirit of Death}}{{ 227}}](#p227)
+  - #### [{{ Split Timeline}}{{ 228}}](#p228)
+  - #### [{{ Staggering Smite}}{{ 228}}](#p228)
+  - #### [{{ Starfall}}{{ 228}}](#p228)
+  - #### [{{ Sticks to Snakes}}{{ 228}}](#p228)
+  - #### [{{ Stinging Swarm}}{{ 229}}](#p229)
+  - #### [{{ Stone Coffin}}{{ 229}}](#p229)
+  - #### [{{ Stone Shape}}{{ 229}}](#p229)
+  - #### [{{ Stoneskin}}{{ 229}}](#p229)
+  - #### [{{ Storm Sphere}}{{ 229}}](#p229)
+  - #### [{{ Suffocate}}{{ 230}}](#p230)
+  - #### [{{ Summon Aberration}}{{ 230}}](#p230)
+  - #### [{{ Summon Construct}}{{ 231}}](#p231)
+  - #### [{{ Summon Elemental}}{{ 232}}](#p232)
+  - #### [{{ Summon Greater Demon}}{{ 233}}](#p233)
+  - #### [{{ Time Dilation}}{{ 233}}](#p233)
+  - #### [{{ Time Loop}}{{ 233}}](#p233)
+  - #### [{{ Violent Crush}}{{ 234}}](#p234)
+  - #### [{{ Vital Surge}}{{ 234}}](#p234)
+  - #### [{{ Vitriolic Sphere}}{{ 234}}](#p234)
+  - #### [{{ Volcanic Upheaval}}{{ 234}}](#p234)
+  - #### [{{ Wall of Fire}}{{ 235}}](#p235)
+  - #### [{{ Watery Sphere}}{{ 235}}](#p235)
+  - #### [{{ Watery Tentacles}}{{ 235}}](#p235)
+  - #### [{{ Zone of Amicability}}{{ 236}}](#p236)
+- ### [{{ 5th Level Spells}}{{ 237}}](#p237)
+  - #### [{{ Acid Rain}}{{ 237}}](#p237)
+  - #### [{{ Aether Storm}}{{ 237}}](#p237)
+  - #### [{{ Animate Objects}}{{ 238}}](#p238)
+  - #### [{{ Antilife Shell}}{{ 238}}](#p238)
+  - #### [{{ Anvil Drop}}{{ 239}}](#p239)
+  - #### [{{ Arcane Hand}}{{ 239}}](#p239)
+  - #### [{{ Awaken}}{{ 239}}](#p239)
+  - #### [{{ Ball Lightning}}{{ 240}}](#p240)
+  - #### [{{ Banishing Smite}}{{ 240}}](#p240)
+  - #### [{{ Bonestorm}}{{ 240}}](#p240)
+  - #### [{{ Burial Barrage}}{{ 240}}](#p240)
+  - #### [{{ Circle of Power}}{{ 241}}](#p241)
+  - #### [{{ Cloudkill}}{{ 241}}](#p241)
+  - #### [{{ Commune}}{{ 241}}](#p241)
+  - #### [{{ Commune with Nature}}{{ 241}}](#p241)
+  - #### [{{ Cone of Cold}}{{ 242}}](#p242)
+  - #### [{{ Conjure Elemental}}{{ 242}}](#p242)
+  - #### [{{ Conjure Volley}}{{ 242}}](#p242)
+  - #### [{{ Contact Other Plane}}{{ 242}}](#p242)
+  - #### [{{ Contagion}}{{ 243}}](#p243)
+  - #### [{{ Control Winds}}{{ 243}}](#p243)
+  - #### [{{ Create Construct}}{{ 244}}](#p244)
+  - #### [{{ Creation}}{{ 245}}](#p245)
+  - #### [{{ Curse of Impotence}}{{ 245}}](#p245)
+  - #### [{{ Danse Macabre}}{{ 246}}](#p246)
+  - #### [{{ Dawn}}{{ 247}}](#p247)
+  - #### [{{ Deglove Creature}}{{ 247}}](#p247)
+  - #### [{{ Destructive Wave}}{{ 247}}](#p247)
+  - #### [{{ Devouring Darkness}}{{ 247}}](#p247)
+  - #### [{{ Dispel Evil and Good}}{{ 248}}](#p248)
+  - #### [{{ Divide Self}}{{ 248}}](#p248)
+  - #### [{{ Dominate Person}}{{ 249}}](#p249)
+  - #### [{{ Dream}}{{ 249}}](#p249)
+  - #### [{{ Dream Flight}}{{ 249}}](#p249)
+  - #### [{{ Elemental Suffusion}}{{ 250}}](#p250)
+  - #### [{{ Enervation}}{{ 250}}](#p250)
+  - #### [{{ Explode Heart}}{{ 251}}](#p251)
+  - #### [{{ Explosive Trap}}{{ 251}}](#p251)
+  - #### [{{ Far Step}}{{ 251}}](#p251)
+  - #### [{{ Field of Stars}}{{ 251}}](#p251)
+  - #### [{{ Fissure}}{{ 252}}](#p252)
+  - #### [{{ Flame Strike}}{{ 252}}](#p252)
+  - #### [{{ Freedom of the Winds}}{{ 252}}](#p252)
+  - #### [{{ Geas}}{{ 252}}](#p252)
+  - #### [{{ Grave Ground}}{{ 253}}](#p253)
+  - #### [{{ Greater Absorb Elements}}{{ 253}}](#p253)
+  - #### [{{ Greater Restoration}}{{ 253}}](#p253)
+  - #### [{{ Greater Shield}}{{ 253}}](#p253)
+  - #### [{{ Hallow}}{{ 254}}](#p254)
+  - #### [{{ Hold Monster}}{{ 254}}](#p254)
+  - #### [{{ Holy Weapon}}{{ 255}}](#p255)
+  - #### [{{ Immolation}}{{ 255}}](#p255)
+  - #### [{{ Infernal Calling}}{{ 255}}](#p255)
+  - #### [{{ Insect Plague}}{{ 255}}](#p255)
+  - #### [{{ Invoke Celestial (Conjure Celestial)}}{{ 256}}](#p256)
+  - #### [{{ Invoke Dragon (Conjure Dragon)}}{{ 256}}](#p256)
+  - #### [{{ Invoke Giant (Conjure Giant)}}{{ 256}}](#p256)
+  - #### [{{ Killing Curse}}{{ 257}}](#p257)
+  - #### [{{ Legend Lore}}{{ 257}}](#p257)
+  - #### [{{ Legendary Ballad}}{{ 257}}](#p257)
+  - #### [{{ Life Link}}{{ 258}}](#p258)
+  - #### [{{ Life Support}}{{ 258}}](#p258)
+  - #### [{{ Maelstrom}}{{ 258}}](#p258)
+  - #### [{{ Mass Cure Wounds}}{{ 258}}](#p258)
+  - #### [{{ Mislead}}{{ 259}}](#p259)
+  - #### [{{ Modify Memory}}{{ 259}}](#p259)
+  - #### [{{ Mooncloak}}{{ 259}}](#p259)
+  - #### [{{ Mystic Lucubration}}{{ 260}}](#p260)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
 - ##
-  - #### [{{ Resilient Sphere}}{{ 215}}](#p215)
-  - #### [{{ Revitalizing Hymn}}{{ 216}}](#p216)
-  - #### [{{ Ribcage}}{{ 216}}](#p216)
-  - #### [{{ Secret Chest}}{{ 216}}](#p216)
-  - #### [{{ Shadow of Moil}}{{ 216}}](#p216)
-  - #### [{{ Sickening Radiance}}{{ 217}}](#p217)
-  - #### [{{ Song of Despair}}{{ 217}}](#p217)
-  - #### [{{ Spatial Swap}}{{ 217}}](#p217)
-  - #### [{{ Spellfire Storm}}{{ 217}}](#p217)
-  - #### [{{ Spirit of Death}}{{ 218}}](#p218)
-  - #### [{{ Split Timeline}}{{ 219}}](#p219)
-  - #### [{{ Staggering Smite}}{{ 219}}](#p219)
-  - #### [{{ Starfall}}{{ 219}}](#p219)
-  - #### [{{ Sticks to Snakes}}{{ 219}}](#p219)
-  - #### [{{ Stinging Swarm}}{{ 220}}](#p220)
-  - #### [{{ Stone Coffin}}{{ 220}}](#p220)
-  - #### [{{ Stone Shape}}{{ 220}}](#p220)
-  - #### [{{ Stoneskin}}{{ 220}}](#p220)
-  - #### [{{ Storm Sphere}}{{ 220}}](#p220)
-  - #### [{{ Suffocate}}{{ 221}}](#p221)
-  - #### [{{ Summon Aberration}}{{ 221}}](#p221)
-  - #### [{{ Summon Construct}}{{ 222}}](#p222)
-  - #### [{{ Summon Elemental}}{{ 223}}](#p223)
-  - #### [{{ Summon Greater Demon}}{{ 224}}](#p224)
-  - #### [{{ Time Loop}}{{ 224}}](#p224)
-  - #### [{{ Violent Crush}}{{ 224}}](#p224)
-  - #### [{{ Vital Surge}}{{ 225}}](#p225)
-  - #### [{{ Vitriolic Sphere}}{{ 225}}](#p225)
-  - #### [{{ Wall of Fire}}{{ 225}}](#p225)
-  - #### [{{ Watery Sphere}}{{ 226}}](#p226)
-  - #### [{{ Watery Tentacles}}{{ 226}}](#p226)
-  - #### [{{ Zone of Amicability}}{{ 226}}](#p226)
-- ### [{{ 5th Level Spells}}{{ 227}}](#p227)
-  - #### [{{ Acid Rain}}{{ 227}}](#p227)
-  - #### [{{ Aether Storm}}{{ 227}}](#p227)
-  - #### [{{ Animate Objects}}{{ 228}}](#p228)
-  - #### [{{ Antilife Shell}}{{ 228}}](#p228)
-  - #### [{{ Anvil Drop}}{{ 229}}](#p229)
-  - #### [{{ Arcane Hand}}{{ 229}}](#p229)
-  - #### [{{ Awaken}}{{ 229}}](#p229)
-  - #### [{{ Ball Lightning}}{{ 230}}](#p230)
-  - #### [{{ Banishing Smite}}{{ 230}}](#p230)
-  - #### [{{ Burial Barrage}}{{ 230}}](#p230)
-  - #### [{{ Circle of Power}}{{ 230}}](#p230)
-  - #### [{{ Cloudkill}}{{ 231}}](#p231)
-  - #### [{{ Commune}}{{ 231}}](#p231)
-  - #### [{{ Commune with Nature}}{{ 231}}](#p231)
-  - #### [{{ Cone of Cold}}{{ 231}}](#p231)
-  - #### [{{ Conjure Elemental}}{{ 232}}](#p232)
-  - #### [{{ Conjure Volley}}{{ 232}}](#p232)
-  - #### [{{ Contact Other Plane}}{{ 232}}](#p232)
-  - #### [{{ Contagion}}{{ 233}}](#p233)
-  - #### [{{ Control Winds}}{{ 233}}](#p233)
-  - #### [{{ Create Construct}}{{ 234}}](#p234)
-  - #### [{{ Creation}}{{ 235}}](#p235)
-  - #### [{{ Curse of Impotence}}{{ 235}}](#p235)
-  - #### [{{ Danse Macabre}}{{ 236}}](#p236)
-  - #### [{{ Dawn}}{{ 237}}](#p237)
-  - #### [{{ Deglove Creature}}{{ 237}}](#p237)
-  - #### [{{ Destructive Wave}}{{ 237}}](#p237)
-  - #### [{{ Devouring Darkness}}{{ 237}}](#p237)
-  - #### [{{ Dispel Evil and Good}}{{ 238}}](#p238)
-  - #### [{{ Divide Self}}{{ 238}}](#p238)
-  - #### [{{ Dominate Person}}{{ 239}}](#p239)
-  - #### [{{ Dream}}{{ 239}}](#p239)
-  - #### [{{ Elemental Suffusion}}{{ 239}}](#p239)
-  - #### [{{ Enervation}}{{ 240}}](#p240)
-  - #### [{{ Explode Heart}}{{ 240}}](#p240)
-  - #### [{{ Far Step}}{{ 240}}](#p240)
-  - #### [{{ Field of Stars}}{{ 240}}](#p240)
-  - #### [{{ Fissure}}{{ 241}}](#p241)
-  - #### [{{ Flame Strike}}{{ 241}}](#p241)
-  - #### [{{ Freedom of the Winds}}{{ 241}}](#p241)
-  - #### [{{ Geas}}{{ 241}}](#p241)
-  - #### [{{ Grave Ground}}{{ 242}}](#p242)
-  - #### [{{ Greater Absorb Elements}}{{ 242}}](#p242)
-  - #### [{{ Greater Restoration}}{{ 242}}](#p242)
-  - #### [{{ Greater Shield}}{{ 242}}](#p242)
-  - #### [{{ Hallow}}{{ 243}}](#p243)
-  - #### [{{ Hold Monster}}{{ 243}}](#p243)
-  - #### [{{ Holy Weapon}}{{ 244}}](#p244)
-  - #### [{{ Immolation}}{{ 244}}](#p244)
-  - #### [{{ Infernal Calling}}{{ 244}}](#p244)
-  - #### [{{ Insect Plague}}{{ 244}}](#p244)
-  - #### [{{ Invoke Celestial (Conjure Celestial)}}{{ 245}}](#p245)
-  - #### [{{ Invoke Dragon (Conjure Dragon)}}{{ 245}}](#p245)
-  - #### [{{ Invoke Giant (Conjure Giant)}}{{ 245}}](#p245)
-  - #### [{{ Killing Curse}}{{ 246}}](#p246)
-  - #### [{{ Legend Lore}}{{ 246}}](#p246)
-  - #### [{{ Legendary Ballad}}{{ 246}}](#p246)
-  - #### [{{ Life Link}}{{ 247}}](#p247)
-  - #### [{{ Life Support}}{{ 247}}](#p247)
-  - #### [{{ Maelstrom}}{{ 247}}](#p247)
-  - #### [{{ Mass Cure Wounds}}{{ 247}}](#p247)
-  - #### [{{ Mislead}}{{ 248}}](#p248)
-  - #### [{{ Modify Memory}}{{ 248}}](#p248)
-  - #### [{{ Mooncloak}}{{ 248}}](#p248)
-  - #### [{{ Mystic Lucubration}}{{ 249}}](#p249)
-  - #### [{{ Nature's Protection}}{{ 249}}](#p249)
-  - #### [{{ Negative Energy Flood}}{{ 249}}](#p249)
-  - #### [{{ Passwall}}{{ 249}}](#p249)
-  - #### [{{ Planar Binding}}{{ 250}}](#p250)
-  - #### [{{ Pressure Cutter}}{{ 250}}](#p250)
-  - #### [{{ Psychic Crush}}{{ 250}}](#p250)
-  - #### [{{ Pyroclastic Lance}}{{ 250}}](#p250)
-  - #### [{{ Raise Dead}}{{ 251}}](#p251)
-  - #### [{{ Regal Presence}}{{ 251}}](#p251)
-  - #### [{{ Reincarnate}}{{ 252}}](#p252)
-  - #### [{{ Scrying}}{{ 255}}](#p255)
-  - #### [{{ Seeming}}{{ 255}}](#p255)
-  - #### [{{ Skill Empowerment}}{{ 256}}](#p256)
-  - #### [{{ Sky Burst}}{{ 256}}](#p256)
-  - #### [{{ Sonic Shriek}}{{ 256}}](#p256)
-  - #### [{{ Spell Matrix}}{{ 257}}](#p257)
-  - #### [{{ Spirit Lantern}}{{ 257}}](#p257)
-  - #### [{{ Spiritual Sundering}}{{ 257}}](#p257)
-  - #### [{{ Steel Wind Strike}}{{ 258}}](#p258)
-  - #### [{{ Storm of Radiance}}{{ 258}}](#p258)
-  - #### [{{ Sudden Hazards}}{{ 259}}](#p259)
-  - #### [{{ Summon Celestial}}{{ 259}}](#p259)
-  - #### [{{ Summon Dragon}}{{ 260}}](#p260)
-  - #### [{{ Summon Greater Plant}}{{ 261}}](#p261)
-  - #### [{{ Swapping Curse}}{{ 262}}](#p262)
-  - #### [{{ Swift Quiver}}{{ 262}}](#p262)
-  - #### [{{ Synaptic Static}}{{ 262}}](#p262)
-  - #### [{{ Telekinesis}}{{ 263}}](#p263)
-  - #### [{{ Telepathic Bond}}{{ 263}}](#p263)
-  - #### [{{ Teleportation Circle}}{{ 263}}](#p263)
-  - #### [{{ Teleportation Tangle}}{{ 264}}](#p264)
-  - #### [{{ Temporal Shunt}}{{ 264}}](#p264)
-  - #### [{{ Tornado}}{{ 264}}](#p264)
-  - #### [{{ Transmute Rock}}{{ 264}}](#p264)
-  - #### [{{ Tree Stride}}{{ 265}}](#p265)
-  - #### [{{ Vorpal Blade}}{{ 265}}](#p265)
-  - #### [{{ Vorpal Shot}}{{ 265}}](#p265)
-  - #### [{{ Vorpal Weapon}}{{ 265}}](#p265)
-  - #### [{{ Wall of Force}}{{ 266}}](#p266)
-  - #### [{{ Wall of Light}}{{ 266}}](#p266)
-  - #### [{{ Wall of Stone}}{{ 266}}](#p266)
-  - #### [{{ Waves of Exhaustion}}{{ 267}}](#p267)
-  - #### [{{ Wrath of Nature}}{{ 267}}](#p267)
-- ### [{{ 6th Level Spells}}{{ 268}}](#p268)
-  - #### [{{ Arcane Gate}}{{ 268}}](#p268)
-  - #### [{{ Avalanche}}{{ 268}}](#p268)
-  - #### [{{ Blizzard}}{{ 269}}](#p269)
-  - #### [{{ Beam of Annihilation}}{{ 269}}](#p269)
-  - #### [{{ Blade Barrier}}{{ 269}}](#p269)
-  - #### [{{ Bones of the Earth}}{{ 270}}](#p270)
-  - #### [{{ Bubbling Cauldron}}{{ 270}}](#p270)
-  - #### [{{ Chain Lightning}}{{ 270}}](#p270)
-  - #### [{{ Chrono Conjunction}}{{ 270}}](#p270)
-  - #### [{{ Circle of Death}}{{ 271}}](#p271)
-  - #### [{{ Conjure Fey}}{{ 271}}](#p271)
-  - #### [{{ Contingency}}{{ 271}}](#p271)
-  - #### [{{ Create Homunculus}}{{ 272}}](#p272)
-  - #### [{{ Create Monstrosity (Chimeric Binding)}}{{ 273}}](#p273)
-  - #### [{{ Create Undead}}{{ 274}}](#p274)
-  - #### [{{ Cryptomnesia}}{{ 275}}](#p275)
+  - #### [{{ Nature's Protection}}{{ 260}}](#p260)
+  - #### [{{ Negative Energy Flood}}{{ 260}}](#p260)
+  - #### [{{ Passwall}}{{ 260}}](#p260)
+  - #### [{{ Planar Binding}}{{ 261}}](#p261)
+  - #### [{{ Pressure Cutter}}{{ 261}}](#p261)
+  - #### [{{ Psychic Crush}}{{ 261}}](#p261)
+  - #### [{{ Pyroclastic Lance}}{{ 261}}](#p261)
+  - #### [{{ Raise Dead}}{{ 262}}](#p262)
+  - #### [{{ Regal Presence}}{{ 262}}](#p262)
+  - #### [{{ Reincarnate}}{{ 263}}](#p263)
+  - #### [{{ Rescue}}{{ 266}}](#p266)
+  - #### [{{ Scrying}}{{ 266}}](#p266)
+  - #### [{{ Seeming}}{{ 266}}](#p266)
+  - #### [{{ Shattering Star}}{{ 267}}](#p267)
+  - #### [{{ Sigil of Chains}}{{ 267}}](#p267)
+  - #### [{{ Skill Empowerment}}{{ 267}}](#p267)
+  - #### [{{ Sky Burst}}{{ 267}}](#p267)
+  - #### [{{ Sonic Shriek}}{{ 267}}](#p267)
+  - #### [{{ Spell Matrix}}{{ 268}}](#p268)
+  - #### [{{ Spirit Lantern}}{{ 268}}](#p268)
+  - #### [{{ Spiritual Sundering}}{{ 268}}](#p268)
+  - #### [{{ Steel Wind Strike}}{{ 269}}](#p269)
+  - #### [{{ Storm of Radiance}}{{ 269}}](#p269)
+  - #### [{{ Sudden Hazards}}{{ 270}}](#p270)
+  - #### [{{ Summon Celestial}}{{ 270}}](#p270)
+  - #### [{{ Summon Dragon}}{{ 271}}](#p271)
+  - #### [{{ Summon Greater Plant}}{{ 272}}](#p272)
+  - #### [{{ Swapping Curse}}{{ 273}}](#p273)
+  - #### [{{ Swift Quiver}}{{ 273}}](#p273)
+  - #### [{{ Synaptic Static}}{{ 273}}](#p273)
+  - #### [{{ Telekinesis}}{{ 274}}](#p274)
+  - #### [{{ Telepathic Bond}}{{ 274}}](#p274)
+  - #### [{{ Teleportation Circle}}{{ 274}}](#p274)
+  - #### [{{ Teleportation Tangle}}{{ 275}}](#p275)
+  - #### [{{ Temporal Shunt}}{{ 275}}](#p275)
+  - #### [{{ Tornado}}{{ 275}}](#p275)
+  - #### [{{ Transmute Rock}}{{ 275}}](#p275)
+  - #### [{{ Tree Stride}}{{ 276}}](#p276)
+  - #### [{{ Verdant Surge}}{{ 276}}](#p276)
+  - #### [{{ Void Eruption}}{{ 276}}](#p276)
+  - #### [{{ Vorpal Blade}}{{ 276}}](#p276)
+  - #### [{{ Vorpal Shot}}{{ 277}}](#p277)
+  - #### [{{ Vorpal Weapon}}{{ 277}}](#p277)
+  - #### [{{ Wall of Force}}{{ 277}}](#p277)
+  - #### [{{ Wall of Light}}{{ 278}}](#p278)
+  - #### [{{ Wall of Stone}}{{ 278}}](#p278)
+  - #### [{{ Waves of Exhaustion}}{{ 279}}](#p279)
+  - #### [{{ Wrath of Nature}}{{ 279}}](#p279)
+- ### [{{ 6th Level Spells}}{{ 280}}](#p280)
+  - #### [{{ Arcane Gate}}{{ 280}}](#p280)
+  - #### [{{ Astral Blade}}{{ 280}}](#p280)
+  - #### [{{ Avalanche}}{{ 281}}](#p281)
+  - #### [{{ Azure Sweep}}{{ 281}}](#p281)
+  - #### [{{ Blizzard}}{{ 281}}](#p281)
+  - #### [{{ Beam of Annihilation}}{{ 281}}](#p281)
+  - #### [{{ Blade Barrier}}{{ 282}}](#p282)
+  - #### [{{ Bones of the Earth}}{{ 282}}](#p282)
+  - #### [{{ Bubbling Cauldron}}{{ 282}}](#p282)
+  - #### [{{ Chain Lightning}}{{ 282}}](#p282)
+  - #### [{{ Chrono Conjunction}}{{ 283}}](#p283)
+  - #### [{{ Circle of Death}}{{ 283}}](#p283)
+  - #### [{{ Combustion}}{{ 283}}](#p283)
+  - #### [{{ Conjure Fey}}{{ 283}}](#p283)
+  - #### [{{ Contingency}}{{ 284}}](#p284)
+  - #### [{{ Create Homunculus}}{{ 284}}](#p284)
+  - #### [{{ Create Monstrosity (Chimeric Binding)}}{{ 285}}](#p285)
+  - #### [{{ Create Undead}}{{ 286}}](#p286)
+  - #### [{{ Cryptomnesia}}{{ 287}}](#p287)
+  - #### [{{ Dirge}}{{ 288}}](#p288)
+  - #### [{{ Disintegrate}}{{ 288}}](#p288)
+  - #### [{{ Druid Grove}}{{ 289}}](#p289)
+  - #### [{{ Effulgent Spheres}}{{ 289}}](#p289)
+  - #### [{{ Elemental Avatar}}{{ 290}}](#p290)
+  - #### [{{ Eyebite}}{{ 290}}](#p290)
+  - #### [{{ Final Flame}}{{ 290}}](#p290)
+  - #### [{{ Find the Path}}{{ 291}}](#p291)
+  - #### [{{ Flesh to Stone}}{{ 292}}](#p292)
+  - #### [{{ Forbiddance}}{{ 292}}](#p292)
+  - #### [{{ Freezing Sphere}}{{ 292}}](#p292)
+  - #### [{{ Globe of Invulnerability}}{{ 293}}](#p293)
+  - #### [{{ Gravity Fissure}}{{ 293}}](#p293)
+  - #### [{{ Guards and Wards}}{{ 293}}](#p293)
+  - #### [{{ Harm}}{{ 294}}](#p294)
+  - #### [{{ Heal}}{{ 294}}](#p294)
+  - #### [{{ Heroes' Feast}}{{ 294}}](#p294)
+  - #### [{{ Impaling Spears}}{{ 294}}](#p294)
+  - #### [{{ Inevitable Winter}}{{ 295}}](#p295)
+  - #### [{{ Instant Summons}}{{ 295}}](#p295)
+  - #### [{{ Investiture of Darkness}}{{ 295}}](#p295)
+  - #### [{{ Investiture of Flame}}{{ 296}}](#p296)
+  - #### [{{ Investiture of Ice}}{{ 296}}](#p296)
+  - #### [{{ Investiture of Light}}{{ 296}}](#p296)
+  - #### [{{ Investiture of Stone}}{{ 297}}](#p297)
+  - #### [{{ Investiture of Water}}{{ 297}}](#p297)
+  - #### [{{ Investiture of Wind}}{{ 297}}](#p297)
+  - #### [{{ Irresistible Dance}}{{ 298}}](#p298)
+  - #### [{{ Lamentable Belaborment}}{{ 298}}](#p298)
+  - #### [{{ Magic Jar}}{{ 298}}](#p298)
+  - #### [{{ Martial Transformation}}{{ 299}}](#p299)
+  - #### [{{ Mass Blur}}{{ 299}}](#p299)
+  - #### [{{ Mass Command}}{{ 299}}](#p299)
+  - #### [{{ Mass Suggestion}}{{ 300}}](#p300)
+  - #### [{{ Melt}}{{ 300}}](#p300)
+  - #### [{{ Mental Prison}}{{ 300}}](#p300)
+  - #### [{{ Move Earth}}{{ 301}}](#p301)
+  - #### [{{ Nature's Tranquility}}{{ 301}}](#p301)
+  - #### [{{ Otherworldly Guise}}{{ 301}}](#p301)
+  - #### [{{ Planar Ally}}{{ 302}}](#p302)
+  - #### [{{ Platinum Lances}}{{ 302}}](#p302)
+  - #### [{{ Platinum Shield}}{{ 302}}](#p302)
+  - #### [{{ Power Torrent}}{{ 302}}](#p302)
+  - #### [{{ Primordial Ward}}{{ 303}}](#p303)
+  - #### [{{ Programmed Illusion}}{{ 303}}](#p303)
+  - #### [{{ Psionic Oppression}}{{ 303}}](#p303)
+  - #### [{{ Sanguine Doom}}{{ 303}}](#p303)
+  - #### [{{ Scatter}}{{ 304}}](#p304)
+  - #### [{{ Sky Omen}}{{ 304}}](#p304)
+  - #### [{{ Soul Cage}}{{ 304}}](#p304)
+  - #### [{{ Spiritual Projection [Astral Projection]}}{{ 305}}](#p305)
+  - #### [{{ Stirge Swarm}}{{ 305}}](#p305)
+  - #### [{{ Summon Dinosaur}}{{ 306}}](#p306)
+  - #### [{{ Summon Fiend}}{{ 307}}](#p307)
+  - #### [{{ Sunbeam}}{{ 308}}](#p308)
+  - #### [{{ Temporal Visions}}{{ 308}}](#p308)
+  - #### [{{ Transport via Plants}}{{ 308}}](#p308)
+  - #### [{{ True Seeing}}{{ 308}}](#p308)
+  - #### [{{ Volcanic Burst}}{{ 309}}](#p309)
+  - #### [{{ Wall of Ice}}{{ 309}}](#p309)
+  - #### [{{ Wall of Thorns}}{{ 309}}](#p309)
+  - #### [{{ Wind Walk}}{{ 310}}](#p310)
+  - #### [{{ Word of Recall}}{{ 310}}](#p310)
+  - #### [{{ Walking Hut}}{{ 310}}](#p310)
+- ### [{{ 7th Level Spells}}{{ 311}}](#p311)
+  - #### [{{ Arcanist's Sword}}{{ 311}}](#p311)
+  - #### [{{ Aura of Evasion}}{{ 311}}](#p311)
+  - #### [{{ Conjure Celestial}}{{ 312}}](#p312)
+  - #### [{{ Create Magen}}{{ 312}}](#p312)
+  - #### [{{ Crown of Stars}}{{ 312}}](#p312)
+  - #### [{{ Delayed Blast Fireball}}{{ 312}}](#p312)
+  - #### [{{ Devouring Mist}}{{ 313}}](#p313)
+  - #### [{{ Divine Word}}{{ 313}}](#p313)
+  - #### [{{ Draconic Transformation}}{{ 313}}](#p313)
+  - #### [{{ Dream of the Blue Veil}}{{ 314}}](#p314)
+  - #### [{{ Etherealness}}{{ 314}}](#p314)
+  - #### [{{ Finger of Death}}{{ 314}}](#p314)
+  - #### [{{ Fire Storm}}{{ 315}}](#p315)
+  - #### [{{ Forcecage}}{{ 315}}](#p315)
+  - #### [{{ Fractured Awareness}}{{ 315}}](#p315)
+  - #### [{{ Glacial Crash}}{{ 315}}](#p315)
+  - #### [{{ Hellfire Pit}}{{ 316}}](#p316)
+  - #### [{{ Inevitable Boulder}}{{ 316}}](#p316)
+  - #### [{{ Lay Waste}}{{ 316}}](#p316)
+  - #### [{{ Magnificent Mansion}}{{ 317}}](#p317)
+  - #### [{{ Mirage Arcane}}{{ 317}}](#p317)
+  - #### [{{ Plane Shift}}{{ 317}}](#p317)
+  - #### [{{ Power Word: Fortify}}{{ 318}}](#p318)
+  - #### [{{ Power Word: Pain}}{{ 318}}](#p318)
+  - #### [{{ Power Word: Slumber}}{{ 318}}](#p318)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
 - ##
-  - #### [{{ Dirge}}{{ 276}}](#p276)
-  - #### [{{ Disintegrate}}{{ 276}}](#p276)
-  - #### [{{ Druid Grove}}{{ 277}}](#p277)
-  - #### [{{ Effulgent Spheres}}{{ 277}}](#p277)
-  - #### [{{ Eyebite}}{{ 278}}](#p278)
-  - #### [{{ Final Flame}}{{ 278}}](#p278)
-  - #### [{{ Find the Path}}{{ 278}}](#p278)
-  - #### [{{ Flesh to Stone}}{{ 279}}](#p279)
-  - #### [{{ Forbiddance}}{{ 279}}](#p279)
-  - #### [{{ Freezing Sphere}}{{ 279}}](#p279)
-  - #### [{{ Globe of Invulnerability}}{{ 280}}](#p280)
-  - #### [{{ Gravity Fissure}}{{ 280}}](#p280)
-  - #### [{{ Guards and Wards}}{{ 280}}](#p280)
-  - #### [{{ Harm}}{{ 281}}](#p281)
-  - #### [{{ Heal}}{{ 281}}](#p281)
-  - #### [{{ Heroes' Feast}}{{ 281}}](#p281)
-  - #### [{{ Impaling Spears}}{{ 281}}](#p281)
-  - #### [{{ Inevitable Winter}}{{ 282}}](#p282)
-  - #### [{{ Instant Summons}}{{ 282}}](#p282)
-  - #### [{{ Investiture of Darkness}}{{ 282}}](#p282)
-  - #### [{{ Investiture of Flame}}{{ 283}}](#p283)
-  - #### [{{ Investiture of Ice}}{{ 283}}](#p283)
-  - #### [{{ Investiture of Light}}{{ 283}}](#p283)
-  - #### [{{ Investiture of Stone}}{{ 284}}](#p284)
-  - #### [{{ Investiture of Water}}{{ 284}}](#p284)
-  - #### [{{ Investiture of Wind}}{{ 284}}](#p284)
-  - #### [{{ Irresistible Dance}}{{ 285}}](#p285)
-  - #### [{{ Lamentable Belaborment}}{{ 285}}](#p285)
-  - #### [{{ Magic Jar}}{{ 285}}](#p285)
-  - #### [{{ Martial Transformation}}{{ 286}}](#p286)
-  - #### [{{ Mass Blur}}{{ 286}}](#p286)
-  - #### [{{ Mass Command}}{{ 286}}](#p286)
-  - #### [{{ Mass Suggestion}}{{ 287}}](#p287)
-  - #### [{{ Melt}}{{ 287}}](#p287)
-  - #### [{{ Mental Prison}}{{ 287}}](#p287)
-  - #### [{{ Move Earth}}{{ 288}}](#p288)
-  - #### [{{ Otherworldly Guise}}{{ 288}}](#p288)
-  - #### [{{ Planar Ally}}{{ 288}}](#p288)
-  - #### [{{ Platinum Lances}}{{ 289}}](#p289)
-  - #### [{{ Platinum Shield}}{{ 289}}](#p289)
-  - #### [{{ Power Torrent}}{{ 289}}](#p289)
-  - #### [{{ Primordial Ward}}{{ 289}}](#p289)
-  - #### [{{ Programmed Illusion}}{{ 290}}](#p290)
-  - #### [{{ Psionic Oppression}}{{ 290}}](#p290)
-  - #### [{{ Sanguine Doom}}{{ 290}}](#p290)
-  - #### [{{ Scatter}}{{ 290}}](#p290)
-  - #### [{{ Sky Omen}}{{ 291}}](#p291)
-  - #### [{{ Soul Cage}}{{ 291}}](#p291)
-  - #### [{{ Stirge Swarm}}{{ 291}}](#p291)
-  - #### [{{ Summon Dinosaur}}{{ 292}}](#p292)
-  - #### [{{ Summon Fiend}}{{ 293}}](#p293)
-  - #### [{{ Sunbeam}}{{ 294}}](#p294)
-  - #### [{{ Temporal Visions}}{{ 294}}](#p294)
-  - #### [{{ Transport via Plants}}{{ 294}}](#p294)
-  - #### [{{ True Seeing}}{{ 294}}](#p294)
-  - #### [{{ Volcanic Burst}}{{ 295}}](#p295)
-  - #### [{{ Wall of Ice}}{{ 295}}](#p295)
-  - #### [{{ Wall of Thorns}}{{ 295}}](#p295)
-  - #### [{{ Wind Walk}}{{ 296}}](#p296)
-  - #### [{{ Word of Recall}}{{ 296}}](#p296)
-  - #### [{{ Walking Hut}}{{ 296}}](#p296)
-- ### [{{ 7th Level Spells}}{{ 297}}](#p297)
-  - #### [{{ Arcanist's Sword}}{{ 297}}](#p297)
-  - #### [{{ Aura of Evasion}}{{ 297}}](#p297)
-  - #### [{{ Conjure Celestial}}{{ 298}}](#p298)
-  - #### [{{ Create Magen}}{{ 298}}](#p298)
-  - #### [{{ Crown of Stars}}{{ 298}}](#p298)
-  - #### [{{ Delayed Blast Fireball}}{{ 298}}](#p298)
-  - #### [{{ Devouring Mist}}{{ 299}}](#p299)
-  - #### [{{ Divine Word}}{{ 299}}](#p299)
-  - #### [{{ Draconic Transformation}}{{ 299}}](#p299)
-  - #### [{{ Dream of the Blue Veil}}{{ 300}}](#p300)
-  - #### [{{ Etherealness}}{{ 300}}](#p300)
-  - #### [{{ Finger of Death}}{{ 300}}](#p300)
-  - #### [{{ Fire Storm}}{{ 301}}](#p301)
-  - #### [{{ Forcecage}}{{ 301}}](#p301)
-  - #### [{{ Fractured Awareness}}{{ 301}}](#p301)
-  - #### [{{ Glacial Crash}}{{ 301}}](#p301)
-  - #### [{{ Hellfire Pit}}{{ 302}}](#p302)
-  - #### [{{ Inevitable Boulder}}{{ 302}}](#p302)
-  - #### [{{ Magnificent Mansion}}{{ 302}}](#p302)
-  - #### [{{ Mirage Arcane}}{{ 303}}](#p303)
-  - #### [{{ Plane Shift}}{{ 303}}](#p303)
-  - #### [{{ Power Word: Fortify}}{{ 303}}](#p303)
-  - #### [{{ Power Word: Pain}}{{ 303}}](#p303)
-  - #### [{{ Power Word: Slumber}}{{ 304}}](#p304)
-  - #### [{{ Prismatic Spray}}{{ 304}}](#p304)
-  - #### [{{ Prophesied Strike}}{{ 304}}](#p304)
-  - #### [{{ Project Image}}{{ 304}}](#p304)
-  - #### [{{ Rain of Swords}}{{ 305}}](#p305)
-  - #### [{{ Regenerate}}{{ 305}}](#p305)
-  - #### [{{ Resurrection}}{{ 305}}](#p305)
-  - #### [{{ Reverse Gravity}}{{ 306}}](#p306)
-  - #### [{{ Reweave Fate}}{{ 306}}](#p306)
-  - #### [{{ Sequester}}{{ 306}}](#p306)
-  - #### [{{ Sorcerous Sequestration}}{{ 306}}](#p306)
-  - #### [{{ Simulacrum}}{{ 307}}](#p307)
-  - #### [{{ Skirmish}}{{ 307}}](#p307)
-  - #### [{{ Symbol}}{{ 308}}](#p308)
-  - #### [{{ Synostodweomer}}{{ 308}}](#p308)
-  - #### [{{ Teleport}}{{ 309}}](#p309)
-  - #### [{{ Temple of the Gods}}{{ 310}}](#p310)
-  - #### [{{ Tether Essence}}{{ 310}}](#p310)
-  - #### [{{ Transfix}}{{ 311}}](#p311)
-  - #### [{{ Twisting Eruption}}{{ 311}}](#p311)
-  - #### [{{ Void Star}}{{ 311}}](#p311)
-  - #### [{{ Whirlwind}}{{ 312}}](#p312)
-- ### [{{ 8th Level Spells}}{{ 313}}](#p313)
-  - #### [{{ Animal Shapes}}{{ 313}}](#p313)
-  - #### [{{ Antimagic Field}}{{ 314}}](#p314)
-  - #### [{{ Antipathy/Sympathy}}{{ 314}}](#p314)
-  - #### [{{ Arcane Singularity}}{{ 315}}](#p315)
-  - #### [{{ Arcane Star}}{{ 315}}](#p315)
-  - #### [{{ Clone}}{{ 315}}](#p315)
-  - #### [{{ Control Weather}}{{ 316}}](#p316)
-  - #### [{{ Dark Star}}{{ 316}}](#p316)
-  - #### [{{ Demiplane}}{{ 317}}](#p317)
-  - #### [{{ Divine Descent}}{{ 317}}](#p317)
-  - #### [{{ Dominate Monster}}{{ 317}}](#p317)
-  - #### [{{ Earthquake}}{{ 318}}](#p318)
-  - #### [{{ Entrancing Mirrors}}{{ 318}}](#p318)
-  - #### [{{ Feeblemind}}{{ 318}}](#p318)
-  - #### [{{ Glibness}}{{ 318}}](#p318)
-  - #### [{{ Holy Aura}}{{ 319}}](#p319)
-  - #### [{{ Horrid Wilting}}{{ 319}}](#p319)
-  - #### [{{ Illusory Dragon}}{{ 319}}](#p319)
-  - #### [{{ Incendiary Cloud}}{{ 320}}](#p320)
-  - #### [{{ Iron Body}}{{ 320}}](#p320)
-  - #### [{{ Lightning Ring}}{{ 320}}](#p320)
-  - #### [{{ Maddening Darkness}}{{ 320}}](#p320)
-  - #### [{{ Mass Invisibility}}{{ 320}}](#p320)
-  - #### [{{ Maximize/Minimize}}{{ 321}}](#p321)
-  - #### [{{ Maze}}{{ 321}}](#p321)
-  - #### [{{ Mighty Fortress}}{{ 322}}](#p322)
-  - #### [{{ Mind Blank}}{{ 322}}](#p322)
-  - #### [{{ Moment of Prescience}}{{ 322}}](#p322)
-  - #### [{{ Nimbleness}}{{ 322}}](#p322)
-  - #### [{{ Omniscience}}{{ 323}}](#p323)
-  - #### [{{ Polar Ray}}{{ 323}}](#p323)
-  - #### [{{ Power Word: Stun}}{{ 323}}](#p323)
-  - #### [{{ Precognition}}{{ 323}}](#p323)
-  - #### [{{ Reality Break}}{{ 323}}](#p323)
-  - #### [{{ Sunburst}}{{ 324}}](#p324)
-  - #### [{{ Skeletal Deliquescence}}{{ 324}}](#p324)
-  - #### [{{ Telepathy}}{{ 324}}](#p324)
-  - #### [{{ Tempestuous Climate}}{{ 325}}](#p325)
-  - #### [{{ Time Anchor}}{{ 325}}](#p325)
-  - #### [{{ Time Bubble}}{{ 325}}](#p325)
-  - #### [{{ Titanic Strength}}{{ 326}}](#p326)
-  - #### [{{ Tsunami}}{{ 326}}](#p326)
-  - #### [{{ Wildfire}}{{ 326}}](#p326)
-- ### [{{ 9th Level Spells}}{{ 327}}](#p327)
-  - #### [{{ Arcanist's Reflection}}{{ 327}}](#p327)
-  - #### [{{ Astral Projection}}{{ 328}}](#p328)
-  - #### [{{ Blackhole}}{{ 328}}](#p328)
-  - #### [{{ Blade of Disaster}}{{ 329}}](#p329)
-  - #### [{{ Detonate}}{{ 329}}](#p329)
-  - #### [{{ Eye of Power}}{{ 329}}](#p329)
+  - #### [{{ Prismatic Spray}}{{ 318}}](#p318)
+  - #### [{{ Prophesied Strike}}{{ 319}}](#p319)
+  - #### [{{ Project Image}}{{ 319}}](#p319)
+  - #### [{{ Rain of Swords}}{{ 319}}](#p319)
+  - #### [{{ Regenerate}}{{ 319}}](#p319)
+  - #### [{{ Resurrection}}{{ 320}}](#p320)
+  - #### [{{ Reverse Gravity}}{{ 320}}](#p320)
+  - #### [{{ Reweave Fate}}{{ 320}}](#p320)
+  - #### [{{ Sequester}}{{ 320}}](#p320)
+  - #### [{{ Sorcerous Sequestration}}{{ 321}}](#p321)
+  - #### [{{ Simulacrum}}{{ 321}}](#p321)
+  - #### [{{ Skirmish}}{{ 321}}](#p321)
+  - #### [{{ Symbol}}{{ 322}}](#p322)
+  - #### [{{ Synostodweomer}}{{ 322}}](#p322)
+  - #### [{{ Teleport}}{{ 323}}](#p323)
+  - #### [{{ Temple of the Gods}}{{ 324}}](#p324)
+  - #### [{{ Tether Essence}}{{ 324}}](#p324)
+  - #### [{{ Transfix}}{{ 325}}](#p325)
+  - #### [{{ Tree of Life}}{{ 325}}](#p325)
+  - #### [{{ Twisting Eruption}}{{ 325}}](#p325)
+  - #### [{{ Void Star}}{{ 325}}](#p325)
+  - #### [{{ Whirlwind}}{{ 326}}](#p326)
+- ### [{{ 8th Level Spells}}{{ 327}}](#p327)
+  - #### [{{ Animal Shapes}}{{ 327}}](#p327)
+  - #### [{{ Antimagic Field}}{{ 328}}](#p328)
+  - #### [{{ Antipathy/Sympathy}}{{ 328}}](#p328)
+  - #### [{{ Apotheosis}}{{ 328}}](#p328)
+  - #### [{{ Arcane Singularity}}{{ 329}}](#p329)
+  - #### [{{ Arcane Star}}{{ 329}}](#p329)
+  - #### [{{ Clone}}{{ 329}}](#p329)
+  - #### [{{ Control Weather}}{{ 330}}](#p330)
+  - #### [{{ Dark Star}}{{ 330}}](#p330)
+  - #### [{{ Demiplane}}{{ 331}}](#p331)
+  - #### [{{ Divine Descent}}{{ 331}}](#p331)
+  - #### [{{ Dominate Monster}}{{ 331}}](#p331)
+  - #### [{{ Earthquake}}{{ 332}}](#p332)
+  - #### [{{ Entrancing Mirrors}}{{ 332}}](#p332)
+  - #### [{{ Feeblemind}}{{ 332}}](#p332)
+  - #### [{{ Glibness}}{{ 332}}](#p332)
+  - #### [{{ Holy Aura}}{{ 333}}](#p333)
+  - #### [{{ Horrid Wilting}}{{ 333}}](#p333)
+  - #### [{{ Illusory Dragon}}{{ 333}}](#p333)
+  - #### [{{ Incendiary Cloud}}{{ 334}}](#p334)
+  - #### [{{ Iron Body}}{{ 334}}](#p334)
+  - #### [{{ Lightning Ring}}{{ 334}}](#p334)
+  - #### [{{ Maddening Darkness}}{{ 334}}](#p334)
+  - #### [{{ Mass Invisibility}}{{ 334}}](#p334)
+  - #### [{{ Maximize/Minimize}}{{ 335}}](#p335)
+  - #### [{{ Maze}}{{ 335}}](#p335)
+  - #### [{{ Mighty Fortress}}{{ 336}}](#p336)
+  - #### [{{ Mind Blank}}{{ 336}}](#p336)
+  - #### [{{ Moment of Prescience}}{{ 336}}](#p336)
+  - #### [{{ Nimbleness}}{{ 336}}](#p336)
+  - #### [{{ Omniscience}}{{ 337}}](#p337)
+  - #### [{{ Polar Ray}}{{ 337}}](#p337)
+  - #### [{{ Power Word: Stun}}{{ 337}}](#p337)
+  - #### [{{ Precognition}}{{ 337}}](#p337)
+  - #### [{{ Reality Break}}{{ 337}}](#p337)
+  - #### [{{ Self Time Stop [Time Stop]}}{{ 338}}](#p338)
+  - #### [{{ Sunburst}}{{ 338}}](#p338)
+  - #### [{{ Skeletal Deliquescence}}{{ 338}}](#p338)
+  - #### [{{ Telepathy}}{{ 338}}](#p338)
+  - #### [{{ Tempestuous Climate}}{{ 339}}](#p339)
+  - #### [{{ Time Anchor}}{{ 339}}](#p339)
+  - #### [{{ Time Bubble}}{{ 339}}](#p339)
+  - #### [{{ Titanic Strength}}{{ 340}}](#p340)
+  - #### [{{ Tsunami}}{{ 340}}](#p340)
+  - #### [{{ Wildfire}}{{ 340}}](#p340)
+- ### [{{ 9th Level Spells}}{{ 341}}](#p341)
+  - #### [{{ Arcanist's Reflection}}{{ 341}}](#p341)
+  - #### [{{ Astral Projection}}{{ 342}}](#p342)
+  - #### [{{ Blackhole}}{{ 342}}](#p342)
+  - #### [{{ Blade of Disaster}}{{ 343}}](#p343)
+  - #### [{{ Detonate}}{{ 343}}](#p343)
+  - #### [{{ Eye of Power}}{{ 343}}](#p343)
+  - #### [{{ Foresight}}{{ 343}}](#p343)
+  - #### [{{ Form of the Elements}}{{ 344}}](#p344)
+  - #### [{{ Frostfell}}{{ 344}}](#p344)
+  - #### [{{ Gate}}{{ 344}}](#p344)
+  - #### [{{ Heart Of Darkness}}{{ 345}}](#p345)
+  - #### [{{ Hindsight}}{{ 345}}](#p345)
+  - #### [{{ Identity Curse}}{{ 345}}](#p345)
+  - #### [{{ Imprisonment}}{{ 346}}](#p346)
+  - #### [{{ Invulnerability}}{{ 346}}](#p346)
+  - #### [{{ Manipulate Fate}}{{ 347}}](#p347)
+  - #### [{{ Mass Heal}}{{ 347}}](#p347)
+  - #### [{{ Mass Polymorph}}{{ 347}}](#p347)
+  - #### [{{ Meteor Swarm}}{{ 348}}](#p348)
+  - #### [{{ Mindweave Convergence}}{{ 348}}](#p348)
+  - #### [{{ Paradox}}{{ 348}}](#p348)
+  - #### [{{ Power Word: Heal}}{{ 348}}](#p348)
+  - #### [{{ Power Word: Kill}}{{ 348}}](#p348)
+  - #### [{{ Power Word: Ruin}}{{ 349}}](#p349)
+  - #### [{{ Prismatic Wall}}{{ 349}}](#p349)
+  - #### [{{ Prismatic Layers}}{{ 349}}](#p349)
+  - #### [{{ Psychic Scream}}{{ 350}}](#p350)
+  - #### [{{ Ravenous Void}}{{ 350}}](#p350)
+  - #### [{{ Restore Youth}}{{ 350}}](#p350)
+  - #### [{{ Shapechange}}{{ 351}}](#p351)
+  - #### [{{ Sphere of Ultimate Destruction}}{{ 351}}](#p351)
+  - #### [{{ Storm of Vengeance}}{{ 351}}](#p351)
+  - #### [{{ Supernova}}{{ 352}}](#p352)
+  - #### [{{ Towering Thunderhead}}{{ 352}}](#p352)
+  - #### [{{ Time Ravage}}{{ 352}}](#p352)
+  - #### [{{ Time Stop}}{{ 352}}](#p352)
+  - #### [{{ True Polymorph}}{{ 353}}](#p353)
+  - #### [{{ True Resurrection}}{{ 353}}](#p353)
+  - #### [{{ Vision of Elapsing Eons}}{{ 353}}](#p353)
+  - #### [{{ Wail of the Banshee}}{{ 354}}](#p354)
+  - #### [{{ Weird}}{{ 354}}](#p354)
+  - #### [{{ Wish}}{{ 355}}](#p355)
+- ### [{{ Metamagic Effects}}{{ 356}}](#p356)
+  - #### [{{ Adamant Spell}}{{ 357}}](#p357)
+  - #### [{{ Adjacent Spell}}{{ 357}}](#p357)
+  - #### [{{ Altered Spell}}{{ 357}}](#p357)
+  - #### [{{ Blinding Spell}}{{ 357}}](#p357)
+  - #### [{{ Careful Spell}}{{ 357}}](#p357)
+  - #### [{{ Concussive Spell}}{{ 357}}](#p357)
+  - #### [{{ Distant Spell}}{{ 357}}](#p357)
+  - #### [{{ Dynamic Presence}}{{ 357}}](#p357)
+  - #### [{{ Empowered Spell}}{{ 357}}](#p357)
+  - #### [{{ Extended Spell}}{{ 357}}](#p357)
+  - #### [{{ Heightened Spell}}{{ 357}}](#p357)
+  - #### [{{ Magical Guidance}}{{ 357}}](#p357)
+  - #### [{{ Magical Transference}}{{ 358}}](#p358)
+  - #### [{{ Potent Spell}}{{ 358}}](#p358)
+  - #### [{{ Quickened Spell}}{{ 358}}](#p358)
+  - #### [{{ Recycled Spell}}{{ 358}}](#p358)
+  - #### [{{ Repeated Spell}}{{ 358}}](#p358)
+  - #### [{{ Seeking Spell}}{{ 358}}](#p358)
+  - #### [{{ Siphoning Spell}}{{ 358}}](#p358)
+  - #### [{{ Sorcerous Fortitude}}{{ 358}}](#p358)
+  - #### [{{ Subtle Spell}}{{ 358}}](#p358)
+  - #### [{{ Terrifying Spell}}{{ 358}}](#p358)
+  - #### [{{ Transmuted Spell}}{{ 358}}](#p358)
+  - #### [{{ Twinned Spell}}{{ 359}}](#p359)
+  - #### [{{ Unstable Spell}}{{ 359}}](#p359)
+  - #### [{{ Venomous Spell}}{{ 359}}](#p359)
+- ### [{{ Metamagic Index}}{{ 359}}](#p359)
 }}
-\page
-{{pageNumber,auto}}
-{{toc,wide
-- ##
-  - #### [{{ Foresight}}{{ 329}}](#p329)
-  - #### [{{ Form of the Elements}}{{ 330}}](#p330)
-  - #### [{{ Frostfell}}{{ 330}}](#p330)
-  - #### [{{ Gate}}{{ 330}}](#p330)
-  - #### [{{ Heart Of Darkness}}{{ 331}}](#p331)
-  - #### [{{ Hindsight}}{{ 331}}](#p331)
-  - #### [{{ Identity Curse}}{{ 331}}](#p331)
-  - #### [{{ Imprisonment}}{{ 332}}](#p332)
-  - #### [{{ Invulnerability}}{{ 332}}](#p332)
-  - #### [{{ Manipulate Fate}}{{ 333}}](#p333)
-  - #### [{{ Mass Heal}}{{ 333}}](#p333)
-  - #### [{{ Mass Polymorph}}{{ 333}}](#p333)
-  - #### [{{ Meteor Swarm}}{{ 334}}](#p334)
-  - #### [{{ Mindweave Convergence}}{{ 334}}](#p334)
-  - #### [{{ Paradox}}{{ 334}}](#p334)
-  - #### [{{ Power Word: Heal}}{{ 334}}](#p334)
-  - #### [{{ Power Word: Kill}}{{ 334}}](#p334)
-  - #### [{{ Power Word: Ruin}}{{ 335}}](#p335)
-  - #### [{{ Prismatic Wall}}{{ 335}}](#p335)
-  - #### [{{ Prismatic Layers}}{{ 335}}](#p335)
-  - #### [{{ Psychic Scream}}{{ 336}}](#p336)
-  - #### [{{ Ravenous Void}}{{ 336}}](#p336)
-  - #### [{{ Restore Youth}}{{ 336}}](#p336)
-  - #### [{{ Shapechange}}{{ 337}}](#p337)
-  - #### [{{ Sphere of Ultimate Destruction}}{{ 337}}](#p337)
-  - #### [{{ Storm of Vengeance}}{{ 337}}](#p337)
-  - #### [{{ Supernova}}{{ 338}}](#p338)
-  - #### [{{ Towering Thunderhead}}{{ 338}}](#p338)
-  - #### [{{ Time Ravage}}{{ 338}}](#p338)
-  - #### [{{ Time Stop}}{{ 338}}](#p338)
-  - #### [{{ True Polymorph}}{{ 339}}](#p339)
-  - #### [{{ True Resurrection}}{{ 339}}](#p339)
-  - #### [{{ Vision of Elapsing Eons}}{{ 339}}](#p339)
-  - #### [{{ Wail of the Banshee}}{{ 340}}](#p340)
-  - #### [{{ Weird}}{{ 340}}](#p340)
-  - #### [{{ Wish}}{{ 341}}](#p341)
-- ### [{{ Metamagic Options}}{{ 343}}](#p343)
-  - #### [{{ Adamant Spell}}{{ 343}}](#p343)
-  - #### [{{ Adjacent Spell}}{{ 343}}](#p343)
-  - #### [{{ Altered Spell}}{{ 343}}](#p343)
-  - #### [{{ Blinding Spell}}{{ 343}}](#p343)
-  - #### [{{ Careful Spell}}{{ 343}}](#p343)
-  - #### [{{ Concussive Spell}}{{ 343}}](#p343)
-  - #### [{{ Distant Spell}}{{ 343}}](#p343)
-  - #### [{{ Dynamic Presence}}{{ 343}}](#p343)
-  - #### [{{ Empowered Spell}}{{ 343}}](#p343)
-  - #### [{{ Extended Spell}}{{ 343}}](#p343)
-  - #### [{{ Heightened Spell}}{{ 343}}](#p343)
-  - #### [{{ Magical Guidance}}{{ 343}}](#p343)
-  - #### [{{ Magical Transference}}{{ 344}}](#p344)
-  - #### [{{ Potent Spell}}{{ 344}}](#p344)
-  - #### [{{ Quickened Spell}}{{ 344}}](#p344)
-  - #### [{{ Recycled Spell}}{{ 344}}](#p344)
-  - #### [{{ Repeated Spell}}{{ 344}}](#p344)
-  - #### [{{ Seeking Spell}}{{ 344}}](#p344)
-  - #### [{{ Siphoning Spell}}{{ 344}}](#p344)
-  - #### [{{ Sorcerous Fortitude}}{{ 344}}](#p344)
-  - #### [{{ Subtle Spell}}{{ 344}}](#p344)
-  - #### [{{ Terrifying Spell}}{{ 344}}](#p344)
-  - #### [{{ Transmuted Spell}}{{ 344}}](#p344)
-  - #### [{{ Twinned Spell}}{{ 345}}](#p345)
-  - #### [{{ Unstable Spell}}{{ 345}}](#p345)
-  - #### [{{ Venomous Spell}}{{ 345}}](#p345)
-- ### [{{ Metamagic Index}}{{ 345}}](#p345)
-}}
-
 
 \page
 {{pageNumber,auto}}
@@ -1237,138 +1313,142 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Arcane Weapon}}{{ 67}}](#p67)
 - [{{ Awaken Rope}}{{ 68}}](#p68)
 - [{{ Bond Item}}{{ 70}}](#p70)
-- [{{ Catapult}}{{ 70}}](#p70)
+- [{{ Catapult}}{{ 71}}](#p71)
 - [{{ Caustic Brew}}{{ 71}}](#p71)
 - [{{ Cure Wounds}}{{ 75}}](#p75)
 - [{{ Detect Magic}}{{ 76}}](#p76)
 - [{{ Disguise Self}}{{ 76}}](#p76)
-- [{{ Ensnaring Strike}}{{ 77}}](#p77)
-- [{{ Expeditious Retreat}}{{ 78}}](#p78)
+- [{{ Ensnaring Strike}}{{ 78}}](#p78)
+- [{{ Expeditious Retreat}}{{ 79}}](#p79)
 - [{{ Faerie Fire}}{{ 79}}](#p79)
-- [{{ Fall}}{{ 79}}](#p79)
-- [{{ False Life}}{{ 79}}](#p79)
-- [{{ Feather Fall}}{{ 79}}](#p79)
-- [{{ Fog Cloud}}{{ 81}}](#p81)
-- [{{ Grease}}{{ 82}}](#p82)
-- [{{ Heroism}}{{ 83}}](#p83)
-- [{{ Identify}}{{ 85}}](#p85)
-- [{{ Jump}}{{ 86}}](#p86)
-- [{{ Longstrider}}{{ 87}}](#p87)
-- [{{ Magic Missile}}{{ 87}}](#p87)
-- [{{ Melting Glob}}{{ 87}}](#p87)
-- [{{ Purify Food and Drink}}{{ 89}}](#p89)
-- [{{ Sanctuary}}{{ 90}}](#p90)
-- [{{ Snare (Create Snare)}}{{ 92}}](#p92)
-- [{{ Unburden}}{{ 96}}](#p96)
+- [{{ Fall}}{{ 80}}](#p80)
+- [{{ False Life}}{{ 80}}](#p80)
+- [{{ Feather Fall}}{{ 80}}](#p80)
+- [{{ Fog Cloud}}{{ 82}}](#p82)
+- [{{ Freezing Trap}}{{ 82}}](#p82)
+- [{{ Grease}}{{ 83}}](#p83)
+- [{{ Heroism}}{{ 84}}](#p84)
+- [{{ Identify}}{{ 86}}](#p86)
+- [{{ Jump}}{{ 89}}](#p89)
+- [{{ Longstrider}}{{ 89}}](#p89)
+- [{{ Magic Missile}}{{ 89}}](#p89)
+- [{{ Melting Glob}}{{ 90}}](#p90)
+- [{{ Purify Food and Drink}}{{ 92}}](#p92)
+- [{{ Quick Clothier}}{{ 93}}](#p93)
+- [{{ Sanctuary}}{{ 94}}](#p94)
+- [{{ Snare (Create Snare)}}{{ 96}}](#p96)
+- [{{ Unburden}}{{ 100}}](#p100)
 :
 - **2nd Level Spells**
-- [{{ Aid}}{{ 99}}](#p99)
-- [{{ Air Bubble}}{{ 99}}](#p99)
-- [{{ Alter Self}}{{ 100}}](#p100)
-- [{{ Animate Object}}{{ 101}}](#p101)
-- [{{ Arcane Lock}}{{ 102}}](#p102)
-- [{{ Blur}}{{ 108}}](#p108)
-- [{{ Clay Touch}}{{ 110}}](#p110)
-- [{{ Continual Flame}}{{ 111}}](#p111)
-- [{{ Cordon of Arrows}}{{ 111}}](#p111)
-- [{{ Create Ooze}}{{ 112}}](#p112)
-- [{{ Dancing Object}}{{ 113}}](#p113)
-- [{{ Darkvision}}{{ 114}}](#p114)
-- [{{ Dueling Ground}}{{ 116}}](#p116)
-- [{{ Enhance Ability}}{{ 117}}](#p117)
-- [{{ Enlarge/Reduce}}{{ 117}}](#p117)
-- [{{ Heat Metal}}{{ 123}}](#p123)
-- [{{ Helpful Homunculi}}{{ 123}}](#p123)
-- [{{ Imbue Luck}}{{ 124}}](#p124)
-- [{{ Immovable Object}}{{ 124}}](#p124)
-- [{{ Invisibility}}{{ 125}}](#p125)
-- [{{ Kinetic Jaunt}}{{ 125}}](#p125)
-- [{{ Lesser Restoration}}{{ 126}}](#p126)
-- [{{ Levitate}}{{ 126}}](#p126)
-- [{{ Lightning Charged}}{{ 127}}](#p127)
-- [{{ Lock/Unlock}}{{ 128}}](#p128)
-- [{{ Magic Mouth}}{{ 128}}](#p128)
-- [{{ Magic Weapon}}{{ 129}}](#p129)
-- [{{ Protection from Poison}}{{ 133}}](#p133)
-- [{{ Pyrotechnics}}{{ 133}}](#p133)
-- [{{ Rope Trick}}{{ 134}}](#p134)
-- [{{ See Invisibility}}{{ 135}}](#p135)
-- [{{ Skywrite}}{{ 137}}](#p137)
-- [{{ Spider Climb}}{{ 137}}](#p137)
-- [{{ Thunderburst Mine}}{{ 144}}](#p144)
-- [{{ Tortoise Shell}}{{ 145}}](#p145)
-- [{{ Uncertain Footing}}{{ 145}}](#p145)
-- [{{ Vortex Warp}}{{ 146}}](#p146)
-- [{{ Web}}{{ 147}}](#p147)
-- [{{ Wind Cutter}}{{ 148}}](#p148)
+- [{{ Aid}}{{ 103}}](#p103)
+- [{{ Air Bubble}}{{ 103}}](#p103)
+- [{{ Alter Self}}{{ 104}}](#p104)
+- [{{ Animate Object}}{{ 105}}](#p105)
+- [{{ Arcane Lock}}{{ 106}}](#p106)
+- [{{ Blur}}{{ 112}}](#p112)
+- [{{ Clay Touch}}{{ 114}}](#p114)
+- [{{ Conjure Tools}}{{ 115}}](#p115)
+- [{{ Continual Flame}}{{ 115}}](#p115)
+- [{{ Cordon of Arrows}}{{ 116}}](#p116)
+- [{{ Create Ooze}}{{ 116}}](#p116)
+- [{{ Dancing Object}}{{ 117}}](#p117)
+- [{{ Darkvision}}{{ 118}}](#p118)
+- [{{ Dueling Ground}}{{ 121}}](#p121)
+- [{{ Enhance Ability}}{{ 122}}](#p122)
+- [{{ Enlarge/Reduce}}{{ 122}}](#p122)
+- [{{ Heat Metal}}{{ 129}}](#p129)
+- [{{ Helpful Homunculi}}{{ 129}}](#p129)
+- [{{ Imbue Luck}}{{ 130}}](#p130)
+- [{{ Immovable Object}}{{ 130}}](#p130)
+- [{{ Invisibility}}{{ 131}}](#p131)
+- [{{ Kinetic Jaunt}}{{ 131}}](#p131)
+- [{{ Lesser Restoration}}{{ 132}}](#p132)
+- [{{ Levitate}}{{ 132}}](#p132)
+- [{{ Lightning Charged}}{{ 133}}](#p133)
+- [{{ Lock/Unlock}}{{ 134}}](#p134)
+- [{{ Magic Mouth}}{{ 134}}](#p134)
+- [{{ Magic Weapon}}{{ 135}}](#p135)
+- [{{ Protection from Poison}}{{ 139}}](#p139)
+- [{{ Pyrotechnics}}{{ 139}}](#p139)
+- [{{ Rope Trick}}{{ 141}}](#p141)
+- [{{ See Invisibility}}{{ 141}}](#p141)
+- [{{ Skywrite}}{{ 143}}](#p143)
+- [{{ Spider Climb}}{{ 144}}](#p144)
+- [{{ Thunderburst Mine}}{{ 150}}](#p150)
+- [{{ Tortoise Shell}}{{ 151}}](#p151)
+- [{{ Uncertain Footing}}{{ 151}}](#p151)
+- [{{ Vortex Warp}}{{ 152}}](#p152)
+- [{{ Web}}{{ 153}}](#p153)
+- [{{ Wind Cutter}}{{ 154}}](#p154)
 :
 - **3rd Level Spells**
-- [{{ Ashardalon's Stride}}{{ 152}}](#p152)
-- [{{ Blink}}{{ 154}}](#p154)
-- [{{ Catnap}}{{ 155}}](#p155)
-- [{{ Conjure Constructs}}{{ 157}}](#p157)
-- [{{ Create Food and Water}}{{ 158}}](#p158)
-- [{{ Daylight}}{{ 159}}](#p159)
-- [{{ Dispel Construct}}{{ 160}}](#p160)
-- [{{ Dispel Magic}}{{ 160}}](#p160)
-- [{{ Elemental Weapon}}{{ 161}}](#p161)
-- [{{ Fireburst Mine}}{{ 163}}](#p163)
-- [{{ Flame Arrows}}{{ 163}}](#p163)
-- [{{ Fly}}{{ 164}}](#p164)
-- [{{ Glyph of Warding}}{{ 166}}](#p166)
-- [{{ Haste}}{{ 167}}](#p167)
-- [{{ Intellect Fortress}}{{ 169}}](#p169)
-- [{{ Life Transference}}{{ 170}}](#p170)
-- [{{ Lightning Arrow}}{{ 171}}](#p171)
-- [{{ Linked Glyphs}}{{ 172}}](#p172)
-- [{{ Protection from Energy}}{{ 176}}](#p176)
-- [{{ Revivify}}{{ 178}}](#p178)
-- [{{ Sending}}{{ 179}}](#p179)
-- [{{ Slow}}{{ 180}}](#p180)
-- [{{ Static Field}}{{ 182}}](#p182)
-- [{{ Tiny Servant}}{{ 190}}](#p190)
-- [{{ Water Breathing}}{{ 191}}](#p191)
-- [{{ Water Walk}}{{ 192}}](#p192)
+- [{{ Ashardalon's Stride}}{{ 158}}](#p158)
+- [{{ Blink}}{{ 160}}](#p160)
+- [{{ Catnap}}{{ 161}}](#p161)
+- [{{ Conjure Constructs}}{{ 163}}](#p163)
+- [{{ Create Food and Water}}{{ 164}}](#p164)
+- [{{ Daylight}}{{ 165}}](#p165)
+- [{{ Dispel Construct}}{{ 166}}](#p166)
+- [{{ Dispel Magic}}{{ 166}}](#p166)
+- [{{ Elemental Weapon}}{{ 167}}](#p167)
+- [{{ Fireburst Mine}}{{ 169}}](#p169)
+- [{{ Flame Arrows}}{{ 170}}](#p170)
+- [{{ Fly}}{{ 170}}](#p170)
+- [{{ Glyph of Warding}}{{ 172}}](#p172)
+- [{{ Haste}}{{ 173}}](#p173)
+- [{{ Intellect Fortress}}{{ 176}}](#p176)
+- [{{ Life Transference}}{{ 178}}](#p178)
+- [{{ Lightning Arrow}}{{ 178}}](#p178)
+- [{{ Linked Glyphs}}{{ 179}}](#p179)
+- [{{ Protection from Energy}}{{ 184}}](#p184)
+- [{{ Revivify}}{{ 186}}](#p186)
+- [{{ Sending}}{{ 186}}](#p186)
+- [{{ Slow}}{{ 187}}](#p187)
+- [{{ Static Field}}{{ 190}}](#p190)
+- [{{ Tiny Servant}}{{ 197}}](#p197)
+- [{{ Water Breathing}}{{ 198}}](#p198)
+- [{{ Water Walk}}{{ 199}}](#p199)
 :
 - **4th Level Spells**
-- [{{ Arcane Eye}}{{ 195}}](#p195)
-- [{{ Dimension Door}}{{ 200}}](#p200)
-- [{{ Distorted Distance}}{{ 201}}](#p201)
-- [{{ Elemental Bane}}{{ 203}}](#p203)
-- [{{ Fabricate}}{{ 204}}](#p204)
-- [{{ Faithful Hound}}{{ 204}}](#p204)
-- [{{ Freedom of Movement}}{{ 206}}](#p206)
-- [{{ Greater Invisibility}}{{ 209}}](#p209)
-- [{{ Private Sanctum}}{{ 214}}](#p214)
-- [{{ Protection from Spells}}{{ 214}}](#p214)
-- [{{ Repair}}{{ 215}}](#p215)
-- [{{ Resilient Sphere}}{{ 215}}](#p215)
-- [{{ Secret Chest}}{{ 216}}](#p216)
-- [{{ Stone Shape}}{{ 220}}](#p220)
-- [{{ Stoneskin}}{{ 220}}](#p220)
-- [{{ Summon Construct}}{{ 222}}](#p222)
+- [{{ Arcane Eye}}{{ 202}}](#p202)
+- [{{ Dimension Door}}{{ 208}}](#p208)
+- [{{ Distorted Distance}}{{ 209}}](#p209)
+- [{{ Elemental Bane}}{{ 211}}](#p211)
+- [{{ Fabricate}}{{ 212}}](#p212)
+- [{{ Faithful Hound}}{{ 212}}](#p212)
+- [{{ Freedom of Movement}}{{ 214}}](#p214)
+- [{{ Greater Invisibility}}{{ 217}}](#p217)
+- [{{ Private Sanctum}}{{ 222}}](#p222)
+- [{{ Protection from Spells}}{{ 222}}](#p222)
+- [{{ Repair}}{{ 223}}](#p223)
+- [{{ Resilient Sphere}}{{ 224}}](#p224)
+- [{{ Secret Chest}}{{ 224}}](#p224)
+- [{{ Stone Shape}}{{ 229}}](#p229)
+- [{{ Stoneskin}}{{ 229}}](#p229)
+- [{{ Summon Construct}}{{ 231}}](#p231)
 :
 - **5th Level Spells**
-- [{{ Animate Objects}}{{ 228}}](#p228)
-- [{{ Arcane Hand}}{{ 229}}](#p229)
-- [{{ Awaken}}{{ 229}}](#p229)
-- [{{ Circle of Power}}{{ 230}}](#p230)
-- [{{ Create Construct}}{{ 234}}](#p234)
-- [{{ Creation}}{{ 235}}](#p235)
+- [{{ Animate Objects}}{{ 238}}](#p238)
+- [{{ Arcane Hand}}{{ 239}}](#p239)
+- [{{ Awaken}}{{ 239}}](#p239)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
-- [{{ Far Step}}{{ 240}}](#p240)
-- [{{ Greater Absorb Elements}}{{ 242}}](#p242)
-- [{{ Greater Restoration}}{{ 242}}](#p242)
-- [{{ Passwall}}{{ 249}}](#p249)
-- [{{ Skill Empowerment}}{{ 256}}](#p256)
-- [{{ Spirit Lantern}}{{ 257}}](#p257)
-- [{{ Transmute Rock}}{{ 264}}](#p264)
-- [{{ Vorpal Shot}}{{ 265}}](#p265)
-- [{{ Vorpal Weapon}}{{ 265}}](#p265)
-- [{{ Wall of Stone}}{{ 266}}](#p266)
+- [{{ Circle of Power}}{{ 241}}](#p241)
+- [{{ Create Construct}}{{ 244}}](#p244)
+- [{{ Creation}}{{ 245}}](#p245)
+- [{{ Explosive Trap}}{{ 251}}](#p251)
+- [{{ Far Step}}{{ 251}}](#p251)
+- [{{ Greater Absorb Elements}}{{ 253}}](#p253)
+- [{{ Greater Restoration}}{{ 253}}](#p253)
+- [{{ Passwall}}{{ 260}}](#p260)
+- [{{ Skill Empowerment}}{{ 267}}](#p267)
+- [{{ Spirit Lantern}}{{ 268}}](#p268)
+- [{{ Transmute Rock}}{{ 275}}](#p275)
+- [{{ Vorpal Shot}}{{ 277}}](#p277)
+- [{{ Vorpal Weapon}}{{ 277}}](#p277)
+- [{{ Wall of Stone}}{{ 278}}](#p278)
 }}
 
 \page
@@ -1401,7 +1481,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Animal Friendship}}{{ 67}}](#p67)
 - [{{ Awaken Rope}}{{ 68}}](#p68)
 - [{{ Bane}}{{ 68}}](#p68)
-- [{{ Beast Bond}}{{ 68}}](#p68)
+- [{{ Beast Bond}}{{ 69}}](#p69)
 - [{{ Blade Mirage}}{{ 69}}](#p69)
 - [{{ Cause Fear}}{{ 71}}](#p71)
 - [{{ Ceremony}}{{ 71}}](#p71)
@@ -1416,240 +1496,254 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Dissonant Whispers}}{{ 76}}](#p76)
 - [{{ Distort Value}}{{ 77}}](#p77)
 - [{{ Earth Tremor}}{{ 77}}](#p77)
+- [{{ Ebon Might}}{{ 77}}](#p77)
 - [{{ Faerie Fire}}{{ 79}}](#p79)
-- [{{ Fated Strike}}{{ 79}}](#p79)
-- [{{ Feather Fall}}{{ 79}}](#p79)
-- [{{ Gift of Alacrity}}{{ 81}}](#p81)
-- [{{ Healing Word}}{{ 82}}](#p82)
-- [{{ Heroism}}{{ 83}}](#p83)
-- [{{ Hideous Laughter}}{{ 83}}](#p83)
-- [{{ Identify}}{{ 85}}](#p85)
-- [{{ Illusory Pit}}{{ 85}}](#p85)
-- [{{ Illusory Script}}{{ 85}}](#p85)
-- [{{ Induce Headache}}{{ 85}}](#p85)
-- [{{ Insidious Rhythm}}{{ 86}}](#p86)
-- [{{ Inspiring Melody}}{{ 86}}](#p86)
-- [{{ Longstrider}}{{ 87}}](#p87)
-- [{{ Mind Ray}}{{ 88}}](#p88)
-- [{{ Prismatic Flash}}{{ 89}}](#p89)
-- [{{ Silent Image}}{{ 91}}](#p91)
-- [{{ Sleep}}{{ 92}}](#p92)
-- [{{ Speak with Animals}}{{ 92}}](#p92)
-- [{{ Thunder Punch}}{{ 95}}](#p95)
-- [{{ Thunderwave}}{{ 95}}](#p95)
-- [{{ Unseen Servant}}{{ 96}}](#p96)
-- [{{ Warding Sigil}}{{ 97}}](#p97)
-- [{{ Wardaway}}{{ 97}}](#p97)
+- [{{ Fated Strike}}{{ 80}}](#p80)
+- [{{ Feather Fall}}{{ 80}}](#p80)
+- [{{ Feign Interest}}{{ 80}}](#p80)
+- [{{ Gift of Alacrity}}{{ 83}}](#p83)
+- [{{ Healing Word}}{{ 84}}](#p84)
+- [{{ Heroism}}{{ 84}}](#p84)
+- [{{ Hideous Laughter}}{{ 85}}](#p85)
+- [{{ Identify}}{{ 86}}](#p86)
+- [{{ Illusory Pit}}{{ 86}}](#p86)
+- [{{ Illusory Script}}{{ 87}}](#p87)
+- [{{ Induce Headache}}{{ 87}}](#p87)
+- [{{ Insidious Rhythm}}{{ 88}}](#p88)
+- [{{ Inspiring Melody}}{{ 88}}](#p88)
+- [{{ Longstrider}}{{ 89}}](#p89)
+- [{{ Mind Ray}}{{ 90}}](#p90)
+- [{{ Moonfire}}{{ 91}}](#p91)
+- [{{ Prismatic Flash}}{{ 92}}](#p92)
+- [{{ Quick Clothier}}{{ 93}}](#p93)
+- [{{ Shadow Word: Pain}}{{ 95}}](#p95)
+- [{{ Silent Image}}{{ 95}}](#p95)
+- [{{ Sleep}}{{ 96}}](#p96)
+- [{{ Speak with Animals}}{{ 96}}](#p96)
+- [{{ Thunder Punch}}{{ 99}}](#p99)
+- [{{ Thunderwave}}{{ 100}}](#p100)
+- [{{ Unseen Servant}}{{ 101}}](#p101)
+- [{{ Warding Sigil}}{{ 101}}](#p101)
+- [{{ Wardaway}}{{ 101}}](#p101)
 :
 - **2nd Level Spells**
-- [{{ Aid}}{{ 99}}](#p99)
-- [{{ Alacrity}}{{ 99}}](#p99)
-- [{{ Animal Messenger}}{{ 100}}](#p100)
-- [{{ Animate Object}}{{ 101}}](#p101)
-- [{{ Blindness/Deafness}}{{ 107}}](#p107)
-- [{{ Borrowed Knowledge}}{{ 109}}](#p109)
-- [{{ Calm Emotions}}{{ 109}}](#p109)
-- [{{ Cloud of Daggers}}{{ 110}}](#p110)
-- [{{ Crescent Wind Slash}}{{ 112}}](#p112)
-- [{{ Crown of Madness}}{{ 113}}](#p113)
-- [{{ Dancing Object}}{{ 113}}](#p113)
-- [{{ Detect Thoughts}}{{ 114}}](#p114)
-- [{{ Disorient}}{{ 115}}](#p115)
-- [{{ Disruptive Tune}}{{ 115}}](#p115)
-- [{{ Dueling Ground}}{{ 116}}](#p116)
-- [{{ Enhance Ability}}{{ 117}}](#p117)
-- [{{ Enthrall}}{{ 118}}](#p118)
-- [{{ Evil Mantra}}{{ 119}}](#p119)
-- [{{ Fortune's Favor}}{{ 121}}](#p121)
-- [{{ Gift of Gab}}{{ 122}}](#p122)
-- [{{ Heat Metal}}{{ 123}}](#p123)
-- [{{ Hold Person}}{{ 123}}](#p123)
-- [{{ Instant Counter}}{{ 125}}](#p125)
-- [{{ Invisibility}}{{ 125}}](#p125)
-- [{{ Kinetic Jaunt}}{{ 125}}](#p125)
-- [{{ Knock}}{{ 126}}](#p126)
-- [{{ Lesser Restoration}}{{ 126}}](#p126)
-- [{{ Locate Animals or Plants}}{{ 127}}](#p127)
-- [{{ Locate Creature (Alternative)}}{{ 127}}](#p127)
-- [{{ Locate Object}}{{ 128}}](#p128)
-- [{{ Magic Mouth}}{{ 128}}](#p128)
-- [{{ Mirror Image}}{{ 130}}](#p130)
-- [{{ Nebulous Mischief}}{{ 131}}](#p131)
-- [{{ Painful Echoes}}{{ 131}}](#p131)
-- [{{ Petal Storm}}{{ 132}}](#p132)
-- [{{ Phantasmal Force}}{{ 132}}](#p132)
-- [{{ Pyrotechnics}}{{ 133}}](#p133)
-- [{{ Reverberating Dash}}{{ 134}}](#p134)
-- [{{ See Invisibility}}{{ 135}}](#p135)
-- [{{ Shatter}}{{ 136}}](#p136)
-- [{{ Silence}}{{ 136}}](#p136)
-- [{{ Silvery Barbs}}{{ 136}}](#p136)
-- [{{ Skywrite}}{{ 137}}](#p137)
-- [{{ Song of Confidence}}{{ 137}}](#p137)
-- [{{ Spelltrap}}{{ 137}}](#p137)
-- [{{ Spray of Cards}}{{ 138}}](#p138)
-- [{{ Suggestion}}{{ 140}}](#p140)
-- [{{ Uncertain Footing}}{{ 145}}](#p145)
-- [{{ Vicious Hound}}{{ 146}}](#p146)
-- [{{ Warding Wind}}{{ 147}}](#p147)
-- [{{ Wristpocket}}{{ 148}}](#p148)
-- [{{ Zone of Truth}}{{ 149}}](#p149)
+- [{{ Aid}}{{ 103}}](#p103)
+- [{{ Alacrity}}{{ 103}}](#p103)
+- [{{ Animal Messenger}}{{ 104}}](#p104)
+- [{{ Animate Object}}{{ 105}}](#p105)
+- [{{ Binding Promise}}{{ 111}}](#p111)
+- [{{ Blindness/Deafness}}{{ 111}}](#p111)
+- [{{ Borrowed Knowledge}}{{ 113}}](#p113)
+- [{{ Calm Emotions}}{{ 114}}](#p114)
+- [{{ Cloud of Daggers}}{{ 114}}](#p114)
+- [{{ Conjure Tools}}{{ 115}}](#p115)
+- [{{ Crescent Wind Slash}}{{ 116}}](#p116)
+- [{{ Crown of Madness}}{{ 117}}](#p117)
+- [{{ Curse of Agony}}{{ 117}}](#p117)
+- [{{ Dancing Object}}{{ 117}}](#p117)
+- [{{ Detect Thoughts}}{{ 119}}](#p119)
+- [{{ Disorient}}{{ 119}}](#p119)
+- [{{ Disruptive Tune}}{{ 119}}](#p119)
+- [{{ Dream Breath}}{{ 120}}](#p120)
+- [{{ Dueling Ground}}{{ 121}}](#p121)
+- [{{ Enhance Ability}}{{ 122}}](#p122)
+- [{{ Enthrall}}{{ 123}}](#p123)
+- [{{ Evil Mantra}}{{ 123}}](#p123)
+- [{{ Fortune's Favor}}{{ 127}}](#p127)
+- [{{ Gift of Gab}}{{ 128}}](#p128)
+- [{{ Heat Metal}}{{ 129}}](#p129)
+- [{{ Hold Person}}{{ 129}}](#p129)
+- [{{ Instant Counter}}{{ 131}}](#p131)
+- [{{ Invisibility}}{{ 131}}](#p131)
+- [{{ Kinetic Jaunt}}{{ 131}}](#p131)
+- [{{ Knock}}{{ 132}}](#p132)
+- [{{ Lesser Restoration}}{{ 132}}](#p132)
+- [{{ Locate Animals or Plants}}{{ 133}}](#p133)
+- [{{ Locate Creature (Alternative)}}{{ 133}}](#p133)
+- [{{ Locate Object}}{{ 134}}](#p134)
+- [{{ Magic Mouth}}{{ 134}}](#p134)
+- [{{ Mirror Image}}{{ 136}}](#p136)
+- [{{ Nebulous Mischief}}{{ 137}}](#p137)
+- [{{ Painful Echoes}}{{ 137}}](#p137)
+- [{{ Petal Storm}}{{ 138}}](#p138)
+- [{{ Phantasmal Force}}{{ 138}}](#p138)
+- [{{ Pyrotechnics}}{{ 139}}](#p139)
+- [{{ Reverberating Dash}}{{ 140}}](#p140)
+- [{{ See Invisibility}}{{ 141}}](#p141)
+- [{{ Shatter}}{{ 142}}](#p142)
+- [{{ Silence}}{{ 143}}](#p143)
+- [{{ Silvery Barbs}}{{ 143}}](#p143)
+- [{{ Skywrite}}{{ 143}}](#p143)
+- [{{ Song of Confidence}}{{ 144}}](#p144)
+- [{{ Spelltrap}}{{ 144}}](#p144)
+- [{{ Spray of Cards}}{{ 145}}](#p145)
+- [{{ Suggestion}}{{ 146}}](#p146)
+- [{{ Uncertain Footing}}{{ 151}}](#p151)
+- [{{ Vicious Hound}}{{ 152}}](#p152)
+- [{{ Warding Wind}}{{ 153}}](#p153)
+- [{{ Wristpocket}}{{ 154}}](#p154)
+- [{{ Zone of Truth}}{{ 155}}](#p155)
 :
 - **3rd Level Spells**
-- [{{ Antagonize}}{{ 152}}](#p152)
-- [{{ Astral Flood}}{{ 153}}](#p153)
-- [{{ Bestow Curse}}{{ 153}}](#p153)
-- [{{ Cacophonic Shield}}{{ 155}}](#p155)
-- [{{ Catnap}}{{ 155}}](#p155)
-- [{{ Clairvoyance}}{{ 156}}](#p156)
-- [{{ Dance Fever}}{{ 159}}](#p159)
-- [{{ Dimensional Anchor}}{{ 160}}](#p160)
-- [{{ Dire Wail}}{{ 160}}](#p160)
-- [{{ Dispel Magic}}{{ 160}}](#p160)
-- [{{ Enemies Abound}}{{ 161}}](#p161)
-- [{{ Fast Friends}}{{ 162}}](#p162)
-- [{{ Fear}}{{ 162}}](#p162)
-- [{{ Feign Death}}{{ 162}}](#p162)
-- [{{ Glyph of Warding}}{{ 166}}](#p166)
-- [{{ Haste}}{{ 167}}](#p167)
-- [{{ Heroic Anthem}}{{ 167}}](#p167)
-- [{{ Hypnotic Pattern}}{{ 168}}](#p168)
-- [{{ Inflict Doubt}}{{ 169}}](#p169)
-- [{{ Linked Glyphs}}{{ 172}}](#p172)
-- [{{ Major Image}}{{ 173}}](#p173)
-- [{{ Mass Healing Word}}{{ 173}}](#p173)
-- [{{ Mouth Latch}}{{ 174}}](#p174)
-- [{{ Motivational Speech}}{{ 174}}](#p174)
-- [{{ Nondetection}}{{ 175}}](#p175)
-- [{{ Plant Growth}}{{ 176}}](#p176)
-- [{{ Revelrous Dance (Irresistible Dance)}}{{ 178}}](#p178)
-- [{{ Sending}}{{ 179}}](#p179)
-- [{{ Slow}}{{ 180}}](#p180)
-- [{{ Sonic Wave}}{{ 180}}](#p180)
-- [{{ Speak with Dead}}{{ 180}}](#p180)
-- [{{ Speak with Plants}}{{ 181}}](#p181)
+- [{{ Antagonize}}{{ 158}}](#p158)
+- [{{ Astral Flood}}{{ 159}}](#p159)
+- [{{ Bestow Curse}}{{ 159}}](#p159)
+- [{{ Cacophonic Shield}}{{ 161}}](#p161)
+- [{{ Catnap}}{{ 161}}](#p161)
+- [{{ Clairvoyance}}{{ 162}}](#p162)
+- [{{ Dance Fever}}{{ 165}}](#p165)
+- [{{ Dimensional Anchor}}{{ 166}}](#p166)
+- [{{ Dire Wail}}{{ 166}}](#p166)
+- [{{ Dispel Magic}}{{ 166}}](#p166)
+- [{{ Emerald Blossom}}{{ 167}}](#p167)
+- [{{ Enemies Abound}}{{ 167}}](#p167)
+- [{{ Fast Friends}}{{ 168}}](#p168)
+- [{{ Fear}}{{ 168}}](#p168)
+- [{{ Feign Death}}{{ 169}}](#p169)
+- [{{ Glyph of Warding}}{{ 172}}](#p172)
+- [{{ Haste}}{{ 173}}](#p173)
+- [{{ Heroic Anthem}}{{ 173}}](#p173)
+- [{{ Hypnotic Pattern}}{{ 174}}](#p174)
+- [{{ Inflict Doubt}}{{ 175}}](#p175)
+- [{{ Linked Glyphs}}{{ 179}}](#p179)
+- [{{ Major Image}}{{ 180}}](#p180)
+- [{{ Mass Healing Word}}{{ 180}}](#p180)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
-- [{{ Stinking Cloud}}{{ 182}}](#p182)
-- [{{ Thunder Pulse}}{{ 189}}](#p189)
-- [{{ Thunder Step}}{{ 189}}](#p189)
-- [{{ Tiny Hut}}{{ 189}}](#p189)
-- [{{ Tongues}}{{ 190}}](#p190)
+- [{{ Mouth Latch}}{{ 181}}](#p181)
+- [{{ Motivational Speech}}{{ 182}}](#p182)
+- [{{ Nondetection}}{{ 183}}](#p183)
+- [{{ Plant Growth}}{{ 183}}](#p183)
+- [{{ Revelrous Dance (Irresistible Dance)}}{{ 185}}](#p185)
+- [{{ Sending}}{{ 186}}](#p186)
+- [{{ Slow}}{{ 187}}](#p187)
+- [{{ Sonic Wave}}{{ 187}}](#p187)
+- [{{ Speak with Dead}}{{ 188}}](#p188)
+- [{{ Speak with Plants}}{{ 188}}](#p188)
+- [{{ Stinking Cloud}}{{ 190}}](#p190)
+- [{{ Thunder Pulse}}{{ 196}}](#p196)
+- [{{ Thunder Step}}{{ 196}}](#p196)
+- [{{ Tiny Hut}}{{ 196}}](#p196)
+- [{{ Tongues}}{{ 197}}](#p197)
 :
 - **4th Level Spells**
-- [{{ Backlash}}{{ 195}}](#p195)
-- [{{ Charm Monster}}{{ 197}}](#p197)
-- [{{ Compulsion}}{{ 197}}](#p197)
-- [{{ Confusion}}{{ 198}}](#p198)
-- [{{ Dimension Door}}{{ 200}}](#p200)
-- [{{ Distorted Distance}}{{ 201}}](#p201)
-- [{{ Dominate Beast}}{{ 201}}](#p201)
-- [{{ Doomtide}}{{ 202}}](#p202)
-- [{{ Echoing Lance}}{{ 202}}](#p202)
-- [{{ Elemental Bane}}{{ 203}}](#p203)
-- [{{ Fabricate}}{{ 204}}](#p204)
-- [{{ False Vision}}{{ 204}}](#p204)
-- [{{ Fount of Moonlight}}{{ 205}}](#p205)
-- [{{ Freedom of Movement}}{{ 206}}](#p206)
-- [{{ Greater Invisibility}}{{ 209}}](#p209)
-- [{{ Hallucinatory Terrain}}{{ 210}}](#p210)
-- [{{ Locate Creature}}{{ 212}}](#p212)
-- [{{ Mirror Army}}{{ 212}}](#p212)
-- [{{ Phantasmal Killer}}{{ 213}}](#p213)
-- [{{ Polymorph}}{{ 214}}](#p214)
-- [{{ Psychic Lance}}{{ 215}}](#p215)
-- [{{ Quicksilver Steps}}{{ 215}}](#p215)
-- [{{ Resilient Sphere}}{{ 215}}](#p215)
-- [{{ Revitalizing Hymn}}{{ 216}}](#p216)
-- [{{ Song of Despair}}{{ 217}}](#p217)
-- [{{ Zone of Amicability}}{{ 226}}](#p226)
+- [{{ Backlash}}{{ 202}}](#p202)
+- [{{ Charm Monster}}{{ 204}}](#p204)
+- [{{ Compulsion}}{{ 205}}](#p205)
+- [{{ Confusion}}{{ 206}}](#p206)
+- [{{ Dimension Door}}{{ 208}}](#p208)
+- [{{ Distorted Distance}}{{ 209}}](#p209)
+- [{{ Dominate Beast}}{{ 209}}](#p209)
+- [{{ Doomtide}}{{ 210}}](#p210)
+- [{{ Echoing Lance}}{{ 210}}](#p210)
+- [{{ Elemental Bane}}{{ 211}}](#p211)
+- [{{ Fabricate}}{{ 212}}](#p212)
+- [{{ False Vision}}{{ 212}}](#p212)
+- [{{ Fount of Moonlight}}{{ 213}}](#p213)
+- [{{ Freedom of Movement}}{{ 214}}](#p214)
+- [{{ Greater Invisibility}}{{ 217}}](#p217)
+- [{{ Hallucinatory Terrain}}{{ 218}}](#p218)
+- [{{ Locate Creature}}{{ 220}}](#p220)
+- [{{ Mirror Army}}{{ 220}}](#p220)
+- [{{ Phantasmal Killer}}{{ 221}}](#p221)
+- [{{ Polymorph}}{{ 222}}](#p222)
+- [{{ Psychic Horror}}{{ 223}}](#p223)
+- [{{ Psychic Lance}}{{ 223}}](#p223)
+- [{{ Quicksilver Steps}}{{ 223}}](#p223)
+- [{{ Resilient Sphere}}{{ 224}}](#p224)
+- [{{ Revitalizing Hymn}}{{ 224}}](#p224)
+- [{{ Song of Despair}}{{ 225}}](#p225)
+- [{{ Time Dilation}}{{ 233}}](#p233)
+- [{{ Zone of Amicability}}{{ 236}}](#p236)
 :
 - **5th Level Spells**
-- [{{ Animate Objects}}{{ 228}}](#p228)
-- [{{ Awaken}}{{ 229}}](#p229)
-- [{{ Dominate Person}}{{ 239}}](#p239)
-- [{{ Dream}}{{ 239}}](#p239)
-- [{{ Geas}}{{ 241}}](#p241)
-- [{{ Greater Restoration}}{{ 242}}](#p242)
-- [{{ Hold Monster}}{{ 243}}](#p243)
-- [{{ Legend Lore}}{{ 246}}](#p246)
-- [{{ Legendary Ballad}}{{ 246}}](#p246)
-- [{{ Mass Cure Wounds}}{{ 247}}](#p247)
-- [{{ Mislead}}{{ 248}}](#p248)
-- [{{ Modify Memory}}{{ 248}}](#p248)
-- [{{ Mooncloak}}{{ 248}}](#p248)
-- [{{ Planar Binding}}{{ 250}}](#p250)
-- [{{ Raise Dead}}{{ 251}}](#p251)
-- [{{ Regal Presence}}{{ 251}}](#p251)
-- [{{ Scrying}}{{ 255}}](#p255)
-- [{{ Seeming}}{{ 255}}](#p255)
-- [{{ Skill Empowerment}}{{ 256}}](#p256)
-- [{{ Sonic Shriek}}{{ 256}}](#p256)
-- [{{ Sudden Hazards}}{{ 259}}](#p259)
-- [{{ Synaptic Static}}{{ 262}}](#p262)
-- [{{ Telepathic Bond}}{{ 263}}](#p263)
-- [{{ Teleportation Circle}}{{ 263}}](#p263)
-- [{{ Teleportation Tangle}}{{ 264}}](#p264)
+- [{{ Animate Objects}}{{ 238}}](#p238)
+- [{{ Awaken}}{{ 239}}](#p239)
+- [{{ Dominate Person}}{{ 249}}](#p249)
+- [{{ Dream}}{{ 249}}](#p249)
+- [{{ Dream Flight}}{{ 249}}](#p249)
+- [{{ Geas}}{{ 252}}](#p252)
+- [{{ Greater Restoration}}{{ 253}}](#p253)
+- [{{ Hold Monster}}{{ 254}}](#p254)
+- [{{ Legend Lore}}{{ 257}}](#p257)
+- [{{ Legendary Ballad}}{{ 257}}](#p257)
+- [{{ Mass Cure Wounds}}{{ 258}}](#p258)
+- [{{ Mislead}}{{ 259}}](#p259)
+- [{{ Modify Memory}}{{ 259}}](#p259)
+- [{{ Mooncloak}}{{ 259}}](#p259)
+- [{{ Planar Binding}}{{ 261}}](#p261)
+- [{{ Raise Dead}}{{ 262}}](#p262)
+- [{{ Regal Presence}}{{ 262}}](#p262)
+- [{{ Rescue}}{{ 266}}](#p266)
+- [{{ Scrying}}{{ 266}}](#p266)
+- [{{ Seeming}}{{ 266}}](#p266)
+- [{{ Skill Empowerment}}{{ 267}}](#p267)
+- [{{ Sonic Shriek}}{{ 267}}](#p267)
+- [{{ Sudden Hazards}}{{ 270}}](#p270)
+- [{{ Synaptic Static}}{{ 273}}](#p273)
+- [{{ Telepathic Bond}}{{ 274}}](#p274)
+- [{{ Teleportation Circle}}{{ 274}}](#p274)
+- [{{ Teleportation Tangle}}{{ 275}}](#p275)
 :
 - **6th Level Spells**
-- [{{ Dirge}}{{ 276}}](#p276)
-- [{{ Eyebite}}{{ 278}}](#p278)
-- [{{ Find the Path}}{{ 278}}](#p278)
-- [{{ Guards and Wards}}{{ 280}}](#p280)
-- [{{ Heroes' Feast}}{{ 281}}](#p281)
-- [{{ Irresistible Dance}}{{ 285}}](#p285)
-- [{{ Lamentable Belaborment}}{{ 285}}](#p285)
-- [{{ Mass Command}}{{ 286}}](#p286)
-- [{{ Mass Suggestion}}{{ 287}}](#p287)
-- [{{ Programmed Illusion}}{{ 290}}](#p290)
-- [{{ Sky Omen}}{{ 291}}](#p291)
-- [{{ True Seeing}}{{ 294}}](#p294)
+- [{{ Dirge}}{{ 288}}](#p288)
+- [{{ Eyebite}}{{ 290}}](#p290)
+- [{{ Find the Path}}{{ 291}}](#p291)
+- [{{ Guards and Wards}}{{ 293}}](#p293)
+- [{{ Heroes' Feast}}{{ 294}}](#p294)
+- [{{ Irresistible Dance}}{{ 298}}](#p298)
+- [{{ Lamentable Belaborment}}{{ 298}}](#p298)
+- [{{ Mass Command}}{{ 299}}](#p299)
+- [{{ Mass Suggestion}}{{ 300}}](#p300)
+- [{{ Programmed Illusion}}{{ 303}}](#p303)
+- [{{ Sky Omen}}{{ 304}}](#p304)
+- [{{ True Seeing}}{{ 308}}](#p308)
 :
 - **7th Level Spells**
-- [{{ Arcanist's Sword}}{{ 297}}](#p297)
-- [{{ Dream of the Blue Veil}}{{ 300}}](#p300)
-- [{{ Etherealness}}{{ 300}}](#p300)
-- [{{ Fractured Awareness}}{{ 301}}](#p301)
-- [{{ Magnificent Mansion}}{{ 302}}](#p302)
-- [{{ Mirage Arcane}}{{ 303}}](#p303)
-- [{{ Power Word: Fortify}}{{ 303}}](#p303)
-- [{{ Power Word: Pain}}{{ 303}}](#p303)
-- [{{ Power Word: Slumber}}{{ 304}}](#p304)
-- [{{ Prismatic Spray}}{{ 304}}](#p304)
-- [{{ Project Image}}{{ 304}}](#p304)
-- [{{ Regenerate}}{{ 305}}](#p305)
-- [{{ Resurrection}}{{ 305}}](#p305)
-- [{{ Reweave Fate}}{{ 306}}](#p306)
-- [{{ Sorcerous Sequestration}}{{ 306}}](#p306)
-- [{{ Symbol}}{{ 308}}](#p308)
-- [{{ Teleport}}{{ 309}}](#p309)
-- [{{ Transfix}}{{ 311}}](#p311)
+- [{{ Arcanist's Sword}}{{ 311}}](#p311)
+- [{{ Dream of the Blue Veil}}{{ 314}}](#p314)
+- [{{ Etherealness}}{{ 314}}](#p314)
+- [{{ Fractured Awareness}}{{ 315}}](#p315)
+- [{{ Magnificent Mansion}}{{ 317}}](#p317)
+- [{{ Mirage Arcane}}{{ 317}}](#p317)
+- [{{ Power Word: Fortify}}{{ 318}}](#p318)
+- [{{ Power Word: Pain}}{{ 318}}](#p318)
+- [{{ Power Word: Slumber}}{{ 318}}](#p318)
+- [{{ Prismatic Spray}}{{ 318}}](#p318)
+- [{{ Project Image}}{{ 319}}](#p319)
+- [{{ Regenerate}}{{ 319}}](#p319)
+- [{{ Resurrection}}{{ 320}}](#p320)
+- [{{ Reweave Fate}}{{ 320}}](#p320)
+- [{{ Sorcerous Sequestration}}{{ 321}}](#p321)
+- [{{ Symbol}}{{ 322}}](#p322)
+- [{{ Teleport}}{{ 323}}](#p323)
+- [{{ Transfix}}{{ 325}}](#p325)
 :
 - **8th Level Spells**
-- [{{ Antipathy/Sympathy}}{{ 314}}](#p314)
-- [{{ Dominate Monster}}{{ 317}}](#p317)
-- [{{ Entrancing Mirrors}}{{ 318}}](#p318)
-- [{{ Feeblemind}}{{ 318}}](#p318)
-- [{{ Glibness}}{{ 318}}](#p318)
-- [{{ Mass Invisibility}}{{ 320}}](#p320)
-- [{{ Maximize/Minimize}}{{ 321}}](#p321)
-- [{{ Mind Blank}}{{ 322}}](#p322)
-- [{{ Power Word: Stun}}{{ 323}}](#p323)
+- [{{ Antipathy/Sympathy}}{{ 328}}](#p328)
+- [{{ Dominate Monster}}{{ 331}}](#p331)
+- [{{ Entrancing Mirrors}}{{ 332}}](#p332)
+- [{{ Feeblemind}}{{ 332}}](#p332)
+- [{{ Glibness}}{{ 332}}](#p332)
+- [{{ Mass Invisibility}}{{ 334}}](#p334)
+- [{{ Maximize/Minimize}}{{ 335}}](#p335)
+- [{{ Mind Blank}}{{ 336}}](#p336)
+- [{{ Power Word: Stun}}{{ 337}}](#p337)
 :
 - **9th Level Spells**
-- [{{ Foresight}}{{ 329}}](#p329)
-- [{{ Mass Polymorph}}{{ 333}}](#p333)
-- [{{ Power Word: Heal}}{{ 334}}](#p334)
-- [{{ Power Word: Kill}}{{ 334}}](#p334)
-- [{{ Power Word: Ruin}}{{ 335}}](#p335)
-- [{{ Prismatic Wall}}{{ 335}}](#p335)
-- [{{ Psychic Scream}}{{ 336}}](#p336)
-- [{{ Restore Youth}}{{ 336}}](#p336)
-- [{{ True Polymorph}}{{ 339}}](#p339)
-- [{{ Vision of Elapsing Eons}}{{ 339}}](#p339)
-- [{{ Wail of the Banshee}}{{ 340}}](#p340)
+- [{{ Foresight}}{{ 343}}](#p343)
+- [{{ Mass Polymorph}}{{ 347}}](#p347)
+- [{{ Power Word: Heal}}{{ 348}}](#p348)
+- [{{ Power Word: Kill}}{{ 348}}](#p348)
+- [{{ Power Word: Ruin}}{{ 349}}](#p349)
+- [{{ Prismatic Wall}}{{ 349}}](#p349)
+- [{{ Psychic Scream}}{{ 350}}](#p350)
+- [{{ Restore Youth}}{{ 350}}](#p350)
+- [{{ True Polymorph}}{{ 353}}](#p353)
+- [{{ Vision of Elapsing Eons}}{{ 353}}](#p353)
+- [{{ Wail of the Banshee}}{{ 354}}](#p354)
 }}
 \page
 {{pageNumber,auto}}
@@ -1670,194 +1764,215 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 :
 - **1st Level Spells**
 - [{{ Bane}}{{ 68}}](#p68)
-- [{{ Bless}}{{ 69}}](#p69)
+- [{{ Bless}}{{ 70}}](#p70)
 - [{{ Ceremony}}{{ 71}}](#p71)
 - [{{ Command}}{{ 73}}](#p73)
 - [{{ Create or Destroy Water}}{{ 74}}](#p74)
 - [{{ Cure Wounds}}{{ 75}}](#p75)
+- [{{ Death Grip}}{{ 75}}](#p75)
 - [{{ Detect Evil and Good}}{{ 75}}](#p75)
 - [{{ Detect Magic}}{{ 76}}](#p76)
 - [{{ Detect Poison and Disease}}{{ 76}}](#p76)
-- [{{ Guiding Bolt}}{{ 82}}](#p82)
-- [{{ Healing Word}}{{ 82}}](#p82)
-- [{{ Inflict Wounds}}{{ 86}}](#p86)
-- [{{ Karmic Reflection}}{{ 86}}](#p86)
-- [{{ Protection from Evil and Good}}{{ 89}}](#p89)
-- [{{ Purify Food and Drink}}{{ 89}}](#p89)
-- [{{ Sanctuary}}{{ 90}}](#p90)
-- [{{ Shield of Faith}}{{ 91}}](#p91)
-- [{{ Wardaway}}{{ 97}}](#p97)
+- [{{ Ebon Might}}{{ 77}}](#p77)
+- [{{ Guiding Bolt}}{{ 84}}](#p84)
+- [{{ Healing Word}}{{ 84}}](#p84)
+- [{{ Inflict Wounds}}{{ 88}}](#p88)
+- [{{ Karmic Reflection}}{{ 89}}](#p89)
+- [{{ Living Flame}}{{ 89}}](#p89)
+- [{{ Moonfire}}{{ 91}}](#p91)
+- [{{ Protection from Evil and Good}}{{ 92}}](#p92)
+- [{{ Purify Food and Drink}}{{ 92}}](#p92)
+- [{{ Rune Strike}}{{ 93}}](#p93)
+- [{{ Sanctuary}}{{ 94}}](#p94)
+- [{{ Scourge Strike}}{{ 94}}](#p94)
+- [{{ Shadow Word: Pain}}{{ 95}}](#p95)
+- [{{ Shield of Faith}}{{ 95}}](#p95)
+- [{{ Vampiric Blood}}{{ 101}}](#p101)
+- [{{ Wardaway}}{{ 101}}](#p101)
 :
 - **2nd Level Spells**
-- [{{ Aid}}{{ 99}}](#p99)
-- [{{ Augury}}{{ 103}}](#p103)
-- [{{ Blazing Beacon}}{{ 107}}](#p107)
-- [{{ Blindness/Deafness}}{{ 107}}](#p107)
-- [{{ Borrowed Knowledge}}{{ 109}}](#p109)
-- [{{ Calm Emotions}}{{ 109}}](#p109)
-- [{{ Continual Flame}}{{ 111}}](#p111)
-- [{{ Divine Judgement}}{{ 115}}](#p115)
-- [{{ Dueling Ground}}{{ 116}}](#p116)
-- [{{ Enhance Ability}}{{ 117}}](#p117)
-- [{{ Find Traps}}{{ 120}}](#p120)
-- [{{ Gentle Repose}}{{ 122}}](#p122)
-- [{{ Helpful Homunculi}}{{ 123}}](#p123)
-- [{{ Hold Person}}{{ 123}}](#p123)
-- [{{ Lesser Restoration}}{{ 126}}](#p126)
-- [{{ Locate Creature (Alternative)}}{{ 127}}](#p127)
-- [{{ Locate Object}}{{ 128}}](#p128)
-- [{{ Prayer of Healing}}{{ 133}}](#p133)
-- [{{ Protection from Poison}}{{ 133}}](#p133)
-- [{{ Sanctified Charge}}{{ 135}}](#p135)
-- [{{ Searing Orb}}{{ 135}}](#p135)
-- [{{ Silence}}{{ 136}}](#p136)
-- [{{ Spiritual Weapon}}{{ 138}}](#p138)
-- [{{ Summon Archon}}{{ 141}}](#p141)
-- [{{ Unholy Wave}}{{ 145}}](#p145)
-- [{{ Warding Bond}}{{ 147}}](#p147)
-- [{{ Zone of Truth}}{{ 149}}](#p149)
+- [{{ Aid}}{{ 103}}](#p103)
+- [{{ Augury}}{{ 107}}](#p107)
+- [{{ Binding Promise}}{{ 111}}](#p111)
+- [{{ Blazing Beacon}}{{ 111}}](#p111)
+- [{{ Blindness/Deafness}}{{ 111}}](#p111)
+- [{{ Borrowed Knowledge}}{{ 113}}](#p113)
+- [{{ Calm Emotions}}{{ 114}}](#p114)
+- [{{ Consecration}}{{ 115}}](#p115)
+- [{{ Continual Flame}}{{ 115}}](#p115)
+- [{{ Curse of Agony}}{{ 117}}](#p117)
+- [{{ Death and Decay}}{{ 118}}](#p118)
+- [{{ Divine Judgement}}{{ 120}}](#p120)
+- [{{ Dream Breath}}{{ 120}}](#p120)
+- [{{ Dueling Ground}}{{ 121}}](#p121)
+- [{{ Enhance Ability}}{{ 122}}](#p122)
+- [{{ Fiery Brand}}{{ 124}}](#p124)
+- [{{ Find Traps}}{{ 126}}](#p126)
+- [{{ Gentle Repose}}{{ 128}}](#p128)
+- [{{ Helpful Homunculi}}{{ 129}}](#p129)
+- [{{ Hold Person}}{{ 129}}](#p129)
+- [{{ Lesser Restoration}}{{ 132}}](#p132)
+- [{{ Locate Creature (Alternative)}}{{ 133}}](#p133)
+- [{{ Locate Object}}{{ 134}}](#p134)
+- [{{ Prayer of Healing}}{{ 139}}](#p139)
+- [{{ Protection from Poison}}{{ 139}}](#p139)
+- [{{ Sanctified Charge}}{{ 141}}](#p141)
+- [{{ Searing Orb}}{{ 141}}](#p141)
+- [{{ Silence}}{{ 143}}](#p143)
+- [{{ Spiritual Weapon}}{{ 145}}](#p145)
+- [{{ Summon Archon}}{{ 147}}](#p147)
+- [{{ Unholy Wave}}{{ 151}}](#p151)
+- [{{ Warding Bond}}{{ 153}}](#p153)
+- [{{ Zone of Truth}}{{ 155}}](#p155)
 :
 - **3rd Level Spells**
-- [{{ Angelic Slash}}{{ 150}}](#p150)
-- [{{ Animate Dead}}{{ 151}}](#p151)
-- [{{ Astral Flood}}{{ 153}}](#p153)
-- [{{ Aura of Vitality}}{{ 153}}](#p153)
-- [{{ Beacon of Hope}}{{ 153}}](#p153)
-- [{{ Bestow Curse}}{{ 153}}](#p153)
-- [{{ Brilliant Blade}}{{ 155}}](#p155)
-- [{{ Clairvoyance}}{{ 156}}](#p156)
-- [{{ Create Food and Water}}{{ 158}}](#p158)
-- [{{ Daylight}}{{ 159}}](#p159)
-- [{{ Dispel Magic}}{{ 160}}](#p160)
-- [{{ Fast Friends}}{{ 162}}](#p162)
-- [{{ Feign Death}}{{ 162}}](#p162)
-- [{{ Glyph of Warding}}{{ 166}}](#p166)
-- [{{ Immutability}}{{ 168}}](#p168)
-- [{{ Incite Greed}}{{ 168}}](#p168)
-- [{{ Life Transference}}{{ 170}}](#p170)
-- [{{ Linked Glyphs}}{{ 172}}](#p172)
-- [{{ Magic Circle}}{{ 172}}](#p172)
-- [{{ Mass Healing Word}}{{ 173}}](#p173)
-- [{{ Meld into Stone}}{{ 173}}](#p173)
-- [{{ Motivational Speech}}{{ 174}}](#p174)
-- [{{ Pillar Of Salt}}{{ 176}}](#p176)
-- [{{ Protection from Energy}}{{ 176}}](#p176)
-- [{{ Remove Curse}}{{ 177}}](#p177)
-- [{{ Revivify}}{{ 178}}](#p178)
-- [{{ Sending}}{{ 179}}](#p179)
-- [{{ Silver Lance}}{{ 179}}](#p179)
-- [{{ Speak with Dead}}{{ 180}}](#p180)
-- [{{ Spirit Guardians}}{{ 182}}](#p182)
-- [{{ Spirit Shroud}}{{ 182}}](#p182)
-- [{{ Tongues}}{{ 190}}](#p190)
-- [{{ Water Walk}}{{ 192}}](#p192)
+- [{{ Angelic Slash}}{{ 156}}](#p156)
+- [{{ Animate Dead}}{{ 157}}](#p157)
+- [{{ Astral Flood}}{{ 159}}](#p159)
+- [{{ Aura of Vitality}}{{ 159}}](#p159)
+- [{{ Beacon of Hope}}{{ 159}}](#p159)
+- [{{ Bestow Curse}}{{ 159}}](#p159)
+- [{{ Brilliant Blade}}{{ 161}}](#p161)
+- [{{ Clairvoyance}}{{ 162}}](#p162)
+- [{{ Create Food and Water}}{{ 164}}](#p164)
+- [{{ Daylight}}{{ 165}}](#p165)
+- [{{ Dispel Magic}}{{ 166}}](#p166)
+- [{{ Fast Friends}}{{ 168}}](#p168)
+- [{{ Feign Death}}{{ 169}}](#p169)
+- [{{ Glyph of Warding}}{{ 172}}](#p172)
+- [{{ Guided Prayer}}{{ 172}}](#p172)
+- [{{ Immutability}}{{ 174}}](#p174)
+- [{{ Incite Greed}}{{ 175}}](#p175)
+- [{{ Life Transference}}{{ 178}}](#p178)
+- [{{ Linked Glyphs}}{{ 179}}](#p179)
+- [{{ Magic Circle}}{{ 180}}](#p180)
+- [{{ Mass Healing Word}}{{ 180}}](#p180)
+- [{{ Meld into Stone}}{{ 181}}](#p181)
+- [{{ Motivational Speech}}{{ 182}}](#p182)
+- [{{ Pillar Of Salt}}{{ 183}}](#p183)
+- [{{ Prayer of Mending}}{{ 183}}](#p183)
+- [{{ Protection from Energy}}{{ 184}}](#p184)
+- [{{ Remove Curse}}{{ 185}}](#p185)
+- [{{ Revivify}}{{ 186}}](#p186)
+- [{{ Sending}}{{ 186}}](#p186)
+- [{{ Silver Lance}}{{ 187}}](#p187)
+- [{{ Speak with Dead}}{{ 188}}](#p188)
+- [{{ Spirit Guardians}}{{ 189}}](#p189)
+- [{{ Spirit Shroud}}{{ 189}}](#p189)
+- [{{ Tongues}}{{ 197}}](#p197)
+- [{{ Water Walk}}{{ 199}}](#p199)
 :
 - **4th Level Spells**
-- [{{ Accursed Touch}}{{ 194}}](#p194)
-- [{{ Aura of Life}}{{ 195}}](#p195)
-- [{{ Aura of Purity}}{{ 195}}](#p195)
-- [{{ Banishment}}{{ 196}}](#p196)
-- [{{ Commandment}}{{ 197}}](#p197)
-- [{{ Control Water}}{{ 199}}](#p199)
-- [{{ Death Ward}}{{ 200}}](#p200)
-- [{{ Divination}}{{ 201}}](#p201)
-- [{{ Doomtide}}{{ 202}}](#p202)
-- [{{ Freedom of Movement}}{{ 206}}](#p206)
-- [{{ Gravecall (Create Undead)}}{{ 208}}](#p208)
-- [{{ Guardian of Faith}}{{ 209}}](#p209)
-- [{{ Heavenly Ray}}{{ 210}}](#p210)
-- [{{ Locate Creature}}{{ 212}}](#p212)
-- [{{ Starfall}}{{ 219}}](#p219)
-- [{{ Sticks to Snakes}}{{ 219}}](#p219)
-- [{{ Stinging Swarm}}{{ 220}}](#p220)
-- [{{ Stone Shape}}{{ 220}}](#p220)
-- [{{ Vital Surge}}{{ 225}}](#p225)
+- [{{ Accursed Touch}}{{ 201}}](#p201)
+- [{{ Aura of Life}}{{ 202}}](#p202)
+- [{{ Aura of Purity}}{{ 202}}](#p202)
+- [{{ Banishment}}{{ 203}}](#p203)
+- [{{ Cometfall}}{{ 205}}](#p205)
+- [{{ Commandment}}{{ 205}}](#p205)
+- [{{ Control Water}}{{ 207}}](#p207)
+- [{{ Death Ward}}{{ 208}}](#p208)
+- [{{ Divination}}{{ 209}}](#p209)
+- [{{ Doomtide}}{{ 210}}](#p210)
+- [{{ Freedom of Movement}}{{ 214}}](#p214)
+- [{{ Gravecall (Create Undead)}}{{ 216}}](#p216)
+- [{{ Guardian of Faith}}{{ 217}}](#p217)
+- [{{ Heavenly Ray}}{{ 218}}](#p218)
+- [{{ Holy Nova}}{{ 218}}](#p218)
+- [{{ Locate Creature}}{{ 220}}](#p220)
+- [{{ Starfall}}{{ 228}}](#p228)
+- [{{ Sticks to Snakes}}{{ 228}}](#p228)
+- [{{ Stinging Swarm}}{{ 229}}](#p229)
+- [{{ Stone Shape}}{{ 229}}](#p229)
+- [{{ Vital Surge}}{{ 234}}](#p234)
 :
 - **5th Level Spells**
-- [{{ Circle of Power}}{{ 230}}](#p230)
-- [{{ Commune}}{{ 231}}](#p231)
-- [{{ Contagion}}{{ 233}}](#p233)
-- [{{ Dawn}}{{ 237}}](#p237)
-- [{{ Dispel Evil and Good}}{{ 238}}](#p238)
-- [{{ Flame Strike}}{{ 241}}](#p241)
-- [{{ Geas}}{{ 241}}](#p241)
-- [{{ Grave Ground}}{{ 242}}](#p242)
-- [{{ Greater Restoration}}{{ 242}}](#p242)
-- [{{ Hallow}}{{ 243}}](#p243)
-- [{{ Holy Weapon}}{{ 244}}](#p244)
-- [{{ Insect Plague}}{{ 244}}](#p244)
-- [{{ Invoke Celestial (Conjure Celestial)}}{{ 245}}](#p245)
-- [{{ Legend Lore}}{{ 246}}](#p246)
-- [{{ Life Link}}{{ 247}}](#p247)
-- [{{ Life Support}}{{ 247}}](#p247)
-- [{{ Mass Cure Wounds}}{{ 247}}](#p247)
-- [{{ Planar Binding}}{{ 250}}](#p250)
-- [{{ Raise Dead}}{{ 251}}](#p251)
-- [{{ Scrying}}{{ 255}}](#p255)
-- [{{ Spirit Lantern}}{{ 257}}](#p257)
-- [{{ Spiritual Sundering}}{{ 257}}](#p257)
-- [{{ Summon Celestial}}{{ 259}}](#p259)
-:
-- **6th Level Spells**
-- [{{ Blade Barrier}}{{ 269}}](#p269)
-- [{{ Create Undead}}{{ 274}}](#p274)
-- [{{ Cryptomnesia}}{{ 275}}](#p275)
-- [{{ Dirge}}{{ 276}}](#p276)
-- [{{ Final Flame}}{{ 278}}](#p278)
-- [{{ Find the Path}}{{ 278}}](#p278)
-- [{{ Forbiddance}}{{ 279}}](#p279)
-- [{{ Harm}}{{ 281}}](#p281)
-- [{{ Heal}}{{ 281}}](#p281)
-- [{{ Heroes' Feast}}{{ 281}}](#p281)
-- [{{ Investiture of Darkness}}{{ 282}}](#p282)
+- [{{ Circle of Power}}{{ 241}}](#p241)
+- [{{ Commune}}{{ 241}}](#p241)
+- [{{ Contagion}}{{ 243}}](#p243)
+- [{{ Dawn}}{{ 247}}](#p247)
+- [{{ Dispel Evil and Good}}{{ 248}}](#p248)
+- [{{ Flame Strike}}{{ 252}}](#p252)
+- [{{ Geas}}{{ 252}}](#p252)
+- [{{ Grave Ground}}{{ 253}}](#p253)
+- [{{ Greater Restoration}}{{ 253}}](#p253)
+- [{{ Hallow}}{{ 254}}](#p254)
+- [{{ Holy Weapon}}{{ 255}}](#p255)
+- [{{ Insect Plague}}{{ 255}}](#p255)
+- [{{ Invoke Celestial (Conjure Celestial)}}{{ 256}}](#p256)
+- [{{ Legend Lore}}{{ 257}}](#p257)
+- [{{ Life Link}}{{ 258}}](#p258)
+- [{{ Life Support}}{{ 258}}](#p258)
+- [{{ Mass Cure Wounds}}{{ 258}}](#p258)
+- [{{ Planar Binding}}{{ 261}}](#p261)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
-- [{{ Investiture of Light}}{{ 283}}](#p283)
-- [{{ Mass Command}}{{ 286}}](#p286)
-- [{{ Planar Ally}}{{ 288}}](#p288)
-- [{{ Platinum Lances}}{{ 289}}](#p289)
-- [{{ Sanguine Doom}}{{ 290}}](#p290)
-- [{{ Sunbeam}}{{ 294}}](#p294)
-- [{{ Temporal Visions}}{{ 294}}](#p294)
-- [{{ True Seeing}}{{ 294}}](#p294)
-- [{{ Word of Recall}}{{ 296}}](#p296)
+- [{{ Raise Dead}}{{ 262}}](#p262)
+- [{{ Scrying}}{{ 266}}](#p266)
+- [{{ Spirit Lantern}}{{ 268}}](#p268)
+- [{{ Spiritual Sundering}}{{ 268}}](#p268)
+- [{{ Summon Celestial}}{{ 270}}](#p270)
+- [{{ Void Eruption}}{{ 276}}](#p276)
+:
+- **6th Level Spells**
+- [{{ Blade Barrier}}{{ 282}}](#p282)
+- [{{ Create Undead}}{{ 286}}](#p286)
+- [{{ Cryptomnesia}}{{ 287}}](#p287)
+- [{{ Dirge}}{{ 288}}](#p288)
+- [{{ Final Flame}}{{ 290}}](#p290)
+- [{{ Find the Path}}{{ 291}}](#p291)
+- [{{ Forbiddance}}{{ 292}}](#p292)
+- [{{ Harm}}{{ 294}}](#p294)
+- [{{ Heal}}{{ 294}}](#p294)
+- [{{ Heroes' Feast}}{{ 294}}](#p294)
+- [{{ Investiture of Darkness}}{{ 295}}](#p295)
+- [{{ Investiture of Light}}{{ 296}}](#p296)
+- [{{ Mass Command}}{{ 299}}](#p299)
+- [{{ Planar Ally}}{{ 302}}](#p302)
+- [{{ Platinum Lances}}{{ 302}}](#p302)
+- [{{ Sanguine Doom}}{{ 303}}](#p303)
+- [{{ Spiritual Projection [Astral Projection]}}{{ 305}}](#p305)
+- [{{ Sunbeam}}{{ 308}}](#p308)
+- [{{ Temporal Visions}}{{ 308}}](#p308)
+- [{{ True Seeing}}{{ 308}}](#p308)
+- [{{ Word of Recall}}{{ 310}}](#p310)
 :
 - **7th Level Spells**
-- [{{ Conjure Celestial}}{{ 298}}](#p298)
-- [{{ Divine Word}}{{ 299}}](#p299)
-- [{{ Etherealness}}{{ 300}}](#p300)
-- [{{ Fire Storm}}{{ 301}}](#p301)
-- [{{ Plane Shift}}{{ 303}}](#p303)
-- [{{ Power Word: Fortify}}{{ 303}}](#p303)
-- [{{ Prophesied Strike}}{{ 304}}](#p304)
-- [{{ Regenerate}}{{ 305}}](#p305)
-- [{{ Resurrection}}{{ 305}}](#p305)
-- [{{ Reweave Fate}}{{ 306}}](#p306)
-- [{{ Skirmish}}{{ 307}}](#p307)
-- [{{ Symbol}}{{ 308}}](#p308)
-- [{{ Temple of the Gods}}{{ 310}}](#p310)
+- [{{ Conjure Celestial}}{{ 312}}](#p312)
+- [{{ Divine Word}}{{ 313}}](#p313)
+- [{{ Etherealness}}{{ 314}}](#p314)
+- [{{ Fire Storm}}{{ 315}}](#p315)
+- [{{ Plane Shift}}{{ 317}}](#p317)
+- [{{ Power Word: Fortify}}{{ 318}}](#p318)
+- [{{ Prophesied Strike}}{{ 319}}](#p319)
+- [{{ Regenerate}}{{ 319}}](#p319)
+- [{{ Resurrection}}{{ 320}}](#p320)
+- [{{ Reweave Fate}}{{ 320}}](#p320)
+- [{{ Skirmish}}{{ 321}}](#p321)
+- [{{ Symbol}}{{ 322}}](#p322)
+- [{{ Temple of the Gods}}{{ 324}}](#p324)
 :
 - **8th Level Spells**
-- [{{ Antimagic Field}}{{ 314}}](#p314)
-- [{{ Arcane Star}}{{ 315}}](#p315)
-- [{{ Control Weather}}{{ 316}}](#p316)
-- [{{ Divine Descent}}{{ 317}}](#p317)
-- [{{ Earthquake}}{{ 318}}](#p318)
-- [{{ Holy Aura}}{{ 319}}](#p319)
-- [{{ Omniscience}}{{ 323}}](#p323)
-- [{{ Precognition}}{{ 323}}](#p323)
-- [{{ Sunburst}}{{ 324}}](#p324)
-- [{{ Titanic Strength}}{{ 326}}](#p326)
+- [{{ Antimagic Field}}{{ 328}}](#p328)
+- [{{ Apotheosis}}{{ 328}}](#p328)
+- [{{ Arcane Star}}{{ 329}}](#p329)
+- [{{ Control Weather}}{{ 330}}](#p330)
+- [{{ Divine Descent}}{{ 331}}](#p331)
+- [{{ Earthquake}}{{ 332}}](#p332)
+- [{{ Holy Aura}}{{ 333}}](#p333)
+- [{{ Omniscience}}{{ 337}}](#p337)
+- [{{ Precognition}}{{ 337}}](#p337)
+- [{{ Sunburst}}{{ 338}}](#p338)
+- [{{ Titanic Strength}}{{ 340}}](#p340)
 :
 - **9th Level Spells**
-- [{{ Astral Projection}}{{ 328}}](#p328)
-- [{{ Gate}}{{ 330}}](#p330)
-- [{{ Mass Heal}}{{ 333}}](#p333)
-- [{{ Power Word: Heal}}{{ 334}}](#p334)
-- [{{ Restore Youth}}{{ 336}}](#p336)
-- [{{ True Resurrection}}{{ 339}}](#p339)
+- [{{ Astral Projection}}{{ 342}}](#p342)
+- [{{ Gate}}{{ 344}}](#p344)
+- [{{ Mass Heal}}{{ 347}}](#p347)
+- [{{ Power Word: Heal}}{{ 348}}](#p348)
+- [{{ Restore Youth}}{{ 350}}](#p350)
+- [{{ True Resurrection}}{{ 353}}](#p353)
 }}
 
 \page
@@ -1896,298 +2011,326 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Thunderclap}}{{ 63}}](#p63)
 - [{{ Water Bullet}}{{ 64}}](#p64)
 - [{{ Windborne Weapon}}{{ 64}}](#p64)
+- [{{ Wrath}}{{ 65}}](#p65)
 :
 - **1st Level Spells**
 - [{{ Absorb Elements}}{{ 66}}](#p66)
 - [{{ Acid Bubble}}{{ 66}}](#p66)
 - [{{ Animal Friendship}}{{ 67}}](#p67)
 - [{{ Bad Blood}}{{ 68}}](#p68)
-- [{{ Beast Bond}}{{ 68}}](#p68)
+- [{{ Beast Bond}}{{ 69}}](#p69)
 - [{{ Bramble Binding}}{{ 70}}](#p70)
 - [{{ Buzzing Bee}}{{ 70}}](#p70)
+- [{{ Chains of Ice}}{{ 72}}](#p72)
 - [{{ Charm Person}}{{ 72}}](#p72)
-- [{{ Crashing Wave}}{{ 73}}](#p73)
+- [{{ Crashing Wave}}{{ 74}}](#p74)
 - [{{ Create or Destroy Water}}{{ 74}}](#p74)
 - [{{ Create Pit}}{{ 74}}](#p74)
 - [{{ Cure Wounds}}{{ 75}}](#p75)
 - [{{ Detect Magic}}{{ 76}}](#p76)
 - [{{ Detect Poison and Disease}}{{ 76}}](#p76)
 - [{{ Earth Tremor}}{{ 77}}](#p77)
+- [{{ Ebon Might}}{{ 77}}](#p77)
 - [{{ Entangle}}{{ 78}}](#p78)
 - [{{ Eyes of Immolation}}{{ 79}}](#p79)
 - [{{ Faerie Fire}}{{ 79}}](#p79)
-- [{{ Fog Cloud}}{{ 81}}](#p81)
-- [{{ Frost Fingers}}{{ 81}}](#p81)
-- [{{ Gale Bolt}}{{ 81}}](#p81)
-- [{{ Goodberry}}{{ 81}}](#p81)
-- [{{ Grasping Roots}}{{ 82}}](#p82)
-- [{{ Healing Word}}{{ 82}}](#p82)
-- [{{ Heavy Blow}}{{ 83}}](#p83)
-- [{{ Ice Arrow}}{{ 84}}](#p84)
-- [{{ Ice Knife}}{{ 84}}](#p84)
-- [{{ Jump}}{{ 86}}](#p86)
-- [{{ Longstrider}}{{ 87}}](#p87)
-- [{{ Nauseating Poison}}{{ 88}}](#p88)
-- [{{ Purify Food and Drink}}{{ 89}}](#p89)
-- [{{ Snare (Create Snare)}}{{ 92}}](#p92)
-- [{{ Speak with Animals}}{{ 92}}](#p92)
-- [{{ Stone Fist}}{{ 93}}](#p93)
-- [{{ Thunderwave}}{{ 95}}](#p95)
-- [{{ Torrent}}{{ 96}}](#p96)
-- [{{ Violent Updraft}}{{ 97}}](#p97)
-- [{{ Water Blast}}{{ 97}}](#p97)
+- [{{ Fog Cloud}}{{ 82}}](#p82)
+- [{{ Freezing Trap}}{{ 82}}](#p82)
+- [{{ Frost Fingers}}{{ 82}}](#p82)
+- [{{ Frost Nova}}{{ 82}}](#p82)
+- [{{ Gale Bolt}}{{ 82}}](#p82)
+- [{{ Goodberry}}{{ 83}}](#p83)
+- [{{ Grasping Roots}}{{ 83}}](#p83)
+- [{{ Healing Word}}{{ 84}}](#p84)
+- [{{ Heavy Blow}}{{ 84}}](#p84)
+- [{{ Ice Arrow}}{{ 85}}](#p85)
+- [{{ Ice Knife}}{{ 85}}](#p85)
+- [{{ Jump}}{{ 89}}](#p89)
+- [{{ Living Flame}}{{ 89}}](#p89)
+- [{{ Longstrider}}{{ 89}}](#p89)
+- [{{ Moonfire}}{{ 91}}](#p91)
+- [{{ Nauseating Poison}}{{ 91}}](#p91)
+- [{{ Purify Food and Drink}}{{ 92}}](#p92)
+- [{{ Snare (Create Snare)}}{{ 96}}](#p96)
+- [{{ Speak with Animals}}{{ 96}}](#p96)
+- [{{ Stone Fist}}{{ 97}}](#p97)
+- [{{ Thunderwave}}{{ 100}}](#p100)
+- [{{ Torrent}}{{ 100}}](#p100)
+- [{{ Violent Updraft}}{{ 101}}](#p101)
+- [{{ Water Blast}}{{ 102}}](#p102)
 :
 - **2nd Level Spells**
-- [{{ Air Bubble}}{{ 99}}](#p99)
-- [{{ Animal Messenger}}{{ 100}}](#p100)
-- [{{ Aura of Frost}}{{ 103}}](#p103)
-- [{{ Awaken Plant}}{{ 104}}](#p104)
-- [{{ Barkskin}}{{ 104}}](#p104)
-- [{{ Battle Familiar}}{{ 105}}](#p105)
-- [{{ Beastial Sensors}}{{ 106}}](#p106)
-- [{{ Beast Sense}}{{ 106}}](#p106)
-- [{{ Become Fire}}{{ 106}}](#p106)
-- [{{ Become Stone}}{{ 106}}](#p106)
-- [{{ Become Water}}{{ 107}}](#p107)
-- [{{ Become Wind}}{{ 107}}](#p107)
-- [{{ Chromatic Blade (Elemental Blade)}}{{ 110}}](#p110)
-- [{{ Clay Touch}}{{ 110}}](#p110)
-- [{{ Crackle}}{{ 111}}](#p111)
-- [{{ Dancing Wave}}{{ 113}}](#p113)
-- [{{ Darkvision}}{{ 114}}](#p114)
-- [{{ Dueling Ground}}{{ 116}}](#p116)
-- [{{ Dust Devil}}{{ 116}}](#p116)
-- [{{ Earth Ripple}}{{ 116}}](#p116)
-- [{{ Earthbind}}{{ 116}}](#p116)
-- [{{ Electric Loop}}{{ 117}}](#p117)
-- [{{ Enhance Ability}}{{ 117}}](#p117)
-- [{{ Find Traps}}{{ 120}}](#p120)
-- [{{ Flame Blade}}{{ 120}}](#p120)
-- [{{ Flame Whip}}{{ 120}}](#p120)
-- [{{ Flaming Sphere}}{{ 120}}](#p120)
-- [{{ Gust of Wind}}{{ 122}}](#p122)
-- [{{ Healing Spirit}}{{ 123}}](#p123)
-- [{{ Heat Metal}}{{ 123}}](#p123)
-- [{{ Hold Person}}{{ 123}}](#p123)
-- [{{ Hurricane Slash}}{{ 124}}](#p124)
-- [{{ Invoke Beast (Conjure Beast)}}{{ 125}}](#p125)
-- [{{ Lesser Restoration}}{{ 126}}](#p126)
-- [{{ Locate Animals or Plants}}{{ 127}}](#p127)
-- [{{ Locate Creature (Alternative)}}{{ 127}}](#p127)
-- [{{ Locate Object}}{{ 128}}](#p128)
-- [{{ Moonbeam}}{{ 130}}](#p130)
-- [{{ Pass Without Trace}}{{ 132}}](#p132)
-- [{{ Petal Storm}}{{ 132}}](#p132)
-- [{{ Protection from Poison}}{{ 133}}](#p133)
-- [{{ Pseudopod Slam}}{{ 133}}](#p133)
-- [{{ Shattering Shield}}{{ 136}}](#p136)
-- [{{ Skywrite}}{{ 137}}](#p137)
-- [{{ Spike Growth}}{{ 138}}](#p138)
-- [{{ Sprout Tree}}{{ 139}}](#p139)
-- [{{ Star Scry}}{{ 139}}](#p139)
-- [{{ Stone Pillar}}{{ 140}}](#p140)
-- [{{ Summon Beast}}{{ 142}}](#p142)
-- [{{ Summon Swarm}}{{ 143}}](#p143)
-- [{{ Tortoise Shell}}{{ 145}}](#p145)
-- [{{ Vacuum Pull}}{{ 146}}](#p146)
-- [{{ Vicious Vapors}}{{ 146}}](#p146)
-- [{{ Warding Wind}}{{ 147}}](#p147)
-- [{{ Wind Cutter}}{{ 148}}](#p148)
-- [{{ Windsense}}{{ 148}}](#p148)
-- [{{ Wither and Bloom}}{{ 148}}](#p148)
+- [{{ Air Bubble}}{{ 103}}](#p103)
+- [{{ Animal Messenger}}{{ 104}}](#p104)
+- [{{ Aura of Frost}}{{ 107}}](#p107)
+- [{{ Awaken Plant}}{{ 108}}](#p108)
+- [{{ Barkskin}}{{ 108}}](#p108)
+- [{{ Battle Familiar}}{{ 109}}](#p109)
+- [{{ Beastial Sensors}}{{ 110}}](#p110)
+- [{{ Beast Sense}}{{ 110}}](#p110)
+- [{{ Become Fire}}{{ 110}}](#p110)
+- [{{ Become Stone}}{{ 110}}](#p110)
+- [{{ Become Water}}{{ 111}}](#p111)
+- [{{ Become Wind}}{{ 111}}](#p111)
+- [{{ Chromatic Blade (Elemental Blade)}}{{ 114}}](#p114)
+- [{{ Clay Touch}}{{ 114}}](#p114)
+- [{{ Crackle}}{{ 116}}](#p116)
+- [{{ Dancing Wave}}{{ 118}}](#p118)
+- [{{ Darkvision}}{{ 118}}](#p118)
+- [{{ Dream Breath}}{{ 120}}](#p120)
+- [{{ Dueling Ground}}{{ 121}}](#p121)
+- [{{ Dust Devil}}{{ 121}}](#p121)
+- [{{ Earth Ripple}}{{ 121}}](#p121)
+- [{{ Earthbind}}{{ 121}}](#p121)
+- [{{ Electric Loop}}{{ 122}}](#p122)
+- [{{ Enhance Ability}}{{ 122}}](#p122)
+- [{{ Eruption}}{{ 123}}](#p123)
+- [{{ Feral Prowl}}{{ 124}}](#p124)
+- [{{ Find Traps}}{{ 126}}](#p126)
+- [{{ Flame Blade}}{{ 126}}](#p126)
+- [{{ Flame Whip}}{{ 126}}](#p126)
+- [{{ Flaming Sphere}}{{ 126}}](#p126)
+- [{{ Gust of Wind}}{{ 128}}](#p128)
+- [{{ Healing Spirit}}{{ 129}}](#p129)
+- [{{ Heat Metal}}{{ 129}}](#p129)
+- [{{ Hold Person}}{{ 129}}](#p129)
+- [{{ Hurricane Slash}}{{ 130}}](#p130)
+- [{{ Invoke Beast (Conjure Beast)}}{{ 131}}](#p131)
+- [{{ Lesser Restoration}}{{ 132}}](#p132)
+- [{{ Locate Animals or Plants}}{{ 133}}](#p133)
+- [{{ Locate Creature (Alternative)}}{{ 133}}](#p133)
+- [{{ Locate Object}}{{ 134}}](#p134)
+- [{{ Moonbeam}}{{ 136}}](#p136)
+- [{{ Pass Without Trace}}{{ 138}}](#p138)
+- [{{ Petal Storm}}{{ 138}}](#p138)
+- [{{ Protection from Poison}}{{ 139}}](#p139)
+- [{{ Pseudopod Slam}}{{ 139}}](#p139)
+- [{{ Roar of the Beast}}{{ 140}}](#p140)
+- [{{ Shattering Shield}}{{ 142}}](#p142)
+- [{{ Skywrite}}{{ 143}}](#p143)
+- [{{ Spike Growth}}{{ 144}}](#p144)
+- [{{ Sprout Tree}}{{ 145}}](#p145)
+- [{{ Star Scry}}{{ 146}}](#p146)
+- [{{ Stone Pillar}}{{ 146}}](#p146)
+- [{{ Summon Beast}}{{ 148}}](#p148)
+- [{{ Summon Swarm}}{{ 149}}](#p149)
+- [{{ Tortoise Shell}}{{ 151}}](#p151)
+- [{{ Vacuum Pull}}{{ 152}}](#p152)
+- [{{ Vicious Vapors}}{{ 152}}](#p152)
+- [{{ Warding Wind}}{{ 153}}](#p153)
+- [{{ Wind Cutter}}{{ 154}}](#p154)
+- [{{ Windsense}}{{ 154}}](#p154)
+- [{{ Wither and Bloom}}{{ 154}}](#p154)
 :
 - **3rd Level Spells**
-- [{{ Acidic Pit}}{{ 150}}](#p150)
-- [{{ Arctic Aura}}{{ 152}}](#p152)
-- [{{ Aura of Vitality}}{{ 153}}](#p153)
-- [{{ Bramble Barrier}}{{ 154}}](#p154)
-- [{{ Call Lightning}}{{ 155}}](#p155)
-- [{{ Conjure Animals}}{{ 156}}](#p156)
-- [{{ Daylight}}{{ 159}}](#p159)
-- [{{ Dispel Magic}}{{ 160}}](#p160)
-- [{{ Elemental Weapon}}{{ 161}}](#p161)
-- [{{ Erupting Earth}}{{ 162}}](#p162)
-- [{{ Feign Death}}{{ 162}}](#p162)
-- [{{ Fire Cyclone}}{{ 163}}](#p163)
-- [{{ Flame Arrows}}{{ 163}}](#p163)
-- [{{ Freedom of the Waves}}{{ 164}}](#p164)
-- [{{ Greenfire}}{{ 166}}](#p166)
-- [{{ Instant Bulwark}}{{ 169}}](#p169)
-- [{{ Invoke Elemental (Conjure Elemental)}}{{ 169}}](#p169)
-- [{{ Invoke Fey (Conjure Fey)}}{{ 170}}](#p170)
-- [{{ Meld into Stone}}{{ 173}}](#p173)
-- [{{ Mutate}}{{ 175}}](#p175)
-- [{{ Plant Growth}}{{ 176}}](#p176)
+- [{{ Acidic Pit}}{{ 156}}](#p156)
+- [{{ Arctic Aura}}{{ 158}}](#p158)
+- [{{ Aura of Vitality}}{{ 159}}](#p159)
+- [{{ Blistering Scales}}{{ 160}}](#p160)
+- [{{ Bramble Barrier}}{{ 161}}](#p161)
+- [{{ Call Lightning}}{{ 161}}](#p161)
+- [{{ Conjure Animals}}{{ 162}}](#p162)
+- [{{ Daylight}}{{ 165}}](#p165)
+- [{{ Dispel Magic}}{{ 166}}](#p166)
+- [{{ Elemental Weapon}}{{ 167}}](#p167)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
-- [{{ Protection from Energy}}{{ 176}}](#p176)
-- [{{ Quick Sand}}{{ 177}}](#p177)
-- [{{ Rain of Spiders}}{{ 177}}](#p177)
-- [{{ Revivify}}{{ 178}}](#p178)
-- [{{ Seismic Wave}}{{ 179}}](#p179)
-- [{{ Sleet Storm}}{{ 179}}](#p179)
-- [{{ Speak with Plants}}{{ 181}}](#p181)
-- [{{ Spectral Viper}}{{ 181}}](#p181)
-- [{{ Spider Bite}}{{ 181}}](#p181)
-- [{{ Summon Fey}}{{ 183}}](#p183)
-- [{{ Summon Plant}}{{ 186}}](#p186)
-- [{{ Tidal Wave}}{{ 189}}](#p189)
-- [{{ Vortex Blast}}{{ 191}}](#p191)
-- [{{ Wall of Water}}{{ 191}}](#p191)
-- [{{ Wasp Barrage}}{{ 191}}](#p191)
-- [{{ Water Breathing}}{{ 191}}](#p191)
-- [{{ Water Cannon}}{{ 192}}](#p192)
-- [{{ Water Walk}}{{ 192}}](#p192)
-- [{{ Waterspout}}{{ 192}}](#p192)
-- [{{ Wind Wall}}{{ 193}}](#p193)
+- [{{ Emerald Blossom}}{{ 167}}](#p167)
+- [{{ Erupting Earth}}{{ 168}}](#p168)
+- [{{ Feign Death}}{{ 169}}](#p169)
+- [{{ Fire Cyclone}}{{ 169}}](#p169)
+- [{{ Flame Arrows}}{{ 170}}](#p170)
+- [{{ Freedom of the Waves}}{{ 170}}](#p170)
+- [{{ Frozen Flurry}}{{ 170}}](#p170)
+- [{{ Greenfire}}{{ 172}}](#p172)
+- [{{ Instant Bulwark}}{{ 176}}](#p176)
+- [{{ Invoke Elemental (Conjure Elemental)}}{{ 176}}](#p176)
+- [{{ Invoke Fey (Conjure Fey)}}{{ 177}}](#p177)
+- [{{ Meld into Stone}}{{ 181}}](#p181)
+- [{{ Mutate}}{{ 182}}](#p182)
+- [{{ Plant Growth}}{{ 183}}](#p183)
+- [{{ Protection from Energy}}{{ 184}}](#p184)
+- [{{ Quick Sand}}{{ 184}}](#p184)
+- [{{ Rain of Fire}}{{ 184}}](#p184)
+- [{{ Rain of Spiders}}{{ 184}}](#p184)
+- [{{ Regrowth}}{{ 185}}](#p185)
+- [{{ Revivify}}{{ 186}}](#p186)
+- [{{ Seismic Wave}}{{ 186}}](#p186)
+- [{{ Sleet Storm}}{{ 187}}](#p187)
+- [{{ Speak with Plants}}{{ 188}}](#p188)
+- [{{ Spectral Viper}}{{ 189}}](#p189)
+- [{{ Spider Bite}}{{ 189}}](#p189)
+- [{{ Summon Fey}}{{ 190}}](#p190)
+- [{{ Summon Plant}}{{ 193}}](#p193)
+- [{{ Tidal Wave}}{{ 196}}](#p196)
+- [{{ Vortex Blast}}{{ 198}}](#p198)
+- [{{ Wall of Water}}{{ 198}}](#p198)
+- [{{ Wasp Barrage}}{{ 198}}](#p198)
+- [{{ Water Breathing}}{{ 198}}](#p198)
+- [{{ Water Cannon}}{{ 199}}](#p199)
+- [{{ Water Walk}}{{ 199}}](#p199)
+- [{{ Waterspout}}{{ 199}}](#p199)
+- [{{ Wind Wall}}{{ 200}}](#p200)
 :
 - **4th Level Spells**
-- [{{ Accursed Touch}}{{ 194}}](#p194)
-- [{{ Arc of Lightning}}{{ 195}}](#p195)
-- [{{ Blight}}{{ 196}}](#p196)
-- [{{ Blood Frenzy}}{{ 196}}](#p196)
-- [{{ Carnivorous Garden}}{{ 197}}](#p197)
-- [{{ Charm Monster}}{{ 197}}](#p197)
-- [{{ Confusion}}{{ 198}}](#p198)
-- [{{ Conjure Minor Elementals}}{{ 198}}](#p198)
-- [{{ Conjure Woodland Beings}}{{ 199}}](#p199)
-- [{{ Control Water}}{{ 199}}](#p199)
-- [{{ Divination}}{{ 201}}](#p201)
-- [{{ Dominate Beast}}{{ 201}}](#p201)
-- [{{ Elemental Bane}}{{ 203}}](#p203)
-- [{{ Festering Blast}}{{ 205}}](#p205)
-- [{{ Fire Shield}}{{ 205}}](#p205)
-- [{{ Fount of Moonlight}}{{ 205}}](#p205)
-- [{{ Freedom of Movement}}{{ 206}}](#p206)
-- [{{ Geyser}}{{ 207}}](#p207)
-- [{{ Giant Insect}}{{ 207}}](#p207)
-- [{{ Grasping Vine}}{{ 208}}](#p208)
-- [{{ Guardian of Nature}}{{ 209}}](#p209)
-- [{{ Hallucinatory Terrain}}{{ 210}}](#p210)
-- [{{ Ice Storm}}{{ 211}}](#p211)
-- [{{ Locate Creature}}{{ 212}}](#p212)
-- [{{ Orbital Stones}}{{ 213}}](#p213)
-- [{{ Pillars of Earth}}{{ 213}}](#p213)
-- [{{ Poison Puff}}{{ 214}}](#p214)
-- [{{ Polymorph}}{{ 214}}](#p214)
-- [{{ Starfall}}{{ 219}}](#p219)
-- [{{ Sticks to Snakes}}{{ 219}}](#p219)
-- [{{ Stinging Swarm}}{{ 220}}](#p220)
-- [{{ Stone Coffin}}{{ 220}}](#p220)
-- [{{ Stone Shape}}{{ 220}}](#p220)
-- [{{ Stoneskin}}{{ 220}}](#p220)
-- [{{ Summon Elemental}}{{ 223}}](#p223)
-- [{{ Vital Surge}}{{ 225}}](#p225)
-- [{{ Wall of Fire}}{{ 225}}](#p225)
-- [{{ Watery Sphere}}{{ 226}}](#p226)
-- [{{ Watery Tentacles}}{{ 226}}](#p226)
+- [{{ Accursed Touch}}{{ 201}}](#p201)
+- [{{ Arc of Lightning}}{{ 202}}](#p202)
+- [{{ Blight}}{{ 203}}](#p203)
+- [{{ Blood Frenzy}}{{ 203}}](#p203)
+- [{{ Breath of Eons}}{{ 204}}](#p204)
+- [{{ Carnivorous Garden}}{{ 204}}](#p204)
+- [{{ Charm Monster}}{{ 204}}](#p204)
+- [{{ Cometfall}}{{ 205}}](#p205)
+- [{{ Confusion}}{{ 206}}](#p206)
+- [{{ Conjure Minor Elementals}}{{ 207}}](#p207)
+- [{{ Conjure Woodland Beings}}{{ 207}}](#p207)
+- [{{ Control Water}}{{ 207}}](#p207)
+- [{{ Divination}}{{ 209}}](#p209)
+- [{{ Dominate Beast}}{{ 209}}](#p209)
+- [{{ Elemental Bane}}{{ 211}}](#p211)
+- [{{ Emberstorm}}{{ 211}}](#p211)
+- [{{ Festering Blast}}{{ 213}}](#p213)
+- [{{ Fire Shield}}{{ 213}}](#p213)
+- [{{ Fount of Moonlight}}{{ 213}}](#p213)
+- [{{ Freedom of Movement}}{{ 214}}](#p214)
+- [{{ Geyser}}{{ 215}}](#p215)
+- [{{ Giant Insect}}{{ 215}}](#p215)
+- [{{ Grasping Vine}}{{ 216}}](#p216)
+- [{{ Guardian of Nature}}{{ 217}}](#p217)
+- [{{ Hallucinatory Terrain}}{{ 218}}](#p218)
+- [{{ Ice Storm}}{{ 219}}](#p219)
+- [{{ Locate Creature}}{{ 220}}](#p220)
+- [{{ Orbital Stones}}{{ 221}}](#p221)
+- [{{ Pillars of Earth}}{{ 221}}](#p221)
+- [{{ Poison Puff}}{{ 222}}](#p222)
+- [{{ Polymorph}}{{ 222}}](#p222)
+- [{{ Starfall}}{{ 228}}](#p228)
+- [{{ Sticks to Snakes}}{{ 228}}](#p228)
+- [{{ Stinging Swarm}}{{ 229}}](#p229)
+- [{{ Stone Coffin}}{{ 229}}](#p229)
+- [{{ Stone Shape}}{{ 229}}](#p229)
+- [{{ Stoneskin}}{{ 229}}](#p229)
+- [{{ Summon Elemental}}{{ 232}}](#p232)
+- [{{ Vital Surge}}{{ 234}}](#p234)
+- [{{ Volcanic Upheaval}}{{ 234}}](#p234)
+- [{{ Wall of Fire}}{{ 235}}](#p235)
+- [{{ Watery Sphere}}{{ 235}}](#p235)
+- [{{ Watery Tentacles}}{{ 235}}](#p235)
 :
 - **5th Level Spells**
-- [{{ Acid Rain}}{{ 227}}](#p227)
-- [{{ Antilife Shell}}{{ 228}}](#p228)
-- [{{ Awaken}}{{ 229}}](#p229)
-- [{{ Burial Barrage}}{{ 230}}](#p230)
-- [{{ Commune with Nature}}{{ 231}}](#p231)
-- [{{ Cone of Cold}}{{ 231}}](#p231)
-- [{{ Conjure Elemental}}{{ 232}}](#p232)
-- [{{ Contagion}}{{ 233}}](#p233)
-- [{{ Control Winds}}{{ 233}}](#p233)
-- [{{ Elemental Suffusion}}{{ 239}}](#p239)
-- [{{ Field of Stars}}{{ 240}}](#p240)
-- [{{ Fissure}}{{ 241}}](#p241)
-- [{{ Freedom of the Winds}}{{ 241}}](#p241)
-- [{{ Geas}}{{ 241}}](#p241)
-- [{{ Greater Absorb Elements}}{{ 242}}](#p242)
-- [{{ Greater Restoration}}{{ 242}}](#p242)
-- [{{ Insect Plague}}{{ 244}}](#p244)
-- [{{ Invoke Dragon (Conjure Dragon)}}{{ 245}}](#p245)
-- [{{ Invoke Giant (Conjure Giant)}}{{ 245}}](#p245)
-- [{{ Maelstrom}}{{ 247}}](#p247)
-- [{{ Mass Cure Wounds}}{{ 247}}](#p247)
-- [{{ Mooncloak}}{{ 248}}](#p248)
-- [{{ Nature's Protection}}{{ 249}}](#p249)
-- [{{ Planar Binding}}{{ 250}}](#p250)
-- [{{ Reincarnate}}{{ 252}}](#p252)
-- [{{ Scrying}}{{ 255}}](#p255)
-- [{{ Sky Burst}}{{ 256}}](#p256)
-- [{{ Summon Dragon}}{{ 260}}](#p260)
-- [{{ Summon Greater Plant}}{{ 261}}](#p261)
-- [{{ Tornado}}{{ 264}}](#p264)
-- [{{ Transmute Rock}}{{ 264}}](#p264)
-- [{{ Tree Stride}}{{ 265}}](#p265)
-- [{{ Wall of Stone}}{{ 266}}](#p266)
-- [{{ Wrath of Nature}}{{ 267}}](#p267)
+- [{{ Acid Rain}}{{ 237}}](#p237)
+- [{{ Antilife Shell}}{{ 238}}](#p238)
+- [{{ Awaken}}{{ 239}}](#p239)
+- [{{ Burial Barrage}}{{ 240}}](#p240)
+- [{{ Commune with Nature}}{{ 241}}](#p241)
+- [{{ Cone of Cold}}{{ 242}}](#p242)
+- [{{ Conjure Elemental}}{{ 242}}](#p242)
+- [{{ Contagion}}{{ 243}}](#p243)
+- [{{ Control Winds}}{{ 243}}](#p243)
+- [{{ Dream Flight}}{{ 249}}](#p249)
+- [{{ Elemental Suffusion}}{{ 250}}](#p250)
+- [{{ Explosive Trap}}{{ 251}}](#p251)
+- [{{ Field of Stars}}{{ 251}}](#p251)
+- [{{ Fissure}}{{ 252}}](#p252)
+- [{{ Freedom of the Winds}}{{ 252}}](#p252)
+- [{{ Geas}}{{ 252}}](#p252)
+- [{{ Greater Absorb Elements}}{{ 253}}](#p253)
+- [{{ Greater Restoration}}{{ 253}}](#p253)
+- [{{ Insect Plague}}{{ 255}}](#p255)
+- [{{ Invoke Dragon (Conjure Dragon)}}{{ 256}}](#p256)
+- [{{ Invoke Giant (Conjure Giant)}}{{ 256}}](#p256)
+- [{{ Maelstrom}}{{ 258}}](#p258)
+- [{{ Mass Cure Wounds}}{{ 258}}](#p258)
+- [{{ Mooncloak}}{{ 259}}](#p259)
+- [{{ Nature's Protection}}{{ 260}}](#p260)
+- [{{ Planar Binding}}{{ 261}}](#p261)
+- [{{ Reincarnate}}{{ 263}}](#p263)
+- [{{ Scrying}}{{ 266}}](#p266)
+- [{{ Sky Burst}}{{ 267}}](#p267)
+- [{{ Summon Dragon}}{{ 271}}](#p271)
+- [{{ Summon Greater Plant}}{{ 272}}](#p272)
+- [{{ Tornado}}{{ 275}}](#p275)
+- [{{ Transmute Rock}}{{ 275}}](#p275)
+- [{{ Tree Stride}}{{ 276}}](#p276)
+- [{{ Verdant Surge}}{{ 276}}](#p276)
+- [{{ Wall of Stone}}{{ 278}}](#p278)
+- [{{ Wrath of Nature}}{{ 279}}](#p279)
 :
 - **6th Level Spells**
-- [{{ Avalanche}}{{ 268}}](#p268)
-- [{{ Blizzard}}{{ 269}}](#p269)
-- [{{ Bones of the Earth}}{{ 270}}](#p270)
-- [{{ Bubbling Cauldron}}{{ 270}}](#p270)
-- [{{ Conjure Fey}}{{ 271}}](#p271)
-- [{{ Druid Grove}}{{ 277}}](#p277)
-- [{{ Effulgent Spheres}}{{ 277}}](#p277)
-- [{{ Find the Path}}{{ 278}}](#p278)
-- [{{ Flesh to Stone}}{{ 279}}](#p279)
-- [{{ Heal}}{{ 281}}](#p281)
-- [{{ Heroes' Feast}}{{ 281}}](#p281)
-- [{{ Impaling Spears}}{{ 281}}](#p281)
-- [{{ Investiture of Flame}}{{ 283}}](#p283)
-- [{{ Investiture of Ice}}{{ 283}}](#p283)
-- [{{ Investiture of Stone}}{{ 284}}](#p284)
-- [{{ Investiture of Water}}{{ 284}}](#p284)
-- [{{ Investiture of Wind}}{{ 284}}](#p284)
-- [{{ Move Earth}}{{ 288}}](#p288)
-- [{{ Primordial Ward}}{{ 289}}](#p289)
-- [{{ Sky Omen}}{{ 291}}](#p291)
-- [{{ Summon Dinosaur}}{{ 292}}](#p292)
-- [{{ Sunbeam}}{{ 294}}](#p294)
-- [{{ Transport via Plants}}{{ 294}}](#p294)
-- [{{ Volcanic Burst}}{{ 295}}](#p295)
-- [{{ Wall of Thorns}}{{ 295}}](#p295)
-- [{{ Wind Walk}}{{ 296}}](#p296)
-:
-- **7th Level Spells**
-- [{{ Draconic Transformation}}{{ 299}}](#p299)
-- [{{ Fire Storm}}{{ 301}}](#p301)
-- [{{ Glacial Crash}}{{ 301}}](#p301)
-- [{{ Inevitable Boulder}}{{ 302}}](#p302)
-- [{{ Mirage Arcane}}{{ 303}}](#p303)
-- [{{ Plane Shift}}{{ 303}}](#p303)
-- [{{ Regenerate}}{{ 305}}](#p305)
-- [{{ Reverse Gravity}}{{ 306}}](#p306)
-- [{{ Symbol}}{{ 308}}](#p308)
-- [{{ Whirlwind}}{{ 312}}](#p312)
-:
-- **8th Level Spells**
-- [{{ Animal Shapes}}{{ 313}}](#p313)
-- [{{ Antipathy/Sympathy}}{{ 314}}](#p314)
-- [{{ Control Weather}}{{ 316}}](#p316)
-- [{{ Earthquake}}{{ 318}}](#p318)
-- [{{ Feeblemind}}{{ 318}}](#p318)
-- [{{ Incendiary Cloud}}{{ 320}}](#p320)
-- [{{ Lightning Ring}}{{ 320}}](#p320)
-- [{{ Nimbleness}}{{ 322}}](#p322)
-- [{{ Precognition}}{{ 323}}](#p323)
-- [{{ Sunburst}}{{ 324}}](#p324)
-- [{{ Tempestuous Climate}}{{ 325}}](#p325)
-- [{{ Tsunami}}{{ 326}}](#p326)
-- [{{ Wildfire}}{{ 326}}](#p326)
+- [{{ Avalanche}}{{ 281}}](#p281)
+- [{{ Blizzard}}{{ 281}}](#p281)
+- [{{ Bones of the Earth}}{{ 282}}](#p282)
+- [{{ Bubbling Cauldron}}{{ 282}}](#p282)
+- [{{ Combustion}}{{ 283}}](#p283)
+- [{{ Conjure Fey}}{{ 283}}](#p283)
+- [{{ Druid Grove}}{{ 289}}](#p289)
+- [{{ Effulgent Spheres}}{{ 289}}](#p289)
+- [{{ Elemental Avatar}}{{ 290}}](#p290)
+- [{{ Find the Path}}{{ 291}}](#p291)
+- [{{ Flesh to Stone}}{{ 292}}](#p292)
+- [{{ Heal}}{{ 294}}](#p294)
+- [{{ Heroes' Feast}}{{ 294}}](#p294)
+- [{{ Impaling Spears}}{{ 294}}](#p294)
+- [{{ Investiture of Flame}}{{ 296}}](#p296)
+- [{{ Investiture of Ice}}{{ 296}}](#p296)
+- [{{ Investiture of Stone}}{{ 297}}](#p297)
+- [{{ Investiture of Water}}{{ 297}}](#p297)
+- [{{ Investiture of Wind}}{{ 297}}](#p297)
+- [{{ Move Earth}}{{ 301}}](#p301)
+- [{{ Nature's Tranquility}}{{ 301}}](#p301)
+- [{{ Primordial Ward}}{{ 303}}](#p303)
+- [{{ Sky Omen}}{{ 304}}](#p304)
+- [{{ Summon Dinosaur}}{{ 306}}](#p306)
+- [{{ Sunbeam}}{{ 308}}](#p308)
+- [{{ Transport via Plants}}{{ 308}}](#p308)
+- [{{ Volcanic Burst}}{{ 309}}](#p309)
+- [{{ Wall of Thorns}}{{ 309}}](#p309)
+- [{{ Wind Walk}}{{ 310}}](#p310)
 :
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
+- **7th Level Spells**
+- [{{ Draconic Transformation}}{{ 313}}](#p313)
+- [{{ Fire Storm}}{{ 315}}](#p315)
+- [{{ Glacial Crash}}{{ 315}}](#p315)
+- [{{ Inevitable Boulder}}{{ 316}}](#p316)
+- [{{ Lay Waste}}{{ 316}}](#p316)
+- [{{ Mirage Arcane}}{{ 317}}](#p317)
+- [{{ Plane Shift}}{{ 317}}](#p317)
+- [{{ Regenerate}}{{ 319}}](#p319)
+- [{{ Reverse Gravity}}{{ 320}}](#p320)
+- [{{ Symbol}}{{ 322}}](#p322)
+- [{{ Tree of Life}}{{ 325}}](#p325)
+- [{{ Whirlwind}}{{ 326}}](#p326)
+:
+- **8th Level Spells**
+- [{{ Animal Shapes}}{{ 327}}](#p327)
+- [{{ Antipathy/Sympathy}}{{ 328}}](#p328)
+- [{{ Control Weather}}{{ 330}}](#p330)
+- [{{ Earthquake}}{{ 332}}](#p332)
+- [{{ Feeblemind}}{{ 332}}](#p332)
+- [{{ Incendiary Cloud}}{{ 334}}](#p334)
+- [{{ Lightning Ring}}{{ 334}}](#p334)
+- [{{ Nimbleness}}{{ 336}}](#p336)
+- [{{ Precognition}}{{ 337}}](#p337)
+- [{{ Sunburst}}{{ 338}}](#p338)
+- [{{ Tempestuous Climate}}{{ 339}}](#p339)
+- [{{ Tsunami}}{{ 340}}](#p340)
+- [{{ Wildfire}}{{ 340}}](#p340)
+:
 - **9th Level Spells**
-- [{{ Foresight}}{{ 329}}](#p329)
-- [{{ Form of the Elements}}{{ 330}}](#p330)
-- [{{ Frostfell}}{{ 330}}](#p330)
-- [{{ Restore Youth}}{{ 336}}](#p336)
-- [{{ Shapechange}}{{ 337}}](#p337)
-- [{{ Storm of Vengeance}}{{ 337}}](#p337)
-- [{{ Towering Thunderhead}}{{ 338}}](#p338)
-- [{{ True Resurrection}}{{ 339}}](#p339)
+- [{{ Foresight}}{{ 343}}](#p343)
+- [{{ Form of the Elements}}{{ 344}}](#p344)
+- [{{ Frostfell}}{{ 344}}](#p344)
+- [{{ Restore Youth}}{{ 350}}](#p350)
+- [{{ Shapechange}}{{ 351}}](#p351)
+- [{{ Storm of Vengeance}}{{ 351}}](#p351)
+- [{{ Towering Thunderhead}}{{ 352}}](#p352)
+- [{{ True Resurrection}}{{ 353}}](#p353)
 }}
 
 \page
@@ -2199,6 +2342,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 
 {{toc,wide
 - **Cantrips**
+- [{{ Arcane Pulse}}{{ 49}}](#p49)
 - [{{ Blade Ward}}{{ 49}}](#p49)
 - [{{ Blood Bolt}}{{ 49}}](#p49)
 - [{{ Booming Blade}}{{ 49}}](#p49)
@@ -2233,291 +2377,326 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Acid Bubble}}{{ 66}}](#p66)
 - [{{ Arcane Lance}}{{ 67}}](#p67)
 - [{{ Armor of Agathys}}{{ 67}}](#p67)
+- [{{ Azure Strike}}{{ 68}}](#p68)
 - [{{ Blade Mirage}}{{ 69}}](#p69)
 - [{{ Burning Hands}}{{ 70}}](#p70)
 - [{{ Caustic Brew}}{{ 71}}](#p71)
+- [{{ Chains of Ice}}{{ 72}}](#p72)
 - [{{ Chromatic Orb}}{{ 72}}](#p72)
 - [{{ Color Spray}}{{ 72}}](#p72)
 - [{{ Detect Magic}}{{ 76}}](#p76)
 - [{{ Electrify}}{{ 77}}](#p77)
 - [{{ Entomb}}{{ 78}}](#p78)
-- [{{ Expeditious Retreat}}{{ 78}}](#p78)
+- [{{ Expeditious Retreat}}{{ 79}}](#p79)
 - [{{ Faerie Fire}}{{ 79}}](#p79)
-- [{{ Fated Strike}}{{ 79}}](#p79)
-- [{{ Feather Fall}}{{ 79}}](#p79)
-- [{{ Fog Cloud}}{{ 81}}](#p81)
-- [{{ Frost Fingers}}{{ 81}}](#p81)
-- [{{ Gale Bolt}}{{ 81}}](#p81)
-- [{{ Grease}}{{ 82}}](#p82)
-- [{{ Ice Arrow}}{{ 84}}](#p84)
-- [{{ Ice Knife}}{{ 84}}](#p84)
-- [{{ Identify}}{{ 85}}](#p85)
-- [{{ Infinite Edge}}{{ 86}}](#p86)
-- [{{ Jump}}{{ 86}}](#p86)
-- [{{ Mage Armor}}{{ 87}}](#p87)
-- [{{ Magic Missile}}{{ 87}}](#p87)
-- [{{ Magnify Gravity}}{{ 87}}](#p87)
-- [{{ Melting Glob}}{{ 87}}](#p87)
-- [{{ Minor Drain}}{{ 88}}](#p88)
-- [{{ Nauseating Poison}}{{ 88}}](#p88)
-- [{{ Prismatic Bolt}}{{ 89}}](#p89)
-- [{{ Prismatic Flash}}{{ 89}}](#p89)
-- [{{ Protection from Evil and Good}}{{ 89}}](#p89)
-- [{{ Sense Blood}}{{ 91}}](#p91)
-- [{{ Shadow Bind}}{{ 91}}](#p91)
-- [{{ Shield}}{{ 91}}](#p91)
-- [{{ Sleep}}{{ 92}}](#p92)
-- [{{ Spellfire Flare}}{{ 93}}](#p93)
-- [{{ Thunder Punch}}{{ 95}}](#p95)
-- [{{ Thunderwave}}{{ 95}}](#p95)
-- [{{ Torrent}}{{ 96}}](#p96)
-- [{{ Violent Updraft}}{{ 97}}](#p97)
-- [{{ Warding Sigil}}{{ 97}}](#p97)
-- [{{ Water Blast}}{{ 97}}](#p97)
-- [{{ Witch Bolt}}{{ 97}}](#p97)
-- [{{ Zephyr Strike}}{{ 98}}](#p98)
+- [{{ Fated Strike}}{{ 80}}](#p80)
+- [{{ Feather Fall}}{{ 80}}](#p80)
+- [{{ Fog Cloud}}{{ 82}}](#p82)
+- [{{ Frost Fingers}}{{ 82}}](#p82)
+- [{{ Frost Nova}}{{ 82}}](#p82)
+- [{{ Gale Bolt}}{{ 82}}](#p82)
+- [{{ Grease}}{{ 83}}](#p83)
+- [{{ Ice Arrow}}{{ 85}}](#p85)
+- [{{ Ice Knife}}{{ 85}}](#p85)
+- [{{ Identify}}{{ 86}}](#p86)
+- [{{ Infernal Rush}}{{ 87}}](#p87)
+- [{{ Infernal Strike}}{{ 87}}](#p87)
+- [{{ Infinite Edge}}{{ 88}}](#p88)
+- [{{ Jump}}{{ 89}}](#p89)
+- [{{ Mage Armor}}{{ 89}}](#p89)
+- [{{ Magic Missile}}{{ 89}}](#p89)
+- [{{ Magnify Gravity}}{{ 90}}](#p90)
+- [{{ Melting Glob}}{{ 90}}](#p90)
+- [{{ Minor Drain}}{{ 91}}](#p91)
+- [{{ Nauseating Poison}}{{ 91}}](#p91)
+- [{{ Prismatic Bolt}}{{ 92}}](#p92)
+- [{{ Prismatic Flash}}{{ 92}}](#p92)
+- [{{ Protection from Evil and Good}}{{ 92}}](#p92)
+- [{{ Sense Blood}}{{ 94}}](#p94)
+- [{{ Shadow Bind}}{{ 95}}](#p95)
+- [{{ Shield}}{{ 95}}](#p95)
+- [{{ Sleep}}{{ 96}}](#p96)
+- [{{ Spellfire Flare}}{{ 97}}](#p97)
+- [{{ Throw Glaive}}{{ 99}}](#p99)
+- [{{ Thunder Punch}}{{ 99}}](#p99)
+- [{{ Thunderwave}}{{ 100}}](#p100)
+- [{{ Torrent}}{{ 100}}](#p100)
+- [{{ Violent Updraft}}{{ 101}}](#p101)
+- [{{ Warding Sigil}}{{ 101}}](#p101)
+- [{{ Water Blast}}{{ 102}}](#p102)
+- [{{ Witch Bolt}}{{ 102}}](#p102)
+- [{{ Zephyr Strike}}{{ 102}}](#p102)
 :
 - **2nd Level Spells**
-- [{{ Alacrity}}{{ 99}}](#p99)
-- [{{ Arcane Scorcher}}{{ 102}}](#p102)
-- [{{ Arcane Vigor}}{{ 102}}](#p102)
-- [{{ Aura of Frost}}{{ 103}}](#p103)
-- [{{ Blindness/Deafness}}{{ 107}}](#p107)
-- [{{ Blur}}{{ 108}}](#p108)
-- [{{ Burning Strike}}{{ 109}}](#p109)
-- [{{ Chromatic Blade (Elemental Blade)}}{{ 110}}](#p110)
-- [{{ Clay Touch}}{{ 110}}](#p110)
-- [{{ Cloud of Daggers}}{{ 110}}](#p110)
-- [{{ Combust}}{{ 110}}](#p110)
-- [{{ Crescent Wind Slash}}{{ 112}}](#p112)
-- [{{ Darkness}}{{ 114}}](#p114)
-- [{{ Darkvision}}{{ 114}}](#p114)
-- [{{ Dueling Ground}}{{ 116}}](#p116)
-- [{{ Earth Ripple}}{{ 116}}](#p116)
-- [{{ Electric Loop}}{{ 117}}](#p117)
-- [{{ Elemental Exhalation}}{{ 117}}](#p117)
-- [{{ Enhance Ability}}{{ 117}}](#p117)
-- [{{ Enlarge/Reduce}}{{ 117}}](#p117)
-- [{{ Ethereal Immolation}}{{ 118}}](#p118)
-- [{{ Fling}}{{ 121}}](#p121)
-- [{{ Gravity Surge}}{{ 122}}](#p122)
-- [{{ Hold Person}}{{ 123}}](#p123)
-- [{{ Instant Counter}}{{ 125}}](#p125)
-- [{{ Invisibility}}{{ 125}}](#p125)
-- [{{ Iron Wind Strike}}{{ 125}}](#p125)
-- [{{ Knock}}{{ 126}}](#p126)
-- [{{ Levitate}}{{ 126}}](#p126)
-- [{{ Maximilian's Earthen Grasp}}{{ 129}}](#p129)
-- [{{ Melf's Acid Arrow}}{{ 129}}](#p129)
-- [{{ Mirror Image}}{{ 130}}](#p130)
-- [{{ Misty Step}}{{ 130}}](#p130)
-- [{{ Mystic Elusion}}{{ 131}}](#p131)
-- [{{ Painful Echoes}}{{ 131}}](#p131)
-- [{{ Protection from Poison}}{{ 133}}](#p133)
-- [{{ Pseudopod Slam}}{{ 133}}](#p133)
-- [{{ Ray of Enfeeblement}}{{ 134}}](#p134)
-- [{{ Scorching Ray}}{{ 135}}](#p135)
-- [{{ Shatter}}{{ 136}}](#p136)
-- [{{ Shattering Shield}}{{ 136}}](#p136)
-- [{{ Snowball Swarm}}{{ 137}}](#p137)
-- [{{ Spider Climb}}{{ 137}}](#p137)
-- [{{ Star Dust}}{{ 139}}](#p139)
-- [{{ Stone Pillar}}{{ 140}}](#p140)
-- [{{ Vacuum Pull}}{{ 146}}](#p146)
-- [{{ Wind Cutter}}{{ 148}}](#p148)
+- [{{ Alacrity}}{{ 103}}](#p103)
+- [{{ Arcane Scorcher}}{{ 106}}](#p106)
+- [{{ Arcane Vigor}}{{ 106}}](#p106)
+- [{{ Aura of Frost}}{{ 107}}](#p107)
+- [{{ Blindness/Deafness}}{{ 111}}](#p111)
+- [{{ Blur}}{{ 112}}](#p112)
+- [{{ Burning Strike}}{{ 113}}](#p113)
+- [{{ Chromatic Blade (Elemental Blade)}}{{ 114}}](#p114)
+- [{{ Clay Touch}}{{ 114}}](#p114)
+- [{{ Cloud of Daggers}}{{ 114}}](#p114)
+- [{{ Combust}}{{ 115}}](#p115)
+- [{{ Crescent Wind Slash}}{{ 116}}](#p116)
+- [{{ Darkness}}{{ 118}}](#p118)
+- [{{ Darkvision}}{{ 118}}](#p118)
+- [{{ Dueling Ground}}{{ 121}}](#p121)
+- [{{ Earth Ripple}}{{ 121}}](#p121)
+- [{{ Electric Loop}}{{ 122}}](#p122)
+- [{{ Elemental Exhalation}}{{ 122}}](#p122)
+- [{{ Enhance Ability}}{{ 122}}](#p122)
+- [{{ Enlarge/Reduce}}{{ 122}}](#p122)
+- [{{ Eruption}}{{ 123}}](#p123)
+- [{{ Ethereal Immolation}}{{ 123}}](#p123)
+- [{{ Eye Beam}}{{ 124}}](#p124)
+- [{{ Fling}}{{ 127}}](#p127)
+- [{{ Frostscythe}}{{ 128}}](#p128)
+- [{{ Gravity Surge}}{{ 128}}](#p128)
+- [{{ Hold Person}}{{ 129}}](#p129)
+- [{{ Instant Counter}}{{ 131}}](#p131)
+- [{{ Invisibility}}{{ 131}}](#p131)
+- [{{ Iron Wind Strike}}{{ 131}}](#p131)
+- [{{ Knock}}{{ 132}}](#p132)
+- [{{ Levitate}}{{ 132}}](#p132)
+- [{{ Maximilian's Earthen Grasp}}{{ 135}}](#p135)
+- [{{ Melf's Acid Arrow}}{{ 135}}](#p135)
+- [{{ Mirror Image}}{{ 136}}](#p136)
+- [{{ Misty Step}}{{ 136}}](#p136)
+- [{{ Mystic Elusion}}{{ 137}}](#p137)
+- [{{ Painful Echoes}}{{ 137}}](#p137)
+- [{{ Protection from Poison}}{{ 139}}](#p139)
+- [{{ Pseudopod Slam}}{{ 139}}](#p139)
+- [{{ Ray of Enfeeblement}}{{ 140}}](#p140)
+- [{{ Scorching Ray}}{{ 141}}](#p141)
+- [{{ Shatter}}{{ 142}}](#p142)
+- [{{ Shattering Shield}}{{ 142}}](#p142)
+- [{{ Sigil of Flame}}{{ 143}}](#p143)
+- [{{ Snowball Swarm}}{{ 143}}](#p143)
+- [{{ Spider Climb}}{{ 144}}](#p144)
+- [{{ Star Dust}}{{ 145}}](#p145)
+- [{{ Stone Pillar}}{{ 146}}](#p146)
+- [{{ Vacuum Pull}}{{ 152}}](#p152)
+- [{{ Wind Cutter}}{{ 154}}](#p154)
 :
 - **3rd Level Spells**
-- [{{ Acidic Pit}}{{ 150}}](#p150)
-- [{{ Aether Lance}}{{ 150}}](#p150)
-- [{{ Arctic Aura}}{{ 152}}](#p152)
-- [{{ Ashardalon's Stride}}{{ 152}}](#p152)
-- [{{ Astral Flood}}{{ 153}}](#p153)
-- [{{ Blade Vortex}}{{ 154}}](#p154)
-- [{{ Corrosive Bolt}}{{ 157}}](#p157)
-- [{{ Counterspell}}{{ 157}}](#p157)
-- [{{ Crushing Singularity}}{{ 159}}](#p159)
-- [{{ Electrocute}}{{ 161}}](#p161)
-- [{{ Elemental Weapon}}{{ 161}}](#p161)
-- [{{ Erode}}{{ 161}}](#p161)
-- [{{ Erupting Earth}}{{ 162}}](#p162)
-- [{{ Fire Cyclone}}{{ 163}}](#p163)
-- [{{ Fireball}}{{ 163}}](#p163)
-- [{{ Flash Freeze}}{{ 164}}](#p164)
-- [{{ Fly}}{{ 164}}](#p164)
-- [{{ Haste}}{{ 167}}](#p167)
-- [{{ Instant Bulwark}}{{ 169}}](#p169)
-- [{{ Lightning Bolt}}{{ 171}}](#p171)
-- [{{ Magic Circle}}{{ 172}}](#p172)
-- [{{ Melf's Minute Meteors}}{{ 174}}](#p174)
-- [{{ Meteor Jump}}{{ 174}}](#p174)
-- [{{ Protection from Energy}}{{ 176}}](#p176)
+- [{{ Acidic Pit}}{{ 156}}](#p156)
+- [{{ Aether Lance}}{{ 156}}](#p156)
+- [{{ Arctic Aura}}{{ 158}}](#p158)
+- [{{ Ashardalon's Stride}}{{ 158}}](#p158)
+- [{{ Astral Flood}}{{ 159}}](#p159)
+- [{{ Blade Vortex}}{{ 160}}](#p160)
+- [{{ Corrosive Bolt}}{{ 163}}](#p163)
+- [{{ Counterspell}}{{ 163}}](#p163)
+- [{{ Crushing Singularity}}{{ 165}}](#p165)
+- [{{ Electrocute}}{{ 167}}](#p167)
+- [{{ Elemental Weapon}}{{ 167}}](#p167)
+- [{{ Erode}}{{ 168}}](#p168)
+- [{{ Erupting Earth}}{{ 168}}](#p168)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
-- [{{ Seismic Wave}}{{ 179}}](#p179)
-- [{{ Sleet Storm}}{{ 179}}](#p179)
-- [{{ Slow}}{{ 180}}](#p180)
-- [{{ Sonic Wave}}{{ 180}}](#p180)
-- [{{ Static Field}}{{ 182}}](#p182)
-- [{{ Thunder Step}}{{ 189}}](#p189)
-- [{{ Tidal Wave}}{{ 189}}](#p189)
-- [{{ Tiny Hut}}{{ 189}}](#p189)
-- [{{ Vortex Blast}}{{ 191}}](#p191)
-- [{{ Wall of Sand}}{{ 191}}](#p191)
-- [{{ Wall of Water}}{{ 191}}](#p191)
-- [{{ Water Cannon}}{{ 192}}](#p192)
-- [{{ Whirling Conflagration}}{{ 192}}](#p192)
-- [{{ Wind Wall}}{{ 193}}](#p193)
+- [{{ Fire Cyclone}}{{ 169}}](#p169)
+- [{{ Fireball}}{{ 169}}](#p169)
+- [{{ Flash Freeze}}{{ 170}}](#p170)
+- [{{ Fly}}{{ 170}}](#p170)
+- [{{ Frozen Flurry}}{{ 170}}](#p170)
+- [{{ Haste}}{{ 173}}](#p173)
+- [{{ Instant Bulwark}}{{ 176}}](#p176)
+- [{{ Lightning Bolt}}{{ 178}}](#p178)
+- [{{ Magic Circle}}{{ 180}}](#p180)
+- [{{ Melf's Minute Meteors}}{{ 181}}](#p181)
+- [{{ Meteor Jump}}{{ 181}}](#p181)
+- [{{ Protection from Energy}}{{ 184}}](#p184)
+- [{{ Remorseless Winter}}{{ 185}}](#p185)
+- [{{ Seismic Wave}}{{ 186}}](#p186)
+- [{{ Sleet Storm}}{{ 187}}](#p187)
+- [{{ Slow}}{{ 187}}](#p187)
+- [{{ Sonic Wave}}{{ 187}}](#p187)
+- [{{ Static Field}}{{ 190}}](#p190)
+- [{{ Thunder Step}}{{ 196}}](#p196)
+- [{{ Tidal Wave}}{{ 196}}](#p196)
+- [{{ Tiny Hut}}{{ 196}}](#p196)
+- [{{ Vortex Blast}}{{ 198}}](#p198)
+- [{{ Wall of Sand}}{{ 198}}](#p198)
+- [{{ Wall of Water}}{{ 198}}](#p198)
+- [{{ Water Cannon}}{{ 199}}](#p199)
+- [{{ Whirling Conflagration}}{{ 199}}](#p199)
+- [{{ Wind Wall}}{{ 200}}](#p200)
 :
 - **4th Level Spells**
-- [{{ Accursed Touch}}{{ 194}}](#p194)
-- [{{ Aero Barrage}}{{ 194}}](#p194)
-- [{{ Arc of Lightning}}{{ 195}}](#p195)
-- [{{ Backlash}}{{ 195}}](#p195)
-- [{{ Bile Beam}}{{ 196}}](#p196)
-- [{{ Death Ward}}{{ 200}}](#p200)
-- [{{ Dimension Cutter}}{{ 200}}](#p200)
-- [{{ Dimension Door}}{{ 200}}](#p200)
-- [{{ Echoing Lance}}{{ 202}}](#p202)
-- [{{ Elemental Bane}}{{ 203}}](#p203)
-- [{{ Festering Blast}}{{ 205}}](#p205)
-- [{{ Fire Shield}}{{ 205}}](#p205)
-- [{{ Force Blade}}{{ 205}}](#p205)
-- [{{ Freedom of Movement}}{{ 206}}](#p206)
-- [{{ Geyser}}{{ 207}}](#p207)
-- [{{ Greater Invisibility}}{{ 209}}](#p209)
-- [{{ Ice Spike}}{{ 210}}](#p210)
-- [{{ Ice Storm}}{{ 211}}](#p211)
-- [{{ Jumping Jolt}}{{ 211}}](#p211)
-- [{{ Mirror Army}}{{ 212}}](#p212)
-- [{{ Pillar of Fire}}{{ 213}}](#p213)
-- [{{ Poison Puff}}{{ 214}}](#p214)
-- [{{ Polymorph}}{{ 214}}](#p214)
-- [{{ Protection from Spells}}{{ 214}}](#p214)
-- [{{ Quicksilver Steps}}{{ 215}}](#p215)
-- [{{ Resilient Sphere}}{{ 215}}](#p215)
-- [{{ Sickening Radiance}}{{ 217}}](#p217)
-- [{{ Spatial Swap}}{{ 217}}](#p217)
-- [{{ Stoneskin}}{{ 220}}](#p220)
-- [{{ Suffocate}}{{ 221}}](#p221)
-- [{{ Violent Crush}}{{ 224}}](#p224)
-- [{{ Vitriolic Sphere}}{{ 225}}](#p225)
-- [{{ Wall of Fire}}{{ 225}}](#p225)
-- [{{ Watery Sphere}}{{ 226}}](#p226)
+- [{{ Accursed Touch}}{{ 201}}](#p201)
+- [{{ Aero Barrage}}{{ 201}}](#p201)
+- [{{ Arc of Lightning}}{{ 202}}](#p202)
+- [{{ Backlash}}{{ 202}}](#p202)
+- [{{ Bile Beam}}{{ 203}}](#p203)
+- [{{ Death Ward}}{{ 208}}](#p208)
+- [{{ Dimension Cutter}}{{ 208}}](#p208)
+- [{{ Dimension Door}}{{ 208}}](#p208)
+- [{{ Echoing Lance}}{{ 210}}](#p210)
+- [{{ Elemental Bane}}{{ 211}}](#p211)
+- [{{ Emberstorm}}{{ 211}}](#p211)
+- [{{ Festering Blast}}{{ 213}}](#p213)
+- [{{ Fire Shield}}{{ 213}}](#p213)
+- [{{ Force Blade}}{{ 213}}](#p213)
+- [{{ Freedom of Movement}}{{ 214}}](#p214)
+- [{{ Geyser}}{{ 215}}](#p215)
+- [{{ Greater Invisibility}}{{ 217}}](#p217)
+- [{{ Ice Spike}}{{ 218}}](#p218)
+- [{{ Ice Storm}}{{ 219}}](#p219)
+- [{{ Jumping Jolt}}{{ 219}}](#p219)
+- [{{ Mirror Army}}{{ 220}}](#p220)
+- [{{ Pillar of Fire}}{{ 221}}](#p221)
+- [{{ Poison Puff}}{{ 222}}](#p222)
+- [{{ Polymorph}}{{ 222}}](#p222)
+- [{{ Protection from Spells}}{{ 222}}](#p222)
+- [{{ Quicksilver Steps}}{{ 223}}](#p223)
+- [{{ Resilient Sphere}}{{ 224}}](#p224)
+- [{{ Sickening Radiance}}{{ 225}}](#p225)
+- [{{ Spatial Swap}}{{ 225}}](#p225)
+- [{{ Stoneskin}}{{ 229}}](#p229)
+- [{{ Suffocate}}{{ 230}}](#p230)
+- [{{ Violent Crush}}{{ 234}}](#p234)
+- [{{ Vitriolic Sphere}}{{ 234}}](#p234)
+- [{{ Volcanic Upheaval}}{{ 234}}](#p234)
+- [{{ Wall of Fire}}{{ 235}}](#p235)
+- [{{ Watery Sphere}}{{ 235}}](#p235)
 :
 - **5th Level Spells**
-- [{{ Acid Rain}}{{ 227}}](#p227)
-- [{{ Aether Storm}}{{ 227}}](#p227)
-- [{{ Animate Objects}}{{ 228}}](#p228)
-- [{{ Ball Lightning}}{{ 230}}](#p230)
-- [{{ Burial Barrage}}{{ 230}}](#p230)
-- [{{ Cone of Cold}}{{ 231}}](#p231)
-- [{{ Contagion}}{{ 233}}](#p233)
-- [{{ Dispel Evil and Good}}{{ 238}}](#p238)
-- [{{ Elemental Suffusion}}{{ 239}}](#p239)
-- [{{ Far Step}}{{ 240}}](#p240)
-- [{{ Fissure}}{{ 241}}](#p241)
-- [{{ Greater Absorb Elements}}{{ 242}}](#p242)
-- [{{ Greater Shield}}{{ 242}}](#p242)
-- [{{ Hold Monster}}{{ 243}}](#p243)
-- [{{ Immolation}}{{ 244}}](#p244)
-- [{{ Pressure Cutter}}{{ 250}}](#p250)
-- [{{ Pyroclastic Lance}}{{ 250}}](#p250)
-- [{{ Scrying}}{{ 255}}](#p255)
-- [{{ Skill Empowerment}}{{ 256}}](#p256)
-- [{{ Sky Burst}}{{ 256}}](#p256)
-- [{{ Sonic Shriek}}{{ 256}}](#p256)
-- [{{ Steel Wind Strike}}{{ 258}}](#p258)
-- [{{ Teleportation Circle}}{{ 263}}](#p263)
-- [{{ Tornado}}{{ 264}}](#p264)
-- [{{ Wall of Force}}{{ 266}}](#p266)
-- [{{ Wall of Light}}{{ 266}}](#p266)
-- [{{ Wall of Stone}}{{ 266}}](#p266)
+- [{{ Acid Rain}}{{ 237}}](#p237)
+- [{{ Aether Storm}}{{ 237}}](#p237)
+- [{{ Animate Objects}}{{ 238}}](#p238)
+- [{{ Ball Lightning}}{{ 240}}](#p240)
+- [{{ Burial Barrage}}{{ 240}}](#p240)
+- [{{ Cone of Cold}}{{ 242}}](#p242)
+- [{{ Contagion}}{{ 243}}](#p243)
+- [{{ Dispel Evil and Good}}{{ 248}}](#p248)
+- [{{ Elemental Suffusion}}{{ 250}}](#p250)
+- [{{ Far Step}}{{ 251}}](#p251)
+- [{{ Fissure}}{{ 252}}](#p252)
+- [{{ Greater Absorb Elements}}{{ 253}}](#p253)
+- [{{ Greater Shield}}{{ 253}}](#p253)
+- [{{ Hold Monster}}{{ 254}}](#p254)
+- [{{ Immolation}}{{ 255}}](#p255)
+- [{{ Pressure Cutter}}{{ 261}}](#p261)
+- [{{ Pyroclastic Lance}}{{ 261}}](#p261)
+- [{{ Scrying}}{{ 266}}](#p266)
+- [{{ Shattering Star}}{{ 267}}](#p267)
+- [{{ Sigil of Chains}}{{ 267}}](#p267)
+- [{{ Skill Empowerment}}{{ 267}}](#p267)
+- [{{ Sky Burst}}{{ 267}}](#p267)
+- [{{ Sonic Shriek}}{{ 267}}](#p267)
+- [{{ Steel Wind Strike}}{{ 269}}](#p269)
+- [{{ Teleportation Circle}}{{ 274}}](#p274)
+- [{{ Tornado}}{{ 275}}](#p275)
+- [{{ Wall of Force}}{{ 277}}](#p277)
+- [{{ Wall of Light}}{{ 278}}](#p278)
+- [{{ Wall of Stone}}{{ 278}}](#p278)
 }}
 \page
 {{pageNumber,auto}}
-
 ### Paladin Spell List
 
 {{toc,wide
 - **1st Level Spells**
-- [{{ Bless}}{{ 69}}](#p69)
+- [{{ Bless}}{{ 70}}](#p70)
 - [{{ Ceremony}}{{ 71}}](#p71)
 - [{{ Command}}{{ 73}}](#p73)
 - [{{ Compelled Duel}}{{ 73}}](#p73)
 - [{{ Cure Wounds}}{{ 75}}](#p75)
+- [{{ Death Grip}}{{ 75}}](#p75)
 - [{{ Detect Evil and Good}}{{ 75}}](#p75)
 - [{{ Detect Magic}}{{ 76}}](#p76)
 - [{{ Detect Poison and Disease}}{{ 76}}](#p76)
 - [{{ Divine Favor}}{{ 77}}](#p77)
-- [{{ Ethereal Anchor}}{{ 78}}](#p78)
-- [{{ Heroism}}{{ 83}}](#p83)
-- [{{ Protection from Evil and Good}}{{ 89}}](#p89)
-- [{{ Purify Food and Drink}}{{ 89}}](#p89)
-- [{{ Searing Smite}}{{ 90}}](#p90)
-- [{{ Shield of Faith}}{{ 91}}](#p91)
-- [{{ Thunderous Smite}}{{ 95}}](#p95)
-- [{{ Wardaway}}{{ 97}}](#p97)
-- [{{ Wrathful Smite}}{{ 98}}](#p98)
+- [{{ Ebon Might}}{{ 77}}](#p77)
+- [{{ Ethereal Anchor}}{{ 79}}](#p79)
+- [{{ Heroism}}{{ 84}}](#p84)
+- [{{ Infernal Strike}}{{ 87}}](#p87)
+- [{{ Living Flame}}{{ 89}}](#p89)
+- [{{ Protection from Evil and Good}}{{ 92}}](#p92)
+- [{{ Purify Food and Drink}}{{ 92}}](#p92)
+- [{{ Rune Strike}}{{ 93}}](#p93)
+- [{{ Scourge Strike}}{{ 94}}](#p94)
+- [{{ Searing Smite}}{{ 94}}](#p94)
+- [{{ Shield of Faith}}{{ 95}}](#p95)
+- [{{ Thunderous Smite}}{{ 99}}](#p99)
+- [{{ Vampiric Blood}}{{ 101}}](#p101)
+- [{{ Wardaway}}{{ 101}}](#p101)
+- [{{ Wrathful Smite}}{{ 102}}](#p102)
 :
 - **2nd Level Spells**
-- [{{ Aid}}{{ 99}}](#p99)
-- [{{ Blazing Beacon}}{{ 107}}](#p107)
-- [{{ Branding Smite}}{{ 109}}](#p109)
-- [{{ Burning Strike}}{{ 109}}](#p109)
-- [{{ Divine Judgement}}{{ 115}}](#p115)
-- [{{ Dueling Ground}}{{ 116}}](#p116)
-- [{{ Find Steed}}{{ 119}}](#p119)
-- [{{ Lesser Restoration}}{{ 126}}](#p126)
-- [{{ Locate Creature (Alternative)}}{{ 127}}](#p127)
-- [{{ Locate Object}}{{ 128}}](#p128)
-- [{{ Magic Weapon}}{{ 129}}](#p129)
-- [{{ Prayer of Healing}}{{ 133}}](#p133)
-- [{{ Protection from Poison}}{{ 133}}](#p133)
-- [{{ Sanctified Charge}}{{ 135}}](#p135)
-- [{{ Searing Orb}}{{ 135}}](#p135)
-- [{{ Summon Archon}}{{ 141}}](#p141)
-- [{{ Unholy Wave}}{{ 145}}](#p145)
-- [{{ Warding Bond}}{{ 147}}](#p147)
-- [{{ Zone of Truth}}{{ 149}}](#p149)
+- [{{ Aid}}{{ 103}}](#p103)
+- [{{ Binding Promise}}{{ 111}}](#p111)
+- [{{ Blazing Beacon}}{{ 111}}](#p111)
+- [{{ Branding Smite}}{{ 113}}](#p113)
+- [{{ Burning Strike}}{{ 113}}](#p113)
+- [{{ Consecration}}{{ 115}}](#p115)
+- [{{ Death and Decay}}{{ 118}}](#p118)
+- [{{ Divine Judgement}}{{ 120}}](#p120)
+- [{{ Dueling Ground}}{{ 121}}](#p121)
+- [{{ Find Steed}}{{ 125}}](#p125)
+- [{{ Frostscythe}}{{ 128}}](#p128)
+- [{{ Lesser Restoration}}{{ 132}}](#p132)
+- [{{ Locate Creature (Alternative)}}{{ 133}}](#p133)
+- [{{ Locate Object}}{{ 134}}](#p134)
+- [{{ Magic Weapon}}{{ 135}}](#p135)
+- [{{ Prayer of Healing}}{{ 139}}](#p139)
+- [{{ Protection from Poison}}{{ 139}}](#p139)
+- [{{ Sanctified Charge}}{{ 141}}](#p141)
+- [{{ Searing Orb}}{{ 141}}](#p141)
+- [{{ Summon Archon}}{{ 147}}](#p147)
+- [{{ Unholy Wave}}{{ 151}}](#p151)
+- [{{ Warding Bond}}{{ 153}}](#p153)
+- [{{ Zone of Truth}}{{ 155}}](#p155)
 :
 - **3rd Level Spells**
-- [{{ Angelic Slash}}{{ 150}}](#p150)
-- [{{ Aura of Vitality}}{{ 153}}](#p153)
-- [{{ Blinding Smite}}{{ 154}}](#p154)
-- [{{ Brilliant Blade}}{{ 155}}](#p155)
-- [{{ Create Food and Water}}{{ 158}}](#p158)
-- [{{ Crusader's Mantle}}{{ 158}}](#p158)
-- [{{ Daylight}}{{ 159}}](#p159)
-- [{{ Dispel Magic}}{{ 160}}](#p160)
-- [{{ Elemental Weapon}}{{ 161}}](#p161)
-- [{{ Magic Circle}}{{ 172}}](#p172)
-- [{{ Remove Curse}}{{ 177}}](#p177)
-- [{{ Revivify}}{{ 178}}](#p178)
-- [{{ Spirit Shroud}}{{ 182}}](#p182)
+- [{{ Angelic Slash}}{{ 156}}](#p156)
+- [{{ Aura of Vitality}}{{ 159}}](#p159)
+- [{{ Blinding Smite}}{{ 160}}](#p160)
+- [{{ Blistering Scales}}{{ 160}}](#p160)
+- [{{ Brilliant Blade}}{{ 161}}](#p161)
+- [{{ Create Food and Water}}{{ 164}}](#p164)
+- [{{ Crusader's Mantle}}{{ 164}}](#p164)
+- [{{ Daylight}}{{ 165}}](#p165)
+- [{{ Demon Spikes}}{{ 166}}](#p166)
+- [{{ Dispel Magic}}{{ 166}}](#p166)
+- [{{ Elemental Weapon}}{{ 167}}](#p167)
+- [{{ Guided Prayer}}{{ 172}}](#p172)
+- [{{ Infernal Metamorphosis}}{{ 175}}](#p175)
+- [{{ Leeching Strike}}{{ 177}}](#p177)
+- [{{ Magic Circle}}{{ 180}}](#p180)
+- [{{ Prayer of Mending}}{{ 183}}](#p183)
+- [{{ Remove Curse}}{{ 185}}](#p185)
+- [{{ Revivify}}{{ 186}}](#p186)
+- [{{ Spirit Shroud}}{{ 189}}](#p189)
+- [{{ Vampiric Blade}}{{ 197}}](#p197)
 :
 - **4th Level Spells**
-- [{{ Aura of Life}}{{ 195}}](#p195)
-- [{{ Aura of Purity}}{{ 195}}](#p195)
-- [{{ Banishment}}{{ 196}}](#p196)
-- [{{ Commandment}}{{ 197}}](#p197)
-- [{{ Death Ward}}{{ 200}}](#p200)
-- [{{ Locate Creature}}{{ 212}}](#p212)
-- [{{ Staggering Smite}}{{ 219}}](#p219)
+- [{{ Aura of Life}}{{ 202}}](#p202)
+- [{{ Aura of Purity}}{{ 202}}](#p202)
+- [{{ Banishment}}{{ 203}}](#p203)
+- [{{ Commandment}}{{ 205}}](#p205)
+- [{{ Death Ward}}{{ 208}}](#p208)
+- [{{ Divine Shield}}{{ 209}}](#p209)
+- [{{ Holy Nova}}{{ 218}}](#p218)
+- [{{ Locate Creature}}{{ 220}}](#p220)
+- [{{ Staggering Smite}}{{ 228}}](#p228)
 :
 - **5th Level Spells**
-- [{{ Banishing Smite}}{{ 230}}](#p230)
-- [{{ Circle of Power}}{{ 230}}](#p230)
-- [{{ Destructive Wave}}{{ 237}}](#p237)
-- [{{ Dispel Evil and Good}}{{ 238}}](#p238)
-- [{{ Geas}}{{ 241}}](#p241)
-- [{{ Holy Weapon}}{{ 244}}](#p244)
-- [{{ Invoke Celestial (Conjure Celestial)}}{{ 245}}](#p245)
-- [{{ Life Support}}{{ 247}}](#p247)
-- [{{ Raise Dead}}{{ 251}}](#p251)
-- [{{ Summon Celestial}}{{ 259}}](#p259)
-- [{{ Vorpal Blade}}{{ 265}}](#p265)
+- [{{ Banishing Smite}}{{ 240}}](#p240)
+- [{{ Circle of Power}}{{ 241}}](#p241)
+- [{{ Destructive Wave}}{{ 247}}](#p247)
+- [{{ Dispel Evil and Good}}{{ 248}}](#p248)
+- [{{ Geas}}{{ 252}}](#p252)
+- [{{ Holy Weapon}}{{ 255}}](#p255)
+- [{{ Invoke Celestial (Conjure Celestial)}}{{ 256}}](#p256)
+- [{{ Life Support}}{{ 258}}](#p258)
+- [{{ Raise Dead}}{{ 262}}](#p262)
+- [{{ Summon Celestial}}{{ 270}}](#p270)
+- [{{ Vorpal Blade}}{{ 276}}](#p276)
 }}
 \page
 {{pageNumber,auto}}
@@ -2549,7 +2728,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 :
 - **1st Level Spells**
 - [{{ Alarm}}{{ 66}}](#p66)
-- [{{ Catapult}}{{ 70}}](#p70)
+- [{{ Catapult}}{{ 71}}](#p71)
 - [{{ Cause Fear}}{{ 71}}](#p71)
 - [{{ Charm Person}}{{ 72}}](#p72)
 - [{{ Command}}{{ 73}}](#p73)
@@ -2558,215 +2737,221 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Detect Magic}}{{ 76}}](#p76)
 - [{{ Disguise Self}}{{ 76}}](#p76)
 - [{{ Dissonant Whispers}}{{ 76}}](#p76)
-- [{{ Expeditious Retreat}}{{ 78}}](#p78)
+- [{{ Expeditious Retreat}}{{ 79}}](#p79)
 - [{{ Faerie Fire}}{{ 79}}](#p79)
-- [{{ Fated Strike}}{{ 79}}](#p79)
-- [{{ Gift of Alacrity}}{{ 81}}](#p81)
-- [{{ Hideous Laughter}}{{ 83}}](#p83)
-- [{{ Id Insinuation}}{{ 84}}](#p84)
-- [{{ Identify}}{{ 85}}](#p85)
-- [{{ Illusory Pit}}{{ 85}}](#p85)
-- [{{ Induce Headache}}{{ 85}}](#p85)
-- [{{ Jump}}{{ 86}}](#p86)
-- [{{ Longstrider}}{{ 87}}](#p87)
-- [{{ Magic Missile}}{{ 87}}](#p87)
-- [{{ Magnify Gravity}}{{ 87}}](#p87)
-- [{{ Mind Ray}}{{ 88}}](#p88)
-- [{{ Shield}}{{ 91}}](#p91)
-- [{{ Silent Image}}{{ 91}}](#p91)
-- [{{ Sleep}}{{ 92}}](#p92)
-- [{{ Unseen Servant}}{{ 96}}](#p96)
-- [{{ Wardaway}}{{ 97}}](#p97)
+- [{{ Fated Strike}}{{ 80}}](#p80)
+- [{{ Feign Interest}}{{ 80}}](#p80)
+- [{{ Gift of Alacrity}}{{ 83}}](#p83)
+- [{{ Hideous Laughter}}{{ 85}}](#p85)
+- [{{ Id Insinuation}}{{ 86}}](#p86)
+- [{{ Identify}}{{ 86}}](#p86)
+- [{{ Illusory Pit}}{{ 86}}](#p86)
+- [{{ Induce Headache}}{{ 87}}](#p87)
+- [{{ Jump}}{{ 89}}](#p89)
+- [{{ Longstrider}}{{ 89}}](#p89)
+- [{{ Magic Missile}}{{ 89}}](#p89)
+- [{{ Magnify Gravity}}{{ 90}}](#p90)
+- [{{ Mind Ray}}{{ 90}}](#p90)
+- [{{ Shadow Word: Pain}}{{ 95}}](#p95)
+- [{{ Shield}}{{ 95}}](#p95)
+- [{{ Silent Image}}{{ 95}}](#p95)
+- [{{ Sleep}}{{ 96}}](#p96)
+- [{{ Unseen Servant}}{{ 101}}](#p101)
+- [{{ Wardaway}}{{ 101}}](#p101)
 :
 - **2nd Level Spells**
-- [{{ Alacrity}}{{ 99}}](#p99)
-- [{{ Blindness/Deafness}}{{ 107}}](#p107)
-- [{{ Blur}}{{ 108}}](#p108)
-- [{{ Calm Emotions}}{{ 109}}](#p109)
-- [{{ Detect Thoughts}}{{ 114}}](#p114)
-- [{{ Disorient}}{{ 115}}](#p115)
-- [{{ Disruptive Tune}}{{ 115}}](#p115)
-- [{{ Enlarge/Reduce}}{{ 117}}](#p117)
-- [{{ Fortune's Favor}}{{ 121}}](#p121)
-- [{{ Gravity Surge}}{{ 122}}](#p122)
-- [{{ Hold Person}}{{ 123}}](#p123)
-- [{{ Invisibility}}{{ 125}}](#p125)
-- [{{ Kinetic Jaunt}}{{ 125}}](#p125)
-- [{{ Levitate}}{{ 126}}](#p126)
-- [{{ Locate Creature (Alternative)}}{{ 127}}](#p127)
-- [{{ Locate Object}}{{ 128}}](#p128)
-- [{{ Mind Spike}}{{ 129}}](#p129)
-- [{{ Mind Whip (Mystic Spear)}}{{ 130}}](#p130)
-- [{{ Mirror Image}}{{ 130}}](#p130)
-- [{{ Misty Step}}{{ 130}}](#p130)
-- [{{ Nebulous Mischief}}{{ 131}}](#p131)
-- [{{ Phantasmal Force}}{{ 132}}](#p132)
-- [{{ See Invisibility}}{{ 135}}](#p135)
-- [{{ Silvery Barbs}}{{ 136}}](#p136)
-- [{{ Suggestion}}{{ 140}}](#p140)
-- [{{ Time Skip}}{{ 144}}](#p144)
-- [{{ Time Slip}}{{ 144}}](#p144)
-- [{{ Time Trap}}{{ 144}}](#p144)
-- [{{ Tower of Iron Will}}{{ 145}}](#p145)
-- [{{ Uncertain Footing}}{{ 145}}](#p145)
-- [{{ Vortex Warp}}{{ 146}}](#p146)
-- [{{ Warp Sense}}{{ 147}}](#p147)
+- [{{ Alacrity}}{{ 103}}](#p103)
+- [{{ Blindness/Deafness}}{{ 111}}](#p111)
+- [{{ Blur}}{{ 112}}](#p112)
+- [{{ Calm Emotions}}{{ 114}}](#p114)
+- [{{ Detect Thoughts}}{{ 119}}](#p119)
+- [{{ Disorient}}{{ 119}}](#p119)
+- [{{ Disruptive Tune}}{{ 119}}](#p119)
+- [{{ Enlarge/Reduce}}{{ 122}}](#p122)
+- [{{ Fortune's Favor}}{{ 127}}](#p127)
+- [{{ Gravity Surge}}{{ 128}}](#p128)
+- [{{ Hold Person}}{{ 129}}](#p129)
+- [{{ Invisibility}}{{ 131}}](#p131)
+- [{{ Kinetic Jaunt}}{{ 131}}](#p131)
+- [{{ Levitate}}{{ 132}}](#p132)
+- [{{ Locate Creature (Alternative)}}{{ 133}}](#p133)
+- [{{ Locate Object}}{{ 134}}](#p134)
+- [{{ Mind Spike}}{{ 135}}](#p135)
+- [{{ Mind Whip (Mystic Spear)}}{{ 136}}](#p136)
+- [{{ Mirror Image}}{{ 136}}](#p136)
+- [{{ Misty Step}}{{ 136}}](#p136)
+- [{{ Nebulous Mischief}}{{ 137}}](#p137)
+- [{{ Phantasmal Force}}{{ 138}}](#p138)
+- [{{ See Invisibility}}{{ 141}}](#p141)
+- [{{ Silvery Barbs}}{{ 143}}](#p143)
+- [{{ Suggestion}}{{ 146}}](#p146)
+- [{{ Time Skip}}{{ 150}}](#p150)
+- [{{ Time Slip}}{{ 150}}](#p150)
+- [{{ Time Trap}}{{ 150}}](#p150)
+- [{{ Tower of Iron Will}}{{ 151}}](#p151)
+- [{{ Uncertain Footing}}{{ 151}}](#p151)
+- [{{ Vortex Warp}}{{ 152}}](#p152)
+- [{{ Warp Sense}}{{ 153}}](#p153)
 :
 - **3rd Level Spells**
-- [{{ Antagonize}}{{ 152}}](#p152)
-- [{{ Astral Flood}}{{ 153}}](#p153)
-- [{{ Blink}}{{ 154}}](#p154)
-- [{{ Cerebral Blast}}{{ 155}}](#p155)
-- [{{ Clairvoyance}}{{ 156}}](#p156)
-- [{{ Crushing Singularity}}{{ 159}}](#p159)
-- [{{ Enemies Abound}}{{ 161}}](#p161)
-- [{{ Fast Friends}}{{ 162}}](#p162)
-- [{{ Fear}}{{ 162}}](#p162)
-- [{{ Feign Death}}{{ 162}}](#p162)
-- [{{ Fly}}{{ 164}}](#p164)
-- [{{ Haste}}{{ 167}}](#p167)
-- [{{ Hypnotic Pattern}}{{ 168}}](#p168)
-- [{{ Illusionary Fireball}}{{ 168}}](#p168)
-- [{{ Inflict Doubt}}{{ 169}}](#p169)
-- [{{ Intellect Fortress}}{{ 169}}](#p169)
-- [{{ Life Transference}}{{ 170}}](#p170)
-- [{{ Major Image}}{{ 173}}](#p173)
-- [{{ Mouth Latch}}{{ 174}}](#p174)
-- [{{ Nondetection}}{{ 175}}](#p175)
-- [{{ Pulse Wave}}{{ 177}}](#p177)
-- [{{ Remove Gravity}}{{ 178}}](#p178)
-- [{{ Sending}}{{ 179}}](#p179)
-- [{{ Slow}}{{ 180}}](#p180)
-- [{{ Tongues}}{{ 190}}](#p190)
-- [{{ Water Walk}}{{ 192}}](#p192)
+- [{{ Antagonize}}{{ 158}}](#p158)
+- [{{ Astral Flood}}{{ 159}}](#p159)
+- [{{ Blink}}{{ 160}}](#p160)
+- [{{ Cerebral Blast}}{{ 162}}](#p162)
+- [{{ Clairvoyance}}{{ 162}}](#p162)
+- [{{ Crushing Singularity}}{{ 165}}](#p165)
+- [{{ Enemies Abound}}{{ 167}}](#p167)
+- [{{ Fast Friends}}{{ 168}}](#p168)
+- [{{ Fear}}{{ 168}}](#p168)
+- [{{ Feign Death}}{{ 169}}](#p169)
+- [{{ Fly}}{{ 170}}](#p170)
+- [{{ Haste}}{{ 173}}](#p173)
+- [{{ Hypnotic Pattern}}{{ 174}}](#p174)
+- [{{ Illusionary Fireball}}{{ 174}}](#p174)
+- [{{ Inflict Doubt}}{{ 175}}](#p175)
+- [{{ Intellect Fortress}}{{ 176}}](#p176)
+- [{{ Life Transference}}{{ 178}}](#p178)
+- [{{ Major Image}}{{ 180}}](#p180)
+- [{{ Mouth Latch}}{{ 181}}](#p181)
+- [{{ Nondetection}}{{ 183}}](#p183)
+- [{{ Pulse Wave}}{{ 184}}](#p184)
+- [{{ Remove Gravity}}{{ 185}}](#p185)
+- [{{ Sending}}{{ 186}}](#p186)
+- [{{ Slow}}{{ 187}}](#p187)
+- [{{ Tongues}}{{ 197}}](#p197)
+- [{{ Water Walk}}{{ 199}}](#p199)
 :
 - **4th Level Spells**
-- [{{ Arcane Eye}}{{ 195}}](#p195)
-- [{{ Backlash}}{{ 195}}](#p195)
-- [{{ Charm Monster}}{{ 197}}](#p197)
-- [{{ Compulsion}}{{ 197}}](#p197)
-- [{{ Confusion}}{{ 198}}](#p198)
-- [{{ Dimension Door}}{{ 200}}](#p200)
-- [{{ Distorted Distance}}{{ 201}}](#p201)
-- [{{ Ego Scourge}}{{ 203}}](#p203)
-- [{{ False Vision}}{{ 204}}](#p204)
-- [{{ Freedom of Movement}}{{ 206}}](#p206)
-- [{{ Gravity Sinkhole}}{{ 209}}](#p209)
-- [{{ Greater Invisibility}}{{ 209}}](#p209)
-- [{{ Hallucinatory Terrain}}{{ 210}}](#p210)
-- [{{ Locate Creature}}{{ 212}}](#p212)
-- [{{ Mirror Army}}{{ 212}}](#p212)
-- [{{ Phantasmal Killer}}{{ 213}}](#p213)
-- [{{ Psychic Lance}}{{ 215}}](#p215)
-- [{{ Resilient Sphere}}{{ 215}}](#p215)
-- [{{ Spatial Swap}}{{ 217}}](#p217)
-- [{{ Time Loop}}{{ 224}}](#p224)
-- [{{ Violent Crush}}{{ 224}}](#p224)
-- [{{ Zone of Amicability}}{{ 226}}](#p226)
+- [{{ Arcane Eye}}{{ 202}}](#p202)
+- [{{ Backlash}}{{ 202}}](#p202)
+- [{{ Charm Monster}}{{ 204}}](#p204)
+- [{{ Compulsion}}{{ 205}}](#p205)
+- [{{ Confusion}}{{ 206}}](#p206)
+- [{{ Dimension Door}}{{ 208}}](#p208)
+- [{{ Distorted Distance}}{{ 209}}](#p209)
+- [{{ Ego Scourge}}{{ 210}}](#p210)
+- [{{ False Vision}}{{ 212}}](#p212)
+- [{{ Freedom of Movement}}{{ 214}}](#p214)
+- [{{ Gravity Sinkhole}}{{ 217}}](#p217)
+- [{{ Greater Invisibility}}{{ 217}}](#p217)
+- [{{ Hallucinatory Terrain}}{{ 218}}](#p218)
+- [{{ Locate Creature}}{{ 220}}](#p220)
+- [{{ Mirror Army}}{{ 220}}](#p220)
+- [{{ Phantasmal Killer}}{{ 221}}](#p221)
+- [{{ Psychic Horror}}{{ 223}}](#p223)
+- [{{ Psychic Lance}}{{ 223}}](#p223)
+- [{{ Resilient Sphere}}{{ 224}}](#p224)
+- [{{ Spatial Swap}}{{ 225}}](#p225)
+- [{{ Time Dilation}}{{ 233}}](#p233)
+- [{{ Time Loop}}{{ 233}}](#p233)
+- [{{ Violent Crush}}{{ 234}}](#p234)
+- [{{ Zone of Amicability}}{{ 236}}](#p236)
 :
 - **5th Level Spells**
-- [{{ Arcane Hand}}{{ 229}}](#p229)
-- [{{ Dominate Person}}{{ 239}}](#p239)
-- [{{ Dream}}{{ 239}}](#p239)
-- [{{ Far Step}}{{ 240}}](#p240)
-- [{{ Geas}}{{ 241}}](#p241)
-- [{{ Greater Shield}}{{ 242}}](#p242)
-- [{{ Hold Monster}}{{ 243}}](#p243)
-- [{{ Legend Lore}}{{ 246}}](#p246)
-- [{{ Life Link}}{{ 247}}](#p247)
-- [{{ Mislead}}{{ 248}}](#p248)
-- [{{ Modify Memory}}{{ 248}}](#p248)
-- [{{ Psychic Crush}}{{ 250}}](#p250)
-- [{{ Regal Presence}}{{ 251}}](#p251)
-- [{{ Scrying}}{{ 255}}](#p255)
-- [{{ Seeming}}{{ 255}}](#p255)
+- [{{ Arcane Hand}}{{ 239}}](#p239)
+- [{{ Dominate Person}}{{ 249}}](#p249)
+- [{{ Dream}}{{ 249}}](#p249)
+- [{{ Far Step}}{{ 251}}](#p251)
+- [{{ Geas}}{{ 252}}](#p252)
+- [{{ Greater Shield}}{{ 253}}](#p253)
+- [{{ Hold Monster}}{{ 254}}](#p254)
+- [{{ Legend Lore}}{{ 257}}](#p257)
+- [{{ Life Link}}{{ 258}}](#p258)
+- [{{ Mislead}}{{ 259}}](#p259)
+- [{{ Modify Memory}}{{ 259}}](#p259)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
-- [{{ Skill Empowerment}}{{ 256}}](#p256)
-- [{{ Sudden Hazards}}{{ 259}}](#p259)
-- [{{ Synaptic Static}}{{ 262}}](#p262)
-- [{{ Telekinesis}}{{ 263}}](#p263)
-- [{{ Telepathic Bond}}{{ 263}}](#p263)
-- [{{ Teleportation Tangle}}{{ 264}}](#p264)
-- [{{ Temporal Shunt}}{{ 264}}](#p264)
-- [{{ Wall of Force}}{{ 266}}](#p266)
+- [{{ Psychic Crush}}{{ 261}}](#p261)
+- [{{ Regal Presence}}{{ 262}}](#p262)
+- [{{ Scrying}}{{ 266}}](#p266)
+- [{{ Seeming}}{{ 266}}](#p266)
+- [{{ Skill Empowerment}}{{ 267}}](#p267)
+- [{{ Sudden Hazards}}{{ 270}}](#p270)
+- [{{ Synaptic Static}}{{ 273}}](#p273)
+- [{{ Telekinesis}}{{ 274}}](#p274)
+- [{{ Telepathic Bond}}{{ 274}}](#p274)
+- [{{ Teleportation Tangle}}{{ 275}}](#p275)
+- [{{ Temporal Shunt}}{{ 275}}](#p275)
+- [{{ Wall of Force}}{{ 277}}](#p277)
 :
 - **6th Level Spells**
-- [{{ Arcane Gate}}{{ 268}}](#p268)
-- [{{ Cryptomnesia}}{{ 275}}](#p275)
-- [{{ Eyebite}}{{ 278}}](#p278)
-- [{{ Globe of Invulnerability}}{{ 280}}](#p280)
-- [{{ Gravity Fissure}}{{ 280}}](#p280)
-- [{{ Irresistible Dance}}{{ 285}}](#p285)
-- [{{ Lamentable Belaborment}}{{ 285}}](#p285)
-- [{{ Magic Jar}}{{ 285}}](#p285)
-- [{{ Martial Transformation}}{{ 286}}](#p286)
-- [{{ Mass Blur}}{{ 286}}](#p286)
-- [{{ Mass Command}}{{ 286}}](#p286)
-- [{{ Mass Suggestion}}{{ 287}}](#p287)
-- [{{ Mental Prison}}{{ 287}}](#p287)
-- [{{ Platinum Shield}}{{ 289}}](#p289)
-- [{{ Psionic Oppression}}{{ 290}}](#p290)
-- [{{ Scatter}}{{ 290}}](#p290)
-- [{{ True Seeing}}{{ 294}}](#p294)
+- [{{ Arcane Gate}}{{ 280}}](#p280)
+- [{{ Cryptomnesia}}{{ 287}}](#p287)
+- [{{ Eyebite}}{{ 290}}](#p290)
+- [{{ Globe of Invulnerability}}{{ 293}}](#p293)
+- [{{ Gravity Fissure}}{{ 293}}](#p293)
+- [{{ Irresistible Dance}}{{ 298}}](#p298)
+- [{{ Lamentable Belaborment}}{{ 298}}](#p298)
+- [{{ Magic Jar}}{{ 298}}](#p298)
+- [{{ Martial Transformation}}{{ 299}}](#p299)
+- [{{ Mass Blur}}{{ 299}}](#p299)
+- [{{ Mass Command}}{{ 299}}](#p299)
+- [{{ Mass Suggestion}}{{ 300}}](#p300)
+- [{{ Mental Prison}}{{ 300}}](#p300)
+- [{{ Platinum Shield}}{{ 302}}](#p302)
+- [{{ Psionic Oppression}}{{ 303}}](#p303)
+- [{{ Scatter}}{{ 304}}](#p304)
+- [{{ Spiritual Projection [Astral Projection]}}{{ 305}}](#p305)
+- [{{ True Seeing}}{{ 308}}](#p308)
 :
 - **7th Level Spells**
-- [{{ Aura of Evasion}}{{ 297}}](#p297)
-- [{{ Dream of the Blue Veil}}{{ 300}}](#p300)
-- [{{ Etherealness}}{{ 300}}](#p300)
-- [{{ Forcecage}}{{ 301}}](#p301)
-- [{{ Fractured Awareness}}{{ 301}}](#p301)
-- [{{ Mirage Arcane}}{{ 303}}](#p303)
-- [{{ Plane Shift}}{{ 303}}](#p303)
-- [{{ Power Word: Pain}}{{ 303}}](#p303)
-- [{{ Power Word: Slumber}}{{ 304}}](#p304)
-- [{{ Prophesied Strike}}{{ 304}}](#p304)
-- [{{ Project Image}}{{ 304}}](#p304)
-- [{{ Reverse Gravity}}{{ 306}}](#p306)
-- [{{ Reweave Fate}}{{ 306}}](#p306)
-- [{{ Sequester}}{{ 306}}](#p306)
-- [{{ Sorcerous Sequestration}}{{ 306}}](#p306)
-- [{{ Teleport}}{{ 309}}](#p309)
-- [{{ Void Star}}{{ 311}}](#p311)
+- [{{ Aura of Evasion}}{{ 311}}](#p311)
+- [{{ Dream of the Blue Veil}}{{ 314}}](#p314)
+- [{{ Etherealness}}{{ 314}}](#p314)
+- [{{ Forcecage}}{{ 315}}](#p315)
+- [{{ Fractured Awareness}}{{ 315}}](#p315)
+- [{{ Mirage Arcane}}{{ 317}}](#p317)
+- [{{ Plane Shift}}{{ 317}}](#p317)
+- [{{ Power Word: Pain}}{{ 318}}](#p318)
+- [{{ Power Word: Slumber}}{{ 318}}](#p318)
+- [{{ Prophesied Strike}}{{ 319}}](#p319)
+- [{{ Project Image}}{{ 319}}](#p319)
+- [{{ Reverse Gravity}}{{ 320}}](#p320)
+- [{{ Reweave Fate}}{{ 320}}](#p320)
+- [{{ Sequester}}{{ 320}}](#p320)
+- [{{ Sorcerous Sequestration}}{{ 321}}](#p321)
+- [{{ Teleport}}{{ 323}}](#p323)
+- [{{ Void Star}}{{ 325}}](#p325)
 :
 - **8th Level Spells**
-- [{{ Antimagic Field}}{{ 314}}](#p314)
-- [{{ Antipathy/Sympathy}}{{ 314}}](#p314)
-- [{{ Arcane Singularity}}{{ 315}}](#p315)
-- [{{ Dominate Monster}}{{ 317}}](#p317)
-- [{{ Entrancing Mirrors}}{{ 318}}](#p318)
-- [{{ Feeblemind}}{{ 318}}](#p318)
-- [{{ Maddening Darkness}}{{ 320}}](#p320)
-- [{{ Mass Invisibility}}{{ 320}}](#p320)
-- [{{ Maximize/Minimize}}{{ 321}}](#p321)
-- [{{ Mind Blank}}{{ 322}}](#p322)
-- [{{ Moment of Prescience}}{{ 322}}](#p322)
-- [{{ Omniscience}}{{ 323}}](#p323)
-- [{{ Power Word: Stun}}{{ 323}}](#p323)
-- [{{ Reality Break}}{{ 323}}](#p323)
-- [{{ Telepathy}}{{ 324}}](#p324)
-- [{{ Time Anchor}}{{ 325}}](#p325)
-- [{{ Time Bubble}}{{ 325}}](#p325)
+- [{{ Antimagic Field}}{{ 328}}](#p328)
+- [{{ Antipathy/Sympathy}}{{ 328}}](#p328)
+- [{{ Arcane Singularity}}{{ 329}}](#p329)
+- [{{ Dominate Monster}}{{ 331}}](#p331)
+- [{{ Entrancing Mirrors}}{{ 332}}](#p332)
+- [{{ Feeblemind}}{{ 332}}](#p332)
+- [{{ Maddening Darkness}}{{ 334}}](#p334)
+- [{{ Mass Invisibility}}{{ 334}}](#p334)
+- [{{ Maximize/Minimize}}{{ 335}}](#p335)
+- [{{ Mind Blank}}{{ 336}}](#p336)
+- [{{ Moment of Prescience}}{{ 336}}](#p336)
+- [{{ Omniscience}}{{ 337}}](#p337)
+- [{{ Power Word: Stun}}{{ 337}}](#p337)
+- [{{ Reality Break}}{{ 337}}](#p337)
+- [{{ Self Time Stop [Time Stop]}}{{ 338}}](#p338)
+- [{{ Telepathy}}{{ 338}}](#p338)
+- [{{ Time Anchor}}{{ 339}}](#p339)
+- [{{ Time Bubble}}{{ 339}}](#p339)
 :
 - **9th Level Spells**
-- [{{ Astral Projection}}{{ 328}}](#p328)
-- [{{ Blackhole}}{{ 328}}](#p328)
-- [{{ Foresight}}{{ 329}}](#p329)
-- [{{ Imprisonment}}{{ 332}}](#p332)
-- [{{ Invulnerability}}{{ 332}}](#p332)
-- [{{ Manipulate Fate}}{{ 333}}](#p333)
-- [{{ Mindweave Convergence}}{{ 334}}](#p334)
-- [{{ Paradox}}{{ 334}}](#p334)
-- [{{ Power Word: Kill}}{{ 334}}](#p334)
-- [{{ Power Word: Ruin}}{{ 335}}](#p335)
-- [{{ Psychic Scream}}{{ 336}}](#p336)
-- [{{ Restore Youth}}{{ 336}}](#p336)
-- [{{ Time Ravage}}{{ 338}}](#p338)
-- [{{ Time Stop}}{{ 338}}](#p338)
-- [{{ Vision of Elapsing Eons}}{{ 339}}](#p339)
-- [{{ Weird}}{{ 340}}](#p340)
+- [{{ Astral Projection}}{{ 342}}](#p342)
+- [{{ Blackhole}}{{ 342}}](#p342)
+- [{{ Foresight}}{{ 343}}](#p343)
+- [{{ Imprisonment}}{{ 346}}](#p346)
+- [{{ Invulnerability}}{{ 346}}](#p346)
+- [{{ Manipulate Fate}}{{ 347}}](#p347)
+- [{{ Mindweave Convergence}}{{ 348}}](#p348)
+- [{{ Paradox}}{{ 348}}](#p348)
+- [{{ Power Word: Kill}}{{ 348}}](#p348)
+- [{{ Power Word: Ruin}}{{ 349}}](#p349)
+- [{{ Psychic Scream}}{{ 350}}](#p350)
+- [{{ Restore Youth}}{{ 350}}](#p350)
+- [{{ Time Ravage}}{{ 352}}](#p352)
+- [{{ Time Stop}}{{ 352}}](#p352)
+- [{{ Vision of Elapsing Eons}}{{ 353}}](#p353)
+- [{{ Weird}}{{ 354}}](#p354)
 }}
 
 \page
@@ -2779,7 +2964,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Alarm}}{{ 66}}](#p66)
 - [{{ Animal Friendship}}{{ 67}}](#p67)
 - [{{ Awaken Rope}}{{ 68}}](#p68)
-- [{{ Beast Bond}}{{ 68}}](#p68)
+- [{{ Beast Bond}}{{ 69}}](#p69)
 - [{{ Blade Mirage}}{{ 69}}](#p69)
 - [{{ Bramble Binding}}{{ 70}}](#p70)
 - [{{ Buzzing Bee}}{{ 70}}](#p70)
@@ -2787,126 +2972,137 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Detect Magic}}{{ 76}}](#p76)
 - [{{ Detect Poison and Disease}}{{ 76}}](#p76)
 - [{{ Electrify}}{{ 77}}](#p77)
-- [{{ Ensnaring Strike}}{{ 77}}](#p77)
+- [{{ Ensnaring Strike}}{{ 78}}](#p78)
 - [{{ Entangle}}{{ 78}}](#p78)
-- [{{ Expeditious Retreat}}{{ 78}}](#p78)
-- [{{ Fog Cloud}}{{ 81}}](#p81)
-- [{{ Gale Bolt}}{{ 81}}](#p81)
-- [{{ Goodberry}}{{ 81}}](#p81)
-- [{{ Grasping Roots}}{{ 82}}](#p82)
-- [{{ Hail of Thorns}}{{ 82}}](#p82)
-- [{{ Heavy Blow}}{{ 83}}](#p83)
-- [{{ Hunter's Mark}}{{ 84}}](#p84)
-- [{{ Infinite Edge}}{{ 86}}](#p86)
-- [{{ Jump}}{{ 86}}](#p86)
-- [{{ Longstrider}}{{ 87}}](#p87)
-- [{{ Multishot}}{{ 88}}](#p88)
-- [{{ Purify Food and Drink}}{{ 89}}](#p89)
-- [{{ Seeking Projectile}}{{ 90}}](#p90)
-- [{{ Snare (Create Snare)}}{{ 92}}](#p92)
-- [{{ Speak with Animals}}{{ 92}}](#p92)
-- [{{ Zephyr Strike}}{{ 98}}](#p98)
+- [{{ Expeditious Retreat}}{{ 79}}](#p79)
+- [{{ Fog Cloud}}{{ 82}}](#p82)
+- [{{ Freezing Trap}}{{ 82}}](#p82)
+- [{{ Gale Bolt}}{{ 82}}](#p82)
+- [{{ Goodberry}}{{ 83}}](#p83)
+- [{{ Grasping Roots}}{{ 83}}](#p83)
+- [{{ Hail of Thorns}}{{ 84}}](#p84)
+- [{{ Heavy Blow}}{{ 84}}](#p84)
+- [{{ Hunter's Mark}}{{ 85}}](#p85)
+- [{{ Infernal Rush}}{{ 87}}](#p87)
+- [{{ Infinite Edge}}{{ 88}}](#p88)
+- [{{ Jump}}{{ 89}}](#p89)
+- [{{ Longstrider}}{{ 89}}](#p89)
+- [{{ Multishot}}{{ 91}}](#p91)
+- [{{ Purify Food and Drink}}{{ 92}}](#p92)
+- [{{ Scourge Strike}}{{ 94}}](#p94)
+- [{{ Seeking Projectile}}{{ 94}}](#p94)
+- [{{ Snare (Create Snare)}}{{ 96}}](#p96)
+- [{{ Speak with Animals}}{{ 96}}](#p96)
+- [{{ Throw Glaive}}{{ 99}}](#p99)
+- [{{ Zephyr Strike}}{{ 102}}](#p102)
 :
 - **2nd Level Spells**
-- [{{ Aid}}{{ 99}}](#p99)
-- [{{ Air Bubble}}{{ 99}}](#p99)
-- [{{ Alacrity}}{{ 99}}](#p99)
-- [{{ Animal Messenger}}{{ 100}}](#p100)
-- [{{ Barkskin}}{{ 104}}](#p104)
-- [{{ Beastial Sensors}}{{ 106}}](#p106)
-- [{{ Beast Sense}}{{ 106}}](#p106)
-- [{{ Burning Strike}}{{ 109}}](#p109)
-- [{{ Clay Touch}}{{ 110}}](#p110)
-- [{{ Cordon of Arrows}}{{ 111}}](#p111)
-- [{{ Crescent Wind Slash}}{{ 112}}](#p112)
-- [{{ Darkvision}}{{ 114}}](#p114)
-- [{{ Dueling Ground}}{{ 116}}](#p116)
-- [{{ Dust Devil}}{{ 116}}](#p116)
-- [{{ Find Traps}}{{ 120}}](#p120)
-- [{{ Healing Spirit}}{{ 123}}](#p123)
-- [{{ Hurricane Slash}}{{ 124}}](#p124)
-- [{{ Instant Counter}}{{ 125}}](#p125)
-- [{{ Invoke Beast (Conjure Beast)}}{{ 125}}](#p125)
-- [{{ Iron Wind Strike}}{{ 125}}](#p125)
-- [{{ Lesser Restoration}}{{ 126}}](#p126)
-- [{{ Locate Animals or Plants}}{{ 127}}](#p127)
-- [{{ Locate Creature (Alternative)}}{{ 127}}](#p127)
-- [{{ Locate Object}}{{ 128}}](#p128)
-- [{{ Magic Weapon}}{{ 129}}](#p129)
-- [{{ Pass Without Trace}}{{ 132}}](#p132)
-- [{{ Protection from Poison}}{{ 133}}](#p133)
-- [{{ Silence}}{{ 136}}](#p136)
-- [{{ Spike Growth}}{{ 138}}](#p138)
-- [{{ Spirit Echo}}{{ 138}}](#p138)
-- [{{ Summon Beast}}{{ 142}}](#p142)
-- [{{ Tortoise Shell}}{{ 145}}](#p145)
-- [{{ Vacuum Pull}}{{ 146}}](#p146)
-- [{{ Wind Cutter}}{{ 148}}](#p148)
-- [{{ Windsense}}{{ 148}}](#p148)
+- [{{ Aid}}{{ 103}}](#p103)
+- [{{ Air Bubble}}{{ 103}}](#p103)
+- [{{ Alacrity}}{{ 103}}](#p103)
+- [{{ Animal Messenger}}{{ 104}}](#p104)
+- [{{ Barkskin}}{{ 108}}](#p108)
+- [{{ Beastial Sensors}}{{ 110}}](#p110)
+- [{{ Beast Sense}}{{ 110}}](#p110)
+- [{{ Burning Strike}}{{ 113}}](#p113)
+- [{{ Clay Touch}}{{ 114}}](#p114)
+- [{{ Conjure Tools}}{{ 115}}](#p115)
+- [{{ Cordon of Arrows}}{{ 116}}](#p116)
+- [{{ Crescent Wind Slash}}{{ 116}}](#p116)
+- [{{ Darkvision}}{{ 118}}](#p118)
+- [{{ Dueling Ground}}{{ 121}}](#p121)
+- [{{ Dust Devil}}{{ 121}}](#p121)
+- [{{ Feral Prowl}}{{ 124}}](#p124)
+- [{{ Find Traps}}{{ 126}}](#p126)
+- [{{ Healing Spirit}}{{ 129}}](#p129)
+- [{{ Hurricane Slash}}{{ 130}}](#p130)
+- [{{ Instant Counter}}{{ 131}}](#p131)
+- [{{ Invoke Beast (Conjure Beast)}}{{ 131}}](#p131)
+- [{{ Iron Wind Strike}}{{ 131}}](#p131)
+- [{{ Lesser Restoration}}{{ 132}}](#p132)
+- [{{ Locate Animals or Plants}}{{ 133}}](#p133)
+- [{{ Locate Creature (Alternative)}}{{ 133}}](#p133)
+- [{{ Locate Object}}{{ 134}}](#p134)
+- [{{ Magic Weapon}}{{ 135}}](#p135)
+- [{{ Pass Without Trace}}{{ 138}}](#p138)
+- [{{ Protection from Poison}}{{ 139}}](#p139)
+- [{{ Roar of the Beast}}{{ 140}}](#p140)
+- [{{ Silence}}{{ 143}}](#p143)
+- [{{ Spike Growth}}{{ 144}}](#p144)
+- [{{ Spirit Echo}}{{ 144}}](#p144)
+- [{{ Summon Beast}}{{ 148}}](#p148)
+- [{{ Tortoise Shell}}{{ 151}}](#p151)
+- [{{ Vacuum Pull}}{{ 152}}](#p152)
+- [{{ Wind Cutter}}{{ 154}}](#p154)
+- [{{ Windsense}}{{ 154}}](#p154)
 :
 - **3rd Level Spells**
-- [{{ Ashardalon's Stride}}{{ 152}}](#p152)
-- [{{ Bramble Barrier}}{{ 154}}](#p154)
-- [{{ Conjure Animals}}{{ 156}}](#p156)
-- [{{ Conjure Barrage}}{{ 156}}](#p156)
-- [{{ Daylight}}{{ 159}}](#p159)
-- [{{ Elemental Weapon}}{{ 161}}](#p161)
-- [{{ Flame Arrows}}{{ 163}}](#p163)
-- [{{ Freedom of the Waves}}{{ 164}}](#p164)
-- [{{ Greenfire}}{{ 166}}](#p166)
-- [{{ Invoke Elemental (Conjure Elemental)}}{{ 169}}](#p169)
-- [{{ Invoke Fey (Conjure Fey)}}{{ 170}}](#p170)
-- [{{ Lightning Arrow}}{{ 171}}](#p171)
-- [{{ Lightning Shot}}{{ 171}}](#p171)
-- [{{ Meld into Stone}}{{ 173}}](#p173)
-- [{{ Nondetection}}{{ 175}}](#p175)
-- [{{ Plant Growth}}{{ 176}}](#p176)
-- [{{ Protection from Energy}}{{ 176}}](#p176)
-- [{{ Revivify}}{{ 178}}](#p178)
-- [{{ Speak with Plants}}{{ 181}}](#p181)
-- [{{ Spider Bite}}{{ 181}}](#p181)
-- [{{ Summon Fey}}{{ 183}}](#p183)
-- [{{ Summon Plant}}{{ 186}}](#p186)
-- [{{ Tiny Hut}}{{ 189}}](#p189)
-- [{{ Wasp Barrage}}{{ 191}}](#p191)
-- [{{ Water Breathing}}{{ 191}}](#p191)
-- [{{ Water Walk}}{{ 192}}](#p192)
-- [{{ Whirling Conflagration}}{{ 192}}](#p192)
-- [{{ Wind Wall}}{{ 193}}](#p193)
+- [{{ Ashardalon's Stride}}{{ 158}}](#p158)
+- [{{ Blistering Scales}}{{ 160}}](#p160)
+- [{{ Bramble Barrier}}{{ 161}}](#p161)
+- [{{ Conjure Animals}}{{ 162}}](#p162)
+- [{{ Conjure Barrage}}{{ 162}}](#p162)
+- [{{ Daylight}}{{ 165}}](#p165)
+- [{{ Elemental Weapon}}{{ 167}}](#p167)
+- [{{ Flame Arrows}}{{ 170}}](#p170)
+- [{{ Freedom of the Waves}}{{ 170}}](#p170)
+- [{{ Greenfire}}{{ 172}}](#p172)
+- [{{ Invoke Elemental (Conjure Elemental)}}{{ 176}}](#p176)
+- [{{ Invoke Fey (Conjure Fey)}}{{ 177}}](#p177)
+- [{{ Leeching Strike}}{{ 177}}](#p177)
+- [{{ Lightning Arrow}}{{ 178}}](#p178)
+- [{{ Lightning Shot}}{{ 179}}](#p179)
+- [{{ Meld into Stone}}{{ 181}}](#p181)
+- [{{ Nondetection}}{{ 183}}](#p183)
+- [{{ Plant Growth}}{{ 183}}](#p183)
+- [{{ Protection from Energy}}{{ 184}}](#p184)
+- [{{ Revivify}}{{ 186}}](#p186)
+- [{{ Serpent Sting}}{{ 186}}](#p186)
+- [{{ Speak with Plants}}{{ 188}}](#p188)
+- [{{ Spider Bite}}{{ 189}}](#p189)
+- [{{ Summon Fey}}{{ 190}}](#p190)
+- [{{ Summon Plant}}{{ 193}}](#p193)
+- [{{ Tiny Hut}}{{ 196}}](#p196)
+- [{{ Wasp Barrage}}{{ 198}}](#p198)
+- [{{ Water Breathing}}{{ 198}}](#p198)
+- [{{ Water Walk}}{{ 199}}](#p199)
+- [{{ Whirling Conflagration}}{{ 199}}](#p199)
+- [{{ Wind Wall}}{{ 200}}](#p200)
 :
 - **4th Level Spells**
-- [{{ Conjure Woodland Beings}}{{ 199}}](#p199)
-- [{{ Death Ward}}{{ 200}}](#p200)
-- [{{ Dimension Cutter}}{{ 200}}](#p200)
-- [{{ Divination}}{{ 201}}](#p201)
-- [{{ Dominate Beast}}{{ 201}}](#p201)
-- [{{ Freedom of Movement}}{{ 206}}](#p206)
-- [{{ Gale Shot}}{{ 206}}](#p206)
-- [{{ Grasping Vine}}{{ 208}}](#p208)
-- [{{ Guardian of Nature}}{{ 209}}](#p209)
-- [{{ Locate Creature}}{{ 212}}](#p212)
-- [{{ Quicksilver Steps}}{{ 215}}](#p215)
-- [{{ Staggering Smite}}{{ 219}}](#p219)
-- [{{ Sticks to Snakes}}{{ 219}}](#p219)
-- [{{ Stoneskin}}{{ 220}}](#p220)
-- [{{ Summon Elemental}}{{ 223}}](#p223)
+- [{{ Conjure Woodland Beings}}{{ 207}}](#p207)
+- [{{ Death Ward}}{{ 208}}](#p208)
+- [{{ Dimension Cutter}}{{ 208}}](#p208)
+- [{{ Divination}}{{ 209}}](#p209)
+- [{{ Dominate Beast}}{{ 209}}](#p209)
+- [{{ Freedom of Movement}}{{ 214}}](#p214)
+- [{{ Gale Shot}}{{ 214}}](#p214)
+- [{{ Grasping Vine}}{{ 216}}](#p216)
+- [{{ Guardian of Nature}}{{ 217}}](#p217)
+- [{{ Locate Creature}}{{ 220}}](#p220)
+- [{{ Quicksilver Steps}}{{ 223}}](#p223)
+- [{{ Staggering Smite}}{{ 228}}](#p228)
+- [{{ Sticks to Snakes}}{{ 228}}](#p228)
+- [{{ Stoneskin}}{{ 229}}](#p229)
+- [{{ Summon Elemental}}{{ 232}}](#p232)
 :
 - **5th Level Spells**
-- [{{ Awaken}}{{ 229}}](#p229)
-- [{{ Commune with Nature}}{{ 231}}](#p231)
-- [{{ Conjure Volley}}{{ 232}}](#p232)
-- [{{ Contagion}}{{ 233}}](#p233)
-- [{{ Freedom of the Winds}}{{ 241}}](#p241)
-- [{{ Greater Absorb Elements}}{{ 242}}](#p242)
-- [{{ Greater Restoration}}{{ 242}}](#p242)
-- [{{ Mooncloak}}{{ 248}}](#p248)
-- [{{ Steel Wind Strike}}{{ 258}}](#p258)
-- [{{ Summon Greater Plant}}{{ 261}}](#p261)
-- [{{ Swift Quiver}}{{ 262}}](#p262)
-- [{{ Tree Stride}}{{ 265}}](#p265)
-- [{{ Vorpal Blade}}{{ 265}}](#p265)
-- [{{ Vorpal Shot}}{{ 265}}](#p265)
-- [{{ Wrath of Nature}}{{ 267}}](#p267)
+- [{{ Awaken}}{{ 239}}](#p239)
+- [{{ Commune with Nature}}{{ 241}}](#p241)
+- [{{ Conjure Volley}}{{ 242}}](#p242)
+- [{{ Contagion}}{{ 243}}](#p243)
+- [{{ Explosive Trap}}{{ 251}}](#p251)
+- [{{ Freedom of the Winds}}{{ 252}}](#p252)
+- [{{ Greater Absorb Elements}}{{ 253}}](#p253)
+- [{{ Greater Restoration}}{{ 253}}](#p253)
+- [{{ Mooncloak}}{{ 259}}](#p259)
+- [{{ Steel Wind Strike}}{{ 269}}](#p269)
+- [{{ Summon Greater Plant}}{{ 272}}](#p272)
+- [{{ Swift Quiver}}{{ 273}}](#p273)
+- [{{ Tree Stride}}{{ 276}}](#p276)
+- [{{ Vorpal Blade}}{{ 276}}](#p276)
+- [{{ Vorpal Shot}}{{ 277}}](#p277)
+- [{{ Wrath of Nature}}{{ 279}}](#p279)
 }}
 
 \page
@@ -2955,6 +3151,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Toll the Dead}}{{ 64}}](#p64)
 - [{{ Water Bullet}}{{ 64}}](#p64)
 - [{{ Windborne Weapon}}{{ 64}}](#p64)
+- [{{ Wrath}}{{ 65}}](#p65)
 :
 - **1st Level Spells**
 - [{{ Absorb Elements}}{{ 66}}](#p66)
@@ -2962,218 +3159,248 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Armor of Agathys}}{{ 67}}](#p67)
 - [{{ Bad Blood}}{{ 68}}](#p68)
 - [{{ Bane}}{{ 68}}](#p68)
-- [{{ Beast Bond}}{{ 68}}](#p68)
-- [{{ Bless}}{{ 69}}](#p69)
+- [{{ Beast Bond}}{{ 69}}](#p69)
+- [{{ Bless}}{{ 70}}](#p70)
 - [{{ Bramble Binding}}{{ 70}}](#p70)
 - [{{ Buzzing Bee}}{{ 70}}](#p70)
 - [{{ Cause Fear}}{{ 71}}](#p71)
 - [{{ Caustic Brew}}{{ 71}}](#p71)
 - [{{ Ceremony}}{{ 71}}](#p71)
+- [{{ Chains of Ice}}{{ 72}}](#p72)
 - [{{ Command}}{{ 73}}](#p73)
-- [{{ Crashing Wave}}{{ 73}}](#p73)
-- [{{ Crimson Poison}}{{ 75}}](#p75)
+- [{{ Consume Soul}}{{ 73}}](#p73)
+- [{{ Crashing Wave}}{{ 74}}](#p74)
+- [{{ Crimson Poison}}{{ 74}}](#p74)
 - [{{ Crippling Agony}}{{ 75}}](#p75)
 - [{{ Cure Wounds}}{{ 75}}](#p75)
 - [{{ Detect Evil and Good}}{{ 75}}](#p75)
 - [{{ Detect Magic}}{{ 76}}](#p76)
 - [{{ Dissonant Whispers}}{{ 76}}](#p76)
 - [{{ Entangle}}{{ 78}}](#p78)
-- [{{ Expeditious Retreat}}{{ 78}}](#p78)
-- [{{ False Life}}{{ 79}}](#p79)
-- [{{ Find Familiar (Conjure Familiar)}}{{ 80}}](#p80)
-- [{{ Fog Cloud}}{{ 81}}](#p81)
-- [{{ Gale Bolt}}{{ 81}}](#p81)
-- [{{ Ghastly Flight}}{{ 81}}](#p81)
-- [{{ Gift of Alacrity}}{{ 81}}](#p81)
-- [{{ Grasping Roots}}{{ 82}}](#p82)
-- [{{ Grip of the Dead}}{{ 82}}](#p82)
-- [{{ Heroism}}{{ 83}}](#p83)
-- [{{ Hex}}{{ 83}}](#p83)
-- [{{ Induce Headache}}{{ 85}}](#p85)
-- [{{ Inflict Wounds}}{{ 86}}](#p86)
-- [{{ Karmic Reflection}}{{ 86}}](#p86)
-- [{{ Longstrider}}{{ 87}}](#p87)
-- [{{ Minor Drain}}{{ 88}}](#p88)
-- [{{ Nauseating Poison}}{{ 88}}](#p88)
-- [{{ Protection from Evil and Good}}{{ 89}}](#p89)
-- [{{ Ray of Sickness}}{{ 90}}](#p90)
-- [{{ Sanctuary}}{{ 90}}](#p90)
-- [{{ Sense Blood}}{{ 91}}](#p91)
-- [{{ Shadow Bind}}{{ 91}}](#p91)
-- [{{ Shield of Faith}}{{ 91}}](#p91)
-- [{{ Sleep}}{{ 92}}](#p92)
-- [{{ Spiritual Consultation}}{{ 93}}](#p93)
-- [{{ Torrent}}{{ 96}}](#p96)
-- [{{ Tranquil Moment}}{{ 96}}](#p96)
-- [{{ Transfuse Life}}{{ 96}}](#p96)
-- [{{ Unseen Servant}}{{ 96}}](#p96)
-- [{{ Violent Updraft}}{{ 97}}](#p97)
-- [{{ Water Blast}}{{ 97}}](#p97)
-- [{{ Witch Bolt}}{{ 97}}](#p97)
+- [{{ Entropic Embrace}}{{ 78}}](#p78)
+- [{{ Expeditious Retreat}}{{ 79}}](#p79)
+- [{{ False Life}}{{ 80}}](#p80)
+- [{{ Find Familiar (Conjure Familiar)}}{{ 81}}](#p81)
+- [{{ Fog Cloud}}{{ 82}}](#p82)
+- [{{ Freezing Trap}}{{ 82}}](#p82)
+- [{{ Frost Nova}}{{ 82}}](#p82)
+- [{{ Gale Bolt}}{{ 82}}](#p82)
+- [{{ Ghastly Flight}}{{ 82}}](#p82)
+- [{{ Gift of Alacrity}}{{ 83}}](#p83)
+- [{{ Grasping Roots}}{{ 83}}](#p83)
+- [{{ Grip of the Dead}}{{ 83}}](#p83)
+- [{{ Heroism}}{{ 84}}](#p84)
+- [{{ Hex}}{{ 85}}](#p85)
+- [{{ Induce Headache}}{{ 87}}](#p87)
+- [{{ Inflict Wounds}}{{ 88}}](#p88)
+- [{{ Karmic Reflection}}{{ 89}}](#p89)
+- [{{ Living Flame}}{{ 89}}](#p89)
+- [{{ Longstrider}}{{ 89}}](#p89)
+- [{{ Minor Drain}}{{ 91}}](#p91)
+- [{{ Moonfire}}{{ 91}}](#p91)
+- [{{ Nauseating Poison}}{{ 91}}](#p91)
+- [{{ Protection from Evil and Good}}{{ 92}}](#p92)
+- [{{ Ray of Sickness}}{{ 93}}](#p93)
+- [{{ Sanctuary}}{{ 94}}](#p94)
+- [{{ Scourge Strike}}{{ 94}}](#p94)
+- [{{ Sense Blood}}{{ 94}}](#p94)
+- [{{ Shadow Bind}}{{ 95}}](#p95)
+- [{{ Shadow Word: Pain}}{{ 95}}](#p95)
+- [{{ Shield of Faith}}{{ 95}}](#p95)
+- [{{ Sleep}}{{ 96}}](#p96)
+- [{{ Spiritual Consultation}}{{ 97}}](#p97)
+- [{{ Torrent}}{{ 100}}](#p100)
+- [{{ Tranquil Moment}}{{ 100}}](#p100)
+- [{{ Transfuse Life}}{{ 100}}](#p100)
+- [{{ Unseen Servant}}{{ 101}}](#p101)
+- [{{ Vampiric Blood}}{{ 101}}](#p101)
+- [{{ Violent Updraft}}{{ 101}}](#p101)
+- [{{ Water Blast}}{{ 102}}](#p102)
+- [{{ Witch Bolt}}{{ 102}}](#p102)
 :
 - **2nd Level Spells**
-- [{{ Aid}}{{ 99}}](#p99)
-- [{{ Alter Self}}{{ 100}}](#p100)
-- [{{ Augury}}{{ 103}}](#p103)
-- [{{ Barkskin}}{{ 104}}](#p104)
-- [{{ Battle Familiar}}{{ 105}}](#p105)
-- [{{ Become Fire}}{{ 106}}](#p106)
-- [{{ Become Stone}}{{ 106}}](#p106)
-- [{{ Become Water}}{{ 107}}](#p107)
-- [{{ Become Wind}}{{ 107}}](#p107)
-- [{{ Blood Divination}}{{ 107}}](#p107)
-- [{{ Blur}}{{ 108}}](#p108)
-- [{{ Boil Blood}}{{ 108}}](#p108)
-- [{{ Borrowed Knowledge}}{{ 109}}](#p109)
-- [{{ Compelled Convulsion}}{{ 111}}](#p111)
-- [{{ Continual Flame}}{{ 111}}](#p111)
-- [{{ Dancing Wave}}{{ 113}}](#p113)
-- [{{ Darkness}}{{ 114}}](#p114)
-- [{{ Death Armor}}{{ 114}}](#p114)
-- [{{ Dueling Ground}}{{ 116}}](#p116)
-- [{{ Dust Devil}}{{ 116}}](#p116)
-- [{{ Earthbind}}{{ 116}}](#p116)
-- [{{ Enhance Ability}}{{ 117}}](#p117)
-- [{{ Evil Mantra}}{{ 119}}](#p119)
-- [{{ Flame Blade}}{{ 120}}](#p120)
-- [{{ Flock of Familiars}}{{ 121}}](#p121)
-- [{{ Form of Familiar}}{{ 121}}](#p121)
-- [{{ Gentle Repose}}{{ 122}}](#p122)
-- [{{ Gust of Wind}}{{ 122}}](#p122)
-- [{{ Healing Spirit}}{{ 123}}](#p123)
-- [{{ Heat Metal}}{{ 123}}](#p123)
-- [{{ Hurricane Slash}}{{ 124}}](#p124)
-- [{{ Locate Animals or Plants}}{{ 127}}](#p127)
-- [{{ Locate Creature (Alternative)}}{{ 127}}](#p127)
-- [{{ Misty Step}}{{ 130}}](#p130)
-- [{{ Moonbeam}}{{ 130}}](#p130)
-- [{{ Morbid Puppet}}{{ 131}}](#p131)
-- [{{ Painful Echoes}}{{ 131}}](#p131)
-- [{{ Pass Without Trace}}{{ 132}}](#p132)
-- [{{ Petal Storm}}{{ 132}}](#p132)
-- [{{ Poison Dart}}{{ 133}}](#p133)
-- [{{ Protection from Poison}}{{ 133}}](#p133)
-- [{{ Skywrite}}{{ 137}}](#p137)
-- [{{ Spike Growth}}{{ 138}}](#p138)
-- [{{ Spirit Echo}}{{ 138}}](#p138)
-- [{{ Sprout Tree}}{{ 139}}](#p139)
-- [{{ Star Scry}}{{ 139}}](#p139)
-- [{{ Tortoise Shell}}{{ 145}}](#p145)
-- [{{ Totemic Cowl}}{{ 145}}](#p145)
-- [{{ Vacuum Pull}}{{ 146}}](#p146)
-- [{{ Warding Wind}}{{ 147}}](#p147)
-- [{{ Windsense}}{{ 148}}](#p148)
-- [{{ Wither and Bloom}}{{ 148}}](#p148)
-:
-- **3rd Level Spells**
-- [{{ Bestow Curse}}{{ 153}}](#p153)
-- [{{ Clairvoyance}}{{ 156}}](#p156)
-- [{{ Cruel Puppetry}}{{ 158}}](#p158)
-- [{{ Daylight}}{{ 159}}](#p159)
+- [{{ Aid}}{{ 103}}](#p103)
+- [{{ Alter Self}}{{ 104}}](#p104)
+- [{{ Augury}}{{ 107}}](#p107)
+- [{{ Barkskin}}{{ 108}}](#p108)
+- [{{ Battle Familiar}}{{ 109}}](#p109)
+- [{{ Become Fire}}{{ 110}}](#p110)
+- [{{ Become Stone}}{{ 110}}](#p110)
+- [{{ Become Water}}{{ 111}}](#p111)
+- [{{ Become Wind}}{{ 111}}](#p111)
+- [{{ Blood Divination}}{{ 112}}](#p112)
+- [{{ Blur}}{{ 112}}](#p112)
+- [{{ Boil Blood}}{{ 113}}](#p113)
+- [{{ Borrowed Knowledge}}{{ 113}}](#p113)
+- [{{ Compelled Convulsion}}{{ 115}}](#p115)
+- [{{ Continual Flame}}{{ 115}}](#p115)
+- [{{ Curse of Agony}}{{ 117}}](#p117)
+- [{{ Dancing Wave}}{{ 118}}](#p118)
+- [{{ Darkness}}{{ 118}}](#p118)
+- [{{ Death and Decay}}{{ 118}}](#p118)
+- [{{ Death Armor}}{{ 118}}](#p118)
+- [{{ Dream Breath}}{{ 120}}](#p120)
+- [{{ Dueling Ground}}{{ 121}}](#p121)
+- [{{ Dust Devil}}{{ 121}}](#p121)
+- [{{ Earthbind}}{{ 121}}](#p121)
+- [{{ Enhance Ability}}{{ 122}}](#p122)
+- [{{ Eruption}}{{ 123}}](#p123)
+- [{{ Evil Mantra}}{{ 123}}](#p123)
+- [{{ Feral Prowl}}{{ 124}}](#p124)
+- [{{ Flame Blade}}{{ 126}}](#p126)
+- [{{ Flock of Familiars}}{{ 127}}](#p127)
+- [{{ Form of Familiar}}{{ 127}}](#p127)
+- [{{ Gentle Repose}}{{ 128}}](#p128)
+- [{{ Gust of Wind}}{{ 128}}](#p128)
+- [{{ Healing Spirit}}{{ 129}}](#p129)
+- [{{ Heat Metal}}{{ 129}}](#p129)
+- [{{ Hurricane Slash}}{{ 130}}](#p130)
+- [{{ Locate Animals or Plants}}{{ 133}}](#p133)
+- [{{ Locate Creature (Alternative)}}{{ 133}}](#p133)
+- [{{ Misty Step}}{{ 136}}](#p136)
+- [{{ Moonbeam}}{{ 136}}](#p136)
+- [{{ Morbid Puppet}}{{ 137}}](#p137)
+- [{{ Painful Echoes}}{{ 137}}](#p137)
+- [{{ Pass Without Trace}}{{ 138}}](#p138)
+- [{{ Petal Storm}}{{ 138}}](#p138)
+- [{{ Poison Dart}}{{ 139}}](#p139)
+- [{{ Protection from Poison}}{{ 139}}](#p139)
+- [{{ Roar of the Beast}}{{ 140}}](#p140)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
-- [{{ Dimensional Anchor}}{{ 160}}](#p160)
-- [{{ Dire Wail}}{{ 160}}](#p160)
-- [{{ Dispel Magic}}{{ 160}}](#p160)
-- [{{ Elemental Weapon}}{{ 161}}](#p161)
-- [{{ Feign Death}}{{ 162}}](#p162)
-- [{{ Gaseous Form}}{{ 165}}](#p165)
-- [{{ Ghost Step}}{{ 165}}](#p165)
-- [{{ Greenfire}}{{ 166}}](#p166)
-- [{{ Haste}}{{ 167}}](#p167)
-- [{{ Inflict Doubt}}{{ 169}}](#p169)
-- [{{ Life Transference}}{{ 170}}](#p170)
-- [{{ Magic Circle}}{{ 172}}](#p172)
-- [{{ Meld into Stone}}{{ 173}}](#p173)
-- [{{ Mutate}}{{ 175}}](#p175)
-- [{{ Nondetection}}{{ 175}}](#p175)
-- [{{ Phantom Steed}}{{ 176}}](#p176)
-- [{{ Plant Growth}}{{ 176}}](#p176)
-- [{{ Protection from Energy}}{{ 176}}](#p176)
-- [{{ Rain of Spiders}}{{ 177}}](#p177)
-- [{{ Remove Curse}}{{ 177}}](#p177)
-- [{{ Sleet Storm}}{{ 179}}](#p179)
-- [{{ Slow}}{{ 180}}](#p180)
-- [{{ Speak with Dead}}{{ 180}}](#p180)
-- [{{ Spectral Passage}}{{ 181}}](#p181)
-- [{{ Spider Bite}}{{ 181}}](#p181)
-- [{{ Spirit Guardians}}{{ 182}}](#p182)
-- [{{ Spirit Shroud}}{{ 182}}](#p182)
-- [{{ Stinking Cloud}}{{ 182}}](#p182)
-- [{{ Thunder Pulse}}{{ 189}}](#p189)
-- [{{ Thunder Step}}{{ 189}}](#p189)
-- [{{ Tidal Wave}}{{ 189}}](#p189)
-- [{{ Tiny Hut}}{{ 189}}](#p189)
-- [{{ Tongues}}{{ 190}}](#p190)
-- [{{ Wall of Sand}}{{ 191}}](#p191)
-- [{{ Wall of Water}}{{ 191}}](#p191)
-- [{{ Wasp Barrage}}{{ 191}}](#p191)
-- [{{ Wind Wall}}{{ 193}}](#p193)
-- [{{ Wither}}{{ 193}}](#p193)
+- [{{ Skywrite}}{{ 143}}](#p143)
+- [{{ Spike Growth}}{{ 144}}](#p144)
+- [{{ Spirit Echo}}{{ 144}}](#p144)
+- [{{ Sprout Tree}}{{ 145}}](#p145)
+- [{{ Star Scry}}{{ 146}}](#p146)
+- [{{ Tortoise Shell}}{{ 151}}](#p151)
+- [{{ Totemic Cowl}}{{ 151}}](#p151)
+- [{{ Vacuum Pull}}{{ 152}}](#p152)
+- [{{ Warding Wind}}{{ 153}}](#p153)
+- [{{ Windsense}}{{ 154}}](#p154)
+- [{{ Wither and Bloom}}{{ 154}}](#p154)
+:
+- **3rd Level Spells**
+- [{{ Bestow Curse}}{{ 159}}](#p159)
+- [{{ Clairvoyance}}{{ 162}}](#p162)
+- [{{ Cruel Puppetry}}{{ 164}}](#p164)
+- [{{ Daylight}}{{ 165}}](#p165)
+- [{{ Dimensional Anchor}}{{ 166}}](#p166)
+- [{{ Dire Wail}}{{ 166}}](#p166)
+- [{{ Dispel Magic}}{{ 166}}](#p166)
+- [{{ Elemental Weapon}}{{ 167}}](#p167)
+- [{{ Emerald Blossom}}{{ 167}}](#p167)
+- [{{ Feign Death}}{{ 169}}](#p169)
+- [{{ Frozen Flurry}}{{ 170}}](#p170)
+- [{{ Gaseous Form}}{{ 171}}](#p171)
+- [{{ Ghost Step}}{{ 171}}](#p171)
+- [{{ Greenfire}}{{ 172}}](#p172)
+- [{{ Haste}}{{ 173}}](#p173)
+- [{{ Inflict Doubt}}{{ 175}}](#p175)
+- [{{ Life Transference}}{{ 178}}](#p178)
+- [{{ Magic Circle}}{{ 180}}](#p180)
+- [{{ Meld into Stone}}{{ 181}}](#p181)
+- [{{ Mutate}}{{ 182}}](#p182)
+- [{{ Nondetection}}{{ 183}}](#p183)
+- [{{ Phantom Steed}}{{ 183}}](#p183)
+- [{{ Plant Growth}}{{ 183}}](#p183)
+- [{{ Protection from Energy}}{{ 184}}](#p184)
+- [{{ Rain of Fire}}{{ 184}}](#p184)
+- [{{ Rain of Spiders}}{{ 184}}](#p184)
+- [{{ Remove Curse}}{{ 185}}](#p185)
+- [{{ Regrowth}}{{ 185}}](#p185)
+- [{{ Remorseless Winter}}{{ 185}}](#p185)
+- [{{ Sleet Storm}}{{ 187}}](#p187)
+- [{{ Slow}}{{ 187}}](#p187)
+- [{{ Soul Reap}}{{ 188}}](#p188)
+- [{{ Speak with Dead}}{{ 188}}](#p188)
+- [{{ Spectral Passage}}{{ 188}}](#p188)
+- [{{ Spider Bite}}{{ 189}}](#p189)
+- [{{ Spirit Guardians}}{{ 189}}](#p189)
+- [{{ Spirit Shroud}}{{ 189}}](#p189)
+- [{{ Stinking Cloud}}{{ 190}}](#p190)
+- [{{ Thunder Pulse}}{{ 196}}](#p196)
+- [{{ Thunder Step}}{{ 196}}](#p196)
+- [{{ Tidal Wave}}{{ 196}}](#p196)
+- [{{ Tiny Hut}}{{ 196}}](#p196)
+- [{{ Tongues}}{{ 197}}](#p197)
+- [{{ Wall of Sand}}{{ 198}}](#p198)
+- [{{ Wall of Water}}{{ 198}}](#p198)
+- [{{ Wasp Barrage}}{{ 198}}](#p198)
+- [{{ Wind Wall}}{{ 200}}](#p200)
+- [{{ Wither}}{{ 200}}](#p200)
 :
 - **4th Level Spells**
-- [{{ Arcane Eye}}{{ 195}}](#p195)
-- [{{ Banishment}}{{ 196}}](#p196)
-- [{{ Blight}}{{ 196}}](#p196)
-- [{{ Blood Frenzy}}{{ 196}}](#p196)
-- [{{ Conjure Woodland Beings}}{{ 199}}](#p199)
-- [{{ Control Water}}{{ 199}}](#p199)
-- [{{ Divination}}{{ 201}}](#p201)
-- [{{ Elemental Bane}}{{ 203}}](#p203)
-- [{{ Faithful Hound}}{{ 204}}](#p204)
-- [{{ False Vision}}{{ 204}}](#p204)
-- [{{ Festering Blast}}{{ 205}}](#p205)
-- [{{ Fire Shield}}{{ 205}}](#p205)
-- [{{ Freedom of Movement}}{{ 206}}](#p206)
-- [{{ Giant Insect}}{{ 207}}](#p207)
-- [{{ Grasping Vine}}{{ 208}}](#p208)
-- [{{ Grasp Of The Grave}}{{ 208}}](#p208)
-- [{{ Guardian of Nature}}{{ 209}}](#p209)
-- [{{ Ice Storm}}{{ 211}}](#p211)
-- [{{ Locate Creature}}{{ 212}}](#p212)
-- [{{ Macabre Marionette}}{{ 212}}](#p212)
-- [{{ Poison Puff}}{{ 214}}](#p214)
-- [{{ Polymorph}}{{ 214}}](#p214)
-- [{{ Protection from Spells}}{{ 214}}](#p214)
-- [{{ Sickening Radiance}}{{ 217}}](#p217)
-- [{{ Starfall}}{{ 219}}](#p219)
-- [{{ Sticks to Snakes}}{{ 219}}](#p219)
-- [{{ Stinging Swarm}}{{ 220}}](#p220)
-- [{{ Stoneskin}}{{ 220}}](#p220)
-- [{{ Watery Sphere}}{{ 226}}](#p226)
-- [{{ Watery Tentacles}}{{ 226}}](#p226)
-- [{{ Zone of Amicability}}{{ 226}}](#p226)
+- [{{ Arcane Eye}}{{ 202}}](#p202)
+- [{{ Banishment}}{{ 203}}](#p203)
+- [{{ Blight}}{{ 203}}](#p203)
+- [{{ Blood Frenzy}}{{ 203}}](#p203)
+- [{{ Cometfall}}{{ 205}}](#p205)
+- [{{ Conjure Woodland Beings}}{{ 207}}](#p207)
+- [{{ Control Water}}{{ 207}}](#p207)
+- [{{ Divination}}{{ 209}}](#p209)
+- [{{ Elemental Bane}}{{ 211}}](#p211)
+- [{{ Emberstorm}}{{ 211}}](#p211)
+- [{{ Faithful Hound}}{{ 212}}](#p212)
+- [{{ False Vision}}{{ 212}}](#p212)
+- [{{ Festering Blast}}{{ 213}}](#p213)
+- [{{ Fire Shield}}{{ 213}}](#p213)
+- [{{ Freedom of Movement}}{{ 214}}](#p214)
+- [{{ Giant Insect}}{{ 215}}](#p215)
+- [{{ Grasping Vine}}{{ 216}}](#p216)
+- [{{ Grasp Of The Grave}}{{ 216}}](#p216)
+- [{{ Guardian of Nature}}{{ 217}}](#p217)
+- [{{ Ice Storm}}{{ 219}}](#p219)
+- [{{ Locate Creature}}{{ 220}}](#p220)
+- [{{ Macabre Marionette}}{{ 220}}](#p220)
+- [{{ Poison Puff}}{{ 222}}](#p222)
+- [{{ Polymorph}}{{ 222}}](#p222)
+- [{{ Protection from Spells}}{{ 222}}](#p222)
+- [{{ Psychic Horror}}{{ 223}}](#p223)
+- [{{ Sickening Radiance}}{{ 225}}](#p225)
+- [{{ Starfall}}{{ 228}}](#p228)
+- [{{ Sticks to Snakes}}{{ 228}}](#p228)
+- [{{ Stinging Swarm}}{{ 229}}](#p229)
+- [{{ Stoneskin}}{{ 229}}](#p229)
+- [{{ Volcanic Upheaval}}{{ 234}}](#p234)
+- [{{ Watery Sphere}}{{ 235}}](#p235)
+- [{{ Watery Tentacles}}{{ 235}}](#p235)
+- [{{ Zone of Amicability}}{{ 236}}](#p236)
 :
 - **5th Level Spells**
-- [{{ Antilife Shell}}{{ 228}}](#p228)
-- [{{ Awaken}}{{ 229}}](#p229)
-- [{{ Cloudkill}}{{ 231}}](#p231)
-- [{{ Commune}}{{ 231}}](#p231)
-- [{{ Commune with Nature}}{{ 231}}](#p231)
-- [{{ Contact Other Plane}}{{ 232}}](#p232)
-- [{{ Contagion}}{{ 233}}](#p233)
-- [{{ Dawn}}{{ 237}}](#p237)
-- [{{ Dispel Evil and Good}}{{ 238}}](#p238)
-- [{{ Dream}}{{ 239}}](#p239)
-- [{{ Elemental Suffusion}}{{ 239}}](#p239)
-- [{{ Far Step}}{{ 240}}](#p240)
-- [{{ Freedom of the Winds}}{{ 241}}](#p241)
-- [{{ Greater Absorb Elements}}{{ 242}}](#p242)
-- [{{ Insect Plague}}{{ 244}}](#p244)
-- [{{ Life Link}}{{ 247}}](#p247)
-- [{{ Maelstrom}}{{ 247}}](#p247)
-- [{{ Mooncloak}}{{ 248}}](#p248)
-- [{{ Nature's Protection}}{{ 249}}](#p249)
-- [{{ Reincarnate}}{{ 252}}](#p252)
-- [{{ Scrying}}{{ 255}}](#p255)
-- [{{ Skill Empowerment}}{{ 256}}](#p256)
-- [{{ Spirit Lantern}}{{ 257}}](#p257)
-- [{{ Spiritual Sundering}}{{ 257}}](#p257)
-- [{{ Tornado}}{{ 264}}](#p264)
-- [{{ Waves of Exhaustion}}{{ 267}}](#p267)
-- [{{ Wrath of Nature}}{{ 267}}](#p267)
+- [{{ Antilife Shell}}{{ 238}}](#p238)
+- [{{ Awaken}}{{ 239}}](#p239)
+- [{{ Bonestorm}}{{ 240}}](#p240)
+- [{{ Cloudkill}}{{ 241}}](#p241)
+- [{{ Commune}}{{ 241}}](#p241)
+- [{{ Commune with Nature}}{{ 241}}](#p241)
+- [{{ Contact Other Plane}}{{ 242}}](#p242)
+- [{{ Contagion}}{{ 243}}](#p243)
+- [{{ Dawn}}{{ 247}}](#p247)
+- [{{ Dispel Evil and Good}}{{ 248}}](#p248)
+- [{{ Dream}}{{ 249}}](#p249)
+- [{{ Dream Flight}}{{ 249}}](#p249)
+- [{{ Elemental Suffusion}}{{ 250}}](#p250)
+- [{{ Explosive Trap}}{{ 251}}](#p251)
+- [{{ Far Step}}{{ 251}}](#p251)
+- [{{ Freedom of the Winds}}{{ 252}}](#p252)
+- [{{ Greater Absorb Elements}}{{ 253}}](#p253)
+- [{{ Insect Plague}}{{ 255}}](#p255)
+- [{{ Life Link}}{{ 258}}](#p258)
+- [{{ Maelstrom}}{{ 258}}](#p258)
+- [{{ Mooncloak}}{{ 259}}](#p259)
+- [{{ Nature's Protection}}{{ 260}}](#p260)
+- [{{ Reincarnate}}{{ 263}}](#p263)
+- [{{ Scrying}}{{ 266}}](#p266)
+- [{{ Skill Empowerment}}{{ 267}}](#p267)
+- [{{ Spirit Lantern}}{{ 268}}](#p268)
+- [{{ Spiritual Sundering}}{{ 268}}](#p268)
+- [{{ Tornado}}{{ 275}}](#p275)
+- [{{ Void Eruption}}{{ 276}}](#p276)
+- [{{ Waves of Exhaustion}}{{ 279}}](#p279)
+- [{{ Wrath of Nature}}{{ 279}}](#p279)
 }}
 
 \page
@@ -3184,6 +3411,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 {{toc,wide
 - **Cantrips**
 - [{{ Acid Splash}}{{ 48}}](#p48)
+- [{{ Arcane Pulse}}{{ 49}}](#p49)
 - [{{ Blade Ward}}{{ 49}}](#p49)
 - [{{ Blood Bolt}}{{ 49}}](#p49)
 - [{{ Booming Blade}}{{ 49}}](#p49)
@@ -3240,503 +3468,542 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Absorb Elements}}{{ 66}}](#p66)
 - [{{ Acid Bubble}}{{ 66}}](#p66)
 - [{{ Arcane Lance}}{{ 67}}](#p67)
+- [{{ Azure Strike}}{{ 68}}](#p68)
 - [{{ Blade Mirage}}{{ 69}}](#p69)
 - [{{ Burning Hands}}{{ 70}}](#p70)
 - [{{ Buzzing Bee}}{{ 70}}](#p70)
-- [{{ Catapult}}{{ 70}}](#p70)
+- [{{ Catapult}}{{ 71}}](#p71)
 - [{{ Caustic Brew}}{{ 71}}](#p71)
+- [{{ Chains of Ice}}{{ 72}}](#p72)
 - [{{ Chaos Bolt}}{{ 72}}](#p72)
 - [{{ Charm Person}}{{ 72}}](#p72)
 - [{{ Chromatic Orb}}{{ 72}}](#p72)
 - [{{ Color Spray}}{{ 72}}](#p72)
 - [{{ Comprehend Languages}}{{ 73}}](#p73)
-- [{{ Crashing Wave}}{{ 73}}](#p73)
+- [{{ Consume Soul}}{{ 73}}](#p73)
+- [{{ Crashing Wave}}{{ 74}}](#p74)
 - [{{ Create Pit}}{{ 74}}](#p74)
-- [{{ Crimson Poison}}{{ 75}}](#p75)
+- [{{ Crimson Poison}}{{ 74}}](#p74)
 - [{{ Delusion}}{{ 75}}](#p75)
 - [{{ Detect Magic}}{{ 76}}](#p76)
 - [{{ Disguise Self}}{{ 76}}](#p76)
 - [{{ Distort Value}}{{ 77}}](#p77)
 - [{{ Earth Tremor}}{{ 77}}](#p77)
+- [{{ Ebon Might}}{{ 77}}](#p77)
 - [{{ Electrify}}{{ 77}}](#p77)
 - [{{ Entomb}}{{ 78}}](#p78)
-- [{{ Expeditious Retreat}}{{ 78}}](#p78)
-- [{{ Explosive Deflection}}{{ 78}}](#p78)
+- [{{ Entropic Embrace}}{{ 78}}](#p78)
+- [{{ Expeditious Retreat}}{{ 79}}](#p79)
+- [{{ Explosive Deflection}}{{ 79}}](#p79)
 - [{{ Eyes of Immolation}}{{ 79}}](#p79)
-- [{{ Fall}}{{ 79}}](#p79)
-- [{{ False Life}}{{ 79}}](#p79)
-- [{{ Fated Strike}}{{ 79}}](#p79)
-- [{{ Feather Fall}}{{ 79}}](#p79)
-- [{{ Fog Cloud}}{{ 81}}](#p81)
-- [{{ Frost Fingers}}{{ 81}}](#p81)
-- [{{ Gale Bolt}}{{ 81}}](#p81)
-- [{{ Grease}}{{ 82}}](#p82)
-- [{{ Heavy Blow}}{{ 83}}](#p83)
-- [{{ Hideous Laughter}}{{ 83}}](#p83)
-- [{{ Ice Arrow}}{{ 84}}](#p84)
-- [{{ Ice Knife}}{{ 84}}](#p84)
-- [{{ Illusory Pit}}{{ 85}}](#p85)
-- [{{ Jump}}{{ 86}}](#p86)
-- [{{ Mage Armor}}{{ 87}}](#p87)
-- [{{ Magic Missile}}{{ 87}}](#p87)
-- [{{ Magnify Gravity}}{{ 87}}](#p87)
-- [{{ Melting Glob}}{{ 87}}](#p87)
-- [{{ Mind Ray}}{{ 88}}](#p88)
-- [{{ Minor Drain}}{{ 88}}](#p88)
-- [{{ Nauseating Poison}}{{ 88}}](#p88)
-- [{{ Prismatic Bolt}}{{ 89}}](#p89)
-- [{{ Prismatic Flash}}{{ 89}}](#p89)
-- [{{ Ray of Sickness}}{{ 90}}](#p90)
-- [{{ Sense Blood}}{{ 91}}](#p91)
-- [{{ Shadow Bind}}{{ 91}}](#p91)
-- [{{ Shield}}{{ 91}}](#p91)
-- [{{ Silent Image}}{{ 91}}](#p91)
-- [{{ Sleep}}{{ 92}}](#p92)
-- [{{ Spellfire Flare}}{{ 93}}](#p93)
-- [{{ Stone Fist}}{{ 93}}](#p93)
-- [{{ Thunder Punch}}{{ 95}}](#p95)
-- [{{ Thunderwave}}{{ 95}}](#p95)
-- [{{ Torrent}}{{ 96}}](#p96)
-- [{{ Tranquil Moment}}{{ 96}}](#p96)
-- [{{ Transfuse Life}}{{ 96}}](#p96)
-- [{{ Violent Updraft}}{{ 97}}](#p97)
-- [{{ Warding Sigil}}{{ 97}}](#p97)
-- [{{ Wardaway}}{{ 97}}](#p97)
-- [{{ Water Blast}}{{ 97}}](#p97)
-- [{{ Witch Bolt}}{{ 97}}](#p97)
+- [{{ Fall}}{{ 80}}](#p80)
+- [{{ False Life}}{{ 80}}](#p80)
+- [{{ Fated Strike}}{{ 80}}](#p80)
+- [{{ Feather Fall}}{{ 80}}](#p80)
+- [{{ Feign Interest}}{{ 80}}](#p80)
+- [{{ Fog Cloud}}{{ 82}}](#p82)
+- [{{ Frost Fingers}}{{ 82}}](#p82)
+- [{{ Frost Nova}}{{ 82}}](#p82)
+- [{{ Gale Bolt}}{{ 82}}](#p82)
+- [{{ Grease}}{{ 83}}](#p83)
+- [{{ Heavy Blow}}{{ 84}}](#p84)
+- [{{ Hideous Laughter}}{{ 85}}](#p85)
+- [{{ Ice Arrow}}{{ 85}}](#p85)
+- [{{ Ice Knife}}{{ 85}}](#p85)
+- [{{ Illusory Pit}}{{ 86}}](#p86)
+- [{{ Infernal Rush}}{{ 87}}](#p87)
+- [{{ Infernal Strike}}{{ 87}}](#p87)
+- [{{ Jump}}{{ 89}}](#p89)
+- [{{ Mage Armor}}{{ 89}}](#p89)
+- [{{ Magic Missile}}{{ 89}}](#p89)
+- [{{ Magnify Gravity}}{{ 90}}](#p90)
+- [{{ Melting Glob}}{{ 90}}](#p90)
+- [{{ Mind Ray}}{{ 90}}](#p90)
+- [{{ Minor Drain}}{{ 91}}](#p91)
+- [{{ Nauseating Poison}}{{ 91}}](#p91)
+- [{{ Prismatic Bolt}}{{ 92}}](#p92)
+- [{{ Prismatic Flash}}{{ 92}}](#p92)
+- [{{ Ray of Sickness}}{{ 93}}](#p93)
+- [{{ Sense Blood}}{{ 94}}](#p94)
+- [{{ Shadow Bind}}{{ 95}}](#p95)
+- [{{ Shadow Word: Pain}}{{ 95}}](#p95)
+- [{{ Shield}}{{ 95}}](#p95)
+- [{{ Silent Image}}{{ 95}}](#p95)
+- [{{ Sleep}}{{ 96}}](#p96)
+- [{{ Spellfire Flare}}{{ 97}}](#p97)
+- [{{ Stone Fist}}{{ 97}}](#p97)
+- [{{ Throw Glaive}}{{ 99}}](#p99)
+- [{{ Thunder Punch}}{{ 99}}](#p99)
+- [{{ Thunderwave}}{{ 100}}](#p100)
+- [{{ Torrent}}{{ 100}}](#p100)
+- [{{ Tranquil Moment}}{{ 100}}](#p100)
+- [{{ Transfuse Life}}{{ 100}}](#p100)
+- [{{ Violent Updraft}}{{ 101}}](#p101)
+- [{{ Warding Sigil}}{{ 101}}](#p101)
+- [{{ Wardaway}}{{ 101}}](#p101)
+- [{{ Water Blast}}{{ 102}}](#p102)
+- [{{ Witch Bolt}}{{ 102}}](#p102)
 :
 - **2nd Level Spells**
-- [{{ Air Bubble}}{{ 99}}](#p99)
-- [{{ Alacrity}}{{ 99}}](#p99)
-- [{{ Alter Self}}{{ 100}}](#p100)
-- [{{ Animate Object}}{{ 101}}](#p101)
-- [{{ Arcane Conduit}}{{ 101}}](#p101)
-- [{{ Arcane Scorcher}}{{ 102}}](#p102)
-- [{{ Arcane Vigor}}{{ 102}}](#p102)
-- [{{ Aura of Frost}}{{ 103}}](#p103)
-- [{{ Become Fire}}{{ 106}}](#p106)
-- [{{ Become Stone}}{{ 106}}](#p106)
-- [{{ Become Water}}{{ 107}}](#p107)
-- [{{ Become Wind}}{{ 107}}](#p107)
-- [{{ Blindness/Deafness}}{{ 107}}](#p107)
-- [{{ Blood Divination}}{{ 107}}](#p107)
-- [{{ Blood Wave}}{{ 108}}](#p108)
-- [{{ Bloody Burst}}{{ 108}}](#p108)
-- [{{ Blur}}{{ 108}}](#p108)
-- [{{ Chromatic Blade (Elemental Blade)}}{{ 110}}](#p110)
-- [{{ Clay Touch}}{{ 110}}](#p110)
-- [{{ Cloud of Daggers}}{{ 110}}](#p110)
-- [{{ Combust}}{{ 110}}](#p110)
-- [{{ Compelled Convulsion}}{{ 111}}](#p111)
-- [{{ Crackle}}{{ 111}}](#p111)
-- [{{ Crescent Wind Slash}}{{ 112}}](#p112)
-- [{{ Crown of Madness}}{{ 113}}](#p113)
-- [{{ Dancing Object}}{{ 113}}](#p113)
-- [{{ Dancing Wave}}{{ 113}}](#p113)
-- [{{ Darkness}}{{ 114}}](#p114)
-- [{{ Darkvision}}{{ 114}}](#p114)
+- [{{ Air Bubble}}{{ 103}}](#p103)
+- [{{ Alacrity}}{{ 103}}](#p103)
+- [{{ Alter Self}}{{ 104}}](#p104)
+- [{{ Animate Object}}{{ 105}}](#p105)
+- [{{ Arcane Conduit}}{{ 105}}](#p105)
+- [{{ Arcane Scorcher}}{{ 106}}](#p106)
+- [{{ Arcane Vigor}}{{ 106}}](#p106)
+- [{{ Aura of Frost}}{{ 107}}](#p107)
+- [{{ Become Fire}}{{ 110}}](#p110)
+- [{{ Become Stone}}{{ 110}}](#p110)
+- [{{ Become Water}}{{ 111}}](#p111)
+- [{{ Become Wind}}{{ 111}}](#p111)
+- [{{ Blindness/Deafness}}{{ 111}}](#p111)
+- [{{ Blood Divination}}{{ 112}}](#p112)
+- [{{ Blood Wave}}{{ 112}}](#p112)
+- [{{ Bloody Burst}}{{ 112}}](#p112)
+- [{{ Blur}}{{ 112}}](#p112)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
-- [{{ Death Armor}}{{ 114}}](#p114)
-- [{{ Detect Thoughts}}{{ 114}}](#p114)
-- [{{ Disruptive Tune}}{{ 115}}](#p115)
-- [{{ Dragon Surge}}{{ 115}}](#p115)
-- [{{ Dragon's Breath}}{{ 115}}](#p115)
-- [{{ Dueling Ground}}{{ 116}}](#p116)
-- [{{ Dust Devil}}{{ 116}}](#p116)
-- [{{ Earth Ripple}}{{ 116}}](#p116)
-- [{{ Earthbind}}{{ 116}}](#p116)
-- [{{ Electric Loop}}{{ 117}}](#p117)
-- [{{ Elemental Exhalation}}{{ 117}}](#p117)
-- [{{ Enhance Ability}}{{ 117}}](#p117)
-- [{{ Enlarge/Reduce}}{{ 117}}](#p117)
-- [{{ Ethereal Immolation}}{{ 118}}](#p118)
-- [{{ Flame Blade}}{{ 120}}](#p120)
-- [{{ Flaming Sphere}}{{ 120}}](#p120)
-- [{{ Fling}}{{ 121}}](#p121)
-- [{{ Gravity Surge}}{{ 122}}](#p122)
-- [{{ Gust of Wind}}{{ 122}}](#p122)
-- [{{ Hold Person}}{{ 123}}](#p123)
-- [{{ Hurricane Slash}}{{ 124}}](#p124)
-- [{{ Immovable Object}}{{ 124}}](#p124)
-- [{{ Instant Counter}}{{ 125}}](#p125)
-- [{{ Invisibility}}{{ 125}}](#p125)
-- [{{ Kinetic Jaunt}}{{ 125}}](#p125)
-- [{{ Knock}}{{ 126}}](#p126)
-- [{{ Levitate}}{{ 126}}](#p126)
-- [{{ Magic Weapon}}{{ 129}}](#p129)
-- [{{ Maximilian's Earthen Grasp}}{{ 129}}](#p129)
-- [{{ Melf's Acid Arrow}}{{ 129}}](#p129)
-- [{{ Mind Spike}}{{ 129}}](#p129)
-- [{{ Mind Whip (Mystic Spear)}}{{ 130}}](#p130)
-- [{{ Mirror Image}}{{ 130}}](#p130)
-- [{{ Misty Step}}{{ 130}}](#p130)
-- [{{ Morbid Puppet}}{{ 131}}](#p131)
-- [{{ Mystic Elusion}}{{ 131}}](#p131)
-- [{{ Nebulous Mischief}}{{ 131}}](#p131)
-- [{{ Painful Echoes}}{{ 131}}](#p131)
-- [{{ Phantasmal Force}}{{ 132}}](#p132)
-- [{{ Poison Dart}}{{ 133}}](#p133)
-- [{{ Pseudopod Slam}}{{ 133}}](#p133)
-- [{{ Pyrotechnics}}{{ 133}}](#p133)
-- [{{ Rime's Binding Ice}}{{ 134}}](#p134)
-- [{{ Scorching Ray}}{{ 135}}](#p135)
-- [{{ See Invisibility}}{{ 135}}](#p135)
-- [{{ Seeking Orb}}{{ 135}}](#p135)
-- [{{ Shadow Blade}}{{ 136}}](#p136)
-- [{{ Shatter}}{{ 136}}](#p136)
-- [{{ Shattering Shield}}{{ 136}}](#p136)
-- [{{ Silvery Barbs}}{{ 136}}](#p136)
-- [{{ Snowball Swarm}}{{ 137}}](#p137)
-- [{{ Spelltrap}}{{ 137}}](#p137)
-- [{{ Spider Climb}}{{ 137}}](#p137)
-- [{{ Spray of Cards}}{{ 138}}](#p138)
-- [{{ Star Dust}}{{ 139}}](#p139)
-- [{{ Stone Pillar}}{{ 140}}](#p140)
-- [{{ Suggestion}}{{ 140}}](#p140)
-- [{{ Time Skip}}{{ 144}}](#p144)
-- [{{ Time Slip}}{{ 144}}](#p144)
-- [{{ Time Trap}}{{ 144}}](#p144)
-- [{{ Uncertain Footing}}{{ 145}}](#p145)
-- [{{ Unstable Explosion}}{{ 146}}](#p146)
-- [{{ Vacuum Pull}}{{ 146}}](#p146)
-- [{{ Vicious Hound}}{{ 146}}](#p146)
-- [{{ Vortex Warp}}{{ 146}}](#p146)
-- [{{ Warding Wind}}{{ 147}}](#p147)
-- [{{ Warp Sense}}{{ 147}}](#p147)
-- [{{ Web}}{{ 147}}](#p147)
-- [{{ Wither and Bloom}}{{ 148}}](#p148)
+- [{{ Chromatic Blade (Elemental Blade)}}{{ 114}}](#p114)
+- [{{ Clay Touch}}{{ 114}}](#p114)
+- [{{ Cloud of Daggers}}{{ 114}}](#p114)
+- [{{ Combust}}{{ 115}}](#p115)
+- [{{ Compelled Convulsion}}{{ 115}}](#p115)
+- [{{ Crackle}}{{ 116}}](#p116)
+- [{{ Crescent Wind Slash}}{{ 116}}](#p116)
+- [{{ Crown of Madness}}{{ 117}}](#p117)
+- [{{ Dancing Object}}{{ 117}}](#p117)
+- [{{ Dancing Wave}}{{ 118}}](#p118)
+- [{{ Darkness}}{{ 118}}](#p118)
+- [{{ Darkvision}}{{ 118}}](#p118)
+- [{{ Death Armor}}{{ 118}}](#p118)
+- [{{ Detect Thoughts}}{{ 119}}](#p119)
+- [{{ Disruptive Tune}}{{ 119}}](#p119)
+- [{{ Dragon Surge}}{{ 120}}](#p120)
+- [{{ Dragon's Breath}}{{ 120}}](#p120)
+- [{{ Dueling Ground}}{{ 121}}](#p121)
+- [{{ Dust Devil}}{{ 121}}](#p121)
+- [{{ Earth Ripple}}{{ 121}}](#p121)
+- [{{ Earthbind}}{{ 121}}](#p121)
+- [{{ Electric Loop}}{{ 122}}](#p122)
+- [{{ Elemental Exhalation}}{{ 122}}](#p122)
+- [{{ Enhance Ability}}{{ 122}}](#p122)
+- [{{ Enlarge/Reduce}}{{ 122}}](#p122)
+- [{{ Eruption}}{{ 123}}](#p123)
+- [{{ Ethereal Immolation}}{{ 123}}](#p123)
+- [{{ Eye Beam}}{{ 124}}](#p124)
+- [{{ Flame Blade}}{{ 126}}](#p126)
+- [{{ Flaming Sphere}}{{ 126}}](#p126)
+- [{{ Fling}}{{ 127}}](#p127)
+- [{{ Frostscythe}}{{ 128}}](#p128)
+- [{{ Gravity Surge}}{{ 128}}](#p128)
+- [{{ Gust of Wind}}{{ 128}}](#p128)
+- [{{ Hold Person}}{{ 129}}](#p129)
+- [{{ Hurricane Slash}}{{ 130}}](#p130)
+- [{{ Immovable Object}}{{ 130}}](#p130)
+- [{{ Instant Counter}}{{ 131}}](#p131)
+- [{{ Invisibility}}{{ 131}}](#p131)
+- [{{ Kinetic Jaunt}}{{ 131}}](#p131)
+- [{{ Knock}}{{ 132}}](#p132)
+- [{{ Levitate}}{{ 132}}](#p132)
+- [{{ Magic Weapon}}{{ 135}}](#p135)
+- [{{ Maximilian's Earthen Grasp}}{{ 135}}](#p135)
+- [{{ Melf's Acid Arrow}}{{ 135}}](#p135)
+- [{{ Mind Spike}}{{ 135}}](#p135)
+- [{{ Mind Whip (Mystic Spear)}}{{ 136}}](#p136)
+- [{{ Mirror Image}}{{ 136}}](#p136)
+- [{{ Misty Step}}{{ 136}}](#p136)
+- [{{ Morbid Puppet}}{{ 137}}](#p137)
+- [{{ Mystic Elusion}}{{ 137}}](#p137)
+- [{{ Nebulous Mischief}}{{ 137}}](#p137)
+- [{{ Painful Echoes}}{{ 137}}](#p137)
+- [{{ Phantasmal Force}}{{ 138}}](#p138)
+- [{{ Poison Dart}}{{ 139}}](#p139)
+- [{{ Pseudopod Slam}}{{ 139}}](#p139)
+- [{{ Pyrotechnics}}{{ 139}}](#p139)
+- [{{ Rime's Binding Ice}}{{ 140}}](#p140)
+- [{{ Scorching Ray}}{{ 141}}](#p141)
+- [{{ See Invisibility}}{{ 141}}](#p141)
+- [{{ Seeking Orb}}{{ 142}}](#p142)
+- [{{ Shadow Blade}}{{ 142}}](#p142)
+- [{{ Shatter}}{{ 142}}](#p142)
+- [{{ Shattering Shield}}{{ 142}}](#p142)
+- [{{ Sigil of Flame}}{{ 143}}](#p143)
+- [{{ Silvery Barbs}}{{ 143}}](#p143)
+- [{{ Snowball Swarm}}{{ 143}}](#p143)
+- [{{ Spelltrap}}{{ 144}}](#p144)
+- [{{ Spider Climb}}{{ 144}}](#p144)
+- [{{ Spray of Cards}}{{ 145}}](#p145)
+- [{{ Star Dust}}{{ 145}}](#p145)
+- [{{ Stone Pillar}}{{ 146}}](#p146)
+- [{{ Suggestion}}{{ 146}}](#p146)
+- [{{ Time Skip}}{{ 150}}](#p150)
+- [{{ Time Slip}}{{ 150}}](#p150)
+- [{{ Time Trap}}{{ 150}}](#p150)
+- [{{ Uncertain Footing}}{{ 151}}](#p151)
+- [{{ Unstable Explosion}}{{ 152}}](#p152)
+- [{{ Vacuum Pull}}{{ 152}}](#p152)
+- [{{ Vicious Hound}}{{ 152}}](#p152)
+- [{{ Vortex Warp}}{{ 152}}](#p152)
+- [{{ Warding Wind}}{{ 153}}](#p153)
+- [{{ Warp Sense}}{{ 153}}](#p153)
+- [{{ Web}}{{ 153}}](#p153)
+- [{{ Wither and Bloom}}{{ 154}}](#p154)
 :
 - **3rd Level Spells**
-- [{{ Acidic Pit}}{{ 150}}](#p150)
-- [{{ Aether Lance}}{{ 150}}](#p150)
-- [{{ Antagonize}}{{ 152}}](#p152)
-- [{{ Arctic Aura}}{{ 152}}](#p152)
-- [{{ Ashardalon's Stride}}{{ 152}}](#p152)
-- [{{ Astral Flood}}{{ 153}}](#p153)
-- [{{ Blade Vortex}}{{ 154}}](#p154)
-- [{{ Blink}}{{ 154}}](#p154)
-- [{{ Blood Explosion}}{{ 154}}](#p154)
-- [{{ Cacophonic Shield}}{{ 155}}](#p155)
-- [{{ Call Lightning}}{{ 155}}](#p155)
-- [{{ Catnap}}{{ 155}}](#p155)
-- [{{ Clairvoyance}}{{ 156}}](#p156)
-- [{{ Corrosive Bolt}}{{ 157}}](#p157)
-- [{{ Counterspell}}{{ 157}}](#p157)
-- [{{ Crushing Singularity}}{{ 159}}](#p159)
-- [{{ Daylight}}{{ 159}}](#p159)
-- [{{ Dimensional Anchor}}{{ 160}}](#p160)
-- [{{ Dispel Magic}}{{ 160}}](#p160)
-- [{{ Electrocute}}{{ 161}}](#p161)
-- [{{ Elemental Weapon}}{{ 161}}](#p161)
-- [{{ Enemies Abound}}{{ 161}}](#p161)
-- [{{ Erode}}{{ 161}}](#p161)
-- [{{ Erupting Earth}}{{ 162}}](#p162)
-- [{{ Fear}}{{ 162}}](#p162)
-- [{{ Fire Cyclone}}{{ 163}}](#p163)
-- [{{ Fireball}}{{ 163}}](#p163)
-- [{{ Flame Arrows}}{{ 163}}](#p163)
-- [{{ Flamethrower}}{{ 164}}](#p164)
-- [{{ Flash Freeze}}{{ 164}}](#p164)
-- [{{ Fly}}{{ 164}}](#p164)
-- [{{ Freedom of the Waves}}{{ 164}}](#p164)
-- [{{ Gaseous Form}}{{ 165}}](#p165)
-- [{{ Ghost Step}}{{ 165}}](#p165)
-- [{{ Greenfire}}{{ 166}}](#p166)
-- [{{ Haste}}{{ 167}}](#p167)
-- [{{ Hungering Void}}{{ 167}}](#p167)
-- [{{ Hypnotic Pattern}}{{ 168}}](#p168)
-- [{{ Illusionary Fireball}}{{ 168}}](#p168)
-- [{{ Incite Greed}}{{ 168}}](#p168)
-- [{{ Inflict Doubt}}{{ 169}}](#p169)
-- [{{ Instant Bulwark}}{{ 169}}](#p169)
-- [{{ Intellect Fortress}}{{ 169}}](#p169)
-- [{{ Life Drain}}{{ 170}}](#p170)
-- [{{ Life Transference}}{{ 170}}](#p170)
-- [{{ Lightning Bolt}}{{ 171}}](#p171)
-- [{{ Major Image}}{{ 173}}](#p173)
-- [{{ Maladweomer}}{{ 173}}](#p173)
-- [{{ Meld into Stone}}{{ 173}}](#p173)
-- [{{ Melf's Minute Meteors}}{{ 174}}](#p174)
-- [{{ Meteor Jump}}{{ 174}}](#p174)
-- [{{ Mouth Latch}}{{ 174}}](#p174)
-- [{{ Mutate}}{{ 175}}](#p175)
-- [{{ Nondetection}}{{ 175}}](#p175)
-- [{{ Protection from Energy}}{{ 176}}](#p176)
-- [{{ Pulse Wave}}{{ 177}}](#p177)
-- [{{ Quick Sand}}{{ 177}}](#p177)
-- [{{ Rain of Spiders}}{{ 177}}](#p177)
-- [{{ Remove Gravity}}{{ 178}}](#p178)
-- [{{ Sanguine Spears}}{{ 178}}](#p178)
-- [{{ Seismic Wave}}{{ 179}}](#p179)
-- [{{ Sending}}{{ 179}}](#p179)
-- [{{ Silver Lance}}{{ 179}}](#p179)
-- [{{ Sleet Storm}}{{ 179}}](#p179)
-- [{{ Slow}}{{ 180}}](#p180)
-- [{{ Sonic Wave}}{{ 180}}](#p180)
-- [{{ Spectral Passage}}{{ 181}}](#p181)
-- [{{ Static Field}}{{ 182}}](#p182)
-- [{{ Stinking Cloud}}{{ 182}}](#p182)
-- [{{ Summon Monstrosity}}{{ 185}}](#p185)
-- [{{ Thunder Pulse}}{{ 189}}](#p189)
-- [{{ Thunder Step}}{{ 189}}](#p189)
-- [{{ Tidal Wave}}{{ 189}}](#p189)
-- [{{ Tongues}}{{ 190}}](#p190)
-- [{{ Vampiric Blade}}{{ 190}}](#p190)
-- [{{ Vampiric Touch}}{{ 190}}](#p190)
-- [{{ Vortex Blast}}{{ 191}}](#p191)
-- [{{ Wall of Sand}}{{ 191}}](#p191)
-- [{{ Wall of Water}}{{ 191}}](#p191)
-- [{{ Wasp Barrage}}{{ 191}}](#p191)
-- [{{ Water Breathing}}{{ 191}}](#p191)
-- [{{ Water Cannon}}{{ 192}}](#p192)
+- [{{ Acidic Pit}}{{ 156}}](#p156)
+- [{{ Aether Lance}}{{ 156}}](#p156)
+- [{{ Antagonize}}{{ 158}}](#p158)
+- [{{ Arctic Aura}}{{ 158}}](#p158)
+- [{{ Ashardalon's Stride}}{{ 158}}](#p158)
+- [{{ Astral Flood}}{{ 159}}](#p159)
+- [{{ Blade Vortex}}{{ 160}}](#p160)
+- [{{ Blink}}{{ 160}}](#p160)
+- [{{ Blistering Scales}}{{ 160}}](#p160)
+- [{{ Blood Explosion}}{{ 160}}](#p160)
+- [{{ Cacophonic Shield}}{{ 161}}](#p161)
+- [{{ Call Lightning}}{{ 161}}](#p161)
+- [{{ Catnap}}{{ 161}}](#p161)
+- [{{ Clairvoyance}}{{ 162}}](#p162)
+- [{{ Corrosive Bolt}}{{ 163}}](#p163)
+- [{{ Counterspell}}{{ 163}}](#p163)
+- [{{ Crushing Singularity}}{{ 165}}](#p165)
+- [{{ Daylight}}{{ 165}}](#p165)
+- [{{ Dimensional Anchor}}{{ 166}}](#p166)
+- [{{ Dispel Magic}}{{ 166}}](#p166)
+- [{{ Electrocute}}{{ 167}}](#p167)
+- [{{ Elemental Weapon}}{{ 167}}](#p167)
+- [{{ Enemies Abound}}{{ 167}}](#p167)
+- [{{ Erode}}{{ 168}}](#p168)
+- [{{ Erupting Earth}}{{ 168}}](#p168)
+- [{{ Fear}}{{ 168}}](#p168)
+- [{{ Fire Cyclone}}{{ 169}}](#p169)
+- [{{ Fireball}}{{ 169}}](#p169)
+- [{{ Flame Arrows}}{{ 170}}](#p170)
+- [{{ Flamethrower}}{{ 170}}](#p170)
+- [{{ Flash Freeze}}{{ 170}}](#p170)
+- [{{ Fly}}{{ 170}}](#p170)
+- [{{ Freedom of the Waves}}{{ 170}}](#p170)
+- [{{ Frozen Flurry}}{{ 170}}](#p170)
+- [{{ Gaseous Form}}{{ 171}}](#p171)
+- [{{ Ghost Step}}{{ 171}}](#p171)
+- [{{ Greenfire}}{{ 172}}](#p172)
+- [{{ Haste}}{{ 173}}](#p173)
+- [{{ Hungering Void}}{{ 173}}](#p173)
+- [{{ Hypnotic Pattern}}{{ 174}}](#p174)
+- [{{ Illusionary Fireball}}{{ 174}}](#p174)
+- [{{ Incite Greed}}{{ 175}}](#p175)
+- [{{ Inflict Doubt}}{{ 175}}](#p175)
+- [{{ Instant Bulwark}}{{ 176}}](#p176)
+- [{{ Intellect Fortress}}{{ 176}}](#p176)
+- [{{ Life Drain}}{{ 178}}](#p178)
+- [{{ Life Transference}}{{ 178}}](#p178)
+- [{{ Lightning Bolt}}{{ 178}}](#p178)
+- [{{ Major Image}}{{ 180}}](#p180)
+- [{{ Maladweomer}}{{ 180}}](#p180)
+- [{{ Meld into Stone}}{{ 181}}](#p181)
+- [{{ Melf's Minute Meteors}}{{ 181}}](#p181)
+- [{{ Meteor Jump}}{{ 181}}](#p181)
+- [{{ Mouth Latch}}{{ 181}}](#p181)
+- [{{ Mutate}}{{ 182}}](#p182)
+- [{{ Nondetection}}{{ 183}}](#p183)
+- [{{ Protection from Energy}}{{ 184}}](#p184)
+- [{{ Pulse Wave}}{{ 184}}](#p184)
+- [{{ Quick Sand}}{{ 184}}](#p184)
+- [{{ Rain of Fire}}{{ 184}}](#p184)
+- [{{ Rain of Spiders}}{{ 184}}](#p184)
+- [{{ Remove Gravity}}{{ 185}}](#p185)
+- [{{ Remorseless Winter}}{{ 185}}](#p185)
+- [{{ Sanguine Spears}}{{ 186}}](#p186)
+- [{{ Seismic Wave}}{{ 186}}](#p186)
+- [{{ Sending}}{{ 186}}](#p186)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
-- [{{ Water Walk}}{{ 192}}](#p192)
-- [{{ Waterspout}}{{ 192}}](#p192)
-- [{{ Wind Wall}}{{ 193}}](#p193)
+- [{{ Silver Lance}}{{ 187}}](#p187)
+- [{{ Sleet Storm}}{{ 187}}](#p187)
+- [{{ Slow}}{{ 187}}](#p187)
+- [{{ Sonic Wave}}{{ 187}}](#p187)
+- [{{ Soul Reap}}{{ 188}}](#p188)
+- [{{ Spectral Passage}}{{ 188}}](#p188)
+- [{{ Static Field}}{{ 190}}](#p190)
+- [{{ Stinking Cloud}}{{ 190}}](#p190)
+- [{{ Summon Monstrosity}}{{ 192}}](#p192)
+- [{{ Thunder Pulse}}{{ 196}}](#p196)
+- [{{ Thunder Step}}{{ 196}}](#p196)
+- [{{ Tidal Wave}}{{ 196}}](#p196)
+- [{{ Tongues}}{{ 197}}](#p197)
+- [{{ Vampiric Blade}}{{ 197}}](#p197)
+- [{{ Vampiric Touch}}{{ 197}}](#p197)
+- [{{ Vortex Blast}}{{ 198}}](#p198)
+- [{{ Wall of Sand}}{{ 198}}](#p198)
+- [{{ Wall of Water}}{{ 198}}](#p198)
+- [{{ Wasp Barrage}}{{ 198}}](#p198)
+- [{{ Water Breathing}}{{ 198}}](#p198)
+- [{{ Water Cannon}}{{ 199}}](#p199)
+- [{{ Water Walk}}{{ 199}}](#p199)
+- [{{ Waterspout}}{{ 199}}](#p199)
+- [{{ Wind Wall}}{{ 200}}](#p200)
 :
 - **4th Level Spells**
-- [{{ Accursed Touch}}{{ 194}}](#p194)
-- [{{ Aero Barrage}}{{ 194}}](#p194)
-- [{{ Arc of Lightning}}{{ 195}}](#p195)
-- [{{ Backlash}}{{ 195}}](#p195)
-- [{{ Banishment}}{{ 196}}](#p196)
-- [{{ Bile Beam}}{{ 196}}](#p196)
-- [{{ Blight}}{{ 196}}](#p196)
-- [{{ Charm Monster}}{{ 197}}](#p197)
-- [{{ Confusion}}{{ 198}}](#p198)
-- [{{ Dimension Door}}{{ 200}}](#p200)
-- [{{ Dominate Beast}}{{ 201}}](#p201)
-- [{{ Echoing Lance}}{{ 202}}](#p202)
-- [{{ Elemental Bane}}{{ 203}}](#p203)
-- [{{ Exsanguinate}}{{ 203}}](#p203)
-- [{{ False Vision}}{{ 204}}](#p204)
-- [{{ Festering Blast}}{{ 205}}](#p205)
-- [{{ Fire Shield}}{{ 205}}](#p205)
-- [{{ Force Blade}}{{ 205}}](#p205)
-- [{{ Gate Seal}}{{ 206}}](#p206)
-- [{{ Geyser}}{{ 207}}](#p207)
-- [{{ Gravity Sinkhole}}{{ 209}}](#p209)
-- [{{ Greater Invisibility}}{{ 209}}](#p209)
-- [{{ Ice Spike}}{{ 210}}](#p210)
-- [{{ Ice Storm}}{{ 211}}](#p211)
-- [{{ Ichorous Blood}}{{ 211}}](#p211)
-- [{{ Iron Garden}}{{ 211}}](#p211)
-- [{{ Jumping Jolt}}{{ 211}}](#p211)
-- [{{ Macabre Marionette}}{{ 212}}](#p212)
-- [{{ Mirror Army}}{{ 212}}](#p212)
-- [{{ Orbital Stones}}{{ 213}}](#p213)
-- [{{ Pillar of Fire}}{{ 213}}](#p213)
-- [{{ Poison Puff}}{{ 214}}](#p214)
-- [{{ Polymorph}}{{ 214}}](#p214)
-- [{{ Protection from Spells}}{{ 214}}](#p214)
-- [{{ Psychic Lance}}{{ 215}}](#p215)
-- [{{ Quicksilver Steps}}{{ 215}}](#p215)
-- [{{ Resilient Sphere}}{{ 215}}](#p215)
-- [{{ Ribcage}}{{ 216}}](#p216)
-- [{{ Sickening Radiance}}{{ 217}}](#p217)
-- [{{ Spatial Swap}}{{ 217}}](#p217)
-- [{{ Spellfire Storm}}{{ 217}}](#p217)
-- [{{ Spirit of Death}}{{ 218}}](#p218)
-- [{{ Split Timeline}}{{ 219}}](#p219)
-- [{{ Starfall}}{{ 219}}](#p219)
-- [{{ Stinging Swarm}}{{ 220}}](#p220)
-- [{{ Stone Coffin}}{{ 220}}](#p220)
-- [{{ Stoneskin}}{{ 220}}](#p220)
-- [{{ Storm Sphere}}{{ 220}}](#p220)
-- [{{ Suffocate}}{{ 221}}](#p221)
-- [{{ Time Loop}}{{ 224}}](#p224)
-- [{{ Violent Crush}}{{ 224}}](#p224)
-- [{{ Vitriolic Sphere}}{{ 225}}](#p225)
-- [{{ Wall of Fire}}{{ 225}}](#p225)
-- [{{ Watery Sphere}}{{ 226}}](#p226)
-- [{{ Zone of Amicability}}{{ 226}}](#p226)
+- [{{ Accursed Touch}}{{ 201}}](#p201)
+- [{{ Aero Barrage}}{{ 201}}](#p201)
+- [{{ Arc of Lightning}}{{ 202}}](#p202)
+- [{{ Backlash}}{{ 202}}](#p202)
+- [{{ Banishment}}{{ 203}}](#p203)
+- [{{ Bile Beam}}{{ 203}}](#p203)
+- [{{ Blight}}{{ 203}}](#p203)
+- [{{ Breath of Eons}}{{ 204}}](#p204)
+- [{{ Chaos Nova}}{{ 204}}](#p204)
+- [{{ Charm Monster}}{{ 204}}](#p204)
+- [{{ Collapsing Star}}{{ 205}}](#p205)
+- [{{ Cometfall}}{{ 205}}](#p205)
+- [{{ Confusion}}{{ 206}}](#p206)
+- [{{ Dimension Door}}{{ 208}}](#p208)
+- [{{ Dominate Beast}}{{ 209}}](#p209)
+- [{{ Echoing Lance}}{{ 210}}](#p210)
+- [{{ Elemental Bane}}{{ 211}}](#p211)
+- [{{ Emberstorm}}{{ 211}}](#p211)
+- [{{ Exsanguinate}}{{ 211}}](#p211)
+- [{{ False Vision}}{{ 212}}](#p212)
+- [{{ Festering Blast}}{{ 213}}](#p213)
+- [{{ Fire Shield}}{{ 213}}](#p213)
+- [{{ Force Blade}}{{ 213}}](#p213)
+- [{{ Gate Seal}}{{ 214}}](#p214)
+- [{{ Geyser}}{{ 215}}](#p215)
+- [{{ Gravity Sinkhole}}{{ 217}}](#p217)
+- [{{ Greater Invisibility}}{{ 217}}](#p217)
+- [{{ Ice Spike}}{{ 218}}](#p218)
+- [{{ Ice Storm}}{{ 219}}](#p219)
+- [{{ Ichorous Blood}}{{ 219}}](#p219)
+- [{{ Iron Garden}}{{ 219}}](#p219)
+- [{{ Jumping Jolt}}{{ 219}}](#p219)
+- [{{ Macabre Marionette}}{{ 220}}](#p220)
+- [{{ Mirror Army}}{{ 220}}](#p220)
+- [{{ Orbital Stones}}{{ 221}}](#p221)
+- [{{ Pillar of Fire}}{{ 221}}](#p221)
+- [{{ Poison Puff}}{{ 222}}](#p222)
+- [{{ Polymorph}}{{ 222}}](#p222)
+- [{{ Protection from Spells}}{{ 222}}](#p222)
+- [{{ Psychic Horror}}{{ 223}}](#p223)
+- [{{ Psychic Lance}}{{ 223}}](#p223)
+- [{{ Quicksilver Steps}}{{ 223}}](#p223)
+- [{{ Resilient Sphere}}{{ 224}}](#p224)
+- [{{ Ribcage}}{{ 224}}](#p224)
+- [{{ Sickening Radiance}}{{ 225}}](#p225)
+- [{{ Spatial Swap}}{{ 225}}](#p225)
+- [{{ Spellfire Storm}}{{ 226}}](#p226)
+- [{{ Spirit of Death}}{{ 227}}](#p227)
+- [{{ Split Timeline}}{{ 228}}](#p228)
+- [{{ Starfall}}{{ 228}}](#p228)
+- [{{ Stinging Swarm}}{{ 229}}](#p229)
+- [{{ Stone Coffin}}{{ 229}}](#p229)
+- [{{ Stoneskin}}{{ 229}}](#p229)
+- [{{ Storm Sphere}}{{ 229}}](#p229)
+- [{{ Suffocate}}{{ 230}}](#p230)
+- [{{ Time Dilation}}{{ 233}}](#p233)
+- [{{ Time Loop}}{{ 233}}](#p233)
+- [{{ Violent Crush}}{{ 234}}](#p234)
+- [{{ Vitriolic Sphere}}{{ 234}}](#p234)
+- [{{ Volcanic Upheaval}}{{ 234}}](#p234)
+- [{{ Wall of Fire}}{{ 235}}](#p235)
+- [{{ Watery Sphere}}{{ 235}}](#p235)
+- [{{ Zone of Amicability}}{{ 236}}](#p236)
 :
 - **5th Level Spells**
-- [{{ Acid Rain}}{{ 227}}](#p227)
-- [{{ Aether Storm}}{{ 227}}](#p227)
-- [{{ Animate Objects}}{{ 228}}](#p228)
-- [{{ Arcane Hand}}{{ 229}}](#p229)
-- [{{ Ball Lightning}}{{ 230}}](#p230)
-- [{{ Burial Barrage}}{{ 230}}](#p230)
-- [{{ Circle of Power}}{{ 230}}](#p230)
-- [{{ Cloudkill}}{{ 231}}](#p231)
-- [{{ Cone of Cold}}{{ 231}}](#p231)
-- [{{ Control Winds}}{{ 233}}](#p233)
-- [{{ Creation}}{{ 235}}](#p235)
-- [{{ Divide Self}}{{ 238}}](#p238)
-- [{{ Dominate Person}}{{ 239}}](#p239)
-- [{{ Elemental Suffusion}}{{ 239}}](#p239)
-- [{{ Enervation}}{{ 240}}](#p240)
-- [{{ Explode Heart}}{{ 240}}](#p240)
-- [{{ Far Step}}{{ 240}}](#p240)
-- [{{ Field of Stars}}{{ 240}}](#p240)
-- [{{ Fissure}}{{ 241}}](#p241)
-- [{{ Freedom of the Winds}}{{ 241}}](#p241)
-- [{{ Grave Ground}}{{ 242}}](#p242)
-- [{{ Greater Absorb Elements}}{{ 242}}](#p242)
-- [{{ Greater Shield}}{{ 242}}](#p242)
-- [{{ Hold Monster}}{{ 243}}](#p243)
-- [{{ Immolation}}{{ 244}}](#p244)
-- [{{ Insect Plague}}{{ 244}}](#p244)
-- [{{ Invoke Dragon (Conjure Dragon)}}{{ 245}}](#p245)
-- [{{ Mooncloak}}{{ 248}}](#p248)
-- [{{ Pressure Cutter}}{{ 250}}](#p250)
-- [{{ Pyroclastic Lance}}{{ 250}}](#p250)
-- [{{ Regal Presence}}{{ 251}}](#p251)
-- [{{ Seeming}}{{ 255}}](#p255)
-- [{{ Skill Empowerment}}{{ 256}}](#p256)
-- [{{ Sky Burst}}{{ 256}}](#p256)
-- [{{ Sonic Shriek}}{{ 256}}](#p256)
-- [{{ Spell Matrix}}{{ 257}}](#p257)
-- [{{ Spirit Lantern}}{{ 257}}](#p257)
-- [{{ Storm of Radiance}}{{ 258}}](#p258)
-- [{{ Sudden Hazards}}{{ 259}}](#p259)
-- [{{ Summon Dragon}}{{ 260}}](#p260)
-- [{{ Synaptic Static}}{{ 262}}](#p262)
-- [{{ Telekinesis}}{{ 263}}](#p263)
-- [{{ Teleportation Circle}}{{ 263}}](#p263)
-- [{{ Teleportation Tangle}}{{ 264}}](#p264)
-- [{{ Temporal Shunt}}{{ 264}}](#p264)
-- [{{ Tornado}}{{ 264}}](#p264)
-- [{{ Wall of Force}}{{ 266}}](#p266)
-- [{{ Wall of Light}}{{ 266}}](#p266)
-- [{{ Wall of Stone}}{{ 266}}](#p266)
-- [{{ Waves of Exhaustion}}{{ 267}}](#p267)
+- [{{ Acid Rain}}{{ 237}}](#p237)
+- [{{ Aether Storm}}{{ 237}}](#p237)
+- [{{ Animate Objects}}{{ 238}}](#p238)
+- [{{ Arcane Hand}}{{ 239}}](#p239)
+- [{{ Ball Lightning}}{{ 240}}](#p240)
+- [{{ Bonestorm}}{{ 240}}](#p240)
+- [{{ Burial Barrage}}{{ 240}}](#p240)
+- [{{ Circle of Power}}{{ 241}}](#p241)
+- [{{ Cloudkill}}{{ 241}}](#p241)
+- [{{ Cone of Cold}}{{ 242}}](#p242)
+- [{{ Control Winds}}{{ 243}}](#p243)
+- [{{ Creation}}{{ 245}}](#p245)
+- [{{ Divide Self}}{{ 248}}](#p248)
+- [{{ Dominate Person}}{{ 249}}](#p249)
+- [{{ Elemental Suffusion}}{{ 250}}](#p250)
+- [{{ Enervation}}{{ 250}}](#p250)
+- [{{ Explode Heart}}{{ 251}}](#p251)
+- [{{ Far Step}}{{ 251}}](#p251)
+- [{{ Field of Stars}}{{ 251}}](#p251)
+- [{{ Fissure}}{{ 252}}](#p252)
+- [{{ Freedom of the Winds}}{{ 252}}](#p252)
+- [{{ Grave Ground}}{{ 253}}](#p253)
+- [{{ Greater Absorb Elements}}{{ 253}}](#p253)
+- [{{ Greater Shield}}{{ 253}}](#p253)
+- [{{ Hold Monster}}{{ 254}}](#p254)
+- [{{ Immolation}}{{ 255}}](#p255)
+- [{{ Insect Plague}}{{ 255}}](#p255)
+- [{{ Invoke Dragon (Conjure Dragon)}}{{ 256}}](#p256)
+- [{{ Mooncloak}}{{ 259}}](#p259)
+- [{{ Pressure Cutter}}{{ 261}}](#p261)
+- [{{ Pyroclastic Lance}}{{ 261}}](#p261)
+- [{{ Regal Presence}}{{ 262}}](#p262)
+- [{{ Rescue}}{{ 266}}](#p266)
+- [{{ Seeming}}{{ 266}}](#p266)
+- [{{ Shattering Star}}{{ 267}}](#p267)
+- [{{ Sigil of Chains}}{{ 267}}](#p267)
+- [{{ Skill Empowerment}}{{ 267}}](#p267)
+- [{{ Sky Burst}}{{ 267}}](#p267)
+- [{{ Sonic Shriek}}{{ 267}}](#p267)
+- [{{ Spell Matrix}}{{ 268}}](#p268)
+- [{{ Spirit Lantern}}{{ 268}}](#p268)
+- [{{ Storm of Radiance}}{{ 269}}](#p269)
+- [{{ Sudden Hazards}}{{ 270}}](#p270)
+- [{{ Summon Dragon}}{{ 271}}](#p271)
+- [{{ Synaptic Static}}{{ 273}}](#p273)
+- [{{ Telekinesis}}{{ 274}}](#p274)
+- [{{ Teleportation Circle}}{{ 274}}](#p274)
+- [{{ Teleportation Tangle}}{{ 275}}](#p275)
+- [{{ Temporal Shunt}}{{ 275}}](#p275)
+- [{{ Tornado}}{{ 275}}](#p275)
+- [{{ Void Eruption}}{{ 276}}](#p276)
+- [{{ Wall of Force}}{{ 277}}](#p277)
+- [{{ Wall of Light}}{{ 278}}](#p278)
+- [{{ Wall of Stone}}{{ 278}}](#p278)
+- [{{ Waves of Exhaustion}}{{ 279}}](#p279)
 :
 - **6th Level Spells**
-- [{{ Arcane Gate}}{{ 268}}](#p268)
-- [{{ Avalanche}}{{ 268}}](#p268)
-- [{{ Blizzard}}{{ 269}}](#p269)
-- [{{ Beam of Annihilation}}{{ 269}}](#p269)
-- [{{ Bones of the Earth}}{{ 270}}](#p270)
-- [{{ Chain Lightning}}{{ 270}}](#p270)
-- [{{ Chrono Conjunction}}{{ 270}}](#p270)
-- [{{ Circle of Death}}{{ 271}}](#p271)
-- [{{ Disintegrate}}{{ 276}}](#p276)
-- [{{ Effulgent Spheres}}{{ 277}}](#p277)
-- [{{ Eyebite}}{{ 278}}](#p278)
-- [{{ Flesh to Stone}}{{ 279}}](#p279)
-- [{{ Freezing Sphere}}{{ 279}}](#p279)
-- [{{ Globe of Invulnerability}}{{ 280}}](#p280)
-- [{{ Gravity Fissure}}{{ 280}}](#p280)
-- [{{ Impaling Spears}}{{ 281}}](#p281)
-- [{{ Inevitable Winter}}{{ 282}}](#p282)
-- [{{ Investiture of Flame}}{{ 283}}](#p283)
-- [{{ Investiture of Ice}}{{ 283}}](#p283)
-- [{{ Investiture of Stone}}{{ 284}}](#p284)
-- [{{ Investiture of Water}}{{ 284}}](#p284)
-- [{{ Investiture of Wind}}{{ 284}}](#p284)
-- [{{ Lamentable Belaborment}}{{ 285}}](#p285)
-- [{{ Mass Blur}}{{ 286}}](#p286)
-- [{{ Mass Command}}{{ 286}}](#p286)
-- [{{ Mass Suggestion}}{{ 287}}](#p287)
-- [{{ Melt}}{{ 287}}](#p287)
-- [{{ Mental Prison}}{{ 287}}](#p287)
-- [{{ Move Earth}}{{ 288}}](#p288)
-- [{{ Otherworldly Guise}}{{ 288}}](#p288)
-- [{{ Platinum Shield}}{{ 289}}](#p289)
-- [{{ Power Torrent}}{{ 289}}](#p289)
-- [{{ Sanguine Doom}}{{ 290}}](#p290)
-- [{{ Scatter}}{{ 290}}](#p290)
-- [{{ Sunbeam}}{{ 294}}](#p294)
-- [{{ True Seeing}}{{ 294}}](#p294)
-- [{{ Volcanic Burst}}{{ 295}}](#p295)
-- [{{ Wall of Ice}}{{ 295}}](#p295)
-:
+- [{{ Arcane Gate}}{{ 280}}](#p280)
+- [{{ Astral Blade}}{{ 280}}](#p280)
+- [{{ Avalanche}}{{ 281}}](#p281)
+- [{{ Azure Sweep}}{{ 281}}](#p281)
+- [{{ Blizzard}}{{ 281}}](#p281)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
+- [{{ Beam of Annihilation}}{{ 281}}](#p281)
+- [{{ Bones of the Earth}}{{ 282}}](#p282)
+- [{{ Chain Lightning}}{{ 282}}](#p282)
+- [{{ Chrono Conjunction}}{{ 283}}](#p283)
+- [{{ Circle of Death}}{{ 283}}](#p283)
+- [{{ Combustion}}{{ 283}}](#p283)
+- [{{ Disintegrate}}{{ 288}}](#p288)
+- [{{ Effulgent Spheres}}{{ 289}}](#p289)
+- [{{ Elemental Avatar}}{{ 290}}](#p290)
+- [{{ Eyebite}}{{ 290}}](#p290)
+- [{{ Flesh to Stone}}{{ 292}}](#p292)
+- [{{ Freezing Sphere}}{{ 292}}](#p292)
+- [{{ Globe of Invulnerability}}{{ 293}}](#p293)
+- [{{ Gravity Fissure}}{{ 293}}](#p293)
+- [{{ Impaling Spears}}{{ 294}}](#p294)
+- [{{ Inevitable Winter}}{{ 295}}](#p295)
+- [{{ Investiture of Flame}}{{ 296}}](#p296)
+- [{{ Investiture of Ice}}{{ 296}}](#p296)
+- [{{ Investiture of Stone}}{{ 297}}](#p297)
+- [{{ Investiture of Water}}{{ 297}}](#p297)
+- [{{ Investiture of Wind}}{{ 297}}](#p297)
+- [{{ Lamentable Belaborment}}{{ 298}}](#p298)
+- [{{ Mass Blur}}{{ 299}}](#p299)
+- [{{ Mass Command}}{{ 299}}](#p299)
+- [{{ Mass Suggestion}}{{ 300}}](#p300)
+- [{{ Melt}}{{ 300}}](#p300)
+- [{{ Mental Prison}}{{ 300}}](#p300)
+- [{{ Move Earth}}{{ 301}}](#p301)
+- [{{ Otherworldly Guise}}{{ 301}}](#p301)
+- [{{ Platinum Shield}}{{ 302}}](#p302)
+- [{{ Power Torrent}}{{ 302}}](#p302)
+- [{{ Sanguine Doom}}{{ 303}}](#p303)
+- [{{ Scatter}}{{ 304}}](#p304)
+- [{{ Sunbeam}}{{ 308}}](#p308)
+- [{{ True Seeing}}{{ 308}}](#p308)
+- [{{ Volcanic Burst}}{{ 309}}](#p309)
+- [{{ Wall of Ice}}{{ 309}}](#p309)
+:
 - **7th Level Spells**
-- [{{ Aura of Evasion}}{{ 297}}](#p297)
-- [{{ Crown of Stars}}{{ 298}}](#p298)
-- [{{ Delayed Blast Fireball}}{{ 298}}](#p298)
-- [{{ Devouring Mist}}{{ 299}}](#p299)
-- [{{ Draconic Transformation}}{{ 299}}](#p299)
-- [{{ Dream of the Blue Veil}}{{ 300}}](#p300)
-- [{{ Etherealness}}{{ 300}}](#p300)
-- [{{ Finger of Death}}{{ 300}}](#p300)
-- [{{ Fire Storm}}{{ 301}}](#p301)
-- [{{ Fractured Awareness}}{{ 301}}](#p301)
-- [{{ Glacial Crash}}{{ 301}}](#p301)
-- [{{ Plane Shift}}{{ 303}}](#p303)
-- [{{ Power Word: Pain}}{{ 303}}](#p303)
-- [{{ Power Word: Slumber}}{{ 304}}](#p304)
-- [{{ Prismatic Spray}}{{ 304}}](#p304)
-- [{{ Prophesied Strike}}{{ 304}}](#p304)
-- [{{ Rain of Swords}}{{ 305}}](#p305)
-- [{{ Reverse Gravity}}{{ 306}}](#p306)
-- [{{ Reweave Fate}}{{ 306}}](#p306)
-- [{{ Sorcerous Sequestration}}{{ 306}}](#p306)
-- [{{ Synostodweomer}}{{ 308}}](#p308)
-- [{{ Teleport}}{{ 309}}](#p309)
-- [{{ Tether Essence}}{{ 310}}](#p310)
-- [{{ Transfix}}{{ 311}}](#p311)
-- [{{ Void Star}}{{ 311}}](#p311)
-- [{{ Whirlwind}}{{ 312}}](#p312)
+- [{{ Aura of Evasion}}{{ 311}}](#p311)
+- [{{ Crown of Stars}}{{ 312}}](#p312)
+- [{{ Delayed Blast Fireball}}{{ 312}}](#p312)
+- [{{ Devouring Mist}}{{ 313}}](#p313)
+- [{{ Draconic Transformation}}{{ 313}}](#p313)
+- [{{ Dream of the Blue Veil}}{{ 314}}](#p314)
+- [{{ Etherealness}}{{ 314}}](#p314)
+- [{{ Finger of Death}}{{ 314}}](#p314)
+- [{{ Fire Storm}}{{ 315}}](#p315)
+- [{{ Fractured Awareness}}{{ 315}}](#p315)
+- [{{ Glacial Crash}}{{ 315}}](#p315)
+- [{{ Lay Waste}}{{ 316}}](#p316)
+- [{{ Plane Shift}}{{ 317}}](#p317)
+- [{{ Power Word: Pain}}{{ 318}}](#p318)
+- [{{ Power Word: Slumber}}{{ 318}}](#p318)
+- [{{ Prismatic Spray}}{{ 318}}](#p318)
+- [{{ Prophesied Strike}}{{ 319}}](#p319)
+- [{{ Rain of Swords}}{{ 319}}](#p319)
+- [{{ Reverse Gravity}}{{ 320}}](#p320)
+- [{{ Reweave Fate}}{{ 320}}](#p320)
+- [{{ Sorcerous Sequestration}}{{ 321}}](#p321)
+- [{{ Synostodweomer}}{{ 322}}](#p322)
+- [{{ Teleport}}{{ 323}}](#p323)
+- [{{ Tether Essence}}{{ 324}}](#p324)
+- [{{ Transfix}}{{ 325}}](#p325)
+- [{{ Void Star}}{{ 325}}](#p325)
+- [{{ Whirlwind}}{{ 326}}](#p326)
 :
 - **8th Level Spells**
-- [{{ Antimagic Field}}{{ 314}}](#p314)
-- [{{ Arcane Singularity}}{{ 315}}](#p315)
-- [{{ Dark Star}}{{ 316}}](#p316)
-- [{{ Demiplane}}{{ 317}}](#p317)
-- [{{ Dominate Monster}}{{ 317}}](#p317)
-- [{{ Earthquake}}{{ 318}}](#p318)
-- [{{ Entrancing Mirrors}}{{ 318}}](#p318)
-- [{{ Feeblemind}}{{ 318}}](#p318)
-- [{{ Horrid Wilting}}{{ 319}}](#p319)
-- [{{ Incendiary Cloud}}{{ 320}}](#p320)
-- [{{ Iron Body}}{{ 320}}](#p320)
-- [{{ Lightning Ring}}{{ 320}}](#p320)
-- [{{ Maddening Darkness}}{{ 320}}](#p320)
-- [{{ Mass Invisibility}}{{ 320}}](#p320)
-- [{{ Maximize/Minimize}}{{ 321}}](#p321)
-- [{{ Moment of Prescience}}{{ 322}}](#p322)
-- [{{ Nimbleness}}{{ 322}}](#p322)
-- [{{ Polar Ray}}{{ 323}}](#p323)
-- [{{ Power Word: Stun}}{{ 323}}](#p323)
-- [{{ Reality Break}}{{ 323}}](#p323)
-- [{{ Sunburst}}{{ 324}}](#p324)
-- [{{ Skeletal Deliquescence}}{{ 324}}](#p324)
-- [{{ Time Anchor}}{{ 325}}](#p325)
-- [{{ Time Bubble}}{{ 325}}](#p325)
-- [{{ Titanic Strength}}{{ 326}}](#p326)
-- [{{ Wildfire}}{{ 326}}](#p326)
+- [{{ Antimagic Field}}{{ 328}}](#p328)
+- [{{ Arcane Singularity}}{{ 329}}](#p329)
+- [{{ Dark Star}}{{ 330}}](#p330)
+- [{{ Demiplane}}{{ 331}}](#p331)
+- [{{ Dominate Monster}}{{ 331}}](#p331)
+- [{{ Earthquake}}{{ 332}}](#p332)
+- [{{ Entrancing Mirrors}}{{ 332}}](#p332)
+- [{{ Feeblemind}}{{ 332}}](#p332)
+- [{{ Horrid Wilting}}{{ 333}}](#p333)
+- [{{ Incendiary Cloud}}{{ 334}}](#p334)
+- [{{ Iron Body}}{{ 334}}](#p334)
+- [{{ Lightning Ring}}{{ 334}}](#p334)
+- [{{ Maddening Darkness}}{{ 334}}](#p334)
+- [{{ Mass Invisibility}}{{ 334}}](#p334)
+- [{{ Maximize/Minimize}}{{ 335}}](#p335)
+- [{{ Moment of Prescience}}{{ 336}}](#p336)
+- [{{ Nimbleness}}{{ 336}}](#p336)
+- [{{ Polar Ray}}{{ 337}}](#p337)
+- [{{ Power Word: Stun}}{{ 337}}](#p337)
+- [{{ Reality Break}}{{ 337}}](#p337)
+- [{{ Self Time Stop [Time Stop]}}{{ 338}}](#p338)
+- [{{ Sunburst}}{{ 338}}](#p338)
+- [{{ Skeletal Deliquescence}}{{ 338}}](#p338)
+- [{{ Time Anchor}}{{ 339}}](#p339)
+- [{{ Time Bubble}}{{ 339}}](#p339)
+- [{{ Titanic Strength}}{{ 340}}](#p340)
+- [{{ Wildfire}}{{ 340}}](#p340)
 :
 - **9th Level Spells**
-- [{{ Arcanist's Reflection}}{{ 327}}](#p327)
-- [{{ Astral Projection}}{{ 328}}](#p328)
-- [{{ Blackhole}}{{ 328}}](#p328)
-- [{{ Blade of Disaster}}{{ 329}}](#p329)
-- [{{ Detonate}}{{ 329}}](#p329)
-- [{{ Form of the Elements}}{{ 330}}](#p330)
-- [{{ Frostfell}}{{ 330}}](#p330)
-- [{{ Gate}}{{ 330}}](#p330)
-- [{{ Invulnerability}}{{ 332}}](#p332)
-- [{{ Manipulate Fate}}{{ 333}}](#p333)
-- [{{ Mass Polymorph}}{{ 333}}](#p333)
-- [{{ Meteor Swarm}}{{ 334}}](#p334)
-- [{{ Paradox}}{{ 334}}](#p334)
-- [{{ Power Word: Kill}}{{ 334}}](#p334)
-- [{{ Power Word: Ruin}}{{ 335}}](#p335)
-- [{{ Prismatic Wall}}{{ 335}}](#p335)
-- [{{ Psychic Scream}}{{ 336}}](#p336)
-- [{{ Ravenous Void}}{{ 336}}](#p336)
-- [{{ Sphere of Ultimate Destruction}}{{ 337}}](#p337)
-- [{{ Supernova}}{{ 338}}](#p338)
-- [{{ Towering Thunderhead}}{{ 338}}](#p338)
-- [{{ Time Ravage}}{{ 338}}](#p338)
-- [{{ Time Stop}}{{ 338}}](#p338)
-- [{{ Vision of Elapsing Eons}}{{ 339}}](#p339)
-- [{{ Wail of the Banshee}}{{ 340}}](#p340)
-- [{{ Weird}}{{ 340}}](#p340)
-- [{{ Wish}}{{ 341}}](#p341)
+- [{{ Arcanist's Reflection}}{{ 341}}](#p341)
+- [{{ Astral Projection}}{{ 342}}](#p342)
+- [{{ Blackhole}}{{ 342}}](#p342)
+- [{{ Blade of Disaster}}{{ 343}}](#p343)
+- [{{ Detonate}}{{ 343}}](#p343)
+- [{{ Form of the Elements}}{{ 344}}](#p344)
+- [{{ Frostfell}}{{ 344}}](#p344)
+- [{{ Gate}}{{ 344}}](#p344)
+- [{{ Invulnerability}}{{ 346}}](#p346)
+- [{{ Manipulate Fate}}{{ 347}}](#p347)
+- [{{ Mass Polymorph}}{{ 347}}](#p347)
+- [{{ Meteor Swarm}}{{ 348}}](#p348)
+- [{{ Paradox}}{{ 348}}](#p348)
+- [{{ Power Word: Kill}}{{ 348}}](#p348)
+- [{{ Power Word: Ruin}}{{ 349}}](#p349)
+- [{{ Prismatic Wall}}{{ 349}}](#p349)
+- [{{ Psychic Scream}}{{ 350}}](#p350)
+- [{{ Ravenous Void}}{{ 350}}](#p350)
+- [{{ Sphere of Ultimate Destruction}}{{ 351}}](#p351)
+- [{{ Supernova}}{{ 352}}](#p352)
+- [{{ Towering Thunderhead}}{{ 352}}](#p352)
+- [{{ Time Ravage}}{{ 352}}](#p352)
+- [{{ Time Stop}}{{ 352}}](#p352)
+- [{{ Vision of Elapsing Eons}}{{ 353}}](#p353)
+- [{{ Wail of the Banshee}}{{ 354}}](#p354)
+- [{{ Weird}}{{ 354}}](#p354)
+- [{{ Wish}}{{ 355}}](#p355)
 }}
 \page
 {{pageNumber,auto}}
@@ -3778,167 +4045,188 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Charm Person}}{{ 72}}](#p72)
 - [{{ Command}}{{ 73}}](#p73)
 - [{{ Compelled Duel}}{{ 73}}](#p73)
+- [{{ Consume Soul}}{{ 73}}](#p73)
 - [{{ Crippling Agony}}{{ 75}}](#p75)
+- [{{ Death Grip}}{{ 75}}](#p75)
 - [{{ Detect Evil and Good}}{{ 75}}](#p75)
 - [{{ Detect Magic}}{{ 76}}](#p76)
 - [{{ Dissonant Whispers}}{{ 76}}](#p76)
 - [{{ Entangle}}{{ 78}}](#p78)
-- [{{ Ethereal Anchor}}{{ 78}}](#p78)
+- [{{ Entropic Embrace}}{{ 78}}](#p78)
+- [{{ Ethereal Anchor}}{{ 79}}](#p79)
 - [{{ Faerie Fire}}{{ 79}}](#p79)
-- [{{ False Life}}{{ 79}}](#p79)
-- [{{ Fated Strike}}{{ 79}}](#p79)
-- [{{ Feather Fall}}{{ 79}}](#p79)
-- [{{ Fog Cloud}}{{ 81}}](#p81)
-- [{{ Gift of Alacrity}}{{ 81}}](#p81)
-- [{{ Hellish Rebuke}}{{ 83}}](#p83)
-- [{{ Inflict Wounds}}{{ 86}}](#p86)
-- [{{ Jump}}{{ 86}}](#p86)
-- [{{ Karmic Reflection}}{{ 86}}](#p86)
-- [{{ Longstrider}}{{ 87}}](#p87)
-- [{{ Minor Drain}}{{ 88}}](#p88)
-- [{{ Protection from Evil and Good}}{{ 89}}](#p89)
-- [{{ Sanctuary}}{{ 90}}](#p90)
-- [{{ Shadow Bind}}{{ 91}}](#p91)
-- [{{ Sleep}}{{ 92}}](#p92)
-- [{{ Thunderwave}}{{ 95}}](#p95)
-- [{{ Tranquil Moment}}{{ 96}}](#p96)
-- [{{ Transfuse Life}}{{ 96}}](#p96)
-- [{{ Witch Bolt}}{{ 97}}](#p97)
+- [{{ False Life}}{{ 80}}](#p80)
+- [{{ Fated Strike}}{{ 80}}](#p80)
+- [{{ Feather Fall}}{{ 80}}](#p80)
+- [{{ Fog Cloud}}{{ 82}}](#p82)
+- [{{ Gift of Alacrity}}{{ 83}}](#p83)
+- [{{ Hellish Rebuke}}{{ 84}}](#p84)
+- [{{ Infernal Strike}}{{ 87}}](#p87)
+- [{{ Inflict Wounds}}{{ 88}}](#p88)
+- [{{ Jump}}{{ 89}}](#p89)
+- [{{ Karmic Reflection}}{{ 89}}](#p89)
+- [{{ Longstrider}}{{ 89}}](#p89)
+- [{{ Minor Drain}}{{ 91}}](#p91)
+- [{{ Protection from Evil and Good}}{{ 92}}](#p92)
+- [{{ Sanctuary}}{{ 94}}](#p94)
+- [{{ Shadow Bind}}{{ 95}}](#p95)
+- [{{ Shadow Word: Pain}}{{ 95}}](#p95)
+- [{{ Sleep}}{{ 96}}](#p96)
+- [{{ Thunderwave}}{{ 100}}](#p100)
+- [{{ Tranquil Moment}}{{ 100}}](#p100)
+- [{{ Transfuse Life}}{{ 100}}](#p100)
+- [{{ Vampiric Blood}}{{ 101}}](#p101)
+- [{{ Witch Bolt}}{{ 102}}](#p102)
 :
 - **2nd Level Spells**
-- [{{ Alacrity}}{{ 99}}](#p99)
-- [{{ Alter Self}}{{ 100}}](#p100)
-- [{{ Augury}}{{ 103}}](#p103)
-- [{{ Battle Familiar}}{{ 105}}](#p105)
-- [{{ Blazing Beacon}}{{ 107}}](#p107)
-- [{{ Blindness/Deafness}}{{ 107}}](#p107)
-- [{{ Blood Wave}}{{ 108}}](#p108)
-- [{{ Bloody Burst}}{{ 108}}](#p108)
-- [{{ Blur}}{{ 108}}](#p108)
-- [{{ Boil Blood}}{{ 108}}](#p108)
-- [{{ Borrowed Knowledge}}{{ 109}}](#p109)
-- [{{ Crown of Madness}}{{ 113}}](#p113)
-- [{{ Darkness}}{{ 114}}](#p114)
-- [{{ Darkvision}}{{ 114}}](#p114)
-- [{{ Detect Thoughts}}{{ 114}}](#p114)
-- [{{ Disorient}}{{ 115}}](#p115)
-- [{{ Dueling Ground}}{{ 116}}](#p116)
-- [{{ Enhance Ability}}{{ 117}}](#p117)
-- [{{ Enlarge/Reduce}}{{ 117}}](#p117)
-- [{{ Enthrall}}{{ 118}}](#p118)
-- [{{ Ethereal Immolation}}{{ 118}}](#p118)
-- [{{ Evil Mantra}}{{ 119}}](#p119)
-- [{{ Hold Person}}{{ 123}}](#p123)
-- [{{ Infernal Shackles}}{{ 124}}](#p124)
-- [{{ Invisibility}}{{ 125}}](#p125)
-- [{{ Levitate}}{{ 126}}](#p126)
-- [{{ Mind Spike}}{{ 129}}](#p129)
-- [{{ Mind Whip (Mystic Spear)}}{{ 130}}](#p130)
-- [{{ Misty Step}}{{ 130}}](#p130)
-- [{{ Morbid Puppet}}{{ 131}}](#p131)
-- [{{ Ray of Enfeeblement}}{{ 134}}](#p134)
-- [{{ Searing Orb}}{{ 135}}](#p135)
-- [{{ See Invisibility}}{{ 135}}](#p135)
-- [{{ Shadow Blade}}{{ 136}}](#p136)
-- [{{ Silence}}{{ 136}}](#p136)
-- [{{ Silvery Barbs}}{{ 136}}](#p136)
-- [{{ Spelltrap}}{{ 137}}](#p137)
-- [{{ Spider Climb}}{{ 137}}](#p137)
-- [{{ Suggestion}}{{ 140}}](#p140)
-- [{{ Vortex Warp}}{{ 146}}](#p146)
-- [{{ Warding Wind}}{{ 147}}](#p147)
-- [{{ Warp Sense}}{{ 147}}](#p147)
-- [{{ Web}}{{ 147}}](#p147)
+- [{{ Alacrity}}{{ 103}}](#p103)
+- [{{ Alter Self}}{{ 104}}](#p104)
+- [{{ Augury}}{{ 107}}](#p107)
+- [{{ Battle Familiar}}{{ 109}}](#p109)
+- [{{ Blazing Beacon}}{{ 111}}](#p111)
+- [{{ Blindness/Deafness}}{{ 111}}](#p111)
+- [{{ Blood Wave}}{{ 112}}](#p112)
+- [{{ Bloody Burst}}{{ 112}}](#p112)
+- [{{ Blur}}{{ 112}}](#p112)
+- [{{ Boil Blood}}{{ 113}}](#p113)
+- [{{ Borrowed Knowledge}}{{ 113}}](#p113)
+- [{{ Crown of Madness}}{{ 117}}](#p117)
+- [{{ Curse of Agony}}{{ 117}}](#p117)
+- [{{ Darkness}}{{ 118}}](#p118)
+- [{{ Darkvision}}{{ 118}}](#p118)
+- [{{ Death and Decay}}{{ 118}}](#p118)
+- [{{ Detect Thoughts}}{{ 119}}](#p119)
+- [{{ Disorient}}{{ 119}}](#p119)
+- [{{ Dueling Ground}}{{ 121}}](#p121)
+- [{{ Enhance Ability}}{{ 122}}](#p122)
+- [{{ Enlarge/Reduce}}{{ 122}}](#p122)
+- [{{ Enthrall}}{{ 123}}](#p123)
+- [{{ Ethereal Immolation}}{{ 123}}](#p123)
+- [{{ Evil Mantra}}{{ 123}}](#p123)
+- [{{ Fiery Brand}}{{ 124}}](#p124)
+- [{{ Frostscythe}}{{ 128}}](#p128)
+- [{{ Hold Person}}{{ 129}}](#p129)
+- [{{ Infernal Shackles}}{{ 130}}](#p130)
+- [{{ Invisibility}}{{ 131}}](#p131)
+- [{{ Levitate}}{{ 132}}](#p132)
+- [{{ Mind Spike}}{{ 135}}](#p135)
+- [{{ Mind Whip (Mystic Spear)}}{{ 136}}](#p136)
+- [{{ Misty Step}}{{ 136}}](#p136)
+- [{{ Morbid Puppet}}{{ 137}}](#p137)
+- [{{ Ray of Enfeeblement}}{{ 140}}](#p140)
+- [{{ Searing Orb}}{{ 141}}](#p141)
+- [{{ See Invisibility}}{{ 141}}](#p141)
+- [{{ Shadow Blade}}{{ 142}}](#p142)
+- [{{ Silence}}{{ 143}}](#p143)
+- [{{ Silvery Barbs}}{{ 143}}](#p143)
+- [{{ Spelltrap}}{{ 144}}](#p144)
+- [{{ Spider Climb}}{{ 144}}](#p144)
+- [{{ Suggestion}}{{ 146}}](#p146)
+- [{{ Vortex Warp}}{{ 152}}](#p152)
+- [{{ Warding Wind}}{{ 153}}](#p153)
+- [{{ Warp Sense}}{{ 153}}](#p153)
+- [{{ Web}}{{ 153}}](#p153)
 :
 - **3rd Level Spells**
-- [{{ Animate Shadow}}{{ 152}}](#p152)
-- [{{ Antagonize}}{{ 152}}](#p152)
-- [{{ Bestow Curse}}{{ 153}}](#p153)
-- [{{ Blink}}{{ 154}}](#p154)
-- [{{ Blood Explosion}}{{ 154}}](#p154)
-- [{{ Clairvoyance}}{{ 156}}](#p156)
-- [{{ Dimensional Anchor}}{{ 160}}](#p160)
-- [{{ Dispel Magic}}{{ 160}}](#p160)
-- [{{ Fear}}{{ 162}}](#p162)
-- [{{ Fly}}{{ 164}}](#p164)
-- [{{ Gaseous Form}}{{ 165}}](#p165)
-- [{{ Ghost Step}}{{ 165}}](#p165)
-- [{{ Haste}}{{ 167}}](#p167)
-- [{{ Hungering Void}}{{ 167}}](#p167)
-- [{{ Immutability}}{{ 168}}](#p168)
-- [{{ Inflict Doubt}}{{ 169}}](#p169)
-- [{{ Intellect Fortress}}{{ 169}}](#p169)
-- [{{ Life Drain}}{{ 170}}](#p170)
-- [{{ Life Transference}}{{ 170}}](#p170)
-- [{{ Mounting Paranoia}}{{ 175}}](#p175)
-- [{{ Mutate}}{{ 175}}](#p175)
-- [{{ Nondetection}}{{ 175}}](#p175)
-- [{{ Protection from Energy}}{{ 176}}](#p176)
-- [{{ Slow}}{{ 180}}](#p180)
-- [{{ Speak with Dead}}{{ 180}}](#p180)
-- [{{ Spectral Passage}}{{ 181}}](#p181)
-- [{{ Spirit Shroud}}{{ 182}}](#p182)
-- [{{ Thunder Step}}{{ 189}}](#p189)
-- [{{ Vampiric Blade}}{{ 190}}](#p190)
-- [{{ Vampiric Touch}}{{ 190}}](#p190)
-- [{{ Wither}}{{ 193}}](#p193)
-:
-- **4th Level Spells**
-- [{{ Banishment}}{{ 196}}](#p196)
-- [{{ Blight}}{{ 196}}](#p196)
-- [{{ Blood Frenzy}}{{ 196}}](#p196)
-- [{{ Charm Monster}}{{ 197}}](#p197)
-- [{{ Commandment}}{{ 197}}](#p197)
-- [{{ Confusion}}{{ 198}}](#p198)
-- [{{ Death Ward}}{{ 200}}](#p200)
-- [{{ Dimension Door}}{{ 200}}](#p200)
-- [{{ Distorted Distance}}{{ 201}}](#p201)
-- [{{ Divination}}{{ 201}}](#p201)
-- [{{ Eldritch Tentacles}}{{ 203}}](#p203)
-- [{{ Elemental Bane}}{{ 203}}](#p203)
+- [{{ Animate Shadow}}{{ 158}}](#p158)
+- [{{ Antagonize}}{{ 158}}](#p158)
+- [{{ Bestow Curse}}{{ 159}}](#p159)
+- [{{ Blink}}{{ 160}}](#p160)
+- [{{ Blood Explosion}}{{ 160}}](#p160)
+- [{{ Clairvoyance}}{{ 162}}](#p162)
+- [{{ Demon Spikes}}{{ 166}}](#p166)
+- [{{ Dimensional Anchor}}{{ 166}}](#p166)
+- [{{ Dispel Magic}}{{ 166}}](#p166)
+- [{{ Fear}}{{ 168}}](#p168)
+- [{{ Fly}}{{ 170}}](#p170)
+- [{{ Gaseous Form}}{{ 171}}](#p171)
+- [{{ Ghost Step}}{{ 171}}](#p171)
+- [{{ Haste}}{{ 173}}](#p173)
+- [{{ Hungering Void}}{{ 173}}](#p173)
+- [{{ Immutability}}{{ 174}}](#p174)
+- [{{ Imp Storm}}{{ 174}}](#p174)
+- [{{ Inflict Doubt}}{{ 175}}](#p175)
+- [{{ Infernal Metamorphosis}}{{ 175}}](#p175)
+- [{{ Intellect Fortress}}{{ 176}}](#p176)
+- [{{ Life Drain}}{{ 178}}](#p178)
+- [{{ Life Transference}}{{ 178}}](#p178)
+- [{{ Mounting Paranoia}}{{ 182}}](#p182)
+- [{{ Mutate}}{{ 182}}](#p182)
+- [{{ Nondetection}}{{ 183}}](#p183)
+- [{{ Protection from Energy}}{{ 184}}](#p184)
+- [{{ Rain of Fire}}{{ 184}}](#p184)
+- [{{ Remorseless Winter}}{{ 185}}](#p185)
+- [{{ Slow}}{{ 187}}](#p187)
+- [{{ Soul Reap}}{{ 188}}](#p188)
+- [{{ Speak with Dead}}{{ 188}}](#p188)
+- [{{ Spectral Passage}}{{ 188}}](#p188)
+- [{{ Spirit Shroud}}{{ 189}}](#p189)
+- [{{ Thunder Step}}{{ 196}}](#p196)
+- [{{ Vampiric Blade}}{{ 197}}](#p197)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
-- [{{ Exsanguinate}}{{ 203}}](#p203)
-- [{{ False Vision}}{{ 204}}](#p204)
-- [{{ Fire Shield}}{{ 205}}](#p205)
-- [{{ Freedom of Movement}}{{ 206}}](#p206)
-- [{{ Greater Invisibility}}{{ 209}}](#p209)
-- [{{ Ichorous Blood}}{{ 211}}](#p211)
-- [{{ Phantasmal Killer}}{{ 213}}](#p213)
-- [{{ Polymorph}}{{ 214}}](#p214)
-- [{{ Shadow of Moil}}{{ 216}}](#p216)
-- [{{ Sickening Radiance}}{{ 217}}](#p217)
-- [{{ Spatial Swap}}{{ 217}}](#p217)
-- [{{ Zone of Amicability}}{{ 226}}](#p226)
+- [{{ Vampiric Touch}}{{ 197}}](#p197)
+- [{{ Wither}}{{ 200}}](#p200)
+:
+- **4th Level Spells**
+- [{{ Banishment}}{{ 203}}](#p203)
+- [{{ Blight}}{{ 203}}](#p203)
+- [{{ Blood Frenzy}}{{ 203}}](#p203)
+- [{{ Charm Monster}}{{ 204}}](#p204)
+- [{{ Collapsing Star}}{{ 205}}](#p205)
+- [{{ Commandment}}{{ 205}}](#p205)
+- [{{ Confusion}}{{ 206}}](#p206)
+- [{{ Death Ward}}{{ 208}}](#p208)
+- [{{ Dimension Door}}{{ 208}}](#p208)
+- [{{ Distorted Distance}}{{ 209}}](#p209)
+- [{{ Divination}}{{ 209}}](#p209)
+- [{{ Eldritch Tentacles}}{{ 210}}](#p210)
+- [{{ Elemental Bane}}{{ 211}}](#p211)
+- [{{ Exsanguinate}}{{ 211}}](#p211)
+- [{{ False Vision}}{{ 212}}](#p212)
+- [{{ Fire Shield}}{{ 213}}](#p213)
+- [{{ Freedom of Movement}}{{ 214}}](#p214)
+- [{{ Greater Invisibility}}{{ 217}}](#p217)
+- [{{ Ichorous Blood}}{{ 219}}](#p219)
+- [{{ Phantasmal Killer}}{{ 221}}](#p221)
+- [{{ Polymorph}}{{ 222}}](#p222)
+- [{{ Psychic Horror}}{{ 223}}](#p223)
+- [{{ Shadow of Moil}}{{ 225}}](#p225)
+- [{{ Sickening Radiance}}{{ 225}}](#p225)
+- [{{ Spatial Swap}}{{ 225}}](#p225)
+- [{{ Zone of Amicability}}{{ 236}}](#p236)
 :
 - **5th Level Spells**
-- [{{ Arcane Hand}}{{ 229}}](#p229)
-- [{{ Circle of Power}}{{ 230}}](#p230)
-- [{{ Cloudkill}}{{ 231}}](#p231)
-- [{{ Contact Other Plane}}{{ 232}}](#p232)
-- [{{ Contagion}}{{ 233}}](#p233)
-- [{{ Destructive Wave}}{{ 237}}](#p237)
-- [{{ Devouring Darkness}}{{ 237}}](#p237)
-- [{{ Dispel Evil and Good}}{{ 238}}](#p238)
-- [{{ Dream}}{{ 239}}](#p239)
-- [{{ Elemental Suffusion}}{{ 239}}](#p239)
-- [{{ Enervation}}{{ 240}}](#p240)
-- [{{ Explode Heart}}{{ 240}}](#p240)
-- [{{ Far Step}}{{ 240}}](#p240)
-- [{{ Geas}}{{ 241}}](#p241)
-- [{{ Greater Absorb Elements}}{{ 242}}](#p242)
-- [{{ Hold Monster}}{{ 243}}](#p243)
-- [{{ Life Link}}{{ 247}}](#p247)
-- [{{ Planar Binding}}{{ 250}}](#p250)
-- [{{ Regal Presence}}{{ 251}}](#p251)
-- [{{ Scrying}}{{ 255}}](#p255)
-- [{{ Skill Empowerment}}{{ 256}}](#p256)
-- [{{ Spirit Lantern}}{{ 257}}](#p257)
-- [{{ Spiritual Sundering}}{{ 257}}](#p257)
-- [{{ Wall of Light}}{{ 266}}](#p266)
-- [{{ Waves of Exhaustion}}{{ 267}}](#p267)
+- [{{ Arcane Hand}}{{ 239}}](#p239)
+- [{{ Bonestorm}}{{ 240}}](#p240)
+- [{{ Circle of Power}}{{ 241}}](#p241)
+- [{{ Cloudkill}}{{ 241}}](#p241)
+- [{{ Contact Other Plane}}{{ 242}}](#p242)
+- [{{ Contagion}}{{ 243}}](#p243)
+- [{{ Destructive Wave}}{{ 247}}](#p247)
+- [{{ Devouring Darkness}}{{ 247}}](#p247)
+- [{{ Dispel Evil and Good}}{{ 248}}](#p248)
+- [{{ Dream}}{{ 249}}](#p249)
+- [{{ Elemental Suffusion}}{{ 250}}](#p250)
+- [{{ Enervation}}{{ 250}}](#p250)
+- [{{ Explode Heart}}{{ 251}}](#p251)
+- [{{ Far Step}}{{ 251}}](#p251)
+- [{{ Geas}}{{ 252}}](#p252)
+- [{{ Greater Absorb Elements}}{{ 253}}](#p253)
+- [{{ Hold Monster}}{{ 254}}](#p254)
+- [{{ Life Link}}{{ 258}}](#p258)
+- [{{ Planar Binding}}{{ 261}}](#p261)
+- [{{ Regal Presence}}{{ 262}}](#p262)
+- [{{ Scrying}}{{ 266}}](#p266)
+- [{{ Sigil of Chains}}{{ 267}}](#p267)
+- [{{ Skill Empowerment}}{{ 267}}](#p267)
+- [{{ Spirit Lantern}}{{ 268}}](#p268)
+- [{{ Spiritual Sundering}}{{ 268}}](#p268)
+- [{{ Void Eruption}}{{ 276}}](#p276)
+- [{{ Wall of Light}}{{ 278}}](#p278)
+- [{{ Waves of Exhaustion}}{{ 279}}](#p279)
 }}
 
 \page
@@ -3995,335 +4283,366 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Cause Fear}}{{ 71}}](#p71)
 - [{{ Charm Person}}{{ 72}}](#p72)
 - [{{ Comprehend Languages}}{{ 73}}](#p73)
-- [{{ Crimson Poison}}{{ 75}}](#p75)
+- [{{ Consume Soul}}{{ 73}}](#p73)
+- [{{ Crimson Poison}}{{ 74}}](#p74)
 - [{{ Crippling Agony}}{{ 75}}](#p75)
+- [{{ Death Grip}}{{ 75}}](#p75)
 - [{{ Delusion}}{{ 75}}](#p75)
 - [{{ Dissonant Whispers}}{{ 76}}](#p76)
 - [{{ Distort Value}}{{ 77}}](#p77)
-- [{{ Expeditious Retreat}}{{ 78}}](#p78)
+- [{{ Entropic Embrace}}{{ 78}}](#p78)
+- [{{ Expeditious Retreat}}{{ 79}}](#p79)
 - [{{ Eyes of Immolation}}{{ 79}}](#p79)
-- [{{ Fated Strike}}{{ 79}}](#p79)
-- [{{ Ghastly Flight}}{{ 81}}](#p81)
-- [{{ Grip of the Dead}}{{ 82}}](#p82)
-- [{{ Hellish Rebuke}}{{ 83}}](#p83)
-- [{{ Hex}}{{ 83}}](#p83)
-- [{{ Hideous Laughter}}{{ 83}}](#p83)
-- [{{ Illusory Pit}}{{ 85}}](#p85)
-- [{{ Illusory Script}}{{ 85}}](#p85)
-- [{{ Melting Glob}}{{ 87}}](#p87)
-- [{{ Mind Ray}}{{ 88}}](#p88)
-- [{{ Minor Drain}}{{ 88}}](#p88)
-- [{{ Nauseating Poison}}{{ 88}}](#p88)
-- [{{ Protection from Evil and Good}}{{ 89}}](#p89)
-- [{{ Ray of Sickness}}{{ 90}}](#p90)
-- [{{ Sense Blood}}{{ 91}}](#p91)
-- [{{ Shadow Bind}}{{ 91}}](#p91)
-- [{{ Sleep}}{{ 92}}](#p92)
-- [{{ Stone Fist}}{{ 93}}](#p93)
-- [{{ Transfuse Life}}{{ 96}}](#p96)
-- [{{ Unseen Servant}}{{ 96}}](#p96)
-- [{{ Violent Updraft}}{{ 97}}](#p97)
-- [{{ Warding Sigil}}{{ 97}}](#p97)
-- [{{ Water Blast}}{{ 97}}](#p97)
-- [{{ Witch Bolt}}{{ 97}}](#p97)
+- [{{ Fated Strike}}{{ 80}}](#p80)
+- [{{ Feign Interest}}{{ 80}}](#p80)
+- [{{ Ghastly Flight}}{{ 82}}](#p82)
+- [{{ Grip of the Dead}}{{ 83}}](#p83)
+- [{{ Hellish Rebuke}}{{ 84}}](#p84)
+- [{{ Hex}}{{ 85}}](#p85)
+- [{{ Hideous Laughter}}{{ 85}}](#p85)
+- [{{ Illusory Pit}}{{ 86}}](#p86)
+- [{{ Illusory Script}}{{ 87}}](#p87)
+- [{{ Infernal Rush}}{{ 87}}](#p87)
+- [{{ Infernal Strike}}{{ 87}}](#p87)
+- [{{ Melting Glob}}{{ 90}}](#p90)
+- [{{ Mind Ray}}{{ 90}}](#p90)
+- [{{ Minor Drain}}{{ 91}}](#p91)
+- [{{ Nauseating Poison}}{{ 91}}](#p91)
+- [{{ Protection from Evil and Good}}{{ 92}}](#p92)
+- [{{ Ray of Sickness}}{{ 93}}](#p93)
+- [{{ Sense Blood}}{{ 94}}](#p94)
+- [{{ Shadow Bind}}{{ 95}}](#p95)
+- [{{ Shadow Word: Pain}}{{ 95}}](#p95)
+- [{{ Sleep}}{{ 96}}](#p96)
+- [{{ Stone Fist}}{{ 97}}](#p97)
+- [{{ Throw Glaive}}{{ 99}}](#p99)
+- [{{ Transfuse Life}}{{ 100}}](#p100)
+- [{{ Unseen Servant}}{{ 101}}](#p101)
+- [{{ Vampiric Blood}}{{ 101}}](#p101)
+- [{{ Violent Updraft}}{{ 101}}](#p101)
+- [{{ Warding Sigil}}{{ 101}}](#p101)
+- [{{ Water Blast}}{{ 102}}](#p102)
+- [{{ Witch Bolt}}{{ 102}}](#p102)
 :
 - **2nd Level Spells**
-- [{{ Arcanist's Magic Aura}}{{ 102}}](#p102)
-- [{{ Battle Familiar}}{{ 105}}](#p105)
-- [{{ Become Fire}}{{ 106}}](#p106)
-- [{{ Become Stone}}{{ 106}}](#p106)
-- [{{ Become Water}}{{ 107}}](#p107)
-- [{{ Become Wind}}{{ 107}}](#p107)
-- [{{ Blazing Beacon}}{{ 107}}](#p107)
-- [{{ Blood Divination}}{{ 107}}](#p107)
-- [{{ Blood Wave}}{{ 108}}](#p108)
-- [{{ Bloody Burst}}{{ 108}}](#p108)
-- [{{ Boil Blood}}{{ 108}}](#p108)
-- [{{ Borrowed Knowledge}}{{ 109}}](#p109)
-- [{{ Cloud of Daggers}}{{ 110}}](#p110)
-- [{{ Compelled Convulsion}}{{ 111}}](#p111)
-- [{{ Crackle}}{{ 111}}](#p111)
-- [{{ Create Ooze}}{{ 112}}](#p112)
-- [{{ Crown of Madness}}{{ 113}}](#p113)
-- [{{ Darkness}}{{ 114}}](#p114)
-- [{{ Death Armor}}{{ 114}}](#p114)
-- [{{ Dragon Surge}}{{ 115}}](#p115)
-- [{{ Dueling Ground}}{{ 116}}](#p116)
-- [{{ Earthbind}}{{ 116}}](#p116)
-- [{{ Elemental Exhalation}}{{ 117}}](#p117)
-- [{{ Enthrall}}{{ 118}}](#p118)
-- [{{ Evil Mantra}}{{ 119}}](#p119)
-- [{{ Flame Whip}}{{ 120}}](#p120)
-- [{{ Flock of Familiars}}{{ 121}}](#p121)
-- [{{ Form of Familiar}}{{ 121}}](#p121)
-- [{{ Hold Person}}{{ 123}}](#p123)
-- [{{ Infernal Shackles}}{{ 124}}](#p124)
-- [{{ Instant Counter}}{{ 125}}](#p125)
-- [{{ Invisibility}}{{ 125}}](#p125)
-- [{{ Levitate}}{{ 126}}](#p126)
-- [{{ Mind Spike}}{{ 129}}](#p129)
-- [{{ Mind Whip (Mystic Spear)}}{{ 130}}](#p130)
-- [{{ Mirror Image}}{{ 130}}](#p130)
-- [{{ Misty Step}}{{ 130}}](#p130)
-- [{{ Morbid Puppet}}{{ 131}}](#p131)
-- [{{ Phantasmal Force}}{{ 132}}](#p132)
-- [{{ Poison Dart}}{{ 133}}](#p133)
-- [{{ Pseudopod Slam}}{{ 133}}](#p133)
-- [{{ Ray of Enfeeblement}}{{ 134}}](#p134)
-- [{{ Shadow Blade}}{{ 136}}](#p136)
-- [{{ Shatter}}{{ 136}}](#p136)
-- [{{ Shattering Shield}}{{ 136}}](#p136)
-- [{{ Spelltrap}}{{ 137}}](#p137)
-- [{{ Spider Climb}}{{ 137}}](#p137)
-- [{{ Spirit Echo}}{{ 138}}](#p138)
-- [{{ Spray of Cards}}{{ 138}}](#p138)
-- [{{ Suggestion}}{{ 140}}](#p140)
-- [{{ Summon Archon}}{{ 141}}](#p141)
-- [{{ Time Skip}}{{ 144}}](#p144)
-- [{{ Time Trap}}{{ 144}}](#p144)
-- [{{ Uncertain Footing}}{{ 145}}](#p145)
-- [{{ Vicious Hound}}{{ 146}}](#p146)
-- [{{ Vicious Vapors}}{{ 146}}](#p146)
-- [{{ Warp Sense}}{{ 147}}](#p147)
+- [{{ Arcanist's Magic Aura}}{{ 106}}](#p106)
+- [{{ Battle Familiar}}{{ 109}}](#p109)
+- [{{ Become Fire}}{{ 110}}](#p110)
+- [{{ Become Stone}}{{ 110}}](#p110)
+- [{{ Become Water}}{{ 111}}](#p111)
+- [{{ Become Wind}}{{ 111}}](#p111)
+- [{{ Binding Promise}}{{ 111}}](#p111)
+- [{{ Blazing Beacon}}{{ 111}}](#p111)
+- [{{ Blood Divination}}{{ 112}}](#p112)
+- [{{ Blood Wave}}{{ 112}}](#p112)
+- [{{ Bloody Burst}}{{ 112}}](#p112)
+- [{{ Boil Blood}}{{ 113}}](#p113)
+- [{{ Borrowed Knowledge}}{{ 113}}](#p113)
+- [{{ Cloud of Daggers}}{{ 114}}](#p114)
+- [{{ Compelled Convulsion}}{{ 115}}](#p115)
+- [{{ Crackle}}{{ 116}}](#p116)
+- [{{ Create Ooze}}{{ 116}}](#p116)
+- [{{ Crown of Madness}}{{ 117}}](#p117)
+- [{{ Curse of Agony}}{{ 117}}](#p117)
+- [{{ Darkness}}{{ 118}}](#p118)
+- [{{ Death and Decay}}{{ 118}}](#p118)
+- [{{ Death Armor}}{{ 118}}](#p118)
+- [{{ Dragon Surge}}{{ 120}}](#p120)
+- [{{ Dueling Ground}}{{ 121}}](#p121)
+- [{{ Earthbind}}{{ 121}}](#p121)
+- [{{ Elemental Exhalation}}{{ 122}}](#p122)
+- [{{ Enthrall}}{{ 123}}](#p123)
+- [{{ Evil Mantra}}{{ 123}}](#p123)
+- [{{ Eye Beam}}{{ 124}}](#p124)
+- [{{ Fiery Brand}}{{ 124}}](#p124)
+- [{{ Flame Whip}}{{ 126}}](#p126)
+- [{{ Flock of Familiars}}{{ 127}}](#p127)
+- [{{ Form of Familiar}}{{ 127}}](#p127)
+- [{{ Frostscythe}}{{ 128}}](#p128)
+- [{{ Hold Person}}{{ 129}}](#p129)
+- [{{ Infernal Shackles}}{{ 130}}](#p130)
+- [{{ Instant Counter}}{{ 131}}](#p131)
+- [{{ Invisibility}}{{ 131}}](#p131)
+- [{{ Levitate}}{{ 132}}](#p132)
+- [{{ Mind Spike}}{{ 135}}](#p135)
+- [{{ Mind Whip (Mystic Spear)}}{{ 136}}](#p136)
+- [{{ Mirror Image}}{{ 136}}](#p136)
+- [{{ Misty Step}}{{ 136}}](#p136)
+- [{{ Morbid Puppet}}{{ 137}}](#p137)
+- [{{ Phantasmal Force}}{{ 138}}](#p138)
+- [{{ Poison Dart}}{{ 139}}](#p139)
+- [{{ Pseudopod Slam}}{{ 139}}](#p139)
+- [{{ Ray of Enfeeblement}}{{ 140}}](#p140)
+- [{{ Shadow Blade}}{{ 142}}](#p142)
+- [{{ Shatter}}{{ 142}}](#p142)
+- [{{ Shattering Shield}}{{ 142}}](#p142)
+- [{{ Sigil of Flame}}{{ 143}}](#p143)
+- [{{ Spelltrap}}{{ 144}}](#p144)
+- [{{ Spider Climb}}{{ 144}}](#p144)
+- [{{ Spirit Echo}}{{ 144}}](#p144)
+- [{{ Spray of Cards}}{{ 145}}](#p145)
+- [{{ Suggestion}}{{ 146}}](#p146)
+- [{{ Summon Archon}}{{ 147}}](#p147)
+- [{{ Time Skip}}{{ 150}}](#p150)
+- [{{ Time Trap}}{{ 150}}](#p150)
+- [{{ Uncertain Footing}}{{ 151}}](#p151)
+- [{{ Vicious Hound}}{{ 152}}](#p152)
+- [{{ Vicious Vapors}}{{ 152}}](#p152)
+}}
+\page
+{{pageNumber,auto}}
+{{toc,wide
+- [{{ Warp Sense}}{{ 153}}](#p153)
 :
 - **3rd Level Spells**
-- [{{ Acidic Pit}}{{ 150}}](#p150)
-- [{{ Animate Shadow}}{{ 152}}](#p152)
-- [{{ Antagonize}}{{ 152}}](#p152)
-- [{{ Arctic Aura}}{{ 152}}](#p152)
-- [{{ Bestow Curse}}{{ 153}}](#p153)
-- [{{ Blade Vortex}}{{ 154}}](#p154)
-- [{{ Blood Explosion}}{{ 154}}](#p154)
-- [{{ Counterspell}}{{ 157}}](#p157)
-- [{{ Crimson Tide}}{{ 158}}](#p158)
-- [{{ Cruel Puppetry}}{{ 158}}](#p158)
-- [{{ Dimensional Anchor}}{{ 160}}](#p160)
-- [{{ Dispel Magic}}{{ 160}}](#p160)
-- [{{ Enemies Abound}}{{ 161}}](#p161)
-}}
-\page
-{{pageNumber,auto}}
-{{toc,wide
-- [{{ Fear}}{{ 162}}](#p162)
-- [{{ Flamethrower}}{{ 164}}](#p164)
-- [{{ Fly}}{{ 164}}](#p164)
-- [{{ Gaseous Form}}{{ 165}}](#p165)
-- [{{ Ghost Step}}{{ 165}}](#p165)
-- [{{ Hunger of Hadar}}{{ 167}}](#p167)
-- [{{ Hungering Void}}{{ 167}}](#p167)
-- [{{ Hypnotic Pattern}}{{ 168}}](#p168)
-- [{{ Incite Greed}}{{ 168}}](#p168)
-- [{{ Inflict Doubt}}{{ 169}}](#p169)
-- [{{ Intellect Fortress}}{{ 169}}](#p169)
-- [{{ Invoke Elemental (Conjure Elemental)}}{{ 169}}](#p169)
-- [{{ Invoke Fey (Conjure Fey)}}{{ 170}}](#p170)
-- [{{ Invoke Fiend (Conjure Fiend)}}{{ 170}}](#p170)
-- [{{ Life Drain}}{{ 170}}](#p170)
-- [{{ Life Transference}}{{ 170}}](#p170)
-- [{{ Magic Circle}}{{ 172}}](#p172)
-- [{{ Major Image}}{{ 173}}](#p173)
-- [{{ Mounting Paranoia}}{{ 175}}](#p175)
-- [{{ Mutate}}{{ 175}}](#p175)
-- [{{ Nondetection}}{{ 175}}](#p175)
-- [{{ Rain of Spiders}}{{ 177}}](#p177)
-- [{{ Remove Curse}}{{ 177}}](#p177)
-- [{{ Sanguine Spears}}{{ 178}}](#p178)
-- [{{ Slow}}{{ 180}}](#p180)
-- [{{ Spider Bite}}{{ 181}}](#p181)
-- [{{ Spirit Shroud}}{{ 182}}](#p182)
-- [{{ Static Field}}{{ 182}}](#p182)
-- [{{ Summon Fey}}{{ 183}}](#p183)
-- [{{ Summon Lesser Demons}}{{ 184}}](#p184)
-- [{{ Summon Shadowspawn}}{{ 187}}](#p187)
-- [{{ Summon Undead}}{{ 188}}](#p188)
-- [{{ Thunder Step}}{{ 189}}](#p189)
-- [{{ Tongues}}{{ 190}}](#p190)
-- [{{ Vampiric Blade}}{{ 190}}](#p190)
-- [{{ Vampiric Touch}}{{ 190}}](#p190)
-- [{{ Wasp Barrage}}{{ 191}}](#p191)
-- [{{ Waterspout}}{{ 192}}](#p192)
-- [{{ Wither}}{{ 193}}](#p193)
+- [{{ Acidic Pit}}{{ 156}}](#p156)
+- [{{ Animate Shadow}}{{ 158}}](#p158)
+- [{{ Antagonize}}{{ 158}}](#p158)
+- [{{ Arctic Aura}}{{ 158}}](#p158)
+- [{{ Bestow Curse}}{{ 159}}](#p159)
+- [{{ Blade Vortex}}{{ 160}}](#p160)
+- [{{ Blood Explosion}}{{ 160}}](#p160)
+- [{{ Counterspell}}{{ 163}}](#p163)
+- [{{ Crimson Tide}}{{ 164}}](#p164)
+- [{{ Cruel Puppetry}}{{ 164}}](#p164)
+- [{{ Demon Spikes}}{{ 166}}](#p166)
+- [{{ Dimensional Anchor}}{{ 166}}](#p166)
+- [{{ Dispel Magic}}{{ 166}}](#p166)
+- [{{ Enemies Abound}}{{ 167}}](#p167)
+- [{{ Fear}}{{ 168}}](#p168)
+- [{{ Flamethrower}}{{ 170}}](#p170)
+- [{{ Fly}}{{ 170}}](#p170)
+- [{{ Gaseous Form}}{{ 171}}](#p171)
+- [{{ Ghost Step}}{{ 171}}](#p171)
+- [{{ Hunger of Hadar}}{{ 173}}](#p173)
+- [{{ Hungering Void}}{{ 173}}](#p173)
+- [{{ Hypnotic Pattern}}{{ 174}}](#p174)
+- [{{ Imp Storm}}{{ 174}}](#p174)
+- [{{ Incite Greed}}{{ 175}}](#p175)
+- [{{ Inflict Doubt}}{{ 175}}](#p175)
+- [{{ Infernal Metamorphosis}}{{ 175}}](#p175)
+- [{{ Intellect Fortress}}{{ 176}}](#p176)
+- [{{ Invoke Elemental (Conjure Elemental)}}{{ 176}}](#p176)
+- [{{ Invoke Fey (Conjure Fey)}}{{ 177}}](#p177)
+- [{{ Invoke Fiend (Conjure Fiend)}}{{ 177}}](#p177)
+- [{{ Life Drain}}{{ 178}}](#p178)
+- [{{ Life Transference}}{{ 178}}](#p178)
+- [{{ Magic Circle}}{{ 180}}](#p180)
+- [{{ Major Image}}{{ 180}}](#p180)
+- [{{ Mounting Paranoia}}{{ 182}}](#p182)
+- [{{ Mutate}}{{ 182}}](#p182)
+- [{{ Nondetection}}{{ 183}}](#p183)
+- [{{ Rain of Fire}}{{ 184}}](#p184)
+- [{{ Rain of Spiders}}{{ 184}}](#p184)
+- [{{ Remove Curse}}{{ 185}}](#p185)
+- [{{ Remorseless Winter}}{{ 185}}](#p185)
+- [{{ Sanguine Spears}}{{ 186}}](#p186)
+- [{{ Slow}}{{ 187}}](#p187)
+- [{{ Soul Reap}}{{ 188}}](#p188)
+- [{{ Spider Bite}}{{ 189}}](#p189)
+- [{{ Spirit Shroud}}{{ 189}}](#p189)
+- [{{ Static Field}}{{ 190}}](#p190)
+- [{{ Summon Fey}}{{ 190}}](#p190)
+- [{{ Summon Lesser Demons}}{{ 191}}](#p191)
+- [{{ Summon Shadowspawn}}{{ 194}}](#p194)
+- [{{ Summon Undead}}{{ 195}}](#p195)
+- [{{ Thunder Step}}{{ 196}}](#p196)
+- [{{ Tongues}}{{ 197}}](#p197)
+- [{{ Vampiric Blade}}{{ 197}}](#p197)
+- [{{ Vampiric Touch}}{{ 197}}](#p197)
+- [{{ Wasp Barrage}}{{ 198}}](#p198)
+- [{{ Waterspout}}{{ 199}}](#p199)
+- [{{ Wither}}{{ 200}}](#p200)
 :
 - **4th Level Spells**
-- [{{ Accursed Touch}}{{ 194}}](#p194)
-- [{{ Arcane Eye}}{{ 195}}](#p195)
-- [{{ Backlash}}{{ 195}}](#p195)
-- [{{ Banishment}}{{ 196}}](#p196)
-- [{{ Blight}}{{ 196}}](#p196)
-- [{{ Blood Frenzy}}{{ 196}}](#p196)
-- [{{ Charm Monster}}{{ 197}}](#p197)
-- [{{ Compulsion}}{{ 197}}](#p197)
-- [{{ Confusion}}{{ 198}}](#p198)
-- [{{ Conjure Aberration (Invoke Abberation)}}{{ 198}}](#p198)
-- [{{ Devour Shadow}}{{ 200}}](#p200)
-- [{{ Dimension Door}}{{ 200}}](#p200)
-- [{{ Distorted Distance}}{{ 201}}](#p201)
-- [{{ Doomtide}}{{ 202}}](#p202)
-- [{{ Eldritch Tentacles}}{{ 203}}](#p203)
-- [{{ Elemental Bane}}{{ 203}}](#p203)
-- [{{ Exsanguinate}}{{ 203}}](#p203)
-- [{{ False Vision}}{{ 204}}](#p204)
-- [{{ Festering Blast}}{{ 205}}](#p205)
-- [{{ Galder's Speedy Courier}}{{ 206}}](#p206)
-- [{{ Gate Seal}}{{ 206}}](#p206)
-- [{{ Giant Insect}}{{ 207}}](#p207)
-- [{{ Grasp Of The Grave}}{{ 208}}](#p208)
-- [{{ Gravecall (Create Undead)}}{{ 208}}](#p208)
-- [{{ Greater Invisibility}}{{ 209}}](#p209)
-- [{{ Hallucinatory Terrain}}{{ 210}}](#p210)
-- [{{ Ichorous Blood}}{{ 211}}](#p211)
-- [{{ Iron Garden}}{{ 211}}](#p211)
-- [{{ Macabre Marionette}}{{ 212}}](#p212)
-- [{{ Mirror Army}}{{ 212}}](#p212)
-- [{{ Phantasmal Killer}}{{ 213}}](#p213)
-- [{{ Pillar of Fire}}{{ 213}}](#p213)
-- [{{ Poison Puff}}{{ 214}}](#p214)
-- [{{ Polymorph}}{{ 214}}](#p214)
-- [{{ Psychic Lance}}{{ 215}}](#p215)
-- [{{ Ribcage}}{{ 216}}](#p216)
-- [{{ Shadow of Moil}}{{ 216}}](#p216)
-- [{{ Sickening Radiance}}{{ 217}}](#p217)
-- [{{ Spatial Swap}}{{ 217}}](#p217)
-- [{{ Spirit of Death}}{{ 218}}](#p218)
-- [{{ Stinging Swarm}}{{ 220}}](#p220)
-- [{{ Stone Coffin}}{{ 220}}](#p220)
-- [{{ Summon Aberration}}{{ 221}}](#p221)
-- [{{ Summon Elemental}}{{ 223}}](#p223)
-- [{{ Summon Greater Demon}}{{ 224}}](#p224)
-- [{{ Time Loop}}{{ 224}}](#p224)
-- [{{ Watery Tentacles}}{{ 226}}](#p226)
-- [{{ Zone of Amicability}}{{ 226}}](#p226)
+- [{{ Accursed Touch}}{{ 201}}](#p201)
+- [{{ Arcane Eye}}{{ 202}}](#p202)
+- [{{ Backlash}}{{ 202}}](#p202)
+- [{{ Banishment}}{{ 203}}](#p203)
+- [{{ Blight}}{{ 203}}](#p203)
+- [{{ Blood Frenzy}}{{ 203}}](#p203)
+- [{{ Charm Monster}}{{ 204}}](#p204)
+- [{{ Collapsing Star}}{{ 205}}](#p205)
+- [{{ Compulsion}}{{ 205}}](#p205)
+- [{{ Confusion}}{{ 206}}](#p206)
+- [{{ Conjure Aberration (Invoke Abberation)}}{{ 206}}](#p206)
+- [{{ Devour Shadow}}{{ 208}}](#p208)
+- [{{ Dimension Door}}{{ 208}}](#p208)
+- [{{ Distorted Distance}}{{ 209}}](#p209)
+- [{{ Doomtide}}{{ 210}}](#p210)
+- [{{ Eldritch Tentacles}}{{ 210}}](#p210)
+- [{{ Elemental Bane}}{{ 211}}](#p211)
+- [{{ Exsanguinate}}{{ 211}}](#p211)
+- [{{ False Vision}}{{ 212}}](#p212)
+- [{{ Festering Blast}}{{ 213}}](#p213)
+- [{{ Galder's Speedy Courier}}{{ 214}}](#p214)
+- [{{ Gate Seal}}{{ 214}}](#p214)
+- [{{ Giant Insect}}{{ 215}}](#p215)
+- [{{ Grasp Of The Grave}}{{ 216}}](#p216)
+- [{{ Gravecall (Create Undead)}}{{ 216}}](#p216)
+- [{{ Greater Invisibility}}{{ 217}}](#p217)
+- [{{ Hallucinatory Terrain}}{{ 218}}](#p218)
+- [{{ Ichorous Blood}}{{ 219}}](#p219)
+- [{{ Iron Garden}}{{ 219}}](#p219)
+- [{{ Macabre Marionette}}{{ 220}}](#p220)
+- [{{ Mirror Army}}{{ 220}}](#p220)
+- [{{ Phantasmal Killer}}{{ 221}}](#p221)
+- [{{ Pillar of Fire}}{{ 221}}](#p221)
+- [{{ Poison Puff}}{{ 222}}](#p222)
+- [{{ Polymorph}}{{ 222}}](#p222)
+- [{{ Psychic Horror}}{{ 223}}](#p223)
+- [{{ Psychic Lance}}{{ 223}}](#p223)
+- [{{ Ribcage}}{{ 224}}](#p224)
+- [{{ Shadow of Moil}}{{ 225}}](#p225)
+- [{{ Sickening Radiance}}{{ 225}}](#p225)
+- [{{ Spatial Swap}}{{ 225}}](#p225)
+- [{{ Spirit of Death}}{{ 227}}](#p227)
+- [{{ Stinging Swarm}}{{ 229}}](#p229)
+- [{{ Stone Coffin}}{{ 229}}](#p229)
+- [{{ Summon Aberration}}{{ 230}}](#p230)
+- [{{ Summon Elemental}}{{ 232}}](#p232)
+- [{{ Summon Greater Demon}}{{ 233}}](#p233)
+- [{{ Time Loop}}{{ 233}}](#p233)
+- [{{ Watery Tentacles}}{{ 235}}](#p235)
+- [{{ Zone of Amicability}}{{ 236}}](#p236)
 :
 - **5th Level Spells**
-- [{{ Burial Barrage}}{{ 230}}](#p230)
-- [{{ Contact Other Plane}}{{ 232}}](#p232)
-- [{{ Contagion}}{{ 233}}](#p233)
-- [{{ Danse Macabre}}{{ 236}}](#p236)
-- [{{ Deglove Creature}}{{ 237}}](#p237)
-- [{{ Devouring Darkness}}{{ 237}}](#p237)
-- [{{ Dominate Person}}{{ 239}}](#p239)
-- [{{ Dream}}{{ 239}}](#p239)
-- [{{ Enervation}}{{ 240}}](#p240)
-- [{{ Explode Heart}}{{ 240}}](#p240)
-- [{{ Far Step}}{{ 240}}](#p240)
-- [{{ Geas}}{{ 241}}](#p241)
-- [{{ Grave Ground}}{{ 242}}](#p242)
-- [{{ Hallow}}{{ 243}}](#p243)
-- [{{ Hold Monster}}{{ 243}}](#p243)
-- [{{ Infernal Calling}}{{ 244}}](#p244)
-- [{{ Insect Plague}}{{ 244}}](#p244)
-- [{{ Legend Lore}}{{ 246}}](#p246)
-- [{{ Life Link}}{{ 247}}](#p247)
-- [{{ Mislead}}{{ 248}}](#p248)
-- [{{ Negative Energy Flood}}{{ 249}}](#p249)
-- [{{ Planar Binding}}{{ 250}}](#p250)
-- [{{ Regal Presence}}{{ 251}}](#p251)
-- [{{ Scrying}}{{ 255}}](#p255)
-- [{{ Spirit Lantern}}{{ 257}}](#p257)
-- [{{ Spiritual Sundering}}{{ 257}}](#p257)
-- [{{ Storm of Radiance}}{{ 258}}](#p258)
-- [{{ Sudden Hazards}}{{ 259}}](#p259)
-- [{{ Synaptic Static}}{{ 262}}](#p262)
-- [{{ Teleportation Circle}}{{ 263}}](#p263)
-- [{{ Wall of Light}}{{ 266}}](#p266)
-- [{{ Waves of Exhaustion}}{{ 267}}](#p267)
+- [{{ Bonestorm}}{{ 240}}](#p240)
+- [{{ Burial Barrage}}{{ 240}}](#p240)
+- [{{ Contact Other Plane}}{{ 242}}](#p242)
+- [{{ Contagion}}{{ 243}}](#p243)
+- [{{ Danse Macabre}}{{ 246}}](#p246)
+- [{{ Deglove Creature}}{{ 247}}](#p247)
+- [{{ Devouring Darkness}}{{ 247}}](#p247)
+- [{{ Dominate Person}}{{ 249}}](#p249)
+- [{{ Dream}}{{ 249}}](#p249)
+- [{{ Enervation}}{{ 250}}](#p250)
+- [{{ Explode Heart}}{{ 251}}](#p251)
+- [{{ Far Step}}{{ 251}}](#p251)
+- [{{ Geas}}{{ 252}}](#p252)
+- [{{ Grave Ground}}{{ 253}}](#p253)
+- [{{ Hallow}}{{ 254}}](#p254)
+- [{{ Hold Monster}}{{ 254}}](#p254)
+- [{{ Infernal Calling}}{{ 255}}](#p255)
+- [{{ Insect Plague}}{{ 255}}](#p255)
+- [{{ Legend Lore}}{{ 257}}](#p257)
+- [{{ Life Link}}{{ 258}}](#p258)
+- [{{ Mislead}}{{ 259}}](#p259)
+- [{{ Negative Energy Flood}}{{ 260}}](#p260)
+- [{{ Planar Binding}}{{ 261}}](#p261)
+- [{{ Regal Presence}}{{ 262}}](#p262)
+- [{{ Scrying}}{{ 266}}](#p266)
+- [{{ Sigil of Chains}}{{ 267}}](#p267)
+- [{{ Spirit Lantern}}{{ 268}}](#p268)
+- [{{ Spiritual Sundering}}{{ 268}}](#p268)
+- [{{ Storm of Radiance}}{{ 269}}](#p269)
+- [{{ Sudden Hazards}}{{ 270}}](#p270)
+- [{{ Synaptic Static}}{{ 273}}](#p273)
+- [{{ Teleportation Circle}}{{ 274}}](#p274)
+- [{{ Void Eruption}}{{ 276}}](#p276)
+- [{{ Wall of Light}}{{ 278}}](#p278)
+- [{{ Waves of Exhaustion}}{{ 279}}](#p279)
 :
 - **6th Level Spells**
-- [{{ Arcane Gate}}{{ 268}}](#p268)
-- [{{ Avalanche}}{{ 268}}](#p268)
-- [{{ Bubbling Cauldron}}{{ 270}}](#p270)
-- [{{ Chrono Conjunction}}{{ 270}}](#p270)
-- [{{ Circle of Death}}{{ 271}}](#p271)
-- [{{ Conjure Fey}}{{ 271}}](#p271)
-- [{{ Eyebite}}{{ 278}}](#p278)
-- [{{ Flesh to Stone}}{{ 279}}](#p279)
-- [{{ Gravity Fissure}}{{ 280}}](#p280)
-- [{{ Inevitable Winter}}{{ 282}}](#p282)
-- [{{ Investiture of Darkness}}{{ 282}}](#p282)
-- [{{ Investiture of Flame}}{{ 283}}](#p283)
-- [{{ Investiture of Ice}}{{ 283}}](#p283)
-- [{{ Investiture of Stone}}{{ 284}}](#p284)
-- [{{ Investiture of Water}}{{ 284}}](#p284)
-- [{{ Investiture of Wind}}{{ 284}}](#p284)
-- [{{ Mass Suggestion}}{{ 287}}](#p287)
-- [{{ Mental Prison}}{{ 287}}](#p287)
-- [{{ Otherworldly Guise}}{{ 288}}](#p288)
-- [{{ Sanguine Doom}}{{ 290}}](#p290)
-- [{{ Scatter}}{{ 290}}](#p290)
-- [{{ Soul Cage}}{{ 291}}](#p291)
-- [{{ Stirge Swarm}}{{ 291}}](#p291)
-- [{{ Summon Fiend}}{{ 293}}](#p293)
-- [{{ True Seeing}}{{ 294}}](#p294)
-- [{{ Volcanic Burst}}{{ 295}}](#p295)
-- [{{ Walking Hut}}{{ 296}}](#p296)
-:
+- [{{ Arcane Gate}}{{ 280}}](#p280)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
+- [{{ Astral Blade}}{{ 280}}](#p280)
+- [{{ Avalanche}}{{ 281}}](#p281)
+- [{{ Bubbling Cauldron}}{{ 282}}](#p282)
+- [{{ Chrono Conjunction}}{{ 283}}](#p283)
+- [{{ Circle of Death}}{{ 283}}](#p283)
+- [{{ Conjure Fey}}{{ 283}}](#p283)
+- [{{ Elemental Avatar}}{{ 290}}](#p290)
+- [{{ Eyebite}}{{ 290}}](#p290)
+- [{{ Flesh to Stone}}{{ 292}}](#p292)
+- [{{ Gravity Fissure}}{{ 293}}](#p293)
+- [{{ Inevitable Winter}}{{ 295}}](#p295)
+- [{{ Investiture of Darkness}}{{ 295}}](#p295)
+- [{{ Investiture of Flame}}{{ 296}}](#p296)
+- [{{ Investiture of Ice}}{{ 296}}](#p296)
+- [{{ Investiture of Stone}}{{ 297}}](#p297)
+- [{{ Investiture of Water}}{{ 297}}](#p297)
+- [{{ Investiture of Wind}}{{ 297}}](#p297)
+- [{{ Mass Suggestion}}{{ 300}}](#p300)
+- [{{ Mental Prison}}{{ 300}}](#p300)
+- [{{ Otherworldly Guise}}{{ 301}}](#p301)
+- [{{ Sanguine Doom}}{{ 303}}](#p303)
+- [{{ Scatter}}{{ 304}}](#p304)
+- [{{ Soul Cage}}{{ 304}}](#p304)
+- [{{ Spiritual Projection [Astral Projection]}}{{ 305}}](#p305)
+- [{{ Stirge Swarm}}{{ 305}}](#p305)
+- [{{ Summon Fiend}}{{ 307}}](#p307)
+- [{{ True Seeing}}{{ 308}}](#p308)
+- [{{ Volcanic Burst}}{{ 309}}](#p309)
+- [{{ Walking Hut}}{{ 310}}](#p310)
+:
+:
 - **7th Level Spells**
-- [{{ Aura of Evasion}}{{ 297}}](#p297)
-- [{{ Crown of Stars}}{{ 298}}](#p298)
-- [{{ Devouring Mist}}{{ 299}}](#p299)
-- [{{ Dream of the Blue Veil}}{{ 300}}](#p300)
-- [{{ Etherealness}}{{ 300}}](#p300)
-- [{{ Finger of Death}}{{ 300}}](#p300)
-- [{{ Forcecage}}{{ 301}}](#p301)
-- [{{ Fractured Awareness}}{{ 301}}](#p301)
-- [{{ Hellfire Pit}}{{ 302}}](#p302)
-- [{{ Plane Shift}}{{ 303}}](#p303)
-- [{{ Power Word: Pain}}{{ 303}}](#p303)
-- [{{ Power Word: Slumber}}{{ 304}}](#p304)
-- [{{ Reweave Fate}}{{ 306}}](#p306)
-- [{{ Sorcerous Sequestration}}{{ 306}}](#p306)
-- [{{ Tether Essence}}{{ 310}}](#p310)
-- [{{ Transfix}}{{ 311}}](#p311)
-- [{{ Twisting Eruption}}{{ 311}}](#p311)
-- [{{ Void Star}}{{ 311}}](#p311)
-\column
+- [{{ Aura of Evasion}}{{ 311}}](#p311)
+- [{{ Crown of Stars}}{{ 312}}](#p312)
+- [{{ Devouring Mist}}{{ 313}}](#p313)
+- [{{ Dream of the Blue Veil}}{{ 314}}](#p314)
+- [{{ Etherealness}}{{ 314}}](#p314)
+- [{{ Finger of Death}}{{ 314}}](#p314)
+- [{{ Forcecage}}{{ 315}}](#p315)
+- [{{ Fractured Awareness}}{{ 315}}](#p315)
+- [{{ Hellfire Pit}}{{ 316}}](#p316)
+- [{{ Plane Shift}}{{ 317}}](#p317)
+- [{{ Power Word: Pain}}{{ 318}}](#p318)
+- [{{ Power Word: Slumber}}{{ 318}}](#p318)
+- [{{ Reweave Fate}}{{ 320}}](#p320)
+- [{{ Sorcerous Sequestration}}{{ 321}}](#p321)
+- [{{ Tether Essence}}{{ 324}}](#p324)
+- [{{ Transfix}}{{ 325}}](#p325)
+- [{{ Twisting Eruption}}{{ 325}}](#p325)
+- [{{ Void Star}}{{ 325}}](#p325)
+:
 - **8th Level Spells**
-- [{{ Arcane Singularity}}{{ 315}}](#p315)
-- [{{ Dark Star}}{{ 316}}](#p316)
-- [{{ Demiplane}}{{ 317}}](#p317)
-- [{{ Dominate Monster}}{{ 317}}](#p317)
-- [{{ Entrancing Mirrors}}{{ 318}}](#p318)
-- [{{ Feeblemind}}{{ 318}}](#p318)
-- [{{ Glibness}}{{ 318}}](#p318)
-- [{{ Iron Body}}{{ 320}}](#p320)
-- [{{ Lightning Ring}}{{ 320}}](#p320)
-- [{{ Maddening Darkness}}{{ 320}}](#p320)
-- [{{ Mass Invisibility}}{{ 320}}](#p320)
-- [{{ Maze}}{{ 321}}](#p321)
-- [{{ Power Word: Stun}}{{ 323}}](#p323)
-- [{{ Reality Break}}{{ 323}}](#p323)
-- [{{ Skeletal Deliquescence}}{{ 324}}](#p324)
-- [{{ Telepathy}}{{ 324}}](#p324)
-- [{{ Time Anchor}}{{ 325}}](#p325)
-- [{{ Time Bubble}}{{ 325}}](#p325)
-\column
+- [{{ Arcane Singularity}}{{ 329}}](#p329)
+- [{{ Dark Star}}{{ 330}}](#p330)
+- [{{ Demiplane}}{{ 331}}](#p331)
+- [{{ Dominate Monster}}{{ 331}}](#p331)
+- [{{ Entrancing Mirrors}}{{ 332}}](#p332)
+- [{{ Feeblemind}}{{ 332}}](#p332)
+- [{{ Glibness}}{{ 332}}](#p332)
+- [{{ Iron Body}}{{ 334}}](#p334)
+- [{{ Lightning Ring}}{{ 334}}](#p334)
+- [{{ Maddening Darkness}}{{ 334}}](#p334)
+- [{{ Mass Invisibility}}{{ 334}}](#p334)
+- [{{ Maze}}{{ 335}}](#p335)
+- [{{ Power Word: Stun}}{{ 337}}](#p337)
+- [{{ Reality Break}}{{ 337}}](#p337)
+- [{{ Skeletal Deliquescence}}{{ 338}}](#p338)
+- [{{ Telepathy}}{{ 338}}](#p338)
+- [{{ Time Anchor}}{{ 339}}](#p339)
+- [{{ Time Bubble}}{{ 339}}](#p339)
+:
 - **9th Level Spells**
-- [{{ Arcanist's Reflection}}{{ 327}}](#p327)
-- [{{ Astral Projection}}{{ 328}}](#p328)
-- [{{ Blade of Disaster}}{{ 329}}](#p329)
-- [{{ Detonate}}{{ 329}}](#p329)
-- [{{ Foresight}}{{ 329}}](#p329)
-- [{{ Form of the Elements}}{{ 330}}](#p330)
-- [{{ Frostfell}}{{ 330}}](#p330)
-- [{{ Gate}}{{ 330}}](#p330)
-- [{{ Heart Of Darkness}}{{ 331}}](#p331)
-- [{{ Identity Curse}}{{ 331}}](#p331)
-- [{{ Imprisonment}}{{ 332}}](#p332)
-- [{{ Invulnerability}}{{ 332}}](#p332)
-- [{{ Paradox}}{{ 334}}](#p334)
-- [{{ Power Word: Kill}}{{ 334}}](#p334)
-- [{{ Power Word: Ruin}}{{ 335}}](#p335)
-- [{{ Psychic Scream}}{{ 336}}](#p336)
-- [{{ Restore Youth}}{{ 336}}](#p336)
-- [{{ Time Ravage}}{{ 338}}](#p338)
-- [{{ True Polymorph}}{{ 339}}](#p339)
-- [{{ Vision of Elapsing Eons}}{{ 339}}](#p339)
-- [{{ Wail of the Banshee}}{{ 340}}](#p340)
-- [{{ Weird}}{{ 340}}](#p340)
+- [{{ Arcanist's Reflection}}{{ 341}}](#p341)
+- [{{ Astral Projection}}{{ 342}}](#p342)
+- [{{ Blade of Disaster}}{{ 343}}](#p343)
+- [{{ Detonate}}{{ 343}}](#p343)
+- [{{ Foresight}}{{ 343}}](#p343)
+- [{{ Form of the Elements}}{{ 344}}](#p344)
+- [{{ Frostfell}}{{ 344}}](#p344)
+- [{{ Gate}}{{ 344}}](#p344)
+- [{{ Heart Of Darkness}}{{ 345}}](#p345)
+- [{{ Identity Curse}}{{ 345}}](#p345)
+- [{{ Imprisonment}}{{ 346}}](#p346)
+- [{{ Invulnerability}}{{ 346}}](#p346)
+- [{{ Paradox}}{{ 348}}](#p348)
+- [{{ Power Word: Kill}}{{ 348}}](#p348)
+- [{{ Power Word: Ruin}}{{ 349}}](#p349)
+- [{{ Psychic Scream}}{{ 350}}](#p350)
+- [{{ Restore Youth}}{{ 350}}](#p350)
+- [{{ Time Ravage}}{{ 352}}](#p352)
+- [{{ True Polymorph}}{{ 353}}](#p353)
+- [{{ Vision of Elapsing Eons}}{{ 353}}](#p353)
+- [{{ Wail of the Banshee}}{{ 354}}](#p354)
+- [{{ Weird}}{{ 354}}](#p354)
 }}
 \page
 {{pageNumber,auto}}
@@ -4337,6 +4656,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - **Cantrips**
 - [{{ Amanuensis}}{{ 48}}](#p48)
 - [{{ Acid Splash}}{{ 48}}](#p48)
+- [{{ Arcane Pulse}}{{ 49}}](#p49)
 - [{{ Blade Ward}}{{ 49}}](#p49)
 - [{{ Blood Bolt}}{{ 49}}](#p49)
 - [{{ Booming Blade}}{{ 49}}](#p49)
@@ -4393,650 +4713,697 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Alarm}}{{ 66}}](#p66)
 - [{{ Arcane Lance}}{{ 67}}](#p67)
 - [{{ Awaken Rope}}{{ 68}}](#p68)
+- [{{ Azure Strike}}{{ 68}}](#p68)
 - [{{ Bad Blood}}{{ 68}}](#p68)
 - [{{ Blade Mirage}}{{ 69}}](#p69)
 - [{{ Burning Hands}}{{ 70}}](#p70)
 - [{{ Buzzing Bee}}{{ 70}}](#p70)
-- [{{ Catapult}}{{ 70}}](#p70)
+- [{{ Catapult}}{{ 71}}](#p71)
 - [{{ Cause Fear}}{{ 71}}](#p71)
 - [{{ Caustic Brew}}{{ 71}}](#p71)
+- [{{ Chains of Ice}}{{ 72}}](#p72)
 - [{{ Charm Person}}{{ 72}}](#p72)
 - [{{ Chromatic Orb}}{{ 72}}](#p72)
 - [{{ Color Spray}}{{ 72}}](#p72)
 - [{{ Comprehend Languages}}{{ 73}}](#p73)
-- [{{ Crashing Wave}}{{ 73}}](#p73)
+- [{{ Consume Soul}}{{ 73}}](#p73)
+- [{{ Crashing Wave}}{{ 74}}](#p74)
 - [{{ Create Pit}}{{ 74}}](#p74)
-- [{{ Crimson Poison}}{{ 75}}](#p75)
+- [{{ Crimson Poison}}{{ 74}}](#p74)
 - [{{ Delusion}}{{ 75}}](#p75)
 - [{{ Detect Magic}}{{ 76}}](#p76)
 - [{{ Disguise Self}}{{ 76}}](#p76)
 - [{{ Distort Value}}{{ 77}}](#p77)
 - [{{ Earth Tremor}}{{ 77}}](#p77)
+- [{{ Ebon Might}}{{ 77}}](#p77)
 - [{{ Electrify}}{{ 77}}](#p77)
 - [{{ Entomb}}{{ 78}}](#p78)
-- [{{ Expeditious Retreat}}{{ 78}}](#p78)
-- [{{ Explosive Deflection}}{{ 78}}](#p78)
+- [{{ Entropic Embrace}}{{ 78}}](#p78)
+- [{{ Expeditious Retreat}}{{ 79}}](#p79)
+- [{{ Explosive Deflection}}{{ 79}}](#p79)
 - [{{ Eyes of Immolation}}{{ 79}}](#p79)
-- [{{ Fall}}{{ 79}}](#p79)
-- [{{ False Life}}{{ 79}}](#p79)
-- [{{ Fated Strike}}{{ 79}}](#p79)
-- [{{ Feather Fall}}{{ 79}}](#p79)
-- [{{ Find Familiar (Conjure Familiar)}}{{ 80}}](#p80)
-- [{{ Fog Cloud}}{{ 81}}](#p81)
-- [{{ Frost Fingers}}{{ 81}}](#p81)
-- [{{ Gale Bolt}}{{ 81}}](#p81)
-- [{{ Gift of Alacrity}}{{ 81}}](#p81)
-- [{{ Grease}}{{ 82}}](#p82)
-- [{{ Heavy Blow}}{{ 83}}](#p83)
-- [{{ Hideous Laughter}}{{ 83}}](#p83)
-- [{{ Ice Arrow}}{{ 84}}](#p84)
-- [{{ Ice Knife}}{{ 84}}](#p84)
-- [{{ Identify}}{{ 85}}](#p85)
-- [{{ Illusory Pit}}{{ 85}}](#p85)
-- [{{ Illusory Script}}{{ 85}}](#p85)
-- [{{ Induce Headache}}{{ 85}}](#p85)
-- [{{ Infinite Edge}}{{ 86}}](#p86)
-- [{{ Jump}}{{ 86}}](#p86)
-- [{{ Longstrider}}{{ 87}}](#p87)
-- [{{ Mage Armor}}{{ 87}}](#p87)
-- [{{ Magic Missile}}{{ 87}}](#p87)
-- [{{ Magnify Gravity}}{{ 87}}](#p87)
-- [{{ Melting Glob}}{{ 87}}](#p87)
-- [{{ Mind Ray}}{{ 88}}](#p88)
-- [{{ Minor Drain}}{{ 88}}](#p88)
-- [{{ Nauseating Poison}}{{ 88}}](#p88)
-- [{{ Prismatic Bolt}}{{ 89}}](#p89)
-- [{{ Prismatic Flash}}{{ 89}}](#p89)
-- [{{ Protection from Evil and Good}}{{ 89}}](#p89)
-- [{{ Ray of Sickness}}{{ 90}}](#p90)
-- [{{ Sense Blood}}{{ 91}}](#p91)
-- [{{ Shadow Bind}}{{ 91}}](#p91)
-- [{{ Shield}}{{ 91}}](#p91)
-- [{{ Silent Image}}{{ 91}}](#p91)
-- [{{ Sleep}}{{ 92}}](#p92)
-- [{{ Snare (Create Snare)}}{{ 92}}](#p92)
-- [{{ Spellfire Flare}}{{ 93}}](#p93)
-- [{{ Stone Fist}}{{ 93}}](#p93)
-- [{{ Summon Ooze}}{{ 94}}](#p94)
-- [{{ Tenser's Floating Disk}}{{ 95}}](#p95)
-- [{{ Thunder Punch}}{{ 95}}](#p95)
-- [{{ Thunderwave}}{{ 95}}](#p95)
-- [{{ Torrent}}{{ 96}}](#p96)
-- [{{ Tranquil Moment}}{{ 96}}](#p96)
-- [{{ Transfuse Life}}{{ 96}}](#p96)
-- [{{ Unseen Servant}}{{ 96}}](#p96)
-- [{{ Violent Updraft}}{{ 97}}](#p97)
-- [{{ Warding Sigil}}{{ 97}}](#p97)
-- [{{ Wardaway}}{{ 97}}](#p97)
-- [{{ Water Blast}}{{ 97}}](#p97)
-- [{{ Witch Bolt}}{{ 97}}](#p97)
+- [{{ Fall}}{{ 80}}](#p80)
+- [{{ False Life}}{{ 80}}](#p80)
+- [{{ Fated Strike}}{{ 80}}](#p80)
+- [{{ Feather Fall}}{{ 80}}](#p80)
+- [{{ Feign Interest}}{{ 80}}](#p80)
+- [{{ Find Familiar (Conjure Familiar)}}{{ 81}}](#p81)
+- [{{ Fog Cloud}}{{ 82}}](#p82)
+- [{{ Freezing Trap}}{{ 82}}](#p82)
+- [{{ Frost Fingers}}{{ 82}}](#p82)
+- [{{ Frost Nova}}{{ 82}}](#p82)
+- [{{ Gale Bolt}}{{ 82}}](#p82)
+- [{{ Gift of Alacrity}}{{ 83}}](#p83)
+- [{{ Grease}}{{ 83}}](#p83)
+- [{{ Heavy Blow}}{{ 84}}](#p84)
+- [{{ Hideous Laughter}}{{ 85}}](#p85)
+- [{{ Ice Arrow}}{{ 85}}](#p85)
+- [{{ Ice Knife}}{{ 85}}](#p85)
+- [{{ Identify}}{{ 86}}](#p86)
+- [{{ Illusory Pit}}{{ 86}}](#p86)
+- [{{ Illusory Script}}{{ 87}}](#p87)
+- [{{ Induce Headache}}{{ 87}}](#p87)
+- [{{ Infernal Rush}}{{ 87}}](#p87)
+- [{{ Infernal Strike}}{{ 87}}](#p87)
+- [{{ Infinite Edge}}{{ 88}}](#p88)
+- [{{ Jump}}{{ 89}}](#p89)
+- [{{ Longstrider}}{{ 89}}](#p89)
+- [{{ Mage Armor}}{{ 89}}](#p89)
+- [{{ Magic Missile}}{{ 89}}](#p89)
+- [{{ Magnify Gravity}}{{ 90}}](#p90)
+- [{{ Melting Glob}}{{ 90}}](#p90)
+- [{{ Mind Ray}}{{ 90}}](#p90)
+- [{{ Minor Drain}}{{ 91}}](#p91)
+- [{{ Nauseating Poison}}{{ 91}}](#p91)
+- [{{ Prismatic Bolt}}{{ 92}}](#p92)
+- [{{ Prismatic Flash}}{{ 92}}](#p92)
+- [{{ Protection from Evil and Good}}{{ 92}}](#p92)
+- [{{ Quick Clothier}}{{ 93}}](#p93)
+- [{{ Ray of Sickness}}{{ 93}}](#p93)
+- [{{ Sense Blood}}{{ 94}}](#p94)
+- [{{ Shadow Bind}}{{ 95}}](#p95)
+- [{{ Shadow Word: Pain}}{{ 95}}](#p95)
+- [{{ Shield}}{{ 95}}](#p95)
+- [{{ Silent Image}}{{ 95}}](#p95)
+- [{{ Sleep}}{{ 96}}](#p96)
+- [{{ Snare (Create Snare)}}{{ 96}}](#p96)
+- [{{ Spellfire Flare}}{{ 97}}](#p97)
+- [{{ Stone Fist}}{{ 97}}](#p97)
+- [{{ Summon Ooze}}{{ 98}}](#p98)
+- [{{ Tenser's Floating Disk}}{{ 99}}](#p99)
+- [{{ Throw Glaive}}{{ 99}}](#p99)
+- [{{ Thunder Punch}}{{ 99}}](#p99)
+- [{{ Thunderwave}}{{ 100}}](#p100)
+- [{{ Torrent}}{{ 100}}](#p100)
+- [{{ Tranquil Moment}}{{ 100}}](#p100)
+- [{{ Transfuse Life}}{{ 100}}](#p100)
+- [{{ Unseen Servant}}{{ 101}}](#p101)
+- [{{ Violent Updraft}}{{ 101}}](#p101)
+- [{{ Warding Sigil}}{{ 101}}](#p101)
+- [{{ Wardaway}}{{ 101}}](#p101)
+- [{{ Water Blast}}{{ 102}}](#p102)
+- [{{ Witch Bolt}}{{ 102}}](#p102)
 :
 - **2nd Level Spells**
-- [{{ Air Bubble}}{{ 99}}](#p99)
-- [{{ Alacrity}}{{ 99}}](#p99)
-- [{{ Alter Self}}{{ 100}}](#p100)
-- [{{ Animate Object}}{{ 101}}](#p101)
-- [{{ Arcane Lock}}{{ 102}}](#p102)
-- [{{ Arcane Scorcher}}{{ 102}}](#p102)
-- [{{ Arcane Vigor}}{{ 102}}](#p102)
-- [{{ Arcanist's Magic Aura}}{{ 102}}](#p102)
-- [{{ Aura of Frost}}{{ 103}}](#p103)
-- [{{ Battle Familiar}}{{ 105}}](#p105)
-- [{{ Become Fire}}{{ 106}}](#p106)
-- [{{ Become Stone}}{{ 106}}](#p106)
-- [{{ Become Water}}{{ 107}}](#p107)
-- [{{ Become Wind}}{{ 107}}](#p107)
-- [{{ Blindness/Deafness}}{{ 107}}](#p107)
+- [{{ Air Bubble}}{{ 103}}](#p103)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
-- [{{ Blood Divination}}{{ 107}}](#p107)
-- [{{ Blood Wave}}{{ 108}}](#p108)
-- [{{ Bloody Burst}}{{ 108}}](#p108)
-- [{{ Blur}}{{ 108}}](#p108)
-- [{{ Borrowed Knowledge}}{{ 109}}](#p109)
-- [{{ Chromatic Blade (Elemental Blade)}}{{ 110}}](#p110)
-- [{{ Clay Touch}}{{ 110}}](#p110)
-- [{{ Cloud of Daggers}}{{ 110}}](#p110)
-- [{{ Combust}}{{ 110}}](#p110)
-- [{{ Compelled Convulsion}}{{ 111}}](#p111)
-- [{{ Continual Flame}}{{ 111}}](#p111)
-- [{{ Crackle}}{{ 111}}](#p111)
-- [{{ Create Ooze}}{{ 112}}](#p112)
-- [{{ Crescent Wind Slash}}{{ 112}}](#p112)
-- [{{ Crown of Madness}}{{ 113}}](#p113)
-- [{{ Dancing Object}}{{ 113}}](#p113)
-- [{{ Dancing Wave}}{{ 113}}](#p113)
-- [{{ Darkness}}{{ 114}}](#p114)
-- [{{ Darkvision}}{{ 114}}](#p114)
-- [{{ Death Armor}}{{ 114}}](#p114)
-- [{{ Detect Thoughts}}{{ 114}}](#p114)
-- [{{ Disorient}}{{ 115}}](#p115)
-- [{{ Disruptive Tune}}{{ 115}}](#p115)
-- [{{ Dragon Surge}}{{ 115}}](#p115)
-- [{{ Dragon's Breath}}{{ 115}}](#p115)
-- [{{ Dueling Ground}}{{ 116}}](#p116)
-- [{{ Dust Devil}}{{ 116}}](#p116)
-- [{{ Earth Ripple}}{{ 116}}](#p116)
-- [{{ Earthbind}}{{ 116}}](#p116)
-- [{{ Electric Loop}}{{ 117}}](#p117)
-- [{{ Elemental Exhalation}}{{ 117}}](#p117)
-- [{{ Enlarge/Reduce}}{{ 117}}](#p117)
-- [{{ Flaming Sphere}}{{ 120}}](#p120)
-- [{{ Fling}}{{ 121}}](#p121)
-- [{{ Flock of Familiars}}{{ 121}}](#p121)
-- [{{ Form of Familiar}}{{ 121}}](#p121)
-- [{{ Fortune's Favor}}{{ 121}}](#p121)
-- [{{ Gentle Repose}}{{ 122}}](#p122)
-- [{{ Gift of Gab}}{{ 122}}](#p122)
-- [{{ Gravity Surge}}{{ 122}}](#p122)
-- [{{ Gust of Wind}}{{ 122}}](#p122)
-- [{{ Helpful Homunculi}}{{ 123}}](#p123)
-- [{{ Hold Person}}{{ 123}}](#p123)
-- [{{ Hurricane Slash}}{{ 124}}](#p124)
-- [{{ Immovable Object}}{{ 124}}](#p124)
-- [{{ Infernal Shackles}}{{ 124}}](#p124)
-- [{{ Instant Counter}}{{ 125}}](#p125)
-- [{{ Invisibility}}{{ 125}}](#p125)
-- [{{ Kinetic Jaunt}}{{ 125}}](#p125)
-- [{{ Knock}}{{ 126}}](#p126)
-- [{{ Levitate}}{{ 126}}](#p126)
-- [{{ Locate Creature (Alternative)}}{{ 127}}](#p127)
-- [{{ Locate Object}}{{ 128}}](#p128)
-- [{{ Lock/Unlock}}{{ 128}}](#p128)
-- [{{ Magic Mouth}}{{ 128}}](#p128)
-- [{{ Magic Weapon}}{{ 129}}](#p129)
-- [{{ Maximilian's Earthen Grasp}}{{ 129}}](#p129)
-- [{{ Melf's Acid Arrow}}{{ 129}}](#p129)
-- [{{ Mind Spike}}{{ 129}}](#p129)
-- [{{ Mind Whip (Mystic Spear)}}{{ 130}}](#p130)
-- [{{ Mirror Image}}{{ 130}}](#p130)
-- [{{ Misty Step}}{{ 130}}](#p130)
-- [{{ Morbid Puppet}}{{ 131}}](#p131)
-- [{{ Mystic Elusion}}{{ 131}}](#p131)
-- [{{ Nebulous Mischief}}{{ 131}}](#p131)
-- [{{ Painful Echoes}}{{ 131}}](#p131)
-- [{{ Phantasmal Force}}{{ 132}}](#p132)
-- [{{ Poison Dart}}{{ 133}}](#p133)
-- [{{ Pseudopod Slam}}{{ 133}}](#p133)
-- [{{ Pyrotechnics}}{{ 133}}](#p133)
-- [{{ Ray of Enfeeblement}}{{ 134}}](#p134)
-- [{{ Rime's Binding Ice}}{{ 134}}](#p134)
-- [{{ Rope Trick}}{{ 134}}](#p134)
-- [{{ Scorching Ray}}{{ 135}}](#p135)
-- [{{ See Invisibility}}{{ 135}}](#p135)
-- [{{ Seeking Orb}}{{ 135}}](#p135)
-- [{{ Shadow Blade}}{{ 136}}](#p136)
-- [{{ Shatter}}{{ 136}}](#p136)
-- [{{ Silvery Barbs}}{{ 136}}](#p136)
-- [{{ Skywrite}}{{ 137}}](#p137)
-- [{{ Snowball Swarm}}{{ 137}}](#p137)
-- [{{ Spelltrap}}{{ 137}}](#p137)
-- [{{ Spider Climb}}{{ 137}}](#p137)
-- [{{ Spirit Echo}}{{ 138}}](#p138)
-- [{{ Spray of Cards}}{{ 138}}](#p138)
-- [{{ Star Dust}}{{ 139}}](#p139)
-- [{{ Star Scry}}{{ 139}}](#p139)
-- [{{ Stone Pillar}}{{ 140}}](#p140)
-- [{{ Suggestion}}{{ 140}}](#p140)
-- [{{ Summon Swarm}}{{ 143}}](#p143)
-- [{{ Time Skip}}{{ 144}}](#p144)
-- [{{ Time Slip}}{{ 144}}](#p144)
-- [{{ Time Trap}}{{ 144}}](#p144)
-- [{{ Uncertain Footing}}{{ 145}}](#p145)
-- [{{ Vacuum Pull}}{{ 146}}](#p146)
-- [{{ Vicious Hound}}{{ 146}}](#p146)
-- [{{ Vicious Vapors}}{{ 146}}](#p146)
-- [{{ Vortex Warp}}{{ 146}}](#p146)
-- [{{ Warding Wind}}{{ 147}}](#p147)
-- [{{ Warp Sense}}{{ 147}}](#p147)
-- [{{ Web}}{{ 147}}](#p147)
-- [{{ Wind Cutter}}{{ 148}}](#p148)
-- [{{ Wither and Bloom}}{{ 148}}](#p148)
-- [{{ Wristpocket}}{{ 148}}](#p148)
+- [{{ Alacrity}}{{ 103}}](#p103)
+- [{{ Alter Self}}{{ 104}}](#p104)
+- [{{ Animate Object}}{{ 105}}](#p105)
+- [{{ Arcane Lock}}{{ 106}}](#p106)
+- [{{ Arcane Scorcher}}{{ 106}}](#p106)
+- [{{ Arcane Vigor}}{{ 106}}](#p106)
+- [{{ Arcanist's Magic Aura}}{{ 106}}](#p106)
+- [{{ Aura of Frost}}{{ 107}}](#p107)
+- [{{ Battle Familiar}}{{ 109}}](#p109)
+- [{{ Become Fire}}{{ 110}}](#p110)
+- [{{ Become Stone}}{{ 110}}](#p110)
+- [{{ Become Water}}{{ 111}}](#p111)
+- [{{ Become Wind}}{{ 111}}](#p111)
+- [{{ Binding Promise}}{{ 111}}](#p111)
+- [{{ Blindness/Deafness}}{{ 111}}](#p111)
+- [{{ Blood Divination}}{{ 112}}](#p112)
+- [{{ Blood Wave}}{{ 112}}](#p112)
+- [{{ Bloody Burst}}{{ 112}}](#p112)
+- [{{ Blur}}{{ 112}}](#p112)
+- [{{ Borrowed Knowledge}}{{ 113}}](#p113)
+- [{{ Chromatic Blade (Elemental Blade)}}{{ 114}}](#p114)
+- [{{ Clay Touch}}{{ 114}}](#p114)
+- [{{ Cloud of Daggers}}{{ 114}}](#p114)
+- [{{ Combust}}{{ 115}}](#p115)
+- [{{ Compelled Convulsion}}{{ 115}}](#p115)
+- [{{ Conjure Tools}}{{ 115}}](#p115)
+- [{{ Continual Flame}}{{ 115}}](#p115)
+- [{{ Crackle}}{{ 116}}](#p116)
+- [{{ Create Ooze}}{{ 116}}](#p116)
+- [{{ Crescent Wind Slash}}{{ 116}}](#p116)
+- [{{ Crown of Madness}}{{ 117}}](#p117)
+- [{{ Curse of Agony}}{{ 117}}](#p117)
+- [{{ Dancing Object}}{{ 117}}](#p117)
+- [{{ Dancing Wave}}{{ 118}}](#p118)
+- [{{ Darkness}}{{ 118}}](#p118)
+- [{{ Darkvision}}{{ 118}}](#p118)
+- [{{ Death and Decay}}{{ 118}}](#p118)
+- [{{ Death Armor}}{{ 118}}](#p118)
+- [{{ Detect Thoughts}}{{ 119}}](#p119)
+- [{{ Disorient}}{{ 119}}](#p119)
+- [{{ Disruptive Tune}}{{ 119}}](#p119)
+- [{{ Dragon Surge}}{{ 120}}](#p120)
+- [{{ Dragon's Breath}}{{ 120}}](#p120)
+- [{{ Dueling Ground}}{{ 121}}](#p121)
+- [{{ Dust Devil}}{{ 121}}](#p121)
+- [{{ Earth Ripple}}{{ 121}}](#p121)
+- [{{ Earthbind}}{{ 121}}](#p121)
+- [{{ Electric Loop}}{{ 122}}](#p122)
+- [{{ Elemental Exhalation}}{{ 122}}](#p122)
+- [{{ Enlarge/Reduce}}{{ 122}}](#p122)
+- [{{ Eruption}}{{ 123}}](#p123)
+- [{{ Eye Beam}}{{ 124}}](#p124)
+- [{{ Flaming Sphere}}{{ 126}}](#p126)
+- [{{ Fling}}{{ 127}}](#p127)
+- [{{ Flock of Familiars}}{{ 127}}](#p127)
+- [{{ Form of Familiar}}{{ 127}}](#p127)
+- [{{ Fortune's Favor}}{{ 127}}](#p127)
+- [{{ Frostscythe}}{{ 128}}](#p128)
+- [{{ Gentle Repose}}{{ 128}}](#p128)
+- [{{ Gift of Gab}}{{ 128}}](#p128)
+- [{{ Gravity Surge}}{{ 128}}](#p128)
+- [{{ Gust of Wind}}{{ 128}}](#p128)
+- [{{ Helpful Homunculi}}{{ 129}}](#p129)
+- [{{ Hold Person}}{{ 129}}](#p129)
+- [{{ Hurricane Slash}}{{ 130}}](#p130)
+- [{{ Immovable Object}}{{ 130}}](#p130)
+- [{{ Infernal Shackles}}{{ 130}}](#p130)
+- [{{ Instant Counter}}{{ 131}}](#p131)
+- [{{ Invisibility}}{{ 131}}](#p131)
+- [{{ Kinetic Jaunt}}{{ 131}}](#p131)
+- [{{ Knock}}{{ 132}}](#p132)
+- [{{ Levitate}}{{ 132}}](#p132)
+- [{{ Locate Creature (Alternative)}}{{ 133}}](#p133)
+- [{{ Locate Object}}{{ 134}}](#p134)
+- [{{ Lock/Unlock}}{{ 134}}](#p134)
+- [{{ Magic Mouth}}{{ 134}}](#p134)
+- [{{ Magic Weapon}}{{ 135}}](#p135)
+- [{{ Maximilian's Earthen Grasp}}{{ 135}}](#p135)
+- [{{ Melf's Acid Arrow}}{{ 135}}](#p135)
+- [{{ Mind Spike}}{{ 135}}](#p135)
+- [{{ Mind Whip (Mystic Spear)}}{{ 136}}](#p136)
+- [{{ Mirror Image}}{{ 136}}](#p136)
+- [{{ Misty Step}}{{ 136}}](#p136)
+- [{{ Morbid Puppet}}{{ 137}}](#p137)
+- [{{ Mystic Elusion}}{{ 137}}](#p137)
+- [{{ Nebulous Mischief}}{{ 137}}](#p137)
+- [{{ Painful Echoes}}{{ 137}}](#p137)
+- [{{ Phantasmal Force}}{{ 138}}](#p138)
+- [{{ Poison Dart}}{{ 139}}](#p139)
+- [{{ Pseudopod Slam}}{{ 139}}](#p139)
+- [{{ Pyrotechnics}}{{ 139}}](#p139)
+- [{{ Ray of Enfeeblement}}{{ 140}}](#p140)
+- [{{ Rime's Binding Ice}}{{ 140}}](#p140)
+- [{{ Rope Trick}}{{ 141}}](#p141)
+- [{{ Scorching Ray}}{{ 141}}](#p141)
+- [{{ See Invisibility}}{{ 141}}](#p141)
+- [{{ Seeking Orb}}{{ 142}}](#p142)
+- [{{ Shadow Blade}}{{ 142}}](#p142)
+- [{{ Shatter}}{{ 142}}](#p142)
+- [{{ Sigil of Flame}}{{ 143}}](#p143)
+- [{{ Silvery Barbs}}{{ 143}}](#p143)
+- [{{ Skywrite}}{{ 143}}](#p143)
+- [{{ Snowball Swarm}}{{ 143}}](#p143)
+- [{{ Spelltrap}}{{ 144}}](#p144)
+- [{{ Spider Climb}}{{ 144}}](#p144)
+- [{{ Spirit Echo}}{{ 144}}](#p144)
+- [{{ Spray of Cards}}{{ 145}}](#p145)
+- [{{ Star Dust}}{{ 145}}](#p145)
+- [{{ Star Scry}}{{ 146}}](#p146)
+- [{{ Stone Pillar}}{{ 146}}](#p146)
+- [{{ Suggestion}}{{ 146}}](#p146)
+- [{{ Summon Swarm}}{{ 149}}](#p149)
+- [{{ Time Skip}}{{ 150}}](#p150)
+- [{{ Time Slip}}{{ 150}}](#p150)
+- [{{ Time Trap}}{{ 150}}](#p150)
+- [{{ Uncertain Footing}}{{ 151}}](#p151)
+- [{{ Vacuum Pull}}{{ 152}}](#p152)
+- [{{ Vicious Hound}}{{ 152}}](#p152)
+- [{{ Vicious Vapors}}{{ 152}}](#p152)
+- [{{ Vortex Warp}}{{ 152}}](#p152)
+- [{{ Warding Wind}}{{ 153}}](#p153)
+- [{{ Warp Sense}}{{ 153}}](#p153)
+- [{{ Web}}{{ 153}}](#p153)
+- [{{ Wind Cutter}}{{ 154}}](#p154)
+- [{{ Wither and Bloom}}{{ 154}}](#p154)
+- [{{ Wristpocket}}{{ 154}}](#p154)
 :
 - **3rd Level Spells**
-- [{{ Acidic Pit}}{{ 150}}](#p150)
-- [{{ Aether Lance}}{{ 150}}](#p150)
-- [{{ Animate Dead}}{{ 151}}](#p151)
-- [{{ Antagonize}}{{ 152}}](#p152)
-- [{{ Arctic Aura}}{{ 152}}](#p152)
-- [{{ Ashardalon's Stride}}{{ 152}}](#p152)
-- [{{ Astral Flood}}{{ 153}}](#p153)
-- [{{ Bestow Curse}}{{ 153}}](#p153)
-- [{{ Blade Vortex}}{{ 154}}](#p154)
-- [{{ Blink}}{{ 154}}](#p154)
-- [{{ Blood Explosion}}{{ 154}}](#p154)
-- [{{ Cacophonic Shield}}{{ 155}}](#p155)
-- [{{ Catnap}}{{ 155}}](#p155)
-- [{{ Clairvoyance}}{{ 156}}](#p156)
-- [{{ Conjure Constructs}}{{ 157}}](#p157)
-- [{{ Corrosive Bolt}}{{ 157}}](#p157)
-- [{{ Counterspell}}{{ 157}}](#p157)
-- [{{ Crimson Tide}}{{ 158}}](#p158)
-- [{{ Crushing Singularity}}{{ 159}}](#p159)
-- [{{ Dancing Dweomer}}{{ 159}}](#p159)
-- [{{ Dimensional Anchor}}{{ 160}}](#p160)
-- [{{ Dispel Magic}}{{ 160}}](#p160)
-- [{{ Electrocute}}{{ 161}}](#p161)
-- [{{ Enemies Abound}}{{ 161}}](#p161)
-- [{{ Erode}}{{ 161}}](#p161)
-- [{{ Erupting Earth}}{{ 162}}](#p162)
-- [{{ Fast Friends}}{{ 162}}](#p162)
-- [{{ Fear}}{{ 162}}](#p162)
-- [{{ Feign Death}}{{ 162}}](#p162)
-- [{{ Fire Cyclone}}{{ 163}}](#p163)
-- [{{ Fireball}}{{ 163}}](#p163)
-- [{{ Flame Arrows}}{{ 163}}](#p163)
-- [{{ Flamethrower}}{{ 164}}](#p164)
-- [{{ Flash Freeze}}{{ 164}}](#p164)
-- [{{ Fly}}{{ 164}}](#p164)
-- [{{ Galder's Tower}}{{ 165}}](#p165)
-- [{{ Gaseous Form}}{{ 165}}](#p165)
-- [{{ Ghost Step}}{{ 165}}](#p165)
-- [{{ Glyph of Warding}}{{ 166}}](#p166)
-- [{{ Haste}}{{ 167}}](#p167)
-- [{{ Hungering Void}}{{ 167}}](#p167)
-- [{{ Hypnotic Pattern}}{{ 168}}](#p168)
-- [{{ Illusionary Fireball}}{{ 168}}](#p168)
-- [{{ Immutability}}{{ 168}}](#p168)
-- [{{ Incite Greed}}{{ 168}}](#p168)
-- [{{ Inflict Doubt}}{{ 169}}](#p169)
-- [{{ Instant Bulwark}}{{ 169}}](#p169)
+- [{{ Acidic Pit}}{{ 156}}](#p156)
+- [{{ Aether Lance}}{{ 156}}](#p156)
+- [{{ Animate Dead}}{{ 157}}](#p157)
+- [{{ Antagonize}}{{ 158}}](#p158)
+- [{{ Arctic Aura}}{{ 158}}](#p158)
+- [{{ Ashardalon's Stride}}{{ 158}}](#p158)
+- [{{ Astral Flood}}{{ 159}}](#p159)
+- [{{ Bestow Curse}}{{ 159}}](#p159)
+- [{{ Blade Vortex}}{{ 160}}](#p160)
+- [{{ Blink}}{{ 160}}](#p160)
+- [{{ Blistering Scales}}{{ 160}}](#p160)
+- [{{ Blood Explosion}}{{ 160}}](#p160)
+- [{{ Cacophonic Shield}}{{ 161}}](#p161)
+- [{{ Catnap}}{{ 161}}](#p161)
+- [{{ Clairvoyance}}{{ 162}}](#p162)
+- [{{ Conjure Constructs}}{{ 163}}](#p163)
+- [{{ Corrosive Bolt}}{{ 163}}](#p163)
+- [{{ Counterspell}}{{ 163}}](#p163)
+- [{{ Crimson Tide}}{{ 164}}](#p164)
+- [{{ Crushing Singularity}}{{ 165}}](#p165)
+- [{{ Dancing Dweomer}}{{ 165}}](#p165)
+- [{{ Dimensional Anchor}}{{ 166}}](#p166)
+- [{{ Dispel Magic}}{{ 166}}](#p166)
+- [{{ Electrocute}}{{ 167}}](#p167)
+- [{{ Enemies Abound}}{{ 167}}](#p167)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
-- [{{ Invoke Elemental (Conjure Elemental)}}{{ 169}}](#p169)
-- [{{ Invoke Fey (Conjure Fey)}}{{ 170}}](#p170)
-- [{{ Invoke Fiend (Conjure Fiend)}}{{ 170}}](#p170)
-- [{{ Life Drain}}{{ 170}}](#p170)
-- [{{ Life Transference}}{{ 170}}](#p170)
-- [{{ Lightning Bolt}}{{ 171}}](#p171)
-- [{{ Linked Glyphs}}{{ 172}}](#p172)
-- [{{ Magic Circle}}{{ 172}}](#p172)
-- [{{ Major Image}}{{ 173}}](#p173)
-- [{{ Maladweomer}}{{ 173}}](#p173)
-- [{{ Melf's Minute Meteors}}{{ 174}}](#p174)
-- [{{ Meteor Jump}}{{ 174}}](#p174)
-- [{{ Mouth Latch}}{{ 174}}](#p174)
-- [{{ Mounting Paranoia}}{{ 175}}](#p175)
-- [{{ Mutate}}{{ 175}}](#p175)
-- [{{ Nondetection}}{{ 175}}](#p175)
-- [{{ Phantom Steed}}{{ 176}}](#p176)
-- [{{ Protection from Energy}}{{ 176}}](#p176)
-- [{{ Pulse Wave}}{{ 177}}](#p177)
-- [{{ Quick Sand}}{{ 177}}](#p177)
-- [{{ Rain of Spiders}}{{ 177}}](#p177)
-- [{{ Remove Curse}}{{ 177}}](#p177)
-- [{{ Remove Gravity}}{{ 178}}](#p178)
-- [{{ Sanguine Spears}}{{ 178}}](#p178)
-- [{{ Seismic Wave}}{{ 179}}](#p179)
-- [{{ Sending}}{{ 179}}](#p179)
-- [{{ Silver Lance}}{{ 179}}](#p179)
-- [{{ Sleet Storm}}{{ 179}}](#p179)
-- [{{ Slow}}{{ 180}}](#p180)
-- [{{ Sonic Wave}}{{ 180}}](#p180)
-- [{{ Speak with Dead}}{{ 180}}](#p180)
-- [{{ Spectral Passage}}{{ 181}}](#p181)
-- [{{ Spectral Viper}}{{ 181}}](#p181)
-- [{{ Spirit Shroud}}{{ 182}}](#p182)
-- [{{ Static Field}}{{ 182}}](#p182)
-- [{{ Stinking Cloud}}{{ 182}}](#p182)
-- [{{ Summon Fey}}{{ 183}}](#p183)
-- [{{ Summon Lesser Demons}}{{ 184}}](#p184)
-- [{{ Summon Monstrosity}}{{ 185}}](#p185)
-- [{{ Summon Shadowspawn}}{{ 187}}](#p187)
-- [{{ Summon Undead}}{{ 188}}](#p188)
-- [{{ Thunder Pulse}}{{ 189}}](#p189)
-- [{{ Thunder Step}}{{ 189}}](#p189)
-- [{{ Tidal Wave}}{{ 189}}](#p189)
-- [{{ Tiny Hut}}{{ 189}}](#p189)
-- [{{ Tiny Servant}}{{ 190}}](#p190)
-- [{{ Tongues}}{{ 190}}](#p190)
-- [{{ Vampiric Blade}}{{ 190}}](#p190)
-- [{{ Vampiric Touch}}{{ 190}}](#p190)
-- [{{ Vortex Blast}}{{ 191}}](#p191)
-- [{{ Wall of Sand}}{{ 191}}](#p191)
-- [{{ Wall of Water}}{{ 191}}](#p191)
-- [{{ Wasp Barrage}}{{ 191}}](#p191)
-- [{{ Water Breathing}}{{ 191}}](#p191)
-- [{{ Water Cannon}}{{ 192}}](#p192)
-- [{{ Waterspout}}{{ 192}}](#p192)
+- [{{ Erode}}{{ 168}}](#p168)
+- [{{ Erupting Earth}}{{ 168}}](#p168)
+- [{{ Fast Friends}}{{ 168}}](#p168)
+- [{{ Fear}}{{ 168}}](#p168)
+- [{{ Feign Death}}{{ 169}}](#p169)
+- [{{ Fire Cyclone}}{{ 169}}](#p169)
+- [{{ Fireball}}{{ 169}}](#p169)
+- [{{ Flame Arrows}}{{ 170}}](#p170)
+- [{{ Flamethrower}}{{ 170}}](#p170)
+- [{{ Flash Freeze}}{{ 170}}](#p170)
+- [{{ Fly}}{{ 170}}](#p170)
+- [{{ Frozen Flurry}}{{ 170}}](#p170)
+- [{{ Galder's Tower}}{{ 171}}](#p171)
+- [{{ Gaseous Form}}{{ 171}}](#p171)
+- [{{ Ghost Step}}{{ 171}}](#p171)
+- [{{ Glyph of Warding}}{{ 172}}](#p172)
+- [{{ Haste}}{{ 173}}](#p173)
+- [{{ Hungering Void}}{{ 173}}](#p173)
+- [{{ Hypnotic Pattern}}{{ 174}}](#p174)
+- [{{ Illusionary Fireball}}{{ 174}}](#p174)
+- [{{ Immutability}}{{ 174}}](#p174)
+- [{{ Imp Storm}}{{ 174}}](#p174)
+- [{{ Incite Greed}}{{ 175}}](#p175)
+- [{{ Inflict Doubt}}{{ 175}}](#p175)
+- [{{ Infernal Metamorphosis}}{{ 175}}](#p175)
+- [{{ Instant Bulwark}}{{ 176}}](#p176)
+- [{{ Invoke Elemental (Conjure Elemental)}}{{ 176}}](#p176)
+- [{{ Invoke Fey (Conjure Fey)}}{{ 177}}](#p177)
+- [{{ Invoke Fiend (Conjure Fiend)}}{{ 177}}](#p177)
+- [{{ Life Drain}}{{ 178}}](#p178)
+- [{{ Life Transference}}{{ 178}}](#p178)
+- [{{ Lightning Bolt}}{{ 178}}](#p178)
+- [{{ Linked Glyphs}}{{ 179}}](#p179)
+- [{{ Magic Circle}}{{ 180}}](#p180)
+- [{{ Major Image}}{{ 180}}](#p180)
+- [{{ Maladweomer}}{{ 180}}](#p180)
+- [{{ Melf's Minute Meteors}}{{ 181}}](#p181)
+- [{{ Meteor Jump}}{{ 181}}](#p181)
+- [{{ Mouth Latch}}{{ 181}}](#p181)
+- [{{ Mounting Paranoia}}{{ 182}}](#p182)
+- [{{ Mutate}}{{ 182}}](#p182)
+- [{{ Nondetection}}{{ 183}}](#p183)
+- [{{ Phantom Steed}}{{ 183}}](#p183)
+- [{{ Protection from Energy}}{{ 184}}](#p184)
+- [{{ Pulse Wave}}{{ 184}}](#p184)
+- [{{ Quick Sand}}{{ 184}}](#p184)
+- [{{ Rain of Fire}}{{ 184}}](#p184)
+- [{{ Rain of Spiders}}{{ 184}}](#p184)
+- [{{ Remove Curse}}{{ 185}}](#p185)
+- [{{ Remove Gravity}}{{ 185}}](#p185)
+- [{{ Remorseless Winter}}{{ 185}}](#p185)
+- [{{ Sanguine Spears}}{{ 186}}](#p186)
+- [{{ Seismic Wave}}{{ 186}}](#p186)
+- [{{ Sending}}{{ 186}}](#p186)
+- [{{ Silver Lance}}{{ 187}}](#p187)
+- [{{ Sleet Storm}}{{ 187}}](#p187)
+- [{{ Slow}}{{ 187}}](#p187)
+- [{{ Sonic Wave}}{{ 187}}](#p187)
+- [{{ Soul Reap}}{{ 188}}](#p188)
+- [{{ Speak with Dead}}{{ 188}}](#p188)
+- [{{ Spectral Passage}}{{ 188}}](#p188)
+- [{{ Spectral Viper}}{{ 189}}](#p189)
+- [{{ Spirit Shroud}}{{ 189}}](#p189)
+- [{{ Static Field}}{{ 190}}](#p190)
+- [{{ Stinking Cloud}}{{ 190}}](#p190)
+- [{{ Summon Fey}}{{ 190}}](#p190)
+- [{{ Summon Lesser Demons}}{{ 191}}](#p191)
+- [{{ Summon Monstrosity}}{{ 192}}](#p192)
+- [{{ Summon Shadowspawn}}{{ 194}}](#p194)
+- [{{ Summon Undead}}{{ 195}}](#p195)
+- [{{ Thunder Pulse}}{{ 196}}](#p196)
+- [{{ Thunder Step}}{{ 196}}](#p196)
+- [{{ Tidal Wave}}{{ 196}}](#p196)
+- [{{ Tiny Hut}}{{ 196}}](#p196)
+- [{{ Tiny Servant}}{{ 197}}](#p197)
+- [{{ Tongues}}{{ 197}}](#p197)
+- [{{ Vampiric Blade}}{{ 197}}](#p197)
+- [{{ Vampiric Touch}}{{ 197}}](#p197)
+- [{{ Vortex Blast}}{{ 198}}](#p198)
+- [{{ Wall of Sand}}{{ 198}}](#p198)
+- [{{ Wall of Water}}{{ 198}}](#p198)
+- [{{ Wasp Barrage}}{{ 198}}](#p198)
+- [{{ Water Breathing}}{{ 198}}](#p198)
+- [{{ Water Cannon}}{{ 199}}](#p199)
+- [{{ Waterspout}}{{ 199}}](#p199)
 :
 - **4th Level Spells**
-- [{{ Accursed Touch}}{{ 194}}](#p194)
-- [{{ Aero Barrage}}{{ 194}}](#p194)
-- [{{ Arcane Eye}}{{ 195}}](#p195)
-- [{{ Arc of Lightning}}{{ 195}}](#p195)
-- [{{ Backlash}}{{ 195}}](#p195)
-- [{{ Banishment}}{{ 196}}](#p196)
-- [{{ Bile Beam}}{{ 196}}](#p196)
-- [{{ Blight}}{{ 196}}](#p196)
-- [{{ Blood Frenzy}}{{ 196}}](#p196)
-- [{{ Charm Monster}}{{ 197}}](#p197)
-- [{{ Confusion}}{{ 198}}](#p198)
-- [{{ Conjure Aberration (Invoke Abberation)}}{{ 198}}](#p198)
-- [{{ Conjure Minor Elementals}}{{ 198}}](#p198)
-- [{{ Control Water}}{{ 199}}](#p199)
-- [{{ Devour Shadow}}{{ 200}}](#p200)
-- [{{ Dimension Cutter}}{{ 200}}](#p200)
-- [{{ Dimension Door}}{{ 200}}](#p200)
-- [{{ Distorted Distance}}{{ 201}}](#p201)
-- [{{ Divination}}{{ 201}}](#p201)
-- [{{ Echoing Lance}}{{ 202}}](#p202)
-- [{{ Eldritch Tentacles}}{{ 203}}](#p203)
-- [{{ Elemental Bane}}{{ 203}}](#p203)
-- [{{ Exsanguinate}}{{ 203}}](#p203)
-- [{{ Fabricate}}{{ 204}}](#p204)
-- [{{ Faithful Hound}}{{ 204}}](#p204)
-- [{{ False Vision}}{{ 204}}](#p204)
-- [{{ Festering Blast}}{{ 205}}](#p205)
-- [{{ Fire Shield}}{{ 205}}](#p205)
-- [{{ Force Blade}}{{ 205}}](#p205)
-- [{{ Galder's Speedy Courier}}{{ 206}}](#p206)
-- [{{ Gate Seal}}{{ 206}}](#p206)
-- [{{ Geyser}}{{ 207}}](#p207)
-- [{{ Grasp Of The Grave}}{{ 208}}](#p208)
-- [{{ Gravecall (Create Undead)}}{{ 208}}](#p208)
-- [{{ Gravity Sinkhole}}{{ 209}}](#p209)
-- [{{ Greater Invisibility}}{{ 209}}](#p209)
-- [{{ Hallucinatory Terrain}}{{ 210}}](#p210)
-- [{{ Ice Spike}}{{ 210}}](#p210)
-- [{{ Ice Storm}}{{ 211}}](#p211)
-- [{{ Ichorous Blood}}{{ 211}}](#p211)
-- [{{ Iron Garden}}{{ 211}}](#p211)
-- [{{ Jumping Jolt}}{{ 211}}](#p211)
-- [{{ Locate Creature}}{{ 212}}](#p212)
-- [{{ Macabre Marionette}}{{ 212}}](#p212)
-- [{{ Mirror Army}}{{ 212}}](#p212)
-- [{{ Orbital Stones}}{{ 213}}](#p213)
-- [{{ Phantasmal Killer}}{{ 213}}](#p213)
-- [{{ Pillar of Fire}}{{ 213}}](#p213)
-- [{{ Poison Puff}}{{ 214}}](#p214)
-- [{{ Polymorph}}{{ 214}}](#p214)
-- [{{ Private Sanctum}}{{ 214}}](#p214)
-- [{{ Protection from Spells}}{{ 214}}](#p214)
-- [{{ Psychic Lance}}{{ 215}}](#p215)
-- [{{ Quicksilver Steps}}{{ 215}}](#p215)
-- [{{ Resilient Sphere}}{{ 215}}](#p215)
-- [{{ Ribcage}}{{ 216}}](#p216)
-- [{{ Secret Chest}}{{ 216}}](#p216)
-- [{{ Sickening Radiance}}{{ 217}}](#p217)
-- [{{ Spatial Swap}}{{ 217}}](#p217)
-- [{{ Spellfire Storm}}{{ 217}}](#p217)
-- [{{ Spirit of Death}}{{ 218}}](#p218)
-- [{{ Split Timeline}}{{ 219}}](#p219)
-- [{{ Starfall}}{{ 219}}](#p219)
-- [{{ Stone Coffin}}{{ 220}}](#p220)
-- [{{ Stone Shape}}{{ 220}}](#p220)
-- [{{ Stoneskin}}{{ 220}}](#p220)
-- [{{ Storm Sphere}}{{ 220}}](#p220)
-- [{{ Suffocate}}{{ 221}}](#p221)
-- [{{ Summon Aberration}}{{ 221}}](#p221)
-- [{{ Summon Construct}}{{ 222}}](#p222)
-- [{{ Summon Elemental}}{{ 223}}](#p223)
-- [{{ Summon Greater Demon}}{{ 224}}](#p224)
-- [{{ Time Loop}}{{ 224}}](#p224)
-- [{{ Violent Crush}}{{ 224}}](#p224)
-- [{{ Vitriolic Sphere}}{{ 225}}](#p225)
-- [{{ Wall of Fire}}{{ 225}}](#p225)
-- [{{ Watery Sphere}}{{ 226}}](#p226)
-- [{{ Watery Tentacles}}{{ 226}}](#p226)
+- [{{ Accursed Touch}}{{ 201}}](#p201)
+- [{{ Aero Barrage}}{{ 201}}](#p201)
+- [{{ Arcane Eye}}{{ 202}}](#p202)
+- [{{ Arc of Lightning}}{{ 202}}](#p202)
+- [{{ Backlash}}{{ 202}}](#p202)
+- [{{ Banishment}}{{ 203}}](#p203)
+- [{{ Bile Beam}}{{ 203}}](#p203)
+- [{{ Blight}}{{ 203}}](#p203)
+- [{{ Blood Frenzy}}{{ 203}}](#p203)
+- [{{ Breath of Eons}}{{ 204}}](#p204)
+- [{{ Charm Monster}}{{ 204}}](#p204)
+- [{{ Collapsing Star}}{{ 205}}](#p205)
+- [{{ Confusion}}{{ 206}}](#p206)
+- [{{ Conjure Aberration (Invoke Abberation)}}{{ 206}}](#p206)
+- [{{ Conjure Minor Elementals}}{{ 207}}](#p207)
+- [{{ Control Water}}{{ 207}}](#p207)
+- [{{ Devour Shadow}}{{ 208}}](#p208)
+- [{{ Dimension Cutter}}{{ 208}}](#p208)
+- [{{ Dimension Door}}{{ 208}}](#p208)
+- [{{ Distorted Distance}}{{ 209}}](#p209)
+- [{{ Divination}}{{ 209}}](#p209)
+- [{{ Echoing Lance}}{{ 210}}](#p210)
+- [{{ Eldritch Tentacles}}{{ 210}}](#p210)
+- [{{ Elemental Bane}}{{ 211}}](#p211)
+- [{{ Emberstorm}}{{ 211}}](#p211)
+- [{{ Exsanguinate}}{{ 211}}](#p211)
+- [{{ Fabricate}}{{ 212}}](#p212)
+- [{{ Faithful Hound}}{{ 212}}](#p212)
+- [{{ False Vision}}{{ 212}}](#p212)
+- [{{ Festering Blast}}{{ 213}}](#p213)
+- [{{ Fire Shield}}{{ 213}}](#p213)
+- [{{ Force Blade}}{{ 213}}](#p213)
+- [{{ Galder's Speedy Courier}}{{ 214}}](#p214)
+- [{{ Gate Seal}}{{ 214}}](#p214)
+- [{{ Geyser}}{{ 215}}](#p215)
+- [{{ Grasp Of The Grave}}{{ 216}}](#p216)
+- [{{ Gravecall (Create Undead)}}{{ 216}}](#p216)
+- [{{ Gravity Sinkhole}}{{ 217}}](#p217)
+- [{{ Greater Invisibility}}{{ 217}}](#p217)
+- [{{ Hallucinatory Terrain}}{{ 218}}](#p218)
+- [{{ Ice Spike}}{{ 218}}](#p218)
+- [{{ Ice Storm}}{{ 219}}](#p219)
+- [{{ Ichorous Blood}}{{ 219}}](#p219)
+- [{{ Iron Garden}}{{ 219}}](#p219)
+- [{{ Jumping Jolt}}{{ 219}}](#p219)
+- [{{ Locate Creature}}{{ 220}}](#p220)
+- [{{ Macabre Marionette}}{{ 220}}](#p220)
+- [{{ Mirror Army}}{{ 220}}](#p220)
+- [{{ Orbital Stones}}{{ 221}}](#p221)
+- [{{ Phantasmal Killer}}{{ 221}}](#p221)
+- [{{ Pillar of Fire}}{{ 221}}](#p221)
+- [{{ Poison Puff}}{{ 222}}](#p222)
+- [{{ Polymorph}}{{ 222}}](#p222)
+- [{{ Private Sanctum}}{{ 222}}](#p222)
+- [{{ Protection from Spells}}{{ 222}}](#p222)
+- [{{ Psychic Horror}}{{ 223}}](#p223)
+- [{{ Psychic Lance}}{{ 223}}](#p223)
+- [{{ Quicksilver Steps}}{{ 223}}](#p223)
+- [{{ Resilient Sphere}}{{ 224}}](#p224)
+- [{{ Ribcage}}{{ 224}}](#p224)
+- [{{ Secret Chest}}{{ 224}}](#p224)
+- [{{ Sickening Radiance}}{{ 225}}](#p225)
+- [{{ Spatial Swap}}{{ 225}}](#p225)
+- [{{ Spellfire Storm}}{{ 226}}](#p226)
+- [{{ Spirit of Death}}{{ 227}}](#p227)
+- [{{ Split Timeline}}{{ 228}}](#p228)
+}}
+\page
+{{pageNumber,auto}}
+{{toc,wide
+- [{{ Starfall}}{{ 228}}](#p228)
+- [{{ Stone Coffin}}{{ 229}}](#p229)
+- [{{ Stone Shape}}{{ 229}}](#p229)
+- [{{ Stoneskin}}{{ 229}}](#p229)
+- [{{ Storm Sphere}}{{ 229}}](#p229)
+- [{{ Suffocate}}{{ 230}}](#p230)
+- [{{ Summon Aberration}}{{ 230}}](#p230)
+- [{{ Summon Construct}}{{ 231}}](#p231)
+- [{{ Summon Elemental}}{{ 232}}](#p232)
+- [{{ Summon Greater Demon}}{{ 233}}](#p233)
+- [{{ Time Dilation}}{{ 233}}](#p233)
+- [{{ Time Loop}}{{ 233}}](#p233)
+- [{{ Violent Crush}}{{ 234}}](#p234)
+- [{{ Vitriolic Sphere}}{{ 234}}](#p234)
+- [{{ Volcanic Upheaval}}{{ 234}}](#p234)
+- [{{ Wall of Fire}}{{ 235}}](#p235)
+- [{{ Watery Sphere}}{{ 235}}](#p235)
+- [{{ Watery Tentacles}}{{ 235}}](#p235)
 :
 - **5th Level Spells**
-- [{{ Acid Rain}}{{ 227}}](#p227)
-- [{{ Aether Storm}}{{ 227}}](#p227)
-- [{{ Animate Objects}}{{ 228}}](#p228)
-- [{{ Anvil Drop}}{{ 229}}](#p229)
-- [{{ Arcane Hand}}{{ 229}}](#p229)
-- [{{ Ball Lightning}}{{ 230}}](#p230)
-- [{{ Burial Barrage}}{{ 230}}](#p230)
-- [{{ Circle of Power}}{{ 230}}](#p230)
-- [{{ Cloudkill}}{{ 231}}](#p231)
-- [{{ Cone of Cold}}{{ 231}}](#p231)
-- [{{ Conjure Elemental}}{{ 232}}](#p232)
-- [{{ Contact Other Plane}}{{ 232}}](#p232)
-- [{{ Control Winds}}{{ 233}}](#p233)
-- [{{ Create Construct}}{{ 234}}](#p234)
-- [{{ Creation}}{{ 235}}](#p235)
-}}
-\page
-{{pageNumber,auto}}
-{{toc,wide
-- [{{ Danse Macabre}}{{ 236}}](#p236)
-- [{{ Dawn}}{{ 237}}](#p237)
-- [{{ Devouring Darkness}}{{ 237}}](#p237)
-- [{{ Divide Self}}{{ 238}}](#p238)
-- [{{ Dominate Person}}{{ 239}}](#p239)
-- [{{ Dream}}{{ 239}}](#p239)
-- [{{ Elemental Suffusion}}{{ 239}}](#p239)
-- [{{ Enervation}}{{ 240}}](#p240)
-- [{{ Explode Heart}}{{ 240}}](#p240)
-- [{{ Far Step}}{{ 240}}](#p240)
-- [{{ Field of Stars}}{{ 240}}](#p240)
-- [{{ Fissure}}{{ 241}}](#p241)
-- [{{ Geas}}{{ 241}}](#p241)
-- [{{ Grave Ground}}{{ 242}}](#p242)
-- [{{ Greater Absorb Elements}}{{ 242}}](#p242)
-- [{{ Greater Shield}}{{ 242}}](#p242)
-- [{{ Hold Monster}}{{ 243}}](#p243)
-- [{{ Immolation}}{{ 244}}](#p244)
-- [{{ Infernal Calling}}{{ 244}}](#p244)
-- [{{ Invoke Dragon (Conjure Dragon)}}{{ 245}}](#p245)
-- [{{ Invoke Giant (Conjure Giant)}}{{ 245}}](#p245)
-- [{{ Legend Lore}}{{ 246}}](#p246)
-- [{{ Life Link}}{{ 247}}](#p247)
-- [{{ Mislead}}{{ 248}}](#p248)
-- [{{ Modify Memory}}{{ 248}}](#p248)
-- [{{ Mooncloak}}{{ 248}}](#p248)
-- [{{ Mystic Lucubration}}{{ 249}}](#p249)
-- [{{ Negative Energy Flood}}{{ 249}}](#p249)
-- [{{ Passwall}}{{ 249}}](#p249)
-- [{{ Planar Binding}}{{ 250}}](#p250)
-- [{{ Pressure Cutter}}{{ 250}}](#p250)
-- [{{ Pyroclastic Lance}}{{ 250}}](#p250)
-- [{{ Regal Presence}}{{ 251}}](#p251)
-- [{{ Scrying}}{{ 255}}](#p255)
-- [{{ Seeming}}{{ 255}}](#p255)
-- [{{ Skill Empowerment}}{{ 256}}](#p256)
-- [{{ Sky Burst}}{{ 256}}](#p256)
-- [{{ Sonic Shriek}}{{ 256}}](#p256)
-- [{{ Spell Matrix}}{{ 257}}](#p257)
-- [{{ Spirit Lantern}}{{ 257}}](#p257)
-- [{{ Steel Wind Strike}}{{ 258}}](#p258)
-- [{{ Storm of Radiance}}{{ 258}}](#p258)
-- [{{ Sudden Hazards}}{{ 259}}](#p259)
-- [{{ Summon Dragon}}{{ 260}}](#p260)
-- [{{ Synaptic Static}}{{ 262}}](#p262)
-- [{{ Telekinesis}}{{ 263}}](#p263)
-- [{{ Telepathic Bond}}{{ 263}}](#p263)
-- [{{ Teleportation Circle}}{{ 263}}](#p263)
-- [{{ Teleportation Tangle}}{{ 264}}](#p264)
-- [{{ Temporal Shunt}}{{ 264}}](#p264)
-- [{{ Tornado}}{{ 264}}](#p264)
-- [{{ Transmute Rock}}{{ 264}}](#p264)
-- [{{ Wall of Force}}{{ 266}}](#p266)
-- [{{ Wall of Light}}{{ 266}}](#p266)
-- [{{ Wall of Stone}}{{ 266}}](#p266)
-- [{{ Waves of Exhaustion}}{{ 267}}](#p267)
+- [{{ Acid Rain}}{{ 237}}](#p237)
+- [{{ Aether Storm}}{{ 237}}](#p237)
+- [{{ Animate Objects}}{{ 238}}](#p238)
+- [{{ Anvil Drop}}{{ 239}}](#p239)
+- [{{ Arcane Hand}}{{ 239}}](#p239)
+- [{{ Ball Lightning}}{{ 240}}](#p240)
+- [{{ Bonestorm}}{{ 240}}](#p240)
+- [{{ Burial Barrage}}{{ 240}}](#p240)
+- [{{ Circle of Power}}{{ 241}}](#p241)
+- [{{ Cloudkill}}{{ 241}}](#p241)
+- [{{ Cone of Cold}}{{ 242}}](#p242)
+- [{{ Conjure Elemental}}{{ 242}}](#p242)
+- [{{ Contact Other Plane}}{{ 242}}](#p242)
+- [{{ Control Winds}}{{ 243}}](#p243)
+- [{{ Create Construct}}{{ 244}}](#p244)
+- [{{ Creation}}{{ 245}}](#p245)
+- [{{ Danse Macabre}}{{ 246}}](#p246)
+- [{{ Dawn}}{{ 247}}](#p247)
+- [{{ Devouring Darkness}}{{ 247}}](#p247)
+- [{{ Divide Self}}{{ 248}}](#p248)
+- [{{ Dominate Person}}{{ 249}}](#p249)
+- [{{ Dream}}{{ 249}}](#p249)
+- [{{ Elemental Suffusion}}{{ 250}}](#p250)
+- [{{ Enervation}}{{ 250}}](#p250)
+- [{{ Explode Heart}}{{ 251}}](#p251)
+- [{{ Explosive Trap}}{{ 251}}](#p251)
+- [{{ Far Step}}{{ 251}}](#p251)
+- [{{ Field of Stars}}{{ 251}}](#p251)
+- [{{ Fissure}}{{ 252}}](#p252)
+- [{{ Geas}}{{ 252}}](#p252)
+- [{{ Grave Ground}}{{ 253}}](#p253)
+- [{{ Greater Absorb Elements}}{{ 253}}](#p253)
+- [{{ Greater Shield}}{{ 253}}](#p253)
+- [{{ Hold Monster}}{{ 254}}](#p254)
+- [{{ Immolation}}{{ 255}}](#p255)
+- [{{ Infernal Calling}}{{ 255}}](#p255)
+- [{{ Invoke Dragon (Conjure Dragon)}}{{ 256}}](#p256)
+- [{{ Invoke Giant (Conjure Giant)}}{{ 256}}](#p256)
+- [{{ Legend Lore}}{{ 257}}](#p257)
+- [{{ Life Link}}{{ 258}}](#p258)
+- [{{ Mislead}}{{ 259}}](#p259)
+- [{{ Modify Memory}}{{ 259}}](#p259)
+- [{{ Mooncloak}}{{ 259}}](#p259)
+- [{{ Mystic Lucubration}}{{ 260}}](#p260)
+- [{{ Negative Energy Flood}}{{ 260}}](#p260)
+- [{{ Passwall}}{{ 260}}](#p260)
+- [{{ Planar Binding}}{{ 261}}](#p261)
+- [{{ Pressure Cutter}}{{ 261}}](#p261)
+- [{{ Pyroclastic Lance}}{{ 261}}](#p261)
+- [{{ Regal Presence}}{{ 262}}](#p262)
+- [{{ Rescue}}{{ 266}}](#p266)
+- [{{ Scrying}}{{ 266}}](#p266)
+- [{{ Seeming}}{{ 266}}](#p266)
+- [{{ Shattering Star}}{{ 267}}](#p267)
+- [{{ Sigil of Chains}}{{ 267}}](#p267)
+- [{{ Skill Empowerment}}{{ 267}}](#p267)
+- [{{ Sky Burst}}{{ 267}}](#p267)
+- [{{ Sonic Shriek}}{{ 267}}](#p267)
+- [{{ Spell Matrix}}{{ 268}}](#p268)
+- [{{ Spirit Lantern}}{{ 268}}](#p268)
+- [{{ Steel Wind Strike}}{{ 269}}](#p269)
+- [{{ Storm of Radiance}}{{ 269}}](#p269)
+- [{{ Sudden Hazards}}{{ 270}}](#p270)
+- [{{ Summon Dragon}}{{ 271}}](#p271)
+- [{{ Synaptic Static}}{{ 273}}](#p273)
+- [{{ Telekinesis}}{{ 274}}](#p274)
+- [{{ Telepathic Bond}}{{ 274}}](#p274)
+- [{{ Teleportation Circle}}{{ 274}}](#p274)
+- [{{ Teleportation Tangle}}{{ 275}}](#p275)
+- [{{ Temporal Shunt}}{{ 275}}](#p275)
+- [{{ Tornado}}{{ 275}}](#p275)
+- [{{ Transmute Rock}}{{ 275}}](#p275)
+- [{{ Void Eruption}}{{ 276}}](#p276)
+- [{{ Wall of Force}}{{ 277}}](#p277)
+- [{{ Wall of Light}}{{ 278}}](#p278)
+- [{{ Wall of Stone}}{{ 278}}](#p278)
+- [{{ Waves of Exhaustion}}{{ 279}}](#p279)
 :
 - **6th Level Spells**
-- [{{ Arcane Gate}}{{ 268}}](#p268)
-- [{{ Avalanche}}{{ 268}}](#p268)
-- [{{ Blizzard}}{{ 269}}](#p269)
-- [{{ Beam of Annihilation}}{{ 269}}](#p269)
-- [{{ Bones of the Earth}}{{ 270}}](#p270)
-- [{{ Bubbling Cauldron}}{{ 270}}](#p270)
-- [{{ Chain Lightning}}{{ 270}}](#p270)
-- [{{ Chrono Conjunction}}{{ 270}}](#p270)
-- [{{ Circle of Death}}{{ 271}}](#p271)
-- [{{ Contingency}}{{ 271}}](#p271)
-- [{{ Create Homunculus}}{{ 272}}](#p272)
-- [{{ Create Monstrosity (Chimeric Binding)}}{{ 273}}](#p273)
-- [{{ Create Undead}}{{ 274}}](#p274)
-- [{{ Cryptomnesia}}{{ 275}}](#p275)
-- [{{ Disintegrate}}{{ 276}}](#p276)
-- [{{ Effulgent Spheres}}{{ 277}}](#p277)
-- [{{ Eyebite}}{{ 278}}](#p278)
-- [{{ Flesh to Stone}}{{ 279}}](#p279)
-- [{{ Freezing Sphere}}{{ 279}}](#p279)
-- [{{ Globe of Invulnerability}}{{ 280}}](#p280)
-- [{{ Gravity Fissure}}{{ 280}}](#p280)
-- [{{ Guards and Wards}}{{ 280}}](#p280)
-- [{{ Impaling Spears}}{{ 281}}](#p281)
-- [{{ Inevitable Winter}}{{ 282}}](#p282)
-- [{{ Instant Summons}}{{ 282}}](#p282)
-- [{{ Investiture of Darkness}}{{ 282}}](#p282)
-- [{{ Investiture of Flame}}{{ 283}}](#p283)
-- [{{ Investiture of Ice}}{{ 283}}](#p283)
-- [{{ Investiture of Stone}}{{ 284}}](#p284)
-- [{{ Investiture of Water}}{{ 284}}](#p284)
-- [{{ Investiture of Wind}}{{ 284}}](#p284)
-- [{{ Irresistible Dance}}{{ 285}}](#p285)
-- [{{ Lamentable Belaborment}}{{ 285}}](#p285)
-- [{{ Magic Jar}}{{ 285}}](#p285)
-- [{{ Martial Transformation}}{{ 286}}](#p286)
-- [{{ Mass Blur}}{{ 286}}](#p286)
-- [{{ Mass Suggestion}}{{ 287}}](#p287)
-- [{{ Melt}}{{ 287}}](#p287)
-- [{{ Mental Prison}}{{ 287}}](#p287)
-- [{{ Move Earth}}{{ 288}}](#p288)
-- [{{ Otherworldly Guise}}{{ 288}}](#p288)
-- [{{ Platinum Shield}}{{ 289}}](#p289)
-- [{{ Programmed Illusion}}{{ 290}}](#p290)
-- [{{ Sanguine Doom}}{{ 290}}](#p290)
-- [{{ Scatter}}{{ 290}}](#p290)
-- [{{ Sky Omen}}{{ 291}}](#p291)
-- [{{ Soul Cage}}{{ 291}}](#p291)
-- [{{ Stirge Swarm}}{{ 291}}](#p291)
-- [{{ Summon Fiend}}{{ 293}}](#p293)
-- [{{ Sunbeam}}{{ 294}}](#p294)
-- [{{ Temporal Visions}}{{ 294}}](#p294)
-- [{{ True Seeing}}{{ 294}}](#p294)
-- [{{ Volcanic Burst}}{{ 295}}](#p295)
-- [{{ Wall of Ice}}{{ 295}}](#p295)
-- [{{ Walking Hut}}{{ 296}}](#p296)
-:
-- **7th Level Spells**
-- [{{ Arcanist's Sword}}{{ 297}}](#p297)
-- [{{ Aura of Evasion}}{{ 297}}](#p297)
-- [{{ Create Magen}}{{ 298}}](#p298)
-- [{{ Crown of Stars}}{{ 298}}](#p298)
-- [{{ Delayed Blast Fireball}}{{ 298}}](#p298)
-- [{{ Devouring Mist}}{{ 299}}](#p299)
-- [{{ Draconic Transformation}}{{ 299}}](#p299)
-- [{{ Dream of the Blue Veil}}{{ 300}}](#p300)
-- [{{ Etherealness}}{{ 300}}](#p300)
-- [{{ Finger of Death}}{{ 300}}](#p300)
-- [{{ Forcecage}}{{ 301}}](#p301)
-- [{{ Fractured Awareness}}{{ 301}}](#p301)
-- [{{ Glacial Crash}}{{ 301}}](#p301)
-- [{{ Hellfire Pit}}{{ 302}}](#p302)
-- [{{ Inevitable Boulder}}{{ 302}}](#p302)
-- [{{ Magnificent Mansion}}{{ 302}}](#p302)
-- [{{ Mirage Arcane}}{{ 303}}](#p303)
-- [{{ Plane Shift}}{{ 303}}](#p303)
-- [{{ Power Word: Pain}}{{ 303}}](#p303)
-- [{{ Power Word: Slumber}}{{ 304}}](#p304)
-- [{{ Prismatic Spray}}{{ 304}}](#p304)
-- [{{ Prophesied Strike}}{{ 304}}](#p304)
-- [{{ Project Image}}{{ 304}}](#p304)
-- [{{ Rain of Swords}}{{ 305}}](#p305)
-- [{{ Reverse Gravity}}{{ 306}}](#p306)
-- [{{ Reweave Fate}}{{ 306}}](#p306)
-- [{{ Sequester}}{{ 306}}](#p306)
-- [{{ Sorcerous Sequestration}}{{ 306}}](#p306)
-- [{{ Simulacrum}}{{ 307}}](#p307)
-- [{{ Skirmish}}{{ 307}}](#p307)
-- [{{ Symbol}}{{ 308}}](#p308)
-- [{{ Synostodweomer}}{{ 308}}](#p308)
-- [{{ Teleport}}{{ 309}}](#p309)
-- [{{ Tether Essence}}{{ 310}}](#p310)
-- [{{ Transfix}}{{ 311}}](#p311)
-- [{{ Void Star}}{{ 311}}](#p311)
-- [{{ Whirlwind}}{{ 312}}](#p312)
-:
+- [{{ Arcane Gate}}{{ 280}}](#p280)
+- [{{ Astral Blade}}{{ 280}}](#p280)
+- [{{ Avalanche}}{{ 281}}](#p281)
+- [{{ Azure Sweep}}{{ 281}}](#p281)
+- [{{ Blizzard}}{{ 281}}](#p281)
+- [{{ Beam of Annihilation}}{{ 281}}](#p281)
+- [{{ Bones of the Earth}}{{ 282}}](#p282)
+- [{{ Bubbling Cauldron}}{{ 282}}](#p282)
+- [{{ Chain Lightning}}{{ 282}}](#p282)
+- [{{ Chrono Conjunction}}{{ 283}}](#p283)
+- [{{ Circle of Death}}{{ 283}}](#p283)
+- [{{ Combustion}}{{ 283}}](#p283)
+- [{{ Contingency}}{{ 284}}](#p284)
+- [{{ Create Homunculus}}{{ 284}}](#p284)
+- [{{ Create Monstrosity (Chimeric Binding)}}{{ 285}}](#p285)
+- [{{ Create Undead}}{{ 286}}](#p286)
+- [{{ Cryptomnesia}}{{ 287}}](#p287)
+- [{{ Disintegrate}}{{ 288}}](#p288)
+- [{{ Effulgent Spheres}}{{ 289}}](#p289)
+- [{{ Elemental Avatar}}{{ 290}}](#p290)
+- [{{ Eyebite}}{{ 290}}](#p290)
+- [{{ Flesh to Stone}}{{ 292}}](#p292)
+- [{{ Freezing Sphere}}{{ 292}}](#p292)
+- [{{ Globe of Invulnerability}}{{ 293}}](#p293)
+- [{{ Gravity Fissure}}{{ 293}}](#p293)
+- [{{ Guards and Wards}}{{ 293}}](#p293)
+- [{{ Impaling Spears}}{{ 294}}](#p294)
+- [{{ Inevitable Winter}}{{ 295}}](#p295)
+- [{{ Instant Summons}}{{ 295}}](#p295)
+- [{{ Investiture of Darkness}}{{ 295}}](#p295)
+- [{{ Investiture of Flame}}{{ 296}}](#p296)
+- [{{ Investiture of Ice}}{{ 296}}](#p296)
+- [{{ Investiture of Stone}}{{ 297}}](#p297)
+- [{{ Investiture of Water}}{{ 297}}](#p297)
+- [{{ Investiture of Wind}}{{ 297}}](#p297)
+- [{{ Irresistible Dance}}{{ 298}}](#p298)
+- [{{ Lamentable Belaborment}}{{ 298}}](#p298)
+- [{{ Magic Jar}}{{ 298}}](#p298)
+- [{{ Martial Transformation}}{{ 299}}](#p299)
+- [{{ Mass Blur}}{{ 299}}](#p299)
+- [{{ Mass Suggestion}}{{ 300}}](#p300)
+- [{{ Melt}}{{ 300}}](#p300)
+- [{{ Mental Prison}}{{ 300}}](#p300)
+- [{{ Move Earth}}{{ 301}}](#p301)
+- [{{ Otherworldly Guise}}{{ 301}}](#p301)
+- [{{ Platinum Shield}}{{ 302}}](#p302)
+- [{{ Programmed Illusion}}{{ 303}}](#p303)
+- [{{ Sanguine Doom}}{{ 303}}](#p303)
+- [{{ Scatter}}{{ 304}}](#p304)
+- [{{ Sky Omen}}{{ 304}}](#p304)
+- [{{ Soul Cage}}{{ 304}}](#p304)
+- [{{ Spiritual Projection [Astral Projection]}}{{ 305}}](#p305)
+- [{{ Stirge Swarm}}{{ 305}}](#p305)
+- [{{ Summon Fiend}}{{ 307}}](#p307)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
+- [{{ Sunbeam}}{{ 308}}](#p308)
+- [{{ Temporal Visions}}{{ 308}}](#p308)
+- [{{ True Seeing}}{{ 308}}](#p308)
+- [{{ Volcanic Burst}}{{ 309}}](#p309)
+- [{{ Wall of Ice}}{{ 309}}](#p309)
+- [{{ Walking Hut}}{{ 310}}](#p310)
+:
+- **7th Level Spells**
+- [{{ Arcanist's Sword}}{{ 311}}](#p311)
+- [{{ Aura of Evasion}}{{ 311}}](#p311)
+- [{{ Create Magen}}{{ 312}}](#p312)
+- [{{ Crown of Stars}}{{ 312}}](#p312)
+- [{{ Delayed Blast Fireball}}{{ 312}}](#p312)
+- [{{ Devouring Mist}}{{ 313}}](#p313)
+- [{{ Draconic Transformation}}{{ 313}}](#p313)
+- [{{ Dream of the Blue Veil}}{{ 314}}](#p314)
+- [{{ Etherealness}}{{ 314}}](#p314)
+- [{{ Finger of Death}}{{ 314}}](#p314)
+- [{{ Forcecage}}{{ 315}}](#p315)
+- [{{ Fractured Awareness}}{{ 315}}](#p315)
+- [{{ Glacial Crash}}{{ 315}}](#p315)
+- [{{ Hellfire Pit}}{{ 316}}](#p316)
+- [{{ Inevitable Boulder}}{{ 316}}](#p316)
+- [{{ Lay Waste}}{{ 316}}](#p316)
+- [{{ Magnificent Mansion}}{{ 317}}](#p317)
+- [{{ Mirage Arcane}}{{ 317}}](#p317)
+- [{{ Plane Shift}}{{ 317}}](#p317)
+- [{{ Power Word: Pain}}{{ 318}}](#p318)
+- [{{ Power Word: Slumber}}{{ 318}}](#p318)
+- [{{ Prismatic Spray}}{{ 318}}](#p318)
+- [{{ Prophesied Strike}}{{ 319}}](#p319)
+- [{{ Project Image}}{{ 319}}](#p319)
+- [{{ Rain of Swords}}{{ 319}}](#p319)
+- [{{ Reverse Gravity}}{{ 320}}](#p320)
+- [{{ Reweave Fate}}{{ 320}}](#p320)
+- [{{ Sequester}}{{ 320}}](#p320)
+- [{{ Sorcerous Sequestration}}{{ 321}}](#p321)
+- [{{ Simulacrum}}{{ 321}}](#p321)
+- [{{ Skirmish}}{{ 321}}](#p321)
+- [{{ Symbol}}{{ 322}}](#p322)
+- [{{ Synostodweomer}}{{ 322}}](#p322)
+- [{{ Teleport}}{{ 323}}](#p323)
+- [{{ Tether Essence}}{{ 324}}](#p324)
+- [{{ Transfix}}{{ 325}}](#p325)
+- [{{ Void Star}}{{ 325}}](#p325)
+- [{{ Whirlwind}}{{ 326}}](#p326)
+:
 - **8th Level Spells**
-- [{{ Antimagic Field}}{{ 314}}](#p314)
-- [{{ Antipathy/Sympathy}}{{ 314}}](#p314)
-- [{{ Arcane Singularity}}{{ 315}}](#p315)
-- [{{ Arcane Star}}{{ 315}}](#p315)
-- [{{ Clone}}{{ 315}}](#p315)
-- [{{ Control Weather}}{{ 316}}](#p316)
-- [{{ Dark Star}}{{ 316}}](#p316)
-- [{{ Demiplane}}{{ 317}}](#p317)
-- [{{ Dominate Monster}}{{ 317}}](#p317)
-- [{{ Entrancing Mirrors}}{{ 318}}](#p318)
-- [{{ Feeblemind}}{{ 318}}](#p318)
-- [{{ Horrid Wilting}}{{ 319}}](#p319)
-- [{{ Illusory Dragon}}{{ 319}}](#p319)
-- [{{ Incendiary Cloud}}{{ 320}}](#p320)
-- [{{ Iron Body}}{{ 320}}](#p320)
-- [{{ Lightning Ring}}{{ 320}}](#p320)
-- [{{ Maddening Darkness}}{{ 320}}](#p320)
-- [{{ Mass Invisibility}}{{ 320}}](#p320)
-- [{{ Maximize/Minimize}}{{ 321}}](#p321)
-- [{{ Maze}}{{ 321}}](#p321)
-- [{{ Mighty Fortress}}{{ 322}}](#p322)
-- [{{ Mind Blank}}{{ 322}}](#p322)
-- [{{ Moment of Prescience}}{{ 322}}](#p322)
-- [{{ Nimbleness}}{{ 322}}](#p322)
-- [{{ Polar Ray}}{{ 323}}](#p323)
-- [{{ Power Word: Stun}}{{ 323}}](#p323)
-- [{{ Precognition}}{{ 323}}](#p323)
-- [{{ Reality Break}}{{ 323}}](#p323)
-- [{{ Sunburst}}{{ 324}}](#p324)
-- [{{ Skeletal Deliquescence}}{{ 324}}](#p324)
-- [{{ Telepathy}}{{ 324}}](#p324)
-- [{{ Time Anchor}}{{ 325}}](#p325)
-- [{{ Time Bubble}}{{ 325}}](#p325)
-- [{{ Titanic Strength}}{{ 326}}](#p326)
-- [{{ Wildfire}}{{ 326}}](#p326)
+- [{{ Antimagic Field}}{{ 328}}](#p328)
+- [{{ Antipathy/Sympathy}}{{ 328}}](#p328)
+- [{{ Arcane Singularity}}{{ 329}}](#p329)
+- [{{ Arcane Star}}{{ 329}}](#p329)
+- [{{ Clone}}{{ 329}}](#p329)
+- [{{ Control Weather}}{{ 330}}](#p330)
+- [{{ Dark Star}}{{ 330}}](#p330)
+- [{{ Demiplane}}{{ 331}}](#p331)
+- [{{ Dominate Monster}}{{ 331}}](#p331)
+- [{{ Entrancing Mirrors}}{{ 332}}](#p332)
+- [{{ Feeblemind}}{{ 332}}](#p332)
+- [{{ Horrid Wilting}}{{ 333}}](#p333)
+- [{{ Illusory Dragon}}{{ 333}}](#p333)
+- [{{ Incendiary Cloud}}{{ 334}}](#p334)
+- [{{ Iron Body}}{{ 334}}](#p334)
+- [{{ Lightning Ring}}{{ 334}}](#p334)
+- [{{ Maddening Darkness}}{{ 334}}](#p334)
+- [{{ Mass Invisibility}}{{ 334}}](#p334)
+- [{{ Maximize/Minimize}}{{ 335}}](#p335)
+- [{{ Maze}}{{ 335}}](#p335)
+- [{{ Mighty Fortress}}{{ 336}}](#p336)
+- [{{ Mind Blank}}{{ 336}}](#p336)
+- [{{ Moment of Prescience}}{{ 336}}](#p336)
+- [{{ Nimbleness}}{{ 336}}](#p336)
+- [{{ Polar Ray}}{{ 337}}](#p337)
+- [{{ Power Word: Stun}}{{ 337}}](#p337)
+- [{{ Precognition}}{{ 337}}](#p337)
+- [{{ Reality Break}}{{ 337}}](#p337)
+- [{{ Self Time Stop [Time Stop]}}{{ 338}}](#p338)
+- [{{ Sunburst}}{{ 338}}](#p338)
+- [{{ Skeletal Deliquescence}}{{ 338}}](#p338)
+- [{{ Telepathy}}{{ 338}}](#p338)
+- [{{ Time Anchor}}{{ 339}}](#p339)
+- [{{ Time Bubble}}{{ 339}}](#p339)
+- [{{ Titanic Strength}}{{ 340}}](#p340)
+- [{{ Wildfire}}{{ 340}}](#p340)
 :
 - **9th Level Spells**
-- [{{ Arcanist's Reflection}}{{ 327}}](#p327)
-- [{{ Astral Projection}}{{ 328}}](#p328)
-- [{{ Blackhole}}{{ 328}}](#p328)
-- [{{ Blade of Disaster}}{{ 329}}](#p329)
-- [{{ Detonate}}{{ 329}}](#p329)
-- [{{ Eye of Power}}{{ 329}}](#p329)
-- [{{ Foresight}}{{ 329}}](#p329)
-- [{{ Form of the Elements}}{{ 330}}](#p330)
-- [{{ Frostfell}}{{ 330}}](#p330)
-- [{{ Gate}}{{ 330}}](#p330)
-- [{{ Heart Of Darkness}}{{ 331}}](#p331)
-- [{{ Hindsight}}{{ 331}}](#p331)
-- [{{ Identity Curse}}{{ 331}}](#p331)
-- [{{ Imprisonment}}{{ 332}}](#p332)
-- [{{ Invulnerability}}{{ 332}}](#p332)
-- [{{ Manipulate Fate}}{{ 333}}](#p333)
-- [{{ Mass Polymorph}}{{ 333}}](#p333)
-- [{{ Meteor Swarm}}{{ 334}}](#p334)
-- [{{ Mindweave Convergence}}{{ 334}}](#p334)
-- [{{ Paradox}}{{ 334}}](#p334)
-- [{{ Power Word: Kill}}{{ 334}}](#p334)
-- [{{ Power Word: Ruin}}{{ 335}}](#p335)
-- [{{ Prismatic Wall}}{{ 335}}](#p335)
-- [{{ Psychic Scream}}{{ 336}}](#p336)
-- [{{ Ravenous Void}}{{ 336}}](#p336)
-- [{{ Restore Youth}}{{ 336}}](#p336)
-- [{{ Shapechange}}{{ 337}}](#p337)
-- [{{ Sphere of Ultimate Destruction}}{{ 337}}](#p337)
-- [{{ Supernova}}{{ 338}}](#p338)
-- [{{ Towering Thunderhead}}{{ 338}}](#p338)
-- [{{ Time Ravage}}{{ 338}}](#p338)
-- [{{ Time Stop}}{{ 338}}](#p338)
-- [{{ True Polymorph}}{{ 339}}](#p339)
-- [{{ Vision of Elapsing Eons}}{{ 339}}](#p339)
-- [{{ Wail of the Banshee}}{{ 340}}](#p340)
-- [{{ Weird}}{{ 340}}](#p340)
-- [{{ Wish}}{{ 341}}](#p341)
+- [{{ Arcanist's Reflection}}{{ 341}}](#p341)
+- [{{ Astral Projection}}{{ 342}}](#p342)
+- [{{ Blackhole}}{{ 342}}](#p342)
+- [{{ Blade of Disaster}}{{ 343}}](#p343)
+- [{{ Detonate}}{{ 343}}](#p343)
+- [{{ Eye of Power}}{{ 343}}](#p343)
+- [{{ Foresight}}{{ 343}}](#p343)
+- [{{ Form of the Elements}}{{ 344}}](#p344)
+- [{{ Frostfell}}{{ 344}}](#p344)
+- [{{ Gate}}{{ 344}}](#p344)
+- [{{ Heart Of Darkness}}{{ 345}}](#p345)
+- [{{ Hindsight}}{{ 345}}](#p345)
+- [{{ Identity Curse}}{{ 345}}](#p345)
+- [{{ Imprisonment}}{{ 346}}](#p346)
+- [{{ Invulnerability}}{{ 346}}](#p346)
+- [{{ Manipulate Fate}}{{ 347}}](#p347)
+- [{{ Mass Polymorph}}{{ 347}}](#p347)
+- [{{ Meteor Swarm}}{{ 348}}](#p348)
+- [{{ Mindweave Convergence}}{{ 348}}](#p348)
+- [{{ Paradox}}{{ 348}}](#p348)
+- [{{ Power Word: Kill}}{{ 348}}](#p348)
+- [{{ Power Word: Ruin}}{{ 349}}](#p349)
+- [{{ Prismatic Wall}}{{ 349}}](#p349)
+- [{{ Psychic Scream}}{{ 350}}](#p350)
+- [{{ Ravenous Void}}{{ 350}}](#p350)
+- [{{ Restore Youth}}{{ 350}}](#p350)
+- [{{ Shapechange}}{{ 351}}](#p351)
+- [{{ Sphere of Ultimate Destruction}}{{ 351}}](#p351)
+- [{{ Supernova}}{{ 352}}](#p352)
+- [{{ Towering Thunderhead}}{{ 352}}](#p352)
+- [{{ Time Ravage}}{{ 352}}](#p352)
+- [{{ Time Stop}}{{ 352}}](#p352)
+- [{{ True Polymorph}}{{ 353}}](#p353)
+- [{{ Vision of Elapsing Eons}}{{ 353}}](#p353)
+- [{{ Wail of the Banshee}}{{ 354}}](#p354)
+- [{{ Weird}}{{ 354}}](#p354)
+- [{{ Wish}}{{ 355}}](#p355)
 }}
 \page
 {{decal}}
@@ -5091,6 +5458,17 @@ You generate a partially magical, partially alchemical Sphere and hurl it at a p
 \page
 {{pageNumber,auto}}
 
+#### Arcane Pulse
+*Evocation Cantrip*  
+**Classes:** Magus, Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** Self (10-foot Emanation)  
+**Components:** V, S  
+**Duration:** 1 round  
+
+You create a pulse of arcane energy in a 10-foot Emanation originating from yourself. Each creature of your choice within this area must succeed on a Constitution saving throw or take 1d8 Force damage, and its Speed is reduced by 10 feet (to a minimum of 0 feet) until the end of your next turn.
+
+***Cantrip Upgrade.*** The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
 
 #### Blade Ward
 *Abjuration	Cantrip*  
@@ -6196,6 +6574,18 @@ Burning radiance erupts from you in a 5-foot Emanation. Each creature of your ch
 
 ***Cantrip Upgrade.*** The spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).
 
+#### Wrath
+*Evocation Cantrip*  
+**Classes:** Druid, Shaman  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** V, S  
+**Duration:** Instantaneous  
+
+You hurl a ball of energy at a target within range. Make a ranged spell attack against the target. On a hit, the target takes 1d8 Lightning damage, and its Speed is reduced by 10 feet until the end of your next turn.
+
+***Cantrip Upgrade.*** The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
+
 \page
 {{pageNumber,auto}}
 
@@ -6341,6 +6731,18 @@ You can touch a rope 10 to 60 feet long and issue a single command to it, select
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can target a chain instead of a rope. It has the same available actions, but it has a DC 15, an AC of 15, and Resistance to Slashing damage when taking the Bind action. When cast with a Spell Slot of 3rd level or higher targeting a rope, that rope is magically imbued for 1 minute, gaining an DC of 15, an AC 20, and 20 Hit Points.
 
+#### Azure Strike
+*1st-level Evocation*  
+**Classes:** Magus, Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** V, S  
+**Duration:** 1 round  
+
+You fire rays of arcane and frigid energy at up to two targets within range that are within 30 feet of each other. Make a ranged spell attack for each target. On a hit, the target takes 2d6 Force damage, and its Speed is reduced by 10 feet until the end of its next turn.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.
+
 #### Bad Blood
 *1st-level Necromancy*  
 **Classes:** Druid, Shaman, Warlock, Wizard  
@@ -6367,6 +6769,11 @@ Up to three creatures of your choice that you can see within range must make Cha
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.
 
+
+
+\page
+{{pageNumber,auto}}
+
 #### Beast Bond
 *1st-level Divination*  
 **Classes:** Bard, Druid, Ranger, Shaman  
@@ -6378,9 +6785,6 @@ Up to three creatures of your choice that you can see within range must make Cha
 You establish a telepathic link with one beast you touch that is friendly to you or Charmed by you. Until the spell ends, the link is active while you and the beast are within Line of Sight of each other. Through the link, the beast can understand your telepathic messages to it, and it can telepathically communicate simple emotions and concepts back to you. While the link is active, the beast gains Advantage on attack rolls against any creature within 5 feet of you that you can see.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the range at which the beast gains Advantage on attack rolls increases by 5 feet for each slot level above 1st.
-
-\page
-{{pageNumber,auto}}
 
 #### Befuddling Curse
 *1st-level Enchantment*  
@@ -6404,6 +6808,9 @@ Each time the creature interacts with, attacks, or is attacked by a swapped targ
 | 5th          | 24 hours     | 
 | 7th+         | Until dispelled     | 
 
+\column
+
+
 #### Binding Curse
 *1st-level Enchantment*  
 **Classes:** None    
@@ -6418,7 +6825,6 @@ If a creature starts its turn more than 10 feet from the binding point, it must 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can maintain your concentration for longer, as shown in the table above (below Befuddling Curse). Using a Spell Slot of 5th level or higher grants a duration that doesn't require concentration.
 
-\column
 
 #### Blade Mirage
 *1st-level Illusion*  
@@ -6434,6 +6840,11 @@ As an Action, a creature that can see you can make an Intelligence (Investigatio
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can target one additional weapon within 30 feet of you for each level above 1st. The wielder must use a Bonus action to gain Advantage on their next attack roll.
 
+
+\page
+{{pageNumber,auto}}
+
+
 #### Bless
 *1st-level Enchantment*  
 **Classes:** Cleric, Paladin, Shaman  
@@ -6445,9 +6856,6 @@ As an Action, a creature that can see you can make an Intelligence (Investigatio
 You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll a d4 and add the number rolled to the attack roll or saving throw.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.
-
-\page
-{{pageNumber,auto}}
 
 #### Bond Item
 *1st-level Conjuration*   
@@ -6503,6 +6911,12 @@ The bee moves with the target, hovering within 3 feet of it as long as the targe
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. A separate spectral bee appears for each target.
 
+
+
+
+\page
+{{pageNumber,auto}}
+
 #### Catapult
 *1st-level Transmutation*  
 **Classes:** Artificer, Psion, Sorcerer, Wizard  
@@ -6514,11 +6928,6 @@ The bee moves with the target, hovering within 3 feet of it as long as the targe
 Choose one object weighing 1 to 5 pounds within range that isn't being worn or carried. The object flies in a straight Line up to 90 feet in a direction you choose before falling to the ground, stopping early if it impacts against a solid surface. If the object would strike a creature, that creature must make a Dexterity saving throw. On a failed save, the object strikes the target and stops moving. When the object strikes something, the object and what it strikes each take 3d8 Bludgeoning damage.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the maximum weight of objects that you can target with this spell increases by 5 pounds, and the damage increases by 1d8, for each slot level above 1st.
-
-
-
-\page
-{{pageNumber,auto}}
 
 #### Cause Fear
 *1st-level Necromancy*  
@@ -6544,7 +6953,6 @@ A stream of acid emanates from you in a 30-foot-long and 5-foot-wide Line in a d
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 2d4 for each slot level above 1st.
 
-\column
 #### Ceremony
 *1st-level Abjuration (ritual)*  
 **Classes:** Bard, Cleric, Paladin, Shaman  
@@ -6566,6 +6974,17 @@ You perform a special religious ceremony that is infused with magic. When you ca
 
 \page
 {{pageNumber,auto}}
+#### Chains of Ice
+*1st-level Evocation*  
+**Classes:** Druid, Magus, Shaman, Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** 30 feet  
+**Components:** V  
+**Duration:** Instantaneous  
+
+You create chains of ice around a creature you can see within range. The target must make a Dexterity saving throw. On a failed save, it takes 1d10 Cold damage and its Speed is halved until the end of its next turn. On a successful save, it takes half as much damage only.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d10 for each slot level above 1st.
 
 #### Chaos Bolt
 *1st-level Evocation*  
@@ -6594,6 +7013,7 @@ The energy can't leap again unless you cast the spell with a level 2+ Spell Slot
 
 ***At Higher Levels.*** The damage increases by 1d8 for each Spell Slot level above 1. The energy can leap a maximum number of times equal to the level of the slot expended, and a creature can be targeted only once by each casting of this spell.
 
+\column
 
 #### Charm Person
 *1st-level Enchantment*  
@@ -6607,7 +7027,6 @@ You attempt to charm a humanoid you can see within range. It must make a Wisdom 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.
 
-\column
 #### Chromatic Orb
 *1st-level Evocation*  
 **Classes:** Magus, Sorcerer, Wizard  
@@ -6687,6 +7106,23 @@ This spell doesn't decode symbols or secret messages.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the spell’s duration increases to 8 hours (2nd level), 1 day (3rd level), 1 week (4th level), 1 month (5th level), 3 months (6th level), 6 months (7th level), or 1 year (8th level). At 9th level, the spell effect is permanent on you.
 
+#### Consume Soul
+*1st-level Necromancy*  
+**Classes:** Shaman, Sorcerer, Vessel, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** V  
+**Duration:** Instantaneous  
+
+You drain the essence from a creature within range, which must make a Constitution saving throw. On a failed save, it takes 4d4 Force damage, and you gain Temporary Hit Points equal to half the Force damage dealt. On a successful save, it takes half as much damage only.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d4 for each slot level above 1st.
+
+
+
+\page
+{{pageNumber,auto}}
+
 #### Crashing Wave
 *1st-level Conjuration*  
 **Classes:** Druid, Shaman, Sorcerer, Wizard  
@@ -6698,9 +7134,6 @@ This spell doesn't decode symbols or secret messages.
 A wave of water sweeps out from you. Each creature in a 15-foot Cone must make a Strength saving throw. On a failed save, a creature takes 2d6 Bludgeoning damage and is knocked 10 feet away from you. If a creature is knocked into a wall, another creature, or fails by 5 or more, it is additionally knocked Prone. On a successful save, the creature takes half as much damage and is not knocked back. If you have a source of water at least 5 cubic feet within 5 feet when you cast the spell, you can displace that water, increasing the range of the spell to a 25-foot Cone.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d6 for each level above 1st.
-
-\page
-{{pageNumber,auto}}
 
 #### Create or Destroy Water
 *1st-level Transmutation*  
@@ -6734,11 +7167,6 @@ You choose a point on the ground in an area of dirt or natural stone you can see
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the pit is 5-feet deeper for each slot level above 1st (to a maximum of 20 feet deep).
 
-
-\page
-{{pageNumber,auto}}
-
-
 #### Crimson Poison
 *1st-level Transmutation (blood magic)*  
 **Classes:** Shaman, Sorcerer, Warlock, Wizard  
@@ -6750,6 +7178,12 @@ You choose a point on the ground in an area of dirt or natural stone you can see
 You sacrifice up to 5 Hit Points (included in the material components) and invest them into an ichorous crimson poison coating that coats a weapon you are holding. The next three times you deal damage with that weapon, it deals Acid damage equal to the Hit Points invested. After dealing damage with the weapon five times, the spell ends. If the spell ends before dealing damage for a 5th time, the blood dries, becoming non-magical and harmless.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can invest up to 1 additional Hit Point in the casting for each slot level above 1st, up to a maximum of 10 Hit Points at 6th level.
+
+\page
+{{pageNumber,auto}}
+
+
+
 
 #### Crippling Agony
 *1st-level Necromancy*  
@@ -6764,7 +7198,6 @@ You can inflict crippling agony on a foe. Choose one creature that you can see w
 The target can repeat the saving throw at the end of each of its turns. On a success, the spell ends.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.
-\column
 
 
 #### Cure Wounds
@@ -6778,6 +7211,20 @@ The target can repeat the saving throw at the end of each of its turns. On a suc
 A creature you touch regains a number of Hit Points equal to 2d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the healing increases by 2d8 for each slot level above 1st.
+
+#### Death Grip
+*1st-level Abjuration*  
+**Classes:** Cleric, Paladin, Vessel, Warlock  
+**Casting Time:** Bonus Action  
+**Range:** 30 feet  
+**Components:** V  
+**Duration:** Instantaneous  
+
+You harness runic energies to bind a foe to you. One creature you can see within range must succeed on a Strength saving throw or be pulled in a straight Line toward you, ending in the nearest unoccupied space within 5 feet of you.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the range increases by 10 feet for each slot level above 1st.
+\column
+
 
 #### Delusion
 *1st-level Enchantment*  
@@ -6909,6 +7356,18 @@ You cause the ground immediately around you to shake and roll. Every other creat
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st, and the radius increases by 5 feet for each two slot levels above 1st.
 \column
 
+#### Ebon Might
+*1st-level Transmutation*  
+**Classes:** Bard, Cleric, Druid, Paladin, Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** Self (10-foot Emanation)  
+**Components:** V, S  
+**Duration:** 1 round  
+
+As you invoke draconic power, shadowy might erupts from you. Each creature of your choice in a 10-foot Emanation originating from you is empowered until the end of your next turn. While empowered, a creature deals an extra 1d4 Force damage when it hits a target with an attack roll.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the extra damage increases by 1d4 for every two slot levels above 1st.
+
 #### Electrify
 *1st-level Evocation*  
 **Classes:** Ranger, Magus, Sorcerer, Wizard  
@@ -6923,6 +7382,10 @@ The spell ends after dealing damage, or at the start of your next turn, whicheve
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d12 for each slot level above 1st.
 
+
+\page
+{{pageNumber,auto}}
+
 #### Ensnaring Strike
 *1st-level Conjuration*  
 **Classes:** Artificer, Ranger  
@@ -6936,8 +7399,6 @@ As you hit the target, grasping vines appear on it, and it makes a Strength savi
 While Restrained, the target takes 1d6 Piercing damage at the start of each of its turns. The target or a creature within reach of it can take an Action to make a Strength (Athletics) check against your spell save DC. On a success, the spell ends.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage it takes at the start of each turn increases by 1d6 for each slot level above 1st.
-\page
-{{pageNumber,auto}}
 
 #### Entangle
 *1st-level Conjuration*  
@@ -6952,6 +7413,8 @@ Grasping plants sprout from the ground in a 20-foot square within range. For the
 Each creature (other than you) in the area when you cast the spell must succeed on a Strength saving throw or have the Restrained condition until the spell ends. A Restrained creature can take an Action to make a Strength (Athletics) check against your spell save DC. On a success, it frees itself from the grasping plants and is no longer Restrained by them.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the area of effect and range both increase by 10 feet for each slot level above 1st.
+\column
+
 
 #### Entomb
 *1st-level Transmutation*  
@@ -6966,7 +7429,29 @@ You attempt to encase a Medium or smaller creature you can see within ice. The c
 If the creature takes more than 5 Fire or Bludgeoning damage from a single damage roll while Restrained, the ice breaks and the target is freed, ending the spell for the target.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.
-\column
+
+#### Entropic Embrace
+*1st-level Necromancy*  
+**Classes:** Shaman, Sorcerer, Vessel, Warlock, Wizard  
+**Casting Time:** Reaction, which you take when you roll a natural 1 or 20 on a D20 Test, or when you roll the same number on both dice of a D20 Test made with Advantage or Disadvantage  
+**Range:** Self  
+**Components:** V  
+**Duration:** 1 minute  
+
+You are empowered by dark, entropic energy for the duration, becoming swathed in shadow and taking on a dark-blue or purple appearance. While this effect lasts, you gain the following benefits.
+
+***Preternatural Calm.*** You automatically succeed on Constitution saving throws to maintain Concentration.
+
+***Shadow Shroud.*** You are shrouded in shadow, making your space Lightly Obscured.
+
+***Touch of Entropy.*** Once on each of your turns, you can deal an extra 1d4 Necrotic damage to one creature when you deal damage to it, or you can restore an extra 1d4 Hit Points to one creature when you heal it.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the extra damage or healing from Touch of Entropy increases by 1d4 for each slot level above 1st.
+
+
+
+\page
+{{pageNumber,auto}}
 
 #### Ethereal Anchor
 *1st-level Evocation*  
@@ -6992,6 +7477,7 @@ This spell allows you to move at an incredible pace. You take the Dash action, a
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can gain an additional 5 feet of movement for each slot level above 1st. This burst of speed only applies to the Dash Bonus action granted by this spell.
 
+
 #### Explosive Deflection
 *1st-level Evocation*  
 **Classes:** Sorcerer, Wizard   
@@ -7006,11 +7492,7 @@ If the triggering attack was a melee attack, the attacker takes damage equal to 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage reduction and the damage dealth increase by 1d6 for each slot level above 1st.
 
-
-
-\page
-{{pageNumber,auto}}
-
+\column
 #### Eyes of Immolation
 *1st-level Evocation*  
 **Classes:** Druid, Sorcerer, Warlock, Wizard  
@@ -7022,6 +7504,7 @@ If the triggering attack was a melee attack, the attacker takes damage equal to 
 Your eyes glow with fiery light before focusing on a creature you can see within range, causing a beam of fire to shoot from your eyes. The target creature must make a Dexterity saving throw. On a failed save, it takes 3d6 Fire damage and is set ablaze, taking 1d6 damage at the end of each of its turns until it or another creature within 5 feet of it spends an Action to douse the flames. On a successful save, the creature takes half as much damage and is not set ablaze.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the initial damage increases by 1d6 for each slot level above 1st.
+
 
 #### Faerie Fire
 *1st-level Evocation*  
@@ -7036,6 +7519,11 @@ Objects in a 20-foot Cube within range are outlined in blue, green, or violet li
 Attack rolls against an affected creature or object have Advantage if the attacker can see it.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the area of effect and range both increase by 10 feet for each slot level above 1st.
+
+\page
+{{pageNumber,auto}}
+
+
 
 #### Fall
 *1st-level Transmutation*  
@@ -7063,6 +7551,7 @@ Bolstering yourself with a necromantic facsimile of life, you gain 2d4 + 4 Tempo
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you gain 5 additional Temporary Hit Points for each slot level above 1st.
 
+\column
 #### Fated Strike
 *1st-level Divination*  
 **Classes:** Bard, Magus, Psion, Sorcerer, Vessel, Warlock, Wizard  
@@ -7087,8 +7576,23 @@ Choose up to five falling creatures within range. A falling creature's rate of d
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, for each slot level above 1st, the range increases by 10 feet and you can affect one additional creature.
 
+#### Feign Interest
+*1st-level Illusion*  
+**Classes:** Bard, Psion, Sorcerer, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** Self  
+**Components:** V  
+**Duration:** 1 hour  
+
+You appear to be fully focused and paying rapt attention for the duration. Behind the illusion, you can be napping, thinking about other things, or otherwise letting your mind wander.
+
+A creature that takes the Study action to evaluate your state of mind can determine that your interest is feigned with a successful Wisdom (Insight) check against your spell save DC. If a creature discerns the illusion for what it is, it sees your true demeanor.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can choose one additional willing creature within 10 feet of you for each slot level above 1st. Each creature maintains its own illusion for the duration.
+
 \page
 {{pageNumber,auto}}
+
 
 #### Find Familiar (Conjure Familiar)
 *1st-level Conjuration (ritual)*  
@@ -7146,17 +7650,41 @@ You create a 20-foot-radius Sphere of fog centered on a point within range, whic
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the radius of the fog increases by 20 feet for each slot level above 1st.
 
+#### Freezing Trap
+*1st-level Evocation*  
+**Classes:** Artificer, Druid, Ranger, Shaman, Wizard  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** S  
+**Duration:** Concentration, up to 1 minute  
+
+An Invisible, intangible trap appears on the ground at a point you choose within range. The first time a creature comes within 5 feet of the trap, the trap explodes in a burst of frost, the spell ends, and the triggering creature must make a Constitution saving throw. On a failed save, the target has the Restrained condition for 1 minute. If the creature takes any damage, the Restrained condition from the trap ends.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the trigger radius and the burst radius each increase by 5 feet for each slot level above 1st. Each creature within the burst radius of the explosion must make the saving throw, not only the triggering creature.
+
 #### Frost Fingers
 *1st-level Conjuration*  
 **Classes:** Druid, Magus, Sorcerer, Wizard  
 **Casting Time:** Action  
-**Range:** Self (30-foot Line)  
+**Range:** Self (15-foot Cone)  
 **Components:** V, S  
 **Duration:** Instantaneous  
 
 Freezing cold blasts from your fingertips in a 15-foot Cone.  Each creature in that area must make a Constitution saving throw. On a failed save, a creature takes 2d8 Cold damage and their movement speed is reduced by 10 feet until the end of their next turn. On a successful save, a creature takes half as much damage and isn't slowed.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d8 and the cone size by 5 feet for each slot level above 1st.
+
+#### Frost Nova
+*1st-level Evocation*  
+**Classes:** Druid, Magus, Shaman, Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** Self (15-foot Emanation)  
+**Components:** V, S  
+**Duration:** Instantaneous  
+
+You unleash a burst of frost, creating a 15-foot Emanation originating from you. Each creature of your choice in the Emanation must make a Constitution saving throw. On a failed save, a creature takes 2d6 Cold damage and has the Restrained condition until the end of your next turn. On a successful save, a creature takes half as much damage only.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.
 
 #### Gale Bolt
 *1st-level Evocation*  
@@ -7170,7 +7698,6 @@ A blast of concentrated wind streaks toward a creature of your choice within ran
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d8 for each level above 1st.
 
-\column
 
 #### Ghastly Flight
 *1st-level Conjuration*  
@@ -7183,6 +7710,12 @@ A blast of concentrated wind streaks toward a creature of your choice within ran
 You release a malevolent spirit that flies out from you in a direction of your choice in a 60-foot long, 5-foot wide Line, at which point it fades away. Each creature within the Line must make a Constitution saving throw. On a failed save, creatures take 2d8 Necrotic damage and cannot regain Hit Points until the start of your next turn. On a success, creatures take half as much damage and can regain Hit Points as normal.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.
+
+
+
+
+\page
+{{pageNumber,auto}}
 
 #### Gift of Alacrity
 *1st-level Divination*  
@@ -7210,8 +7743,6 @@ The fruit becomes nonmagical when the spell ends.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you infuse an additional fruit for each slot level above 1st.
 
-\page
-
 #### Grasping Roots
 *1st-level Transmutation*  
 **Classes:** Druid, Ranger, Shaman  
@@ -7223,6 +7754,8 @@ The fruit becomes nonmagical when the spell ends.
 A twisting burst of roots launches from your hand, reaching to grab a Large or smaller target. The target must make a Strength saving throw. On success, the target is moved 5 feet in a direction of your choice. On a failure, the target is moved 20 feet in a direction of your choice. A creature can choose to fail this save.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you move a creature an additional 5 feet for each slot level above 1st.
+
+\column
 
 #### Grease
 *1st-level Conjuration*  
@@ -7251,6 +7784,12 @@ You channel unholy strength into your hand and reach out to grab a creature. The
 At the start of the creatures turn while you maintain the grip and the spell, it takes 1d8 Necrotic damage as you drain the life from it, and regain Hit Points equal to half the damage dealt.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.
+
+
+
+
+\page
+{{pageNumber,auto}}
 
 #### Guiding Bolt
 *1st-level Evocation*  
@@ -7288,8 +7827,7 @@ A creature of your choice that you can see within range regains Hit Points equal
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the healing increases by 2d4 for each slot level above 1st.
 
-\page
-{{pageNumber,auto}}
+\column
 
 #### Heavy Blow
 *1st-level Transmutation*  
@@ -7326,7 +7864,12 @@ You point your finger, and the creature that damaged you is momentarily surround
 A willing creature you touch is imbued with bravery. Until the spell ends, the creature has Immunity to being Frightened and gains Temporary Hit Points equal to your spellcasting ability modifier at the start of each of its turns.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.
-\column
+
+
+
+\page
+{{pageNumber,auto}}
+
 #### Hex
 *1st-level Enchantment*  
 **Classes:** Warlock, Shaman  
@@ -7356,8 +7899,8 @@ One creature of your choice that you can see within range makes a Wisdom saving 
 At the end of each of its turns and each time it takes damage, it makes another Wisdom saving throw. The target has Advantage on the save if the save is triggered by damage. On a successful save, the spell ends.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.
-\page
-{{pageNumber,auto}}
+\column
+
 
 #### Hunter's Mark
 *1st-level Divination*  
@@ -7396,14 +7939,11 @@ You conjure a shard of ice before hurling it at a target you can see within rang
 You create a shard of ice and fling it at one creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d8 Piercing damage. Hit or miss, the shard then explodes. The target and each creature within 5 feet of it must succeed on a Dexterity saving throw or take 2d8 Cold damage.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the Cold damage increases by 1d8 for each slot level above 1st.
-\column
 
-{{descriptive
-{{font-family:WalterTurncoat "Hunter’s Mark" emerges from the ranger's connection to the wild, allowing them to mark their chosen prey with an ethereal bond. With whispered words steeped in the reverence of the hunt, the ranger designates their target, infusing their attacks with a primal energy that enhances damage and heightens their senses. This mystic bond persists until the hunter chooses a new quarry or the current one falls, reflecting the ranger's unwavering focus and attunement to the rhythms of nature. As a mage scholar, I find this spell a captivating fusion of wilderness lore and martial prowess, embodying the ranger's role as a protector of the natural world. }}
-:
-{{font-family:WalterTurncoat"Ice Arrow" and "Ice Knife" are manifestations of elemental magic, channeling the biting chill of winter into potent projectiles. Through gestures imbued with the essence of frost, the caster conjures icy shards, launching them toward their target with precision and force. "Ice Arrow" strikes true, delivering a burst of frigid energy upon impact, while "Ice Knife" combines piercing and freezing damage in a devastating display of elemental power. Their potency increases with the caster's proficiency, reflecting a deepening mastery over the arcane arts. Personally, as a scholar enamored with the mysteries of elemental magic, I find these spells a mesmerizing testament to the beauty and ferocity of ice in its magical form. }}
-}}
 
+
+\page
+{{pageNumber,auto}}
 
 
 #### Id Insinuation
@@ -7420,10 +7960,6 @@ The creature can repeat this Wisdom saving throw at the end of each of its turns
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.
 
-\page
-{{pageNumber,auto}}
-
-
 #### Identify
 *1st-level Divination (ritual)*  
 **Classes:** Artificer, Bard, Magus, Psion, Wizard  
@@ -7438,6 +7974,7 @@ If you instead touch a creature throughout the casting, you learn which ongoing 
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can identify one additional item for each slot level above 1st.
 
+\column
 
 #### Illusory Pit
 *1st-level Illusion*  
@@ -7453,7 +7990,9 @@ Creatures with a Fly Speed are unaffected. Each time a creature under the effect
 
 ***At Higher Levels.*** When you cast the spell using a Spell Slot of 2nd level or higher, the radius of the pit increases by 5 feet for each level above 1st.
 
-\column
+\page
+{{pageNumber,auto}}
+
 #### Illusory Script
 *1st-level Illusion (ritual)*  
 **Classes:** Bard, Warlock, Wizard  
@@ -7486,8 +8025,36 @@ Targeting a creature with 6 or more intelligence, you inflict an instantaneous h
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd or higher, the Psychic damage increases by 1d4 for each spell level above 1st.
 
+\column
+#### Infernal Rush
+*1st-level Transmutation*  
+**Classes:** Magus, Ranger, Sorcerer, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** Self  
+**Components:** V  
+**Duration:** Instantaneous  
+
+Fiery magic surrounds you and grants you explosive speed. Until the end of your turn, your Speed increases by 30 feet, and your movement doesn't provoke Opportunity Attacks.
+
+When you move within 5 feet of a creature or an object that isn't being worn or carried, it must make a Dexterity saving throw, taking 2d6 Fire damage on a failed save or half as much damage on a successful one. A creature or object can take this damage only once per turn.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.
+
+#### Infernal Strike
+*1st-level Evocation*  
+**Classes:** Magus, Paladin, Sorcerer, Vessel, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** Self (10-foot Emanation)  
+**Components:** V  
+**Duration:** Instantaneous  
+
+You leap through the air without provoking Opportunity Attacks and land in an unoccupied space within 30 feet. Each creature in a 10-foot Emanation originating from you must make a Dexterity saving throw. On a failed save, a creature takes 2d6 Fire damage and has Disadvantage on attack rolls against creatures other than you until the start of your next turn. On a successful save, a creature takes half as much damage only.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.
+
 \page
 {{pageNumber,auto}}
+
 
 
 #### Infinite Edge
@@ -7514,6 +8081,7 @@ Make a melee spell attack against a creature you can reach. On a hit, the target
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d10 for each slot level above 1st.
 
+\column
 #### Insidious Rhythm
 *1st-level Enchantment*  
 **Classes:** Bard  
@@ -7527,7 +8095,7 @@ One creature of your choice that you can see within range hears a haunting yet c
 At the end of each of its turns, the target repeats the saving throw, ending the spell on itself on a success.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.
-\column
+
 #### Inspiring Melody
 *1st-level Enchantment*  
 **Classes:** Bard  
@@ -7541,6 +8109,10 @@ You play a tune that inspires those who hear it to stand and fight. Creatures of
 As a Bonus action on each subsequent turn, you can use an instrument to play this tune again and grant another creature that can hear you within range these Temporary Hit Points.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the range increases by 5 feet, and you can grant one additional target Temporary Hit Points each time you play, for each slot level above 1st.
+
+
+\page
+{{pageNumber,auto}}
 
 #### Jump
 *1st-level Transmutation*  
@@ -7565,10 +8137,23 @@ You touch a willing creature and greatly alter its buoyancy. Once on each of its
 You place a binding on a creature you can see within range. Until the start of your next turn, any time that creature deals damage with its Action, Bonus action, or Reaction, they take Radiant damage equal to the damage dealt. The target is aware of the effect of this spell while affected. After reflecting 10 damage, the spell ends.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the maximum damage increases by 10 for each Spell Slot level above 2nd.
-\page
-{{pageNumber,auto}}
 
+#### Living Flame
+*1st-level Evocation*  
+**Classes:** Cleric, Druid, Paladin, Shaman  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** V  
+**Duration:** Instantaneous  
 
+Flickering flames hurtle toward a creature you choose within range. Choose one of these options:
+
+***Healing Flames.*** The target regains 2d6 Hit Points. This option has no effect on undead or constructs.
+
+***Searing Flames.*** Make a ranged spell attack against the target. On a hit, the target takes 2d8 Fire damage.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can choose one additional target for every two slot levels above 1st (two targets with a 3rd or 4th level slot, three targets with a 5th or 6th level slot, four targets with a 7th or 8th level slot, and five targets with a 9th level slot). You choose the flames' effect separately for each target.
+\column
 
 #### Longstrider
 *1st-level Transmutation*  
@@ -7607,8 +8192,8 @@ You create three glowing darts of magical force. Each dart strikes a creature of
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.
 
 
-\column
-
+\page
+{{pageNumber,auto}}
 #### Magnify Gravity
 *1st-level Transmutation*  
 **Classes:** Magus, Psion, Sorcerer, Wizard  
@@ -7641,9 +8226,7 @@ You hurl a glob of acid at a creature within range, making a ranged spell attack
 
 }}
 
-\page
-{{pageNumber,auto}}
-
+\column
 
 #### Mind Ray
 *1st-level Enchantment*  
@@ -7656,6 +8239,10 @@ You hurl a glob of acid at a creature within range, making a ranged spell attack
 You launch a ray of mental energy from your mind at the mind of another creature within range. This Line passes through cover and barriers that do not block magical effects, and the target must make a Wisdom saving throw. On failure, it takes 2d8 Psychic damage and has Disadvantage on the next attack roll or ability check it makes before the start of your next turn. On success, it takes half as much damage and suffers no additional effect.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d8 for each level above 1st.
+\page
+{{pageNumber,auto}}
+
+
 
 #### Minor Drain
 *1st-level Necromancy*  
@@ -7668,6 +8255,18 @@ You launch a ray of mental energy from your mind at the mind of another creature
 You send a pulse of necrotic energy towards a target, sucking its life essence away. Make a ranged spell attack. On a hit, the target takes 3d6 Necrotic damage, and you gain half the damage dealt as Temporary Hit Points. 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.
+
+#### Moonfire
+*1st-level Evocation*  
+**Classes:** Bard, Cleric, Druid, Shaman  
+**Casting Time:** Bonus Action  
+**Range:** 60 feet  
+**Components:** V  
+**Duration:** 1 round  
+
+A beam of lunar light burns a creature you can see within range. The target must make a Dexterity saving throw. On a failed save, it takes 2d8 Radiant damage, sheds Dim Light in a 10-foot radius, and can't benefit from the Invisible condition until the end of its next turn. At the end of its next turn, it takes an extra 1d8 Radiant damage, and the spell ends. On a successful save, it takes half the initial damage only.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, both the initial and the later damage increase by 1d8 for each slot level above 1st.
 \column
 
 #### Multishot
@@ -7769,8 +8368,20 @@ You remove poison and rot from nonmagical food and drink in a 5-foot-radius Sphe
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the area of effect doubles in size for each slot level above 1st (to a maximum radius of 1,000 feet at 9th level).
 
 
+
 \page
 {{pageNumber,auto}}
+#### Quick Clothier
+*1st-level Transmutation*  
+**Classes:** Artificer, Bard, Wizard  
+**Casting Time:** Action  
+**Range:** Touch  
+**Components:** V, S, M (a set of clothing)  
+**Duration:** 24 hours  
+
+You alter the appearance of a set of nonmagical clothing that isn't being worn by someone else. You determine the color, styling, decoration, and form the clothing takes, though you can't generate clothes worth more than 15 gp. For example, you could transform a tattered robe into fine clothes, or vice versa. At the end of the spell's duration, the altered clothing returns to its original form.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can alter one additional set of clothing for each slot level above 1st, and the maximum value of each set increases by 15 gp for each slot level above 1st.
 
 #### Ray of Sickness
 *1st-level Necromancy*  
@@ -7783,6 +8394,8 @@ You remove poison and rot from nonmagical food and drink in a 5-foot-radius Sphe
 You shoot a greenish ray at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 2d8 Poison damage and has the Poisoned condition until the end of your next turn.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.
+
+\column
 
 #### Rotting Curse
 *1st-level Necromancy*  
@@ -7804,6 +8417,24 @@ You inflict a rotting decay on a creature, causing it to begin to rot. For the d
 | 5th          | 24 hours     | 
 | 7th+         | Until dispelled     | 
 
+#### Rune Strike
+*1st-level Evocation*  
+**Classes:** Cleric, Paladin  
+**Casting Time:** On Hit  
+**Range:** Self  
+**Components:** V  
+**Duration:** Instantaneous  
+
+When you hit a target with a melee weapon attack or an Unarmed Strike, you can channel runic power into the blow. The target takes an extra 2d8 Necrotic damage. The damage increases by 1d8 if the target is a Celestial.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.
+
+
+
+\page
+{{pageNumber,auto}}
+
+
 #### Sanctuary
 *1st-level Abjuration*  
 **Classes:** Artificer, Cleric, Shaman, Vessel  
@@ -7817,6 +8448,18 @@ You ward a creature within range against attacks. Until the spell ends, any crea
 The spell ends if the warded creature makes an attack roll, casts a spell, or deals damage.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, the number of creatures you can affect increases by 1 for each 2 slot levels above 1st. If one of the warded creatures makes an attack, casts a spell that affects an enemy, or deals damage to another creature, the effect ends for that creature.
+
+#### Scourge Strike
+*1st-level Necromancy*  
+**Classes:** Cleric, Paladin, Ranger, Shaman  
+**Casting Time:** On Hit  
+**Range:** Self  
+**Components:** V  
+**Duration:** 1 minute  
+
+When you hit a target with a melee weapon attack or an Unarmed Strike, you can infuse the blow with festering necrotic power. The target takes an extra 2d6 Necrotic damage, and it must succeed on a Constitution saving throw or have the Poisoned condition until the spell ends. At the end of each of its turns, the Poisoned target repeats the save, ending the spell on itself on a success.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.
 
 #### Searing Smite
 *1st-level Evocation*  
@@ -7844,9 +8487,6 @@ You touch a piece of ammunition or weapon with the thrown property imbuing it wi
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can target one more ammunition or make one more attack before the spell ends (if you target a thrown weapon) for each slot level above 1st.
 
-\page
-{{pageNumber,auto}}
-
 #### Sense Blood
 *1st-level Divination (blood magic) (ritual)*  
 **Classes:** Magus, Shaman, Sorcerer, Warlock, Wizard  
@@ -7859,6 +8499,10 @@ You gain the ability to sense the blood of other creatures. For the duration, yo
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd or 4th level, the duration becomes 8 hours. When you use a Spell Slot of 5th level or higher, the duration becomes 24 hours.
 
+
+
+\page
+{{pageNumber,auto}}
 #### Shadow Bind
 *1st-level Illusion*  
 **Classes:** Magus, Shaman, Sorcerer, Vessel, Warlock, Wizard  
@@ -7871,6 +8515,19 @@ You cause solidified tendrils of shadow to spring from a Medium or smaller creat
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can target either one additional creature or a creature of one size category larger than medium for each slot level above 1st.
 
+#### Shadow Word: Pain
+*1st-level Necromancy*  
+**Classes:** Bard, Cleric, Psion, Shaman, Sorcerer, Vessel, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** V  
+**Duration:** 1 minute  
+
+Speaking a word of dark power, you cause one creature within range to suffer agonizing pain. The target must make a Wisdom saving throw. On a failed save, it takes Psychic damage equal to 1d10 plus your spellcasting ability modifier and is cursed for the duration. On a successful save, it takes half as much damage only.
+
+Until the curse ends, the target takes 1d10 Psychic damage at the start of each of its turns. It repeats the save at the end of each of its turns, ending the curse on a success.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the initial damage increases by 1d10 for each slot level above 1st.
 
 #### Shield
 *1st-level Abjuration*  
@@ -8016,7 +8673,7 @@ Until the start of your next turn, you can use your Reaction when you take Slash
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d10 for each slot level above 1st.
 
 \page
-{{pageNumber 1}}
+{{pageNumber,auto}}
 
 #### Summon Ooze
 *1st-level Conjuration*  
@@ -8079,6 +8736,18 @@ If you move more than 100 feet from the disk (typically because it can't move ar
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, for each slot level above 1st, the duration of the spell increases by 1 hour, the radius of the disk by 1 foot, and the carrying capacity by 100 pounds. In addition, for the duration of the spell you can use a Bonus action to re-summon the disk after it has vanished. You can do this once for each slot level above 1st.
 
+#### Throw Glaive
+*1st-level Evocation*  
+**Classes:** Magus, Ranger, Sorcerer, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** V, S  
+**Duration:** Instantaneous  
+
+You create a spectral glaive and hurl it at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d8 Slashing damage plus 1d8 Acid, Cold, Fire, Lightning, or Necrotic damage (your choice when you cast the spell), and the glaive ricochets to a different target of your choice within 30 feet of the target. Make a new attack roll and damage roll against the new target.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the elemental damage increases by 1d8 for each slot level above 1st. The glaive can ricochet a maximum number of times equal to the level of the slot expended, and a creature can be targeted only once by each casting of this spell.
+
 #### Thunder Punch
 *1st-level Evocation*  
 **Classes:** Bard, Magus, Sorcerer, Wizard  
@@ -8090,7 +8759,6 @@ If you move more than 100 feet from the disk (typically because it can't move ar
 You charge your hand (or similar appendage) with thunder power. Make a melee spell attack against the target. On a hit, there is a thunderous crash audible from up to 300 feet of you and the target takes 3d8 Thunder damage, and is knocked 10 feet away from you.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.
-\column
 
 #### Thunderous Smite
 *1st-level Evocation*  
@@ -8106,6 +8774,9 @@ If your target is a construct or an earth elemental the bonus Thunder damage inc
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the Thunder damage increases by 1d8, and the target is pushed an additional 10 feet away from you in a straight Line for each Spell Slot level above 1st.
 
+\page
+{{pageNumber,auto}}
+
 #### Thunderwave
 *1st-level Evocation*  
 **Classes:** Bard, Druid, Magus, Sorcerer, Vessel, Wizard  
@@ -8119,8 +8790,6 @@ A wave of thunderous force sweeps out from you. Each creature in a 15-foot Cube 
 In addition, unsecured objects that are completely within the area of effect are automatically pushed 10 feet away from you by the spell's effect, and the spell emits a thunderous boom audible out to 300 feet.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.
-\page
-{{pageNumber,auto}}
 
 #### Torrent
 *1st-level Evocation*  
@@ -8133,6 +8802,7 @@ In addition, unsecured objects that are completely within the area of effect are
 A burst of elemental water erupts from you in a 30-foot-long and 5-foot-wide Line in a direction you choose, forcing any creature in that area to make a Strength saving throw. On a failure, it takes 1d12 Cold damage and is knocked back 10 feet in a straight Line and falls Prone. On a success, it takes half as much damage and is not moved or knocked Prone. A Huge or larger creature has Advantage on its saving throw.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d12 and it knocks back 10 additional feet for each slot level above 1st.
+\column
 
 #### Tranquil Moment
 *1st-level Divination*  
@@ -8158,7 +8828,6 @@ You infuse a creature you touch with life divested from the blood used in the ma
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the amount of Hit Points consumed by the spell increases by 5 (and the amount of Hit Points restored increases by a corresponding amount).
 
-\column
 #### Unburden
 *1st-level Transmutation*  
 **Classes:** Artificer  
@@ -8171,6 +8840,9 @@ A creature you touch no longer suffers the penalties to movement speed or to the
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.
 
+
+\page
+{{pageNumber,auto}}
 #### Unseen Servant
 *1st-level Conjuration (ritual)*  
 **Classes:** Bard, Psion, Shaman, Warlock, Wizard  
@@ -8186,8 +8858,19 @@ Once on each of your turns as a Bonus Action, you can mentally command the serva
 If you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends.
 
 ***At Higher Levels.*** When you cast this spell using a spell  slot of 2nd level or higher, for each slot level above 1st, the servant has an additional 1d8 Hit Points and increases its Strength by 2.
-\page
-{{pageNumber,auto}}
+
+#### Vampiric Blood
+*1st-level Necromancy*  
+**Classes:** Cleric, Paladin, Shaman, Vessel, Warlock  
+**Casting Time:** Action  
+**Range:** Self  
+**Components:** V  
+**Duration:** Concentration, up to 1 minute  
+
+Dark energy surges through your veins, bolstering your vitality. For the duration, your Hit Point maximum increases by 10, and you gain the same number of Hit Points. In addition, whenever you regain Hit Points, you regain an extra 1d6 Hit Points. When the spell ends, your Hit Point maximum returns to normal, and your current Hit Points are reduced if they exceed the new maximum.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the extra healing increases by 1d6 for each slot level above 1st.
+\column
 
 #### Violent Updraft
 *1st-level Transmutation*  
@@ -8226,7 +8909,14 @@ You hurl a disorienting magical force toward one creature within range. The targ
 On a failed save, the target takes 2d4 force damage, its speed is halved until the start of your next turn, and on its next turn it can take only an action or a bonus action, not both. On a successful save, the target takes half as much damage only.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 2d4 for each slot level above 1st.
-\column
+
+
+
+
+
+
+\page
+{{pageNumber,auto}}
 
 #### Water Blast
 *1st-level Conjuration*  
@@ -8256,9 +8946,7 @@ The spell immediately ends if you are forced to move more than 30 feet away from
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, both the initial and subsequent damage increases by 1d12 for each slot level above 1st.
 
-
-\page
-{{pageNumber,auto}}
+\column
 #### Wrathful Smite
 *1st-level Evocation*  
 **Classes:** Paladin  
@@ -8782,6 +9470,20 @@ You become a burst of elemental wind until the start of the next turn. You gain 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the Fly Speed increases by 5 feet for each slot level above 2nd.
 
+#### Binding Promise
+*2nd-level Abjuration*  
+**Classes:** Bard, Cleric, Paladin, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** Touch  
+**Components:** V, S  
+**Duration:** 24 hours  
+
+You touch a willing creature, and either you or that creature speaks a promise of no more than 25 words, which the promiser vows to keep. The other party is the witness to the oath. Alternatively, you and the creature can each speak a promise of no more than 25 words to the other, making a mutual oath. In a mutual oath, each of you is both a promiser and a witness.
+
+For the duration of the spell, if a promiser knowingly breaks their promise, the witness immediately knows of the breach if it is within 1 mile, and the promiser starts burning, taking 1 Fire damage at the start of each of their turns until they or another creature uses an Action to put out the flames.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the duration increases to 8 days (3rd level), 30 days (4th level), or until dispelled (5th level or higher), and the damage increases by 1 for each slot level above 2nd.
+
 #### Blazing Beacon
 *2nd-level Evocation*  
 **Classes:** Cleric, Paladin, Vessel, Warlock  
@@ -8808,6 +9510,10 @@ You can blind or deafen a foe. Choose one creature that you can see within range
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.
 
+
+\page
+{{pageNumber,auto}}
+
 #### Blood Divination
 *2nd-level Divination (blood magic)*  
 **Classes:** Shaman, Sorcerer, Warlock, Wizard  
@@ -8822,9 +9528,6 @@ If the blood is more than 24 hours old, the spell becomes more difficult, and yo
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the DC for old blood decreases by 2 for each slot level above 2nd.
 
-\page
-{{pageNumber,auto}}
-
 #### Blood Wave
 *2nd-level Transmutation (blood magic)*  
 **Classes:** Sorcerer, Vessel, Warlock, Wizard  
@@ -8838,6 +9541,7 @@ You release a wave of magical blood that spreads out in a 15-foot Cone. Creature
 When the wave passes over a creature that has died within the last minute or kills a creature, if that creature had blood, it strengthens the wave and causes it to travel an additional 10 feet (turning it into a 20-foot Cone or more), up to a maximum of twice its original length.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the spell's range increases by 5 feet and the Necrotic damage increases by 1d6 damage for each slot level above 2nd.
+\column
 
 #### Bloody Burst
 *2nd-level Necromancy (blood magic)*  
@@ -8851,7 +9555,6 @@ You cause a creature's blood to erupt outward in a violent burst. The target mus
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage to the target increases by 2d6, and creatures within 10 feet take an additional 1d6 damage for each level over 2nd.
 
-\column
 
 #### Blur
 *2nd-level Illusion*  
@@ -8864,6 +9567,10 @@ You cause a creature's blood to erupt outward in a violent burst. The target mus
 Your body becomes blurred, shifting and wavering to all who can see you. For the duration, any creature has Disadvantage on attack rolls against you. An attacker has Immunity to this effect if it doesn't rely on sight, as with Blindsight, or can see through illusions, as with Truesight.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, you gain 5 temporary hit points for each slot level above 2nd. These are lost when the spell ends.
+
+
+\page
+{{pageNumber,auto}}
 
 #### Boil Blood
 *2nd-level Necromancy*  
@@ -8879,9 +9586,6 @@ At the end of each of its turns, the target can make another Constitution saving
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 2d4 for each slot level above 2nd.
 
-\page
-{{pageNumber,auto}}
-
 #### Borrowed Knowledge
 *2nd-level Divination*  
 **Classes:** Bard, Cleric, Shaman, Vessel, Warlock, Wizard  
@@ -8893,6 +9597,7 @@ At the end of each of its turns, the target can make another Constitution saving
 You draw on knowledge from spirits of the past. Choose one skill or tool in which you lack proficiency. For the spell's duration, you have proficiency in the chosen skill. The spell ends early if you cast it again.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you gain proficiency in an additional skill or tool for each two slot levels above 2nd. If you cast this spell using a Spell Slot of 3rd level or higher, you can also choose a skill in which you are already proficient. You instead gain expertise (doubling your proficiency bonus for any ability check you make with the skill) in that skill. If you already had expertise, you instead can reroll one of the dice once whenever you have Advantage on that ability check. 
+\column
 
 #### Branding Smite
 *2nd-level Evocation*  
@@ -8908,7 +9613,6 @@ If your target is a fiend or undead, or if it has the sunlight sensitivity trait
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the Radiant damage increases by 1d8 for each Spell Slot level above 2nd.
 
-\column
 #### Burning Strike
 *2nd-level Transmutation*  
 **Classes:** Magus, Paladin, Ranger  
@@ -8922,6 +9626,10 @@ As part of a weapon attack, you imbue your weapon or ammunition with licking mag
 The burning target sheds Bright Light in a 10-foot radius and Dim Light for an additional 10 feet and takes 1d4 Fire damage at the end of its turns unless a creature uses their action to put the flames out.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, both the initial and ongoing burn damage are increased by 1d4 damage.
+
+
+\page
+{{pageNumber,auto}}
 
 #### Calm Emotions
 *2nd-level Enchantment*  
@@ -8938,9 +9646,6 @@ Each Humanoid in a 20-foot-radius Sphere centered on a point you choose within r
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, the range and area of effect both increase by 10 feet for each slot level above 2nd.
 
-\page
-{{pageNumber,auto}}
-
 #### Chromatic Blade (Elemental Blade)
 *2nd-level Evocation*  
 **Classes:** Druid, Magus, Sorcerer, Wizard  
@@ -8956,6 +9661,7 @@ Whenever you would make a melee attack, you can make a melee spell attack with t
 While in your hand, the blade sheds Bright Light in a 10-foot radius and Dim Light an additional 10 feet beyond that.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d6 for every two slot levels above 2nd.
+\column
 
 #### Clay Touch
 *2nd-level Transmutation*  
@@ -8971,7 +9677,6 @@ Alternatively, you can touch a nonmagical object that isn't being worn or carrie
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the range of the spell increases by 10 feet for each level above 2nd.
 
-\column
 #### Cloud of Daggers
 *2nd-level Conjuration*  
 **Classes:** Bard, Magus, Sorcerer, Warlock, Wizard  
@@ -8985,6 +9690,13 @@ You conjure spinning daggers in a 5-foot Cube centered on a point within range. 
 On your later turns, you can take a Magic action to teleport the Cube up to 30 feet.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 2d4 for each slot level above 2nd.
+
+
+
+
+
+\page
+{{pageNumber,auto}}
 
 #### Combust
 *2nd-level Evocation*  
@@ -9000,12 +9712,6 @@ If the target is an inflammable object, the initial eruption of flame automatica
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the initial damage increases by 1d8 for each slot level after 2nd.
 
-
-
-
-\page
-{{pageNumber,auto}}
-
 #### Compelled Convulsion
 *2nd-level Necromancy (blood magic)*  
 **Classes:** Shaman, Sorcerer, Warlock, Wizard  
@@ -9017,6 +9723,31 @@ If the target is an inflammable object, the initial eruption of flame automatica
 You attempt to briefly take control of the blood of a creature within range you can see. The target must make a Constitution saving throw. On failure, you can force the creature to use its Reaction to move up to 10 feet (or its movement speed, whichever is less) and make a single weapon attack against a target of your choice within reach. Creatures without blood have Immunity to this effect.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can target an additional creature for each level above 2nd level.
+
+\column
+#### Conjure Tools
+*2nd-level Conjuration*  
+**Classes:** Artificer, Bard, Ranger, Wizard  
+**Casting Time:** Action  
+**Range:** 30 feet  
+**Components:** V, S  
+**Duration:** 8 hours  
+
+You conjure a set of Artisan's Tools of your choice in an unoccupied space within range. You have proficiency with these tools while you use them. At the end of the spell's duration, the tools vanish, but any items created or transformed with them remain. The spell ends early if you cast it again or if the tools are more than 10 feet away from you.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can conjure one additional set of Artisan's Tools for each slot level above 2nd. Each set can be a different type, and you have proficiency with each of them while you use them.
+
+#### Consecration
+*2nd-level Evocation*  
+**Classes:** Cleric, Paladin  
+**Casting Time:** Action  
+**Range:** Self (15-foot Emanation)  
+**Components:** V  
+**Duration:** Concentration, up to 1 minute  
+
+You consecrate the area in a 15-foot Emanation originating from you. Each creature of your choice that starts its turn in the Emanation takes 1d8 Radiant damage. The Emanation is Difficult Terrain for Fiends and Undead.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.
 
 #### Continual Flame
 *2nd-level Evocation (Ritual)*  
@@ -9030,7 +9761,11 @@ A flame springs from an object that you touch. The effect casts Bright Light in 
 
 ***At Higher Levels.*** Casting this spell using a Spell Slot of 3rd level or higher extends the radius of the Bright Light by 10 feet for each slot level above 2nd (to a maximum of 90 feet of Bright Light and 20 feet of Dim Light).
 
-\column
+
+\page
+{{pageNumber,auto}}
+
+
 #### Cordon of Arrows
 *2nd-level Transmutation*  
 **Classes:** Artificer, Ranger  
@@ -9059,8 +9794,6 @@ Make a ranged spell attack for each arc. On a hit, the target takes 1d12 Lightni
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you create one additional arc for each slot level above 2nd.
 
-\page
-{{pageNumber,auto}}
 #### Create Ooze
 *2nd-level Transmutation*  
 **Classes:** Artificer, Warlock, Wizard  
@@ -9076,7 +9809,6 @@ While it exists, the ooze follows the rules below.
 **Control.** Oozes you create with this spell follow your commands to the best of their abilities. If not given a command, the ooze remains in place and acts only to defend itself. In combat, the ooze shares your initiative and acts during your turn.
 
 As a bonus action, you can mentally command any number of oozes you created with this spell, provided they are within 120 feet of you. You can issue an individual command to each ooze, determining exactly how it acts, or you can set a general course of action (such as *“defend this hall”*). An ooze follows your commands until they are completed or control is released.
-
 **Slimy Bond.** While an ooze is under your control, you can’t regain the spell slot you spent to create it. When you finish a long rest, you can release control over any number of oozes you created with this spell to regain the spell slots spent on them.
 
 When released, oozes become hostile to all living creatures and seek out the nearest underground dungeon to inhabit.
@@ -9094,7 +9826,6 @@ When released, oozes become hostile to all living creatures and seek out the nea
 | 8th        | Black Pudding |
 | 9th        | Adult Oblex |
 
-\column
 #### Crescent Wind Slash
 *2nd-level Evocation*  
 **Classes:** Bard, Magus, Ranger, Sorcerer, Wizard  
@@ -9128,6 +9859,20 @@ On subsequent turns, the target can make a Wisdom saving throw at the end of eac
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.
 
+#### Curse of Agony
+*2nd-level Necromancy*  
+**Classes:** Bard, Cleric, Shaman, Vessel, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** 30 feet  
+**Components:** V, S  
+**Duration:** 1 minute  
+
+You curse one creature within range with excruciating pain. The target must make a Constitution saving throw. On a failed save, it takes 1d4 Psychic damage and is cursed for the duration. On a successful save, the spell ends.
+
+At the end of each of its turns, the cursed target takes Psychic damage and repeats the saving throw, ending the curse on a success. On a failed save, the damage die increases by one step (1d4 to 1d6, 1d6 to 1d8, 1d8 to 1d10, or 1d10 to 1d12, the maximum).
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the starting damage die increases by one step for each slot level above 2nd (to a maximum of 1d12).
+\column
 #### Dancing Object
 *2nd-level Transmutation*  
 **Classes:** Bard, Artificer, Sorcerer, Wizard  
@@ -9144,6 +9889,17 @@ If the object is securely attached to a surface or a larger object, such as a ch
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can animate one more object for each slot level above 2nd.
 
+
+{{descriptive
+
+{{font-family:WalterTurncoat Crown of Madness is a sinister Enchantment that embodies the darker side of magical manipulation. With a whispered incantation and subtle gestures, the caster inflicts a twisted curse upon a chosen humanoid within range. The victim's eyes blaze with a malevolent gleam as a crown of jagged iron materializes atop their head, marking them as puppets of the caster's will. This crown compels them to unleash their fury upon those around them, turning on their allies with violent intent. They are forced to wield their weapons against a mentally chosen target, all while bound within the web of madness the spell weaves. }}
+
+}}
+
+
+\page
+{{pageNumber,auto}}
+
 #### Dancing Wave
 *2nd-level Conjuration*  
 **Classes:** Druid, Shaman, Sorcerer, Wizard  
@@ -9157,16 +9913,6 @@ You summon a surging mass of water into existence at a point on the ground withi
 For the duration of the spell, as a Bonus action, you can move the wave of water up to 30 feet along a surface in any direction. The first time the wave enters any creature's space during your turn, they must make a Strength saving throw or take 2d6 Bludgeoning damage and be knocked Prone. A creature automatically fails this saving throw if they are Prone.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 2nd.
-
-{{descriptive
-
-{{font-family:WalterTurncoat Crown of Madness is a sinister Enchantment that embodies the darker side of magical manipulation. With a whispered incantation and subtle gestures, the caster inflicts a twisted curse upon a chosen humanoid within range. The victim's eyes blaze with a malevolent gleam as a crown of jagged iron materializes atop their head, marking them as puppets of the caster's will. This crown compels them to unleash their fury upon those around them, turning on their allies with violent intent. They are forced to wield their weapons against a mentally chosen target, all while bound within the web of madness the spell weaves. }}
-
-}}
-
-
-\page
-{{pageNumber,auto}}
 
 #### Darkness
 *2nd-level Evocation*  
@@ -9183,6 +9929,7 @@ Alternatively, you cast the spell on an object that isn't being worn or carried,
 If any of this spell's area overlaps with an area of light created by a spell of 2nd level or lower, the spell that created the light is dispelled.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, the radius increases by 5 feet for each slot level above 2nd. In addition, it dispels any magical light created by a spell of the same level or lower.
+\column
 
 #### Darkvision
 *2nd-level Transmutation*  
@@ -9196,7 +9943,18 @@ You touch a willing creature to grant it the ability to see in the dark. For the
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can affect an additional creature for each slot level above 2nd.
 
-\column
+#### Death and Decay
+*2nd-level Necromancy*  
+**Classes:** Cleric, Paladin, Shaman, Vessel, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** V  
+**Duration:** Instantaneous  
+
+Corruption ripples out in a 20-foot-radius Sphere from a point on the ground you can see within range. Each creature in that area must make a Wisdom saving throw. On a failed save, a creature takes 2d6 Necrotic damage and is cursed until the end of your next turn. If you deal damage to a cursed creature with an attack roll, it takes an extra 1d6 Necrotic damage. On a successful save, a creature takes half as much damage only.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the initial damage increases by 1d6 and the extra damage against cursed creatures increases by 1d6 for every two slot levels above 2nd.
+
 #### Death Armor
 *2nd-level Necromancy*  
 **Classes:** Shaman, Sorcerer, Warlock, Wizard  
@@ -9209,6 +9967,8 @@ For the duration, an inky aura surrounds one creature you touch. The target has 
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, the necrotic damage increases by 2d4 for each slot level above 2nd.
 
+\page
+{{pageNumber,auto}}
 #### Detect Thoughts
 *2nd-level Divination*  
 **Classes:** Bard, Psion, Sorcerer, Vessel, Wizard   
@@ -9229,9 +9989,7 @@ As a Magic action on your next turn, you can try to probe deeper into the target
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, on your action you can read the thoughts of an additional creature for each slot level above 2nd.
 
-
-\page
-{{pageNumber,auto}}
+\column
 
 #### Disorient
 *2nd-level Illusion*  
@@ -9259,6 +10017,11 @@ A distracting melody momentarily fills a 20-foot-radius Sphere centered on a poi
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the radius of the Sphere increases by 5 feet for each slot level above 2nd.
 
+
+\page
+{{pageNumber,auto}}
+
+
 #### Divine Judgement
 *2nd-level Evocation*  
 **Classes:** Cleric, Paladin   
@@ -9283,6 +10046,7 @@ You channel elemental power to form draconic wings, selecting an element from Ac
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d8 and the Fly Speed increases by 10 feet for each slot level above 2nd.
 
+\column
 #### Dragon's Breath
 *2nd-level Transmutation*  
 **Classes:** Sorcerer, Wizard   
@@ -9295,6 +10059,17 @@ You touch one willing creature and imbue it with the power to spew magical energ
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 2nd.
 
+#### Dream Breath
+*2nd-level Abjuration*  
+**Classes:** Bard, Cleric, Druid, Shaman  
+**Casting Time:** Action  
+**Range:** Self (15-foot Cone)  
+**Components:** V, S  
+**Duration:** Instantaneous  
+
+You exhale verdant healing magic. Each creature of your choice in a 15-foot Cone originating from you regains 2d6 Hit Points. This spell has no effect on undead or constructs.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the healing increases by 2d6 for each slot level above 2nd.
 
 \page
 {{pageNumber,auto}}
@@ -9315,6 +10090,7 @@ If a target drops to 0 Hit Points while in the dueling ground, the target is Sta
 When only one target remains in the dueling ground, runes matching those on the ground around the Sphere briefly flash around the remaining target's head like a crown.
 
 ***At Higher Levels.*** You can target one additional willing creature for each Spell Slot level above 2nd.
+
 #### Dust Devil
 *2nd-level Conjuration*  
 **Classes:** Druid, Ranger, Shaman, Sorcerer, Wizard   
@@ -9447,6 +10223,20 @@ The spell ends if you are Incapacitated or you can no longer speak. Creatures do
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the duration increases by 1 minute and the radius increases by 10 feet for each slot level above 2nd.
 
+#### Eruption
+*2nd-level Evocation*  
+**Classes:** Druid, Magus, Shaman, Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** V, S  
+**Duration:** Instantaneous  
+
+The ground in a 20-foot-radius Sphere centered on a point within range erupts with flames. Each creature in the Sphere must make a Dexterity saving throw, taking 3d8 Fire damage on a failed save or half as much damage on a successful one.
+
+The cracks turn the ground in the Sphere into Difficult Terrain until the end of your next turn, at which point they close.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.
+
 
 \column
 
@@ -9465,9 +10255,6 @@ Additionally, if the target ends their turn while concentrating on a spell, they
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can target one additional creature within range for each slot level above 2nd.
 
-\page
-{{pageNumber,auto}}
-
 #### Evil Mantra
 *2nd-level Enchantment*  
 **Classes:** Bard, Shaman, Vessel, Warlock   
@@ -9481,6 +10268,61 @@ You shout a sentence at a creature that can hear and understand you within range
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.
 
 
+\page
+{{pageNumber,auto}}
+
+
+#### Eye Beam
+*2nd-level Evocation*  
+**Classes:** Magus, Sorcerer, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** Self (15-foot Cone)  
+**Components:** V  
+**Duration:** Concentration, up to 1 minute  
+
+You concentrate your magic into your eyes. When you cast the spell, and as a Magic action on your subsequent turns for the duration, you can unleash a burst of searing energy. Each creature in a 15-foot Cone originating from you must make a Dexterity saving throw, taking 3d6 Force damage on a failed save or half as much damage on a successful one.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 2nd.
+
+#### Feral Prowl
+*2nd-level Transmutation*  
+**Classes:** Druid, Ranger, Shaman  
+**Casting Time:** Bonus Action  
+**Range:** Self  
+**Components:** V  
+**Duration:** 1 minute  
+
+You shape-shift into a Medium or smaller Beast of your choice with a Challenge Rating of 1/8 or lower. Your game statistics are replaced by the Beast’s, except you retain your alignment, personality, Hit Points, Hit Point Dice, and Intelligence, Wisdom, and Charisma scores. You gain a number of Temporary Hit Points equal to the Beast’s Hit Points. You have the Invisible condition until the spell ends. The spell ends early immediately when you have no more Temporary Hit Points remaining or after you make an attack roll, deal damage, cast a spell, or revert to your natural form (no action required).
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the maximum Challenge Rating of the Beast increases for each slot level above 2nd, as shown in the table below.
+
+| Spell Slot | Maximum CR |
+|:----------:|:----------:|
+| 2nd        | 1/8        |
+| 3rd        | 1/4        |
+| 4th        | 1/2        |
+| 5th        | 1          |
+| 6th        | 2          |
+| 7th        | 3          |
+| 8th        | 4          |
+| 9th        | 5          |
+
+
+\column
+#### Fiery Brand
+*2nd-level Evocation*  
+**Classes:** Cleric, Vessel, Warlock  
+**Casting Time:** Action  
+**Range:** 30 feet  
+**Components:** V  
+**Duration:** 1 minute  
+
+You magically place a fiery symbol on a creature within range, which must make a Wisdom saving throw. On a failed save, the creature takes 3d10 Fire damage and is cursed. While it remains cursed, you have Resistance to all damage it deals. On a successful save, it takes half as much damage only.
+
+A cursed creature repeats the save at the end of each of its turns, ending the spell on a success.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d10 for each slot level above 2nd.
+\page
 #### Find Steed
 *2nd-level Conjuration*  
 **Classes:** Paladin  
@@ -9678,6 +10520,19 @@ If the original d20 roll has Advantage or Disadvantage, the creature rolls the a
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.
 \page
 {{pageNumber,auto}}
+
+#### Frostscythe
+*2nd-level Evocation*  
+**Classes:** Paladin, Magus, Sorcerer, Vessel, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** Self (20-foot Cone)  
+**Components:** V, M (a melee weapon worth at least 1 sp)  
+**Duration:** Instantaneous  
+
+Sweeping the weapon used in the casting before you, you unleash a blast of icy cold. Each creature in a 20-foot Cone must make a Constitution saving throw. On a failed save, a creature takes 3d8 Cold damage and its Speed is reduced by 10 feet for 1 minute. On a successful save, a creature takes half as much damage only.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.
+
 #### Gentle Repose
 *2nd-level Necromancy (ritual)*  
 **Classes:** Cleric, Shaman, Wizard   
@@ -9704,7 +10559,6 @@ When you cast this spell, you skillfully reshape the memories of listeners in yo
 
 ***At Higher Levels.*** When you cast this spell using a 3rd level Spell Slot, you can make creatures forget everything you said for an additional 6 seconds of time for each spell level above 2nd.
 
-\column
 
 #### Gravity Surge
 *2nd-level Transmutation*  
@@ -10467,6 +11321,24 @@ A burst of cold energy emanates from you in a 30-foot Cone. Each creature in tha
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, increase the Cold damage by 1d8 for each slot level above 2nd.
 
+#### Roar of the Beast
+*2nd-level Transmutation*  
+**Classes:** Druid, Ranger, Shaman  
+**Casting Time:** Bonus Action  
+**Range:** Self  
+**Components:** V  
+**Duration:** 1 round  
+
+You shape-shift into a Large or smaller Beast of your choice with a Challenge Rating of 1 or lower. Your game statistics are replaced by the Beast's, except you retain your alignment, personality, Hit Points, Hit Point Dice, and Intelligence, Wisdom, and Charisma scores. You gain a number of Temporary Hit Points equal to the Beast's Hit Points. The spell ends early if you have no Temporary Hit Points left or if you revert to your natural form (no action required).
+
+You then let out a mighty roar. Until the start of your next turn, any creature that starts its turn within 5 feet of you has Disadvantage on attack rolls against any creature other than you.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the maximum Challenge Rating of the Beast increases by 1 for each slot level above 2nd.
+
+
+\page
+{{pageNumber,auto}}
+
 #### Rope Trick
 *2nd-level Transmutation*  
 **Classes:** Artificer, Wizard  
@@ -10485,9 +11357,6 @@ Anything inside the extradimensional space drops out when the spell ends.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can move the entrance to the extradimensional space as a Magic action. You can do this as many times as you like for the duration, but it can’t move more than 15 feet in any direction from its original location for each slot level above 2nd.
 
-\page
-{{pageNumber,auto}}
-
 #### Sanctified Charge
 *2nd-level Transmutation*  
 **Classes:** Cleric, Paladin  
@@ -10499,6 +11368,7 @@ Anything inside the extradimensional space drops out when the spell ends.
 Fueled by a burst of divine strength, you move up to 20 feet in a straight Line in a swift burst of movement, ending your charge early if you collide with a creature. A creature you collide with must make a Strength saving throw. On failure, they take 2d6 Radiant damage and are knocked Prone, or half as much damage on a successful save.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 2nd.
+\column
 
 #### Scorching Ray
 *2nd-level Evocation*  
@@ -10527,7 +11397,6 @@ You create and hurl a pulsing orb of energy at one creature within range. Make a
 ***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 2d4 for each slot level above 2nd.
 
 
-\column
 #### See Invisibility
 *2nd-level Divination*  
 **Classes:** Artificer, Bard, Psion, Sorcerer, Vessel, Wizard  
@@ -10540,6 +11409,13 @@ For the duration, you see Invisible creatures and objects as if they were visibl
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can grant the same ability to one additional creature within 10 feet of you for each slot level above 2nd.
 
+
+
+
+\page
+{{pageNumber,auto}}
+
+
 #### Seeking Orb
 *2nd-level Evocation*  
 **Classes:** Sorcerer, Wizard  
@@ -10551,12 +11427,6 @@ For the duration, you see Invisible creatures and objects as if they were visibl
 You create a Tiny orb of pure arcane energy that hovers within range, and designate a target creature within 120 feet. For the duration of the spell, at the end of each of your turns, the orb grows larger and moves 30 feet directly toward the creature. If the orb reaches the target, it detonates dealing 6d4 Force damage and an additional 2d4 damage for each round since you cast the spell to the target up to a maximum of 10d4. The spell ends after it deals damage. If the orb does not reach the target before the spell ends, it fades away without dealing damage.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the initial and maximum damage increases by 2d4 for each slot level above 2nd.
-
-
-
-\page
-{{pageNumber,auto}}
-
 
 #### Shadow Blade
 *2nd-level Illusion*  
@@ -10572,6 +11442,7 @@ If you drop the weapon or throw it, it dissipates at the end of the turn. Therea
 
 ***At Higher Levels.*** When you cast this spell using a 3rd  or 4th level Spell Slot, the damage increases to 3d8. When you cast it using a 5th  or 6th level Spell Slot, the damage increases to 4d8. When you cast it using a Spell Slot of 7th level or higher, the damage increases to 5d8.
 
+\column
 #### Shatter
 *2nd-level Evocation*  
 **Classes:** Bard, Magus, Sorcerer, Warlock, Wizard  
@@ -10599,6 +11470,23 @@ You cause a shield of ice to erupt, blocking the attack. The damage of the attac
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the amount of damage blocked increases by 1d8 for each slot level above 2nd.
 
+
+
+\page
+{{pageNumber,auto}}
+
+#### Sigil of Flame
+*2nd-level Evocation*  
+**Classes:** Magus, Sorcerer, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** 90 feet  
+**Components:** V  
+**Duration:** Instantaneous  
+
+You inscribe a sigil in the air that then appears on a creature you can see within range. The target must make a Constitution saving throw, taking 2d8 Fire damage on a failed save or half as much damage on a successful one. Whether or not the target fails its saving throw, it radiates heat in a 10-foot Emanation originating from itself until the end of its next turn. At the start of the target's next turn, the target and each creature in the Emanation must succeed on a Constitution saving throw or take 1d8 Fire damage.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, both the initial and the later damage increase by 1d8 for each slot level above 2nd.
+
 #### Silence
 *2nd-level Illusion (ritual)*  
 **Classes:** Bard, Cleric, Ranger, Vessel  
@@ -10625,8 +11513,6 @@ You can then choose a different creature you can see within range (you can choos
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can choose one additional creature to gain Advantage on its next d20 Test for each spell level above 2nd.
 
-\page
-
 #### Skywrite
 *2nd-level Transmutation (ritual)*  
 **Classes:** Artificer, Bard, Druid, Shaman, Wizard  
@@ -10652,6 +11538,11 @@ A swirling burst of freezing wind erupts at a point you choose within range. Eac
 The ground in the area is covered with slick ice and snow, making it Difficult Terrain until the start of your next turn.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.
+
+
+
+\page
+{{pageNumber,auto}}
 
 #### Song of Confidence
 *2nd-level Enchantment*  
@@ -10693,9 +11584,6 @@ Until the spell ends, one willing creature you touch gains the ability to move u
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 3rd level or higher, you can affect one additional creature for each slot level above 2nd.
 
-\page
-{{pageNumber,auto}}
-
 #### Spike Growth
 *2nd-level Transmutation*  
 **Classes:** Druid, Ranger, Shaman  
@@ -10722,7 +11610,10 @@ You summon a ghostly echo of yourself. It shares your space and acts automatical
 
 ***At Higher Levels.*** When you cast this spell with a 4th level or higher Spell Slot, you conjure another echo for each two levels above 2nd.
 
-\column
+
+\page
+{{pageNumber,auto}}
+
 #### Spiritual Weapon
 *2nd-level Evocation*  
 **Classes:** Cleric  
@@ -10749,9 +11640,7 @@ As a Bonus action on your later turns, you can move the force up to 20 feet and 
 You spray a 15-foot Cone of spectral cards. Each creature in that area must make a Dexterity saving throw. On a failed save, a creature takes 2d10 Force damage and has the Blinded condition until the end of its next turn. On a successful save, a creature takes half as much damage only.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d10 for each slot level above 2nd.
-
-\page
-{{pageNumber,auto}}
+\column
 
 #### Sprout Tree
 *2nd-level Transmutation*  
@@ -10783,7 +11672,11 @@ You evoke a burst of brilliant particles of force energy sweeping out in a 30-co
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the damage increases by 1d4 for each slot level above 2nd.
 
-\column
+
+
+\page
+{{pageNumber,auto}}
+
 #### Star Scry
 *2nd-level Divination (ritual)*  
 **Classes:** Druid, Shaman, Wizard  
@@ -10798,10 +11691,6 @@ If you give an inaccurate description or false name of the target, the spell fai
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the Intelligence (Navigator’s Tools) decreases by 1 for each level above 2nd.
 
-
-
-\page
-{{pageNumber,auto}}
 
 #### Stone Pillar
 *2nd-level Transmutation*  
@@ -10818,7 +11707,6 @@ If a pillar is created under a creature, that creature must succeed on a Dexteri
 The pillar has AC 5 and 30 Hit Points. When reduced to 0 Hit Points, a pillar crumbles into rubble, which creates an area of Difficult Terrain with a 10-foot radius that lasts until the rubble is cleared. Each 5-foot-diameter portion of the area requires at least 1 minute to clear by hand.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, you can summon another pillar for each slot level above 2nd.
-\column
 #### Suggestion
 *2nd-level Enchantment*  
 **Classes:** Bard, Psion, Sorcerer, Vessel, Warlock, Wizard  
@@ -11608,6 +12496,18 @@ You return to the other plane at the start of your next turn and when the spell 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, each time you roll the die you can choose to add or subtract 1 for each two slot levels above 3rd.
 
+#### Blistering Scales
+*3rd-level Transmutation*  
+**Classes:** Druid, Paladin, Ranger, Sorcerer, Wizard  
+**Casting Time:** Bonus Action  
+**Range:** 30 feet  
+**Components:** V, S, M (a dragon's scale)  
+**Duration:** Concentration, up to 1 minute  
+
+Choose a willing creature you can see within range. Five explosive scales form on the target, granting it a +1 bonus to AC for the duration. If a creature hits the target with a melee attack roll before the spell ends, a scale explodes, and the attacking creature must make a Dexterity saving throw or take 2d8 Fire damage. The spell ends early if the target has no explosive scales.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the number of explosive scales that form on the target increases by one for each slot level above 3rd.
+
 #### Blood Explosion
 *3rd-level Necromancy (blood magic)*  
 **Classes:** Sorcerer, Vessel, Warlock, Wizard  
@@ -11619,6 +12519,14 @@ You return to the other plane at the start of your next turn and when the spell 
 Targeting a Medium or larger corpse of a creature that had blood that has been slain within the last minute, you seize control of the blood within it causing it to explode into piercing crimson lances. Make a ranged spell attack against up to 4 creatures of your choice within 30 feet of the corpse. On hit, creatures take 3d8 Piercing damage and 4d8 Necrotic damage. A corpse cannot be targeted with this spell again.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the Necrotic damage increases by 1d8 for each Spell Slot level above 3rd.
+
+
+
+
+
+\page
+{{pageNumber,auto}}
+
 
 #### Bramble Barrier
 *3rd-level Transmutation*  
@@ -11634,11 +12542,6 @@ Each 5-foot-square portion of brambles can be cleared if they take 5 or more Fir
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can create two additional 5-foot squares of brambles for each slot level above 3rd.
 
-
-
-
-\page
-{{pageNumber,auto}}
 #### Brilliant Blade
 *3rd-level Evocation*  
 **Classes:** Cleric, Paladin  
@@ -11695,6 +12598,10 @@ You make a calming gesture, and up to three willing creatures of your choice tha
 
 ***At Higher Levels.*** If you cast this spell using a Spell Slot of 4th level or higher, you can target one additional creature for each spell level above 3rd.
 
+
+\page
+{{pageNumber,auto}}
+
 #### Cerebral Blast
 *3rd-level Evocation*  
 **Classes:** Psion  
@@ -11706,9 +12613,6 @@ You make a calming gesture, and up to three willing creatures of your choice tha
 Your mind unleashes a blast of overwhelming mental force in a 30-foot Cone. Creature in the area of this spell must make a Strength saving throw. On a failed save, a creature takes 5d8 Psychic damage and is pushed 20 feet directly away from you in a line, then falls Prone. On a success, creatures take half as much damage, remain in place, and don't fall Prone.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the magical Bludgeoning damage increases by 1d8 for each Spell Slot level above 3rd.
-
-\page
-{{pageNumber,auto}}
 
 #### Clairvoyance
 *3rd-level Divination*  
@@ -11946,6 +12850,17 @@ If any of this spell's area overlaps with an area of darkness created by a spell
 
 \page
 {{pageNumber,auto}}
+#### Demon Spikes
+*3rd-level Transmutation*  
+**Classes:** Paladin, Vessel, Warlock  
+**Casting Time:** Bonus Action  
+**Range:** Self  
+**Components:** V  
+**Duration:** 1 minute  
+
+You surge with infernal power and sprout hard, jagged spikes. You gain a +2 bonus to AC for the duration, and when a creature within 5 feet of you hits you with a melee attack roll, it takes 5 Piercing damage.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the bonus to AC increases by 1 for every two slot levels above 3rd, and the Piercing damage increases by 5 for each slot level above 3rd.
 
 #### Dimensional Anchor
 *3rd-level Conjuration*  
@@ -12041,6 +12956,21 @@ You touch a weapon and enhance it with elemental power. Choose one of the follow
 | 9 | 3 |4d6
 
 \column
+
+#### Emerald Blossom
+*3rd-level Conjuration*  
+**Classes:** Bard, Druid, Shaman  
+**Casting Time:** Bonus Action  
+**Range:** 60 feet  
+**Components:** V, S  
+**Duration:** Concentration, up to 1 minute  
+
+You conjure a spectral bulb that sprouts from the ground in an unoccupied space that you can see within range. The bulb lasts for the duration.
+
+The bulb emits healing magic in a 10-foot Emanation at the end of each of your turns. Allies of your choice in the Emanation regain 5 Hit Points. The bulb vanishes when it restores a total of 20 Hit Points. This spell has no effect on undead or constructs.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the total Hit Points the bulb can restore increases by 5 for each slot level above 3rd.
+
 #### Enemies Abound
 *3rd-level Enchantment*  
 **Classes:** Bard, Psion, Sorcerer, Warlock, Wizard  
@@ -12055,6 +12985,9 @@ Whenever the affected creature chooses another creature as a target, it must cho
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, you can affect one additional creature for each slot level above 3rd.
 
+\page
+{{pageNumber,auto}}
+
 #### Erode
 *3rd-level Conjuration*  
 **Classes:** Magus, Sorcerer, Wizard  
@@ -12066,8 +12999,6 @@ Whenever the affected creature chooses another creature as a target, it must cho
 You blast a target with a glob of acid. The target must make a Dexterity saving throw. On failure, the target takes 8d4 Acid damage immediately and becomes covered in acid. On a success, the target takes half as much damage and is not covered in acid. While covered in acid, the target takes 2d4 Acid damage at the end of each of its turns. The target or a creature within 5 feet of it can end this damage by using its action to clear away the acid.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage (both initial and later) increases by 1d4 for each slot level above 3rd.
-\page
-{{pageNumber,auto}}
 
 #### Erupting Earth
 *3rd-level Transmutation*  
@@ -12080,6 +13011,7 @@ You blast a target with a glob of acid. The target must make a Dexterity saving 
 Choose a point you can see on the ground within range. A fountain of churned earth and stone erupts in a 20-foot Cube centered on that point. Each creature in that area must make a Dexterity saving throw. A creature takes 3d12 Bludgeoning damage on a failed save, or half as much damage on a successful one. Additionally, the ground in that area becomes Difficult Terrain until cleared. Each 5-foot-square portion of the area requires at least 1 minute to clear by hand.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d12 for each slot level above 3rd.
+\column
 
 #### Fast Friends
 *3rd-level Enchantment*  
@@ -12096,7 +13028,6 @@ You can set the creature new tasks when a previous task is completed, or if you 
 When the spell ends, the creature knows it was Charmed by you.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.
-\column
 
 #### Fear
 *3rd-level Illusion*  
@@ -12111,6 +13042,9 @@ You project a phantasmal image of a creature's worst fears. Each creature in a 3
 While Frightened by this spell, a creature must take the Dash action and move away from you by the safest available route on each of its turns, unless there is nowhere to move. If the creature ends its turn in a location where it doesn't have Line of Sight to you, the creature can make a Wisdom saving throw. On a successful save, the spell ends for that creature.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the area of effect increases by 15 feet for each slot level above 3rd.
+
+\page
+{{pageNumber,auto}}
 
 #### Feign Death
 *3rd-level Necromancy (ritual)*  
@@ -12129,8 +13063,6 @@ The spell ends if the target moves, speaks or takes any action. Additionally, yo
 If the target is diseased or Poisoned when you cast the spell, or becomes diseased or Poisoned while under the spell's effect, the disease and poison have no effect until the spell ends.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, the duration increases to 8 hours (4th level), 1 day (5th level), 1 week (6th level), 1 month (7th level), 1 year (8th level), or permanent (9th level).
-\page
-{{pageNumber,auto}}
 
 #### Fire Cyclone
 *3rd-level Conjuration*  
@@ -12162,7 +13094,6 @@ The fire spreads around corners. It ignites flammable objects in the area that a
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.
 
-\column
 #### Fireburst Mine
 *3rd-level Abjuration*  
 **Classes:** Artificer  
@@ -12179,6 +13110,9 @@ A magical mine must be set 5 feet or more from another mine, and cannot be moved
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd.
 
+\page
+{{pageNumber,auto}}
+
 #### Flame Arrows
 *3rd-level Transmutation*  
 **Classes:** Artificer, Druid, Ranger, Sorcerer, Wizard  
@@ -12190,8 +13124,6 @@ A magical mine must be set 5 feet or more from another mine, and cannot be moved
 You touch a quiver containing ranged weapon ammunition. The first twelve pieces of ammunition drawn from the quiver deal Fire damage in place of their normal damage type, plus an additional 1d6 Fire damage on hit. If fired into a flammable object, it bursts into flame on hit. The magic of this spell ends for each piece of ammunition when it hits or misses, and the spell ends after twelve pieces of ammunition are fired.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can draw two additional pieces of ammunition from the quiver for each slot level above 3rd.
-\page
-{{pageNumber,auto}}
 
 #### Flamethrower
 *3rd-level Evocation*  
@@ -12246,6 +13178,17 @@ If you are within the spell's area, as part of the action you use to cast the sp
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd.
 
+#### Frozen Flurry
+*3rd-level Evocation*  
+**Classes:** Druid, Magus, Shaman, Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** 120 feet  
+**Components:** V, S  
+**Duration:** Instantaneous  
+
+You hurl three shards of ice at one target within range or at several. Make a ranged spell attack for each shard. On a hit, the target takes 4d6 Cold damage, and its Speed is reduced by 10 feet until the start of your next turn. On a Critical Hit, the target has the Restrained condition until the end of your next turn.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you create one additional shard of ice for each slot level above 3rd.
 \page
 {{pageNumber,auto}}
 
@@ -12348,7 +13291,17 @@ You may choose to make the spell not affect natural vegetation in the area.
 
 ***At Higher Levels.*** When you cast this spell using a slot of 4th level or higher, the initial damage increases by 2d4 for each level above 4th.
 
+#### Guided Prayer
+*3rd-level Evocation*  
+**Classes:** Cleric, Paladin  
+**Casting Time:** Reaction, which you take when you become Bloodied or take damage while you are Bloodied  
+**Range:** Self  
+**Components:** V  
+**Duration:** Instantaneous  
 
+You call out a prayer for guidance and regain Hit Points equal to 8d4 plus your spellcasting ability modifier. You have Advantage on the next attack roll you make before the end of your next turn.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the healing increases by 2d4 for each slot level above 3rd.
 \page
 {{pageNumber,auto}}
 
@@ -12458,6 +13411,25 @@ While the spell is active, as a Reaction to taking Bludgeoning, Piercing, or Sla
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th or higher, your movement speed after you use the spell’s Reaction is 5 feet for each spell level above 3rd, instead of 0.
 
+#### Imp Storm
+*3rd-level Conjuration*  
+**Classes:** Vessel, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** 120 feet  
+**Components:** V, S  
+**Duration:** Concentration, up to 1 minute  
+
+A demonic meteor hurtles from you to a point you choose within range and then erupts. Each creature in a 20-foot-radius Sphere centered on that point must make a Dexterity saving throw, taking 2d8 Fire damage plus 2d8 Necrotic damage on a failed save or half as much damage on a successful one.
+
+Demonic imps flit about the Sphere for the duration. A creature that enters the Sphere or ends its turn there must make a Dexterity saving throw, taking 1d8 Fire damage plus 1d8 Necrotic damage on a failed save or half as much damage on a successful one. A creature can be affected by this spell only once per turn.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the initial Fire and Necrotic damage each increase by 1d8 for each slot level above 3rd.
+
+
+
+\page
+{{pageNumber,auto}}
+
 #### Incite Greed
 *3rd-level Enchantment*  
 **Classes:** Cleric, Sorcerer, Warlock, Wizard  
@@ -12472,10 +13444,6 @@ At the end of each of its turns, an affected target can make a Wisdom saving thr
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can target one additional creature for each spell level above 3rd.
 
-
-\page
-{{pageNumber,auto}}
-
 #### Inflict Doubt
 *3rd-level Enchantment*  
 **Classes:** Bard, Psion, Shaman, Sorcerer, Vessel, Warlock, Wizard  
@@ -12487,6 +13455,30 @@ At the end of each of its turns, an affected target can make a Wisdom saving thr
 You inflict self-doubt on a creature you can see within range. The target must succeed on a Wisdom saving throw or have Disadvantage on D20 Tests for the duration. At the end of each of its turns, the target repeats the save, ending the spell on itself on a success.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.
+
+\column
+
+#### Infernal Metamorphosis
+*3rd-level Transmutation*  
+**Classes:** Paladin, Vessel, Warlock, Wizard  
+**Casting Time:** Bonus Action  
+**Range:** Self  
+**Components:** V, S, M (a soul fragment or similar token, which the spell consumes)  
+**Duration:** 1 minute  
+
+Uttering an incantation, you draw on infernal or void magic to transform yourself, taking on demonic features. You gain one of the following benefits of your choice until the spell ends:
+
+***Devourer.*** When you roll damage for a spell, weapon, or feature that deals Force damage, you can treat any 1 or 2 on a damage die as a 3.
+
+***Havoc.*** Whenever you hit a creature with a melee weapon attack, the target takes an extra 1d6 Fire damage.
+
+***Vengeance.*** You have a +2 bonus to AC, and your Hit Point maximum and current Hit Points increase by 5 for the duration. When the spell ends, your Hit Point maximum returns to normal, and your current Hit Points are reduced if they exceed the new maximum.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can choose one additional benefit for every two slot levels above 3rd (two benefits with a 5th level slot, three benefits with a 7th level slot). The extra damage of Havoc increases by 1d6 and the Hit Points granted by Vengeance increase by 5 for each slot level above 3rd.
+
+
+\page
+{{pageNumber,auto}}
 
 #### Instant Bulwark
 *3rd-level Transmutation*  
@@ -12501,7 +13493,6 @@ You cause a 15-foot-long, 10-foot-tall, several-inch-thick wall of earth to erup
 All damage the wall blocks is applied to the wall, even if that damage normally only affects creatures, but it takes the blocked damage only once, even if blocking the same damage against multiple creatures. The wall has 4d10 + your spellcasting modifier Hit Points and crumbles to dust when it is reduced to 0 Hit Points. Any damage remaining after the wall is destroyed is dealt as normal. If the wall is not destroyed, it crumbles at the start of your next turn.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the wall has 1d10 additional Hit Points and is 5 feet longer for each level above 3rd.
-\column
 
 #### Intellect Fortress
 *3rd-level Abjuration*  
@@ -12514,6 +13505,8 @@ All damage the wall blocks is applied to the wall, even if that damage normally 
 For the duration, you or one willing creature you can see within range has Resistance to Psychic damage, as well as Advantage on Intelligence, Wisdom, and Charisma saving throws.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can target one additional creature for each slot level above 3rd. The creatures must be within 30 feet of each other when you target them.
+
+\column
 
 #### Invoke Elemental (Conjure Elemental)
 *3rd-level Conjuration*  
@@ -12537,6 +13530,9 @@ Grasping the material component of the spell, you conjure an Elemental whose mak
 
 \page
 {{pageNumber,auto}}
+
+
+
 #### Invoke Fey (Conjure Fey)
 *3rd-level Conjuration*  
 **Classes:** Druid, Ranger, Warlock, Wizard  
@@ -12556,6 +13552,8 @@ You grasp the material component of this spell and call its Fey spirit to your a
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the CR of Fey this spirit can take on increases by 1 for each slot level above 3rd.
 
+\column
+
 #### Invoke Fiend (Conjure Fiend)
 *3rd-level Conjuration*  
 **Classes:** Warlock, Wizard  
@@ -12574,6 +13572,21 @@ Speaking its true name, you conjure a Fiend of CR 4 or lower to your aid. While 
 **Control.** If your concentration on this spell is broken, the Fiend remains. It instantly returns to its true form and is no longer under your control. For the duration of the spell, or until it is reduced to 0 hit points, it is Hostile to you and your allies, and will act according to its alignment. Devils seek to kill the spellcaster, and Demons kill indiscriminately.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the CR of the Fiends that you can conjure increases by 1 for each slot level above 3rd.
+
+#### Leeching Strike
+*3rd-level Necromancy*  
+**Classes:** Paladin, Ranger  
+**Casting Time:** On Hit  
+**Range:** Self  
+**Components:** V  
+**Duration:** Instantaneous  
+
+When you hit a target with a melee weapon attack or an Unarmed Strike, you can drain its vitality through the blow. The target takes an extra 3d8 Necrotic damage, and you regain 3d4 Hit Points.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d8, and the Hit Points you regain increase by 1d4, for each slot level above 3rd.
+\page
+{{pageNumber,auto}}
+
 
 #### Life Drain
 *3rd-level Necromancy*  
@@ -12603,9 +13616,7 @@ The spell has no effect on constructs or the undead.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd.
 
-\page
-{{pageNumber,auto}}
-
+\column
 #### Lightning Arrow
 *3rd-level Transmutation*  
 **Classes:** Artificer, Ranger  
@@ -12635,7 +13646,10 @@ A brilliant, blue-white beam of lightning flashes forth from your fingertips, fo
 The lightning ignites flammable objects in the area that aren't being worn or carried.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d12 for each slot level above 3rd.
-\column
+
+\page
+{{pageNumber,auto}}
+
 #### Lightning Shot
 *3rd-level Transmutation*  
 **Classes:** Ranger  
@@ -12647,11 +13661,6 @@ The lightning ignites flammable objects in the area that aren't being worn or ca
 As part of a ranged weapon attack, you can transmute a piece of ammunition, or the thrown weapon, into a bolt of lightning. When fired, it blasts out from you in a Line 100 feet long and 5 feet wide. Make the weapon's attack roll against each creature in that line, (Using the same roll against each creature) dealing 4d8 Lightning damage on hit, and half as much on a miss. This damage roll does not add any modifiers or bonus associated to weapon attacks. The lightning ignites flammable objects in the area that aren't being worn or carried.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d8 for each level above 3rd, up to a maximum of 6d8 at 5th level.
-
-\column
-
-\page
-{{pageNumber,auto}}
 
 #### Linked Glyphs
 *3rd-level Abjuration*  
@@ -12677,6 +13686,9 @@ When you inscribe the detection glyph, choose an alarm glyph or spell glyph to l
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher to create a spell glyph, you can store any spell of up to the same level as the slot you use.
 
+
+\page
+{{pageNumber,auto}}
 #### Magic Circle
 *3rd-level Abjuration*  
 **Classes:** Cleric, Magus, Paladin, Shaman, Warlock, Wizard  
@@ -12695,8 +13707,6 @@ Choose one or more of the following types of creatures: celestials, elementals, 
 When you cast this spell, you can elect to cause its magic to operate in the reverse direction, preventing a creature of the specified type from leaving the Cylinder and protecting targets outside it.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the duration increases by 1 hour for each slot level above 3rd.
-\page
-{{pageNumber,auto}}
 
 #### Major Image
 *3rd-level Illusion*  
@@ -12725,7 +13735,6 @@ Physical interaction with the image reveals it to be an illusion, for things can
 You cause a creature to lose much of their magical potency. The target must succeed on a Constitution saving throw, or all spells they cast for the duration have minimum impact with regards to any variable component or effect of the spell, such as the damage of the spell. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can affect one additional creature for every spell level above 3rd.
-\column
 
 
 #### Mass Healing Word
@@ -12740,6 +13749,10 @@ As you call out words of restoration, up to six creatures of your choice that yo
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the healing increases by 1d4 for each slot level above 3rd.
 
+
+
+\page
+{{pageNumber,auto}}
 #### Meld into Stone
 *3rd-level Transmutation (ritual)*  
 **Classes:** Cleric, Druid, Ranger, Shaman, Sorcerer  
@@ -12755,9 +13768,6 @@ While merged with the stone, you can't see what occurs outside it, and any Wisdo
 Minor physical damage to the stone doesn't harm you, but its partial destruction or a change in its shape (to the extent that you no longer fit within it) expels you and deals 6d6 Bludgeoning damage to you. The stone's complete destruction (or Transmutation into a different substance) expels you and deals 50 Bludgeoning damage to you. If expelled, you fall Prone in an unoccupied space closest to where you first entered.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can affect one additional creature for each slot level above 3rd.
-
-\page
-{{pageNumber,auto}}
 
 #### Melf's Minute Meteors
 *3rd-level Evocation*  
@@ -12782,7 +13792,7 @@ You create six tiny meteors in your space. They float in the air and orbit you f
 You drastically reduce your weight, tripling your jump distance and allowing you to immediately jump up to your maximum jumping distance without spending your movement. When you reach the height of your jump, your weight and density are rapidly increased, causing you to crash down with great force. You take no falling damage provided you fell less than 100 feet from where you started your movement, and all creatures within 10 feet of where you land must succeed a Strength saving throw, or take 2d10 Bludgeoning damage and be knocked Prone. On successful save, creatures take half as much damage and are not knocked Prone.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d10 for each slot level above 3rd.
-\column
+
 #### Mouth Latch
 *3rd-level Illusion*  
 **Classes:** Bard, Psion, Sorcerer, Wizard   
@@ -12795,6 +13805,11 @@ You attempt to prevent a creature from uttering words. The creature must succeed
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.
 
+
+
+
+\page
+{{pageNumber,auto}}
 
 #### Motivational Speech
 *3rd-level Enchantment*  
@@ -12809,8 +13824,6 @@ Choose up to five creatures within range that can hear you. For the duration, ea
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the Temporary Hit Points increase by 5 for each slot level above 3rd.
 
 
-\page
-{{pageNumber,auto}}
 #### Mounting Paranoia
 *3rd-level Illusion*  
 **Classes:** Vessel, Warlock, Wizard  
@@ -12825,6 +13838,7 @@ At the end of each of the creatures turns, it makes a Wisdom saving throw. On fa
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can affect one additional creature for each slot level above 3rd.
 
+\column
 #### Mutate
 *3rd-level Transmutation*  
 **Classes:** Druid, Shaman, Sorcerer, Vessel, Warlock, Wizard  
@@ -12850,6 +13864,11 @@ For the duration of the spell, you can take the Magic action to change one or al
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th or higher, you can select one additional property from the list of options, with one additional property per spell level above 3rd.
 
+
+
+\page
+{{pageNumber,auto}}
+
 #### Nondetection
 *3rd-level Abjuration*  
 **Classes:** Bard, Psion, Ranger, Shaman, Sorcerer, Vessel, Warlock, Wizard  
@@ -12862,9 +13881,6 @@ For the duration, you hide a target that you touch from divination magic. The ta
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can affect one additional creature for each slot level above 3rd.
 
-
-\page
-{{pageNumber,auto}}
 #### Phantom Steed
 *3rd-level Illusion (ritual)*  
 **Classes:** Shaman, Wizard  
@@ -12891,7 +13907,6 @@ You deliver a mote of divine wrath to a point you can see within range. Each cre
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.
 
-\column
 #### Plant Growth
 *3rd-level Transmutation*  
 **Classes:** Bard, Druid, Ranger, Shaman  
@@ -12908,6 +13923,22 @@ This spell channels vitality into plants. The casting time you use determines wh
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, if you cast it using an Action, the area of effect increases by 50 feet for each slot level above 3rd. If you cast it using the longer effect, the casting time is reduced by 1 hour for each slot level above 3rd.
 
+#### Prayer of Mending
+*3rd-level Abjuration*  
+**Classes:** Cleric, Paladin  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** V, M (a pinch of powdered silver)  
+**Duration:** 1 minute  
+
+You place a holy ward on one willing creature within range. The next time that creature takes damage, the ward activates, and the creature regains Hit Points equal to 1d8 plus your spellcasting ability modifier. The ward then jumps to another ally of your choice within 30 feet of the warded creature, with the same effect. If no ally is in range, the spell ends, and it ends after the ward has healed five times. This spell has no effect on undead or constructs.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the ward can heal one additional time for each slot level above 3rd.
+
+
+\page
+{{pageNumber,auto}}
+
 #### Protection from Energy
 *3rd-level Abjuration*  
 **Classes:** Artificer, Cleric, Druid, Magus, Ranger, Shaman, Sorcerer, Vessel, Wizard  
@@ -12919,9 +13950,6 @@ This spell channels vitality into plants. The casting time you use determines wh
 For the duration, the willing creature you touch has Resistance to one damage type of your choice: Acid, Cold, Fire, Lightning or Thunder.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can affect one additional creature for each slot level above 3rd.
-
-\page
-{{pageNumber,auto}}
 
 #### Pulse Wave
 *3rd-level Evocation*  
@@ -12948,7 +13976,22 @@ In addition, unsecured objects that are completely within the cone are likewise 
 You cause the ground in a 20-foot radius centered on a point you can see to turn to quicksand for the duration of the spell. A creature moving through or out of the area must spend 4 feet of movement for every 1 foot it moves. A creature that ends their turn must make a Strength saving throw. On failure, they fall Prone.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the radius increases by 10 feet for each slot level above 3rd.
-\column
+
+#### Rain of Fire
+*3rd-level Evocation*  
+**Classes:** Druid, Shaman, Sorcerer, Vessel, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** 120 feet  
+**Components:** V, S  
+**Duration:** Concentration, up to 1 minute  
+
+Hellfire rains down in a 20-foot-radius, 40-foot-high Cylinder centered on a point within range. Until the spell ends, you can take a Magic action on later turns to move the Cylinder up to 60 feet.
+
+When the Cylinder appears, each creature in it must make a Dexterity saving throw, taking 3d8 Fire damage on a failed save or half as much damage on a successful one. A creature also makes this save when the spell's area moves into its space and when it enters the spell's area or ends its turn there. A creature makes this save only once per turn.
+
+You have Advantage on spell attack rolls against a creature in the Cylinder, and when you hit such a creature with a spell attack, it takes an extra 1d6 Necrotic damage.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the Fire damage increases by 1d8 for each slot level above 3rd.
 
 #### Rain of Spiders
 *3rd-level Conjuration*  
@@ -12967,6 +14010,9 @@ The swarm uses the caster’s spell attack modifier when attacking (if it is hig
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the radius increases by 10 feet for each slot level above 3rd.
 
 
+\page
+{{pageNumber,auto}}
+
 
 #### Remove Curse
 *3rd-level Abjuration*  
@@ -12979,8 +14025,6 @@ The swarm uses the caster’s spell attack modifier when attacking (if it is hig
 At your touch, all curses affecting one creature or object end. If the object is a cursed magic item, its curse remains, but the spell breaks its owner's attunement to the object so it can be removed or discarded.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can affect one additional creature for each slot level above 3rd.
-\page
-{{pageNumber,auto}}
 
 #### Remove Gravity
 *3rd-level Transmutation*  
@@ -13008,7 +14052,38 @@ While dancing, the target must use all its movement to dance without leaving its
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature who can hear you within range for each slot level above 3rd.
 
-\column
+#### Regrowth
+*3rd-level Abjuration*  
+**Classes:** Druid, Shaman  
+**Casting Time:** Action  
+**Range:** 120 feet  
+**Components:** V  
+**Duration:** Concentration, up to 1 minute  
+
+One creature you can see within range regains 3d8 Hit Points. For the duration, the target regains 1d8 Hit Points at the start of each of your turns. This spell has no effect on undead or constructs.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the initial healing increases by 1d8.
+
+#### Remorseless Winter
+*3rd-level Evocation*  
+**Classes:** Magus, Shaman, Sorcerer, Vessel, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** Self (30-foot Emanation)  
+**Components:** V  
+**Duration:** Instantaneous  
+
+You drain the warmth from nearby creatures. Each creature of your choice in a 30-foot Emanation originating from you must make a Constitution saving throw, taking 6d6 Cold damage on a failed save or half as much damage on a successful one. Whether or not a creature succeeds on its saving throw, its Speed is reduced to 10 feet until the end of its next turn as clinging frost hinders its movement.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.
+
+
+
+
+
+
+\page
+{{pageNumber,auto}}
+
 #### Revivify
 *3rd-level Necromancy*  
 **Classes:** Artificer, Cleric, Druid, Paladin, Ranger  
@@ -13032,12 +14107,6 @@ You touch a creature that has died within the last minute. That creature returns
 You transform some of your blood into three floating spears of crimson power. While you have one or more spear remaining, you can take the Magic action or use a Bonus action to launch one of the spears at a creature within range, making a ranged spell attack. On hit, the target takes 2d6 Piercing damage and 2d6 Necrotic damage, and you regain 5 Hit Points.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, for each Spell Slot level above 3rd, you can sacrifice 2 additional Hit Points to create an additional spear.
-
-
-
-\page
-{{pageNumber,auto}}
-
 
 #### Seismic Wave
 *3rd-level Transmutation*  
@@ -13067,7 +14136,23 @@ Upon receiving your message, a creature can block your ability to reach it again
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the message length you can send increases by 25 words for each slot level above 3rd.
 
-\column
+#### Serpent Sting
+*3rd-level Necromancy*  
+**Classes:** Ranger  
+**Casting Time:** On Hit  
+**Range:** Self  
+**Components:** V  
+**Duration:** 1 minute  
+
+When you hit a creature with a weapon attack, you can envenom the strike. The target takes an extra 3d6 Poison damage from the attack, and it has the Poisoned condition until the spell ends. At the end of each of its turns, the Poisoned target must make a Constitution saving throw. On a failed save, it takes 2d6 Poison damage. On a successful save, the spell ends.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the initial damage increases by 1d6 and the damage on a failed save increases by 1d6 for each slot level above 3rd.
+
+
+
+\page
+{{pageNumber,auto}}
+
 #### Silver Lance
 *3rd-level Evocation*  
 **Classes:** Cleric, Sorcerer, Wizard  
@@ -13093,10 +14178,7 @@ Until the spell ends, sleet falls in a 40-foot-tall, 20-foot-radius Cylinder cen
 Ground in the Cylinder is Difficult Terrain. When a creature enters the Cylinder for the first time on a turn or starts its turn there, it must succeed on a Dexterity saving throw or have the Prone condition. If it is concentrating on a spell, it must also succeed on a Constitution saving throws or lose Concentration.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the radius increases by 10 feet for each slot level above 3rd.
-
-\page
-{{pageNumber,auto}}
-
+\column
 
 #### Slow
 *3rd-level Transmutation*  
@@ -13116,7 +14198,7 @@ If the creature attempts to cast a spell with a casting time of an Action, roll 
 A creature affected by this spell makes another Wisdom saving throw at the end of each of its turns. On a successful save, the effect ends for it.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, for each slot level above 3rd, you can affect two additional creatures within a Cube 10 feet bigger on each side.
-\column
+
 #### Sonic Wave
 *3rd-level Conjuration*  
 **Classes:** Bard, Magus, Sorcerer, Wizard  
@@ -13130,6 +14212,21 @@ You forcefully clasp your hands and a shockwave of booming force shoots forth fr
 A creature can repeat this saving throw at the end of each of its turns, ending the effect on a success.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d8, and the cone increases by 5 feet for each slot level above 3rd.
+
+
+\page
+{{pageNumber,auto}}
+#### Soul Reap
+*3rd-level Necromancy*  
+**Classes:** Shaman, Sorcerer, Vessel, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** V, S  
+**Duration:** Instantaneous  
+
+You cut a hole in the fabric of reality, sending a bolt of cosmic matter toward a creature within range. Make a ranged spell attack against the target, which gains no benefit from Half Cover or Three-Quarters Cover. On a hit, the target takes 6d6 Force damage. If you roll a 6 on a d6 for this spell, you can roll another d6 and add it to the damage. When you cast this spell, the maximum number of these extra d6s you can add equals your spellcasting ability modifier.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.
 
 #### Speak with Dead
 *3rd-level Divination*  
@@ -13145,9 +14242,7 @@ Until the spell ends, you can ask the corpse up to five questions. The corpse kn
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can ask two more questions for each slot level above 3rd.
 
-\page
-{{pageNumber,auto}}
-
+\column
 #### Speak with Plants
 *3rd-level Transmutation*  
 **Classes:** Bard, Druid, Ranger  
@@ -13180,7 +14275,11 @@ You touch a willing creature. Until the spell ends, it becomes semi-incorporeal 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.
 
-\column
+
+\page
+{{pageNumber,auto}}
+
+
 #### Spectral Viper
 *3rd-level Conjuration*  
 **Classes:** Druid, Wizard  
@@ -13212,8 +14311,9 @@ You prick a target with a tiny magical fang of venom. Make a melee spell attack 
 If you miss your melee attack roll, you can concentrate (as if concentrating on a spell) to maintain the attack for another attempt until the end of your next turn. (You may make subsequent attempts until you hit or lose concentration)
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d12 for each slot level above 3rd.
-\page
-{{pageNumber,auto}}
+
+\column
+
 
 #### Spirit Guardians
 *3rd-level Conjuration*  
@@ -13245,7 +14345,11 @@ In addition, any creature of your choice that you can see that starts its turn w
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d8 for every two slot levels above 3rd.
 
-\column
+
+
+\page
+{{pageNumber,auto}}
+
 #### Static Field
 *3rd-level Evocation*  
 **Classes:** Artificer, Magus, Sorcerer, Warlock, Wizard  
@@ -13272,8 +14376,6 @@ Each creature that starts its turn in the Sphere must succeed on a Constitution 
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 4th level or higher, the radius increases by 10 feet for each slot level above 3rd.
 
-\page
-{{pageNumber,auto}}
 #### Summon Fey
 *3rd-level Conjuration*  
 **Classes:** Druid, Ranger, Warlock, Wizard  
@@ -13287,6 +14389,7 @@ You call forth a fey spirit. It manifests in an unoccupied space that you can se
 The creature is an ally to you and your companions. In combat, the creature shares your initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the Dodge action and uses its move to avoid danger.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, use the higher level wherever the spell's level appears in the stat block.
+
 {{note
 {{monster,
 #### Fey Spirit
@@ -13669,7 +14772,7 @@ This spell grants the creature you touch the ability to understand any spoken or
 
 #### Vampiric Blade
 *3rd-level Necromancy (blood magic)*  
-**Classes:** Sorcerer, Vessel, Warlock, Wizard  
+**Classes:** Paladin, Sorcerer, Vessel, Warlock, Wizard  
 **Casting Time:** Bonus action  
 **Range:** Self  
 **Components:** S, M (a melee weapon worth at least 1 sp and a splash of your blood worth up to 10 Hit Points, which the spell consumes)  
@@ -14036,6 +15139,22 @@ You touch a willing creature, launching them into an empowered frenzy. For the d
 \page
 {{pageNumber,auto}}
 
+#### Breath of Eons
+*4th-level Abjuration*  
+**Classes:** Druid, Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** Self  
+**Components:** V, S  
+**Duration:** Concentration, up to 1 minute  
+
+You draw on the magic of dragons and the flow of time. For the duration, you gain the following benefits.
+
+***Temporal Wounds.*** When you move within 5 feet of a creature, you can curse it until the start of your next turn. While a creature is cursed, the next time it takes damage, it takes an extra 2d10 Force damage, its Speed is halved until the end of its next turn, and the curse ends. A creature can be cursed this way only once per turn.
+
+***Wings.*** You sprout spectral wings from your back if you don't already have wings. You have a Fly Speed of 60 feet and can hover. In addition, your movement doesn't provoke Opportunity Attacks.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the extra Force damage of Temporal Wounds increases by 1d10 for each slot level above 4th.
+
 #### Carnivorous Garden
 *4th-level Transmutation*  
 **Classes:** Druid  
@@ -14052,6 +15171,20 @@ The plants have AC 14 and 30 Hit Points, and have vulnerability to fire and Slas
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, you can summon 1 additional carnivorous plant for each slot level above 4th.
 
+#### Chaos Nova
+*4th-level Evocation*  
+**Classes:** Sorcerer  
+**Casting Time:** Action  
+**Range:** Self (20-foot Emanation)  
+**Components:** V  
+**Duration:** Instantaneous  
+
+Chaos energy bursts out in a 20-foot Emanation originating from you. Roll 3d8 and choose one of the dice. The number on the chosen die determines the damage type for this casting: 1 Acid, 2 Cold, 3 Fire, 4 Force, 5 Lightning, 6 Necrotic, 7 Psychic, 8 Thunder.
+
+Each creature of your choice in the Emanation must make a Wisdom saving throw. On a failed save, a creature takes damage equal to the total of the 3d8 of the chosen type and, until the end of your next turn, cannot take Reactions and must choose whether it gets a Move, an Action, or a Bonus Action on its turn; it gets only one of the three. On a successful save, a creature takes half as much damage only.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.
+
 #### Charm Monster
 *4th-level Enchantment*  
 **Classes:** Bard, Druid, Psion, Sorcerer, Vessel, Warlock, Wizard  
@@ -14063,7 +15196,40 @@ The plants have AC 14 and 30 Hit Points, and have vulnerability to fire and Slas
 One creature you can see within range makes a Wisdom saving throw. It does so with Advantage if you or your allies are fighting it. On a failed save, the target has the Charmed condition until the spell ends or until you or your allies damage it. The Charmed creature is Friendly to you. When the spell ends, the target knows it was Charmed by you.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, you can target one additional creature for each slot level above 4th. The creatures must be within 30 feet of each other when you target them.
+
+
+
+\page
+{{pageNumber,auto}}
+
+#### Collapsing Star
+*4th-level Evocation*  
+**Classes:** Sorcerer, Vessel, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** V  
+**Duration:** Instantaneous  
+
+You channel dark energy into a cataclysmic blast that fills a 20-foot-radius Sphere centered on a point you can see within range. Each creature of your choice within the Sphere must make a Constitution saving throw, taking 4d12 Force damage on a failed save or half as much damage on a successful one.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the damage increases by 1d12 for each slot level above 4th.
+
+#### Cometfall
+*4th-level Evocation*  
+**Classes:** Cleric, Druid, Shaman, Sorcerer  
+**Casting Time:** Action  
+**Range:** 120 feet  
+**Components:** V, S, M (a pinch of stardust)  
+**Duration:** 1 round  
+
+You call down falling comets on creatures in a 30-foot-radius, 40-foot-high Cylinder within range. Each creature in the Cylinder must make a Dexterity saving throw, taking 7d8 Radiant damage on a failed save or half as much damage on a successful one.
+
+Until the start of your next turn, a creature that enters the Cylinder for the first time on a turn or ends its turn there takes Radiant damage equal to your spellcasting ability modifier. A creature takes this damage only once per turn.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the initial damage increases by 1d8 for each slot level above 4th.
+
 \column
+
 
 #### Commandment
 *4th-level Enchantment*  
@@ -14078,7 +15244,6 @@ You issue a divine order to another creature you can see within range that can h
 Some examples of orders you can issue would include ordering the target to not take attacks, to not move, or to not breath. The order must be possible to attempt to obey, or the spell ends.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, you can target one additional creature for each slot level above 4th.
-
 
 #### Compulsion
 *4th-level Enchantment*  
@@ -14097,6 +15262,8 @@ slot of 6th level or higher, the range increases by 10 feet
 for each slot level above 5th.
 
 \page
+{{pageNumber,auto}}
+
 
 #### Confusion
 *4th-level Enchantment*  
@@ -14121,6 +15288,7 @@ At the end of each of its turns, an affected target can repeat its saving throw,
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the radius of the Sphere increases by 5 feet for each slot level above 4th.
 
+\column
 #### Conjure Aberration (Invoke Abberation)
 *4th-level Conjuration*  
 **Classes:** Warlock, Wizard  
@@ -14149,7 +15317,8 @@ You grasp the material component of this spell, tearing a rift in reality and ca
 | 4        | Red Slaad  |
 | 5        | Blue Slaad |
 | 6+       | Mind Flayer|
-
+\page
+{{pageNumber,auto}}
 
 #### Conjure Minor Elementals
 *4th-level Conjuration*  
@@ -14164,8 +15333,7 @@ You conjure spirits from the Elemental Planes that flit around you in a 15-foot 
 In addition, the ground in the Emanation is Difficult Terrain for your enemies.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of level 5 or higher, the damage increases by 1d8 for each slot level above 4.
-\page
-{{pageNumber,auto}}
+
 #### Conjure Woodland Beings
 *4th-level Conjuration*  
 **Classes:** Druid, Ranger, Shaman  
@@ -14292,8 +15460,19 @@ This spell puts you in contact with a god or a god's servants. You ask one quest
 If you cast the spell more than once before finishing a Long Rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, your chance of failure is reduced by 25% for each slot level above 4th. This reduction does not affect subsequent castings.
-
 \column
+
+#### Divine Shield
+*4th-level Abjuration*  
+**Classes:** Paladin  
+**Casting Time:** Reaction, which you take when you take damage  
+**Range:** Self  
+**Components:** V  
+**Duration:** 1 round  
+
+You have Immunity to all damage until the start of your next turn, including the triggering damage. For the duration, your Speed can't be reduced, any current reductions to your Speed are suspended, and no effect can move you against your will.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, you can choose one additional creature you can see within 30 feet of you for each slot level above 4th. The chosen creatures gain the same benefits for the duration.
 
 #### Dominate Beast
 *4th-level Enchantment*  
@@ -14329,7 +15508,6 @@ Each creature in the sphere when it appears makes a Wisdom saving throw. On a fa
 ***At Higher Levels.*** When you cast this spell using a spell slot of 5th level or higher, the psychic damage increases by 1d6 for each slot level above 4th.  
 
 **Casting as a Circle Spell.** Casting this as a Circle spell requires a minimum of five secondary casters. In addition to the spell's usual components, you must provide a special component (a string of three black pearls from Pandemonium), which the spell consumes. The spell's range increases to 1 mile, and its duration increases to until dispelled (no concentration required). The spell ends early if any caster who participated in this casting contributes to another casting of Doomtide as a Circle spell. Each secondary caster must expend a spell slot of 3rd level or higher, or the spell fails.
-\column
 
 #### Echoing Lance
 *4th-level Evocation*  
@@ -14344,10 +15522,7 @@ You emit a targeted burst of intense sonic energy at a target within range. The 
 At the end of each of its turns, the target can make another Constitution saving throw. On a success, the spell ends on the target; on failure they take an additional 1d8 thunder from the echoes within their mind.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.
-
-
-\page
-{{pageNumber,auto}}
+\column
 
 #### Ego Scourge
 *4th-level Enchantment*  
@@ -14378,7 +15553,10 @@ Each creature in that area makes a Strength saving throw. On a failed save, it t
 A Restrained creature can take an action to make a Strength (Athletics) check against your spell save DC, ending the condition on itself on a success.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, both instances of damage from this spell increase by 1d6 for each slot level above 4th.
-\column
+\page
+{{pageNumber,auto}}
+
+
 
 #### Elemental Bane
 *4th-level Transmutation*  
@@ -14392,7 +15570,20 @@ Choose up to three creatures you can see within range and that are within 30 fee
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, you can target one additional creature for each slot level above 4th. The creatures must be within 30 feet of each other when you target them.
 
+#### Emberstorm
+*4th-level Evocation*  
+**Classes:** Druid, Magus, Shaman, Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** V, S  
+**Duration:** Instantaneous  
 
+White-hot embers fill a 20-foot-radius Sphere centered on a point you choose within range. Each creature in the Sphere makes a Constitution saving throw, taking 6d8 Fire damage on a failed save or half as much damage on a successful one.
+
+Creatures and flammable objects in the Sphere that aren't being worn or carried start burning, taking 1d8 Fire damage at the start of each of their turns instead of the normal burning damage.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.
+\column
 
 #### Exsanguinate
 *4th-level Necromancy (blood magic)*  
@@ -14812,7 +16003,6 @@ The tactile characteristics of the terrain are unchanged, so creatures entering 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the duration increases to 2 days (6th level), 1 week (7th level), 1 month (8th level), or 1 year (9th level).
 
-\column
 #### Heavenly Ray
 *4th-level Evocation*  
 **Classes:** Cleric   
@@ -14831,6 +16021,17 @@ On each of your turns after you cast this spell, you can use a Bonus action to m
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the damage and Temporary Hit Points increase by 1d8 for each slot level above 4th.
 
+#### Holy Nova
+*4th-level Evocation*  
+**Classes:** Cleric, Paladin  
+**Casting Time:** Action  
+**Range:** Self (30-foot Emanation)  
+**Components:** V  
+**Duration:** Instantaneous  
+
+An explosion of holy light surrounds you in a 30-foot Emanation, harming your enemies and healing your allies. Each creature of your choice in the Emanation makes a Constitution saving throw, taking 5d6 Radiant damage on a failed save or half as much damage on a successful one. Each other creature in the Emanation regains 3d6 Hit Points. This spell has no effect on undead or constructs.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the damage and healing each increase by 1d6 for each slot level above 4th.
 #### Ice Spike
 *4th-level Evocation*  
 **Classes:** Magus, Sorcerer, Wizard   
@@ -15093,6 +16294,18 @@ This spell creates a protective barrier that wards against spells around a willi
 \page
 {{pageNumber,auto}}
 
+#### Psychic Horror
+*4th-level Enchantment*  
+**Classes:** Bard, Psion, Shaman, Sorcerer, Vessel, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** 30 feet  
+**Components:** V, M (a drop of ink)  
+**Duration:** Instantaneous  
+
+A creature within range is overwhelmed with mental visions of the Far Realm and must make a Wisdom saving throw. On a failed save, the target takes 2d10 Psychic damage and has the Frightened condition for 1 minute. A Frightened creature also has the Stunned condition until the end of your next turn. At the end of each of its turns, the target repeats the save, ending the effect on itself on a success. On a successful save, the creature takes half as much damage only.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th.
+
 #### Psychic Lance
 *4th-level Enchantment*  
 **Classes:** Bard, Psion, Sorcerer, Warlock, Wizard   
@@ -15107,6 +16320,8 @@ The target must make an Intelligence saving throw. On a failure, they take 5d8 P
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.
 
+\column
+
 #### Quicksilver Steps
 *4th-level Transmutation*  
 **Classes:** Bard, Magus, Ranger, Sorcerer, Wizard   
@@ -15118,7 +16333,6 @@ The target must make an Intelligence saving throw. On a failure, they take 5d8 P
 For the duration of the spell your movement does not provoke attacks of opportunity, and you can move up to 10 feet each time another creature you can see or hear ends their turn (no action required), up to 4 times, regaining all uses at the start of your turn. The first attack against you after each time you move has Disadvantage.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the number of times you can move at the end of another creature's turn increases by 1, equaling the level of the Spell Slot used.
-\column
 
 #### Repair
 *4th-level Transmutation*  
@@ -15133,6 +16347,13 @@ You touch a construct or inanimate object, causing it to regain 10d6 Hit Points.
 If the construct or object's damaged state is the result of age, you can instead repair it to the condition it was in 10d6 years ago, if it was previously in a better condition during that time (the condition can only improve or not change).
 
 ***At Higher Levels.*** The Hit Points restored increases by 2d6 (or the years restored) for each slot above 4th.
+
+
+
+
+
+\page
+{{pageNumber,auto}}
 
 #### Resilient Sphere
 *4th-level Evocation*  
@@ -15152,12 +16373,6 @@ A disintegrate spell targeting the globe destroys it without harming anything in
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, you can create one additional Sphere for every two slot levels above 4th. The spheres must be initially within 30 feet of one another.
 
-
-
-
-\page
-{{pageNumber,auto}}
-
 #### Revitalizing Hymn
 *4th-level Enchantment*  
 **Classes:** Bard   
@@ -15172,6 +16387,8 @@ As a Bonus action on each subsequent turn, you can use an instrument to continue
 
 ***At Higher Levels.*** When you cast this spell with a 5th level or higher Spell Slot, the range of the spell increases by 10 feet for each spell level above 4th.
 
+\column
+
 #### Ribcage
 *4th-level Necromancy*  
 **Classes:** Sorcerer, Warlock, Wizard   
@@ -15185,7 +16402,6 @@ You cause a series of rib bones to burst from the earth surrounding a 10-foot ra
 The cage has an AC of 13 and 40 Hit Points, with a vulnerability to Bludgeoning damage. If it is reduced to 0 Hit Points, the cage crumbles to dust and the spell ends.
 
 ***At Higher Levels.*** When cast with a 5th level or higher Spell Slot, the cage has an additional 10 Hit Points for each level above 4th.
-\column
 
 #### Secret Chest
 *4th-level Conjuration*  
@@ -15203,9 +16419,12 @@ After 60 days, there is a cumulative 5 percent chance per day that the spell's e
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the maximum size of the chest increases by 6 cubic feet for each slot level above 4th. The longest dimension of the chest can’t be more than double the shortest dimension.
 
+\page
+{{pageNumber,auto}}
+
 #### Shadow of Moil
 *4th-level Necromancy*  
-**Classes:** Vessel, Warlock   
+**Classes:** Vessel, Warlock  
 **Casting Time:** Action  
 **Range:** Self  
 **Components:** V, S, M (an undead eyeball encased in a gem worth at least 150 gp)  
@@ -15217,13 +16436,6 @@ Until the spell ends, you have Resistance to Radiant damage. In addition, whenev
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the extra damage increases by 1d8 for each slot level above 4th.
 
-
-
-
-
-
-\page
-{{pageNumber,auto}}
 #### Sickening Radiance
 *4th-level Evocation*  
 **Classes:** Magus, Shaman, Sorcerer, Vessel, Warlock, Wizard   
@@ -15244,6 +16456,8 @@ All effects caused by this spell (except death) end when the spell ends.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the maximum Hit Point reduction increases by 1d4 per slot level above 4th.
 
+\column
+
 #### Song of Despair
 *4th-level Enchantment*  
 **Classes:** Bard   
@@ -15255,7 +16469,7 @@ All effects caused by this spell (except death) end when the spell ends.
 You begin to chant a woeful lullaby that brings great sorrow and despair to those who hear it. Up to three creatures of your choice that can hear you within the spell’s range must make a Charisma saving throw. On a failed save, a creature has Disadvantage on attack rolls, saving throws and ability checks until the end of your next turn. For the duration, you may take the Magic action during each of your consecutive turns to repeat this effect.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, you can target one additional creature for each slot level above 4th.
-\column
+
 #### Spatial Swap
 *4th-level Conjuration*  
 **Classes:** Magus, Psion, Sorcerer, Vessel, Warlock, Wizard   
@@ -15267,6 +16481,10 @@ You begin to chant a woeful lullaby that brings great sorrow and despair to thos
 You switch positions with a creature you can see. If there is insufficient space for either creature at the location of the other, the spell fails. If the target is an unwilling creature, the target must make a Charisma saving throw. On success, the spell fails.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the range of the spell increases by 30 feet for each slot level above 4th.
+
+
+\page
+{{pageNumber,auto}}
 
 #### Spellfire Storm
 *4th-level Evocation*  
@@ -15291,6 +16509,8 @@ You can designate creatures to be unaffected by this spell.
 | 1–3             | 40-foot-radius, 40-foot-high cylinder | 1 hour |
 | 4–6             | 60-foot-radius, 60-foot-high cylinder | 8 hours |
 | 7+              | 100-foot-radius, 100-foot-high cylinder | 24 hours |
+
+
 
 \page
 {{pageNumber,auto}}
@@ -15648,6 +16868,19 @@ As part of casting the spell, you can form a circle on the ground with the blood
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the challenge rating increases by 1 for each slot level above 4th.
 \column
+
+#### Time Dilation
+*4th-level Abjuration*  
+**Classes:** Bard, Psion, Sorcerer, Wizard  
+**Casting Time:** Reaction, which you take in response to you or a creature you can see within 60 feet of you taking damage  
+**Range:** 60 feet  
+**Components:** V, S  
+**Duration:** Instantaneous  
+
+The target reduces the damage taken by 4d8. At the end of each of the target's turns, the target loses 1d8 Hit Points until it has lost a total of 4d8 Hit Points (roll these 4d8 separately from the damage reduction). This loss can't be reduced or prevented in any way, but any healing the target receives ends the remaining loss.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the damage reduction and the total Hit Points the target can lose each increase by 1d8 for each slot level above 4th.
+
 #### Time Loop
 *4th-level Transmutation*  
 **Classes:** Psion, Sorcerer, Warlock, Wizard  
@@ -15666,6 +16899,9 @@ Where these conflict, the caster decides which part of the action takes preceden
 Unlike most material components, for convenience sake, this spell's material components is required by the player in addition to their character (whose detailed list does not need to by a physical object, simply the knowledge of their target's actions), and consequently requires some preparation and attention to detail on the player's part to avoid making the DM having to keep track of such details.
 }}
 
+
+\page
+{{pageNumber,auto}}
 #### Violent Crush
 *4th-level Transmutation*  
 **Classes:** Psion, Magus, Sorcerer, Wizard  
@@ -15677,8 +16913,7 @@ Unlike most material components, for convenience sake, this spell's material com
 You place massive omnidirectional force on a Large or smaller creature or object within range, attempting to crush it in all directions inward. The target must make a Strength saving throw. On failure, the target takes 6d12 Bludgeoning damage and falls Prone. On success, it takes half as much damage and does not fall Prone.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the damage increases by 1d12 for each slot level above 4th.
-\page
-{{pageNumber,auto}}
+
 #### Vital Surge
 *4th-level Transmutation*  
 **Classes:** Cleric, Druid  
@@ -15693,6 +16928,8 @@ Once a creature triggers this healing surge, the spell ends for that creature.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, you can target one additional creature for each slot level above 4th.
 
+\column
+
 #### Vitriolic Sphere
 *4th-level Evocation*  
 **Classes:** Magus, Sorcerer, Wizard  
@@ -15704,7 +16941,24 @@ Once a creature triggers this healing surge, the spell ends for that creature.
 You hurl a ball of dripping acid outward, exploding in a 20-foot radius Sphere at a point you can see within range. Every creature in the area must make a Dexterity saving throw, taking 8d4 Acid damage on a failure or half as much on a success. A creature that fails the save takes an additional 4d4 Acid damage at the end of every turn, unless it or another creature within 5 feet spends an Action to clear the acid off.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the initial damage increases by 2d4 for each slot level above 4th.
-\column
+
+#### Volcanic Upheaval
+*4th-level Evocation*  
+**Classes:** Druid, Magus, Shaman, Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** 90 feet  
+**Components:** V, S  
+**Duration:** Instantaneous  
+
+Fiery stones erupt, filling a 20-foot-radius, 10-foot-tall Cylinder originating from a point on the ground you can see within range. Each creature in the Cylinder must make a Dexterity saving throw. On a failed save, a creature takes 1d12 Bludgeoning damage plus 3d8 Fire damage and is pushed vertically to the top of the Cylinder, at which point it falls. On a successful save, a creature takes half as much damage only.
+
+Smoldering stones turn the ground in the Cylinder into Difficult Terrain until the end of your next turn.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the Bludgeoning damage increases by 1d12 for each slot level above 4th.
+
+
+\page
+{{pageNumber,auto}}
 
 #### Wall of Fire
 *4th-level Evocation*  
@@ -15721,8 +16975,6 @@ When the wall appears, each creature within its area must make a Dexterity savin
 One side of the wall, selected by you when you cast this spell, deals 5d8 Fire damage to each creature that ends its turn within 10 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there, but no more than once per turn. The other side of the wall deals no damage.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.
-\page
-{{pageNumber,auto}}
 
 #### Watery Sphere
 *4th-level Conjuration*  
@@ -15745,7 +16997,6 @@ As a Magic action, you can move the Sphere up to 30 feet in a straight line. If 
 When the spell ends, the Sphere falls to the ground and extinguishes all normal flames within 30 feet of it. Any creature Restrained by the Sphere is knocked Prone in the space where it falls. The water then vanishes.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the distance you can move the Sphere on a turn increases by 10 feet for each slot level above 4th.
-\column
 
 #### Watery Tentacles
 *4th-level Conjuration*  
@@ -15763,6 +17014,8 @@ You can also use the tentacles to manipulate objects as a Magic action or a Bonu
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, you gain an additional tentacle for every slot level above 4th.
 
+\page
+{{pageNumber,auto}}
 #### Zone of Amicability
 *4th-level Enchantment*  
 **Classes:** Bard, Psion, Shaman, Sorcerer, Vessel, Warlock  
@@ -15965,6 +17218,18 @@ If the target is not native to your current plane of existence this bonus Force 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the bonus Force damage increases by 1d10 for each Spell Slot level above 5th.
 
+#### Bonestorm
+*5th-level Abjuration*  
+**Classes:** Shaman, Sorcerer, Vessel, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** Self (10-foot Emanation)  
+**Components:** V  
+**Duration:** Instantaneous  
+
+You conjure a whirl of battering bone and gore around yourself. You regain 4d6 Hit Points, and each creature in a 10-foot Emanation originating from you must make a Constitution saving throw. A target takes 8d8 Necrotic damage on a failed save or half as much damage on a successful one.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the healing increases by 1d6 and the damage increases by 1d8 for each slot level above 5th.
+
 #### Burial Barrage
 *5th-level Transmutation*  
 **Classes:** Druid, Magus, Sorcerer, Warlock, Wizard  
@@ -15976,6 +17241,10 @@ If the target is not native to your current plane of existence this bonus Force 
 You unearth and launch a barrage of five heavy chunks of earth or stone at targets within range. You can hurl them at one target or several. Make a ranged spell attack for each hurled object. On hit, the target takes 1d12 + 1 Bludgeoning damage, and if it is Large or smaller, it is knocked Prone. Attacks made as part of this spell have Advantage against Prone targets, and ignore the normal Disadvantage ranged attacks made from more than 5 feet away from a Prone target have.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, you can hurl one additional object for each slot level above 5th.
+
+
+\page
+{{pageNumber,auto}}
 
 #### Circle of Power
 *5th-level Abjuration*  
@@ -15990,10 +17259,6 @@ An aura radiates from you in a 30-foot Emanation for the duration. While in the 
 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the Emanation increases by 10 feet for each slot level above 5th.
-
-\page
-{{pageNumber,auto}}
-
 #### Cloudkill
 *5th-level Conjuration*  
 **Classes:** Shaman, Sorcerer, Vessel, Wizard  
@@ -16048,6 +17313,11 @@ For example, you could determine the location of a powerful monster in the area,
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the range doubles for each slot level above 5th. You can’t cast this spell as a ritual at a higher level.
 
+
+
+\page
+{{pageNumber,auto}}
+
 #### Cone of Cold
 *5th-level Evocation*  
 **Classes:** Druid, Magus, Sorcerer, Wizard  
@@ -16062,9 +17332,6 @@ A creature killed by this spell becomes a frozen statue until it thaws.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.
 
-
-\page
-{{pageNumber,auto}}
 #### Conjure Elemental
 *5th-level Conjuration*  
 **Classes:** Druid, Wizard  
@@ -16077,6 +17344,7 @@ You conjure a Large, intangible spirit from the Elemental Planes that appears in
 Whenever a creature you can see enters the spirit's space or starts its turn within 5 feet of the spirit, you can force that creature to make a Dexterity saving throw if the spirit has no creature Restrained. On failed save, the target takes 8d8 damage of the spirit's type, and the target has the Restrained condition until the spell ends. At the start of each of its turns, the Restrained target repeats the save. On a failed save, the target takes 4d8 damage of the spirit's type. On a successful save, the target isn't Restrained by the spirit.
 
 **At	Higher	Levels.** When you cast this spell using a spell slot of level 6 or	higher,	the	damage increases by 2d8	for	each slot level	above	5.
+\column
 
 #### Conjure Volley
 *5th-level Conjuration*  
@@ -16091,7 +17359,6 @@ You brandish the weapon used to cast the spell and choose a point within range. 
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 6th level or higher, the damage increases by 2d8 for each slot level above 5th.
 
-\column
 
 #### Contact Other Plane
 *5th-level Divination (ritual)*  
@@ -16463,6 +17730,25 @@ If you have a body part, lock of hair, clipping from a nail, or similar portion 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, you can affect one additional target for each slot level above 5th. Each target receives the same dream.
 
+#### Dream Flight
+*5th-level Abjuration*  
+**Classes:** Bard, Druid, Shaman  
+**Casting Time:** Action  
+**Range:** Self  
+**Components:** V, S  
+**Duration:** Concentration, up to 1 minute  
+
+You draw on the magic of dragons and the dreaming wild. For the duration, you gain the following benefits.
+
+***Healing Presence.*** When you move within 5 feet of a creature, you can restore 5d4 Hit Points to that creature. A creature can regain these Hit Points only once per turn. This has no effect on undead or constructs.
+
+***Wings.*** You sprout spectral wings from your back if you don't already have wings. You have a Fly Speed of 60 feet and can hover. In addition, your movement doesn't provoke Opportunity Attacks.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the healing increases by 1d4 for each slot level above 5th.
+\page
+{{pageNumber,auto}}
+
+
 #### Elemental Suffusion
 *5th-level Transmutation*  
 **Classes:** Druid, Magus, Shaman, Sorcerer, Vessel, Wizard  
@@ -16482,8 +17768,8 @@ You imbue yourself with the elemental power of genies. You gain the following be
 ***At Higher Levels.*** When you cast this spell using a spell slot of 6th level or higher, the damage of Elemental Pulse increases by 1d6 for each slot level above 5th.  
 
 **Casting as a Circle Spell.** If the spell is cast as a Circle spell, its casting time increases to 1 minute, and its duration increases to Concentration, up to 10 minutes. For each secondary caster who participates in the casting, you can choose one additional creature, to a maximum of nine additional creatures. The chosen creatures also gain the benefits of the spell for its duration. Each secondary caster must expend a 2nd-level or higher spell slot, or the spell fails.
-\page
-{{pageNumber,auto}}
+
+\column
 #### Enervation
 *5th-level Necromancy*  
 **Classes:** Sorcerer, Vessel, Warlock, Wizard  
@@ -16497,6 +17783,8 @@ You empower yourself with deathly energies, gaining the ability to harvest life 
 Whenever the spell deals damage to a target, you regain Hit Points equal to half the amount of Necrotic damage the target takes.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.
+\page
+{{pageNumber,auto}}
 
 #### Explode Heart
 *5th-level Necromancy (blood magic)*  
@@ -16512,6 +17800,17 @@ Creatures without a heart have Immunity to effect, though at your GM’s discret
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the damage increases by 2d6 for each slot level above 5th.
 
+#### Explosive Trap
+*5th-level Evocation*  
+**Classes:** Artificer, Druid, Ranger, Shaman, Wizard  
+**Casting Time:** Action  
+**Range:** 60 feet  
+**Components:** S  
+**Duration:** Concentration, up to 1 minute  
+
+An Invisible, intangible trap appears on the ground at a point you choose within range. The first time a creature comes within 5 feet of the trap, the trap explodes in a fiery burst that fills a 20-foot-radius Sphere centered on the trap. The spell ends, and each creature within the Sphere must make a Dexterity saving throw. On a failed save, a creature takes 8d6 Fire damage and, if it is Huge or smaller, is pushed 20 feet straight away from the trap's location. On a successful save, a creature takes half as much damage and isn't pushed.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the trigger radius and the burst radius each increase by 5 feet, and the damage increases by 1d6, for each slot level above 5th.
 \column
 
 #### Far Step
@@ -17398,6 +18697,19 @@ The reincarnated creature makes any choices that a species' description offers, 
 
 \page
 {{pageNumber,auto}}
+
+#### Rescue
+*5th-level Conjuration*  
+**Classes:** Bard, Sorcerer, Wizard  
+**Casting Time:** Bonus Action  
+**Range:** 120 feet  
+**Components:** V  
+**Duration:** Instantaneous  
+
+You teleport to an unoccupied space you can see within range. One willing creature within 60 feet of the space you left also teleports to an unoccupied space within 5 feet of your destination space.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, you can teleport one additional willing creature for each slot level above 5th. The creatures must be within 60 feet of the space you left.
+
 #### Scrying
 *5th-level Divination*  
 **Classes:** Bard, Cleric, Druid, Magus, Psion, Shaman, Vessel, Warlock, Wizard  
@@ -17430,7 +18742,6 @@ Instead of targeting a creature, you can choose a location you have seen before 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the maximum duration of concentration increases to 1 hour (6th level), 8 hours (7th level), 1 day (8th level), or 1 week (9th level).
 
-\column
 #### Seeming
 *5th-level Illusion*  
 **Classes:** Bard, Psion, Sorcerer, Wizard  
@@ -17450,6 +18761,31 @@ A creature that takes the Study action to examine a target can make an Intellige
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the range increases by 15 feet for each slot level above 5th.
 \page
 {{pageNumber,auto}}
+
+#### Shattering Star
+*5th-level Evocation*  
+**Classes:** Magus, Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** 90 feet  
+**Components:** V, S  
+**Duration:** Instantaneous  
+
+You unleash a bolt of concentrated power at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 10d8 Force damage, and it takes a -2 penalty to AC until the start of your next turn as clinging frost makes the target's exterior brittle.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.
+
+#### Sigil of Chains
+*5th-level Conjuration*  
+**Classes:** Magus, Sorcerer, Vessel, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** 90 feet  
+**Components:** V  
+**Duration:** 1 round  
+
+A sigil appears at a point on the ground you can see within range, then erupts in a 20-foot-radius Sphere. Each creature in the Sphere must make a Dexterity saving throw. On a failed save, a creature takes 5d6 Force damage, is pulled up to 10 feet in a straight Line toward the sigil, and has the Restrained condition until the end of your next turn. On a successful save, a creature takes half as much damage, and its Speed is reduced by 10 feet until the end of your next turn.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the damage increases by 1d6 for each slot level above 5th.
+
 #### Skill Empowerment
 *5th-level Divination*  
 **Classes:** Artificer, Bard, Magus, Psion, Shaman, Sorcerer, Vessel, Wizard  
@@ -17467,7 +18803,6 @@ For each skill or tool chosen, choose what applies:
 If you cast this spell again, the effects of the previous casting end.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, you can target one additional creature for each slot level above 5th.
-\column
 
 #### Sky Burst
 *5th-level Evocation*  
@@ -17920,6 +19255,37 @@ You can use this transportation ability once on each of your turns for the durat
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, you can make an additional tree stride per round for every two slot levels above 5th. You learn the location of all trees within 500 feet of your new position as soon as you emerge from a tree.
 
+#### Verdant Surge
+*5th-level Transmutation*  
+**Classes:** Druid  
+**Casting Time:** Action  
+**Range:** 30 feet  
+**Components:** V  
+**Duration:** Instantaneous  
+
+A creature of your choice within range gains a 4th-level Spell Slot. The Spell Slot vanishes after it is expended or the target finishes a Long Rest. It can use this Spell Slot to cast any spell it has prepared.
+
+In addition, you regain one expended use of Primal Surge (or Wild Shape).
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the Spell Slot granted is one level higher for each slot level above 5th (a 5th-level slot with a 6th-level slot, a 6th-level slot with a 7th-level slot, and so on).
+
+\column
+#### Void Eruption
+*5th-level Necromancy*  
+**Classes:** Cleric, Shaman, Sorcerer, Vessel, Warlock, Wizard  
+**Casting Time:** Bonus Action  
+**Range:** 120 feet  
+**Components:** V  
+**Duration:** Concentration, up to 1 minute  
+
+Shadowy energy erupts in a 20-foot-radius Sphere centered on a point you choose within range. Each creature in the Sphere must make a Constitution saving throw, taking 5d6 Necrotic damage on a failed save or half as much damage on a successful one. At the same time, you take on a shadowy form that grants you the following benefits for the duration.
+
+***Shadow Bolt.*** As a Bonus Action on your turn, you can hurl a bolt of shadow energy at a creature within 60 feet of yourself. Make a ranged spell attack. On a hit, the target takes Necrotic damage equal to 2d6 plus your spellcasting ability modifier.
+
+***Shadow Stealth.*** While you are in an area of Dim Light or darkness, you have the Invisible condition.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the initial damage increases by 1d6 and the Shadow Bolt damage increases by 1d6 for each slot level above 5th.
+
 #### Vorpal Blade
 *5th-level Transmutation*  
 **Classes:** Paladin, Ranger  
@@ -17935,7 +19301,10 @@ If this damage reduces the creature to 50 Hit Points or fewer, you instantly cut
 The creature instantly dies if it cannot survive without the lost head. The creature's head is not removed if it has Immunity to Slashing damage, or if it doesn't have or need a head.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.
-\column
+
+\page
+{{pageNumber,auto}}
+
 #### Vorpal Shot
 *5th-level Transmutation*  
 **Classes:** Artificer, Ranger  
@@ -17963,9 +19332,8 @@ You touch a weapon and imbue it with power. Until the spell ends, the weapon bec
 Additionally, if a critical strike of this weapon would leave a creature with less than 50 Hit Points, the target creature is decapitated, killing it if it cannot live without its head.
 
 ***At Higher Levels.*** If you cast this spell using a Spell Slot of 6th level or higher, the creature is decapitated having 10 Hit Points over 50 for each spell level above 5th.
-\page
-{{pageNumber,auto}}
 
+\column
 #### Wall of Force
 *5th-level Conjuration*  
 **Classes:** Magus, Psion, Sorcerer, Wizard  
@@ -17981,6 +19349,9 @@ A shimmering opaque wall of force springs into existence at a point you choose w
 **Statistics.** The wall has 150 Hit Points and its Armor Class equals your Spell save DC. It has Immunity to Poison, Psychic, and non-magical Bludgeoning, Piercing, and Slashing damage, vulnerable to Force damage, and resistant to all other damage types except for magical Bludgeoning, Piercing, and Slashing damage. It cannot be dispelled by a dispel magic spell, but a disintegrate spell destroys the wall it instantly.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the Hit Points of the wall created by this spell increase by 25 for each Spell Slot level above 5th.
+
+\page
+{{pageNumber,auto}}
 
 #### Wall of Light
 *5th-level Evocation*  
@@ -18000,6 +19371,7 @@ Until the spell ends, you can take the Magic action to launch a beam of radiance
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.
 
+\column
 #### Wall of Stone
 *5th-level Evocation*  
 **Classes:** Artificer, Druid, Magus, Sorcerer, Wizard  
@@ -18021,6 +19393,7 @@ The wall is an object made of stone that can be damaged and thus breached. Each 
 If you maintain your concentration on this spell for its whole duration, the wall becomes permanent and can't be dispelled. Otherwise, the wall disappears when the spell ends.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 6th level or higher, you can make two additional panels for each slot level above 5th.
+
 \page
 {{pageNumber,auto}}
 #### Waves of Exhaustion
@@ -18079,7 +19452,27 @@ Any creature or object entering the portal exits from the other portal as if the
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, you can create one additional portal for each slot level above 6th. A creature can enter any portal and attempt to pass through to any other one of its choice. If the creature is hostile to you, it must make a Charisma saving throw. On a failure, it instead emerges from a random portal, or you can use a Reaction to make it emerge from a portal of your choice.
 
 \column
-::::
+:::::
+
+#### Astral Blade
+*6th-level Conjuration*  
+**Classes:** Sorcerer, Warlock, Wizard  
+**Casting Time:** Bonus Action  
+**Range:** 60 feet  
+**Components:** V, S  
+**Duration:** Concentration, up to 1 minute  
+
+You conjure a 3-foot blade of pure astral energy. It appears in a space you can see within range, and you instantly make two melee spell attacks with it against targets within 5 feet. Astral Blade attacks score a critical hit on a roll of 18-20 on the d20. On a hit, they deal 4d6 force damage. On a critical hit, the target must succeed on a Charisma saving throw or be banished to a harmless demiplane until the start of your next turn.
+
+On subsequent turns, you can use a Bonus Action to move your Astral Blade up to 60 feet and make two attacks with it.
+
+Your Astral Blade can harmlessly pass through any barrier created with magic, like those of a *wall of force* spell.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the force damage dealt by the Astral Blade increases by 2d6 for each slot level above 6th.
+
+
+\page
+{{pageNumber,auto}}
 
 #### Avalanche
 *6th-level Transmutation*  
@@ -18095,8 +19488,19 @@ The spell creates a 15 by 15-foot area of Difficult Terrain at the end of the Li
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the damage increases by 1d10 for each slot level above 6th.
 
-\page
-{{pageNumber,auto}}
+#### Azure Sweep
+*6th-level Evocation*  
+**Classes:** Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** Self (30-foot Emanation)  
+**Components:** V, S  
+**Duration:** 1 minute  
+
+Pure magic sweeps out from you in a 30-foot Emanation. Each creature of your choice in the Emanation must make a Constitution saving throw. On a failed save, a creature takes 7d8 Force damage, and its Speed is reduced by 20 feet for the duration. On a successful save, a creature takes half as much damage only.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the damage increases by 1d8 for each slot level above 6th.
+
+\column
 
 #### Blizzard
 *6th-level Evocation*  
@@ -18109,6 +19513,7 @@ The spell creates a 15 by 15-foot area of Difficult Terrain at the end of the Li
 You create a terrible ice storm in a 30-foot-radius Sphere centered on a point you can see within range. When the Sphere appears, each creature in it must make a Constitution saving throw. On a failed save, it takes 6d8 Cold damage and has its Speed reduced by half until the end of its next turn. A creature whose Speed is already reduced by this spell is also Restrained until the end of its next turn. On a successful save, the creature takes half as much damage only. A creature also makes this save when it enters the spell's area or ends its turn there. A creature makes this save only once per turn. Water in the area instantly freezes.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the damage increases by 1d8 for each slot level above 6th.
+
 
 #### Beam of Annihilation
 *6th-level Evocation*  
@@ -18126,7 +19531,10 @@ If you do not take the Magic action to maintain or redirect it, the spell ends e
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the damage increases by 1d8 for each slot level above 6th.
 
-\column
+
+\page
+{{pageNumber,auto}}
+
 #### Blade Barrier
 *6th-level Evocation*  
 **Classes:** Cleric  
@@ -18140,9 +19548,6 @@ You create a vertical wall of whirling, razor-sharp blades made of magical energ
 Any creature in the wall's space makes a Dexterity saving throw, taking 6d10 Force damage on a failed save or half as much damage on a successful one. A creature also makes that save if it enters the wall's space or ends it turn there. A creature makes that save only once per turn.
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 7th level or higher, the damage increases by 1d10 for each slot level above 6th.
-
-\page
-{{pageNumber,auto}}
 
 #### Bones of the Earth
 *6th-level Transmutation*  
@@ -18190,6 +19595,11 @@ A target must make a Dexterity saving throw. The target takes 10d8 Lightning dam
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, one additional bolt leaps from the first target to another target for each slot level above 6th.
 
+
+
+\page
+{{pageNumber,auto}}
+
 #### Chrono Conjunction
 *6th-level Divination*  
 **Classes:** Sorcerer, Warlock, Wizard  
@@ -18204,10 +19614,6 @@ If you use this spell to change the roll to 1 or 20, you gain 1 level of exhaust
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the range increases by 30 feet for each level above 6th.
 
-
-\page
-{{pageNumber,auto}}
-
 #### Circle of Death
 *6th-level Necromancy*  
 **Classes:** Sorcerer, Warlock, Wizard  
@@ -18219,6 +19625,22 @@ If you use this spell to change the roll to 1 or 20, you gain 1 level of exhaust
 A Sphere of negative energy ripples out in a 60-foot-radius Sphere from a point within range. Each creature in that area must make a Constitution saving throw. A target takes 8d8 Necrotic damage on a failed save, or half as much damage on a successful one.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the damage increases by 2d8 for each slot level above 6th.
+
+\column
+
+#### Combustion
+*6th-level Evocation*  
+**Classes:** Druid, Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** Self (5-foot Emanation)  
+**Components:** V, S  
+**Duration:** 1 minute  
+
+You engulf yourself in flames for the duration, shedding Bright Light in a 20-foot radius and Dim Light for an additional 10 feet. These flames grant you Immunity to Fire damage. While they last, you have Advantage on spell attack rolls.
+
+At the end of each of your turns, each creature of your choice in a 5-foot Emanation originating from you takes 3d8 Fire damage.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the damage increases by 1d8 for each slot level above 6th.
 
 #### Conjure Fey
 *6th-level Conjuration*  
@@ -18234,7 +19656,10 @@ As a Bonus Action on your later turns, you can teleport the spirit to an unoccup
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of level 7 or higher, the damage increases by 2d12 for each slot level above 6.
 
-\column
+
+\page
+{{pageNumber,auto}}
+
 #### Contingency
 *6th-level Evocation*  
 **Classes:** Wizard  
@@ -18250,9 +19675,6 @@ The contingent spell takes effect immediately after the circumstance is met for 
 The contingent spell takes effect only on you, even if it can normally target others. You can use only one contingency spell at a time. If you cast this spell again, the effect of another contingency spell on you ends. Also, contingency ends on you if its material component is ever not on your person.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, you can use it to cast a spell at any level less than the Spell Slot you used.
-
-\page
-{{pageNumber,auto}}
 
 #### Create Homunculus
 *6th-level Transmutation*  
@@ -18511,6 +19933,27 @@ The spell ends early if you have no more spheres remaining.
 \page
 {{pageNumber,auto}}
 
+#### Elemental Avatar
+*6th-level Transmutation*  
+**Classes:** Druid, Sorcerer, Warlock, Wizard  
+**Casting Time:** Action  
+**Range:** Self  
+**Components:** V, S  
+**Duration:** Concentration, up to 1 hour  
+
+You draw upon the chaotic energies of the elemental planes, infusing yourself with pure elemental Air, Earth, Fire, or Ice. For the duration, you gain the benefits of that element:
+
+***Air.*** A vortex of wind swirls about you, causing all ranged weapon attacks targeting you to be made with Disadvantage, and granting you a Fly Speed equal to your Speed. As an Action, you can unleash a tempestuous burst, forcing creatures within 15 feet to make a Strength saving throw. On a failed save, they take 4d8 Thunder damage and are pushed 15 feet away from you in a straight line. On a successful save, they take half as much damage and are not moved.
+
+***Earth.*** Your body is covered in a shifting layer of raw earth and stone, granting you Resistance to Bludgeoning, Piercing, and Slashing damage. You also ignore any Difficult Terrain imposed by earth, stone, sand, or similar materials. As an Action, you rend the earth at your feet out to a 15-foot radius, turning it into Difficult Terrain and forcing all creatures in that area to make a Dexterity saving throw. On a failed save, a creature takes 4d8 Bludgeoning damage and has the Prone condition. On a successful save, it takes half as much damage and doesn't have the Prone condition.
+
+***Fire.*** Flames envelop your body, harmless to you. You gain Immunity to Fire damage, Resistance to Radiant damage, and you shed Bright Light in a 30-foot radius. As an Action, you unleash a burst of searing fire, forcing all creatures within 15 feet to make a Dexterity saving throw. On a failed save, a creature takes 4d8 Fire damage and has the Blinded condition until the start of your next turn. On a successful save, it takes half as much damage and isn't Blinded.
+
+***Ice.*** A thin sheen of glacial frost covers your body. You gain Immunity to Cold damage, and the area within 15 feet of you becomes Difficult Terrain for creatures other than you due to the frigid temperature emanating from your body. As an Action, you can flash freeze the area within 15 feet, forcing creatures there to make a Constitution saving throw. On a failed save, a creature takes 4d8 Cold damage and its Speed is halved until the start of your next turn. On a successful save, it takes half as much damage and its Speed isn't affected.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, you gain the benefits of another element of your choice (you can choose each element only once), and the damage of the special Actions granted by this spell increases by 1d8 for each slot level above 6th.
+\column
+
 #### Eyebite
 *6th-level Necromancy*  
 **Classes:** Bard, Psion, Sorcerer, Warlock, Wizard  
@@ -18545,7 +19988,10 @@ When the flame is activated, the creature fire explodes, causing all creatures w
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the damage increases by 2d6 for each slot level above 6th.
 
-\column
+
+\page
+{{pageNumber,auto}}
+
 #### Find the Path
 *6th-level Divination*  
 **Classes:** Bard, Cleric, Druid  
@@ -19081,6 +20527,19 @@ Similarly, this spell doesn't directly affect plant growth. The moved earth carr
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the time for each alteration decreases by 2 minutes for each slot level above 6th.
 
+#### Nature's Tranquility
+*6th-level Abjuration*  
+**Classes:** Druid  
+**Casting Time:** Action  
+**Range:** Self (60-foot Emanation)  
+**Components:** V  
+**Duration:** Concentration, up to 1 minute  
+
+Nature's power flows around you in a 60-foot Emanation for the duration. Creatures of your choice in the Emanation have Resistance to Bludgeoning, Piercing, and Slashing damage. As a Bonus Action, you can cause each ally in the Emanation to regain Hit Points equal to 2d8 plus your spellcasting ability modifier. This spell has no effect on undead or constructs.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, creatures regain 1d8 additional Hit Points for each slot level above 6th.
+
+\column
 #### Otherworldly Guise
 *6th-level Transmutation*  
 **Classes:** Sorcerer, Warlock, Wizard   
@@ -19099,6 +20558,12 @@ Uttering an incantation, you draw on the magic of the Lower Planes or Upper Plan
 - You can attack twice, instead of once, when you take the Attack action on your turn. You ignore this benefit if you already have a feature, like Extra Attack, that lets you attack more than once when you take the Attack action on your turn.
 
 ***At Higher Levels.*** When you cast this spell using a 7th level Spell Slot, the duration increases to Concentration, up to 10 minutes. When you cast it at 8th level or higher, you gain the benefits of both Lower and Upper plane effects. At 9th level, the duration is Concentration, up to 1 hour.
+
+
+
+\page
+{{pageNumber,auto}}
+
 #### Planar Ally
 *6th-level Conjuration*  
 **Classes:** Cleric  
@@ -19114,10 +20579,6 @@ When the creature appears, it is friendly but under no obligation to help you. I
 Services can be anything appropriate to the creature summoned. Creatures will rarely agree to tasks that are suicidal, impossible, abhorrent, or especially lengthy. After the creature completes the task, or if you are unable to agree on its payment, it returns to its home plane.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, for each slot level above 6th, you can obtain one minute of service for no payment, as long as the task is of limited risk.
-
-
-\page
-{{pageNumber,auto}}
 
 #### Platinum Lances
 *6th-level Evocation*  
@@ -19152,7 +20613,7 @@ You create a field of silvery light that surrounds a creature of your choice wit
 As a Bonus action on subsequent turns, you can move the field to another creature within 60 feet of the field.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, you can affect one additional creature for each slot level above 6th. You can move any number of shields to different creatures as part of the same Bonus action.
-\column
+
 #### Power Torrent
 *6th-level Evocation*  
 **Classes:** Sorcerer  
@@ -19167,6 +20628,12 @@ All spells of 1st level or lower on creatures that take this damage are dispelle
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the damage increases by 1d12 + 1 for each slot level above 6th.
 
+
+
+
+\page
+{{pageNumber,auto}}
+
 #### Primordial Ward
 *6th-level Abjuration*  
 **Classes:** Druid   
@@ -19178,11 +20645,6 @@ All spells of 1st level or lower on creatures that take this damage are dispelle
 You create a whirling shield of elemental power around yourself. When you cast this spell, select one damage type out of Acid, Cold, Fire, Lightning and Thunder. Until the spell ends, you gain immunity to that damage type, and creatures of your choice within 5 feet of you gain Resistance to it. As a Bonus action, you can change the damage type.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, you can gain immunity to an additional damage type for each slot level above 6th.
-
-
-
-\page
-{{pageNumber,auto}}
 
 #### Programmed Illusion
 *6th-level Illusion*  
@@ -19202,6 +20664,8 @@ Physical interaction with the image reveals it to be illusory, since things can 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the performance can last for double the time for each slot level above 6th.
 
+\column
+
 #### Psionic Oppression
 *6th-level Enchantment*  
 **Classes:** Psion   
@@ -19215,7 +20679,7 @@ You psionically overwhelm the mind of one creature you can see within range. It 
 The Stunned target can repeat the saving throw at the end of each of its turns, ending the effect on a success.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the Psychic damage increases by 2d6 for each spell level above 6th.
-\column
+
 #### Sanguine Doom
 *6th-level Necromancy (blood magic)*  
 **Classes:** Cleric, Sorcerer, Warlock, Wizard   
@@ -19230,6 +20694,11 @@ On failure, the creature gains the doomed curse, and the next time they are hit 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, the damage increases by 2d6 for each slot level above 6th.
 
+
+
+\page
+{{pageNumber,auto}}
+
 #### Scatter
 *6th-level Conjuration*  
 **Classes:** Psion, Sorcerer, Warlock, Wizard   
@@ -19242,10 +20711,6 @@ The air quivers around up to five creatures of your choice that you can see with
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, you can affect one additional creature for each slot level above 6th.
 
-
-
-\page
-{{pageNumber,auto}}
 
 #### Sky Omen
 *6th-level Illusion*  
@@ -19265,6 +20730,7 @@ The first time a creature sees the omen, it must make a Wisdom saving throw. A c
 
 ***At Higher Levels.*** If you cast this spell using a 7th level Spell Slot, the radius is 6 miles and the duration is concentration, up to 8 hours. If you use an 8th level Spell Slot, the radius is 12 miles and the duration is concentration, up to 24 hours. If you use a 9th level Spell Slot, the radius is 18 miles, the spell no longer requires concentration, and it lasts until dispelled.
 
+\column
 #### Soul Cage
 *6th-level Necromancy*  
 **Classes:** Warlock, Wizard   
@@ -19283,6 +20749,30 @@ A creature that can see the sensor (such as one using see invisibility or Truesi
 
 ***At Higher Levels.*** When you cast this spell using a spell slot of 7th level or higher, you can exploit a soul an additional time for each slot level above 6th.
 
+\page
+{{pageNumber,auto}}
+
+#### Spiritual Projection [Astral Projection]
+*6th-level Necromancy*  
+**Classes:** Cleric, Psion, Warlock, Wizard  
+**Casting Time:** 1 hour  
+**Range:** Self  
+**Components:** V, S, M (a 10-foot-long cord of mithril worth 1,000 GP for each target, which the spell consumes)  
+**Duration:** Special  
+
+You separate your soul from your body, projecting it into the Astral Plane (the spell fails if you cast it on the Astral Plane). Your physical body is left behind, Unconscious and in a state of suspended animation; it does not need air, food, or water, and it does not age. Your soul uses the following rules:
+
+***Astral Body.*** Your soul forms an Astral Body around itself. It is an exact replica of your physical body with your statistics and possessions, though a silver cord extends from the center of its back, turning invisible after 1 foot. Any damage or other effects that apply to it don't affect your physical body or carry over to it when you return to your body.
+
+***Silver Cord.*** This cord tethers your soul to your physical body, and as long as it is intact, you can find your way to your physical body. If the cord is severed (which only happens if an effect specifically states that it does), your soul and body are permanently separated, killing you instantly.
+
+***Ending the Spell.*** If you leave the Astral Plane through a portal to another plane or return to the plane where the spell was cast, your physical body and its possessions travel along your silver cord, and you re-enter your physical body there.
+
+The spell ends if you use your action to end it, if a spell like *dispel magic* is cast on your Astral Body or physical body, or if either body is reduced to 0 hit points. When the spell ends in this way, your soul instantly travels along your silver cord and returns to your physical body, where you awaken.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 7th level or higher, you can target three additional creatures for each slot level above 6th. Any additional creatures must remain within 10 feet of you while you cast the spell.
+
+\column
 #### Stirge Swarm
 *6th-level Conjuration (blood magic)*  
 **Classes:** Warlock, Wizard   
@@ -19853,6 +21343,7 @@ When the spell ends, the supernatural void to hell closes, and all creatures in 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 8th level or higher, both the fire and Necrotic damage increase by 1d6 for each slot level above 7th.
 
+\column
 #### Inevitable Boulder
 *7th-level Conjuration*  
 **Classes:** Druid, Wizard  
@@ -19868,6 +21359,23 @@ At the beginning of each of your turns, the boulder moves 60 feet in the directi
 After the spell ends, the boulder continues to pursue its target for up to 24 hours. Once the boulder strikes its target after the spell ends, it immediately vanishes.
 
 ***At Higher Level.*** When you cast this spell using a Spell Slot of 8th level or higher, the damage increases by 1d10 for each spell level above 7th.
+
+#### Lay Waste
+*7th-level Evocation*  
+**Classes:** Druid, Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** Self (120-foot Line)  
+**Components:** V  
+**Duration:** Instantaneous  
+
+You draw a deep breath and spew molten cinders along a 120-foot-long, 20-foot-wide Line originating from you in a direction you choose. Each creature in the Line must make a Dexterity saving throw, taking 12d6 Fire damage on a failed save or half as much damage on a successful one.
+
+You then teleport to an unoccupied space within 5 feet of the end of the Line.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 8th level or higher, the damage increases by 1d6 for each slot level above 7th.
+
+\page
+{{pageNumber,auto}}
 
 
 #### Magnificent Mansion
@@ -19885,8 +21393,6 @@ Beyond the portal is a magnificent foyer with numerous chambers beyond. The atmo
 You can create any floor plan you like, but the space can't exceed 50 cubes, each Cube being 10 feet on each side. The place is furnished and decorated as you choose. It contains sufficient food to serve a nine course banquet for up to 100 people. A staff of 100 near-transparent servants attends all who enter. You decide the visual appearance of these servants and their attire. They are completely obedient to your orders. Each servant can perform any task a normal human servant could perform, but they can't attack or take any action that would directly harm another creature. Thus the servants can fetch things, clean, mend, fold clothes, light fires, serve food, pour wine, and so on. The servants can go anywhere in the mansion but can't leave it. Furnishings and other objects created by this spell dissipate into smoke if removed from the mansion. When the spell ends, any creatures or objects left inside the extradimensional space are expelled into the open spaces nearest to the entrance.
 
 ***At Higher Levels.*** When you cast this spell using an 8th level Spell Slot, you can create one additional entrance portal in a space you can see for every Spell Slot above 7th.
-\page
-{{pageNumber,auto}}
 
 #### Mirage Arcane
 *7th-level Illusion*  
@@ -19922,6 +21428,11 @@ You can use this spell to banish an unwilling creature to another plane. Choose 
 
 ***At Higher Levels.*** When you cast this spell using an 8th level Spell Slot to transport a circle of willing creatures, you can transport up to 500 pounds of objects or creatures along with them, as long as this cargo is entirely within the circle. Unwilling creatures can make a Charisma saving throw to avoid being transported. At 9th level, you can transport up to ten willing creatures along with up to 1000 pounds of cargo.
 
+
+\page
+{{pageNumber,auto}}
+
+
 #### Power Word: Fortify
 *7th-level Enchantment*  
 **Classes:** Bard, Cleric   
@@ -19952,8 +21463,6 @@ At the end of each of its turns, the Charmed target makes a Constitution saving 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 8th level or higher, the Hit Point threshold decreases by 25 for each slot level above 7th.
 
-\page
-{{pageNumber,auto}}
 #### Power Word: Slumber
 *7th-level Enchantment*  
 **Classes:** Bard, Psion, Sorcerer, Warlock, Wizard   
@@ -19992,6 +21501,12 @@ You send a shimmering wave of force outward, striking each creature within a 60-
 
 ***At Higher Levels.*** When you cast this spell using an 8th level Spell Slot, instead of rolling a d8 for each ray, roll a d10. On a roll of 8 or higher, the Multiple effect occurs. When you cast it at 9th level, roll a d12 instead.
 
+
+
+\page
+{{pageNumber,auto}}
+
+
 #### Prophesied Strike
 *7th-level Divination*  
 **Classes:** Cleric, Psion, Sorcerer, Wizard  
@@ -20020,10 +21535,7 @@ Physical interaction with the image reveals it to be illusory, since things can 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 8th level or higher, you can use a Bonus action instead of an Action to control the image. At 9th level, you can also cause it to cast any Cantrip you know that doesn’t deal damage.
 
-
-\page
-
-{{pageNumber,auto}}
+\column
 #### Rain of Swords
 *7th-level Evocation*  
 **Classes:** Sorcerer, Wizard  
@@ -20051,7 +21563,10 @@ You touch a creature and stimulate its natural healing ability. The target regai
 The target's severed body members (fingers, legs, tails, and so on), if any, are restored after 2 minutes. If you have the severed part and hold it to the stump, the spell instantaneously causes the limb to knit to the stump.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 8th level or higher, you can affect one additional creature for each slot level above 7th.
-\column
+
+\page
+{{pageNumber,auto}}
+
 
 #### Resurrection
 *7th-level Necromancy*  
@@ -20072,8 +21587,6 @@ Coming back from the dead is an ordeal. The target takes a −4 penalty to all a
 Casting this spell to restore life to a creature that has been dead for one year or longer taxes you greatly. Until you finish a long rest, you can't cast spells again, and you have Disadvantage on all D20 Tests.
 
 ***At Higher Levels.*** When you cast this spell using an 8th level Spell Slot, the material cost is reduced to 500 gp. At 9th level it is 250 gp.
-\page
-{{pageNumber,auto}}
 
 #### Reverse Gravity
 *7th-level Transmutation*  
@@ -20100,7 +21613,6 @@ If a ceiling or an anchored object is encountered in this upward fall, creatures
 You untangle a single thread of fate to encourage a different result. The creature that failed the D20 Test can reroll it with Advantage, and the creature must use the new roll. If the D20 Test is successful, the creature gains 6d10 Temporary Hit Points from its strengthened fate.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 8th level or higher, the Temporary Hit Points gained increase by 2d10 for each slot level above 7th.
-\column
 
 #### Sequester
 *7th-level Transmutation*  
@@ -20116,6 +21628,11 @@ The spell ends on a target if it takes any damage. You can also define a conditi
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 8th level or higher, you can sequester one additional creature or object for each slot level above 7th. If you set an awakening condition, it applies to all the affected targets.
 
+
+\page
+{{pageNumber,auto}}
+
+
 #### Sorcerous Sequestration
 *7th-level Conjuration*  
 **Classes:** Bard, Psion, Sorcerer, Warlock, Wizard  
@@ -20127,9 +21644,6 @@ The spell ends on a target if it takes any damage. You can also define a conditi
 This spell teleports a creature to your location. Choose a creature that you have met and is known to you within range as the target of this spell. An unwilling creature can make a Charisma saving throw to resist this effect. The target is placed at a location of your choice within 30 feet of you. You choose if the target is sitting, standing, Prone, or bound with nearby restraints. At the end of the spell's duration, you can choose whether the target remains at your location or is teleported back to the location from which it was abducted.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 8th level or higher, you can target one additional creature for each spell level above 7th.
-
-\page
-{{pageNumber,auto}}
 
 #### Simulacrum
 *7th-level Illusion*  
@@ -20155,7 +21669,6 @@ The only way for the Simulacrum to regain hit points is for a creature to touch 
 
 ***At Higher Levels.*** When you cast this spell using an 8th level Spell Slot or higher, the duplicate gains resistance to two damage types of your choice for each slot level above 7th.
 
-\column
 #### Skirmish
 *7th-level Transmutation*  
 **Classes:** Cleric, Wizard  
@@ -20312,7 +21825,28 @@ Until the spell ends, you can take a Magic action on subsequent turns to target 
 
 ***At Higher Levels.*** The damage increases by 1d8 for each Spell Slot level above 7th.
 
-\column
+#### Tree of Life
+*8th-level Transmutation*  
+**Classes:** Druid  
+**Casting Time:** Bonus Action  
+**Range:** Self  
+**Components:** V, S  
+**Duration:** 1 minute  
+
+You shape-shift into a Tree of Life form that resembles a treant. In this form, you gain the following benefits.
+
+***Tree Form.*** You become Large. Your Speed becomes 10 feet and can't be reduced, and Difficult Terrain doesn't cost you extra movement.
+
+***Bark Skin.*** You gain a +2 bonus to Armor Class and 10 Temporary Hit Points.
+
+***Condition Immunity.*** You gain Immunity to the Paralyzed and Restrained conditions. You can't be shape-shifted against your will.
+
+***Source of Life.*** When a spell you cast with a Spell Slot restores Hit Points to a creature, that creature regains an additional 1d8 Hit Points on the turn you cast the spell.
+
+***Spells Enhanced.*** The spell save DC of your spells increases by 1, and you have Advantage on the attack rolls of spells you cast.
+
+***At Higher Levels.*** When you cast this spell using a 9th-level Spell Slot, the duration increases to 10 minutes, you gain 20 Temporary Hit Points, and the extra healing from Source of Life increases to 2d8.
+
 #### Twisting Eruption
 *7th-level Conjuration*  
 **Classes:** Warlock   
@@ -20406,7 +21940,6 @@ Dispel Magic has no effect on the aura, and the auras created by different Antim
 
 ***At Higher Levels.*** When you cast this spell using a 9th level Spell Slot, the radius increases to 20 feet.
 
-\column
 
 #### Antipathy/Sympathy
 *8th-level Enchantment*  
@@ -20425,6 +21958,22 @@ As you cast the spell, choose whether it creates antipathy or sympathy, and targ
 ***Ending the Effect.*** If the Frightened or Charmed creature ends its turn more than 120 feet away from the target, the creature makes a Wisdom saving throw. On a successful save, the creature is no longer affected by the target. A creature that successfully saves against this effect is immune to it for 1 minute, after which it can be affected again.
 
 ***At Higher Levels.*** When you cast this spell using a 9th level Spell Slot, you can specify two types of creatures to be affected.
+
+#### Apotheosis
+*9th-level Transmutation*  
+**Classes:** Cleric  
+**Casting Time:** Bonus Action  
+**Range:** Self  
+**Components:** V  
+**Duration:** 1 minute  
+
+You transform into a spectral, angelic form that grants you the following benefits.
+
+***Angelic Wings.*** You have a Fly Speed of 90 feet.
+
+***Spectral Form.*** You have Resistance to Bludgeoning, Piercing, Radiant, and Slashing damage.
+
+***Holy Empowerment.*** Whenever you cast a spell using a Spell Slot that restores Hit Points to one or more creatures or deals Radiant damage, determine the spell's effects as if you had used a Spell Slot 2 levels higher than the Spell Slot you used to cast it (maximum of 9th level).
 \page
 {{pageNumber,auto}}
 
@@ -20950,6 +22499,20 @@ At the end of each of its turns, the affected target can repeat the Wisdom savin
 \page
 {{pageNumber,auto}}
 
+#### Self Time Stop [Time Stop]
+*7th-level Transmutation*  
+**Classes:** Psion, Sorcerer, Wizard  
+**Casting Time:** Action  
+**Range:** Self  
+**Components:** V  
+**Duration:** Instantaneous  
+
+You briefly stop the flow of time for everyone but yourself. No time passes for other creatures, while you take two turns in a row, during which you can use Actions and move as normal.
+
+This spell ends immediately if you move more than 1,000 feet from the location where you cast it, or if an Action you use during the spell affects a creature other than you or an object being worn or carried by someone other than you.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 8th level or higher, the number of turns you take while time is stopped increases by 1 for each slot level above 7th.
+
 #### Sunburst
 *8th-level Evocation*  
 **Classes:** Cleric, Druid, Sorcerer, Wizard   
@@ -20979,7 +22542,7 @@ You fire a ruby-red ray from your hands and attempt to dissolve a creature's bon
 At the end of each of the creature's turns, it must make a Constitution saving throw. After failing three of these saving throws, the spell lasts for the duration. After succeeding on a Constitution saving throw, the creature's bones reform. The recrystallization of the bones in the subject's body causes great pain and the creature is Stunned until the end of its next turn, at which point the spell ends.
 
 ***At Higher Levels.*** When you cast this spell using a 9th level Spell Slot, the range of the spell is 60 feet.
-\column
+
 #### Telepathy
 *8th-level Divination*  
 **Classes:** Psion, Warlock, Wizard   
@@ -21060,6 +22623,8 @@ After all creatures inside the bubble have acted, the spell ends and initiative 
 
 \page
 {{pageNumber,auto}}
+
+
 #### Titanic Strength
 *8th-level Transmutation*  
 **Classes:** Cleric, Sorcerer, Wizard   
