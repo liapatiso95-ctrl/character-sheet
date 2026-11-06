@@ -362,6 +362,9 @@ A Collection of DnD 5e Feats
   - #### [{{ Shadow Pact}}{{ 49}}](#p49)
   - #### [{{ Shadow Trapper}}{{ 49}}](#p49)
   - #### [{{ Shadow Weaver}}{{ 49}}](#p49)
+  - #### [{{ Upper Planes Pact}}{{ 49}}](#p49)
+  - #### [{{ Elysium Diplomat}}{{ 49}}](#p49)
+  - #### [{{ Ysgardian Warrior}}{{ 49}}](#p49)
 }}
 
 
@@ -1382,6 +1385,7 @@ You have some basic martial arts training, giving you some skill in both unarmed
 
 **Bonus Strike.** When you take the Attack action on your turn and only make unarmed strikes, you can make a single unarmed strike as a bonus action on that same turn.
 
+\column
 
 ### Martial Adept
 ***Prerequisite: Proficiency with all simple and martial weapons***  
@@ -4392,3 +4396,40 @@ Your commitment to your planar pact grants you the following benefits.
 **Create Shadow.** You always have the *Darkness* spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast the spell using any spell slots you have of the appropriate level. The spell's spellcasting ability is the ability increased by this feat.
 
 **Manipulate Shadow.** You can take a Bonus Action to increase or decrease the radius of a *Darkness* spell you cast by 5 feet (minimum 5-foot radius, maximum 25-foot radius) or move the area of Darkness to a space within 60 feet of you.
+
+\column
+
+### Upper Planes Pact
+***Prerequisites: Can't Have Another Planar Pact Feat***
+
+A pact with the blessed realms above has touched your mind and body with celestial grace. You gain the following benefits.
+
+**Celestial Lore.** You gain Proficiency in the Religion skill.
+
+**Celestial Resistance.** You have Resistance to Radiant damage.
+
+**Detect Evil and Good.** You always have the *Detect Evil and Good* spell prepared. You can cast it once without expending a spell slot, and you regain the ability to cast it in that way when you finish a Short or Long Rest. You can also cast the spell using any spell slots you have of the appropriate level.
+
+Intelligence, Wisdom, or Charisma is your spellcasting ability for this spell (choose when you select this feat).
+
+### Elysium Diplomat
+***Prerequisites: Level 4+, Upper Planes Pact***
+
+Elysium's tranquility and serenity grants you the following benefits.
+
+**Ability Score Increase.** Increase your Intelligence, Wisdom, or Charisma by 1, to a maximum of 20.
+
+**Celestial Communicator.** You learn two additional languages of your choice, chosen from the language tables in the *Player's Handbook*.
+
+**Divine Calm.** A creature's Hostile attitude toward you doesn't impose Disadvantage on your Charisma (Persuasion) checks to influence that creature.
+
+**Quick Retreat.** When an enemy ends its turn within 5 feet of you, you can take a Reaction to move up to half your Speed without provoking Opportunity Attacks.
+
+### Ysgardian Warrior
+***Prerequisites: Level 4+, Upper Planes Pact***
+
+Your commitment to your planar pact grants you the following benefits.
+
+**Ability Score Increase.** Increase your Strength, Dexterity, or Constitution by 1, to a maximum of 20.
+
+**Ysgardian Spirit.** When you become Bloodied or are Bloodied, you can gain Advantage on the next attack roll you make before the end of your next turn (no action required), and if you hit with the attack roll, you can deal extra damage to the target equal to your Proficiency Bonus. This extra damage is of the same type as the attack. You can use this feature a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
