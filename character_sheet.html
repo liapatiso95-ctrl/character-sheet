@@ -449,12 +449,15 @@ const init=()=>{ const d=({
   nt1:[],nt2:[],nt3:[],
   feat:[],
   fts:[],
+  spec:[],
   npc:[],
   locations:[],
   lore:[],
   customSections:[],
   factions:[],
-  aprof:"",
+  secOpen:{},
+  raceManual:false,raceAuto:"",
+  aprof:"",profA:{armor:{},weapons:{},custom:[]},profT:{tools:{},custom:[]},profL:{langs:{},custom:[]},
   tprof:"",lang:"",
   spellClasses:[],
   spellPtsMax:"",spellPtsUsed:"",spellPtsFormula:null,
@@ -560,6 +563,11 @@ const CSS = `
   .ally-badge{background:rgba(74,156,92,.2);border:1px solid rgba(74,156,92,.4);color:#6dbb80}
   .enemy-badge{background:rgba(201,74,42,.2);border:1px solid rgba(201,74,42,.4);color:#e07060}
   .neutral-badge{background:rgba(42,140,156,.2);border:1px solid rgba(42,140,156,.4);color:#60b4c4}
+  .fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 10px;margin-bottom:10px}
+  .fgrid>.fc,.fgrid>.fcr{margin-bottom:0;min-width:0}
+  @media (max-width:760px){.fgrid{grid-template-columns:minmax(0,1fr)}}
+  .fcr{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.25);border:1px solid rgba(201,150,42,.15);border-left:3px solid var(--arcane);padding:5px 10px;cursor:pointer;transition:background .15s}
+  .fcr:hover{background:rgba(201,150,42,.07)}
   .fc{background:rgba(0,0,0,.25);border:1px solid rgba(201,150,42,.15);border-left:3px solid var(--arcane);padding:12px 14px;margin-bottom:10px;transition:border-color .2s}
   .fc:hover{border-left-color:var(--arcane-l)}
   .fc input[type=text]{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(201,150,42,.2);color:var(--gold-l);font-family:'Cinzel',serif;font-size:13px;font-weight:600;letter-spacing:1px;outline:none;padding:2px 0 4px;margin-bottom:8px}
@@ -1176,6 +1184,7 @@ function computeEncumbrance(c){
 }
 
 function Page1({c,s}){
+  useSpeciesHeritageSync(c,s);
   const [acOpen,setAcOpen]=useState(false);
   const [iniModal,setIniModal]=useState(false);
   const [wpnOpen,setWpnOpen]=useState(null); // {idx, mode:"atk"|"dmg"}
@@ -1340,7 +1349,7 @@ function Page1({c,s}){
       <div className="sh">Identity</div>
       <div className="thc">
         <F label="Character Name" val={c.name} set={v=>s("name",v)} ph="Archmage..." lg />
-        <F label="Race" val={c.race} set={v=>s("race",v)} ph="Human, Elf..." />
+        <F label="Species" val={c.race} set={v=>{s("race",v);s("raceManual",!!(v||"").trim());}} ph="Human, Elf... (auto-filled from Species Features)" />
         <F label="Background" val={c.bg} set={v=>s("bg",v)} ph="Sage..." />
       </div>
       <div className="tc">
@@ -2114,7 +2123,7 @@ function Page1({c,s}){
       </div>
 
       <div className="sh" style={{display:"flex",alignItems:"baseline",gap:10}}>Attacks / Weapons / Spells
-        <span onClick={function(){setWpnRef(true);}} title="Weapons reference (PHB 2024)"
+        <span onClick={function(){setWpnRef(true);}} title="Weapons &amp; Armor reference (PHB 2024)"
           style={{cursor:"pointer",width:15,height:15,borderRadius:"50%",border:"1px solid rgba(201,74,42,.45)",color:"rgba(201,74,42,.8)",fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",display:"inline-flex",alignItems:"center",justifyContent:"center",userSelect:"none",background:"rgba(201,74,42,.08)",lineHeight:1,alignSelf:"center"}}>i</span>
         <span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.3)",fontStyle:"italic",letterSpacing:0,textTransform:"none",fontWeight:"normal"}}>rolls appear in the Dice Roller tab</span></div>
       {wpnRef&&<WeaponReferenceModal onClose={function(){setWpnRef(false);}} />}
@@ -4093,11 +4102,7 @@ function UsesCalcModal({lim,c,onApply,onClose}){
     onClear={lim.usesFormula?function(){onApply(null,null);}:null} />;
 }
 
-function LimitBlock({lim,idx,onChange,onDelete,isOnly,c}){
-  const [showCalc,setShowCalc]=React.useState(false);
-
-  // Live-recompute from formula whenever character state changes
-  const computeFromFormula=function(formula){
+function _limFormula(c,formula){
     if(!formula) return null;
     const allCls=(c.classes&&c.classes.length>0?c.classes:[{nm:c.cls||"",lv:"",hd:"d6"}]).filter(function(cl){return (cl.nm||"").trim();});
     const totalLv=allCls.reduce(function(t,cl){return t+(parseInt(cl.lv)||0);},0);
@@ -4138,7 +4143,13 @@ function LimitBlock({lim,idx,onChange,onDelete,isOnly,c}){
       return 0;
     })();
     return Math.max(1,flat+ablSum+profSum+lvlSum);
-  };
+  }
+
+function LimitBlock({lim,idx,onChange,onDelete,isOnly,c}){
+  const [showCalc,setShowCalc]=React.useState(false);
+
+  // Live-recompute from formula whenever character state changes
+  const computeFromFormula=function(formula){return _limFormula(c,formula);};
 
   const formulaResult=lim.usesFormula?computeFromFormula(lim.usesFormula):null;
   const maxUses=formulaResult!==null?formulaResult:(parseInt(lim.uses)||0);
@@ -4354,10 +4365,259 @@ const AMMUNITION_DATA=[
   ["Needles","50","Pouch","1 lb.","1 GP"]
 ];
 
+
+// ─── Armor reference data (PHB 2024) ───────────────────────────────────────────
+const ARMOR_DATA={
+  "Light Armor":[
+    {n:"Padded",ac:"11 + Dex modifier",str:"—",stealth:"Disadvantage",wt:"8 lb.",cost:"5 GP"},
+    {n:"Leather",ac:"11 + Dex modifier",str:"—",stealth:"—",wt:"10 lb.",cost:"10 GP"},
+    {n:"Studded Leather",ac:"12 + Dex modifier",str:"—",stealth:"—",wt:"13 lb.",cost:"45 GP"}
+  ],
+  "Medium Armor":[
+    {n:"Hide",ac:"12 + Dex modifier (max 2)",str:"—",stealth:"—",wt:"12 lb.",cost:"10 GP"},
+    {n:"Chain Shirt",ac:"13 + Dex modifier (max 2)",str:"—",stealth:"—",wt:"20 lb.",cost:"50 GP"},
+    {n:"Scale Mail",ac:"14 + Dex modifier (max 2)",str:"—",stealth:"Disadvantage",wt:"45 lb.",cost:"50 GP"},
+    {n:"Breastplate",ac:"14 + Dex modifier (max 2)",str:"—",stealth:"—",wt:"20 lb.",cost:"400 GP"},
+    {n:"Half Plate Armor",ac:"15 + Dex modifier (max 2)",str:"—",stealth:"Disadvantage",wt:"40 lb.",cost:"750 GP"}
+  ],
+  "Heavy Armor":[
+    {n:"Ring Mail",ac:"14",str:"—",stealth:"Disadvantage",wt:"40 lb.",cost:"30 GP"},
+    {n:"Chain Mail",ac:"16",str:"Str 13",stealth:"Disadvantage",wt:"55 lb.",cost:"75 GP"},
+    {n:"Splint Armor",ac:"17",str:"Str 15",stealth:"Disadvantage",wt:"60 lb.",cost:"200 GP"},
+    {n:"Plate Armor",ac:"18",str:"Str 15",stealth:"Disadvantage",wt:"65 lb.",cost:"1,500 GP"}
+  ],
+  "Shield":[
+    {n:"Shield",ac:"+2",str:"—",stealth:"—",wt:"6 lb.",cost:"10 GP"}
+  ]
+};
+const ARMOR_DON_DOFF=[
+  ["Light Armor","1 minute","1 minute"],["Medium Armor","5 minutes","1 minute"],["Heavy Armor","10 minutes","5 minutes"],["Shield","1 action (Utilize)","1 action (Utilize)"]
+];
+const ARMOR_RULES=[
+  ["Armor Training","Anyone can put on a suit of armor or strap a Shield to an arm, but only those with training can use them effectively. You gain a benefit from armor or a Shield only if you have training with it. If you wear armor or use a Shield you lack training with, you have Disadvantage on any D20 Test that involves Strength or Dexterity, and you can't cast spells."],
+  ["Armor Class","Armor determines your base Armor Class. Light armor adds your full Dexterity modifier; Medium armor adds your Dexterity modifier, to a maximum of +2; Heavy armor adds no Dexterity modifier. A Shield adds +2 to your AC and requires a free hand."],
+  ["One Armor at a Time","You can wear only one suit of armor at a time and benefit from only one Shield at a time."],
+  ["Strength Requirement","If the table shows a Strength score for a suit of armor, the armor reduces your Speed by 10 feet if your Strength score is lower than that number."],
+  ["Stealth","If the table shows \"Disadvantage\" in the Stealth column, you have Disadvantage on Dexterity (Stealth) checks while wearing that armor."],
+  ["Donning and Doffing","The time it takes to don or doff armor depends on its category, as shown in the Donning and Doffing Armor table. Donning a Shield or taking it off is a Utilize action."]
+];
+
+// ─── Proficiency picker (armor + weapons, tools) ────────────────────────────────
+const PROF_ARMOR_LIST=["Light Armor","Medium Armor","Heavy Armor","Shields"];
+function _wpnNames(prefix){
+  var out=[];Object.keys(WEAPON_DATA).forEach(function(cat){if(cat.indexOf(prefix)===0)WEAPON_DATA[cat].forEach(function(w){out.push(w.n);});});return out;
+}
+function _toolIsArtisan(t){return /^Artisan/i.test(t.d||"");}
+function profChips(kind,p){
+  p=p||{};var chips=[];
+  if(kind==="armor"){
+    PROF_ARMOR_LIST.forEach(function(a){if(p.armor&&p.armor[a]) chips.push({t:a,k:"armor"});});
+    ["Simple","Martial"].forEach(function(grp){
+      var names=_wpnNames(grp),w=p.weapons||{};
+      if(names.every(function(n){return w[n];})) chips.push({t:grp+" Weapons",k:"wpn"});
+      else names.forEach(function(n){if(w[n]) chips.push({t:n,k:"wpn"});});
+    });
+  } else if(kind==="lang"){
+    var ll=p.langs||{};
+    Object.keys(LANG_DATA).forEach(function(cat){LANG_DATA[cat].forEach(function(l){if(ll[l.n]) chips.push({t:l.n,k:"lang"});});});
+  } else {
+    var tl=p.tools||{};
+    var art=TOOL_DATA.filter(_toolIsArtisan).map(function(t){return t.n;});
+    if(art.length&&art.every(function(n){return tl[n];})) chips.push({t:"Artisan's Tools",k:"tool"});
+    else art.forEach(function(n){if(tl[n]) chips.push({t:n,k:"tool"});});
+    TOOL_DATA.forEach(function(t){if(!_toolIsArtisan(t)&&tl[t.n]) chips.push({t:t.n,k:"tool"});});
+  }
+  (p.custom||[]).forEach(function(cu){if((cu||"").trim()) chips.push({t:cu,k:"custom"});});
+  return chips;
+}
+
+
+// ─── Languages (PHB 2024) ──────────────────────────────────────────────────────
+const LANG_DATA={
+  "Standard Languages":[
+    {n:"Common",sp:"Humans and most folk",sc:"Common"},
+    {n:"Common Sign Language",sp:"Deaf communities, travelers, merchants",sc:"Hand signs"},
+    {n:"Draconic",sp:"Dragons, dragonborn, kobolds",sc:"Draconic"},
+    {n:"Dwarvish",sp:"Dwarves",sc:"Dwarvish"},
+    {n:"Elvish",sp:"Elves",sc:"Elvish"},
+    {n:"Giant",sp:"Ogres, giants",sc:"Dwarvish"},
+    {n:"Gnomish",sp:"Gnomes",sc:"Dwarvish"},
+    {n:"Goblin",sp:"Goblinoids",sc:"Dwarvish"},
+    {n:"Halfling",sp:"Halflings",sc:"Common"},
+    {n:"Orc",sp:"Orcs",sc:"Dwarvish"}
+  ],
+  "Rare Languages":[
+    {n:"Abyssal",sp:"Demons",sc:"Infernal"},
+    {n:"Celestial",sp:"Celestials",sc:"Celestial"},
+    {n:"Deep Speech",sp:"Aberrations (e.g. aboleths, mind flayers)",sc:"—"},
+    {n:"Druidic",sp:"Druids (secret language)",sc:"—"},
+    {n:"Infernal",sp:"Devils",sc:"Infernal"},
+    {n:"Primordial",sp:"Elementals",sc:"Dwarvish"},
+    {n:"Sylvan",sp:"Fey creatures",sc:"Elvish"},
+    {n:"Thieves' Cant",sp:"Rogues and criminals (secret language)",sc:"—"},
+    {n:"Undercommon",sp:"Underdark traders",sc:"Elvish"}
+  ],
+  "Primordial Dialects":[
+    {n:"Aquan",sp:"Water elementals",sc:"Dwarvish"},
+    {n:"Auran",sp:"Air elementals",sc:"Dwarvish"},
+    {n:"Ignan",sp:"Fire elementals",sc:"Dwarvish"},
+    {n:"Terran",sp:"Earth elementals",sc:"Dwarvish"}
+  ]
+};
+const LANG_NOTES=[
+  ["Choosing Languages","Your character knows Common and typically two other languages of your choice from the Standard Languages table (or the Rare Languages table, with your DM's permission). Your background and species may grant more."],
+  ["Scripts","Some languages share a script. A creature that can read a script can read any language written in it, but it doesn't understand a language it doesn't know."],
+  ["Secret Languages","Druidic and Thieves' Cant are secret languages. Druidic is taught only to druids, and Thieves' Cant is a mix of dialect, jargon and code that lets those in the know hide messages in seemingly normal conversation."],
+  ["Primordial Dialects","Primordial is spoken in four dialects (Aquan, Auran, Ignan and Terran). Speakers of one dialect can generally understand the others."],
+  ["Telepathy and Sign","Telepathy and sign languages let you communicate without sound; a sign language requires you to see (or touch) the signer."]
+];
+function LanguageReferenceModal({onClose}){
+  const [q,setQ]=React.useState("");
+  const ql=q.trim().toLowerCase();
+  const thS={fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(123,160,201,.8)",textAlign:"left",padding:"4px 8px",borderBottom:"1px solid rgba(123,160,201,.25)"};
+  const tdS={fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.85)",padding:"4px 8px",borderBottom:"1px solid rgba(123,160,201,.08)",verticalAlign:"top"};
+  return (
+    <div onClick={onClose} style={{position:"fixed",inset:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(123,160,201,.4)",borderRadius:4,maxWidth:620,width:"100%",maxHeight:"84vh",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.7)"}}>
+        <div style={{padding:"18px 22px 10px",borderBottom:"1px solid rgba(123,160,201,.2)"}}>
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <span style={{fontFamily:"'Cinzel',serif",fontSize:14,letterSpacing:1,color:"#9fc0e0",flex:1}}>Languages Reference</span>
+            <div onClick={onClose} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:16,color:"rgba(232,213,176,.5)",lineHeight:1,padding:"0 4px"}}>×</div>
+          </div>
+          <input value={q} onChange={function(e){setQ(e.target.value);}} placeholder="Filter languages..." style={{marginTop:10,width:"100%",boxSizing:"border-box",background:"rgba(0,0,0,.3)",border:"1px solid rgba(123,160,201,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,padding:"5px 9px",outline:"none"}} />
+        </div>
+        <div style={{overflowY:"auto",padding:"6px 14px 14px"}}>
+          {Object.keys(LANG_DATA).map(function(cat){
+            var rows=LANG_DATA[cat].filter(function(l){return !ql||l.n.toLowerCase().indexOf(ql)>=0||l.sp.toLowerCase().indexOf(ql)>=0;});
+            if(!rows.length) return null;
+            return <div key={cat}>
+              <div style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",color:"#9fc0e0",padding:"10px 8px 4px"}}>{cat}</div>
+              <table style={{width:"100%",borderCollapse:"collapse"}}>
+                <thead><tr><th style={thS}>Language</th><th style={thS}>Typical Speakers</th><th style={thS}>Script</th></tr></thead>
+                <tbody>{rows.map(function(l){return <tr key={l.n}><td style={Object.assign({},tdS,{fontWeight:600,color:"var(--gold-l)",whiteSpace:"nowrap"})}>{l.n}</td><td style={tdS}>{l.sp}</td><td style={tdS}>{l.sc}</td></tr>;})}</tbody>
+              </table>
+            </div>;
+          })}
+          {!ql&&<div style={{padding:"12px 8px 0"}}>{LANG_NOTES.map(function(p){return <div key={p[0]} style={{marginBottom:10}}><span style={{fontFamily:"'EB Garamond',serif",fontSize:14,fontWeight:600,color:"#9fc0e0"}}>{p[0]}. </span><span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.8)",lineHeight:1.6}}>{p[1]}</span></div>;})}</div>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProficiencyPicker({kind,value,onSave,onClose}){
+  const {useState:us}=React;
+  const isArmor=kind==="armor",isLang=kind==="lang";
+  const [d,setD]=us(function(){return JSON.parse(JSON.stringify(value||{}));});
+  const [cu,setCu]=us("");
+  const [q,setQ]=us("");
+  const ql=q.trim().toLowerCase();
+  const set=function(sec,name,on){setD(function(p){var n=Object.assign({},p);n[sec]=Object.assign({},n[sec]);if(on)n[sec][name]=true;else delete n[sec][name];return n;});};
+  const setMany=function(sec,names,on){setD(function(p){var n=Object.assign({},p);n[sec]=Object.assign({},n[sec]);names.forEach(function(x){if(on)n[sec][x]=true;else delete n[sec][x];});return n;});};
+  const addCustom=function(){var v=cu.trim();if(!v) return;setD(function(p){var l=(p.custom||[]).slice();if(l.indexOf(v)<0)l.push(v);return Object.assign({},p,{custom:l});});setCu("");};
+  const delCustom=function(i){setD(function(p){return Object.assign({},p,{custom:(p.custom||[]).filter(function(_,j){return j!==i;})});});};
+  const col=isArmor?"201,74,42":isLang?"123,160,201":"201,150,42";
+  const lbl={fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",color:"rgba("+col+",.85)",padding:"10px 0 4px"};
+  const row=function(key,text,checked,onChange,extra){
+    return <label key={key} style={{display:"flex",alignItems:"center",gap:8,padding:"3px 0",cursor:"pointer",fontFamily:"'EB Garamond',serif",fontSize:14,color:checked?"var(--gold-l)":"var(--parch)"}}>
+      <input type="checkbox" checked={!!checked} onChange={function(e){onChange(e.target.checked);}} style={{accentColor:"#c9962a",width:15,height:15}} />
+      <span>{text}</span>{extra}</label>;
+  };
+  const wl=d.weapons||{},tl=d.tools||{},ll=d.langs||{};
+  const visible=function(n){return !ql||n.toLowerCase().indexOf(ql)>=0;};
+  function grpBlock(title,names,sec,map){
+    var all=names.every(function(n){return map[n];});
+    var shown=names.filter(visible);
+    return <div key={title} style={{marginBottom:6}}>
+      {row("all-"+title,<b>All {title}</b>,all,function(on){setMany(sec,names,on);})}
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(170px,1fr))",gap:0,paddingLeft:22}}>
+        {shown.map(function(n){return row(n,n,map[n],function(on){set(sec,n,on);});})}
+      </div>
+    </div>;
+  }
+  const chips=profChips(kind,d);
+  return (
+    <div onClick={onClose} style={{position:"fixed",inset:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba("+col+",.4)",borderRadius:4,maxWidth:640,width:"100%",maxHeight:"86vh",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.7)"}}>
+        <div style={{padding:"16px 22px 10px",borderBottom:"1px solid rgba("+col+",.2)"}}>
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <span style={{fontFamily:"'Cinzel',serif",fontSize:14,letterSpacing:1,color:isArmor?"#e07060":isLang?"#9fc0e0":"var(--gold-l)",flex:1}}>{isArmor?"Armor & Weapon Proficiencies":isLang?"Languages":"Tool Proficiencies"}</span>
+            <div onClick={onClose} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:16,color:"rgba(232,213,176,.5)",lineHeight:1,padding:"0 4px"}}>×</div>
+          </div>
+          <input value={q} onChange={function(e){setQ(e.target.value);}} placeholder={isArmor?"Filter weapons...":isLang?"Filter languages...":"Filter tools..."} style={{marginTop:10,width:"100%",boxSizing:"border-box",background:"rgba(0,0,0,.3)",border:"1px solid rgba("+col+",.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,padding:"5px 9px",outline:"none"}} />
+        </div>
+        <div style={{overflowY:"auto",padding:"4px 22px 12px"}}>
+          {isArmor&&<div>
+            <div style={lbl}>Armor</div>
+            <div style={{display:"flex",flexWrap:"wrap",gap:"0 22px"}}>
+              {PROF_ARMOR_LIST.map(function(a){return row(a,a,d.armor&&d.armor[a],function(on){set("armor",a,on);});})}
+            </div>
+            <div style={lbl}>Simple Weapons</div>
+            {grpBlock("Simple Weapons",_wpnNames("Simple"),"weapons",wl)}
+            <div style={lbl}>Martial Weapons</div>
+            {grpBlock("Martial Weapons",_wpnNames("Martial"),"weapons",wl)}
+          </div>}
+          {isLang&&<div>
+            {Object.keys(LANG_DATA).map(function(cat,ci){return <div key={cat}><div style={lbl}>{cat}</div>{grpBlock(cat,LANG_DATA[cat].map(function(l){return l.n;}),"langs",ll)}</div>;})}
+          </div>}
+          {!isArmor&&!isLang&&<div>
+            {grpBlock("Artisan's Tools",TOOL_DATA.filter(_toolIsArtisan).map(function(t){return t.n;}),"tools",tl)}
+            <div style={lbl}>Other Tools</div>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))"}}>
+              {TOOL_DATA.filter(function(t){return !_toolIsArtisan(t)&&visible(t.n);}).map(function(t){return row(t.n,t.n,tl[t.n],function(on){set("tools",t.n,on);});})}
+            </div>
+          </div>}
+          <div style={lbl}>Custom</div>
+          <div style={{display:"flex",gap:8}}>
+            <input value={cu} onChange={function(e){setCu(e.target.value);}} onKeyDown={function(e){if(e.key==="Enter"){e.preventDefault();addCustom();}}} placeholder={isArmor?"e.g. Net, Firearms, Lance...":isLang?"e.g. Gith, Leonin, Thri-kreen...":"e.g. Dragonchess Set, Navigator's Tools..."} style={{flex:1,background:"rgba(0,0,0,.3)",border:"1px solid rgba("+col+",.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,padding:"5px 9px",outline:"none"}} />
+            <button className="arb" style={{margin:0}} onClick={addCustom}>+ Add</button>
+          </div>
+          {(d.custom||[]).length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:6,marginTop:8}}>
+            {d.custom.map(function(x,i){return <span key={i} style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"var(--parch)",border:"1px dashed rgba("+col+",.5)",padding:"2px 8px",borderRadius:12}}>{x} <span onClick={function(){delCustom(i);}} style={{cursor:"pointer",color:"rgba(201,74,42,.7)",marginLeft:4}}>×</span></span>;})}
+          </div>}
+        </div>
+        <div style={{padding:"10px 22px",borderTop:"1px solid rgba("+col+",.2)",display:"flex",alignItems:"center",gap:10}}>
+          <span style={{flex:1,fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>{chips.length?chips.length+" selected":"Nothing selected"}</span>
+          <div onClick={onClose} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 14px",borderRadius:2,border:"1px solid rgba(232,213,176,.25)",color:"rgba(232,213,176,.6)"}}>Cancel</div>
+          <div onClick={function(){onSave(d);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"6px 16px",borderRadius:2,border:"1px solid var(--gold)",background:"rgba(201,150,42,.15)",color:"var(--gold-l)"}}>Save</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProfField({c,s,kind,label,info}){
+  const [open,setOpen]=React.useState(false);
+  const isArmor=kind==="armor",isLang=kind==="lang";
+  const key=isArmor?"profA":isLang?"profL":"profT",legacyKey=isArmor?"aprof":isLang?"lang":"tprof";
+  const chips=profChips(kind,c[key]);
+  const glyph={armor:"🛡",wpn:"⚔",tool:"⚒",lang:"◈",custom:"✦"};
+  const tint={armor:"123,160,201",wpn:"201,74,42",tool:"201,150,42",lang:"123,160,201",custom:"123,79,207"};
+  const legacy=(c[legacyKey]||"").trim();
+  return (
+    <div className="fg">
+      <label className="fl" style={{display:"inline-flex",alignItems:"center",gap:6}}>
+        {label}{info}
+      </label>
+      <div onClick={function(){setOpen(true);}} title="Click to choose proficiencies"
+        style={{cursor:"pointer",minHeight:isLang?60:88,background:"rgba(0,0,0,.2)",border:"1px solid rgba(201,150,42,.15)",borderRadius:2,padding:"8px 10px",display:"flex",flexWrap:"wrap",gap:6,alignContent:"flex-start",position:"relative"}}>
+        {chips.length===0&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.3)"}}>None chosen — click to choose…</span>}
+        {chips.map(function(ch,i){var t=tint[ch.k];return <span key={i} style={{fontFamily:"'EB Garamond',serif",fontSize:13.5,color:"var(--gold-l)",background:"rgba("+t+",.12)",border:"1px solid rgba("+t+",.5)",borderRadius:12,padding:"2px 10px",whiteSpace:"nowrap"}}><span style={{marginRight:5,fontSize:11,opacity:.9}}>{glyph[ch.k]}</span>{ch.t}</span>;})}
+        <span style={{position:"absolute",right:8,bottom:4,fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(201,150,42,.5)"}}>✎ Choose</span>
+      </div>
+      {legacy&&<div style={{marginTop:6}}>
+        <label className="fl" style={{fontSize:8}}>Previous notes (you can clear these)</label>
+        <MdField className="fi" value={c[legacyKey]} onChange={function(e){s(legacyKey,e.target.value);}} style={{minHeight:30}} />
+      </div>}
+      {open&&<ProficiencyPicker kind={kind} value={c[key]} onClose={function(){setOpen(false);}} onSave={function(v){s(key,v);setOpen(false);}} />}
+    </div>
+  );
+}
+
 function WeaponReferenceModal({onClose}){
   const {useState:us}=React;
   const [q,setQ]=us("");
-  const [tab,setTab]=us("weapons"); // weapons | properties | mastery | ammo
+  const [tab,setTab]=us("weapons"); // weapons | armor | properties | mastery | ammo
   var ql=q.trim().toLowerCase();
   function thStyle(){return {fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(201,74,42,.65)",textAlign:"left",padding:"4px 8px",borderBottom:"1px solid rgba(201,74,42,.2)",whiteSpace:"nowrap"};}
   function tdStyle(){return {fontFamily:"'EB Garamond',serif",fontSize:12.5,color:"rgba(232,213,176,.85)",padding:"4px 8px",borderBottom:"1px solid rgba(201,74,42,.06)",verticalAlign:"top"};}
@@ -4367,10 +4627,10 @@ function WeaponReferenceModal({onClose}){
       <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,74,42,.4)",borderRadius:4,maxWidth:720,width:"100%",maxHeight:"86vh",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
         <div style={{padding:"18px 22px 10px",borderBottom:"1px solid rgba(201,74,42,.15)"}}>
           <div style={{display:"flex",alignItems:"center",gap:10}}>
-            <span style={{fontFamily:"'Cinzel',serif",fontSize:14,letterSpacing:1,color:"#e07060",flex:1}}>Weapons Reference</span>
+            <span style={{fontFamily:"'Cinzel',serif",fontSize:14,letterSpacing:1,color:"#e07060",flex:1}}>Weapons &amp; Armor Reference</span>
             <div onClick={onClose} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:16,color:"rgba(232,213,176,.5)",lineHeight:1,padding:"0 4px"}}>×</div>
           </div>
-          <div style={{display:"flex",gap:6,marginTop:10,flexWrap:"wrap"}}>{tabBtn("weapons","Weapons")}{tabBtn("properties","Properties")}{tabBtn("mastery","Mastery")}{tabBtn("ammo","Ammunition")}</div>
+          <div style={{display:"flex",gap:6,marginTop:10,flexWrap:"wrap"}}>{tabBtn("weapons","Weapons")}{tabBtn("armor","Armor")}{tabBtn("properties","Properties")}{tabBtn("mastery","Mastery")}{tabBtn("ammo","Ammunition")}</div>
           {tab==="weapons"&&<input value={q} onChange={function(e){setQ(e.target.value);}} placeholder="Filter weapons..." style={{marginTop:10,width:"100%",background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,74,42,.2)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"6px 8px",borderRadius:2}} />}
         </div>
         <div style={{overflowY:"auto",padding:"6px 0 14px"}}>
@@ -4395,6 +4655,22 @@ function WeaponReferenceModal({onClose}){
             if(notes.length===0) return null;
             return <div style={{padding:"8px 22px 0"}}>{notes.map(function(nt,i){return <div key={i} style={{fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,.6)",lineHeight:1.55,marginTop:i>0?6:0}}>{nt}</div>;})}</div>;
           })()}
+          {tab==="armor"&&<div style={{padding:"0 14px"}}>
+            {Object.keys(ARMOR_DATA).map(function(cat){return (
+              <div key={cat} style={{marginBottom:6}}>
+                <div style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",color:"#e07060",padding:"8px 8px 4px"}}>{cat}</div>
+                <table style={{width:"100%",borderCollapse:"collapse"}}>
+                  <thead><tr><th style={thStyle()}>Name</th><th style={thStyle()}>Armor Class</th><th style={thStyle()}>Strength</th><th style={thStyle()}>Stealth</th><th style={thStyle()}>Weight</th><th style={thStyle()}>Cost</th></tr></thead>
+                  <tbody>{ARMOR_DATA[cat].map(function(a){return <tr key={a.n}><td style={Object.assign({},tdStyle(),{fontWeight:600,color:"var(--gold-l)",whiteSpace:"nowrap"})}>{a.n}</td><td style={tdStyle()}>{a.ac}</td><td style={tdStyle()}>{a.str}</td><td style={tdStyle()}>{a.stealth}</td><td style={tdStyle()}>{a.wt}</td><td style={tdStyle()}>{a.cost}</td></tr>;})}</tbody>
+                </table>
+              </div>);})}
+            <div style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",color:"#e07060",padding:"12px 8px 4px"}}>Donning and Doffing Armor</div>
+            <table style={{width:"100%",borderCollapse:"collapse"}}>
+              <thead><tr><th style={thStyle()}>Category</th><th style={thStyle()}>Don</th><th style={thStyle()}>Doff</th></tr></thead>
+              <tbody>{ARMOR_DON_DOFF.map(function(r){return <tr key={r[0]}><td style={Object.assign({},tdStyle(),{fontWeight:600,color:"var(--gold-l)"})}>{r[0]}</td><td style={tdStyle()}>{r[1]}</td><td style={tdStyle()}>{r[2]}</td></tr>;})}</tbody>
+            </table>
+            <div style={{padding:"12px 8px 0"}}>{ARMOR_RULES.map(function(p){return <div key={p[0]} style={{marginBottom:10}}><span style={{fontFamily:"'EB Garamond',serif",fontSize:14,fontWeight:600,color:"#e07060"}}>{p[0]}. </span><span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.8)",lineHeight:1.6}}>{p[1]}</span></div>;})}</div>
+          </div>}
           {tab==="properties"&&<div style={{padding:"4px 22px"}}>{WEAPON_PROPERTIES.map(function(p){return <div key={p[0]} style={{marginBottom:10}}><span style={{fontFamily:"'EB Garamond',serif",fontSize:14,fontWeight:600,color:"var(--gold-l)"}}>{p[0]}. </span><span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.8)",lineHeight:1.6}}>{p[1]}</span></div>;})}</div>}
           {tab==="mastery"&&<div style={{padding:"4px 22px"}}>{WEAPON_MASTERY.map(function(p){return <div key={p[0]} style={{marginBottom:10}}><span style={{fontFamily:"'EB Garamond',serif",fontSize:14,fontWeight:600,color:"#e07060"}}>{p[0]}. </span><span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.8)",lineHeight:1.6}}>{p[1]}</span></div>;})}</div>}
           {tab==="ammo"&&<div style={{padding:"4px 14px"}}><table style={{width:"100%",borderCollapse:"collapse"}}><thead><tr><th style={thStyle()}>Type</th><th style={thStyle()}>Amount</th><th style={thStyle()}>Storage</th><th style={thStyle()}>Weight</th><th style={thStyle()}>Cost</th></tr></thead><tbody>{AMMUNITION_DATA.map(function(a){return <tr key={a[0]}><td style={Object.assign({},tdStyle(),{fontWeight:600,color:"var(--gold-l)"})}>{a[0]}</td><td style={tdStyle()}>{a[1]}</td><td style={tdStyle()}>{a[2]}</td><td style={tdStyle()}>{a[3]}</td><td style={tdStyle()}>{a[4]}</td></tr>;})}</tbody></table></div>}
@@ -4471,6 +4747,10 @@ function ConditionReferenceModal({onClose}){
 
 function Page3({c,s}){
   const [toolRef,setToolRef]=React.useState(false);
+  const [wpnRef,setWpnRef]=React.useState(false);
+  const [langRef,setLangRef]=React.useState(false);
+  const secIsOpen=function(k){return (c.secOpen||{})[k]!==false;};
+  const toggleSec=function(k){s("secOpen",Object.assign({},c.secOpen||{},{[k]:!secIsOpen(k)}));};
   const updFeat=(i,field,val)=>{const a=[...c.feat];a[i]={...a[i],[field]:val};s("feat",a);};
   const updFeatLim=(fi,li,field,val)=>{
     const a=[...c.feat];
@@ -4527,39 +4807,43 @@ function Page3({c,s}){
         <div onClick={function(){
           s("feat",(c.feat||[]).map(function(f){return f.limited?{...f,limits:(f.limits||[]).map(function(l){return {...l,exp:"0"};})}:f;}));
           s("fts",(c.fts||[]).map(function(f){return f.limited?{...f,limits:(f.limits||[]).map(function(l){return {...l,exp:"0"};})}:f;}));
+          s("spec",(c.spec||[]).map(function(f){return f.limited?{...f,limits:(f.limits||[]).map(function(l){return {...l,exp:"0"};})}:f;}));
         }} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(74,156,92,.8)",border:"1px solid rgba(74,156,92,.35)",padding:"4px 12px",borderRadius:2,transition:"all .15s",userSelect:"none"}}
           title="Reset all expended uses to 0">↺ Recharge All</div>
       </div>
       <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
         <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(201,150,42,.4)"}}>⌕</span>
-        <input value={featSearch} onChange={e=>setFeatSearch(e.target.value)} placeholder="Search features &amp; feats by name, source or text…"
+        <input value={featSearch} onChange={e=>setFeatSearch(e.target.value)} placeholder="Search features, feats &amp; species by name, source or text…"
           style={{flex:1,maxWidth:360,background:"rgba(0,0,0,.3)",border:"none",borderBottom:"1px solid rgba(201,150,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"5px 4px",outline:"none"}} />
         {featSearch&&<span onClick={()=>setFeatSearch("")} title="Clear search" style={{cursor:"pointer",color:"rgba(201,74,42,.5)",fontSize:16,userSelect:"none"}}>×</span>}
       </div>
       <div style={{position:"relative"}}>
       <SectionRail accent="201,150,42" label="Features"
-        onExpand={function(){var o=Object.assign({},c.dsOpen||{});(c.feat||[]).forEach(function(_,i){o["feat-"+i]=true;});(c.fts||[]).forEach(function(_,i){o["fts-"+i]=true;});s("dsOpen",o);}}
-        onCollapse={function(){var o=Object.assign({},c.dsOpen||{});(c.feat||[]).forEach(function(_,i){o["feat-"+i]=false;});(c.fts||[]).forEach(function(_,i){o["fts-"+i]=false;});s("dsOpen",o);}} />
-      <div className="sh">Class and Race Features</div>
-      {ffIdx(c.feat).map(function(x){var f=x.it,i=x.i;
+        onExpand={function(){var o=Object.assign({},c.dsOpen||{});(c.feat||[]).forEach(function(_,i){o["feat-"+i]=true;});(c.fts||[]).forEach(function(_,i){o["fts-"+i]=true;});(c.spec||[]).forEach(function(_,i){o["spec-"+i]=true;});s("dsOpen",o);}}
+        onCollapse={function(){var o=Object.assign({},c.dsOpen||{});(c.feat||[]).forEach(function(_,i){o["feat-"+i]=false;});(c.fts||[]).forEach(function(_,i){o["fts-"+i]=false;});(c.spec||[]).forEach(function(_,i){o["spec-"+i]=false;});s("dsOpen",o);}} />
+      <SecHead label="Class Features" open={secIsOpen("feat")||!!fq} onToggle={function(){toggleSec("feat");}} summary={(c.feat||[]).length+" feature"+((c.feat||[]).length===1?"":"s")} />
+      {(secIsOpen("feat")||!!fq)&&<React.Fragment>
+      <div className="fgrid">{ffIdx(c.feat).map(function(x){var f=x.it,i=x.i;
         const limited=!!f.limited;
         const limits=f.limits||[{name:"",uses:"",exp:"",die:"NO",recharge:""}];
         const dsKey="feat-"+i;
         const dsOpen=(c.dsOpen&&c.dsOpen[dsKey])!==false;
         const taKey="feat-ds-"+i;
         const savedH=(c.taH&&c.taH[taKey]);
+        if(!dsOpen) return <CompactFeatureRow key={i} name={f.nm} sub={f.src} limited={limited} lims={limitStates(f,c)} onAdjust={function(li,d){updFeat(i,"limits",adjustLimits(f,li,d,c));}} border={limited?"var(--ember)":"var(--arcane)"} ph="Unnamed feature"
+          onOpen={function(){s("dsOpen",{...(c.dsOpen||{}),[dsKey]:true});}} onDelete={function(){window.__confirm("Delete this feature?",()=>s("feat",c.feat.filter((_,j)=>j!==i)));}} />;
         return (
-          <div key={i} className="fc" style={{borderLeftColor:limited?"var(--ember)":"var(--arcane)"}}>
+          <div key={i} className="fc" style={{borderLeftColor:limited?"var(--ember)":"var(--arcane)",gridColumn:(wideFeature(f)||(c.feat||[]).length<2)?"1 / -1":undefined}}>
             <div style={{display:"flex",gap:10}}>
               <div style={{flex:1}}>
-                <div style={{display:"flex",gap:8,alignItems:"flex-start",marginBottom:6}}>
+                <div style={{display:"flex",gap:8,alignItems:"flex-start",marginBottom:4}}>
                   <div style={{flex:1}}>
-                    <input type="text" value={f.nm||""} onChange={e=>updFeat(i,"nm",e.target.value)} placeholder="Feature name..." style={{width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.2)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:600,letterSpacing:1,outline:"none",padding:"2px 0 4px"}} />
+                    <input type="text" value={f.nm||""} onChange={e=>updFeat(i,"nm",e.target.value)} placeholder="Feature name..." style={{marginBottom:0,width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.2)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:600,letterSpacing:1,outline:"none",padding:"2px 0 4px"}} />
                   </div>
                   <div style={{flex:1}}>
-                    <input type="text" value={f.src||""} onChange={e=>updFeat(i,"src",e.target.value)} placeholder="Source..." style={{width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.1)",color:"rgba(232,213,176,.5)",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",outline:"none",padding:"2px 0 4px"}} />
+                    <input type="text" value={f.src||""} onChange={e=>updFeat(i,"src",e.target.value)} placeholder="Source..." style={{marginBottom:0,width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.1)",color:"rgba(232,213,176,.5)",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",outline:"none",padding:"2px 0 4px"}} />
                   </div>
-                  <div onClick={function(){const nd={...(c.dsOpen||{}),[dsKey]:!dsOpen};s("dsOpen",nd);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,color:dsOpen?"rgba(201,150,42,.7)":"rgba(232,213,176,.25)",flexShrink:0,userSelect:"none",paddingTop:2,lineHeight:1}} title={dsOpen?"Collapse description":"Expand description"}>{dsOpen?"−":"+"}</div>
+                  <div onClick={function(){const nd={...(c.dsOpen||{}),[dsKey]:!dsOpen};s("dsOpen",nd);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,color:dsOpen?"rgba(201,150,42,.7)":"rgba(232,213,176,.25)",flexShrink:0,userSelect:"none",paddingTop:2,lineHeight:1}} title={dsOpen?"Collapse description":"Expand description"}><span style={{border:"1px solid rgba(201,150,42,.4)",padding:"2px 7px",borderRadius:2,fontSize:9,letterSpacing:1,textTransform:"uppercase",whiteSpace:"nowrap"}}>▴ Close</span></div>
                   <button onClick={()=>updFeat(i,"limited",!limited)} title="Toggle limited use tracking"
                     style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",padding:"3px 7px",flexShrink:0,cursor:"pointer",transition:"all .2s",marginTop:2,background:limited?"rgba(201,74,42,.2)":"transparent",border:"1px solid "+(limited?"rgba(201,74,42,.6)":"rgba(201,150,42,.2)"),color:limited?"var(--ember)":"rgba(232,213,176,.3)"}}>{limited?"Limited":"+ Limit"}</button>
                 </div>
@@ -4574,10 +4858,11 @@ function Page3({c,s}){
             </div>
           </div>
         );
-      })}
+      })}</div>
       <button className="arb" onClick={()=>s("feat",[...c.feat,{nm:"",src:"",ds:"",limited:false,limits:[{name:"",uses:"",exp:"",die:"NO",recharge:""}]}])}>+ Add Feature</button>
+      </React.Fragment>}
 
-      <div className="sh">Feats
+      <SecHead label="Feats" open={secIsOpen("fts")||!!fq} onToggle={function(){toggleSec("fts");}} summary={(c.fts||[]).length+" feat"+((c.fts||[]).length===1?"":"s")}>
         {(function(){
           var st=_featCache.status;
           var col=st==="ready"?"rgba(74,156,92,.6)":st==="loading"?"rgba(201,150,42,.5)":"rgba(201,74,42,.5)";
@@ -4587,16 +4872,19 @@ function Page3({c,s}){
             Compendium
           </span>;
         })()}
-      </div>
-      {ffIdx(c.fts).map(function(x){var f=x.it,i=x.i;
+      </SecHead>
+      {(secIsOpen("fts")||!!fq)&&<React.Fragment>
+      <div className="fgrid">      {ffIdx(c.fts).map(function(x){var f=x.it,i=x.i;
         const limited=!!f.limited;
         const limits=f.limits||[{name:"",uses:"",exp:"",die:"NO",recharge:""}];
         const dsKey="fts-"+i;
         const dsOpen=(c.dsOpen&&c.dsOpen[dsKey])!==false;
         const taKey="fts-ds-"+i;
         const savedH=(c.taH&&c.taH[taKey]);
+        if(!dsOpen) return <CompactFeatureRow key={i} name={f.nm} sub={f.lv?"Lv "+f.lv:""} limited={limited} lims={limitStates(f,c)} onAdjust={function(li,d){updFts(i,"limits",adjustLimits(f,li,d,c));}} border={limited?"var(--ember)":"var(--gold)"} ph="Unnamed feat"
+          onOpen={function(){s("dsOpen",{...(c.dsOpen||{}),[dsKey]:true});}} onDelete={function(){window.__confirm("Delete this feature?",()=>s("fts",c.fts.filter((_,j)=>j!==i)));}} />;
         return (
-          <div key={i} className="fc" style={{borderLeftColor:limited?"var(--ember)":"var(--gold)"}}>
+          <div key={i} className="fc" style={{borderLeftColor:limited?"var(--ember)":"var(--gold)",gridColumn:(wideFeature(f)||(c.fts||[]).length<2)?"1 / -1":undefined}}>
             <div style={{display:"flex",gap:10}}>
               <div style={{flex:1}}>
                 <div style={{display:"flex",gap:8,alignItems:"flex-end",marginBottom:4}}>
@@ -4621,7 +4909,7 @@ function Page3({c,s}){
                     <input type="text" value={f.lv||""} onChange={e=>updFts(i,"lv",e.target.value)} placeholder="0"
                       style={{width:40,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.25)",color:"rgba(232,213,176,.6)",fontFamily:"'Cinzel',serif",fontSize:13,textAlign:"center",outline:"none",padding:"2px 0 4px"}} />
                   </div>
-                  <div onClick={function(){const nd={...(c.dsOpen||{}),[dsKey]:!dsOpen};s("dsOpen",nd);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,color:dsOpen?"rgba(201,150,42,.7)":"rgba(232,213,176,.25)",flexShrink:0,userSelect:"none",paddingBottom:4,lineHeight:1}} title={dsOpen?"Collapse description":"Expand description"}>{dsOpen?"−":"+"}</div>
+                  <div onClick={function(){const nd={...(c.dsOpen||{}),[dsKey]:!dsOpen};s("dsOpen",nd);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,color:dsOpen?"rgba(201,150,42,.7)":"rgba(232,213,176,.25)",flexShrink:0,userSelect:"none",paddingBottom:4,lineHeight:1}} title={dsOpen?"Collapse description":"Expand description"}><span style={{border:"1px solid rgba(201,150,42,.4)",padding:"2px 7px",borderRadius:2,fontSize:9,letterSpacing:1,textTransform:"uppercase",whiteSpace:"nowrap"}}>▴ Close</span></div>
                   <button onClick={()=>updFts(i,"limited",!limited)} title="Toggle limited use tracking"
                     style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",padding:"3px 7px",flexShrink:0,cursor:"pointer",transition:"all .2s",marginBottom:2,background:limited?"rgba(201,74,42,.2)":"transparent",border:"1px solid "+(limited?"rgba(201,74,42,.6)":"rgba(201,150,42,.2)"),color:limited?"var(--ember)":"rgba(232,213,176,.3)"}}>{limited?"Limited":"+ Limit"}</button>
                 </div>
@@ -4636,24 +4924,31 @@ function Page3({c,s}){
             </div>
           </div>
         );
-      })}
+      })}</div>
       <button className="arb" onClick={()=>s("fts",[...c.fts,{nm:"",ds:"",lv:"",limited:false,limits:[{name:"",uses:"",exp:"",die:"NO",recharge:""}]}])}>+ Add Feat</button>
+      </React.Fragment>}
       </div>
 
-      <div className="sh">Proficiencies and Languages</div>
+      <SpeciesFeaturesSection c={c} s={s} q={fq} />
+
+      <SecHead label="Proficiencies and Languages" open={secIsOpen("prof")} onToggle={function(){toggleSec("prof");}}
+        summary={profChips("armor",c.profA).length+" armor/weapon · "+profChips("tools",c.profT).length+" tool · "+profChips("lang",c.profL).length+" language"} />
+      {secIsOpen("prof")&&<React.Fragment>
       <div className="tc">
-        <TA label="Armor and Weapon Proficiencies" val={c.aprof} set={v=>s("aprof",v)} rows={4} />
-        <div className="fg">
-          <label className="fl" style={{display:"inline-flex",alignItems:"center",gap:6}}>
-            Tool Proficiencies
-            <span onClick={function(){setToolRef(true);}} title="Tool reference (XGE / PHB 2024)"
-              style={{cursor:"pointer",width:15,height:15,borderRadius:"50%",border:"1px solid rgba(201,150,42,.45)",color:"rgba(201,150,42,.75)",fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",display:"inline-flex",alignItems:"center",justifyContent:"center",userSelect:"none",background:"rgba(201,150,42,.08)",lineHeight:1}}>i</span>
-          </label>
-          <MdField className="fi" value={c.tprof} onChange={e=>s("tprof",e.target.value)} style={{minHeight:88}} />
-        </div>
+        <ProfField c={c} s={s} kind="armor" label="Armor and Weapon Proficiencies"
+          info={<span onClick={function(e){e.stopPropagation();setWpnRef(true);}} title="Weapons &amp; Armor reference (PHB 2024)"
+            style={{cursor:"pointer",width:15,height:15,borderRadius:"50%",border:"1px solid rgba(201,74,42,.45)",color:"rgba(201,74,42,.8)",fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",display:"inline-flex",alignItems:"center",justifyContent:"center",userSelect:"none"}}>i</span>} />
+        <ProfField c={c} s={s} kind="tools" label="Tool Proficiencies"
+          info={<span onClick={function(e){e.stopPropagation();setToolRef(true);}} title="Tool reference (XGE / PHB 2024)"
+            style={{cursor:"pointer",width:15,height:15,borderRadius:"50%",border:"1px solid rgba(201,150,42,.45)",color:"rgba(201,150,42,.75)",fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",display:"inline-flex",alignItems:"center",justifyContent:"center",userSelect:"none"}}>i</span>} />
       </div>
-      <TA label="Languages" val={c.lang} set={v=>s("lang",v)} rows={3} />
+      <ProfField c={c} s={s} kind="lang" label="Languages"
+        info={<span onClick={function(e){e.stopPropagation();setLangRef(true);}} title="Languages reference (PHB 2024)"
+          style={{cursor:"pointer",width:15,height:15,borderRadius:"50%",border:"1px solid rgba(123,160,201,.5)",color:"rgba(159,192,224,.85)",fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",display:"inline-flex",alignItems:"center",justifyContent:"center",userSelect:"none"}}>i</span>} />
+      </React.Fragment>}
+      {langRef&&<LanguageReferenceModal onClose={function(){setLangRef(false);}} />}
       {toolRef&&<ToolReferenceModal onClose={function(){setToolRef(false);}} />}
+      {wpnRef&&<WeaponReferenceModal onClose={function(){setWpnRef(false);}} />}
     </div>
   );
 }
@@ -10191,6 +10486,400 @@ function matchQuery(text, query){
   return false;
 }
 
+// ─── Species Compendium (races.md) ───────────────────────────────────────────
+const SPECIES_MD_URL="https://raw.githubusercontent.com/liapatiso95-ctrl/character-sheet/main/races.md";
+const _speciesCache={data:null,status:"idle"};
+const _speciesListeners=[];
+function _notifySpeciesListeners(){_speciesListeners.forEach(function(fn){fn();});}
+
+// Parse the "Complete Guide to Sapient Species" Homebrewery markdown.
+// Returns {key:{name,blurb,groups:[{label,feats:[{name,desc,cost,hasCost}]}]}}.
+// Each "## Species" heading is one entry; "###" headings open subspecies groups;
+// traits are lines that start with **Name. *(N points)*** and run until the next trait.
+function parseSpeciesMd(text){
+  var out={};
+  if(!text) return out;
+  text=text.replace(/\r/g,"");
+  var si=text.search(/^# Species\s*$/m);
+  if(si>=0) text=text.slice(si).replace(/^# Species\s*$/m,"");
+  // Re-join costs split over a line break: "(3\npoints)"
+  text=text.replace(/\(\s*(\d+)\s*\n\s*(points?)/gi,"($1 $2");
+  var sections=text.split(/^## +/m).slice(1);
+  sections.forEach(function(sec){
+    var nl=sec.indexOf("\n");
+    var name=(nl<0?sec:sec.slice(0,nl)).trim();
+    if(!name) return;
+    var body=nl<0?"":sec.slice(nl+1);
+    var parts=body.split(/^### +/m);
+    var groups=[],blurb="";
+    parts.forEach(function(part,pi){
+      var label,chunk;
+      if(pi===0){label="General Traits";chunk=part;}
+      else{var n2=part.indexOf("\n");label=(n2<0?part:part.slice(0,n2)).trim();chunk=n2<0?"":part.slice(n2+1);}
+      var feats=_parseSpeciesTraits(chunk);
+      if(pi===0){
+        // flavor text = everything before the first #### heading / first trait
+        var cut=chunk.search(/^#### |^\*\*[^*\n]+?\.[^\n]*?\*\*/m);
+        blurb=_cleanSpeciesText(cut<0?chunk:chunk.slice(0,cut)).split(/\n\s*\n/)[0]||"";
+      }
+      if(feats.length) groups.push({label:label,feats:feats});
+    });
+    if(!groups.length) return;
+    // Resolve "Darkvision + 1 point" style costs against the species' own traits
+    var allF=[];groups.forEach(function(g){g.feats.forEach(function(f){allF.push(f);});});
+    allF.forEach(function(f){
+      if(f._ref){
+        var base=0,rl=f._ref.toLowerCase().trim();
+        for(var i=0;i<allF.length;i++){if(allF[i]!==f&&allF[i].name.toLowerCase()===rl&&allF[i]._own!=null){base=allF[i]._own;break;}}
+        if(!base){var gen={darkvision:3};base=gen[rl]||0;}
+        f.cost=base+f._refAdd;
+      }
+      delete f._ref;delete f._refAdd;delete f._own;
+    });
+    out[name.toLowerCase()]={name:name,key:name.toLowerCase(),blurb:blurb,groups:groups};
+  });
+  return out;
+}
+function _cleanSpeciesText(t){
+  return (t||"").replace(/^\\(page|column|columnbreak)\s*$/gm,"").replace(/^\{\{pageNumber[^}]*\}\}\s*$/gm,"")
+    .replace(/^#### .*$/gm,"").replace(/^\s*<!--[\s\S]*?-->\s*$/gm,"").replace(/[ \t]+$/gm,"").replace(/\n{3,}/g,"\n\n").trim();
+}
+function _parseSpeciesTraits(chunk){
+  var lines=chunk.split("\n"),feats=[],cur=null;
+  function flush(){
+    if(!cur) return;
+    var d=_cleanSpeciesText(cur.lines.join("\n"));
+    // Cost written at the end of the paragraph: ***(1 point)***
+    if(!cur.hasCost){
+      var m=d.match(/\*{2,3}\(\s*(\d+)\s*points?\s*\)\*{2,3}/i);
+      if(m){cur.cost=parseInt(m[1]);cur.hasCost=true;cur._own=cur.cost;d=d.replace(m[0],"").replace(/[ \t]+\n/g,"\n").trim();}
+    }
+    cur.desc=d;delete cur.lines;
+    feats.push(cur);cur=null;
+  }
+  lines.forEach(function(line){
+    var m=line.match(/^\*\*(.+?)\*\*\*?(?!\*)(.*)$/);
+    var hdr=m?m[1]:"";
+    // A trait line looks like "Name. *(N points)*" / "Name. (N Points)" / "Name."
+    var tm=m&&hdr.match(/^([^.:*()]+?)[.:](?:\s+(.*))?$/);
+    if(tm&&!/^\s*-/.test(line)){
+      flush();
+      var nm=tm[1].trim(),costTxt=tm[2]||"";
+      cur={name:nm,desc:"",cost:0,hasCost:false,lines:[(m[2]||"").trim()]};
+      if(costTxt){
+        var nums=[],re=/(\d+)\s*points?/gi,mm;
+        while((mm=re.exec(costTxt))) nums.push(parseInt(mm[1]));
+        var rf=costTxt.match(/\(\s*([A-Za-z' ]+?)\s*\+\s*(\d+)\s*points?/i);
+        if(rf){cur._ref=rf[1];cur._refAdd=parseInt(rf[2]);cur.hasCost=true;}
+        else if(nums.length){cur.cost=nums.reduce(function(a,b){return a+b;},0);cur.hasCost=true;cur._own=cur.cost;}
+      }
+    } else if(cur){
+      cur.lines.push(line);
+    }
+  });
+  flush();
+  return feats.filter(function(f){return !/^(Age|Subspecies|Heritage Trait)$/i.test(f.name);});
+}
+
+function useSpeciesCompendium(){
+  const [tick,setTick]=React.useState(0);
+  React.useEffect(function(){
+    function onUpdate(){setTick(function(t){return t+1;});}
+    _speciesListeners.push(onUpdate);
+    if(_speciesCache.status==="idle"){
+      _speciesCache.status="loading";_speciesCache.data={};
+      fetch(SPECIES_MD_URL)
+        .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
+        .then(function(text){
+          var md=parseSpeciesMd(text);_speciesCache.data=md;
+          _speciesCache.status=Object.keys(md).length?"ready":"error";
+        })
+        .catch(function(){_speciesCache.status="error";})
+        .finally(function(){_notifySpeciesListeners();});
+    }
+    return function(){var i=_speciesListeners.indexOf(onUpdate);if(i>=0)_speciesListeners.splice(i,1);};
+  },[]);
+  return _speciesCache;
+}
+
+// Species features chosen on the Features page are stored in c.spec:
+// [{sp:"Dwarf", grp:"Duergar", nm, ds, cost}]
+const SPECIES_COST_MIN=17, SPECIES_COST_MAX=19;
+function speciesTotalCost(list){
+  return (list||[]).reduce(function(a,f){var n=parseFloat(f.cost);return a+(isNaN(n)?0:n);},0);
+}
+function speciesHas(list,sp,grp,nm){
+  return (list||[]).some(function(f){return f.sp===sp&&f.grp===grp&&(f.nm||"").toLowerCase()===(nm||"").toLowerCase();});
+}
+
+// Source line shown on a species feature: "Elf (Drow)" when it came from a subspecies.
+function speciesSourceText(f){
+  var g=(f.grp||"").trim();
+  return (f.sp||"")+((g&&!/^(general )?traits$/i.test(g))?" ("+g+")":"");
+}
+function parseSpeciesSource(t){
+  var m=(t||"").match(/^(.*?)\s*\(([^()]*)\)\s*$/);
+  return m?{sp:m[1],grp:m[2]}:{sp:t||"",grp:""};
+}
+
+// Compact one-line row for a collapsed feature, and a clickable section header.
+function _limMax(c,l){var fr=l.usesFormula?_limFormula(c,l.usesFormula):null;return fr!==null?fr:parseInt(l.uses);}
+function limitStates(f,c){
+  if(!f.limited) return [];
+  var out=[];
+  (f.limits||[]).forEach(function(l,li){
+    var u=_limMax(c,l);if(isNaN(u)) return;
+    var e=Math.min(Math.max(parseInt(l.exp)||0,0),u);
+    out.push({li:li,rem:u-e,max:u,rc:/short/i.test(l.recharge||"")?"SR":/long/i.test(l.recharge||"")?"LR":"",name:l.name||""});
+  });
+  return out;
+}
+// New limits array after changing "remaining" uses of limit li by delta.
+function adjustLimits(f,li,delta,c){
+  var lims=(f.limits||[]).slice();var l=lims[li];if(!l) return lims;
+  var u=_limMax(c,l);if(isNaN(u)) return lims;
+  var e=Math.min(Math.max(parseInt(l.exp)||0,0),u);
+  lims[li]=Object.assign({},l,{exp:""+Math.min(Math.max(e-delta,0),u)});
+  return lims;
+}
+function CompactFeatureRow({name,sub,cost,limited,lims,onAdjust,border,onOpen,onDelete,ph}){
+  return (
+    <div className="fcr" style={{borderLeftColor:border}} onClick={onOpen} title="Click to expand">
+      <span style={{fontFamily:"'Cinzel',serif",fontSize:12,color:"rgba(201,150,42,.7)",flexShrink:0}}>▸</span>
+      <span style={{fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:600,letterSpacing:.8,color:name?"var(--gold-l)":"rgba(232,213,176,.3)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",flex:"0 1 auto",minWidth:0}}>{name||ph||"Unnamed"}</span>
+      {sub&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",color:"rgba(232,213,176,.4)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",flex:"1 1 0",minWidth:0}}>{sub}</span>}
+      {!sub&&<span style={{flex:1}} />}
+      {limited&&(lims&&lims.length>0?lims.map(function(l){
+        var bs={cursor:"pointer",background:"transparent",border:"none",color:"var(--ember)",fontFamily:"'Cinzel',serif",fontSize:13,lineHeight:1,padding:"0 4px"};
+        return <span key={l.li} onClick={function(e){e.stopPropagation();}} title={(l.name?l.name+": ":"")+l.rem+" of "+l.max+" uses left"+(l.rc?" ("+(l.rc==="SR"?"short":"long")+" rest)":"")}
+          style={{display:"inline-flex",alignItems:"center",border:"1px solid rgba(201,74,42,.5)",background:"rgba(201,74,42,.12)",borderRadius:8,flexShrink:0,whiteSpace:"nowrap"}}>
+          <button style={bs} onClick={function(e){e.stopPropagation();onAdjust&&onAdjust(l.li,-1);}} title="Use one">−</button>
+          <span style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:.5,color:l.rem===0?"rgba(232,213,176,.4)":"var(--gold-l)",minWidth:26,textAlign:"center"}}>{l.rem}/{l.max}{l.rc?" "+l.rc:""}</span>
+          <button style={bs} onClick={function(e){e.stopPropagation();onAdjust&&onAdjust(l.li,1);}} title="Regain one">+</button>
+        </span>;
+      }):<span title="Limited (set max uses in the expanded card)" style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"var(--ember)",border:"1px solid rgba(201,74,42,.5)",padding:"1px 6px",borderRadius:8,flexShrink:0}}>Limited</span>)}
+      {cost!=null&&<span title="Cost" style={{fontFamily:"'Cinzel',serif",fontSize:11,color:"var(--gold-l)",flexShrink:0,minWidth:14,textAlign:"right"}}>{cost===""?0:cost}</span>}
+      {onDelete&&<button className="db" onClick={function(e){e.stopPropagation();onDelete();}}>x</button>}
+    </div>
+  );
+}
+function SecHead({label,open,onToggle,summary,children}){
+  return (
+    <div className="sh" onClick={onToggle} style={{cursor:"pointer",userSelect:"none"}} title={open?"Collapse section":"Expand section"}>
+      <span style={{fontSize:11,color:"rgba(201,150,42,.7)",width:10,flexShrink:0}}>{open?"▾":"▸"}</span>
+      <span>{label}</span>{children}
+      {!open&&summary&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",letterSpacing:0,textTransform:"none",fontWeight:"normal",color:"rgba(232,213,176,.45)"}}>{summary}</span>}
+    </div>
+  );
+}
+const wideFeature=function(f){return !!f.limited||(f.ds||"").length>150||/\n/.test(f.ds||"");};
+
+function speciesHeritage(list){
+  // Entries are unique species/subspecies pairs; "General Traits" alone means just the species.
+  var ents=[],seen={},bySp={};
+  (list||[]).forEach(function(f){
+    var sp=(f.sp||"").trim();if(!sp) return;
+    var g=(f.grp||"").trim(),sub=(g&&!/^(general )?traits$/i.test(g))?g.replace(/\s+Variant$/i,""):"";
+    (bySp[sp]=bySp[sp]||{subs:[]});
+    if(sub&&bySp[sp].subs.indexOf(sub)<0) bySp[sp].subs.push(sub);
+    if(!(sp in seen)){seen[sp]=1;ents.push(sp);}
+  });
+  var out=[];
+  ents.forEach(function(sp){
+    var subs=bySp[sp].subs;
+    if(!subs.length){out.push({sp:sp,short:sp,full:sp});return;}
+    subs.forEach(function(sb){
+      var has=sb.toLowerCase().indexOf(sp.toLowerCase())>=0;
+      out.push({sp:sp,short:has?sb.replace(new RegExp("\\s*"+sp.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"$","i"),""):sb,full:has?sb:sb+" "+sp});
+    });
+  });
+  if(!out.length) return "";
+  if(out.length===1) return out[0].full;
+  if(out.length===2){
+    if(out[0].sp===out[1].sp) return "Half-"+out[0].short+", Half-"+out[1].full;
+    return "Half "+out[0].full+"/Half "+out[1].full;
+  }
+  return out.map(function(o){return o.full;}).join("/")+" Heritage";
+}
+// Keeps the Species field on the Character page in step with the chosen species features.
+function useSpeciesHeritageSync(c,s){
+  var d=speciesHeritage(c.spec);
+  React.useEffect(function(){
+    // Never overwrite a manually written Species (flag raceManual, or any text we didn't auto-write).
+    var manual=!!c.raceManual||((c.race||"").trim()!==""&&c.race!==c.raceAuto);
+    if(d&&!manual&&d!==c.race){s("race",d);s("raceAuto",d);}
+  },[d,c.race,c.raceManual]);
+}
+
+function SpeciesPanel({c,s}){
+  useSpeciesHeritageSync(c,s);
+  const cache=useSpeciesCompendium();
+  const [q,setQ]=React.useState("");
+  const [open,setOpen]=React.useState({});
+  const [openF,setOpenF]=React.useState({});
+  const inputStyle={background:"rgba(0,0,0,.35)",border:"1px solid rgba(201,150,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"6px 10px",outline:"none",borderRadius:2};
+  const list=(cache.status==="ready"&&cache.data)?Object.values(cache.data):[];
+  const nq=q.trim().toLowerCase();
+  const shown=list.filter(function(sp){
+    if(!nq) return true;
+    if(sp.name.toLowerCase().indexOf(nq)>=0) return true;
+    return sp.groups.some(function(g){return g.label.toLowerCase().indexOf(nq)>=0||g.feats.some(function(f){return f.name.toLowerCase().indexOf(nq)>=0||f.desc.toLowerCase().indexOf(nq)>=0;});});
+  }).sort(function(a,b){return a.name.localeCompare(b.name);});
+  const cur=c.spec||[];
+  function addFeats(sp,g,feats){
+    var next=cur.slice();
+    feats.forEach(function(f){
+      if(speciesHas(next,sp.name,g.label,f.name)) return;
+      next.push({sp:sp.name,grp:g.label,nm:f.name,ds:f.desc,cost:f.cost});
+    });
+    if(next.length!==cur.length) s("spec",next);
+  }
+  function removeFeats(sp,g,feats){
+    var names=feats.map(function(f){return f.name.toLowerCase();});
+    var next=cur.filter(function(x){return !(x.sp===sp.name&&x.grp===g.label&&names.indexOf((x.nm||"").toLowerCase())>=0);});
+    if(next.length!==cur.length) s("spec",next);
+  }
+  const small={fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",borderRadius:2,cursor:"pointer",userSelect:"none",whiteSpace:"nowrap"};
+  return (
+    <div>
+      <div style={{display:"flex",gap:8,marginBottom:10,alignItems:"center",flexWrap:"wrap"}}>
+        <input value={q} onChange={function(e){setQ(e.target.value);}} placeholder="Species, subspecies or trait contains..." style={Object.assign({},inputStyle,{flex:"1 1 220px",minWidth:160})} />
+        <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.4)"}}>
+          Chosen: <span style={{color:(cur.length&&(speciesTotalCost(cur)<SPECIES_COST_MIN||speciesTotalCost(cur)>SPECIES_COST_MAX))?"var(--ember)":"var(--gold-l)"}}>{speciesTotalCost(cur)}</span> pts · target {SPECIES_COST_MIN}–{SPECIES_COST_MAX}
+        </span>
+      </div>
+      {shown.length===0&&<div style={{padding:"20px",textAlign:"center",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.3)"}}>
+        {cache.status==="loading"?"Loading species…":cache.status==="error"?"Species file unavailable — add races.md to the repo.":"No matches."}
+      </div>}
+      {shown.map(function(sp){
+        var isOpen=!!open[sp.key]||!!nq&&sp.groups.length<4&&nq.length>2;
+        var multi=sp.groups.length>1;
+        return (
+          <div key={sp.key} className="fc" style={{borderLeftColor:"var(--gold)",padding:"10px 14px"}}>
+            <div onClick={function(){var o=Object.assign({},open);o[sp.key]=!open[sp.key];setOpen(o);}} style={{display:"flex",alignItems:"center",gap:10,cursor:"pointer"}}>
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:14,letterSpacing:1,color:"var(--gold-l)",fontWeight:600,flex:1}}>{sp.name}</span>
+              {multi&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:"rgba(232,213,176,.4)"}}>{sp.groups.length-1} subspecies</span>}
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:13,color:"rgba(201,150,42,.7)"}}>{isOpen?"▾":"▸"}</span>
+            </div>
+            {isOpen&&(
+              <div style={{marginTop:8}}>
+                {sp.blurb&&<div style={{fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.5)",lineHeight:1.5,marginBottom:10}}>{sp.blurb}</div>}
+                {sp.groups.map(function(g){
+                  var costed=g.feats;
+                  var gTotal=costed.reduce(function(a,f){return a+f.cost;},0);
+                  var allIn=g.feats.every(function(f){return speciesHas(cur,sp.name,g.label,f.name);});
+                  return (
+                    <div key={g.label} style={{marginBottom:12,borderTop:"1px solid rgba(201,150,42,.12)",paddingTop:8}}>
+                      <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:6,flexWrap:"wrap"}}>
+                        <span style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1.5,textTransform:"uppercase",color:"var(--gold)",flex:1}}>{g.label}</span>
+                        <span style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"rgba(232,213,176,.5)"}}>{gTotal} pts</span>
+                        <button className="arb" onClick={function(){if(allIn)removeFeats(sp,g,g.feats);else addFeats(sp,g,g.feats);}}
+                          title={allIn?"Remove all these features from your sheet":"Add all these features"}
+                          style={{margin:0,padding:"4px 10px",fontSize:9,opacity:.9,cursor:"pointer",borderColor:allIn?"rgba(201,74,42,.45)":undefined,color:allIn?"var(--ember)":undefined}}>{allIn?"− Remove all":"+ Add all"}</button>
+                      </div>
+                      {g.feats.map(function(f){
+                        var fk=sp.key+"|"+g.label+"|"+f.name;
+                        var has=speciesHas(cur,sp.name,g.label,f.name);
+                        var fo=!!openF[fk];
+                        return (
+                          <div key={fk} style={{padding:"4px 0",borderBottom:"1px dashed rgba(201,150,42,.08)"}}>
+                            <div style={{display:"flex",alignItems:"center",gap:8}}>
+                              <span onClick={function(){var o=Object.assign({},openF);o[fk]=!fo;setOpenF(o);}} style={{cursor:"pointer",flex:1,fontFamily:"'Cinzel',serif",fontSize:12,letterSpacing:.5,color:"var(--parch)"}}>
+                                <span style={{color:"rgba(201,150,42,.6)",marginRight:6}}>{fo?"▾":"▸"}</span>{f.name}
+                              </span>
+                              <span title={f.hasCost?"Trait point cost":"No point cost listed"} style={{fontFamily:"'Cinzel',serif",fontSize:10,color:f.hasCost?"var(--gold-l)":"rgba(232,213,176,.3)",minWidth:42,textAlign:"right"}}>{f.hasCost?f.cost+" pt"+(f.cost===1?"":"s"):"—"}</span>
+                              <button onClick={function(){if(has)removeFeats(sp,g,[f]);else addFeats(sp,g,[f]);}}
+                                title={has?"Added — click to remove":"Add to Species Features"}
+                                style={Object.assign({},small,{padding:"3px 8px",minWidth:74,background:has?"transparent":"rgba(201,150,42,.1)",border:"1px solid "+(has?"rgba(74,156,92,.4)":"rgba(201,150,42,.4)"),color:has?"rgba(74,156,92,.8)":"var(--gold-l)"})}
+                                onMouseEnter={function(e){if(has){e.currentTarget.textContent="− Remove";e.currentTarget.style.color="var(--ember)";e.currentTarget.style.borderColor="rgba(201,74,42,.5)";}}}
+                                onMouseLeave={function(e){if(has){e.currentTarget.textContent="✓ Added";e.currentTarget.style.color="rgba(74,156,92,.8)";e.currentTarget.style.borderColor="rgba(74,156,92,.4)";}}}>{has?"✓ Added":"+ Add"}</button>
+                            </div>
+                            {fo&&<div style={{padding:"6px 0 4px 16px",fontFamily:"'EB Garamond',serif",fontSize:14,lineHeight:1.55,color:"var(--parch)"}}><Markdown text={f.desc} /></div>}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function SpeciesFeaturesSection({c,s,q}){
+  useSpeciesHeritageSync(c,s);
+  const list=c.spec||[];
+  const sq=(q||"").trim().toLowerCase();
+  const open=(c.secOpen||{}).spec!==false;
+  const showList=open||!!sq;
+  const total=speciesTotalCost(list);
+  const bad=list.length>0&&(total<SPECIES_COST_MIN||total>SPECIES_COST_MAX);
+  const upd=function(i,k,v){var a=list.slice();a[i]=Object.assign({},a[i],{[k]:v});s("spec",a);};
+  const tip="Species features should be in the range "+SPECIES_COST_MIN+"-"+SPECIES_COST_MAX;
+  const col=bad?"201,74,42":"201,150,42";
+  return (
+    <div style={{marginTop:28}}>
+      <SecHead label="Species Features" open={open||!!sq} onToggle={function(){s("secOpen",Object.assign({},c.secOpen||{},{spec:!open}));}} summary={list.length+" feature"+(list.length===1?"":"s")+" · "+total+" pts"+(bad?" ⚠":"")} />
+      <div className="fc" style={{borderLeftColor:bad?"var(--ember)":"var(--gold)",background:bad?"rgba(201,74,42,.08)":undefined,borderColor:bad?"rgba(201,74,42,.45)":undefined}}>
+        <div title={bad?tip:"Total feature cost of your species ("+SPECIES_COST_MIN+"-"+SPECIES_COST_MAX+")"}
+          style={{display:"flex",alignItems:"center",gap:12,marginBottom:list.length?10:0,cursor:bad?"help":"default"}}>
+          <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(232,213,176,.45)"}}>Feature Cost</span>
+          <span style={{fontFamily:"'Cinzel',serif",fontSize:20,fontWeight:600,color:bad?"var(--ember)":"var(--gold-l)",border:"1px solid rgba("+col+",.5)",padding:"2px 14px",borderRadius:2,background:"rgba("+col+",.08)"}}>{total}</span>
+          <span style={{fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:bad?"var(--ember)":"rgba(232,213,176,.35)"}}>{bad?(total<SPECIES_COST_MIN?"Below ":"Above ")+"the "+SPECIES_COST_MIN+"–"+SPECIES_COST_MAX+" range":"range "+SPECIES_COST_MIN+"–"+SPECIES_COST_MAX}</span>
+        </div>
+        {showList&&list.length===0&&<div style={{fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.35)",marginTop:6}}>No species features yet — add them from the Species tab in the Compendium, or add one manually.</div>}
+        {showList&&<div className="fgrid" style={{marginBottom:6}}>{list.map(function(f,i){
+          if(sq&&![f.nm,f.ds,f.sp,f.grp].some(function(v){return typeof v==="string"&&v.toLowerCase().indexOf(sq)>=0;})) return null;
+          const key="spec-"+i;
+          const dsOpen=(c.dsOpen&&c.dsOpen[key])!==false;
+          if(!dsOpen) return <CompactFeatureRow key={i} name={f.nm} sub={speciesSourceText(f)} limited={!!f.limited} lims={limitStates(f,c)} onAdjust={function(li,d){upd(i,"limits",adjustLimits(f,li,d,c));}} cost={f.cost==null?"":f.cost} border="rgba(201,150,42,.5)" ph="Unnamed feature"
+            onOpen={function(){s("dsOpen",Object.assign({},c.dsOpen||{},{[key]:true}));}} onDelete={function(){window.__confirm("Delete this species feature?",function(){s("spec",list.filter(function(_,j){return j!==i;}));});}} />;
+          return (
+            <div key={i} style={{background:"rgba(0,0,0,.22)",border:"1px solid rgba(201,150,42,.12)",borderLeft:"2px solid rgba(201,150,42,.5)",padding:"8px 10px",gridColumn:wideFeature(f)?"1 / -1":undefined}}>
+              <div style={{display:"flex",gap:8,alignItems:"flex-end"}}>
+                <div style={{flex:1}}>
+                  <input type="text" value={f.nm||""} onChange={function(e){upd(i,"nm",e.target.value);}} placeholder="Feature name..."
+                    style={{marginBottom:0,width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.2)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:600,letterSpacing:1,outline:"none",padding:"2px 0 4px"}} />
+                  <input type="text" value={speciesSourceText(f)} onChange={function(e){var pr=parseSpeciesSource(e.target.value);var a=list.slice();a[i]=Object.assign({},a[i],pr);s("spec",a);}} placeholder="Species it comes from…" title="Species this feature comes from (editable)"
+                    style={{width:"100%",display:"block",background:"transparent",border:"none",color:"rgba(232,213,176,.4)",fontFamily:"'EB Garamond',serif",fontSize:11,fontWeight:400,letterSpacing:0,lineHeight:1.2,outline:"none",padding:0,margin:"2px 0 0",borderBottom:"none"}} />
+                </div>
+                <div style={{flexShrink:0,textAlign:"center"}}>
+                  <label className="fl" style={{fontSize:8}}>Cost</label>
+                  <input type="text" inputMode="decimal" value={f.cost==null?"":f.cost} onChange={function(e){upd(i,"cost",e.target.value);}} placeholder="0"
+                    style={{width:40,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.25)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:13,textAlign:"center",outline:"none",padding:"2px 0 4px"}} />
+                </div>
+                <div onClick={function(){var nd=Object.assign({},c.dsOpen||{});nd[key]=!dsOpen;s("dsOpen",nd);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,color:dsOpen?"rgba(201,150,42,.7)":"rgba(232,213,176,.25)",flexShrink:0,userSelect:"none",marginBottom:4}} title="Collapse this feature"><span style={{border:"1px solid rgba(201,150,42,.4)",padding:"2px 7px",borderRadius:2,fontSize:9,letterSpacing:1,textTransform:"uppercase",whiteSpace:"nowrap"}}>▴ Close</span></div>
+                <button onClick={function(){upd(i,"limited",!f.limited);}} title="Toggle limited use tracking"
+                  style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",padding:"3px 7px",flexShrink:0,cursor:"pointer",transition:"all .2s",marginBottom:2,background:f.limited?"rgba(201,74,42,.2)":"transparent",border:"1px solid "+(f.limited?"rgba(201,74,42,.6)":"rgba(201,150,42,.2)"),color:f.limited?"var(--ember)":"rgba(232,213,176,.3)"}}>{f.limited?"Limited":"+ Limit"}</button>
+                <button className="db" onClick={function(){window.__confirm("Delete this species feature?",function(){s("spec",list.filter(function(_,j){return j!==i;}));});}}>x</button>
+              </div>
+              {f.limited&&(function(){
+                var lims=f.limits&&f.limits.length?f.limits:[{name:"",uses:"",exp:"",die:"NO",recharge:""}];
+                return <div style={{marginTop:6,marginBottom:4}}>
+                  {lims.map(function(lim,li){return <LimitBlock key={li} lim={lim} idx={li} c={c} isOnly={lims.length===1}
+                    onChange={function(li2,f2,v){var a=lims.slice();if(f2==="__full__")a[li2]=v;else a[li2]=Object.assign({},a[li2],{[f2]:v});upd(i,"limits",a);}}
+                    onDelete={function(li2){var a=lims.filter(function(_,j){return j!==li2;});upd(i,"limits",a.length?a:[{name:"",uses:"",exp:"",die:"NO",recharge:""}]);}} />;})}
+                  <button className="arb" onClick={function(){upd(i,"limits",lims.concat([{name:"",uses:"",exp:"",die:"NO",recharge:""}]));}} style={{fontSize:9,padding:"2px 8px",marginTop:2,borderColor:"rgba(201,74,42,.3)",color:"rgba(201,74,42,.6)"}}>+ Add Limit</button>
+                </div>;
+              })()}
+              {dsOpen&&<div style={{marginTop:2}}><MdField value={f.ds||""} onChange={function(e){upd(i,"ds",e.target.value);}} placeholder="Description..."
+                style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,lineHeight:1.6,outline:"none"}} /></div>}
+            </div>
+          );
+        })}</div>}
+        {showList&&<div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap"}}>
+          <button className="arb" onClick={function(){s("spec",list.concat([{sp:"",grp:"",nm:"",ds:"",cost:0}]));}}>+ Add Species Feature</button>
+          {list.length>0&&<button className="arb" style={{borderColor:"rgba(201,74,42,.3)",color:"rgba(201,74,42,.6)"}} onClick={function(){window.__confirm("Remove all species features?",function(){s("spec",[]);});}}>Clear All</button>}
+        </div>}
+      </div>
+    </div>
+  );
+}
+
 function CompendiumPage({c,s}){
   const {useState:us}=React;
   const spellCache=useSpellCompendium();
@@ -10323,6 +11012,7 @@ function CompendiumPage({c,s}){
   React.useEffect(function(){
     if(!includeSrd){setSrdResults([]);return;}
     if(kind==="exploits"){setSrdResults([]);return;} // no SRD API for exploits
+    if(kind==="species"){setSrdResults([]);return;}
     var qq=(query||descQuery||"").trim();
     if(qq.length<2){setSrdResults([]);return;}
     if(debounceRef.current) clearTimeout(debounceRef.current);
@@ -10576,16 +11266,16 @@ function CompendiumPage({c,s}){
       <div className="sh" style={{display:"flex",alignItems:"center"}}>
         <span>Compendium Search</span>
         {(function(){
-          var st=kind==="spells"?spellCache.status:kind==="feats"?featCache.status:kind==="exploits"?exploitCache.status:kind==="creatures"?creatureCache.status:itemCache.status;
+          var st=kind==="spells"?spellCache.status:kind==="feats"?featCache.status:kind==="exploits"?exploitCache.status:kind==="creatures"?creatureCache.status:kind==="species"?_speciesCache.status:itemCache.status;
           var col=st==="ready"?"rgba(74,156,92,.6)":st==="loading"?"rgba(201,150,42,.5)":"rgba(201,74,42,.5)";
           var lbl=st==="ready"?"Compendium file loaded":st==="loading"?"Loading compendium file…":"Compendium file unavailable (offline or missing)";
           return <span title={lbl} style={{display:"inline-flex",alignItems:"center",gap:4,fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:col,userSelect:"none",marginLeft:"auto",fontWeight:"normal",textTransform:"uppercase"}}>
             <span style={{width:6,height:6,borderRadius:"50%",background:col,display:"inline-block",flexShrink:0}} />
-            {kind==="spells"?"Spells":kind==="feats"?"Feats":kind==="exploits"?"Exploits":kind==="creatures"?"Creatures":"Items"} File
+            {kind==="spells"?"Spells":kind==="feats"?"Feats":kind==="exploits"?"Exploits":kind==="creatures"?"Creatures":kind==="species"?"Species":"Items"} File
           </span>;
         })()}
       </div>
-      <div style={{display:"flex",gap:8,marginBottom:14,flexWrap:"wrap",alignItems:"center"}}>{tabBtn("spells","Spells")}{tabBtn("feats","Feats")}{tabBtn("items","Items")}{tabBtn("exploits","Exploits")}
+      <div style={{display:"flex",gap:8,marginBottom:14,flexWrap:"wrap",alignItems:"center"}}>{tabBtn("spells","Spells")}{tabBtn("feats","Feats")}{tabBtn("items","Items")}{tabBtn("exploits","Exploits")}{tabBtn("species","Species")}
         {creaturesEnabled
           ? tabBtn("creatures","Creatures")
           : <span onClick={function(){window.__confirm("The monster compendium is a reference and prep tool — best for creatures you control (summons, wild shape, companions) and for DMs.\n\nPlease don't use it to metagame: looking up an enemy's AC, HP, weaknesses, or tactics that your character wouldn't know can spoil encounters and undercut your DM. Use it responsibly and follow your table's norms.\n\nDo you agree?",function(){setCreaturesEnabled(true);switchKind("creatures");},"Agree");}}
@@ -10595,6 +11285,8 @@ function CompendiumPage({c,s}){
             </span>}
       </div>
 
+      {kind==="species"&&<SpeciesPanel c={c} s={s} />}
+      {kind!=="species"&&(<React.Fragment>
       {/* Search controls */}
       <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:8,alignItems:"center",position:"relative"}}>
         <input value={query} onChange={function(e){setQuery(e.target.value);}} placeholder="Name contains..." style={Object.assign({},inputStyle,{flex:"1 1 160px",minWidth:140})} />
@@ -10900,6 +11592,7 @@ function CompendiumPage({c,s}){
         );
       })()}
       {/* Summon: pick which spellcasting class drives spell attack / ability mod */}
+      </React.Fragment>)}
       {crAdd&&(
         <div onClick={function(){setCrAdd(null);}}
           style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
@@ -12481,7 +13174,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.13.5</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.16.1</div>
 
 </script>
 </body>
