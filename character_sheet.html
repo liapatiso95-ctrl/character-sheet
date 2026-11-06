@@ -566,6 +566,11 @@ const CSS = `
   .fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 10px;margin-bottom:10px}
   .fgrid>.fc,.fgrid>.fcr{margin-bottom:0;min-width:0}
   @media (max-width:760px){.fgrid{grid-template-columns:minmax(0,1fr)}}
+  .fcr{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+  .itbl tr[data-dsrc]{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+  .itbl tr[data-dsrc] input,.itbl tr[data-dsrc] textarea{-webkit-user-select:text;user-select:text}
+  .dnd-src{opacity:.35}
+  .dnd-over{outline:2px dashed var(--gold-l);outline-offset:-2px}
   .fcr{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.25);border:1px solid rgba(201,150,42,.15);border-left:3px solid var(--arcane);padding:5px 10px;cursor:pointer;transition:background .15s}
   .fcr:hover{background:rgba(201,150,42,.07)}
   .fc{background:rgba(0,0,0,.25);border:1px solid rgba(201,150,42,.15);border-left:3px solid var(--arcane);padding:12px 14px;margin-bottom:10px;transition:border-color .2s}
@@ -790,7 +795,33 @@ function SortableTh({label, col, sort, onSort, style, title}){
 }
 // sortItems(arr, sort, keyFn) — returns a new sorted array with original indices preserved
 // arr: array of items; sort: {col, dir}; keyFn: (item) => {col: value}
-function sortItems(arr, sort){
+// While a text field inside a table has focus, a list keeps its current order (so a row you are
+// typing in does not jump away); it re-sorts when you leave the field. `id` names the list.
+(function(){
+  if(typeof document==="undefined"||window.__sortFreezeInit) return;
+  window.__sortFreezeInit=true;
+  var t=null;
+  document.addEventListener("focusin",function(e){
+    var el=e.target;
+    if(el&&el.matches&&el.matches("input,textarea,select")&&el.closest&&el.closest("table")){clearTimeout(t);window.__sortFrozen=true;}
+  });
+  document.addEventListener("focusout",function(){
+    if(!window.__sortFrozen) return;
+    clearTimeout(t);
+    t=setTimeout(function(){window.__sortFrozen=false;if(window.__forceRender) window.__forceRender();},150);
+  });
+})();
+function sortItems(arr, sort, id){
+  var cache=window.__sortCache||(window.__sortCache={});
+  var sig=sort?(sort.col+"|"+sort.dir):"";
+  if(id&&window.__sortFrozen&&cache[id]&&cache[id].len===arr.length&&cache[id].sig===sig){
+    return cache[id].order.map(function(i){return {item:arr[i],i:i};});
+  }
+  var res=sortItemsRaw(arr,sort);
+  if(id) cache[id]={len:arr.length,sig:sig,order:res.map(function(x){return x.i;})};
+  return res;
+}
+function sortItemsRaw(arr, sort){
   if(!sort||!sort.col||!sort.dir) return arr.map(function(item,i){return {item,i};});
   return arr.map(function(item,i){return {item,i};}).sort(function(a,b){
     var av=a.item[sort.col]; var bv=b.item[sort.col];
@@ -834,6 +865,44 @@ function ChargeBadge({it, onClick}){
         padding:"1px 6px",borderRadius:10,whiteSpace:"nowrap",
         background:col+"14",cursor:"pointer",userSelect:"none"}}>
       {chRem}/{chMax}
+    </span>
+  );
+}
+
+// ─── Inline charge controls for item rows: − X/Y + and a one-shot recharge roll ─
+// rollChargeOnce does exactly what ChargeTracker's "Roll" button does (roll the restore
+// formula once, restore up to that many used charges) but returns the result.
+function rollChargeOnce(it){
+  var ch=it.charges||{};
+  var max=parseInt(ch.max)||0,used=parseInt(ch.used)||0;
+  var formula=(ch.restore||"").trim();
+  var nm=it.nm||"Item";
+  if(!formula) return {skip:true,msg:nm+": no restore formula set (open the item to add one)."};
+  var parsed=parseRestoreFormula(formula);
+  if(!parsed) return {skip:true,msg:nm+": invalid restore formula \""+formula+"\"."};
+  var r=rollRestoreFormula(parsed);
+  var restored=Math.min(r.total,used);
+  var newUsed=Math.max(0,used-restored);
+  var detail=r.rolls.length>0?"["+r.rolls.join("+")+"]"+(r.mod!==0?(r.mod>0?"+"+r.mod:r.mod):"")+" = "+r.total:""+r.total;
+  return {ch:Object.assign({},ch,{used:String(newUsed)}),msg:nm+": rolled "+detail+" → restored "+restored+" charge"+(restored!==1?"s":"")+" ("+(max-newUsed)+"/"+max+")"};
+}
+function ChargeQuick({it,onUpdate,onMsg,onOpen}){
+  var ch=it.charges;
+  if(!ch||!ch.enabled) return null;
+  var max=parseInt(ch.max)||0;
+  if(max===0) return null;
+  var used=parseInt(ch.used)||0,rem=Math.max(0,max-used);
+  var col=rem>max*0.6?"#4a9c5c":rem>max*0.3?"#c9962a":"#c94a2a";
+  var hasF=!!(ch.restore||"").trim();
+  var bs=function(c2,bd,dim){return {cursor:"pointer",background:"transparent",border:"1px solid "+bd,color:c2,fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:700,lineHeight:1,padding:0,width:20,height:20,display:"inline-flex",alignItems:"center",justifyContent:"center",borderRadius:2,flexShrink:0,touchAction:"manipulation",opacity:dim?.4:1};};
+  return (
+    <span style={{display:"inline-flex",alignItems:"center",gap:3,flexShrink:0,whiteSpace:"nowrap"}}>
+      <button style={bs("rgba(201,74,42,.8)","rgba(201,74,42,.3)",used>=max)} title="Spend 1 charge" onClick={function(){if(used<max) onUpdate(Object.assign({},ch,{used:String(used+1)}));}}>−</button>
+      <span onClick={onOpen} title="Charges remaining — click to expand"
+        style={{fontFamily:"'Cinzel',serif",fontSize:11,fontWeight:700,color:col,minWidth:30,textAlign:"center",cursor:"pointer",userSelect:"none"}}>{rem}/{max}</span>
+      <button style={bs("rgba(74,156,92,.8)","rgba(74,156,92,.3)",used<=0)} title="Recover 1 charge" onClick={function(){if(used>0) onUpdate(Object.assign({},ch,{used:String(used-1)}));}}>+</button>
+      <button style={bs("rgba(201,150,42,.85)","rgba(201,150,42,.35)",!hasF)} title={hasF?"Roll recharge ("+ch.restore+")":"No restore formula — open the item to set one"}
+        onClick={function(){var r=rollChargeOnce(it);if(r.ch) onUpdate(r.ch);if(onMsg) onMsg(r.msg);}}>↻</button>
     </span>
   );
 }
@@ -2136,7 +2205,7 @@ function Page1({c,s}){
           <th></th>
         </tr></thead>
         <tbody>
-          {sortItems(c.wpn,wpnSort).map(({item:w,i})=>{
+          {sortItems(c.wpn,wpnSort,"wpn").map(({item:w,i})=>{
             const atkAbls=Array.isArray(w.atkAbls)?w.atkAbls:[];
             const atkProfMode=w.atkProfMode||(w.atkProf?"full":"none");
             const atkProfBon=atkProfMode==="full"?pb:atkProfMode==="half"?Math.floor(pb/2):atkProfMode==="half-up"?Math.ceil(pb/2):0;
@@ -2422,6 +2491,9 @@ function Page1({c,s}){
 function Page2({c,s}){
   const [drag,setDrag]=useState(null);
   const [invSearch,setInvSearch]=useState("");
+  const [chMsg,setChMsg]=useState(null);
+  const chMsgTimer=React.useRef(null);
+  const showChMsg=function(m){setChMsg(m);clearTimeout(chMsgTimer.current);chMsgTimer.current=setTimeout(function(){setChMsg(null);},6000);};
   const iq=invSearch.trim().toLowerCase();
   const invMatch=(it)=>{ if(!iq) return true; try{return ["nm","desc","nt"].some(function(k){var v=it[k];return typeof v==="string"&&v.toLowerCase().indexOf(iq)>=0;});}catch(e){return true;} };
   const [dragOver,setDragOver]=useState(null);
@@ -2499,6 +2571,21 @@ function Page2({c,s}){
   const isWeightlessInside=(bag)=>bag?bag.weightless!==false:true;
   // New bags array
   const bags=c.bags||[];
+  // Roll every item's recharge formula once (items without a formula are skipped)
+  const rollAllCharges=function(){
+    var msgs=[],any=false;
+    var doList=function(arr){return (arr||[]).map(function(it){
+      if(!it||!it.charges||!it.charges.enabled||!(parseInt(it.charges.max)>0)) return it;
+      if(!(it.charges.restore||"").trim()) return it;
+      var r=rollChargeOnce(it);msgs.push(r.msg);
+      if(r.ch){any=true;return Object.assign({},it,{charges:r.ch});}
+      return it;
+    });};
+    var ninv=doList(c.inv),natt=doList(c.attuned_inv);
+    var nbags=(c.bags||[]).map(function(b){return Object.assign({},b,{inv:doList(b.inv)});});
+    if(any){s("inv",ninv);s("attuned_inv",natt);s("bags",nbags);}
+    showChMsg(msgs.length?"Recharge rolls — "+msgs.join(" · "):"No items with charges and a restore formula.");
+  };
   const newBagsWeight=bags.reduce((t,b)=>t+getBagSelfWeight(b),0);
   // Contents of non-weightless bags add to carried weight (items + coins at 0.02 lb each).
   const bagContentsWeight=bags.reduce((t,b)=>{
@@ -2740,9 +2827,10 @@ function Page2({c,s}){
     setDrag(null);setDragOver(null);setSplitDragModal(null);
   };
 
-  const onDrop=(dest)=>{
-    if(!drag||drag.src===dest) return;
-    const snapshot={...drag};
+  const onDrop=(dest,ovr)=>{
+    const dr0=ovr||drag;
+    if(!dr0||dr0.src===dest) return;
+    const snapshot={...dr0};
     if(snapshot.isCoin){
       const isBagDest=dest&&dest.startsWith("bag_");
       // on_person coins can only go to bags; everything else goes to on_person
@@ -2763,6 +2851,27 @@ function Page2({c,s}){
   };
 
 
+  const reorderItems=(src,from,to)=>{
+    if(from===to) return;
+    const mv=function(a){a=(a||[]).slice();if(from>=a.length||to>=a.length) return a;var it=a.splice(from,1)[0];a.splice(to,0,it);return a;};
+    if(src==="inv") s("inv",mv);
+    else if(src==="attuned") s("attuned_inv",mv);
+    else if(src&&src.startsWith("bag_")){const bid=src.slice(4);s("bags",function(prev){return (prev||[]).map(function(b){return b.id===bid?{...b,inv:mv(b.inv)}:b;});});}
+  };
+  // Press-and-hold drag for an item row: reorders inside its own list, or moves it to the
+  // list/container it is dropped on (the usual split-quantity prompt still applies).
+  const invHold=(src,i)=>holdDragGeneric(
+    function(el){
+      var r=el.closest("tr[data-dsrc]");
+      if(r) return {node:r,data:{src:r.getAttribute("data-dsrc"),i:parseInt(r.getAttribute("data-di"))}};
+      var d=el.closest("[data-dest]");
+      return d?{node:d,data:{dest:d.getAttribute("data-dest")}}:null;
+    },
+    function(data){
+      if(data.dest===undefined){
+        if(data.src===src) reorderItems(src,i,data.i); else onDrop(data.src,{src:src,idx:i});
+      } else if(data.dest!==src) onDrop(data.dest,{src:src,idx:i});
+    });
   const rowStyle=(dragging)=>({background:dragging?"rgba(123,79,207,.15)":"transparent",transition:"background .15s",cursor:"grab"});
 
   // Capacity bar segments
@@ -2777,7 +2886,10 @@ function Page2({c,s}){
         <input value={invSearch} onChange={e=>setInvSearch(e.target.value)} placeholder="Search items by name or description…"
           style={{flex:1,maxWidth:360,background:"rgba(0,0,0,.3)",border:"none",borderBottom:"1px solid rgba(201,150,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"5px 4px",outline:"none"}} />
         {invSearch&&<span onClick={()=>setInvSearch("")} title="Clear search" style={{cursor:"pointer",color:"rgba(201,74,42,.5)",fontSize:16,userSelect:"none"}}>×</span>}
+        <div onClick={rollAllCharges} title="Roll each item's recharge formula once (does not refill charges)"
+          style={{marginLeft:"auto",cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(74,156,92,.8)",border:"1px solid rgba(74,156,92,.35)",padding:"4px 12px",borderRadius:2,userSelect:"none",whiteSpace:"nowrap"}}>↻ Roll recharge for all items</div>
       </div>
+      {chMsg&&<div onClick={function(){setChMsg(null);}} style={{position:"fixed",top:56,left:"50%",transform:"translateX(-50%)",zIndex:9999,maxWidth:"min(92vw,640px)",background:"linear-gradient(145deg,#1d1608,#120d05)",border:"1px solid rgba(201,150,42,.5)",borderRadius:3,padding:"8px 14px",fontFamily:"'EB Garamond',serif",fontSize:14,color:"var(--gold-l)",boxShadow:"0 4px 20px rgba(0,0,0,.7)",cursor:"pointer",animation:"tipIn .15s ease-out"}}>{chMsg}</div>}
 
       {/* Weight summary */}
       <div style={{display:"flex",gap:12,marginTop:24,marginBottom:4,flexWrap:"wrap",alignItems:"stretch"}}>
@@ -2881,14 +2993,14 @@ function Page2({c,s}){
           </span>
 
         </div>
-        <div onDragOver={e=>{e.preventDefault();setDragOver("attuned");}} onDragLeave={()=>setDragOver(null)} onDrop={()=>onDrop("attuned")}
+        <div data-dest="attuned" onDragOver={e=>{e.preventDefault();setDragOver("attuned");}} onDragLeave={()=>setDragOver(null)} onDrop={()=>onDrop("attuned")}
           style={{border:dragOver==="attuned"?"1px dashed rgba(201,150,42,.5)":"1px dashed rgba(201,150,42,.15)",borderRadius:2,transition:"border .2s",minHeight:36,padding:"2px 0",position:"relative"}}>
           <SectionRail accent="201,150,42" label="Attuned Items" inset="none"
             onExpand={function(){s("attuned_inv",(c.attuned_inv||[]).map(function(it){return Object.assign({},it,{showDesc:true});}));}}
             onCollapse={function(){s("attuned_inv",(c.attuned_inv||[]).map(function(it){return Object.assign({},it,{showDesc:false});}));}} />
           <div className="stbl-wrap"><table className="itbl" style={{minWidth:520}}>
             <thead><tr>
-              <th style={{width:"2%"}}></th>
+              <th style={{width:34}}></th>
               <SortableTh label="Eq" col="eq" sort={attSort} onSort={onAttSort} style={{width:"3%",textAlign:"center"}} title="Equipped" />
               <SortableTh label="Wl" col="wl" sort={attSort} onSort={onAttSort} style={{width:"3%",textAlign:"center"}} title="Weightless" />
               <SortableTh label="Item" col="nm" sort={attSort} onSort={onAttSort} style={{width:"30%"}} />
@@ -2899,10 +3011,17 @@ function Page2({c,s}){
               <th></th>
             </tr></thead>
             <tbody>
-              {sortItems(c.attuned_inv||[],attSort).map(({item:it,i})=>(
+              {sortItems(c.attuned_inv||[],attSort,"att").map(({item:it,i})=>(
+                !it.showDesc?<CompactItemRow key={i+"c"} it={it} dsrc="attuned" i={i} hold={invHold("attuned",i)} onMsg={showChMsg}
+                  onOpen={function(){const a=[...(c.attuned_inv||[])];a[i]={...a[i],showDesc:true};s("attuned_inv",a);}}
+                  onOpenDesc={function(){const a=[...(c.attuned_inv||[])];a[i]={...a[i],showDesc:true};s("attuned_inv",a);}}
+                  onChargeUpdate={function(ch){const a=[...(c.attuned_inv||[])];a[i]={...a[i],charges:ch};s("attuned_inv",a);}}
+                  onDelete={function(){window.__confirm("Delete this item?",()=>s("attuned_inv",(c.attuned_inv||[]).filter((_,j)=>j!==i)));}} />:
                 [
-                <tr key={i+"a"} draggable onDragStart={()=>onDragStart("attuned",i)} onDragEnd={onDragEnd} style={rowStyle(drag&&drag.src==="attuned"&&drag.idx===i)}>
-                  <td style={{textAlign:"center",cursor:"grab",color:"rgba(201,150,42,.4)",fontSize:12}}>::</td>
+                <tr key={i+"a"} data-dsrc={"attuned"} data-di={i} {...invHold("attuned",i)} style={{background:"transparent"}}>
+                  
+                  <td style={{textAlign:"center",verticalAlign:"middle",padding:"0 2px"}}><button onClick={()=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],showDesc:!it.showDesc};s("attuned_inv",a);}} title="Show / hide description"
+ style={{background:it.showDesc?"rgba(184,154,240,.15)":"transparent",border:"1px solid rgba(184,154,240,"+(it.showDesc?".5":".3")+")",color:it.showDesc?"var(--arcane-l)":"rgba(184,154,240,.6)",cursor:"pointer",fontSize:16,fontWeight:700,padding:0,width:26,height:22,lineHeight:1,fontFamily:"'Cinzel',serif",borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",touchAction:"manipulation"}}><Chev open={!!it.showDesc} /></button></td>
                   <td style={{textAlign:"center"}}><div className={"tog tog-eq"+(it.eq?" on":"")} onClick={()=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],eq:!it.eq};s("attuned_inv",a);}} /></td>
                   <td style={{textAlign:"center"}}><div className={"tog tog-wl"+(it.wl?" on":"")} onClick={()=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],wl:!it.wl};s("attuned_inv",a);}} /></td>
                   <td><ItemNameInput value={it.nm||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],nm:e.target.value};s("attuned_inv",a);}} placeholder="Item..." style={{width:"100%",background:"transparent",border:"none",color:it.eq?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px",fontWeight:it.eq?"600":"400"}}
@@ -2912,17 +3031,13 @@ function Page2({c,s}){
                   <td style={{fontFamily:"'Cinzel',serif",fontSize:11,color:it.wl?"var(--teal)":"var(--gold-l)",textAlign:"center",opacity:.8}}>{it.wl?"0":itemWeight(it)>0?itemWeight(it).toFixed(2):"-"}</td>
                   <td style={{display:"flex",alignItems:"center",gap:4}}>
                     <TipInput value={it.nt||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],nt:e.target.value};s("attuned_inv",a);}} placeholder="notes..." style={{flex:1,minWidth:0,background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} />
-                    <ChargeBadge it={it} onClick={function(){const a=[...(c.attuned_inv||[])];a[i]={...a[i],showDesc:true};s("attuned_inv",a);}} />
-                  </td>
-                  <td style={{textAlign:"center"}}>
-                    <button onClick={()=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],showDesc:!it.showDesc};s("attuned_inv",a);}} title="Add description"
-                      style={{background:"transparent",border:"none",color:it.showDesc?"var(--arcane-l)":"rgba(184,154,240,.25)",cursor:"pointer",fontSize:12,padding:0,lineHeight:1,fontFamily:"'Cinzel',serif"}}>{it.showDesc?"−":"+"}</button>
+                    <ChargeQuick it={it} onMsg={showChMsg} onUpdate={function(ch){const a=[...(c.attuned_inv||[])];a[i]={...a[i],charges:ch};s("attuned_inv",a);}} onOpen={function(){const a=[...(c.attuned_inv||[])];a[i]={...a[i],showDesc:true};s("attuned_inv",a);}} />
                   </td>
                   <td><button className="db" onClick={()=>window.__confirm("Delete this item?",()=>s("attuned_inv",(c.attuned_inv||[]).filter((_,j)=>j!==i)))}>x</button></td>
                 </tr>,
                 it.showDesc&&<tr key={i+"b"} style={{borderBottom:"1px solid rgba(201,150,42,.1)"}}>
                   <td></td><td></td><td></td>
-                  <td colSpan={7} style={{padding:"2px 4px 6px"}}>
+                  <td colSpan={6} style={{padding:"2px 4px 6px"}}>
                     <MdField value={it.desc||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],desc:e.target.value};s("attuned_inv",a);}} placeholder="Item description..."
                       style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 4px"}} />
                     <ChargeTracker it={it} onUpdate={function(ch){const a=[...(c.attuned_inv||[])];a[i]={...a[i],charges:ch||undefined};s("attuned_inv",a);}} />
@@ -2937,7 +3052,7 @@ function Page2({c,s}){
           <button className="arb" style={{borderColor:"rgba(201,150,42,.25)",color:"rgba(201,150,42,.6)",fontSize:10}} onClick={()=>{
             const maxAtt=attunedSlots;
             if(attunedUsed>=maxAtt){showInvToast("Attunement limit ("+maxAtt+") reached");return;}
-            s("attuned_inv",[...(c.attuned_inv||[]),{nm:"",qt:"",wt:"",nt:"",eq:false,wl:false}]);
+            s("attuned_inv",[...(c.attuned_inv||[]),{nm:"",qt:"",wt:"",nt:"",eq:false,wl:false,showDesc:true}]);
           }}>+ Add Attuned</button>
           <div style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"rgba(201,150,42,.5)",letterSpacing:1}}>Subtotal: {attunedWeight.toFixed(2)} lbs</div>
         </div>
@@ -2947,15 +3062,15 @@ function Page2({c,s}){
       <div style={{display:"flex",alignItems:"center",gap:8,padding:"4px 0",marginBottom:4,marginTop:8}}>
         <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:2,color:"rgba(201,150,42,.6)",textTransform:"uppercase"}}>Equipment & Other Items</span>
       </div>
-      <div onDragOver={e=>{e.preventDefault();setDragOver("inv");}} onDragLeave={()=>setDragOver(null)} onDrop={()=>onDrop("inv")}
+      <div data-dest="inv" onDragOver={e=>{e.preventDefault();setDragOver("inv");}} onDragLeave={()=>setDragOver(null)} onDrop={()=>onDrop("inv")}
         style={{border:dragOver==="inv"?"1px dashed rgba(123,79,207,.6)":"1px solid transparent",borderRadius:2,transition:"border .2s",minHeight:40,position:"relative"}}>
         <SectionRail accent="201,150,42" label="Equipment" inset="none"
           onExpand={function(){s("inv",(c.inv||[]).map(function(it){return Object.assign({},it,{showDesc:true});}));}}
           onCollapse={function(){s("inv",(c.inv||[]).map(function(it){return Object.assign({},it,{showDesc:false});}));}} />
         <div className="stbl-wrap"><table className="itbl" style={{minWidth:520}}>
           <thead><tr>
-            <th style={{width:"2%"}}></th>
-            <SortableTh label="Eq" col="eq" sort={invSort} onSort={onInvSort} style={{width:"3%",textAlign:"center"}} title="Equipped" />
+            <th style={{width:34}}></th>
+              <SortableTh label="Eq" col="eq" sort={invSort} onSort={onInvSort} style={{width:"3%",textAlign:"center"}} title="Equipped" />
             <SortableTh label="Wl" col="wl" sort={invSort} onSort={onInvSort} style={{width:"3%",textAlign:"center"}} title="Weightless" />
             <SortableTh label="Item" col="nm" sort={invSort} onSort={onInvSort} style={{width:"30%"}} />
             <SortableTh label="Qty" col="qt" sort={invSort} onSort={onInvSort} style={{width:"8%"}} />
@@ -2965,10 +3080,17 @@ function Page2({c,s}){
             <th></th>
           </tr></thead>
           <tbody>
-            {sortItems(c.inv,invSort).filter(function(x){return invMatch(x.item);}).map(({item:it,i})=>(
+            {sortItems(c.inv,invSort,"inv").filter(function(x){return invMatch(x.item);}).map(({item:it,i})=>(
+              !it.showDesc?<CompactItemRow key={i+"c"} it={it} dsrc="inv" i={i} hold={invHold("inv",i)} onMsg={showChMsg}
+                onOpen={function(){ui("inv",i,"showDesc",true);}}
+                onOpenDesc={function(){ui("inv",i,"showDesc",true);}}
+                onChargeUpdate={function(ch){ui("inv",i,"charges",ch);}}
+                onDelete={function(){window.__confirm("Delete this item?",()=>di("inv",i));}} />:
               [
-                <tr key={i+"a"} draggable onDragStart={()=>onDragStart("inv",i)} onDragEnd={onDragEnd} style={rowStyle(drag&&drag.src==="inv"&&drag.idx===i)}>
-                  <td style={{textAlign:"center",cursor:"grab",color:"rgba(184,154,240,.3)",fontSize:12}}>::</td>
+                <tr key={i+"a"} data-dsrc={"inv"} data-di={i} {...invHold("inv",i)} style={{background:"transparent"}}>
+                  
+                  <td style={{textAlign:"center",verticalAlign:"middle",padding:"0 2px"}}><button onClick={()=>ui("inv",i,"showDesc",!it.showDesc)} title="Show / hide description"
+ style={{background:it.showDesc?"rgba(184,154,240,.15)":"transparent",border:"1px solid rgba(184,154,240,"+(it.showDesc?".5":".3")+")",color:it.showDesc?"var(--arcane-l)":"rgba(184,154,240,.6)",cursor:"pointer",fontSize:16,fontWeight:700,padding:0,width:26,height:22,lineHeight:1,fontFamily:"'Cinzel',serif",borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",touchAction:"manipulation"}}><Chev open={!!it.showDesc} /></button></td>
                   <td style={{textAlign:"center"}}>
                     <div className={"tog tog-eq"+(it.eq?" on":"")} onClick={()=>ui("inv",i,"eq",!it.eq)} title="Equipped" />
                   </td>
@@ -2982,17 +3104,13 @@ function Page2({c,s}){
                   <td style={{fontFamily:"'Cinzel',serif",fontSize:11,color:it.wl?"var(--teal)":"var(--gold-l)",textAlign:"center",opacity:.8}}>{it.wl?"0":itemWeight(it)>0?itemWeight(it).toFixed(2):"-"}</td>
                   <td style={{display:"flex",alignItems:"center",gap:4}}>
                     <TipInput value={it.nt||""} onChange={e=>ui("inv",i,"nt",e.target.value)} placeholder="notes..." style={{flex:1,minWidth:0,background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} />
-                    <ChargeBadge it={it} onClick={function(){ui("inv",i,"showDesc",true);}} />
-                  </td>
-                  <td style={{textAlign:"center"}}>
-                    <button onClick={()=>ui("inv",i,"showDesc",!it.showDesc)} title="Add description"
-                      style={{background:"transparent",border:"none",color:it.showDesc?"var(--arcane-l)":"rgba(184,154,240,.25)",cursor:"pointer",fontSize:12,padding:0,lineHeight:1,fontFamily:"'Cinzel',serif"}}>{it.showDesc?"−":"+"}</button>
+                    <ChargeQuick it={it} onMsg={showChMsg} onUpdate={function(ch){ui("inv",i,"charges",ch);}} onOpen={function(){ui("inv",i,"showDesc",true);}} />
                   </td>
                   <td><button className="db" onClick={()=>window.__confirm("Delete this item?",()=>di("inv",i))}>x</button></td>
                 </tr>,
                 it.showDesc&&<tr key={i+"b"} style={{borderBottom:"1px solid rgba(123,79,207,.1)"}}>
                   <td></td><td></td><td></td>
-                  <td colSpan={7} style={{padding:"2px 4px 6px"}}>
+                  <td colSpan={6} style={{padding:"2px 4px 6px"}}>
                     <MdField value={it.desc||""} onChange={e=>ui("inv",i,"desc",e.target.value)} placeholder="Item description..."
                       style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 4px"}} />
                     <ChargeTracker it={it} onUpdate={function(ch){ui("inv",i,"charges",ch||undefined);}} />
@@ -3004,7 +3122,7 @@ function Page2({c,s}){
         </table></div>
       </div>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:4}}>
-        <button className="arb" onClick={()=>ai("inv",{nm:"",qt:"",wt:"",nt:"",eq:false,wl:false})}>+ Add Item</button>
+        <button className="arb" onClick={()=>ai("inv",{nm:"",qt:"",wt:"",nt:"",eq:false,wl:false,showDesc:true})}>+ Add Item</button>
         <div style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"rgba(201,150,42,.5)",letterSpacing:1}}>Subtotal: {invWeight.toFixed(2)} lbs</div>
       </div>
 
@@ -3068,7 +3186,7 @@ function Page2({c,s}){
               <button onClick={()=>setRemoveBagModal(bag.id)}
                 style={{fontFamily:"'Cinzel',serif",fontSize:9,padding:"3px 10px",background:"transparent",border:"1px solid rgba(201,74,42,.3)",color:"rgba(201,74,42,.5)",cursor:"pointer",borderRadius:2}}>Remove</button>
             </div>
-            <div onDragOver={e=>{e.preventDefault();setDragOver(dropTarget);}} onDragLeave={()=>setDragOver(null)}
+            <div data-dest={dropTarget} onDragOver={e=>{e.preventDefault();setDragOver(dropTarget);}} onDragLeave={()=>setDragOver(null)}
               onDrop={()=>onDrop(dropTarget)}
               style={{border:dragOver===dropTarget?"2px dashed rgba(123,79,207,.8)":"2px dashed rgba(123,79,207,.25)",borderRadius:4,padding:"0 0 8px",marginBottom:8,background:dragOver===dropTarget?"rgba(123,79,207,.08)":"rgba(0,0,0,.2)",transition:"all .2s",minHeight:60,position:"relative"}}>
               <SectionRail accent="201,150,42" label={bag.nm||"Bag"} inset="none"
@@ -3105,8 +3223,8 @@ function Page2({c,s}){
               </div>
               <div className="stbl-wrap"><table className="itbl" style={{minWidth:520}}>
                 <thead><tr>
-                  <th style={{width:"2%"}}></th>
-                  <SortableTh label="Eq" col="eq" sort={bagSorts[bag.id]||null} onSort={(col)=>onBagSort(bag.id,col)} style={{width:"3%",textAlign:"center"}} title="Equipped" />
+                  <th style={{width:34}}></th>
+              <SortableTh label="Eq" col="eq" sort={bagSorts[bag.id]||null} onSort={(col)=>onBagSort(bag.id,col)} style={{width:"3%",textAlign:"center"}} title="Equipped" />
                   <SortableTh label="Wl" col="wl" sort={bagSorts[bag.id]||null} onSort={(col)=>onBagSort(bag.id,col)} style={{width:"3%",textAlign:"center"}} title="Weightless" />
                   <SortableTh label="Item" col="nm" sort={bagSorts[bag.id]||null} onSort={(col)=>onBagSort(bag.id,col)} style={{width:"30%"}} />
                   <SortableTh label="Qty" col="qt" sort={bagSorts[bag.id]||null} onSort={(col)=>onBagSort(bag.id,col)} style={{width:"8%"}} />
@@ -3116,11 +3234,18 @@ function Page2({c,s}){
                   <th></th>
                 </tr></thead>
                 <tbody>
-                  {sortItems(bagInv,bagSorts[bag.id]||null).filter(function(x){return invMatch(x.item);}).map(({item:it,i})=>(
+                  {sortItems(bagInv,bagSorts[bag.id]||null,"bag"+bag.id).filter(function(x){return invMatch(x.item);}).map(({item:it,i})=>(
+                    !it.showDesc?<CompactItemRow key={i+"c"} it={it} dsrc={dropTarget} i={i} hold={invHold(dropTarget,i)} onMsg={showChMsg}
+                      onOpen={function(){const a=[...bagInv];a[i]={...a[i],showDesc:true};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}}
+                      onOpenDesc={function(){const a=[...bagInv];a[i]={...a[i],showDesc:true};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}}
+                      onChargeUpdate={function(ch){const a=[...bagInv];a[i]={...a[i],charges:ch};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}}
+                      onDelete={function(){window.__confirm("Delete this item?",()=>s("bags",bags.map(b=>b.id===bag.id?{...b,inv:bagInv.filter((_,j)=>j!==i)}:b)));}} />:
                     [
-                    <tr key={i+"a"} draggable onDragStart={()=>onDragStart(dropTarget,i)} onDragEnd={onDragEnd} style={rowStyle(drag&&drag.src===dropTarget&&drag.idx===i)}>
-                      <td style={{textAlign:"center",cursor:"grab",color:"rgba(184,154,240,.3)",fontSize:12}}>::</td>
-                      <td style={{textAlign:"center"}}><div className={"tog tog-eq"+(it.eq?" on":"")} onClick={()=>{const a=[...bagInv];a[i]={...a[i],eq:!it.eq};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} /></td>
+                    <tr key={i+"a"} data-dsrc={dropTarget} data-di={i} {...invHold(dropTarget,i)} style={{background:"transparent"}}>
+                      
+                      <td style={{textAlign:"center",verticalAlign:"middle",padding:"0 2px"}}><button onClick={()=>{const a=[...bagInv];a[i]={...a[i],showDesc:!it.showDesc};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} title="Show / hide description"
+ style={{background:it.showDesc?"rgba(184,154,240,.15)":"transparent",border:"1px solid rgba(184,154,240,"+(it.showDesc?".5":".3")+")",color:it.showDesc?"var(--arcane-l)":"rgba(184,154,240,.6)",cursor:"pointer",fontSize:16,fontWeight:700,padding:0,width:26,height:22,lineHeight:1,fontFamily:"'Cinzel',serif",borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",touchAction:"manipulation"}}><Chev open={!!it.showDesc} /></button></td>
+                  <td style={{textAlign:"center"}}><div className={"tog tog-eq"+(it.eq?" on":"")} onClick={()=>{const a=[...bagInv];a[i]={...a[i],eq:!it.eq};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} /></td>
                       <td style={{textAlign:"center"}}><div className={"tog tog-wl"+(it.wl?" on":"")} onClick={()=>{const a=[...bagInv];a[i]={...a[i],wl:!it.wl};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} /></td>
                       <td><ItemNameInput value={it.nm||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],nm:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="Item..." style={{width:"100%",background:"transparent",border:"none",color:it.eq?"var(--gold-l)":"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px",fontWeight:it.eq?"600":"400",opacity:it.wl?0.7:1}}
                         onAutofill={function(item){const a=[...bagInv];const ch=item.charges||parseChargesFromDesc(item.desc);a[i]={...a[i],nm:item.name,wt:item.weight||a[i].wt||"",nt:item.cost?"Cost: "+item.cost:a[i].nt||"",desc:item.desc||a[i].desc||"",showDesc:item.desc?true:a[i].showDesc,charges:ch||a[i].charges};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));if(item.weightInferred){setWtVal((a[i].wt==null?"":(""+a[i].wt)));setWtPrompt({list:"bag",idx:i,bagId:bag.id,name:item.name});}}} /></td>
@@ -3129,17 +3254,13 @@ function Page2({c,s}){
                       <td style={{fontFamily:"'Cinzel',serif",fontSize:11,color:it.wl?"var(--teal)":"var(--gold-l)",textAlign:"center",opacity:.8}}>{it.wl?"0":itemWeight(it)>0?itemWeight(it).toFixed(2):"-"}</td>
                       <td style={{display:"flex",alignItems:"center",gap:4}}>
                         <TipInput value={it.nt||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],nt:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="notes..." style={{flex:1,minWidth:0,background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,outline:"none",padding:"3px 4px"}} />
-                        <ChargeBadge it={it} onClick={function(){const a=[...bagInv];a[i]={...a[i],showDesc:true};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} />
-                      </td>
-                      <td style={{textAlign:"center"}}>
-                        <button onClick={()=>{const a=[...bagInv];a[i]={...a[i],showDesc:!it.showDesc};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} title="Add description"
-                          style={{background:"transparent",border:"none",color:it.showDesc?"var(--arcane-l)":"rgba(184,154,240,.25)",cursor:"pointer",fontSize:12,padding:0,lineHeight:1,fontFamily:"'Cinzel',serif"}}>{it.showDesc?"−":"+"}</button>
+                        <ChargeQuick it={it} onMsg={showChMsg} onUpdate={function(ch){const a=[...bagInv];a[i]={...a[i],charges:ch};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} onOpen={function(){const a=[...bagInv];a[i]={...a[i],showDesc:true};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} />
                       </td>
                       <td><button className="db" onClick={()=>window.__confirm("Delete this item?",()=>s("bags",bags.map(b=>b.id===bag.id?{...b,inv:bagInv.filter((_,j)=>j!==i)}:b)))}>x</button></td>
                     </tr>,
                     it.showDesc&&<tr key={i+"b"} style={{borderBottom:"1px solid rgba(123,79,207,.1)"}}>
                       <td></td><td></td><td></td>
-                      <td colSpan={7} style={{padding:"2px 4px 6px"}}>
+                      <td colSpan={6} style={{padding:"2px 4px 6px"}}>
                         <MdField value={it.desc||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],desc:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="Item description..."
                           style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 4px"}} />
                         <ChargeTracker it={it} onUpdate={function(ch){const a=[...bagInv];a[i]={...a[i],charges:ch||undefined};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} />
@@ -3151,7 +3272,7 @@ function Page2({c,s}){
               </table></div>
               <div style={{padding:"4px 12px"}}>
                 <button className="arb" style={{borderColor:"rgba(123,79,207,.35)",color:"var(--arcane-l)"}}
-                  onClick={()=>s("bags",bags.map(b=>b.id===bag.id?{...b,inv:[...bagInv,{nm:"",qt:"",wt:"",nt:""}]}:b))}>+ Add Item</button>
+                  onClick={()=>s("bags",bags.map(b=>b.id===bag.id?{...b,inv:[...bagInv,{nm:"",qt:"",wt:"",nt:"",showDesc:true}]}:b))}>+ Add Item</button>
               </div>
 
             </div>
@@ -4201,7 +4322,7 @@ function LimitBlock({lim,idx,onChange,onDelete,isOnly,c}){
             <TipInput value={lim.recharge||""} onChange={e=>ch("recharge",e.target.value)} placeholder="Long Rest"
               style={{width:78,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.2)",color:"rgba(232,213,176,.55)",fontFamily:"'EB Garamond',serif",fontSize:13,textAlign:"center",outline:"none"}} />
             <div onClick={()=>ch("exp","0")}
-              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:.5,color:"rgba(74,156,92,.7)",border:"1px solid rgba(74,156,92,.3)",padding:"2px 5px",borderRadius:2,flexShrink:0,transition:"all .15s",userSelect:"none"}} title="Click to recharge (reset expended to 0)">↺</div>
+              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:16,fontWeight:700,lineHeight:1,color:"rgba(74,156,92,.9)",border:"1px solid rgba(74,156,92,.4)",background:"rgba(74,156,92,.08)",width:30,height:30,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:3,flexShrink:0,transition:"all .15s",userSelect:"none",touchAction:"manipulation"}} title="Restore all uses (reset expended to 0)">↻</div>
           </div>
         </div>
       </div>
@@ -4684,6 +4805,7 @@ function WeaponReferenceModal({onClose}){
 // ─── Condition reference (PHB 2024 conditions) ─────────────────────────────────
 const CONDITION_DATA=[
   {n:"Blinded",p:"p361",e:[["Can't See","You can't see and automatically fail any ability check that requires sight."],["Attacks Affected","Attack rolls against you have Advantage, and your attack rolls have Disadvantage."]]},
+  {n:"Burning",p:"Hazard",e:[["Fire Damage","A burning creature or object takes 1d4 Fire damage at the start of each of its turns."],["Extinguishing","As an action, you can extinguish fire on yourself by giving yourself the Prone condition and rolling on the ground."],["Other Ways to End","The fire also goes out if it is doused, submerged, or suffocated."]]},
   {n:"Charmed",p:"p361",e:[["Can't Harm the Charmer","You can't attack the charmer or target the charmer with damaging abilities or magical effects."],["Social Advantage","The charmer has Advantage on any ability check to interact with you socially."]]},
   {n:"Deafened",p:"p365",e:[["Can't Hear","You can't hear and automatically fail any ability check that requires hearing."]]},
   {n:"Exhaustion",p:"p365",e:[["Exhaustion Levels","This condition is cumulative. Each time you receive it, you gain 1 Exhaustion level. You die if your Exhaustion level is 6."],["D20 Tests Affected","When you make a D20 Test the roll is reduced by 2 times your Exhaustion level."],["Speed Reduced","Your Speed is reduced by a number of feet equal to 5 times your Exhaustion level."],["Removing Exhaustion Levels","Finishing a Long Rest removes 1 of your Exhaustion levels. When your Exhaustion level reaches 0, the condition ends."]]},
@@ -4830,20 +4952,20 @@ function Page3({c,s}){
         const dsOpen=(c.dsOpen&&c.dsOpen[dsKey])!==false;
         const taKey="feat-ds-"+i;
         const savedH=(c.taH&&c.taH[taKey]);
-        if(!dsOpen) return <CompactFeatureRow key={i} name={f.nm} sub={f.src} limited={limited} lims={limitStates(f,c)} onAdjust={function(li,d){updFeat(i,"limits",adjustLimits(f,li,d,c));}} border={limited?"var(--ember)":"var(--arcane)"} ph="Unnamed feature"
+        if(!dsOpen) return <CompactFeatureRow key={i} name={f.nm} sub={f.src} limited={limited} lims={limitStates(f,c)} onAdjust={function(li,d){updFeat(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){updFeat(i,"limits",(f.limits||[]).map(function(l){return {...l,exp:"0"};}));}} border={limited?"var(--ember)":"var(--arcane)"} dkey="feat" di={i} s={s} ph="Unnamed feature"
           onOpen={function(){s("dsOpen",{...(c.dsOpen||{}),[dsKey]:true});}} onDelete={function(){window.__confirm("Delete this feature?",()=>s("feat",c.feat.filter((_,j)=>j!==i)));}} />;
         return (
-          <div key={i} className="fc" style={{borderLeftColor:limited?"var(--ember)":"var(--arcane)",gridColumn:(wideFeature(f)||(c.feat||[]).length<2)?"1 / -1":undefined}}>
+          <div key={i} className="fc" data-dkey="feat" data-di={i} style={{borderLeftColor:limited?"var(--ember)":"var(--arcane)",gridColumn:(wideFeature(f)||(c.feat||[]).length<2)?"1 / -1":undefined}}>
             <div style={{display:"flex",gap:10}}>
               <div style={{flex:1}}>
                 <div style={{display:"flex",gap:8,alignItems:"flex-start",marginBottom:4}}>
+                  <button onClick={function(){const nd={...(c.dsOpen||{}),[dsKey]:!dsOpen};s("dsOpen",nd);}} title="Close" style={{background:"rgba(201,150,42,.12)",border:"1px solid rgba(201,150,42,.45)",color:"var(--gold-l)",cursor:"pointer",fontSize:16,fontWeight:700,padding:0,width:26,height:22,lineHeight:1,fontFamily:"'Cinzel',serif",borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,alignSelf:"center",touchAction:"manipulation"}}><Chev open /></button>
                   <div style={{flex:1}}>
                     <input type="text" value={f.nm||""} onChange={e=>updFeat(i,"nm",e.target.value)} placeholder="Feature name..." style={{marginBottom:0,width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.2)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:600,letterSpacing:1,outline:"none",padding:"2px 0 4px"}} />
                   </div>
                   <div style={{flex:1}}>
                     <input type="text" value={f.src||""} onChange={e=>updFeat(i,"src",e.target.value)} placeholder="Source..." style={{marginBottom:0,width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.1)",color:"rgba(232,213,176,.5)",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",outline:"none",padding:"2px 0 4px"}} />
                   </div>
-                  <div onClick={function(){const nd={...(c.dsOpen||{}),[dsKey]:!dsOpen};s("dsOpen",nd);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,color:dsOpen?"rgba(201,150,42,.7)":"rgba(232,213,176,.25)",flexShrink:0,userSelect:"none",paddingTop:2,lineHeight:1}} title={dsOpen?"Collapse description":"Expand description"}><span style={{border:"1px solid rgba(201,150,42,.4)",padding:"2px 7px",borderRadius:2,fontSize:9,letterSpacing:1,textTransform:"uppercase",whiteSpace:"nowrap"}}>▴ Close</span></div>
                   <button onClick={()=>updFeat(i,"limited",!limited)} title="Toggle limited use tracking"
                     style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",padding:"3px 7px",flexShrink:0,cursor:"pointer",transition:"all .2s",marginTop:2,background:limited?"rgba(201,74,42,.2)":"transparent",border:"1px solid "+(limited?"rgba(201,74,42,.6)":"rgba(201,150,42,.2)"),color:limited?"var(--ember)":"rgba(232,213,176,.3)"}}>{limited?"Limited":"+ Limit"}</button>
                 </div>
@@ -4881,13 +5003,14 @@ function Page3({c,s}){
         const dsOpen=(c.dsOpen&&c.dsOpen[dsKey])!==false;
         const taKey="fts-ds-"+i;
         const savedH=(c.taH&&c.taH[taKey]);
-        if(!dsOpen) return <CompactFeatureRow key={i} name={f.nm} sub={f.lv?"Lv "+f.lv:""} limited={limited} lims={limitStates(f,c)} onAdjust={function(li,d){updFts(i,"limits",adjustLimits(f,li,d,c));}} border={limited?"var(--ember)":"var(--gold)"} ph="Unnamed feat"
+        if(!dsOpen) return <CompactFeatureRow key={i} name={f.nm} sub={f.lv?"Lv "+f.lv:""} limited={limited} lims={limitStates(f,c)} onAdjust={function(li,d){updFts(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){updFts(i,"limits",(f.limits||[]).map(function(l){return {...l,exp:"0"};}));}} border={limited?"var(--ember)":"var(--gold)"} dkey="fts" di={i} s={s} ph="Unnamed feat"
           onOpen={function(){s("dsOpen",{...(c.dsOpen||{}),[dsKey]:true});}} onDelete={function(){window.__confirm("Delete this feature?",()=>s("fts",c.fts.filter((_,j)=>j!==i)));}} />;
         return (
-          <div key={i} className="fc" style={{borderLeftColor:limited?"var(--ember)":"var(--gold)",gridColumn:(wideFeature(f)||(c.fts||[]).length<2)?"1 / -1":undefined}}>
+          <div key={i} className="fc" data-dkey="fts" data-di={i} style={{borderLeftColor:limited?"var(--ember)":"var(--gold)",gridColumn:(wideFeature(f)||(c.fts||[]).length<2)?"1 / -1":undefined}}>
             <div style={{display:"flex",gap:10}}>
               <div style={{flex:1}}>
                 <div style={{display:"flex",gap:8,alignItems:"flex-end",marginBottom:4}}>
+                  <button onClick={function(){const nd={...(c.dsOpen||{}),[dsKey]:!dsOpen};s("dsOpen",nd);}} title="Close" style={{background:"rgba(201,150,42,.12)",border:"1px solid rgba(201,150,42,.45)",color:"var(--gold-l)",cursor:"pointer",fontSize:16,fontWeight:700,padding:0,width:26,height:22,lineHeight:1,fontFamily:"'Cinzel',serif",borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,alignSelf:"center",touchAction:"manipulation"}}><Chev open /></button>
                   <div style={{flex:1}}>
                     <FeatNameInput
                       value={f.nm||""}
@@ -4909,7 +5032,6 @@ function Page3({c,s}){
                     <input type="text" value={f.lv||""} onChange={e=>updFts(i,"lv",e.target.value)} placeholder="0"
                       style={{width:40,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.25)",color:"rgba(232,213,176,.6)",fontFamily:"'Cinzel',serif",fontSize:13,textAlign:"center",outline:"none",padding:"2px 0 4px"}} />
                   </div>
-                  <div onClick={function(){const nd={...(c.dsOpen||{}),[dsKey]:!dsOpen};s("dsOpen",nd);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,color:dsOpen?"rgba(201,150,42,.7)":"rgba(232,213,176,.25)",flexShrink:0,userSelect:"none",paddingBottom:4,lineHeight:1}} title={dsOpen?"Collapse description":"Expand description"}><span style={{border:"1px solid rgba(201,150,42,.4)",padding:"2px 7px",borderRadius:2,fontSize:9,letterSpacing:1,textTransform:"uppercase",whiteSpace:"nowrap"}}>▴ Close</span></div>
                   <button onClick={()=>updFts(i,"limited",!limited)} title="Toggle limited use tracking"
                     style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",padding:"3px 7px",flexShrink:0,cursor:"pointer",transition:"all .2s",marginBottom:2,background:limited?"rgba(201,74,42,.2)":"transparent",border:"1px solid "+(limited?"rgba(201,74,42,.6)":"rgba(201,150,42,.2)"),color:limited?"var(--ember)":"rgba(232,213,176,.3)"}}>{limited?"Limited":"+ Limit"}</button>
                 </div>
@@ -4927,9 +5049,9 @@ function Page3({c,s}){
       })}</div>
       <button className="arb" onClick={()=>s("fts",[...c.fts,{nm:"",ds:"",lv:"",limited:false,limits:[{name:"",uses:"",exp:"",die:"NO",recharge:""}]}])}>+ Add Feat</button>
       </React.Fragment>}
-      </div>
 
       <SpeciesFeaturesSection c={c} s={s} q={fq} />
+      </div>
 
       <SecHead label="Proficiencies and Languages" open={secIsOpen("prof")} onToggle={function(){toggleSec("prof");}}
         summary={profChips("armor",c.profA).length+" armor/weapon · "+profChips("tools",c.profT).length+" tool · "+profChips("lang",c.profL).length+" language"} />
@@ -7285,7 +7407,7 @@ function SpellPage({c,s,from,to}){
 
   // Spellcasting classes - each has own ability, dc bonus, atk bonus, max level
   const spCls=c.spellClasses||[];
-  const addSpCls=()=>s("spellClasses",[...spCls,{nm:"",abl:"INT",dcBonus:"",atkBonus:"",maxLv:9}]);
+  const addSpCls=()=>s("spellClasses",[...spCls,{nm:"",abl:"INT",dcBonus:"",atkBonus:"",maxLv:9,open:true}]);
 
   const allLvls=[];
   for(let l=from;l<=to;l++){
@@ -7337,11 +7459,13 @@ function SpellPage({c,s,from,to}){
     const all=group.spells.map(function(item){return {...item.sp,__i:item.i};});
     const bonus=all.filter(function(sp){return sp.bonus;});
     const rest=all.filter(function(sp){return !sp.bonus;});
-    const sorted=[...sortItems(bonus,sort&&{col:sort.col,dir:sort.dir}),...sortItems(rest,sort&&{col:sort.col,dir:sort.dir})];
+    const sorted=[...sortItems(bonus,sort&&{col:sort.col,dir:sort.dir},"spb"+lv+"|"+(group.name||"")),...sortItems(rest,sort&&{col:sort.col,dir:sort.dir},"spr"+lv+"|"+(group.name||""))];
     return sorted.map(function(sorted){
     const sp=sorted.item; const i=sorted.item.__i;
     return [
       <tr key={i+"a"}>
+        <td style={{textAlign:"center",verticalAlign:"middle",padding:"0 2px"}}><button onClick={()=>us(lv,i,"showDesc",sp.showDesc===false?true:false)} title="Show / hide description"
+          style={{background:sp.showDesc!==false?"rgba(184,154,240,.15)":"transparent",border:"1px solid rgba(184,154,240,"+(sp.showDesc!==false?".5":".3")+")",color:sp.showDesc!==false?"var(--arcane-l)":"rgba(184,154,240,.6)",cursor:"pointer",fontSize:16,fontWeight:700,padding:0,width:26,height:22,lineHeight:1,fontFamily:"'Cinzel',serif",borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",touchAction:"manipulation"}}><Chev open={sp.showDesc!==false} /></button></td>
         <td style={{textAlign:"center",verticalAlign:"middle"}}>
           <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:0}}>
             <span style={{fontFamily:"'Cinzel',serif",fontSize:6,letterSpacing:.5,color:sp.bonus?"rgba(201,150,42,.7)":"rgba(184,154,240,.2)",textTransform:"uppercase",lineHeight:1,marginBottom:1}}>bonus</span>
@@ -7378,10 +7502,6 @@ function SpellPage({c,s,from,to}){
         <td><TipInput value={sp.dur||""} onChange={e=>us(lv,i,"dur",e.target.value)} placeholder="Instant" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px"}} /></td>
         <td style={{textAlign:"center",verticalAlign:"middle"}}><input type="checkbox" className="cc" checked={!!sp.conc} onChange={e=>us(lv,i,"conc",e.target.checked)} /></td>
         <td><TipInput value={sp.note||""} onChange={e=>us(lv,i,"note",e.target.value)} placeholder="note..." style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:12,outline:"none",padding:"3px 4px"}} /></td>
-        <td style={{textAlign:"center",verticalAlign:"middle"}}>
-          <button onClick={()=>us(lv,i,"showDesc",sp.showDesc===false?true:false)} title="Toggle description"
-            style={{background:"transparent",border:"none",color:sp.showDesc!==false?"var(--arcane-l)":"rgba(184,154,240,.2)",cursor:"pointer",fontSize:12,padding:0,lineHeight:1,fontFamily:"'Cinzel',serif"}}>{sp.showDesc!==false?"−":"+"}</button>
-        </td>
         <td style={{verticalAlign:"middle"}}><button className="db" onClick={()=>window.__confirm("Delete this spell?",()=>ds2(lv,i))}>x</button></td>
       </tr>,
       sp.showDesc!==false&&<tr key={i+"b"} style={{borderBottom:"1px solid rgba(123,79,207,.1)"}}>
@@ -7435,9 +7555,18 @@ function SpellPage({c,s,from,to}){
           var leveledSpells=allLvls.filter(function(lv){return lv>0;}).reduce(function(t,lv){return t+(c.sp[lv]||[]).filter(function(sp){return (sp.cls||"")===(sc.nm||"")&&!sp.bonus;}).length;},0);
           var bonusSpells=allLvls.filter(function(lv){return lv>0;}).reduce(function(t,lv){return t+(c.sp[lv]||[]).filter(function(sp){return (sp.cls||"")===(sc.nm||"")&&sp.bonus;}).length;},0);
           var prepSpells=allLvls.filter(function(lv){return lv>0;}).reduce(function(t,lv){return t+(c.sp[lv]||[]).filter(function(sp){return (sp.cls||"")===(sc.nm||"")&&sp.prep&&!sp.bonus;}).length;},0);
+          if(!sc.open) return (
+            <div key={i} onClick={function(e){if(e.target.closest("[data-keep]")) return;updSpCls(i,"open",true);}} title="Click to open" style={{cursor:"pointer",background:"rgba(0,0,0,.25)",border:"1px solid rgba(123,79,207,.3)",padding:"6px 12px",display:"flex",gap:14,alignItems:"center",flexWrap:"wrap"}}>
+              <button onClick={function(){updSpCls(i,"open",true);}} title="Open" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(184,154,240,.55)",color:"rgba(184,154,240,.55)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={false} /></button>
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:600,color:"var(--arcane-l)"}}>{sc.nm||"Class"}</span>
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(232,213,176,.4)"}}>Save DC <b style={{fontSize:16,color:"var(--gold-l)",marginLeft:3}}>{clsDC(sc)}</b></span>
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(232,213,176,.4)"}}>Spell Attack <b style={{fontSize:16,color:"var(--arcane-l)",marginLeft:3}}>{clsAtk(sc)}</b></span>
+            </div>
+          );
           return (
             <div key={i} style={{background:"rgba(0,0,0,.25)",border:"1px solid rgba(123,79,207,.3)",padding:"12px 14px",minWidth:220,flex:1,position:"relative"}}>
               <div style={{display:"flex",gap:8,alignItems:"center",marginBottom:10}}>
+                <button onClick={function(){updSpCls(i,"open",false);}} title="Close" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(184,154,240,.55)",color:"rgba(184,154,240,.55)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={true} /></button>
                 <input value={sc.nm||""} onChange={function(e){updSpCls(i,"nm",e.target.value);}} placeholder="Class name..."
                   style={{flex:1,background:"transparent",border:"none",borderBottom:"1px solid rgba(123,79,207,.5)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:600,padding:"2px 4px",outline:"none"}} />
                 <button className="db" onClick={function(){window.__confirm("Delete this spellcasting class?",function(){delSpCls(i);});}}>x</button>
@@ -7485,6 +7614,10 @@ function SpellPage({c,s,from,to}){
                   <label className="fl" style={{fontSize:8}}>Known</label>
                   <input type="checkbox" checked={!!sc.known} onChange={function(e){updSpCls(i,"known",e.target.checked);}} title="Known caster — spells don't need to be prepared daily" />
                 </div>
+                <div style={{display:"flex",flexDirection:"column",gap:3,alignItems:"center",justifyContent:"flex-end"}}>
+                  <label className="fl" style={{fontSize:8,textAlign:"center"}}>Uses spell / sorcery points</label>
+                  <input type="checkbox" checked={!!sc.usesPts} onChange={function(e){updSpCls(i,"usesPts",e.target.checked);}} title="Show the Spell / Sorcery Points tracker for this character" />
+                </div>
                 {sc.nm&&<div style={{display:"flex",gap:8,alignItems:"center",alignSelf:"flex-end",marginLeft:"auto",flexWrap:"wrap"}}>
                   <span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.35)",fontStyle:"italic"}}>
                     {(function(){
@@ -7515,12 +7648,29 @@ function SpellPage({c,s,from,to}){
 
       {/* Shared Spell Points — shown above 1st level spells */}
       {(()=>{
+        // The Spell / Sorcery Points tracker only appears when a class has "uses points" ticked.
+        const showPts=spCls.some(function(sc){return !!sc.usesPts;});
+        if(!showPts) return null;
         const sptMax=parseInt(c.spellPtsMax)||0;
         const sptUsed=parseInt(c.spellPtsUsed)||0;
         const sptRem=Math.max(0,sptMax-sptUsed);
         const sptCol=sptMax===0?"rgba(123,79,207,.4)":sptRem>sptMax*0.6?"#4a9c5c":sptRem>sptMax*0.3?"#c9962a":"#c94a2a";
+        if(!c.spPtsOpen) return (
+          <div onClick={function(e){if(e.target.closest("[data-keep]")) return;s("spPtsOpen",true);}} title="Click to open" style={{cursor:"pointer",display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",background:"rgba(0,0,0,.18)",border:"1px solid rgba(123,79,207,.2)",padding:"6px 12px",borderRadius:2,marginBottom:14}}>
+            <button data-keep="1" onClick={function(){s("spPtsOpen",true);}} title="Open" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(184,154,240,.55)",color:"rgba(184,154,240,.55)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={false} /></button>
+            <span style={{fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:400,letterSpacing:1.5,textTransform:"uppercase",color:"var(--gold-l)"}}>Spell / Sorcery Points</span>
+            <div data-keep="1" onClick={function(){const used=parseInt(c.spellPtsUsed)||0;s("spellPtsUsed",""+(used+1));}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"rgba(201,74,42,.7)",border:"1px solid rgba(201,74,42,.3)",width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,userSelect:"none",lineHeight:1}}>−</div>
+            <span title="Remaining / Max" style={{fontFamily:"'Cinzel',serif",fontSize:18,fontWeight:700,color:sptCol,minWidth:54,textAlign:"center"}}>{sptRem}/{sptMax}</span>
+            <div data-keep="1" onClick={function(){const used=parseInt(c.spellPtsUsed)||0;if(used>0)s("spellPtsUsed",""+(used-1));}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"rgba(74,156,92,.7)",border:"1px solid rgba(74,156,92,.3)",width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,userSelect:"none",lineHeight:1}}>+</div>
+            <div data-keep="1" onClick={function(){s("spellPtsUsed","");}} title="Restore all" style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"rgba(74,156,92,.85)",border:"1px solid rgba(74,156,92,.35)",width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,userSelect:"none",lineHeight:1}}>↻</div>
+          </div>
+        );
         return (
           <div style={{display:"flex",gap:10,alignItems:"flex-end",flexWrap:"wrap",background:"rgba(0,0,0,.18)",border:"1px solid rgba(123,79,207,.2)",padding:"8px 12px",borderRadius:2,marginBottom:14}}>
+            <div style={{display:"flex",alignItems:"center",gap:10,width:"100%",marginBottom:2}}>
+              <button onClick={function(){s("spPtsOpen",false);}} title="Close" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(184,154,240,.55)",color:"rgba(184,154,240,.55)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={true} /></button>
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:400,letterSpacing:1.5,textTransform:"uppercase",color:"var(--gold-l)"}}>Spell / Sorcery Points</span>
+            </div>
             <div style={{display:"flex",flexDirection:"column",gap:3,alignItems:"center"}}>
               <label className="fl" style={{fontSize:8,textAlign:"center"}}>Max Spell / Sorcery Points</label>
               {c.spellPtsFormula
@@ -7812,6 +7962,7 @@ function SpellPage({c,s,from,to}){
                   )}
                   {!grpCollapsed&&<div className="stbl-wrap"><table className="stbl">
                     <thead><tr>
+                      <th style={{width:34}}></th>
                       <th style={{width:"3%"}}></th>
                       {lv>0&&!(group.sc&&group.sc.known)&&<SortableTh label="P" col="prep" sort={spellSorts[lv+"-"+gi]||null} onSort={(col)=>onSpellSort(lv,gi,col)} style={{width:"3%",textAlign:"center"}} title="Prepared" />}
                       <SortableTh label="Spell Name" col="nm" sort={spellSorts[lv+"-"+gi]||null} onSort={(col)=>onSpellSort(lv,gi,col)} style={{width:"18%"}} />
@@ -7823,7 +7974,6 @@ function SpellPage({c,s,from,to}){
                       <SortableTh label="Duration" col="dur" sort={spellSorts[lv+"-"+gi]||null} onSort={(col)=>onSpellSort(lv,gi,col)} style={{width:"9%"}} />
                       <SortableTh label="C" col="conc" sort={spellSorts[lv+"-"+gi]||null} onSort={(col)=>onSpellSort(lv,gi,col)} style={{width:"3%",textAlign:"center"}} title="Concentration" />
                       <SortableTh label="Notes" col="note" sort={spellSorts[lv+"-"+gi]||null} onSort={(col)=>onSpellSort(lv,gi,col)} />
-                      <th style={{width:"3%"}}></th>
                       <th style={{width:"3%"}}></th>
                     </tr></thead>
                     <tbody>{renderRows(group,lv,spellSorts[lv+"-"+gi]||null)}</tbody>
@@ -7860,7 +8010,7 @@ function ExploitPage({c,s}){
   const degNotes={"1":"Use as many times as you have Exploit Dice.","2":"Use as many times as you have Exploit Dice.","3":"Once per short or long rest.","4":"Once per short or long rest.","5":"Once per short or long rest."};
   const borderCols={"1":"rgba(184,154,240,.35)","2":"rgba(123,79,207,.35)","3":"rgba(201,150,42,.35)","4":"rgba(201,74,42,.35)","5":"rgba(232,50,50,.35)"};
   const exCls=c.exploitClasses||[];
-  const addExCls=()=>s("exploitClasses",[...exCls,{nm:"",abl:"STR",dcBonus:"",dcBonusFormula:null}]);
+  const addExCls=()=>s("exploitClasses",[...exCls,{nm:"",abl:"STR",dcBonus:"",dcBonusFormula:null,open:true}]);
   const updExCls=(i,field,val)=>{const a=exCls.map(function(x){return Object.assign({},x);});a[i][field]=val;s("exploitClasses",a);};
   const delExCls=(i)=>s("exploitClasses",exCls.filter((_,j)=>j!==i));
   const exExhPen=Math.min(5,Math.max(0,parseInt(c.exhaustion)||0))*-2;
@@ -7882,7 +8032,7 @@ function ExploitPage({c,s}){
     <div>
       <div className="orn">Exploits</div>
       <div style={{marginBottom:20,marginTop:32}}>
-        <div style={{display:"flex",justifyContent:"flex-end",marginBottom:10}}>
+        <div style={{display:"flex",justifyContent:"flex-end",alignItems:"center",gap:10,marginBottom:10}}>
           <div onClick={function(){
             s("exploitDiceExp","0");
             const newExpl=Object.assign({},c.expl);
@@ -7896,9 +8046,17 @@ function ExploitPage({c,s}){
         <div style={{display:"flex",flexWrap:"wrap",gap:12,marginBottom:10}}>
         {exCls.map(function(ec,i){
           var total=ec.nm?countForClass(ec.nm):0;
+          if(!ec.open) return (
+            <div key={i} onClick={function(e){if(e.target.closest("[data-keep]")) return;updExCls(i,"open",true);}} title="Click to open" style={{cursor:"pointer",background:"rgba(0,0,0,.25)",border:"1px solid rgba(201,74,42,.3)",padding:"6px 12px",display:"flex",gap:14,alignItems:"center",flexWrap:"wrap"}}>
+              <button onClick={function(){updExCls(i,"open",true);}} title="Open" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(224,112,96,.6)",color:"rgba(224,112,96,.6)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={false} /></button>
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:600,color:"#e07060"}}>{ec.nm||"Class"}</span>
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(232,213,176,.4)"}}>Save DC <b style={{fontSize:16,color:"#e07060",marginLeft:3}}>{clsDC(ec)}</b></span>
+            </div>
+          );
           return (
             <div key={i} style={{background:"rgba(0,0,0,.25)",border:"1px solid rgba(201,74,42,.3)",padding:"12px 14px",minWidth:220,flex:1,position:"relative"}}>
               <div style={{display:"flex",gap:8,alignItems:"center",marginBottom:10}}>
+                <button onClick={function(){updExCls(i,"open",false);}} title="Close" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(224,112,96,.6)",color:"rgba(224,112,96,.6)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={true} /></button>
                 <input value={ec.nm||""} onChange={function(e){updExCls(i,"nm",e.target.value);}} placeholder="Class name..."
                   style={{flex:1,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,74,42,.5)",color:"#e07060",fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:600,padding:"2px 4px",outline:"none"}} />
                 <button className="db" onClick={function(){window.__confirm("Delete this exploit class?",function(){delExCls(i);});}}>x</button>
@@ -7931,7 +8089,19 @@ function ExploitPage({c,s}){
         <button className="arb" onClick={addExCls} style={{marginTop:4,borderColor:"rgba(201,74,42,.35)",color:"#e07060"}}>+ Add Exploit Class</button>
 
         {/* Shared exploit dice strip — below classes */}
+        {!c.exDiceOpen?<div onClick={function(e){if(e.target.closest("[data-keep]")) return;s("exDiceOpen",true);}} title="Click to open" style={{cursor:"pointer",display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",background:"rgba(0,0,0,.2)",border:"1px solid rgba(201,74,42,.2)",padding:"6px 12px",borderRadius:2,marginTop:12}}>
+            <button data-keep="1" onClick={function(){s("exDiceOpen",true);}} title="Open" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(224,112,96,.6)",color:"rgba(224,112,96,.6)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={false} /></button>
+            <span style={{fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:700,letterSpacing:1.5,textTransform:"uppercase",color:"#e07060"}}>Exploit Dice ({c.exploitDie||"d4"})</span>
+            <div data-keep="1" onClick={function(){s("exploitDiceExp",""+Math.min(diceMax,diceExp+1));}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"rgba(201,74,42,.7)",border:"1px solid rgba(201,74,42,.3)",width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,userSelect:"none",lineHeight:1}}>−</div>
+            <span title="Remaining / Max" style={{fontFamily:"'Cinzel',serif",fontSize:18,fontWeight:700,color:pipCol,minWidth:54,textAlign:"center"}}>{diceRem}/{diceMax}</span>
+            <div data-keep="1" onClick={function(){s("exploitDiceExp",""+Math.max(0,diceExp-1));}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"rgba(74,156,92,.7)",border:"1px solid rgba(74,156,92,.3)",width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,userSelect:"none",lineHeight:1}}>+</div>
+            <div data-keep="1" onClick={function(){s("exploitDiceExp","0");}} title="Restore all" style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"rgba(74,156,92,.85)",border:"1px solid rgba(74,156,92,.35)",width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,userSelect:"none",lineHeight:1}}>↻</div>
+          </div>:
         <div style={{display:"flex",gap:10,alignItems:"flex-end",flexWrap:"wrap",background:"rgba(0,0,0,.2)",border:"1px solid rgba(201,74,42,.2)",padding:"8px 12px",borderRadius:2,marginTop:12}}>
+            <div style={{display:"flex",alignItems:"center",gap:10,width:"100%",marginBottom:2}}>
+              <button onClick={function(){s("exDiceOpen",false);}} title="Close" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(224,112,96,.6)",color:"rgba(224,112,96,.6)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={true} /></button>
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:700,letterSpacing:1.5,textTransform:"uppercase",color:"#e07060"}}>Exploit Dice</span>
+            </div>
             <div style={{display:"flex",flexDirection:"column",gap:3}}>
               <label className="fl" style={{fontSize:8}}>Exploit Die</label>
               <select value={c.exploitDie||"d4"} onChange={function(e){s("exploitDie",e.target.value);}}
@@ -7962,7 +8132,7 @@ function ExploitPage({c,s}){
             {diceMax>0&&<span style={{fontFamily:"'Cinzel',serif",fontSize:20,fontWeight:700,color:pipCol,alignSelf:"flex-end",paddingBottom:1}}>{diceRem}</span>}
             <div onClick={function(){s("exploitDiceExp","0");}} title="Reset expended dice"
               style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(74,156,92,.7)",border:"1px solid rgba(74,156,92,.3)",padding:"2px 8px",borderRadius:2,alignSelf:"flex-end",userSelect:"none"}}>↺</div>
-          </div>
+          </div>}
       </div>
 
       <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:16,flexWrap:"wrap"}}>
@@ -8043,19 +8213,21 @@ function ExploitPage({c,s}){
                   )}
                   {!grpCollapsed&&<div className="stbl-wrap"><table className="stbl" style={{minWidth:300}}>
                     <thead><tr>
+                      <th style={{width:34}}></th>
                       <SortableTh label="Exploit Name" col="nm" sort={exploitSorts[deg+"-"+gi]||null} onSort={(col)=>onExploitSort(deg,gi,col)} style={{width:"22%"}} />
                       <SortableTh label="Dice Cost" col="uses" sort={exploitSorts[deg+"-"+gi]||null} onSort={(col)=>onExploitSort(deg,gi,col)} style={{width:"11%"}} />
                       <SortableTh label="Execution" col="exec" sort={exploitSorts[deg+"-"+gi]||null} onSort={(col)=>onExploitSort(deg,gi,col)} style={{width:"16%"}} />
                       {hasUsed&&<th style={{width:"4%",textAlign:"center"}} title="Used this rest">U</th>}
                       <th>Notes</th>
                       <th style={{width:"3%"}}></th>
-                      <th style={{width:"3%"}}></th>
                     </tr></thead>
                     <tbody>
-                      {sortItems(group.exploits.map(function(item){return {...item.ex,__i:item.i};}),exploitSorts[deg+"-"+gi]||null).map(function(sorted){
+                      {sortItems(group.exploits.map(function(item){return {...item.ex,__i:item.i};}),exploitSorts[deg+"-"+gi]||null,"ex"+deg+"-"+gi).map(function(sorted){
                         const ex=sorted.item; const i=sorted.item.__i;
                         return [
                           <tr key={i+"a"} style={{opacity:(hasUsed&&ex.used)?0.45:1,transition:"opacity .2s"}}>
+                            <td style={{textAlign:"center",verticalAlign:"middle",padding:"0 2px"}}><button onClick={()=>ue(deg,i,"showDesc",!ex.showDesc)} title="Show / hide description"
+                              style={{background:ex.showDesc?"rgba(201,74,42,.15)":"transparent",border:"1px solid rgba(201,74,42,"+(ex.showDesc?".55":".3")+")",color:ex.showDesc?"#e07060":"rgba(224,112,96,.6)",cursor:"pointer",fontSize:16,fontWeight:700,padding:0,width:26,height:22,lineHeight:1,fontFamily:"'Cinzel',serif",borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",touchAction:"manipulation"}}><Chev open={!!ex.showDesc} /></button></td>
                             <td><ExploitNameInput value={ex.nm||""} degree={deg}
                               onChange={e=>ue(deg,i,"nm",e.target.value)}
                               onAutofill={function(ex2){const cp={...c.expl};cp[deg]=[...(cp[deg]||[])];cp[deg][i]={...cp[deg][i],nm:ex2.name,uses:ex2.cost||cp[deg][i].uses||"",exec:ex2.execution||"",prereq:ex2.prereq||"",desc:ex2.desc||"",showDesc:ex2.desc?true:cp[deg][i].showDesc};s("expl",cp);}}
@@ -8067,8 +8239,6 @@ function ExploitPage({c,s}){
                             </td>}
                             <td><TipInput value={ex.nt||""} onChange={e=>ue(deg,i,"nt",e.target.value)} placeholder="note..." style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px"}} /></td>
                             <td><button className="db" onClick={()=>window.__confirm("Delete this exploit?",()=>de(deg,i))}>x</button></td>
-                            <td><button onClick={()=>ue(deg,i,"showDesc",!ex.showDesc)}
-                              style={{background:"transparent",border:"none",color:ex.showDesc?"var(--arcane-l)":"rgba(184,154,240,.25)",cursor:"pointer",fontSize:12,padding:0,lineHeight:1,fontFamily:"'Cinzel',serif"}}>{ex.showDesc?"−":"+"}</button></td>
                           </tr>,
                           ex.showDesc&&<tr key={i+"b"} style={{borderBottom:"1px solid rgba(123,79,207,.1)"}}>
                             <td colSpan={hasUsed?7:6} style={{padding:"2px 4px 6px"}}>
@@ -10642,20 +10812,114 @@ function adjustLimits(f,li,delta,c){
   lims[li]=Object.assign({},l,{exp:""+Math.min(Math.max(e-delta,0),u)});
   return lims;
 }
-function CompactFeatureRow({name,sub,cost,limited,lims,onAdjust,border,onOpen,onDelete,ph}){
+// ─── Drag-to-reorder within one features section (touch + mouse) ──────────────
+// Rows carry data-dkey (the section: feat / fts / spec) and data-di (index). A grip
+// can only drop onto rows of its own section, so features never cross sections.
+function moveInSection(s,dkey,from,to){
+  if(from===to) return;
+  s(dkey,function(prev){var a=(prev||[]).slice();if(from<0||from>=a.length||to<0||to>=a.length) return prev;var it=a.splice(from,1)[0];a.splice(to,0,it);return a;});
+  // open/closed state is keyed by index, so carry it along with the moved feature
+  s("dsOpen",function(prev){
+    var o=Object.assign({},prev||{}),old={},re=new RegExp("^"+dkey+"-(\\d+)$");
+    Object.keys(o).forEach(function(k){var m=k.match(re);if(m){old[+m[1]]=o[k];delete o[k];}});
+    Object.keys(old).forEach(function(k){
+      k=+k;var n=k===from?to:(from<to&&k>from&&k<=to)?k-1:(from>to&&k>=to&&k<from)?k+1:k;
+      o[dkey+"-"+n]=old[k];
+    });
+    return o;
+  });
+}
+var _dndLast=0;
+// Press and hold a collapsed feature row (~0.3s) to pick it up, then drag onto another row
+// of the same section. Moving before the hold completes cancels it, so scrolling and
+// normal taps/clicks are unaffected.
+function holdDragGeneric(resolve,commit){
+  return {
+    onContextMenu:function(e){e.preventDefault();},
+    onClickCapture:function(e){if(Date.now()-_dndLast<500){e.stopPropagation();e.preventDefault();}},
+    onPointerDown:function(e){
+      if(e.button!=null&&e.button>0) return;
+      if(e.target.closest&&e.target.closest("button,input,textarea,select,a,label,.tog,[contenteditable]")) return;
+      var row=e.currentTarget,sx=e.clientX,sy=e.clientY,x=sx,y=sy,active=false,over=null,overData=null,timer=null,scroller=null;
+      function clear(){if(over){over.classList.remove("dnd-over");over=null;overData=null;}}
+      function block(ev){if(active&&ev.cancelable) ev.preventDefault();}
+      function end(doCommit){
+        clearTimeout(timer);clearInterval(scroller);
+        window.removeEventListener("pointermove",move,true);window.removeEventListener("pointerup",up,true);window.removeEventListener("pointercancel",canc,true);
+        document.removeEventListener("touchmove",block,{passive:false});
+        var d=overData;
+        clear();row.classList.remove("dnd-src");
+        if(active){_dndLast=Date.now();if(doCommit&&d!=null) commit(d);}
+      }
+      function move(ev){
+        x=ev.clientX;y=ev.clientY;
+        if(!active){if(Math.abs(x-sx)>8||Math.abs(y-sy)>8) end(false);return;}
+        var el=document.elementFromPoint(x,y),t=el&&el.closest?resolve(el):null;
+        if(t&&t.node===row) t=null;
+        if((t?t.node:null)!==over){clear();if(t){over=t.node;overData=t.data;over.classList.add("dnd-over");}}
+      }
+      function up(){end(true);}
+      function canc(){clear();end(false);}
+      window.addEventListener("pointermove",move,true);window.addEventListener("pointerup",up,true);window.addEventListener("pointercancel",canc,true);
+      document.addEventListener("touchmove",block,{passive:false});
+      timer=setTimeout(function(){
+        active=true;row.classList.add("dnd-src");
+        try{if(navigator.vibrate) navigator.vibrate(15);}catch(_){}
+        scroller=setInterval(function(){var vh=window.innerHeight;if(y<70) window.scrollBy(0,-14);else if(y>vh-70) window.scrollBy(0,14);},16);
+      },300);
+    }
+  };
+}
+function holdDragProps(dkey,i,s){
+  return holdDragGeneric(
+    function(el){var t=el.closest('[data-dkey="'+dkey+'"]');return t?{node:t,data:parseInt(t.getAttribute("data-di"))}:null;},
+    function(to){if(!isNaN(to)) moveInSection(s,dkey,i,to);}
+  );
+}
+// Closed (non-editable) view of an inventory item: same columns/look as the editable row.
+// Click to open and edit; press and hold to drag.
+function CompactItemRow({it,dsrc,i,hold,onOpen,onDelete,onChargeUpdate,onMsg,onOpenDesc}){
+  var wtEach=parseFloat(it.wt)||0,qn=(it.qt===""||it.qt==null)?1:(parseFloat(it.qt)||0),tot=it.wl?0:wtEach*qn;
+  var txt=function(v,ph,extra){var empty=v===""||v==null;return <span style={Object.assign({display:"block",fontFamily:"'EB Garamond',serif",fontSize:14,color:empty?"rgba(232,213,176,.25)":"var(--parch)",padding:"3px 4px",minHeight:22,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"},extra||{})}>{empty?ph:v}</span>;};
+  var tg=function(cls,on){return <div className={"tog "+cls+(on?" on":"")} style={{pointerEvents:"none"}} />;};
   return (
-    <div className="fcr" style={{borderLeftColor:border}} onClick={onOpen} title="Click to expand">
-      <span style={{fontFamily:"'Cinzel',serif",fontSize:12,color:"rgba(201,150,42,.7)",flexShrink:0}}>▸</span>
+    <tr data-dsrc={dsrc} data-di={i} {...hold} onClick={onOpen} title="Click to edit · press and hold to drag" style={{cursor:"pointer"}}>
+      <td style={{textAlign:"center",verticalAlign:"middle",padding:"0 2px"}}><button title="Open / edit" style={{background:"transparent",border:"1px solid rgba(184,154,240,.3)",color:"rgba(184,154,240,.6)",cursor:"pointer",fontSize:16,fontWeight:700,padding:0,width:26,height:22,lineHeight:1,fontFamily:"'Cinzel',serif",borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",touchAction:"manipulation"}}><Chev open={false} /></button></td>
+      <td style={{textAlign:"center"}}>{tg("tog-eq",it.eq)}</td>
+      <td style={{textAlign:"center"}}>{tg("tog-wl",it.wl)}</td>
+      <td>{txt(it.nm,"Item...",{color:it.nm?(it.eq?"var(--gold-l)":"var(--parch)"):undefined,fontWeight:it.eq?600:400,opacity:it.wl?.7:1})}</td>
+      <td>{txt(it.qt,"1")}</td>
+      <td>{txt(it.wt,"0")}</td>
+      <td style={{fontFamily:"'Cinzel',serif",fontSize:11,color:it.wl?"var(--teal)":"var(--gold-l)",textAlign:"center",opacity:.8}}>{it.wl?"0":tot>0?tot.toFixed(2):"-"}</td>
+      <td style={{display:"flex",alignItems:"center",gap:4}}>
+        <span style={{flex:1,minWidth:0}}>{txt(it.nt,"notes...")}</span>
+        <span onClick={function(e){e.stopPropagation();}}><ChargeQuick it={it} onMsg={onMsg} onUpdate={onChargeUpdate} onOpen={onOpenDesc} /></span>
+      </td>
+      <td><button className="db" onClick={function(e){e.stopPropagation();onDelete();}}>x</button></td>
+    </tr>
+  );
+}
+// Clickable chevron: ">" when closed, "^" when open (drawn with borders so it renders crisply)
+function Chev({open}){
+  return <span style={{display:"inline-block",width:7,height:7,borderRight:"2px solid currentColor",borderBottom:"2px solid currentColor",transform:open?"rotate(-135deg) translate(-1px,-1px)":"rotate(-45deg)",marginLeft:open?0:-2,marginTop:open?3:0,pointerEvents:"none"}} />;
+}
+function CompactFeatureRow({name,sub,cost,limited,lims,onAdjust,onRestore,border,onOpen,onDelete,ph,dkey,di,s}){
+  return (
+    <div className="fcr" data-dkey={dkey} data-di={di} {...(dkey?holdDragProps(dkey,di,s):{})} style={{borderLeftColor:border}} onClick={onOpen} title="Click to expand · press and hold to drag">
+      <button title="Open" style={{background:"transparent",border:"1px solid rgba(201,150,42,.4)",color:"rgba(201,150,42,.8)",cursor:"pointer",fontSize:16,fontWeight:700,padding:0,width:26,height:22,lineHeight:1,fontFamily:"'Cinzel',serif",borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={false} /></button>
       <span style={{fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:600,letterSpacing:.8,color:name?"var(--gold-l)":"rgba(232,213,176,.3)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",flex:"0 1 auto",minWidth:0}}>{name||ph||"Unnamed"}</span>
+      {limited&&lims&&lims.length>0&&onRestore&&(function(){var full=lims.every(function(l){return l.rem>=l.max;});
+        return <button title="Restore all uses" onClick={function(e){e.stopPropagation();if(!full) onRestore();}}
+          style={{cursor:"pointer",background:"transparent",border:"1px solid rgba(74,156,92,.35)",color:"rgba(74,156,92,.85)",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,lineHeight:1,padding:0,width:22,height:22,display:"inline-flex",alignItems:"center",justifyContent:"center",borderRadius:2,flexShrink:0,touchAction:"manipulation",opacity:full?.4:1}}>↻</button>;})()}
       {sub&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",color:"rgba(232,213,176,.4)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",flex:"1 1 0",minWidth:0}}>{sub}</span>}
       {!sub&&<span style={{flex:1}} />}
       {limited&&(lims&&lims.length>0?lims.map(function(l){
-        var bs={cursor:"pointer",background:"transparent",border:"none",color:"var(--ember)",fontFamily:"'Cinzel',serif",fontSize:13,lineHeight:1,padding:"0 4px"};
+        var bs=function(col,bd){return {cursor:"pointer",background:"transparent",border:"1px solid "+bd,color:col,fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,lineHeight:1,padding:0,width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,touchAction:"manipulation"};};
         return <span key={l.li} onClick={function(e){e.stopPropagation();}} title={(l.name?l.name+": ":"")+l.rem+" of "+l.max+" uses left"+(l.rc?" ("+(l.rc==="SR"?"short":"long")+" rest)":"")}
-          style={{display:"inline-flex",alignItems:"center",border:"1px solid rgba(201,74,42,.5)",background:"rgba(201,74,42,.12)",borderRadius:8,flexShrink:0,whiteSpace:"nowrap"}}>
-          <button style={bs} onClick={function(e){e.stopPropagation();onAdjust&&onAdjust(l.li,-1);}} title="Use one">−</button>
-          <span style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:.5,color:l.rem===0?"rgba(232,213,176,.4)":"var(--gold-l)",minWidth:26,textAlign:"center"}}>{l.rem}/{l.max}{l.rc?" "+l.rc:""}</span>
-          <button style={bs} onClick={function(e){e.stopPropagation();onAdjust&&onAdjust(l.li,1);}} title="Regain one">+</button>
+          style={{display:"inline-flex",alignItems:"center",gap:6,flexShrink:0,whiteSpace:"nowrap"}}>
+          <button style={bs("rgba(201,74,42,.7)","rgba(201,74,42,.3)")} onClick={function(e){e.stopPropagation();onAdjust&&onAdjust(l.li,-1);}} title="Use one">−</button>
+          <span style={{fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:700,letterSpacing:.5,color:l.max<=0?"rgba(232,213,176,.4)":l.rem>l.max*0.6?"#4a9c5c":l.rem>l.max*0.3?"#c9962a":"#c94a2a",minWidth:34,textAlign:"center"}}>{l.rem}/{l.max}{l.rc?" "+l.rc:""}</span>
+          <button style={bs("rgba(74,156,92,.7)","rgba(74,156,92,.3)")} onClick={function(e){e.stopPropagation();onAdjust&&onAdjust(l.li,1);}} title="Regain one">+</button>
         </span>;
       }):<span title="Limited (set max uses in the expanded card)" style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"var(--ember)",border:"1px solid rgba(201,74,42,.5)",padding:"1px 6px",borderRadius:8,flexShrink:0}}>Limited</span>)}
       {cost!=null&&<span title="Cost" style={{fontFamily:"'Cinzel',serif",fontSize:11,color:"var(--gold-l)",flexShrink:0,minWidth:14,textAlign:"right"}}>{cost===""?0:cost}</span>}
@@ -10711,20 +10975,81 @@ function useSpeciesHeritageSync(c,s){
   },[d,c.race,c.raceManual]);
 }
 
+// ─── Species filters (same + | ! syntax as the other compendiums) ─────────────
+const SPECIES_FILTER_EMPTY={name:"",trait:"",desc:"",costMin:"",costMax:""};
+function speciesFilterActive(f){return !!(f.name.trim()||f.trait.trim()||f.desc.trim()||(""+f.costMin).trim()||(""+f.costMax).trim());}
+function speciesFeatFilterActive(f){return !!(f.trait.trim()||f.desc.trim()||(""+f.costMin).trim()||(""+f.costMax).trim());}
+function filterSpecies(list,f){
+  // A species is listed when at least one of its traits matches the trait / description / cost
+  // filters; it is then shown with ALL of its traits (matching ones are flagged _hit).
+  var cmin=parseFloat(f.costMin),cmax=parseFloat(f.costMax),ff=speciesFeatFilterActive(f),out=[];
+  list.forEach(function(sp){
+    if(f.name.trim()&&!matchQuery(sp.name+" "+sp.groups.map(function(g){return g.label;}).join(" "),f.name)) return;
+    var any=false;
+    var groups=sp.groups.map(function(g){
+      return {label:g.label,feats:g.feats.map(function(ft){
+        var hit=ff&&matchQuery(ft.name,f.trait)&&matchQuery(ft.desc,f.desc)&&(isNaN(cmin)||ft.cost>=cmin)&&(isNaN(cmax)||ft.cost<=cmax);
+        if(hit) any=true;
+        return Object.assign({},ft,{_hit:hit});
+      })};
+    });
+    if(ff&&!any) return;
+    out.push(Object.assign({},sp,{groups:groups,_filtered:ff}));
+  });
+  return out.sort(function(a,b){return a.name.localeCompare(b.name);});
+}
+function SpeciesFilterBar({f,setF,inputStyle}){
+  const [help,setHelp]=React.useState(false);
+  const set=function(k,v){setF(Object.assign({},f,{[k]:v}));};
+  const active=speciesFilterActive(f);
+  const qhKey={fontFamily:"'Cinzel',serif",fontSize:15,fontWeight:700,color:"var(--arcane)",textAlign:"center"};
+  const qhEx={fontFamily:"monospace",fontSize:12,color:"var(--gold-l)",background:"rgba(0,0,0,.3)",padding:"1px 5px",borderRadius:2};
+  const num=Object.assign({},inputStyle,{width:64,flex:"0 0 auto"});
+  return (
+    <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:10,alignItems:"center",position:"relative"}}>
+      <input value={f.name} onChange={function(e){set("name",e.target.value);}} placeholder="Name contains..." style={Object.assign({},inputStyle,{flex:"1 1 180px",minWidth:140})} />
+      <input value={f.trait} onChange={function(e){set("trait",e.target.value);}} placeholder="Trait contains..." style={Object.assign({},inputStyle,{flex:"1 1 150px",minWidth:120})} />
+      <input value={f.desc} onChange={function(e){set("desc",e.target.value);}} placeholder="Description contains..." style={Object.assign({},inputStyle,{flex:"1 1 170px",minWidth:130})} />
+      <input value={f.costMin} onChange={function(e){set("costMin",e.target.value.replace(/[^\d.]/g,""));}} placeholder="Min pts" title="Minimum trait cost" style={num} />
+      <input value={f.costMax} onChange={function(e){set("costMax",e.target.value.replace(/[^\d.]/g,""));}} placeholder="Max pts" title="Maximum trait cost" style={num} />
+      <div onClick={function(){setHelp(!help);}} title="How to write complex search queries"
+        style={{flexShrink:0,width:24,height:24,borderRadius:"50%",border:"1px solid rgba(123,79,207,.5)",color:"var(--arcane)",background:help?"rgba(123,79,207,.2)":"rgba(123,79,207,.08)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'EB Garamond',serif",fontSize:14,fontWeight:700,userSelect:"none"}}>?</div>
+      <div onClick={function(){if(active)setF(SPECIES_FILTER_EMPTY);}} title="Clear all species filters"
+        style={{flexShrink:0,cursor:active?"pointer":"default",opacity:active?1:.4,fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",border:"1px solid rgba(201,74,42,.45)",color:"#e07060",background:"rgba(201,74,42,.1)",padding:"5px 10px",borderRadius:2,userSelect:"none",whiteSpace:"nowrap"}}>✕ Clear filters</div>
+      {help&&(
+        <div style={{position:"absolute",top:"100%",right:0,marginTop:6,zIndex:300,width:"min(420px,92vw)",background:"#1a1410",border:"1px solid rgba(123,79,207,.4)",borderRadius:3,padding:"14px 16px",boxShadow:"0 6px 28px rgba(0,0,0,.6)"}}>
+          <div style={{display:"flex",alignItems:"baseline",justifyContent:"space-between",marginBottom:8}}>
+            <span style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1.5,textTransform:"uppercase",color:"var(--arcane)"}}>Search Syntax</span>
+            <span onClick={function(){setHelp(false);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(232,213,176,.4)"}}>close ✕</span>
+          </div>
+          <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.8)",lineHeight:1.7}}>
+            The Name, Trait and Description boxes understand these operators (plain words match as “contains”, case-insensitive):
+            <div style={{marginTop:8,display:"grid",gridTemplateColumns:"auto 1fr",gap:"4px 12px",alignItems:"baseline"}}>
+              <span style={qhKey}>+</span><span><b>AND</b> — both terms must appear. <span style={qhEx}>fire+resistance</span></span>
+              <span style={qhKey}>|</span><span><b>OR</b> — either term may appear. <span style={qhEx}>darkvision|flight</span></span>
+              <span style={qhKey}>!</span><span><b>NOT</b> — term must <i>not</i> appear. <span style={qhEx}>!poison</span></span>
+            </div>
+            <div style={{marginTop:10}}><b>+</b> binds tighter than <b>|</b>, so <span style={qhEx}>a+b|c</span> means <i>(a and b) or c</i>.</div>
+            <div style={{marginTop:10,paddingTop:10,borderTop:"1px solid rgba(123,79,207,.18)"}}>
+              Trait / Description / Min–Max pts list every species that has a matching trait, with all of its traits; the matching traits are highlighted. <b>Name</b> matches the species or any of its subspecies.
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SpeciesPanel({c,s}){
   useSpeciesHeritageSync(c,s);
   const cache=useSpeciesCompendium();
-  const [q,setQ]=React.useState("");
+  const [fl,setFl]=React.useState(SPECIES_FILTER_EMPTY);
   const [open,setOpen]=React.useState({});
   const [openF,setOpenF]=React.useState({});
   const inputStyle={background:"rgba(0,0,0,.35)",border:"1px solid rgba(201,150,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"6px 10px",outline:"none",borderRadius:2};
   const list=(cache.status==="ready"&&cache.data)?Object.values(cache.data):[];
-  const nq=q.trim().toLowerCase();
-  const shown=list.filter(function(sp){
-    if(!nq) return true;
-    if(sp.name.toLowerCase().indexOf(nq)>=0) return true;
-    return sp.groups.some(function(g){return g.label.toLowerCase().indexOf(nq)>=0||g.feats.some(function(f){return f.name.toLowerCase().indexOf(nq)>=0||f.desc.toLowerCase().indexOf(nq)>=0;});});
-  }).sort(function(a,b){return a.name.localeCompare(b.name);});
+  const nq=fl.name.trim();
+  const shown=filterSpecies(list,fl);
   const cur=c.spec||[];
   function addFeats(sp,g,feats){
     var next=cur.slice();
@@ -10742,21 +11067,26 @@ function SpeciesPanel({c,s}){
   const small={fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",borderRadius:2,cursor:"pointer",userSelect:"none",whiteSpace:"nowrap"};
   return (
     <div>
+      <SpeciesFilterBar f={fl} setF={setFl} inputStyle={inputStyle} />
       <div style={{display:"flex",gap:8,marginBottom:10,alignItems:"center",flexWrap:"wrap"}}>
-        <input value={q} onChange={function(e){setQ(e.target.value);}} placeholder="Species, subspecies or trait contains..." style={Object.assign({},inputStyle,{flex:"1 1 220px",minWidth:160})} />
+                <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.4)"}}>{shown.length} species ·</span>
         <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.4)"}}>
           Chosen: <span style={{color:(cur.length&&(speciesTotalCost(cur)<SPECIES_COST_MIN||speciesTotalCost(cur)>SPECIES_COST_MAX))?"var(--ember)":"var(--gold-l)"}}>{speciesTotalCost(cur)}</span> pts · target {SPECIES_COST_MIN}–{SPECIES_COST_MAX}
         </span>
       </div>
+      <div style={{position:"relative"}}>
+      {shown.length>0&&<SectionRail accent="201,150,42" label="Species" inset="none"
+        onExpand={function(){var o={},of={};shown.forEach(function(sp){o[sp.key]=true;sp.groups.forEach(function(g){g.feats.forEach(function(f){of[sp.key+"|"+g.label+"|"+f.name]=true;});});});setOpen(o);setOpenF(of);}}
+        onCollapse={function(){var o={};shown.forEach(function(sp){o[sp.key]=false;});setOpen(o);setOpenF({});}} />}
       {shown.length===0&&<div style={{padding:"20px",textAlign:"center",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.3)"}}>
         {cache.status==="loading"?"Loading species…":cache.status==="error"?"Species file unavailable — add races.md to the repo.":"No matches."}
       </div>}
       {shown.map(function(sp){
-        var isOpen=!!open[sp.key]||!!nq&&sp.groups.length<4&&nq.length>2;
+        var isOpen=open[sp.key]!==undefined?!!open[sp.key]:(sp._filtered||(nq.length>2&&sp.groups.length<4));
         var multi=sp.groups.length>1;
         return (
           <div key={sp.key} className="fc" style={{borderLeftColor:"var(--gold)",padding:"10px 14px"}}>
-            <div onClick={function(){var o=Object.assign({},open);o[sp.key]=!open[sp.key];setOpen(o);}} style={{display:"flex",alignItems:"center",gap:10,cursor:"pointer"}}>
+            <div onClick={function(){var o=Object.assign({},open);o[sp.key]=!isOpen;setOpen(o);}} style={{display:"flex",alignItems:"center",gap:10,cursor:"pointer"}}>
               <span style={{fontFamily:"'Cinzel',serif",fontSize:14,letterSpacing:1,color:"var(--gold-l)",fontWeight:600,flex:1}}>{sp.name}</span>
               {multi&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:"rgba(232,213,176,.4)"}}>{sp.groups.length-1} subspecies</span>}
               <span style={{fontFamily:"'Cinzel',serif",fontSize:13,color:"rgba(201,150,42,.7)"}}>{isOpen?"▾":"▸"}</span>
@@ -10782,7 +11112,7 @@ function SpeciesPanel({c,s}){
                         var has=speciesHas(cur,sp.name,g.label,f.name);
                         var fo=!!openF[fk];
                         return (
-                          <div key={fk} style={{padding:"4px 0",borderBottom:"1px dashed rgba(201,150,42,.08)"}}>
+                          <div key={fk} style={{padding:"4px 0",borderBottom:"1px dashed rgba(201,150,42,.08)",background:f._hit?"rgba(201,150,42,.1)":undefined,boxShadow:f._hit?"inset 2px 0 0 var(--gold)":undefined,paddingLeft:f._hit?6:0}}>
                             <div style={{display:"flex",alignItems:"center",gap:8}}>
                               <span onClick={function(){var o=Object.assign({},openF);o[fk]=!fo;setOpenF(o);}} style={{cursor:"pointer",flex:1,fontFamily:"'Cinzel',serif",fontSize:12,letterSpacing:.5,color:"var(--parch)"}}>
                                 <span style={{color:"rgba(201,150,42,.6)",marginRight:6}}>{fo?"▾":"▸"}</span>{f.name}
@@ -10806,6 +11136,7 @@ function SpeciesPanel({c,s}){
           </div>
         );
       })}
+      </div>
     </div>
   );
 }
@@ -10836,11 +11167,12 @@ function SpeciesFeaturesSection({c,s,q}){
           if(sq&&![f.nm,f.ds,f.sp,f.grp].some(function(v){return typeof v==="string"&&v.toLowerCase().indexOf(sq)>=0;})) return null;
           const key="spec-"+i;
           const dsOpen=(c.dsOpen&&c.dsOpen[key])!==false;
-          if(!dsOpen) return <CompactFeatureRow key={i} name={f.nm} sub={speciesSourceText(f)} limited={!!f.limited} lims={limitStates(f,c)} onAdjust={function(li,d){upd(i,"limits",adjustLimits(f,li,d,c));}} cost={f.cost==null?"":f.cost} border="rgba(201,150,42,.5)" ph="Unnamed feature"
+          if(!dsOpen) return <CompactFeatureRow key={i} name={f.nm} sub={speciesSourceText(f)} limited={!!f.limited} lims={limitStates(f,c)} onAdjust={function(li,d){upd(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){upd(i,"limits",(f.limits||[]).map(function(l){return {...l,exp:"0"};}));}} cost={f.cost==null?"":f.cost} border="rgba(201,150,42,.5)" dkey="spec" di={i} s={s} ph="Unnamed feature"
             onOpen={function(){s("dsOpen",Object.assign({},c.dsOpen||{},{[key]:true}));}} onDelete={function(){window.__confirm("Delete this species feature?",function(){s("spec",list.filter(function(_,j){return j!==i;}));});}} />;
           return (
-            <div key={i} style={{background:"rgba(0,0,0,.22)",border:"1px solid rgba(201,150,42,.12)",borderLeft:"2px solid rgba(201,150,42,.5)",padding:"8px 10px",gridColumn:wideFeature(f)?"1 / -1":undefined}}>
+            <div key={i} data-dkey="spec" data-di={i} style={{background:"rgba(0,0,0,.22)",border:"1px solid rgba(201,150,42,.12)",borderLeft:"2px solid rgba(201,150,42,.5)",padding:"8px 10px",gridColumn:wideFeature(f)?"1 / -1":undefined}}>
               <div style={{display:"flex",gap:8,alignItems:"flex-end"}}>
+                  <button onClick={function(){var nd=Object.assign({},c.dsOpen||{});nd[key]=!dsOpen;s("dsOpen",nd);}} title="Close" style={{background:"rgba(201,150,42,.12)",border:"1px solid rgba(201,150,42,.45)",color:"var(--gold-l)",cursor:"pointer",fontSize:16,fontWeight:700,padding:0,width:26,height:22,lineHeight:1,fontFamily:"'Cinzel',serif",borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,alignSelf:"center",touchAction:"manipulation"}}><Chev open /></button>
                 <div style={{flex:1}}>
                   <input type="text" value={f.nm||""} onChange={function(e){upd(i,"nm",e.target.value);}} placeholder="Feature name..."
                     style={{marginBottom:0,width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.2)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:600,letterSpacing:1,outline:"none",padding:"2px 0 4px"}} />
@@ -10852,7 +11184,6 @@ function SpeciesFeaturesSection({c,s,q}){
                   <input type="text" inputMode="decimal" value={f.cost==null?"":f.cost} onChange={function(e){upd(i,"cost",e.target.value);}} placeholder="0"
                     style={{width:40,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.25)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:13,textAlign:"center",outline:"none",padding:"2px 0 4px"}} />
                 </div>
-                <div onClick={function(){var nd=Object.assign({},c.dsOpen||{});nd[key]=!dsOpen;s("dsOpen",nd);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,color:dsOpen?"rgba(201,150,42,.7)":"rgba(232,213,176,.25)",flexShrink:0,userSelect:"none",marginBottom:4}} title="Collapse this feature"><span style={{border:"1px solid rgba(201,150,42,.4)",padding:"2px 7px",borderRadius:2,fontSize:9,letterSpacing:1,textTransform:"uppercase",whiteSpace:"nowrap"}}>▴ Close</span></div>
                 <button onClick={function(){upd(i,"limited",!f.limited);}} title="Toggle limited use tracking"
                   style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",padding:"3px 7px",flexShrink:0,cursor:"pointer",transition:"all .2s",marginBottom:2,background:f.limited?"rgba(201,74,42,.2)":"transparent",border:"1px solid "+(f.limited?"rgba(201,74,42,.6)":"rgba(201,150,42,.2)"),color:f.limited?"var(--ember)":"rgba(232,213,176,.3)"}}>{f.limited?"Limited":"+ Limit"}</button>
                 <button className="db" onClick={function(){window.__confirm("Delete this species feature?",function(){s("spec",list.filter(function(_,j){return j!==i;}));});}}>x</button>
@@ -11293,7 +11624,7 @@ function CompendiumPage({c,s}){
         <input value={descQuery} onChange={function(e){setDescQuery(e.target.value);}} placeholder="Description contains..." style={Object.assign({},inputStyle,{flex:"1 1 160px",minWidth:140})} />
         <div onClick={function(){setShowQueryHelp(function(v){return !v;});}}
           title="How to write complex search queries"
-          style={{flexShrink:0,width:24,height:24,borderRadius:"50%",border:"1px solid rgba(123,79,207,.5)",color:"var(--arcane)",background:showQueryHelp?"rgba(123,79,207,.2)":"rgba(123,79,207,.08)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'EB Garamond',serif",fontSize:14,fontStyle:"italic",fontWeight:700,userSelect:"none"}}>i</div>
+          style={{flexShrink:0,width:24,height:24,borderRadius:"50%",border:"1px solid rgba(123,79,207,.5)",color:"var(--arcane)",background:showQueryHelp?"rgba(123,79,207,.2)":"rgba(123,79,207,.08)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'EB Garamond',serif",fontSize:14,fontWeight:700,userSelect:"none"}}>?</div>
         <div onClick={function(){if(hasActiveFilters)clearFilters();}}
           title="Clear this list's filters and search"
           style={{flexShrink:0,cursor:hasActiveFilters?"pointer":"default",opacity:hasActiveFilters?1:.4,
@@ -12988,6 +13319,8 @@ function ConfirmModal({message,onYes,onNo,confirmLabel}){
 function App(){
   const [pg,setPg]=useState(0);
   const [c,setC]=useState(init());
+  const [,setSortTick]=useState(0);
+  window.__forceRender=function(){setSortTick(function(x){return x+1;});};
   const s=(k,v)=>setC(function(prev){const next={...prev,[k]:typeof v==="function"?v(prev[k]):v};if(window.__characterAutoSave)setTimeout(function(){window.__characterAutoSave(next);},100);return next;});
   const [hiddenTabs,setHiddenTabs]=useState(function(){try{var h=JSON.parse(localStorage.getItem('_ht'));return Array.isArray(h)?h:[];}catch(e){return [];}});
   const [showTabMgr,setShowTabMgr]=useState(false);
@@ -13174,7 +13507,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.16.1</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.21.3</div>
 
 </script>
 </body>
