@@ -571,7 +571,10 @@ const CSS = `
   .itbl tr[data-dsrc] input,.itbl tr[data-dsrc] textarea{-webkit-user-select:text;user-select:text}
   .dnd-src{opacity:.35}
   .dnd-over{outline:2px dashed var(--gold-l);outline-offset:-2px}
-  .fcr{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.25);border:1px solid rgba(201,150,42,.15);border-left:3px solid var(--arcane);padding:5px 10px;cursor:pointer;transition:background .15s}
+  .fcr{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.25);border:1px solid rgba(201,150,42,.15);border-left:3px solid var(--arcane);padding:5px 10px;cursor:pointer;transition:background .15s;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+  .fcr>*{flex-shrink:0}
+  .fcr::-webkit-scrollbar{height:3px}
+  .fcr::-webkit-scrollbar-thumb{background:rgba(201,150,42,.35);border-radius:2px}
   .fcr:hover{background:rgba(201,150,42,.07)}
   .fc{background:rgba(0,0,0,.25);border:1px solid rgba(201,150,42,.15);border-left:3px solid var(--arcane);padding:12px 14px;margin-bottom:10px;transition:border-color .2s}
   .fc:hover{border-left-color:var(--arcane-l)}
@@ -1901,7 +1904,7 @@ function Page1({c,s}){
         <span onClick={function(){setCondRef(true);}} title="Condition reference (PHB 2024)"
           style={{cursor:"pointer",width:15,height:15,borderRadius:"50%",border:"1px solid rgba(56,178,172,.45)",color:"rgba(56,178,172,.8)",fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",display:"inline-flex",alignItems:"center",justifyContent:"center",userSelect:"none",background:"rgba(56,178,172,.08)",lineHeight:1,alignSelf:"center"}}>i</span>
       </div>
-      {condRef&&<ConditionReferenceModal onClose={function(){setCondRef(false);}} />}
+      {condRef&&ReactDOM.createPortal(<ConditionReferenceModal onClose={function(){setCondRef(false);}} />,document.body)}
       {(function(){
         const TYPES=[
           {id:"acid",label:"Acid",col:"rgba(130,200,60,.9)"},
@@ -2195,7 +2198,7 @@ function Page1({c,s}){
         <span onClick={function(){setWpnRef(true);}} title="Weapons &amp; Armor reference (PHB 2024)"
           style={{cursor:"pointer",width:15,height:15,borderRadius:"50%",border:"1px solid rgba(201,74,42,.45)",color:"rgba(201,74,42,.8)",fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",display:"inline-flex",alignItems:"center",justifyContent:"center",userSelect:"none",background:"rgba(201,74,42,.08)",lineHeight:1,alignSelf:"center"}}>i</span>
         <span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.3)",fontStyle:"italic",letterSpacing:0,textTransform:"none",fontWeight:"normal"}}>rolls appear in the Dice Roller tab</span></div>
-      {wpnRef&&<WeaponReferenceModal onClose={function(){setWpnRef(false);}} />}
+      {wpnRef&&ReactDOM.createPortal(<WeaponReferenceModal onClose={function(){setWpnRef(false);}} />,document.body)}
       <div className="stbl-wrap"><table className="itbl" style={{minWidth:520}}>
         <thead><tr>
           <SortableTh label="Name" col="nm" sort={wpnSort} onSort={onWpnSort} style={{width:"20%"}} />
@@ -4369,12 +4372,12 @@ function ToolReferenceModal({onClose}){
   function toggle(n){setOpen(function(e){var x=Object.assign({},e);x[n]=!x[n];return x;});}
   var list=TOOL_DATA.filter(function(t){return !q.trim()||t.n.toLowerCase().indexOf(q.toLowerCase())>=0;});
   return (
-    <div onClick={onClose} style={{position:"fixed",inset:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
-      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,maxWidth:560,width:"100%",maxHeight:"82vh",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+    <div onClick={onClose} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:12,boxSizing:"border-box"}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,maxWidth:560,width:"100%",maxHeight:"100%",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
         <div style={{padding:"18px 22px 10px",borderBottom:"1px solid rgba(201,150,42,.15)"}}>
           <div style={{display:"flex",alignItems:"center",gap:10}}>
             <span style={{fontFamily:"'Cinzel',serif",fontSize:14,letterSpacing:1,color:"var(--gold-l)",flex:1}}>Tool Proficiencies</span>
-            <div onClick={onClose} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:16,color:"rgba(232,213,176,.5)",lineHeight:1,padding:"0 4px"}}>×</div>
+            <div onClick={onClose} title="Close" style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:24,color:"rgba(232,213,176,.7)",lineHeight:1,padding:"6px 12px",margin:"-6px -8px -6px 0",flexShrink:0}}>×</div>
           </div>
           <input value={q} onChange={function(e){setQ(e.target.value);}} placeholder="Filter tools..." style={{marginTop:10,width:"100%",background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,150,42,.2)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"6px 8px",borderRadius:2}} />
         </div>
@@ -4598,12 +4601,12 @@ function LanguageReferenceModal({onClose}){
   const thS={fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(123,160,201,.8)",textAlign:"left",padding:"4px 8px",borderBottom:"1px solid rgba(123,160,201,.25)"};
   const tdS={fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.85)",padding:"4px 8px",borderBottom:"1px solid rgba(123,160,201,.08)",verticalAlign:"top"};
   return (
-    <div onClick={onClose} style={{position:"fixed",inset:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
-      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(123,160,201,.4)",borderRadius:4,maxWidth:620,width:"100%",maxHeight:"84vh",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.7)"}}>
+    <div onClick={onClose} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:12,boxSizing:"border-box"}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(123,160,201,.4)",borderRadius:4,maxWidth:620,width:"100%",maxHeight:"100%",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.7)"}}>
         <div style={{padding:"18px 22px 10px",borderBottom:"1px solid rgba(123,160,201,.2)"}}>
           <div style={{display:"flex",alignItems:"center",gap:10}}>
             <span style={{fontFamily:"'Cinzel',serif",fontSize:14,letterSpacing:1,color:"#9fc0e0",flex:1}}>Languages Reference</span>
-            <div onClick={onClose} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:16,color:"rgba(232,213,176,.5)",lineHeight:1,padding:"0 4px"}}>×</div>
+            <div onClick={onClose} title="Close" style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:24,color:"rgba(232,213,176,.7)",lineHeight:1,padding:"6px 12px",margin:"-6px -8px -6px 0",flexShrink:0}}>×</div>
           </div>
           <input value={q} onChange={function(e){setQ(e.target.value);}} placeholder="Filter languages..." style={{marginTop:10,width:"100%",boxSizing:"border-box",background:"rgba(0,0,0,.3)",border:"1px solid rgba(123,160,201,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,padding:"5px 9px",outline:"none"}} />
         </div>
@@ -4658,12 +4661,12 @@ function ProficiencyPicker({kind,value,onSave,onClose}){
   }
   const chips=profChips(kind,d);
   return (
-    <div onClick={onClose} style={{position:"fixed",inset:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
-      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba("+col+",.4)",borderRadius:4,maxWidth:640,width:"100%",maxHeight:"86vh",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.7)"}}>
+    <div onClick={onClose} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:12,boxSizing:"border-box"}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba("+col+",.4)",borderRadius:4,maxWidth:640,width:"100%",maxHeight:"100%",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.7)"}}>
         <div style={{padding:"16px 22px 10px",borderBottom:"1px solid rgba("+col+",.2)"}}>
           <div style={{display:"flex",alignItems:"center",gap:10}}>
             <span style={{fontFamily:"'Cinzel',serif",fontSize:14,letterSpacing:1,color:isArmor?"#e07060":isLang?"#9fc0e0":"var(--gold-l)",flex:1}}>{isArmor?"Armor & Weapon Proficiencies":isLang?"Languages":"Tool Proficiencies"}</span>
-            <div onClick={onClose} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:16,color:"rgba(232,213,176,.5)",lineHeight:1,padding:"0 4px"}}>×</div>
+            <div onClick={onClose} title="Close" style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:24,color:"rgba(232,213,176,.7)",lineHeight:1,padding:"6px 12px",margin:"-6px -8px -6px 0",flexShrink:0}}>×</div>
           </div>
           <input value={q} onChange={function(e){setQ(e.target.value);}} placeholder={isArmor?"Filter weapons...":isLang?"Filter languages...":"Filter tools..."} style={{marginTop:10,width:"100%",boxSizing:"border-box",background:"rgba(0,0,0,.3)",border:"1px solid rgba("+col+",.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,padding:"5px 9px",outline:"none"}} />
         </div>
@@ -4744,12 +4747,12 @@ function WeaponReferenceModal({onClose}){
   function tdStyle(){return {fontFamily:"'EB Garamond',serif",fontSize:12.5,color:"rgba(232,213,176,.85)",padding:"4px 8px",borderBottom:"1px solid rgba(201,74,42,.06)",verticalAlign:"top"};}
   var tabBtn=function(k,lbl){return <span onClick={function(){setTab(k);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",padding:"4px 10px",borderRadius:2,userSelect:"none",border:"1px solid "+(tab===k?"rgba(201,74,42,.6)":"rgba(201,74,42,.2)"),color:tab===k?"#e07060":"rgba(232,213,176,.45)",background:tab===k?"rgba(201,74,42,.12)":"transparent"}}>{lbl}</span>;};
   return (
-    <div onClick={onClose} style={{position:"fixed",inset:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
-      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,74,42,.4)",borderRadius:4,maxWidth:720,width:"100%",maxHeight:"86vh",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+    <div onClick={onClose} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:12,boxSizing:"border-box"}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,74,42,.4)",borderRadius:4,maxWidth:720,width:"100%",maxHeight:"100%",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
         <div style={{padding:"18px 22px 10px",borderBottom:"1px solid rgba(201,74,42,.15)"}}>
           <div style={{display:"flex",alignItems:"center",gap:10}}>
             <span style={{fontFamily:"'Cinzel',serif",fontSize:14,letterSpacing:1,color:"#e07060",flex:1}}>Weapons &amp; Armor Reference</span>
-            <div onClick={onClose} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:16,color:"rgba(232,213,176,.5)",lineHeight:1,padding:"0 4px"}}>×</div>
+            <div onClick={onClose} title="Close" style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:24,color:"rgba(232,213,176,.7)",lineHeight:1,padding:"6px 12px",margin:"-6px -8px -6px 0",flexShrink:0}}>×</div>
           </div>
           <div style={{display:"flex",gap:6,marginTop:10,flexWrap:"wrap"}}>{tabBtn("weapons","Weapons")}{tabBtn("armor","Armor")}{tabBtn("properties","Properties")}{tabBtn("mastery","Mastery")}{tabBtn("ammo","Ammunition")}</div>
           {tab==="weapons"&&<input value={q} onChange={function(e){setQ(e.target.value);}} placeholder="Filter weapons..." style={{marginTop:10,width:"100%",background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,74,42,.2)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"6px 8px",borderRadius:2}} />}
@@ -4829,12 +4832,12 @@ function ConditionReferenceModal({onClose}){
   function toggle(n){setOpen(function(e){var x=Object.assign({},e);x[n]=!x[n];return x;});}
   var list=CONDITION_DATA.filter(function(t){return !q.trim()||t.n.toLowerCase().indexOf(q.toLowerCase())>=0;});
   return (
-    <div onClick={onClose} style={{position:"fixed",inset:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
-      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(56,178,172,.4)",borderRadius:4,maxWidth:560,width:"100%",maxHeight:"82vh",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+    <div onClick={onClose} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:12,boxSizing:"border-box"}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(56,178,172,.4)",borderRadius:4,maxWidth:560,width:"100%",maxHeight:"100%",display:"flex",flexDirection:"column",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
         <div style={{padding:"18px 22px 10px",borderBottom:"1px solid rgba(56,178,172,.15)"}}>
           <div style={{display:"flex",alignItems:"center",gap:10}}>
             <span style={{fontFamily:"'Cinzel',serif",fontSize:14,letterSpacing:1,color:"rgba(56,178,172,.9)",flex:1}}>Conditions (PHB 2024)</span>
-            <div onClick={onClose} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:16,color:"rgba(232,213,176,.5)",lineHeight:1,padding:"0 4px"}}>×</div>
+            <div onClick={onClose} title="Close" style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:24,color:"rgba(232,213,176,.7)",lineHeight:1,padding:"6px 12px",margin:"-6px -8px -6px 0",flexShrink:0}}>×</div>
           </div>
           <input value={q} onChange={function(e){setQ(e.target.value);}} placeholder="Filter conditions..." style={{marginTop:10,width:"100%",background:"rgba(0,0,0,.3)",border:"1px solid rgba(56,178,172,.2)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"6px 8px",borderRadius:2}} />
         </div>
@@ -5068,9 +5071,9 @@ function Page3({c,s}){
         info={<span onClick={function(e){e.stopPropagation();setLangRef(true);}} title="Languages reference (PHB 2024)"
           style={{cursor:"pointer",width:15,height:15,borderRadius:"50%",border:"1px solid rgba(123,160,201,.5)",color:"rgba(159,192,224,.85)",fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",display:"inline-flex",alignItems:"center",justifyContent:"center",userSelect:"none"}}>i</span>} />
       </React.Fragment>}
-      {langRef&&<LanguageReferenceModal onClose={function(){setLangRef(false);}} />}
-      {toolRef&&<ToolReferenceModal onClose={function(){setToolRef(false);}} />}
-      {wpnRef&&<WeaponReferenceModal onClose={function(){setWpnRef(false);}} />}
+      {langRef&&ReactDOM.createPortal(<LanguageReferenceModal onClose={function(){setLangRef(false);}} />,document.body)}
+      {toolRef&&ReactDOM.createPortal(<ToolReferenceModal onClose={function(){setToolRef(false);}} />,document.body)}
+      {wpnRef&&ReactDOM.createPortal(<WeaponReferenceModal onClose={function(){setWpnRef(false);}} />,document.body)}
     </div>
   );
 }
@@ -10907,12 +10910,12 @@ function CompactFeatureRow({name,sub,cost,limited,lims,onAdjust,onRestore,border
   return (
     <div className="fcr" data-dkey={dkey} data-di={di} {...(dkey?holdDragProps(dkey,di,s):{})} style={{borderLeftColor:border}} onClick={onOpen} title="Click to expand · press and hold to drag">
       <button title="Open" style={{background:"transparent",border:"1px solid rgba(201,150,42,.4)",color:"rgba(201,150,42,.8)",cursor:"pointer",fontSize:16,fontWeight:700,padding:0,width:26,height:22,lineHeight:1,fontFamily:"'Cinzel',serif",borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={false} /></button>
-      <span style={{fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:600,letterSpacing:.8,color:name?"var(--gold-l)":"rgba(232,213,176,.3)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",flex:"0 1 auto",minWidth:0}}>{name||ph||"Unnamed"}</span>
+      <span style={{fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:600,letterSpacing:.8,color:name?"var(--gold-l)":"rgba(232,213,176,.3)",whiteSpace:"nowrap",flex:"0 0 auto"}}>{name||ph||"Unnamed"}</span>
       {limited&&lims&&lims.length>0&&onRestore&&(function(){var full=lims.every(function(l){return l.rem>=l.max;});
         return <button title="Restore all uses" onClick={function(e){e.stopPropagation();if(!full) onRestore();}}
           style={{cursor:"pointer",background:"transparent",border:"1px solid rgba(74,156,92,.35)",color:"rgba(74,156,92,.85)",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,lineHeight:1,padding:0,width:22,height:22,display:"inline-flex",alignItems:"center",justifyContent:"center",borderRadius:2,flexShrink:0,touchAction:"manipulation",opacity:full?.4:1}}>↻</button>;})()}
-      {sub&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",color:"rgba(232,213,176,.4)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",flex:"1 1 0",minWidth:0}}>{sub}</span>}
-      {!sub&&<span style={{flex:1}} />}
+      {sub&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",color:"rgba(232,213,176,.4)",whiteSpace:"nowrap",flex:"1 0 auto"}}>{sub}</span>}
+      {!sub&&<span style={{flex:"1 0 8px"}} />}
       {limited&&(lims&&lims.length>0?lims.map(function(l){
         var bs=function(col,bd){return {cursor:"pointer",background:"transparent",border:"1px solid "+bd,color:col,fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,lineHeight:1,padding:0,width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,touchAction:"manipulation"};};
         return <span key={l.li} onClick={function(e){e.stopPropagation();}} title={(l.name?l.name+": ":"")+l.rem+" of "+l.max+" uses left"+(l.rc?" ("+(l.rc==="SR"?"short":"long")+" rest)":"")}
@@ -13507,7 +13510,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.21.3</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.21.5</div>
 
 </script>
 </body>
