@@ -616,9 +616,9 @@ In a concentrated-magic zone, green things grow faster than anything can eat the
 ### Actions
 ***Multiattack.*** The Bloom makes two Thorned Vine attacks.
 
-***Thorned Vine.*** *Melee Attack Roll:* +7, reach 15 ft. *Hit:* 14 (2d8 + 5) Piercing damage, and the target has the Grappled condition (escape DC 15).
+***Thorned Vine.*** *Melee Attack Roll:* +7, reach 15 ft. *Hit:* 14 (2d8 + 5) Piercing damage, and the target has the Grappled condition (escape DC 15). The Bloom can grapple up to 6 creatures at once.
 
-***Root Surge (Recharge 5–6).*** Roots erupt in a 10-foot-radius area centered on a point the Bloom can sense within 60 feet. Each creature in that area must succeed on a DC 15 Dexterity saving throw or take 13 (3d8) Piercing damage and have the Restrained condition (escape DC 15).
+***Root Surge (Recharge 5–6).*** Roots erupt in a 10-foot-radius area centered on a point the Bloom can sense within 60 feet. Each creature in that area must succeed on a DC 15 Dexterity saving throw or take 13 (3d8) Piercing damage and have the Restrained condition until the end of the Bloom's next turn.
 
 }}
 
