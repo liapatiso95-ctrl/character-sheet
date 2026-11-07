@@ -4601,26 +4601,35 @@ function _wpnNames(prefix){
   var out=[];Object.keys(WEAPON_DATA).forEach(function(cat){if(cat.indexOf(prefix)===0)WEAPON_DATA[cat].forEach(function(w){out.push(w.n);});});return out;
 }
 function _toolIsArtisan(t){return /^Artisan/i.test(t.d||"");}
+function _pm(p,n){var m=(p&&p.meta&&p.meta[n])||{};return {src:(m.src||"").trim(),fl:!!m.fl};}
+// A floating proficiency reads "Name (Source)"; a permanent one only keeps its source for the picker / tooltip.
+function _pt(n,m){return m.fl&&m.src?n+" ("+m.src+")":n;}
+function _ptip(m){return m.src?"Source: "+m.src+(m.fl?" · floating":" · permanent"):(m.fl?"Floating":"");}
+// Shared source/floating of a group of items, or null when they differ.
+function _pgrp(p,names){var ms=names.map(function(n){return _pm(p,n);});var f=ms[0];return ms.every(function(m){return m.fl===f.fl&&m.src===f.src;})?f:null;}
+function _pchip(p,n,k,label){var m=_pm(p,n);return {t:_pt(label||n,m),k:k,tip:_ptip(m)};}
 function profChips(kind,p){
   p=p||{};var chips=[];
   if(kind==="armor"){
-    PROF_ARMOR_LIST.forEach(function(a){if(p.armor&&p.armor[a]) chips.push({t:a,k:"armor"});});
+    PROF_ARMOR_LIST.forEach(function(a){if(p.armor&&p.armor[a]) chips.push(_pchip(p,a,"armor"));});
     ["Simple","Martial"].forEach(function(grp){
       var names=_wpnNames(grp),w=p.weapons||{};
-      if(names.every(function(n){return w[n];})) chips.push({t:grp+" Weapons",k:"wpn"});
-      else names.forEach(function(n){if(w[n]) chips.push({t:n,k:"wpn"});});
+      var g=names.every(function(n){return w[n];})?_pgrp(p,names):null;
+      if(g) chips.push({t:_pt(grp+" Weapons",g),k:"wpn",tip:_ptip(g)});
+      else names.forEach(function(n){if(w[n]) chips.push(_pchip(p,n,"wpn"));});
     });
   } else if(kind==="lang"){
     var ll=p.langs||{};
-    Object.keys(LANG_DATA).forEach(function(cat){LANG_DATA[cat].forEach(function(l){if(ll[l.n]) chips.push({t:l.n,k:"lang"});});});
+    Object.keys(LANG_DATA).forEach(function(cat){LANG_DATA[cat].forEach(function(l){if(ll[l.n]) chips.push(_pchip(p,l.n,"lang"));});});
   } else {
     var tl=p.tools||{};
     var art=TOOL_DATA.filter(_toolIsArtisan).map(function(t){return t.n;});
-    if(art.length&&art.every(function(n){return tl[n];})) chips.push({t:"Artisan's Tools",k:"tool"});
-    else art.forEach(function(n){if(tl[n]) chips.push({t:n,k:"tool"});});
-    TOOL_DATA.forEach(function(t){if(!_toolIsArtisan(t)&&tl[t.n]) chips.push({t:t.n,k:"tool"});});
+    var ga=(art.length&&art.every(function(n){return tl[n];}))?_pgrp(p,art):null;
+    if(ga) chips.push({t:_pt("Artisan's Tools",ga),k:"tool",tip:_ptip(ga)});
+    else art.forEach(function(n){if(tl[n]) chips.push(_pchip(p,n,"tool"));});
+    TOOL_DATA.forEach(function(t){if(!_toolIsArtisan(t)&&tl[t.n]) chips.push(_pchip(p,t.n,"tool"));});
   }
-  (p.custom||[]).forEach(function(cu){if((cu||"").trim()) chips.push({t:cu,k:"custom"});});
+  (p.custom||[]).forEach(function(cu){if((cu||"").trim()) chips.push(_pchip(p,cu,"custom"));});
   return chips;
 }
 
@@ -4705,10 +4714,11 @@ function ProficiencyPicker({kind,value,onSave,onClose}){
   const [cu,setCu]=us("");
   const [q,setQ]=us("");
   const ql=q.trim().toLowerCase();
-  const set=function(sec,name,on){setD(function(p){var n=Object.assign({},p);n[sec]=Object.assign({},n[sec]);if(on)n[sec][name]=true;else delete n[sec][name];return n;});};
-  const setMany=function(sec,names,on){setD(function(p){var n=Object.assign({},p);n[sec]=Object.assign({},n[sec]);names.forEach(function(x){if(on)n[sec][x]=true;else delete n[sec][x];});return n;});};
+  const set=function(sec,name,on){setD(function(p){var n=Object.assign({},p);n[sec]=Object.assign({},n[sec]);n.meta=Object.assign({},n.meta);if(on)n[sec][name]=true;else{delete n[sec][name];delete n.meta[name];}return n;});};
+  const setMeta=function(names,patch){setD(function(p){var n=Object.assign({},p);n.meta=Object.assign({},n.meta);names.forEach(function(x){n.meta[x]=Object.assign({},n.meta[x],patch);});return n;});};
+  const setMany=function(sec,names,on){setD(function(p){var n=Object.assign({},p);n[sec]=Object.assign({},n[sec]);n.meta=Object.assign({},n.meta);names.forEach(function(x){if(on)n[sec][x]=true;else{delete n[sec][x];delete n.meta[x];}});return n;});};
   const addCustom=function(){var v=cu.trim();if(!v) return;setD(function(p){var l=(p.custom||[]).slice();if(l.indexOf(v)<0)l.push(v);return Object.assign({},p,{custom:l});});setCu("");};
-  const delCustom=function(i){setD(function(p){return Object.assign({},p,{custom:(p.custom||[]).filter(function(_,j){return j!==i;})});});};
+  const delCustom=function(i){setD(function(p){var nm=(p.custom||[])[i];var mt=Object.assign({},p.meta);delete mt[nm];return Object.assign({},p,{custom:(p.custom||[]).filter(function(_,j){return j!==i;}),meta:mt});});};
   const col=isArmor?"201,74,42":isLang?"123,160,201":"201,150,42";
   const lbl={fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",color:"rgba("+col+",.85)",padding:"10px 0 4px"};
   const row=function(key,text,checked,onChange,extra){
@@ -4716,15 +4726,29 @@ function ProficiencyPicker({kind,value,onSave,onClose}){
       <input type="checkbox" checked={!!checked} onChange={function(e){onChange(e.target.checked);}} style={{accentColor:"#c9962a",width:15,height:15}} />
       <span>{text}</span>{extra}</label>;
   };
+  // Small "source + floating" editor shown under a ticked proficiency. Permanent = source is only a note; floating = shown on the chip.
+  const metaEd=function(names){
+    var raw=(d.meta&&d.meta[names[0]])||{};
+    return <div style={{display:"flex",alignItems:"center",gap:8,padding:"0 0 5px 23px"}}>
+      <input value={raw.src||""} onChange={function(e){setMeta(names,{src:e.target.value});}} placeholder="Source (race, feat, class…)"
+        style={{flex:1,minWidth:0,boxSizing:"border-box",background:"rgba(0,0,0,.3)",border:"1px solid rgba("+col+",.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,padding:"3px 7px",borderRadius:3,outline:"none"}} />
+      <label title="Floating: the source is shown on the proficiency, e.g. Thieves' Tools (Feat). Unchecked = permanent: the source is only kept here as a note." style={{display:"inline-flex",alignItems:"center",gap:4,cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:.5,textTransform:"uppercase",color:raw.fl?"var(--gold-l)":"rgba(232,213,176,.5)",whiteSpace:"nowrap",userSelect:"none"}}>
+        <input type="checkbox" checked={!!raw.fl} onChange={function(e){setMeta(names,{fl:e.target.checked});}} style={{accentColor:"#c9962a",width:14,height:14,margin:0}} />floating
+      </label>
+    </div>;
+  };
+  const cell=function(key,names,text,checked,onChange,showMeta){
+    return <div key={key}>{row(key,text,checked,onChange)}{checked&&showMeta!==false&&metaEd(names)}</div>;
+  };
   const wl=d.weapons||{},tl=d.tools||{},ll=d.langs||{};
   const visible=function(n){return !ql||n.toLowerCase().indexOf(ql)>=0;};
   function grpBlock(title,names,sec,map){
     var all=names.every(function(n){return map[n];});
     var shown=names.filter(visible);
     return <div key={title} style={{marginBottom:6}}>
-      {row("all-"+title,<b>All {title}</b>,all,function(on){setMany(sec,names,on);})}
+      {cell("all-"+title,names,<b>All {title}</b>,all,function(on){setMany(sec,names,on);})}
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(170px,1fr))",gap:0,paddingLeft:22}}>
-        {shown.map(function(n){return row(n,n,map[n],function(on){set(sec,n,on);});})}
+        {shown.map(function(n){return cell(n,[n],n,map[n],function(on){set(sec,n,on);},!all);})}
       </div>
     </div>;
   }
@@ -4743,7 +4767,7 @@ function ProficiencyPicker({kind,value,onSave,onClose}){
           {isArmor&&<div>
             <div style={lbl}>Armor</div>
             <div style={{display:"flex",flexWrap:"wrap",gap:"0 22px"}}>
-              {PROF_ARMOR_LIST.map(function(a){return row(a,a,d.armor&&d.armor[a],function(on){set("armor",a,on);});})}
+              {PROF_ARMOR_LIST.map(function(a){return cell(a,[a],a,d.armor&&d.armor[a],function(on){set("armor",a,on);});})}
             </div>
             <div style={lbl}>Simple Weapons</div>
             {grpBlock("Simple Weapons",_wpnNames("Simple"),"weapons",wl)}
@@ -4757,7 +4781,7 @@ function ProficiencyPicker({kind,value,onSave,onClose}){
             {grpBlock("Artisan's Tools",TOOL_DATA.filter(_toolIsArtisan).map(function(t){return t.n;}),"tools",tl)}
             <div style={lbl}>Other Tools</div>
             <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))"}}>
-              {TOOL_DATA.filter(function(t){return !_toolIsArtisan(t)&&visible(t.n);}).map(function(t){return row(t.n,t.n,tl[t.n],function(on){set("tools",t.n,on);});})}
+              {TOOL_DATA.filter(function(t){return !_toolIsArtisan(t)&&visible(t.n);}).map(function(t){return cell(t.n,[t.n],t.n,tl[t.n],function(on){set("tools",t.n,on);});})}
             </div>
           </div>}
           <div style={lbl}>Custom</div>
@@ -4765,8 +4789,8 @@ function ProficiencyPicker({kind,value,onSave,onClose}){
             <input value={cu} onChange={function(e){setCu(e.target.value);}} onKeyDown={function(e){if(e.key==="Enter"){e.preventDefault();addCustom();}}} placeholder={isArmor?"e.g. Net, Firearms, Lance...":isLang?"e.g. Gith, Leonin, Thri-kreen...":"e.g. Dragonchess Set, Navigator's Tools..."} style={{flex:1,background:"rgba(0,0,0,.3)",border:"1px solid rgba("+col+",.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,padding:"5px 9px",outline:"none"}} />
             <button className="arb" style={{margin:0}} onClick={addCustom}>+ Add</button>
           </div>
-          {(d.custom||[]).length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:6,marginTop:8}}>
-            {d.custom.map(function(x,i){return <span key={i} style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"var(--parch)",border:"1px dashed rgba("+col+",.5)",padding:"2px 8px",borderRadius:12}}>{x} <span onClick={function(){delCustom(i);}} style={{cursor:"pointer",color:"rgba(201,74,42,.7)",marginLeft:4}}>×</span></span>;})}
+          {(d.custom||[]).length>0&&<div style={{display:"flex",flexDirection:"column",marginTop:6}}>
+            {d.custom.map(function(x,i){return <div key={i}><div style={{display:"inline-flex",alignItems:"center",fontFamily:"'EB Garamond',serif",fontSize:13,color:"var(--parch)",border:"1px dashed rgba("+col+",.5)",padding:"2px 8px",borderRadius:12,margin:"4px 0 3px"}}>{x} <span onClick={function(){delCustom(i);}} style={{cursor:"pointer",color:"rgba(201,74,42,.7)",marginLeft:6}}>×</span></div>{metaEd([x])}</div>;})}
           </div>}
         </div>
         <div style={{padding:"10px 22px",borderTop:"1px solid rgba("+col+",.2)",display:"flex",alignItems:"center",gap:10}}>
@@ -4795,7 +4819,7 @@ function ProfField({c,s,kind,label,info}){
       <div onClick={function(){setOpen(true);}} title="Click to choose proficiencies"
         style={{cursor:"pointer",minHeight:isLang?60:88,background:"rgba(0,0,0,.2)",border:"1px solid rgba(201,150,42,.15)",borderRadius:2,padding:"8px 10px",display:"flex",flexWrap:"wrap",gap:6,alignContent:"flex-start",position:"relative"}}>
         {chips.length===0&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.3)"}}>None chosen — click to choose…</span>}
-        {chips.map(function(ch,i){var t=tint[ch.k];return <span key={i} style={{fontFamily:"'EB Garamond',serif",fontSize:13.5,color:"var(--gold-l)",background:"rgba("+t+",.12)",border:"1px solid rgba("+t+",.5)",borderRadius:12,padding:"2px 10px",whiteSpace:"nowrap"}}><span style={{marginRight:5,fontSize:11,opacity:.9}}>{glyph[ch.k]}</span>{ch.t}</span>;})}
+        {chips.map(function(ch,i){var t=tint[ch.k];return <span key={i} title={ch.tip||undefined} style={{fontFamily:"'EB Garamond',serif",fontSize:13.5,color:"var(--gold-l)",background:"rgba("+t+",.12)",border:"1px solid rgba("+t+",.5)",borderRadius:12,padding:"2px 10px",whiteSpace:"nowrap"}}><span style={{marginRight:5,fontSize:11,opacity:.9}}>{glyph[ch.k]}</span>{ch.t}</span>;})}
         <span style={{position:"absolute",right:8,bottom:4,fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(201,150,42,.5)"}}>✎ Choose</span>
       </div>
       {legacy&&<div style={{marginTop:6}}>
@@ -14216,7 +14240,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.25.1</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.26.0</div>
 
 </script>
 </body>
