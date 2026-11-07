@@ -26,7 +26,7 @@ if('serviceWorker' in navigator){
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#0d0a08}
-#save-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(13,10,8,.97);border-bottom:1px solid rgba(201,150,42,.2);padding:7px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+#save-bar{position:fixed;top:0;left:0;right:0;z-index:9000;background:rgba(13,10,8,.97);border-bottom:1px solid rgba(201,150,42,.2);padding:7px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .sb-title{font-family:'Cinzel Decorative',cursive;font-size:13px;color:#e8b84b;letter-spacing:2px;flex:1;white-space:nowrap;min-width:120px}
 #save-bar button{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;cursor:pointer;transition:all .2s;border-radius:2px;outline:none}
 .btn-save{background:rgba(201,150,42,.12);border:1px solid rgba(201,150,42,.45);color:#e8b84b}
@@ -35,6 +35,10 @@ body{margin:0;background:#0d0a08}
 .btn-load:hover{background:rgba(123,79,207,.28)}
 .btn-new{background:rgba(201,74,42,.1);border:1px solid rgba(201,74,42,.35);color:#e07060}
 .btn-new:hover{background:rgba(201,74,42,.22)}
+.btn-lr{background:rgba(74,156,92,.12);border:1px solid rgba(74,156,92,.45);color:#6fcf85}
+.btn-lr:hover{background:rgba(74,156,92,.25)}
+.btn-sr{background:rgba(42,140,156,.14);border:1px solid rgba(42,140,156,.5);color:#6cc3d1}
+.btn-sr:hover{background:rgba(42,140,156,.28)}
 .btn-theme{background:rgba(232,213,176,.08);border:1px solid rgba(232,213,176,.3);color:#e8d5b0}
 .btn-theme:hover{background:rgba(232,213,176,.18)}
 .save-status{font-family:'EB Garamond',serif;font-size:11px;color:rgba(232,213,176,.35);font-style:italic;white-space:nowrap}
@@ -54,6 +58,8 @@ html.light-theme,html.light-theme input,html.light-theme select,html.light-theme
   <button class="btn-save" onclick="saveToFile()">&#8659; Save JSON</button>
   <button class="btn-load" onclick="document.getElementById('fi').click()">&#8657; Load JSON</button>
   <button class="btn-new" onclick="newCharacter()">+ New</button>
+  <button class="btn-sr" id="sr-btn" onclick="window.__shortRest&&window.__shortRest()">&#9788; Short Rest</button>
+  <button class="btn-lr" id="lr-btn" onclick="window.__longRest&&window.__longRest()">&#9790; Long Rest</button>
   <button class="btn-theme" id="theme-btn" onclick="toggleTheme()">&#9790; Light</button>
   <input type="file" id="fi" accept=".json" style="display:none" onchange="loadFromFile(event)">
   <span class="save-status" id="ss">Loading...</span>
@@ -465,7 +471,8 @@ const init=()=>{ const d=({
   spellPtsAbilities:[],
   exploitClasses:[],
   sp:{0:[],1:[],2:[],3:[],4:[],5:[],6:[],7:[],8:[],9:[]},
-  slotMax:{},slotExp:{},
+  slotMax:{},slotExp:{},srTaken:0,srHdMod:null,slotRc:{},slotSr:{},slotSrF:{},
+  sptRc:"",sptSr:"",sptSrF:null,exRc:"",exSr:"",exSrF:null,
   expl:{1:[],2:[],3:[],4:[],5:[]},
   exploitDie:"d4",exploitDice:"",exploitDiceExp:"",
   creatures:[],
@@ -495,7 +502,7 @@ const CSS = `
   .sheet{max-width:960px;margin:0 auto;background:linear-gradient(160deg,#2a1f0e,#1e1508 40%,#16100a 70%,#1a1208);border:1px solid rgba(201,150,42,.2);border-radius:4px;box-shadow:0 4px 32px rgba(0,0,0,.7),0 2px 8px rgba(0,0,0,.4);position:relative;overflow-x:auto;overflow-y:visible;animation:pgIn .4s ease-out}
   @keyframes pgIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
   .sheet::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(201,150,42,.025) 27px,rgba(201,150,42,.025) 28px);pointer-events:none;z-index:0}
-  .si{position:relative;z-index:1;padding:32px 36px}
+  .si{position:relative;padding:32px 36px}
   @media(max-width:600px){.si{padding:20px 16px}}
   .sh{font-family:'Cinzel',serif;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:14px;margin-top:26px}
   .sh::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent);opacity:.4}
@@ -1456,6 +1463,11 @@ function Page1({c,s}){
       {allClasses.map(function(cl,i){
         var updCls=function(field,val){
           var a=allClasses.map(function(x){return Object.assign({},x);});
+          if(field==="nm"){
+            var oldN=a[i].nm||a[i]._prev||"";
+            if(val===""){if(oldN)a[i]._prev=oldN;}
+            else{delete a[i]._prev;if(oldN&&oldN!==val)_applyClassRename(c,s,oldN,val);}
+          }
           a[i][field]=val;
           s("classes",a);
           s("cls",a.map(function(x){return (x.nm||"")+(x.lv?" "+x.lv:"");}).filter(function(x){return x.trim();}).join(" / "));
@@ -1914,7 +1926,7 @@ function Page1({c,s}){
               {[1,2,3,4,5,6].map(function(lv){
                 const active=exhLv>=lv;
                 const isDeath=lv===6;
-                return <div key={lv} onClick={function(){if(lv===6&&exhLv!==6)setFx("died");else if(exhLv===6&&lv<=6&&dsCur>0)setFx("live");s("exhaustion",exhLv===lv?lv-1:lv);}}
+                return <div key={lv} onClick={function(){const nl=lv<=exhLv?exhLv-1:Math.min(6,exhLv+1);if(nl===6&&exhLv!==6)setFx("died");else if(exhLv===6&&nl<6&&dsCur>0)setFx("live");s("exhaustion",nl);}}
                   style={{width:22,height:22,borderRadius:3,border:"1px solid "+(active?(isDeath?"#c94a2a":"rgba(201,74,42,.7)"):"rgba(201,74,42,.25)"),background:active?(isDeath?"#c94a2a":"rgba(201,74,42,.35)"):"rgba(0,0,0,.2)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",transition:"all .15s",flexShrink:0}}>
                   <span style={{fontFamily:"'Cinzel',serif",fontSize:10,color:active?"#fff":"rgba(201,74,42,.4)",fontWeight:700}}>{lv}</span>
                 </div>;
@@ -2929,10 +2941,9 @@ function Page2({c,s}){
         <input value={invSearch} onChange={e=>setInvSearch(e.target.value)} placeholder="Search items by name or description…"
           style={{flex:1,maxWidth:360,background:"rgba(0,0,0,.3)",border:"none",borderBottom:"1px solid rgba(201,150,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"5px 4px",outline:"none"}} />
         {invSearch&&<span onClick={()=>setInvSearch("")} title="Clear search" style={{cursor:"pointer",color:"rgba(201,74,42,.5)",fontSize:16,userSelect:"none"}}>×</span>}
-        <div onClick={rollAllCharges} title="Roll each item's recharge formula once (does not refill charges)"
-          style={{marginLeft:"auto",cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(74,156,92,.8)",border:"1px solid rgba(74,156,92,.35)",padding:"4px 12px",borderRadius:2,userSelect:"none",whiteSpace:"nowrap"}}>↻ Roll recharge for all items</div>
+        
       </div>
-      {chMsg&&<div onClick={function(){setChMsg(null);}} style={{position:"fixed",top:56,left:"50%",transform:"translateX(-50%)",zIndex:9999,maxWidth:"min(92vw,640px)",background:"linear-gradient(145deg,#1d1608,#120d05)",border:"1px solid rgba(201,150,42,.5)",borderRadius:3,padding:"8px 14px",fontFamily:"'EB Garamond',serif",fontSize:14,color:"var(--gold-l)",boxShadow:"0 4px 20px rgba(0,0,0,.7)",cursor:"pointer",animation:"tipIn .15s ease-out"}}>{chMsg}</div>}
+      {chMsg&&<div onClick={function(){setChMsg(null);}} style={{position:"fixed",top:((document.getElementById("save-bar")||{}).offsetHeight||48)+8,left:"50%",transform:"translateX(-50%)",zIndex:9999,maxWidth:"min(92vw,640px)",boxSizing:"border-box",background:"linear-gradient(145deg,#1d1608,#120d05)",border:"1px solid rgba(201,150,42,.5)",borderRadius:3,padding:"8px 14px",fontFamily:"'EB Garamond',serif",fontSize:14,color:"var(--gold-l)",boxShadow:"0 4px 20px rgba(0,0,0,.7)",cursor:"pointer",animation:"tipIn .15s ease-out"}}>{chMsg}</div>}
 
       {/* Weight summary */}
       <div style={{display:"flex",gap:12,marginTop:24,marginBottom:4,flexWrap:"wrap",alignItems:"stretch"}}>
@@ -3330,7 +3341,7 @@ function Page2({c,s}){
 
       {/* Bag max weight modal */}
       {bagMaxModal&&ReactDOM.createPortal(
-        <div style={{position:"fixed",inset:0,zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.75)"}} onClick={()=>setBagMaxModal(null)}>
+        <div style={{position:"fixed",inset:0,height:"100dvh",boxSizing:"border-box",zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.75)"}} onClick={()=>setBagMaxModal(null)}>
           <div style={{background:"#1a1208",border:"1px solid rgba(123,79,207,.35)",padding:"20px 24px",minWidth:280,boxShadow:"0 8px 40px rgba(0,0,0,.9)"}} onClick={e=>e.stopPropagation()}>
             <div style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,color:"rgba(184,154,240,.7)",textTransform:"uppercase",marginBottom:16,borderBottom:"1px solid rgba(123,79,207,.15)",paddingBottom:8}}>Bag Settings</div>
             <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:16}}>
@@ -3359,7 +3370,7 @@ function Page2({c,s}){
 
       {/* Remove bag modal */}
       {splitDragModal&&ReactDOM.createPortal(
-        <div style={{position:"fixed",inset:0,zIndex:10000,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.78)"}} onClick={()=>{setSplitDragModal(null);setDrag(null);setDragOver(null);}}>
+        <div style={{position:"fixed",inset:0,height:"100dvh",boxSizing:"border-box",zIndex:10000,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.78)"}} onClick={()=>{setSplitDragModal(null);setDrag(null);setDragOver(null);}}>
           <div style={{background:"#1a1208",border:"1px solid rgba(201,150,42,.4)",padding:"22px 28px",minWidth:300,maxWidth:400,width:"90vw",boxShadow:"0 8px 40px rgba(0,0,0,.9)"}} onClick={e=>e.stopPropagation()}>
             <div style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,color:"rgba(201,150,42,.8)",textTransform:"uppercase",marginBottom:14,borderBottom:"1px solid rgba(201,150,42,.2)",paddingBottom:8}}>
               {splitDragModal.type==="coin"?"Move Coins":"Split Stack"}
@@ -3408,7 +3419,7 @@ function Page2({c,s}){
       )}
 
       {removeBagModal&&ReactDOM.createPortal(
-        <div style={{position:"fixed",inset:0,zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.78)"}} onClick={()=>setRemoveBagModal(null)}>
+        <div style={{position:"fixed",inset:0,height:"100dvh",boxSizing:"border-box",zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.78)"}} onClick={()=>setRemoveBagModal(null)}>
           <div style={{background:"#1a1208",border:"1px solid rgba(201,74,42,.4)",padding:"22px 28px",minWidth:300,maxWidth:420,width:"90vw",boxShadow:"0 8px 40px rgba(0,0,0,.9)"}} onClick={e=>e.stopPropagation()}>
             <div style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,color:"rgba(201,74,42,.8)",textTransform:"uppercase",marginBottom:14,borderBottom:"1px solid rgba(201,74,42,.2)",paddingBottom:8}}>Remove Bag of Holding</div>
             <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.7)",marginBottom:18,lineHeight:1.6}}>
@@ -3443,7 +3454,7 @@ function Page2({c,s}){
         document.body
       )}
       {wtPrompt&&ReactDOM.createPortal(
-        <div style={{position:"fixed",inset:0,zIndex:10000,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.78)"}}>
+        <div style={{position:"fixed",inset:0,height:"100dvh",boxSizing:"border-box",zIndex:10000,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.78)"}}>
           <div style={{background:"#1a1208",border:"1px solid rgba(201,150,42,.4)",padding:"22px 28px",minWidth:300,maxWidth:380,width:"90vw",boxShadow:"0 8px 40px rgba(0,0,0,.9)"}} onClick={e=>e.stopPropagation()}>
             <div style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,color:"var(--gold-l)",textTransform:"uppercase",marginBottom:14,borderBottom:"1px solid rgba(201,150,42,.2)",paddingBottom:8}}>Confirm Item Weight</div>
             <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.7)",marginBottom:14,lineHeight:1.6}}>
@@ -3811,17 +3822,17 @@ function BonusField({c,value,formula,onApply,label,inputStyle,hideProfFull}){
   );
 }
 
-function FormulaModal({c,initialFormula,onApply,onClose,title,minResult,onClear,hideProfFull}){
+function FormulaModal({c,initialFormula,onApply,onClose,title,minResult,onClear,hideProfFull,maxUses}){
   const allClasses=(c.classes&&c.classes.length>0?c.classes:[{nm:c.cls||"",lv:"",hd:"d6"}]).filter(function(cl){return (cl.nm||"").trim();});
   const totalLv=allClasses.reduce(function(t,cl){return t+(parseInt(cl.lv)||0);},0);
   const pb=(function(){var lv=totalLv;var base=lv<1?2:Math.ceil(lv/4)+1;return base+(parseInt((c.pbBonus||"").replace("+",""))||0);})();
   const getMod=function(abl){var base=parseInt((c.statsBase&&c.statsBase[abl])||c.stats[abl])||10;var bon=parseInt((c.statsBon&&c.statsBon[abl])||0)||0;return Math.floor((base+bon-10)/2);};
 
   const migrate=function(f){
-    if(!f) return {flat:"",abls:[],profs:[],lvlEntries:[]};
+    if(!f) return {flat:"",abls:[],profs:[],lvlEntries:[],maxParts:[]};
     var profs=f.profs?[...f.profs]:(f.prof&&f.prof!=="none"?[f.prof]:[]);
     var lvlEntries=f.lvlEntries?[...f.lvlEntries]:(f.lvlType&&f.lvlType!=="none"?[{type:f.lvlType,cls:f.lvlClass||""}]:[]);
-    return {flat:f.flat||"",abls:[...(f.abls||[])],profs,lvlEntries};
+    return {flat:f.flat||"",abls:[...(f.abls||[])],profs,lvlEntries,maxParts:[...(f.maxParts||[])]};
   };
   const [formula,setFormula]=React.useState(migrate(initialFormula));
   const setF=function(field,val){setFormula(function(prev){return {...prev,[field]:val};});};
@@ -3853,7 +3864,10 @@ function FormulaModal({c,initialFormula,onApply,onClose,title,minResult,onClear,
   const ablSum=(formula.abls||[]).reduce(function(t,a){return t+getMod(a);},0);
   const profSum=(formula.profs||[]).reduce(function(t,p){return t+profValFn(p);},0);
   const lvlSum=(formula.lvlEntries||[]).reduce(function(t,e){return t+lvlValFn(e);},0);
-  const rawTotal=flat+ablSum+profSum+lvlSum;
+  const maxValFn=function(p){var m=parseInt(maxUses)||0;return p==="full"?m:p==="half-up"?Math.ceil(m/2):p==="half-down"?Math.floor(m/2):0;};
+  const maxLabelFn=function(p){return p==="full"?"Max uses ("+maxValFn(p)+")":p==="half-up"?"½↑ Max uses ("+maxValFn(p)+")":"½↓ Max uses ("+maxValFn(p)+")";};
+  const maxSum=(formula.maxParts||[]).reduce(function(t,p){return t+maxValFn(p);},0);
+  const rawTotal=flat+ablSum+profSum+lvlSum+maxSum;
   const total=(minResult!==null&&minResult!==undefined)?Math.max(minResult,rawTotal):rawTotal;
 
   const row=function(label,children){
@@ -3892,8 +3906,8 @@ function FormulaModal({c,initialFormula,onApply,onClose,title,minResult,onClear,
     lvlOpts.push({type:"class-half-up",cls:cl.nm});
   });
 
-  return <div style={{position:"fixed",inset:0,zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.75)"}} onClick={onClose}>
-    <div style={{background:"#1a1208",border:"1px solid rgba(201,150,42,.35)",padding:"20px 24px",minWidth:320,maxWidth:500,width:"92vw",boxShadow:"0 8px 40px rgba(0,0,0,.9)",position:"relative",maxHeight:"90vh",overflowY:"auto"}} onClick={function(e){e.stopPropagation();}}>
+  return <div style={{position:"fixed",inset:0,height:"100dvh",boxSizing:"border-box",zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.75)"}} onClick={onClose}>
+    <div style={{background:"#1a1208",border:"1px solid rgba(201,150,42,.35)",padding:"20px 24px",minWidth:320,maxWidth:500,width:"92vw",boxShadow:"0 8px 40px rgba(0,0,0,.9)",position:"relative",maxHeight:"100%",overflowY:"auto"}} onClick={function(e){e.stopPropagation();}}>
       <div style={{fontFamily:"'Cinzel',serif",fontSize:12,letterSpacing:2,color:"rgba(201,150,42,.8)",textTransform:"uppercase",marginBottom:16,borderBottom:"1px solid rgba(201,150,42,.15)",paddingBottom:8}}>{title||"Formula"}</div>
 
       {row("Flat",
@@ -3928,6 +3942,18 @@ function FormulaModal({c,initialFormula,onApply,onClose,title,minResult,onClear,
         </div>
       )}
 
+      {maxUses!=null&&row("Max",
+        <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+          {["half-down","half-up","full"].map(function(p){
+            var count=(formula.maxParts||[]).filter(function(x){return x===p;}).length;
+            return counterChip(maxLabelFn(p),count,
+              function(){setF("maxParts",[...(formula.maxParts||[]),p]);},
+              function(){var cur=formula.maxParts||[];var idx=cur.lastIndexOf(p);if(idx>=0){var next=[...cur];next.splice(idx,1);setF("maxParts",next);}},
+              "rgba(74,156,92,1)","max-"+p);
+          })}
+        </div>
+      )}
+
       {row("Level",
         <div style={{display:"flex",flexDirection:"column",gap:6,width:"100%"}}>
           <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
@@ -3951,6 +3977,7 @@ function FormulaModal({c,initialFormula,onApply,onClose,title,minResult,onClear,
             if(ablSum) parts.push((formula.abls||[]).map(function(a){return a+"("+getMod(a)+")";}).join("+"));
             if(profSum) parts.push((formula.profs||[]).map(profLabelFn).join("+"));
             if(lvlSum) parts.push((formula.lvlEntries||[]).map(function(e){return lvlLabelFn(e)+"("+lvlValFn(e)+")";}).join("+"));
+            if(maxSum) parts.push((formula.maxParts||[]).map(maxLabelFn).join("+"));
             return parts.filter(Boolean).join(" + ")||"—";
           })()}
         </div>
@@ -4153,8 +4180,8 @@ function CreatureFormulaModal({c,creature,spellLevel,initialFormula,onApply,onCl
   };
 
   return ReactDOM.createPortal(
-    <div style={{position:"fixed",inset:0,zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.75)"}} onClick={onClose}>
-      <div style={{background:"#1a1208",border:"1px solid rgba(201,150,42,.35)",padding:"20px 24px",minWidth:340,maxWidth:540,width:"94vw",boxShadow:"0 8px 40px rgba(0,0,0,.9)",maxHeight:"92vh",overflowY:"auto"}} onClick={function(e){e.stopPropagation();}}>
+    <div style={{position:"fixed",inset:0,height:"100dvh",boxSizing:"border-box",zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.75)"}} onClick={onClose}>
+      <div style={{background:"#1a1208",border:"1px solid rgba(201,150,42,.35)",padding:"20px 24px",minWidth:340,maxWidth:540,width:"94vw",boxShadow:"0 8px 40px rgba(0,0,0,.9)",maxHeight:"100%",overflowY:"auto"}} onClick={function(e){e.stopPropagation();}}>
         <div style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,color:"rgba(201,150,42,.8)",textTransform:"uppercase",marginBottom:16,borderBottom:"1px solid rgba(201,150,42,.15)",paddingBottom:8}}>{title||"Formula"}</div>
 
         {row("Flat",<input value={formula.flat||""} onChange={function(e){setF("flat",e.target.value);}} placeholder="0"
@@ -4266,7 +4293,7 @@ function UsesCalcModal({lim,c,onApply,onClose}){
     onClear={lim.usesFormula?function(){onApply(null,null);}:null} />;
 }
 
-function _limFormula(c,formula){
+function _limFormula(c,formula,maxUses,minRes){
     if(!formula) return null;
     const allCls=(c.classes&&c.classes.length>0?c.classes:[{nm:c.cls||"",lv:"",hd:"d6"}]).filter(function(cl){return (cl.nm||"").trim();});
     const totalLv=allCls.reduce(function(t,cl){return t+(parseInt(cl.lv)||0);},0);
@@ -4306,7 +4333,8 @@ function _limFormula(c,formula){
       if(formula.lvlType==="class-half-up"){var cl3=allCls.find(function(x){return x.nm===formula.lvlClass;});return cl3?Math.ceil((parseInt(cl3.lv)||0)/2):0;}
       return 0;
     })();
-    return Math.max(1,flat+ablSum+profSum+lvlSum);
+    const maxSum=(formula.maxParts||[]).reduce(function(t,p){var m=parseInt(maxUses)||0;return t+(p==="full"?m:p==="half-up"?Math.ceil(m/2):p==="half-down"?Math.floor(m/2):0);},0);
+    return Math.max(minRes==null?1:minRes,flat+ablSum+profSum+lvlSum+maxSum);
   }
 
 function LimitBlock({lim,idx,onChange,onDelete,isOnly,c}){
@@ -4352,22 +4380,23 @@ function LimitBlock({lim,idx,onChange,onDelete,isOnly,c}){
             })}
           </div>
         )}
+      </div>
+      <div style={{display:"flex",gap:14,alignItems:"flex-end",flexWrap:"wrap",marginTop:10}}>
         <div style={{display:"flex",flexDirection:"column",gap:2}}>
-          <label className="fl" style={{fontSize:8}}>Die</label>
+          <label className="fl" style={{fontSize:8,height:12,lineHeight:"12px",margin:0,whiteSpace:"nowrap"}}>Die</label>
           <select value={lim.die||"NO"} onChange={e=>ch("die",e.target.value)}
-            style={{background:"#1a1410",border:"1px solid rgba(123,79,207,.35)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:11,padding:"2px 4px",cursor:"pointer",outline:"none",borderRadius:2}}>
+            style={{height:28,boxSizing:"border-box",background:"#1a1410",border:"1px solid rgba(123,79,207,.35)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:11,padding:"2px 4px",cursor:"pointer",outline:"none",borderRadius:2}}>
             {DIE_OPTS.map(d=><option key={d} value={d}>{d}</option>)}
           </select>
         </div>
         <div style={{display:"flex",flexDirection:"column",gap:2}}>
-          <label className="fl" style={{fontSize:8}}>Recharge</label>
-          <div style={{display:"flex",gap:4,alignItems:"center"}}>
-            <TipInput value={lim.recharge||""} onChange={e=>ch("recharge",e.target.value)} placeholder="Long Rest"
-              style={{width:78,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.2)",color:"rgba(232,213,176,.55)",fontFamily:"'EB Garamond',serif",fontSize:13,textAlign:"center",outline:"none"}} />
-            <div onClick={()=>ch("exp","0")}
-              style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:16,fontWeight:700,lineHeight:1,color:"rgba(74,156,92,.9)",border:"1px solid rgba(74,156,92,.4)",background:"rgba(74,156,92,.08)",width:30,height:30,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:3,flexShrink:0,transition:"all .15s",userSelect:"none",touchAction:"manipulation"}} title="Restore all uses (reset expended to 0)">↻</div>
-          </div>
+          <label className="fl" style={{fontSize:8,height:12,lineHeight:"12px",margin:0,whiteSpace:"nowrap"}}>Recharge</label>
+          <RestChip big c={c} title={lim.name||"Limited use"} def="Long Rest" ph="e.g. 1d4 Long Rests" rc={lim.recharge||""} sr={lim.srAmt||""} srF={lim.srFormula||null} max={maxUses}
+          onChange={function(p){if("rc" in p)ch("recharge",p.rc);if("sr" in p)onChange(idx,"__full__",{...lim,srAmt:p.sr,srFormula:p.srF});}} />
         </div>
+        <div onClick={()=>ch("exp","0")} title="Restore all uses"
+          style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:15,fontWeight:700,lineHeight:1,color:"rgba(74,156,92,.9)",border:"1px solid rgba(74,156,92,.4)",background:"rgba(74,156,92,.08)",width:28,height:28,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:3,flexShrink:0,userSelect:"none"}}>↻</div>
+        {lim.lrLeft!=null&&lim.lrLeft!==""&&expended>0&&<div style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"#c9962a",letterSpacing:.5,alignSelf:"center"}}>⏳ back in {lim.lrLeft} long rest{parseInt(lim.lrLeft)===1?"":"s"}</div>}
       </div>
     </div>
     {showCalc&&<UsesCalcModal lim={lim} c={c} onClose={function(){setShowCalc(false);}} onApply={function(total,formula){if(total===null){onChange(idx,"__full__",{...lim,uses:"",usesFormula:null});}else{onChange(idx,"__full__",{...lim,uses:""+total,usesFormula:formula});}setShowCalc(false);}} />}
@@ -4968,14 +4997,7 @@ function Page3({c,s}){
   return (
     <div>
       <div className="orn">Features</div>
-      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10,marginTop:32}}>
-        <div onClick={function(){
-          s("feat",(c.feat||[]).map(function(f){return f.limited?{...f,limits:(f.limits||[]).map(function(l){return {...l,exp:"0"};})}:f;}));
-          s("fts",(c.fts||[]).map(function(f){return f.limited?{...f,limits:(f.limits||[]).map(function(l){return {...l,exp:"0"};})}:f;}));
-          s("spec",(c.spec||[]).map(function(f){return f.limited?{...f,limits:(f.limits||[]).map(function(l){return {...l,exp:"0"};})}:f;}));
-        }} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(74,156,92,.8)",border:"1px solid rgba(74,156,92,.35)",padding:"4px 12px",borderRadius:2,transition:"all .15s",userSelect:"none"}}
-          title="Reset all expended uses to 0">↺ Recharge All</div>
-      </div>
+      <div style={{height:22}} />
       <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
         <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(201,150,42,.4)"}}>⌕</span>
         <input value={featSearch} onChange={e=>setFeatSearch(e.target.value)} placeholder="Search features, feats &amp; species by name, source or text…"
@@ -4996,7 +5018,7 @@ function Page3({c,s}){
         const taKey="feat-ds-"+i;
         const savedH=(c.taH&&c.taH[taKey]);
         if(!dsOpen) return <CompactFeatureRow key={i} name={f.nm} sub={f.src} limited={limited} lims={limitStates(f,c)} onAdjust={function(li,d){updFeat(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){updFeat(i,"limits",(f.limits||[]).map(function(l){return {...l,exp:"0"};}));}} border={limited?"var(--ember)":"var(--arcane)"} dkey="feat" di={i} s={s} ph="Unnamed feature"
-          onOpen={function(){s("dsOpen",{...(c.dsOpen||{}),[dsKey]:true});}} onDelete={function(){window.__confirm("Delete this feature?",()=>s("feat",c.feat.filter((_,j)=>j!==i)));}} />;
+          onOpen={function(){s("dsOpen",{...(c.dsOpen||{}),[dsKey]:true});}} onDelete={function(){window.__confirm("Delete this feature?",()=>_delAt(s,"feat",c.feat,i,"feat-"));}} />;
         return (
           <div key={i} className="fc" data-dkey="feat" data-di={i} style={{borderLeftColor:limited?"var(--ember)":"var(--arcane)",gridColumn:(wideFeature(f)||(c.feat||[]).length<2)?"1 / -1":undefined}}>
             <div style={{display:"flex",gap:10}}>
@@ -5019,7 +5041,7 @@ function Page3({c,s}){
                 {dsOpen&&<MdField value={f.ds||""} onChange={e=>updFeat(i,"ds",e.target.value)} placeholder="Description..."
                   style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,lineHeight:1.6,outline:"none"}} />}
               </div>
-              <button className="db" onClick={()=>window.__confirm("Delete this feature?",()=>s("feat",c.feat.filter((_,j)=>j!==i)))}>x</button>
+              <button className="db" onClick={()=>window.__confirm("Delete this feature?",()=>_delAt(s,"feat",c.feat,i,"feat-"))}>x</button>
             </div>
           </div>
         );
@@ -5047,7 +5069,7 @@ function Page3({c,s}){
         const taKey="fts-ds-"+i;
         const savedH=(c.taH&&c.taH[taKey]);
         if(!dsOpen) return <CompactFeatureRow key={i} name={f.nm} sub={f.lv?"Lv "+f.lv:""} limited={limited} lims={limitStates(f,c)} onAdjust={function(li,d){updFts(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){updFts(i,"limits",(f.limits||[]).map(function(l){return {...l,exp:"0"};}));}} border={limited?"var(--ember)":"var(--gold)"} dkey="fts" di={i} s={s} ph="Unnamed feat"
-          onOpen={function(){s("dsOpen",{...(c.dsOpen||{}),[dsKey]:true});}} onDelete={function(){window.__confirm("Delete this feature?",()=>s("fts",c.fts.filter((_,j)=>j!==i)));}} />;
+          onOpen={function(){s("dsOpen",{...(c.dsOpen||{}),[dsKey]:true});}} onDelete={function(){window.__confirm("Delete this feature?",()=>_delAt(s,"fts",c.fts,i,"fts-"));}} />;
         return (
           <div key={i} className="fc" data-dkey="fts" data-di={i} style={{borderLeftColor:limited?"var(--ember)":"var(--gold)",gridColumn:(wideFeature(f)||(c.fts||[]).length<2)?"1 / -1":undefined}}>
             <div style={{display:"flex",gap:10}}>
@@ -5085,7 +5107,7 @@ function Page3({c,s}){
                 {dsOpen&&<MdField value={f.ds||""} onChange={e=>updFts(i,"ds",e.target.value)} placeholder="Description..."
                   style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,lineHeight:1.6,outline:"none"}} />}
               </div>
-              <button className="db" onClick={()=>window.__confirm("Delete this feature?",()=>s("fts",c.fts.filter((_,j)=>j!==i)))}>x</button>
+              <button className="db" onClick={()=>window.__confirm("Delete this feature?",()=>_delAt(s,"fts",c.fts,i,"fts-"))}>x</button>
             </div>
           </div>
         );
@@ -7441,6 +7463,11 @@ function SpellPage({c,s,from,to}){
   const setSlotMax=(lv,v)=>s("slotMax",{...(c.slotMax||{}),[lv]:v});
   const setSlotExp=(lv,v)=>s("slotExp",{...(c.slotExp||{}),[lv]:v});
   const rechargeLevel=(lv)=>setSlotExp(lv,"0");
+  const setSlotRest=(lv,p)=>{
+    if("rc" in p) s("slotRc",{...(c.slotRc||{}),[lv]:p.rc});
+    if("sr" in p) s("slotSr",{...(c.slotSr||{}),[lv]:p.sr});
+    if("srF" in p) s("slotSrF",{...(c.slotSrF||{}),[lv]:p.srF});
+  };
   const rechargeAll=()=>{
     const newExp={};
     for(let l=1;l<=9;l++) newExp[l]="0";
@@ -7600,9 +7627,7 @@ function SpellPage({c,s,from,to}){
               Compendium
             </span>;
           })()}
-          <div onClick={rechargeAll}
-            style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(74,156,92,.8)",border:"1px solid rgba(74,156,92,.35)",padding:"4px 12px",borderRadius:2,transition:"all .15s",userSelect:"none"}}
-            title="Reset all spell slots and spell points to full">↺ Recharge All</div>
+          
         </div>
         <div style={{display:"flex",flexWrap:"wrap",gap:12,marginBottom:10}}>
         {spCls.map(function(sc,i){
@@ -7717,10 +7742,13 @@ function SpellPage({c,s,from,to}){
           <div onClick={function(e){if(e.target.closest("[data-keep]")) return;s("spPtsOpen",true);}} title="Click to open" style={{cursor:"pointer",display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",background:"rgba(0,0,0,.18)",border:"1px solid rgba(123,79,207,.2)",padding:"6px 12px",borderRadius:2,marginBottom:14}}>
             <button data-keep="1" onClick={function(){s("spPtsOpen",true);}} title="Open" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(184,154,240,.55)",color:"rgba(184,154,240,.55)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={false} /></button>
             <span style={{fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:400,letterSpacing:1.5,textTransform:"uppercase",color:"var(--gold-l)"}}>Spell / Sorcery Points</span>
+            <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"nowrap"}}>
             <div data-keep="1" onClick={function(){const used=parseInt(c.spellPtsUsed)||0;s("spellPtsUsed",""+(used+1));}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"rgba(201,74,42,.7)",border:"1px solid rgba(201,74,42,.3)",width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,userSelect:"none",lineHeight:1}}>−</div>
             <span title="Remaining / Max" style={{fontFamily:"'Cinzel',serif",fontSize:18,fontWeight:700,color:sptCol,minWidth:54,textAlign:"center"}}>{sptRem}/{sptMax}</span>
             <div data-keep="1" onClick={function(){const used=parseInt(c.spellPtsUsed)||0;if(used>0)s("spellPtsUsed",""+(used-1));}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"rgba(74,156,92,.7)",border:"1px solid rgba(74,156,92,.3)",width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,userSelect:"none",lineHeight:1}}>+</div>
             <div data-keep="1" onClick={function(){s("spellPtsUsed","");}} title="Restore all" style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"rgba(74,156,92,.85)",border:"1px solid rgba(74,156,92,.35)",width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,userSelect:"none",lineHeight:1}}>↻</div>
+            <RestChip c={c} title="Spell / sorcery points" def="Long Rest" rc={c.sptRc||""} sr={c.sptSr||""} srF={c.sptSrF||null} max={sptMax} onChange={function(p){if("rc" in p)s("sptRc",p.rc);if("sr" in p)s("sptSr",p.sr);if("srF" in p)s("sptSrF",p.srF);}} />
+            </div>
           </div>
         );
         return (
@@ -7766,7 +7794,9 @@ function SpellPage({c,s,from,to}){
                 style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(74,156,92,.7)",border:"1px solid rgba(74,156,92,.3)",padding:"2px 8px",height:22,display:"flex",alignItems:"center",borderRadius:2,userSelect:"none"}}>↺</div>
               <div onClick={function(){const used=parseInt(c.spellPtsUsed)||0;if(used>0)s("spellPtsUsed",""+(used-1));}} title="Recover 1 point"
                 style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"rgba(74,156,92,.7)",border:"1px solid rgba(74,156,92,.3)",width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,userSelect:"none",lineHeight:1}}>+</div>
+              <RestChip c={c} title="Spell / sorcery points" def="Long Rest" rc={c.sptRc||""} sr={c.sptSr||""} srF={c.sptSrF||null} max={sptMax} onChange={function(p){if("rc" in p)s("sptRc",p.rc);if("sr" in p)s("sptSr",p.sr);if("srF" in p)s("sptSrF",p.srF);}} />
             </div>
+            
             <span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.25)",fontStyle:"italic",alignSelf:"flex-end",marginLeft:"auto"}}>shared across all classes</span>
             {sptMax>0&&(
               <div style={{width:"100%",marginTop:8,borderTop:"1px solid rgba(123,79,207,.15)",paddingTop:8}}>
@@ -7908,16 +7938,23 @@ function SpellPage({c,s,from,to}){
         {visLvls.map(function(lv){
           var active=curLv===lv;
           var cnt=(c.sp[lv]||[]).length;
+          var tMax=lv>0?getSlotMax(lv):0,tExp=getSlotExp(lv),tRem=Math.max(0,tMax-tExp);
+          var tCol=tRem>tMax*0.6?"#4a9c5c":tRem>tMax*0.3?"#c9962a":"#c94a2a";
           return <button key={lv} onClick={function(){setActiveLv(lv);}}
-            style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",padding:"7px 12px",cursor:"pointer",borderRadius:2,transition:"all .2s",display:"flex",alignItems:"center",gap:6,
+            style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",padding:"7px 12px",cursor:"pointer",borderRadius:2,transition:"all .2s",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:5,
               background:active?"linear-gradient(135deg,rgba(123,79,207,.3),rgba(201,150,42,.15))":"rgba(20,14,8,.8)",
               border:"1px solid "+(active?"var(--arcane)":"rgba(184,154,240,.2)"),
               color:active?"var(--arcane-l)":"rgba(184,154,240,.55)"}}>
-            {lv===0?"Cantrips":"Lvl "+lv}
+            <span style={{display:"inline-flex",alignItems:"center",gap:6}}>{lv===0?"Cantrips":"Lvl "+lv}
             <span style={{fontFamily:"'Cinzel',serif",fontSize:9,minWidth:15,textAlign:"center",padding:"1px 5px",borderRadius:9,
               background:active?"rgba(184,154,240,.22)":"rgba(0,0,0,.35)",
               color:active?"var(--arcane-l)":"rgba(184,154,240,.4)",
-              border:"1px solid "+(active?"rgba(184,154,240,.4)":"rgba(184,154,240,.12)")}}>{cnt}</span>
+              border:"1px solid "+(active?"rgba(184,154,240,.4)":"rgba(184,154,240,.12)")}}>{cnt}</span></span>
+            {tMax>0&&<span onClick={function(e){e.stopPropagation();}} title={"Level "+lv+" spell slots left / max"} style={{display:"inline-flex",alignItems:"center",gap:4,letterSpacing:0,cursor:"default"}}>
+              <span onClick={function(e){e.stopPropagation();setSlotExp(lv,""+Math.min(tMax,tExp+1));}} title="Use a slot" style={{cursor:"pointer",fontSize:13,fontWeight:700,color:"rgba(201,74,42,.85)",border:"1px solid rgba(201,74,42,.35)",width:20,height:20,display:"inline-flex",alignItems:"center",justifyContent:"center",borderRadius:2,lineHeight:1,background:"rgba(201,74,42,.06)"}}>−</span>
+              <span style={{fontSize:12,fontWeight:700,color:tCol,minWidth:30,textAlign:"center"}}>{tRem}/{tMax}</span>
+              <span onClick={function(e){e.stopPropagation();setSlotExp(lv,""+Math.max(0,tExp-1));}} title="Restore a slot" style={{cursor:"pointer",fontSize:13,fontWeight:700,color:"rgba(74,156,92,.9)",border:"1px solid rgba(74,156,92,.4)",width:20,height:20,display:"inline-flex",alignItems:"center",justifyContent:"center",borderRadius:2,lineHeight:1,background:"rgba(74,156,92,.07)"}}>+</span>
+            </span>}
           </button>;
         })}
       </div>}
@@ -7987,6 +8024,7 @@ function SpellPage({c,s,from,to}){
                       </div>
                     )}
                     {slotMax>0&&<span style={{fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:700,color:pipCol,minWidth:16,textAlign:"center",marginLeft:4}}>{slotRem}</span>}
+                    {slotMax>0&&<RestChip c={c} title={"Level "+lv+" spell slots"} def="Long Rest" rc={(c.slotRc||{})[lv]||""} sr={(c.slotSr||{})[lv]||""} srF={(c.slotSrF||{})[lv]||null} max={slotMax} onChange={function(p){setSlotRest(lv,p);}} />}
                   </div>
                   <div onClick={()=>rechargeLevel(lv)} title="Recharge: reset expended slots to 0"
                     style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(74,156,92,.7)",border:"1px solid rgba(74,156,92,.3)",padding:"2px 5px",borderRadius:2,flexShrink:0,transition:"all .15s",userSelect:"none",marginLeft:"auto"}}>↺</div>
@@ -8002,7 +8040,7 @@ function SpellPage({c,s,from,to}){
                 <div key={gi} style={{marginBottom:gi<groups.length-1?12:0}}>
                   {group.name&&(
                     <div onClick={function(){toggleSpGroup(lv,group.name);}} title={grpCollapsed?"Show "+group.name+" spells":"Hide "+group.name+" spells"}
-                      style={{display:"flex",alignItems:"center",gap:10,padding:"4px 0 5px",borderBottom:"1px solid rgba(123,79,207,.2)",marginBottom:4,cursor:"pointer",userSelect:"none"}}>
+                      style={{display:"flex",alignItems:"center",flexWrap:"wrap",gap:"4px 10px",padding:"4px 0 5px",borderBottom:"1px solid rgba(123,79,207,.2)",marginBottom:4,cursor:"pointer",userSelect:"none"}}>
                       <span style={{fontFamily:"'Cinzel',serif",fontSize:11,color:"rgba(184,154,240,.6)",width:12,textAlign:"center",flexShrink:0}}>{grpCollapsed?"▸":"▾"}</span>
                       <span style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:2,color:"var(--arcane-l)",textTransform:"uppercase"}}>
                       {group.name+" "+(lv===0?"Cantrips":ordinal(lv)+" Spell"+(cnt!==1?"s":""))}
@@ -8104,15 +8142,7 @@ function ExploitPage({c,s}){
       <div className="orn">Exploits</div>
       <div style={{marginBottom:20,marginTop:32}}>
         <div style={{display:"flex",justifyContent:"flex-end",alignItems:"center",gap:10,marginBottom:10}}>
-          <div onClick={function(){
-            s("exploitDiceExp","0");
-            const newExpl=Object.assign({},c.expl);
-            [3,4,5].forEach(function(deg){
-              newExpl[deg]=(newExpl[deg]||[]).map(function(ex){return Object.assign({},ex,{used:false});});
-            });
-            s("expl",newExpl);
-          }} title="Recharge all exploit dice and reset used abilities (3rd degree+)"
-            style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(74,156,92,.8)",border:"1px solid rgba(74,156,92,.35)",padding:"4px 12px",borderRadius:2,transition:"all .15s",userSelect:"none"}}>↺ Recharge All</div>
+          
         </div>
         <div style={{display:"flex",flexWrap:"wrap",gap:12,marginBottom:10}}>
         {exCls.map(function(ec,i){
@@ -8165,10 +8195,13 @@ function ExploitPage({c,s}){
         {!c.exDiceOpen?<div onClick={function(e){if(e.target.closest("[data-keep]")) return;s("exDiceOpen",true);}} title="Click to open" style={{cursor:"pointer",display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",background:"rgba(0,0,0,.2)",border:"1px solid rgba(201,74,42,.2)",padding:"6px 12px",borderRadius:2,marginTop:12}}>
             <button data-keep="1" onClick={function(){s("exDiceOpen",true);}} title="Open" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(224,112,96,.6)",color:"rgba(224,112,96,.6)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={false} /></button>
             <span style={{fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:700,letterSpacing:1.5,textTransform:"uppercase",color:"#e07060"}}>Exploit Dice ({c.exploitDie||"d4"})</span>
+            <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"nowrap"}}>
             <div data-keep="1" onClick={function(){s("exploitDiceExp",""+Math.min(diceMax,diceExp+1));}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"rgba(201,74,42,.7)",border:"1px solid rgba(201,74,42,.3)",width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,userSelect:"none",lineHeight:1}}>−</div>
             <span title="Remaining / Max" style={{fontFamily:"'Cinzel',serif",fontSize:18,fontWeight:700,color:pipCol,minWidth:54,textAlign:"center"}}>{diceRem}/{diceMax}</span>
             <div data-keep="1" onClick={function(){s("exploitDiceExp",""+Math.max(0,diceExp-1));}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"rgba(74,156,92,.7)",border:"1px solid rgba(74,156,92,.3)",width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,userSelect:"none",lineHeight:1}}>+</div>
             <div data-keep="1" onClick={function(){s("exploitDiceExp","0");}} title="Restore all" style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"rgba(74,156,92,.85)",border:"1px solid rgba(74,156,92,.35)",width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,userSelect:"none",lineHeight:1}}>↻</div>
+            <RestChip c={c} title="Exploit dice" def="Short Rest" rc={c.exRc||""} sr={c.exSr||""} srF={c.exSrF||null} max={diceMax} onChange={function(p){if("rc" in p)s("exRc",p.rc);if("sr" in p)s("exSr",p.sr);if("srF" in p)s("exSrF",p.srF);}} />
+            </div>
           </div>:
         <div style={{display:"flex",gap:10,alignItems:"flex-end",flexWrap:"wrap",background:"rgba(0,0,0,.2)",border:"1px solid rgba(201,74,42,.2)",padding:"8px 12px",borderRadius:2,marginTop:12}}>
             <div style={{display:"flex",alignItems:"center",gap:10,width:"100%",marginBottom:2}}>
@@ -8205,6 +8238,7 @@ function ExploitPage({c,s}){
             {diceMax>0&&<span style={{fontFamily:"'Cinzel',serif",fontSize:20,fontWeight:700,color:pipCol,alignSelf:"flex-end",paddingBottom:1}}>{diceRem}</span>}
             <div onClick={function(){s("exploitDiceExp","0");}} title="Reset expended dice"
               style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(74,156,92,.7)",border:"1px solid rgba(74,156,92,.3)",padding:"2px 8px",borderRadius:2,alignSelf:"flex-end",userSelect:"none"}}>↺</div>
+            <div style={{alignSelf:"flex-end"}}><RestChip c={c} title="Exploit dice" def="Short Rest" rc={c.exRc||""} sr={c.exSr||""} srF={c.exSrF||null} max={diceMax} onChange={function(p){if("rc" in p)s("exRc",p.rc);if("sr" in p)s("exSr",p.sr);if("srF" in p)s("exSrF",p.srF);}} /></div>
           </div>}
       </div>
 
@@ -10867,17 +10901,72 @@ function parseSpeciesSource(t){
 
 // Compact one-line row for a collapsed feature, and a clickable section header.
 function _limMax(c,l){var fr=l.usesFormula?_limFormula(c,l.usesFormula):null;return fr!==null?fr:parseInt(l.uses);}
+// Uses regained on a short rest (the rest come back on a long rest): explicit field, or parsed from the recharge text.
+function limShortRegain(l,c){
+  var t=String(l.recharge||"");
+  // "1 use on short rest, all on long rest" typed in the text -> that number
+  var m=t.match(/(\d+|one|two|three)\s*(?:uses?\s*|charges?\s*)?(?:on|after|per|at|each)\s+(?:a\s+)?short/i);
+  if(m){var w={one:1,two:2,three:3}[m[1].toLowerCase()];return w||parseInt(m[1])||0;}
+  // All uses already come back on a short rest -> nothing partial to show (it is simply a short-rest feature)
+  if(/short/i.test(t))return 0;
+  if(l.srFormula&&c){var fv=_limFormula(c,l.srFormula,_limMax(c,l),0);if(fv!==null)return fv;}
+  var v=parseInt(l.srAmt);return v>0?v:0;
+}
 function limitStates(f,c){
   if(!f.limited) return [];
   var out=[];
   (f.limits||[]).forEach(function(l,li){
     var u=_limMax(c,l);if(isNaN(u)) return;
     var e=Math.min(Math.max(parseInt(l.exp)||0,0),u);
-    out.push({li:li,rem:u-e,max:u,rc:/short/i.test(l.recharge||"")?"SR":/long/i.test(l.recharge||"")?"LR":"",name:l.name||""});
+    out.push({li:li,rem:u-e,max:u,rc:/short/i.test(l.recharge||"")?"SR":/long/i.test(l.recharge||"")?"LR":"",name:l.name||"",lr:(l.lrLeft!=null&&l.lrLeft!==""&&e>0)?parseInt(l.lrLeft):null,sr:limShortRegain(l,c)});
   });
   return out;
 }
 // New limits array after changing "remaining" uses of limit li by delta.
+// ── Rest recharge setting for spell slots / spell points / exploit dice ──
+// rc = text for "all back on" (empty = the default for that resource), sr = how many come back on a short rest.
+function restInfo(c,rc,srAmt,srF,max,def){
+  var t=String(rc||def||"");
+  var sr=limShortRegain({recharge:t,srAmt:srAmt,srFormula:srF,uses:""+(parseInt(max)||0)},c);
+  return {sr:sr,tag:/short/i.test(t)?"SR":/long/i.test(t)?"LR":String(rc||"")};
+}
+function RestChip({c,title,def,rc,sr,srF,max,onChange,ph,big}){
+  var st=React.useState(false),open=st[0],setOpen=st[1];
+  var st2=React.useState(false),calc=st2[0],setCalc=st2[1];
+  var info=restInfo(c,rc,sr,srF,max,def);
+  var m=parseInt(max)||0;
+  var srVal=srF?_limFormula(c,srF,m,0):null;
+  var label=info.sr>0?"+"+info.sr+" SR · all LR":(info.tag||"LR");
+  var fi={background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.35)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:15,outline:"none",height:28,boxSizing:"border-box",padding:0};
+  return <>
+    <span data-keep="1" onClick={function(e){e.stopPropagation();setOpen(true);}} title={"Rest recharge — "+(info.sr>0?info.sr+" back on a short rest, all on a long rest":info.tag==="SR"?"all back on a short rest":info.tag==="LR"?"all back on a long rest":"all back on: "+info.tag)+" (click to change)"}
+      style={Object.assign({cursor:"pointer",display:"inline-flex",alignItems:"center",gap:3,fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:.5,color:"rgba(201,150,42,.85)",border:"1px solid rgba(201,150,42,.35)",background:"rgba(201,150,42,.06)",padding:"2px 6px",borderRadius:3,whiteSpace:"nowrap",userSelect:"none",flexShrink:0},big?{height:28,boxSizing:"border-box",fontSize:12,padding:"0 12px",letterSpacing:.8,borderRadius:2}:{})}>⟳ {label}</span>
+    {open&&ReactDOM.createPortal(
+      <div onClick={function(e){e.stopPropagation();setOpen(false);}} style={{position:"fixed",inset:0,height:"100dvh",boxSizing:"border-box",background:"rgba(0,0,0,.72)",zIndex:100002,display:"flex",alignItems:"center",justifyContent:"center",padding:16}}>
+        <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.45)",borderRadius:4,padding:"16px 18px",width:"100%",maxWidth:380,maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",boxShadow:"0 8px 40px rgba(0,0,0,.6)"}}>
+          <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1.5,color:"var(--gold-l)",textTransform:"uppercase",marginBottom:12}}>⟳ {title}</div>
+          <div style={{display:"flex",gap:14,alignItems:"flex-start",flexWrap:"wrap",marginBottom:10}}>
+            <div style={{display:"flex",flexDirection:"column",gap:2,alignItems:"center"}} title="How many come back on a short rest. Leave empty if none.">
+              <label className="fl" style={{fontSize:8,height:12,lineHeight:"12px",margin:0,whiteSpace:"nowrap"}}>Regain on short rest</label>
+              <input value={srF?""+srVal:(sr||"")} readOnly onChange={function(){}} onClick={function(){setCalc(true);}} placeholder="0" title="Click to calculate (flat, ability, proficiency, level, max / 2...)"
+                style={Object.assign({},fi,{width:64,textAlign:"center",cursor:"pointer",color:srF?"rgba(201,150,42,.7)":"var(--gold-l)"})} />
+            </div>
+            <div style={{display:"flex",flexDirection:"column",gap:2,flex:"1 1 150px",minWidth:140}} title="When ALL of them come back. Empty = the default.">
+              <label className="fl" style={{fontSize:8,height:12,lineHeight:"12px",margin:0,whiteSpace:"nowrap"}}>All back on</label>
+              <input value={rc||""} onChange={function(e){onChange({rc:e.target.value});}} placeholder={ph||def+" (default)"}
+                style={Object.assign({},fi,{width:"100%",fontFamily:"'EB Garamond',serif",textAlign:"left"})} />
+            </div>
+          </div>
+          <div style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:"rgba(232,213,176,.45)",lineHeight:1.4,marginBottom:14}}>Default: all back on a {def.toLowerCase()}. If all come back on a short rest, the partial regain is ignored. A long rest always restores everything.</div>
+          <div style={{display:"flex",justifyContent:"flex-end"}}><div onClick={function(){setOpen(false);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1,textTransform:"uppercase",padding:"8px 20px",borderRadius:2,userSelect:"none",border:"1px solid rgba(201,150,42,.5)",color:"var(--gold-l)"}}>Done</div></div>
+          {calc&&<FormulaModal c={c} initialFormula={srF} title="Regained on a short rest" minResult={0} maxUses={m}
+            onClose={function(){setCalc(false);}}
+            onApply={function(total,formula){onChange({sr:""+total,srF:formula});setCalc(false);}}
+            onClear={(srF||sr)?function(){onChange({sr:"",srF:null});setCalc(false);}:null} />}
+        </div>
+      </div>,document.body)}
+  </>;
+}
 function adjustLimits(f,li,delta,c){
   var lims=(f.limits||[]).slice();var l=lims[li];if(!l) return lims;
   var u=_limMax(c,l);if(isNaN(u)) return lims;
@@ -11027,8 +11116,465 @@ function _moveClassItems(map,name,target,same){
   });
   return {map:out,skipped:skipped};
 }
+// Delete item i from state list `key` and shift the by-position open/closed flags (dsOpen) so other rows keep their state.
+function _delAt(s,key,list,i,prefix){
+  s(key,(list||[]).filter(function(_,j){return j!==i;}));
+  s("dsOpen",function(p){var o={};Object.keys(p||{}).forEach(function(k){
+    if(k.indexOf(prefix)!==0){o[k]=p[k];return;}
+    var n=parseInt(k.slice(prefix.length));if(isNaN(n)){o[k]=p[k];return;}
+    if(n<i)o[k]=p[k];else if(n>i)o[prefix+(n-1)]=p[k];
+  });return o;});
+}
+// When a class is renamed, move its spent hit dice and re-point formula references that use the class by name.
+function _renameClassRefs(node,oldN,newN){
+  if(Array.isArray(node)){var ch=false;var out=node.map(function(x){var r=_renameClassRefs(x,oldN,newN);if(r!==x)ch=true;return r;});return ch?out:node;}
+  if(node&&typeof node==="object"){
+    var changed=false,o={};
+    Object.keys(node).forEach(function(k){var v=node[k];var r=_renameClassRefs(v,oldN,newN);if(r!==v)changed=true;o[k]=r;});
+    if(typeof node.type==="string"&&node.type.indexOf("class-")===0&&node.cls===oldN){o.cls=newN;changed=true;}
+    if(typeof node.lvlType==="string"&&node.lvlType.indexOf("class-")===0&&node.lvlClass===oldN){o.lvlClass=newN;changed=true;}
+    return changed?o:node;
+  }
+  return node;
+}
+function _applyClassRename(c,s,oldN,newN){
+  var hd=c.hdExp||{};
+  if(Object.prototype.hasOwnProperty.call(hd,oldN)&&!Object.prototype.hasOwnProperty.call(hd,newN)){var nh=Object.assign({},hd);nh[newN]=nh[oldN];delete nh[oldN];s("hdExp",nh);}
+  Object.keys(c).forEach(function(k){if(k==="classes"||k==="hdExp")return;var v=c[k];var r=_renameClassRefs(v,oldN,newN);if(r!==v)s(k,r);});
+}
 function Chev({open}){
   return <span style={{display:"inline-block",width:7,height:7,borderRight:"2px solid currentColor",borderBottom:"2px solid currentColor",transform:open?"rotate(-135deg) translate(-1px,-1px)":"rotate(-45deg)",marginLeft:open?0:-2,marginTop:open?3:0,pointerEvents:"none"}} />;
+}
+// ── Long rest ──────────────────────────────────────────────────────────────
+// "Recharge: 1d4 long rests" (or a fixed "3 long rests") → {cnt,sides,mod} / {fixed}
+function lrCountSpec(rc){
+  var t=String(rc||"");
+  var m=t.match(/(\d+)\s*d\s*(\d+)\s*([+-]\s*\d+)?\s*long\s*rests?/i);
+  if(m) return {cnt:parseInt(m[1]),sides:parseInt(m[2]),mod:m[3]?parseInt(m[3].replace(/\s+/g,"")):0};
+  var f=t.match(/(\d+)\s*long\s*rests?/i);
+  if(f&&parseInt(f[1])>1) return {fixed:parseInt(f[1])};
+  return null;
+}
+function rollLrCount(sp){
+  if(sp.fixed) return sp.fixed;
+  var tot=sp.mod||0;for(var i=0;i<sp.cnt;i++) tot+=1+Math.floor(Math.random()*sp.sides);
+  return Math.max(1,tot);
+}
+// Does a plain (non-counter) limit come back on a long rest? (short-rest features do too)
+function lrRestores(rc){
+  var t=String(rc||"").trim();
+  if(!t) return true;
+  return /short|long|dawn|day|daily|rest/i.test(t);
+}
+// Adds/clears the long-rest countdown on limits whose recharge is "N long rests" (rolls it when first expended).
+function syncLrCounters(list,c){
+  var changed=false,msgs=[];
+  var out=(list||[]).map(function(f){
+    if(!f||!f.limited||!f.limits) return f;
+    var lc=false;
+    var lims=f.limits.map(function(l){
+      var sp=lrCountSpec(l.recharge);var expended=(parseInt(l.exp)||0)>0;
+      var has=(l.lrLeft!=null&&l.lrLeft!=="");
+      if(sp&&expended&&!has){var n=rollLrCount(sp);lc=true;msgs.push((f.nm||"Feature")+(l.name?" ("+l.name+")":"")+": returns after "+n+" long rest"+(n===1?"":"s"));return Object.assign({},l,{lrLeft:n});}
+      if((!sp||!expended)&&has){lc=true;var cp=Object.assign({},l);delete cp.lrLeft;return cp;}
+      return l;
+    });
+    if(lc){changed=true;return Object.assign({},f,{limits:lims});}
+    return f;
+  });
+  return {list:out,changed:changed,msgs:msgs};
+}
+function _lrClasses(c){return (c.classes&&c.classes.length>0?c.classes:[{nm:c.cls||"",lv:"",hd:"d6"}]).filter(function(cl){return cl&&(cl.nm||"").trim();});}
+// Items that have charges, a restore formula, and are missing charges. id = "inv:i" | "att:i" | "bag:b:i"
+function lrItemList(c){
+  var out=[];
+  var add=function(it,id){
+    if(!it||!it.charges||!it.charges.enabled)return;
+    var max=parseInt(it.charges.max)||0,used=parseInt(it.charges.used)||0;
+    if(max<=0||used<=0||!(it.charges.restore||"").trim())return;
+    var txt=((it.nt||"")+" "+(it.desc||"")+" "+(it.ds||"")).toLowerCase();
+    var wm=txt.match(/(?:at|each|every|until)\s+(dawn|dusk|midnight|noon|sunrise|sunset|nightfall)/);
+    out.push({id:id,name:it.nm||"Item",cur:Math.max(0,max-used),max:max,formula:(it.charges.restore||"").trim(),when:wm?wm[1]:""});
+  };
+  (c.inv||[]).forEach(function(it,i){add(it,"inv:"+i);});
+  (c.attuned_inv||[]).forEach(function(it,i){add(it,"att:"+i);});
+  (c.bags||[]).forEach(function(b,bi){(b.inv||[]).forEach(function(it,i){add(it,"bag:"+bi+":"+i);});});
+  return out;
+}
+function applyLongRest(c,hdMode,exRem,selIds){
+  var patch={},msgs=[];
+  patch.hpc="";patch.hpDmg="";patch.srTaken=0;
+  var hadTemp=(parseInt(c.hpt)||0)>0;if(hadTemp)patch.hpt="";
+  patch.ds=[false,false,false];patch.df=[false,false,false];
+  msgs.push("Hit points restored to full."+(((c.ds||[]).some(Boolean)||(c.df||[]).some(Boolean))?" Death saves cleared.":"")+(hadTemp?" Temporary hit points removed.":""));
+  // hit dice
+  var classes=_lrClasses(c);
+  var hdExp=c.hdExp||{};
+  if(hdMode&&classes.length){
+    var ne=Object.assign({},hdExp),regained=0;
+    classes.forEach(function(cl){
+      var lv=Math.max(1,parseInt(cl.lv)||0);var exp=Math.min(lv,parseInt(ne[cl.nm])||0);
+      var restore=hdMode==="all"?exp:Math.min(exp,Math.max(1,Math.ceil(lv/2)));
+      ne[cl.nm]=Math.max(0,exp-restore);regained+=restore;
+    });
+    patch.hdExp=ne;
+    msgs.push(regained>0?"Hit dice: regained "+regained+" ("+(hdMode==="all"?"all":"half")+").":"Hit dice: none were spent.");
+  }
+  // exhaustion
+  var ex=Math.min(6,Math.max(0,parseInt(c.exhaustion)||0));
+  if(ex>0){var rm=Math.min(ex,Math.max(0,exRem||0));if(rm>0){patch.exhaustion=ex-rm;msgs.push("Exhaustion reduced by "+rm+" (now level "+(ex-rm)+").");}else msgs.push("Exhaustion unchanged (level "+ex+").");}
+  // spell slots / sorcery points / exploit dice
+  var slotAny=false,ns=Object.assign({},c.slotExp||{});
+  for(var l=1;l<=9;l++){if((parseInt(ns[l])||0)>0)slotAny=true;ns[l]="0";}
+  patch.slotExp=ns;if(slotAny)msgs.push("Spell slots restored.");
+  if((parseInt(c.spellPtsUsed)||0)>0){patch.spellPtsUsed="";msgs.push("Spell / sorcery points restored.");}
+  if((parseInt(c.exploitDiceExp)||0)>0){patch.exploitDiceExp="0";msgs.push("Exploit dice restored.");}
+  var exUsed=0,newExpl=Object.assign({},c.expl||{});
+  [3,4,5].forEach(function(deg){newExpl[deg]=(newExpl[deg]||[]).map(function(ex){if(ex&&ex.used){exUsed++;return Object.assign({},ex,{used:false});}return ex;});});
+  if(exUsed>0){patch.expl=newExpl;msgs.push("Exploits ready again: "+exUsed+".");}
+  // limited features (class features, feats, species)
+  var restored=[],counting=[],finished=[];
+  ["feat","fts","spec"].forEach(function(k){
+    var arr=c[k];if(!Array.isArray(arr))return;
+    var changed=false;
+    var out=arr.map(function(f){
+      if(!f||!f.limited||!f.limits)return f;
+      var fc=false;
+      var lims=f.limits.map(function(lm){
+        var e=parseInt(lm.exp)||0;var nm=(f.nm||"Feature")+(lm.name?" ("+lm.name+")":"");
+        var sp=lrCountSpec(lm.recharge);
+        if(sp){
+          if(e>0&&lm.lrLeft!=null&&lm.lrLeft!==""){
+            var left=(parseInt(lm.lrLeft)||1)-1;fc=true;
+            var cp=Object.assign({},lm);
+            if(left<=0){delete cp.lrLeft;cp.exp="0";finished.push(nm);}
+            else{cp.lrLeft=left;counting.push(nm+": "+left+" long rest"+(left===1?"":"s")+" left");}
+            return cp;
+          }
+          return lm;
+        }
+        if(e>0&&lrRestores(lm.recharge)){fc=true;restored.push(nm);return Object.assign({},lm,{exp:"0"});}
+        return lm;
+      });
+      if(fc){changed=true;return Object.assign({},f,{limits:lims});}
+      return f;
+    });
+    if(changed)patch[k]=out;
+  });
+  if(restored.length)msgs.push("Features restored: "+restored.join(", ")+".");
+  if(finished.length)msgs.push("Features returned after their long-rest countdown: "+finished.join(", ")+".");
+  if(counting.length)msgs.push("Long-rest countdown: "+counting.join("; ")+".");
+  // magic items: roll once and recharge
+  var itemMsgs=[],anyItem=false;
+  var sel=selIds||[];
+  var doList=function(arr,pre){return (arr||[]).map(function(it,i){
+    if(sel.indexOf(pre+i)<0)return it;
+    if(!it||!it.charges||!it.charges.enabled||!(parseInt(it.charges.max)>0))return it;
+    if(!(it.charges.restore||"").trim())return it;
+    if(!(parseInt(it.charges.used)>0))return it;
+    var r=rollChargeOnce(it);itemMsgs.push(r.msg);
+    if(r.ch){anyItem=true;return Object.assign({},it,{charges:r.ch});}
+    return it;
+  });};
+  var ninv=doList(c.inv,"inv:"),natt=doList(c.attuned_inv,"att:");
+  var nbags=(c.bags||[]).map(function(b,bi){return Object.assign({},b,{inv:doList(b.inv,"bag:"+bi+":")});});
+  if(anyItem){patch.inv=ninv;patch.attuned_inv=natt;patch.bags=nbags;}
+  if(itemMsgs.length)msgs.push("Item recharge rolls — "+itemMsgs.join(" · "));
+  return {patch:patch,msgs:msgs};
+}
+function LongRestFlow({hasHD,exLv,items,onFinish,onClose}){
+  const [step,setStep]=React.useState("ask");
+  const [hd,setHd]=React.useState(hasHD?"half":null);
+  const [rm,setRm]=React.useState("0");
+  const [sel,setSel]=React.useState(function(){const o={};(items||[]).forEach(function(it){o[it.id]=true;});return o;});
+  const bs={cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1,textTransform:"uppercase",padding:"10px 20px",borderRadius:2,userSelect:"none",textAlign:"center"};
+  const good=Object.assign({},bs,{border:"1px solid rgba(74,156,92,.6)",color:"#6fcf85",background:"rgba(74,156,92,.12)"});
+  const neutral=Object.assign({},bs,{border:"1px solid rgba(232,213,176,.25)",color:"rgba(232,213,176,.7)"});
+  const finish=function(hdv,r){onFinish(hdv,r,(items||[]).filter(function(it){return sel[it.id];}).map(function(it){return it.id;}));};
+  const afterEx=function(hdv,r){ if((items||[]).length>0){setHd(hdv);setRm(""+r);setStep("items");} else finish(hdv,r); };
+  const after=function(hdv){ if(exLv>0){setHd(hdv);setStep("ex");} else afterEx(hdv,0); };
+  const q={fontFamily:"'Cinzel',serif",fontSize:15,letterSpacing:1,color:"var(--gold-l)",marginBottom:18,lineHeight:1.4,textAlign:"center"};
+  return ReactDOM.createPortal(
+    <div onClick={onClose} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.72)",zIndex:100003,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(74,156,92,.5)",borderRadius:4,padding:"22px 22px",maxWidth:380,width:"100%",boxSizing:"border-box",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+        {step==="ask"&&<React.Fragment>
+          <div style={q}>Take a long rest?</div>
+          <div style={{display:"flex",gap:10,justifyContent:"center"}}><div style={Object.assign({},good,{flex:1})} onClick={function(){if(hasHD)setStep("hd");else after(null);}}>Yes</div><div style={Object.assign({},neutral,{flex:1})} onClick={onClose}>No</div></div>
+        </React.Fragment>}
+        {step==="hd"&&<React.Fragment>
+          <div style={q}>Restore half or all hit dice?</div>
+          <div style={{display:"flex",gap:10,justifyContent:"center"}}><div style={Object.assign({},good,{flex:1})} onClick={function(){after("half");}}>Half</div><div style={Object.assign({},good,{flex:1})} onClick={function(){after("all");}}>All</div></div>
+        </React.Fragment>}
+        {step==="ex"&&<React.Fragment>
+          <div style={q}>Remove how many levels of exhaustion?</div>
+          <select value={rm} onChange={function(e){setRm(e.target.value);}} style={{width:"100%",boxSizing:"border-box",background:"#0d0a08",color:"var(--parch)",border:"1px solid rgba(201,150,42,.35)",fontFamily:"'EB Garamond',serif",fontSize:18,padding:"8px",marginBottom:16}}>
+            {Array.from({length:exLv+1}).map(function(_,i){return <option key={i} value={""+i}>{i}</option>;})}
+          </select>
+          <div style={{display:"flex",justifyContent:"center"}}><div style={Object.assign({},good,{minWidth:120})} onClick={function(){afterEx(hd,parseInt(rm)||0);}}>OK</div></div>
+        </React.Fragment>}
+        {step==="items"&&<React.Fragment>
+          <div style={q}>Recharge which items?</div>
+          <div style={{maxHeight:"46vh",overflowY:"auto",marginBottom:14,border:"1px solid rgba(201,150,42,.2)",borderRadius:3}}>
+            {items.map(function(it){return <label key={it.id} style={{display:"flex",alignItems:"center",gap:10,padding:"10px 12px",borderBottom:"1px solid rgba(201,150,42,.12)",cursor:"pointer"}}>
+              <input type="checkbox" checked={!!sel[it.id]} onChange={function(e){const v=e.target.checked;setSel(function(p){return Object.assign({},p,{[it.id]:v});});}} style={{width:20,height:20,flexShrink:0,accentColor:"#4a9c5c"}} />
+              <span style={{flex:1,minWidth:0,fontFamily:"'EB Garamond',serif",fontSize:15,color:"var(--parch)"}}>{it.name}<span style={{display:"block",fontSize:12,color:"rgba(232,213,176,.45)"}}>{it.cur}/{it.max} charges · rolls {it.formula}{it.when?" · at "+it.when:""}</span></span>
+            </label>;})}
+          </div>
+          <div style={{display:"flex",justifyContent:"center"}}><div style={Object.assign({},good,{minWidth:120})} onClick={function(){finish(hd,parseInt(rm)||0);}}>OK</div></div>
+        </React.Fragment>}
+      </div>
+    </div>,document.body);
+}
+// ── Short rest ──────────────────────────────────────────────────────────────
+// Max HP (same rule as the Character tab: auto-calculated from classes + CON, or the manual box).
+function _hdMax(c){
+  if(!c.hpAutoCalc) return parseInt(c.hpx)||0;
+  var total=0,first=true,con=getMod(c,"CON");
+  (c.classes&&c.classes.length>0?c.classes:[{nm:c.cls||"",lv:"",hd:"d6"}]).forEach(function(cl){
+    var lv=parseInt(cl.lv)||0;if(lv<1)return;
+    var ds=parseInt((cl.hd||"d6").replace("d",""))||6,mean=Math.ceil((ds+1)/2),hb=parseInt((cl.hpBonus||"").replace("+",""))||0;
+    for(var i=0;i<lv;i++){if(first){total+=Math.max(1,ds+con);first=false;}else total+=Math.max(1,mean+con);total+=hb;}
+  });
+  return total>0?total:0;
+}
+function _hdParse(str,sides){var out=[];(""+(str||"")).split(",").forEach(function(p){var n=parseInt(p.trim());if(!isNaN(n)&&n>=1&&n<=sides&&out.indexOf(n)<0)out.push(n);});return out;}
+// Roll one hit die with the die modifier (turn → reroll → explode) and its bonus formula. HP gained is never below 0.
+function hdRollOne(sides,mods,c){
+  mods=mods||{};
+  var rd=function(){return Math.floor(Math.random()*sides)+1;};
+  var tOn=mods.turn&&mods.turn.on,tFrom=tOn?_hdParse(mods.turn.from,sides):[],tTo=tOn?parseInt(mods.turn.to):NaN,tOk=!!(tOn&&tFrom.length&&!isNaN(tTo));
+  var rOn=mods.reroll&&mods.reroll.on,rVals=rOn?_hdParse(mods.reroll.vals,sides):[],rOk=!!(rOn&&rVals.length),rUntil=!!(mods.reroll&&mods.reroll.mode==="until");
+  var rawMax=parseInt(mods.reroll&&mods.reroll.max),budget=(!isNaN(rawMax)&&rawMax>0)?rawMax:Infinity;
+  var eOn=mods.explode&&mods.explode.on,eTrig=eOn?parseInt(mods.explode.threshold):NaN,eOk=!!(eOn&&!isNaN(eTrig)),eUntil=!!(mods.explode&&mods.explode.mode==="until");
+  var notes=[];
+  var one=function(){
+    var v=rd();
+    var turn=function(){if(tOk&&tFrom.indexOf(v)>=0){notes.push(v+"→"+tTo);v=tTo;}};
+    turn();
+    var g=0;
+    while(rOk&&rVals.indexOf(v)>=0&&budget>0&&g<200){notes.push("rerolled "+v);v=rd();budget--;g++;turn();if(!rUntil)break;}
+    return v;
+  };
+  var vals=[one()];
+  if(eOk){var cur=vals[0],guard=0;while(cur>=eTrig&&guard<50){var nv=one();vals.push(nv);notes.push("exploded +"+nv);guard++;cur=nv;if(!eUntil)break;}}
+  var sum=vals.reduce(function(t,x){return t+x;},0);
+  var bonus=mods.formula?(computeBonusFromFormula(mods.formula,c)||0):0;
+  return {vals:vals,sum:sum,bonus:bonus,total:Math.max(0,sum+bonus),notes:notes};
+}
+function _hdModLabel(m,c){
+  m=m||{};var p=[];
+  if(m.turn&&m.turn.on)p.push("turn");if(m.reroll&&m.reroll.on)p.push("reroll");if(m.explode&&m.explode.on)p.push("explode");
+  if(m.formula){var b=computeBonusFromFormula(m.formula,c)||0;p.push((b>=0?"+":"")+b);}
+  return p.join(" · ");
+}
+// A hit die drawn as a die: ready (click to roll), rolled this rest (shows the HP it gave) or already spent.
+function HdDie({sides,state,val,onClick}){
+  var shapes={4:"50,8 93,88 7,88",6:"14,14 86,14 86,86 14,86",8:"50,5 94,50 50,95 6,50",10:"50,4 93,38 76,94 24,94 7,38",12:"50,5 89,32 75,90 25,90 11,32",20:"50,4 92,27 92,73 50,96 8,73 8,27"};
+  var pts=shapes[sides];
+  var ready=state==="ready",rolled=state==="rolled";
+  var stroke=ready?"#c9962a":rolled?"#4a9c5c":"rgba(232,213,176,.2)";
+  var fill=ready?"rgba(201,150,42,.16)":rolled?"rgba(74,156,92,.24)":"rgba(0,0,0,.35)";
+  return <svg viewBox="0 0 100 100" width="46" height="46" onClick={ready?onClick:undefined} style={{cursor:ready?"pointer":"default",flexShrink:0,opacity:state==="spent"?.45:1,touchAction:"manipulation"}}>
+    {pts?<polygon points={pts} fill={fill} stroke={stroke} strokeWidth="5" strokeLinejoin="round" />:<circle cx="50" cy="50" r="44" fill={fill} stroke={stroke} strokeWidth="5" />}
+    <text x="50" y="58" textAnchor="middle" fontFamily="Cinzel,serif" fontWeight="700" fontSize={rolled?(String(val).length>2?24:32):26} fill={ready?"#e8b84b":rolled?"#6fcf85":"rgba(232,213,176,.5)"}>{rolled?val:"d"+sides}</text>
+  </svg>;
+}
+// "Die modifier" window for hit dice: turn / reroll / explode, plus a bonus formula (level, proficiency, ability…) added to every die.
+function HdModEditor({mods,setMods,c,sides,onClose}){
+  var fo=React.useState(false),fOpen=fo[0],setFOpen=fo[1];
+  var m=mods||{};
+  var setPart=function(part,patch){setMods(function(p){var n=Object.assign({},p);n[part]=Object.assign({},n[part]||{},patch);return n;});};
+  var chk=function(on){return {cursor:"pointer",width:15,height:15,borderRadius:3,flexShrink:0,border:"1px solid "+(on?"var(--arcane)":"rgba(184,154,240,.35)"),background:on?"var(--arcane)":"transparent"};};
+  var inp={background:"rgba(0,0,0,.3)",border:"1px solid rgba(123,79,207,.3)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,textAlign:"center",outline:"none",padding:"3px 4px",borderRadius:3};
+  var sel={background:"#1a1208",border:"1px solid rgba(123,79,207,.3)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:10,padding:"3px 4px",outline:"none",cursor:"pointer",borderRadius:3};
+  var lbl={fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,color:"rgba(232,213,176,.65)",whiteSpace:"nowrap"};
+  var row={display:"flex",alignItems:"center",gap:7,flexWrap:"wrap"};
+  var bonus=m.formula?(computeBonusFromFormula(m.formula,c)||0):null;
+  return ReactDOM.createPortal(
+    <div onClick={function(e){e.stopPropagation();onClose();}} style={{position:"fixed",inset:0,height:"100dvh",boxSizing:"border-box",background:"rgba(0,0,0,.72)",zIndex:100004,display:"flex",alignItems:"center",justifyContent:"center",padding:16}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#15100a",border:"1px solid rgba(123,79,207,.5)",borderRadius:5,padding:"16px 16px",width:"100%",maxWidth:380,maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",boxShadow:"0 8px 40px rgba(0,0,0,.8)",display:"flex",flexDirection:"column",gap:12}}>
+        <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1.5,color:"var(--arcane-l)",textTransform:"uppercase"}}>⚙ Hit die modifier</div>
+        <div style={row}>
+          <span onClick={function(){setPart("turn",{on:!(m.turn&&m.turn.on)});}} style={chk(m.turn&&m.turn.on)} />
+          <span style={lbl}>TURN ANY</span>
+          <input value={(m.turn&&m.turn.from)||""} placeholder="1,2" onChange={function(e){setPart("turn",{from:e.target.value,on:true});}} style={Object.assign({},inp,{width:60})} />
+          <span style={{fontFamily:"'Cinzel',serif",fontSize:10,color:"rgba(232,213,176,.5)"}}>into</span>
+          <input type="number" value={(m.turn&&m.turn.to)||""} placeholder="4" onChange={function(e){setPart("turn",{to:e.target.value,on:true});}} style={Object.assign({},inp,{width:44,color:"var(--gold-l)"})} />
+        </div>
+        <div style={row}>
+          <span onClick={function(){setPart("reroll",{on:!(m.reroll&&m.reroll.on)});}} style={chk(m.reroll&&m.reroll.on)} />
+          <span style={lbl}>REROLL ANY</span>
+          <input value={(m.reroll&&m.reroll.vals)||""} placeholder="1,2" onChange={function(e){setPart("reroll",{vals:e.target.value,on:true});}} style={Object.assign({},inp,{width:60})} />
+          <select value={(m.reroll&&m.reroll.mode)||"once"} onChange={function(e){setPart("reroll",{mode:e.target.value,on:true});}} style={sel}>
+            <option value="once">once (keep new)</option><option value="until">until clear</option>
+          </select>
+          {m.reroll&&m.reroll.on&&<span style={{display:"inline-flex",alignItems:"center",gap:4}}><span style={{fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,.45)"}}>max</span>
+            <input type="number" min="1" value={(m.reroll&&m.reroll.max)||""} placeholder="∞" onChange={function(e){setPart("reroll",{max:e.target.value,on:true});}} style={Object.assign({},inp,{width:40,color:"var(--arcane-l)"})} /></span>}
+        </div>
+        <div style={row}>
+          <span onClick={function(){setPart("explode",{on:!(m.explode&&m.explode.on)});}} style={chk(m.explode&&m.explode.on)} />
+          <span style={lbl}>EXPLODE ON</span>
+          <input type="number" value={(m.explode&&m.explode.threshold)||""} placeholder={""+(sides||"")} onChange={function(e){setPart("explode",{threshold:e.target.value,on:true});}} style={Object.assign({},inp,{width:44,color:"var(--gold-l)"})} />
+          <select value={(m.explode&&m.explode.mode)||"perdie"} onChange={function(e){setPart("explode",{mode:e.target.value,on:true});}} style={sel}>
+            <option value="perdie">once per die</option><option value="until">until no new</option>
+          </select>
+        </div>
+        <div style={Object.assign({},row,{borderTop:"1px solid rgba(123,79,207,.2)",paddingTop:10})}>
+          <span style={lbl}>BONUS PER DIE</span>
+          <span onClick={function(){setFOpen(true);}} title="Level, half level, proficiency, ability modifiers…" style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:m.formula?"var(--gold-l)":"rgba(232,213,176,.4)",border:"1px solid rgba(201,150,42,.4)",borderRadius:3,padding:"4px 12px",minWidth:46,textAlign:"center",userSelect:"none"}}>{m.formula?(bonus>=0?"+":"")+bonus:"none"}</span>
+          <span style={{fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>added to every die (CON by default)</span>
+        </div>
+        <div style={Object.assign({},row,{justifyContent:"space-between"})}>
+          <div onClick={function(){setMods(function(p){return {_perm:p._perm,formula:null};});}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,color:"rgba(201,74,42,.7)",textTransform:"uppercase",userSelect:"none"}}>Clear all</div>
+          <div onClick={function(){setMods(function(p){return Object.assign({},p,{_perm:!p._perm});});}} title="Once = for this short rest only. Permanent = saved and loaded every short rest."
+            style={{cursor:"pointer",padding:"4px 12px",borderRadius:9,border:"1px solid "+(m._perm?"rgba(232,184,75,.55)":"rgba(123,79,207,.35)"),background:m._perm?"rgba(232,184,75,.12)":"rgba(123,79,207,.08)",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,color:m._perm?"var(--gold-l)":"var(--arcane-l)",userSelect:"none"}}>{m._perm?"PERMANENT":"ONCE"}</div>
+        </div>
+        <div style={{display:"flex",justifyContent:"flex-end"}}><div onClick={onClose} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1,textTransform:"uppercase",padding:"8px 22px",borderRadius:2,userSelect:"none",border:"1px solid rgba(123,79,207,.6)",color:"var(--arcane-l)"}}>Done</div></div>
+        {fOpen&&<FormulaModal c={c} initialFormula={m.formula||{flat:"",abls:[],profs:[],lvlEntries:[]}} title="Bonus per hit die"
+          onClose={function(){setFOpen(false);}}
+          onApply={function(total,formula){setMods(function(p){return Object.assign({},p,{formula:formula});});setFOpen(false);}}
+          onClear={m.formula?function(){setMods(function(p){return Object.assign({},p,{formula:null});});setFOpen(false);}:null} />}
+      </div>
+    </div>,document.body);
+}
+function ShortRestFlow({c,onFinish,onClose}){
+  var classes=_lrClasses(c).filter(function(cl){return (parseInt(cl.lv)||0)>0;});
+  var s1=React.useState("ask"),step=s1[0],setStep=s1[1];
+  var s2=React.useState({used:{},rolls:{},healed:0,log:[]}),stage=s2[0],setStage=s2[1];
+  var s3=React.useState(function(){var sv=c.srHdMod;return sv?Object.assign({},sv,{_perm:true}):{_perm:false,formula:{flat:"",abls:["CON"],profs:[],lvlEntries:[]}};}),mods=s3[0],setMods=s3[1];
+  var s4=React.useState(false),modOpen=s4[0],setModOpen=s4[1];
+  var bs={cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1,textTransform:"uppercase",padding:"10px 20px",borderRadius:2,userSelect:"none",textAlign:"center"};
+  var good=Object.assign({},bs,{border:"1px solid rgba(201,150,42,.6)",color:"#e8b84b",background:"rgba(201,150,42,.12)"});
+  var neutral=Object.assign({},bs,{border:"1px solid rgba(232,213,176,.25)",color:"rgba(232,213,176,.7)"});
+  var q={fontFamily:"'Cinzel',serif",fontSize:15,letterSpacing:1,color:"var(--gold-l)",marginBottom:14,lineHeight:1.4,textAlign:"center"};
+  var hdExp=c.hdExp||{};
+  var max=_hdMax(c),hasCur=(c.hpc!==""&&c.hpc!=null),cur=hasCur?(parseInt(c.hpc)||0):max;
+  var after=max>0?Math.min(max,cur+stage.healed):cur+stage.healed;
+  var firstSides=classes.length?(parseInt(String(classes[0].hd||"d6").replace(/\D/g,""))||6):6;
+  var roll=function(cl){
+    var sides=parseInt(String(cl.hd||"d6").replace(/\D/g,""))||6;
+    var r=hdRollOne(sides,mods,c);
+    setStage(function(p){var u=Object.assign({},p.used),rl=Object.assign({},p.rolls);u[cl.nm]=(u[cl.nm]||0)+1;rl[cl.nm]=(rl[cl.nm]||[]).concat([r.total]);return {used:u,rolls:rl,healed:p.healed+r.total,log:p.log.concat([{cls:cl.nm,sides:sides,r:r}])};});
+  };
+  var ok=function(){
+    var hdOf={};classes.forEach(function(cl){hdOf[cl.nm]=cl.hd||"d6";});
+    var keep=mods._perm?(function(){var o=Object.assign({},mods);delete o._perm;return (o.turn||o.reroll||o.explode||o.formula)?o:null;})():undefined;
+    onFinish({used:stage.used,healed:stage.healed,hdOf:hdOf,savePerm:keep});
+  };
+  return ReactDOM.createPortal(
+    <div onClick={step==="ask"?onClose:undefined} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.72)",zIndex:100003,display:"flex",alignItems:"center",justifyContent:"center",padding:12,boxSizing:"border-box"}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.5)",borderRadius:4,padding:"18px 18px",maxWidth:step==="ask"?380:460,width:"100%",maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+        {step==="ask"&&<React.Fragment>
+          <div style={q}>Do you want to take a short rest?</div>
+          <div style={{textAlign:"center",fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgba(232,213,176,.6)",marginBottom:18}}>Short rests taken since last long rest: <b style={{color:"var(--gold-l)"}}>{parseInt(c.srTaken)||0}</b></div>
+          <div style={{display:"flex",gap:10,justifyContent:"center"}}><div style={Object.assign({},good,{flex:1})} onClick={function(){if(classes.length)setStep("hd");else onFinish({used:{},healed:0,hdOf:{},savePerm:undefined});}}>Yes</div><div style={Object.assign({},neutral,{flex:1})} onClick={onClose}>No</div></div>
+        </React.Fragment>}
+        {step==="hd"&&<React.Fragment>
+          <div style={Object.assign({},q,{marginBottom:8})}>Spend Hit Die to Restore HP</div>
+          <div style={{textAlign:"center",fontFamily:"'Cinzel',serif",fontSize:14,marginBottom:12,color:"rgba(232,213,176,.7)"}}>HP <b style={{color:"#e07060"}}>{cur}</b> → <b style={{color:"#6fcf85"}}>{after}</b>{max>0&&<span style={{color:"rgba(232,213,176,.45)"}}> / {max}</span>}{stage.healed>0&&<span style={{color:"#6fcf85",marginLeft:8}}>+{after-cur}</span>}</div>
+          {classes.map(function(cl){
+            var lv=parseInt(cl.lv)||0,sides=parseInt(String(cl.hd||"d6").replace(/\D/g,""))||6;
+            var spent0=Math.min(lv,parseInt(hdExp[cl.nm])||0),staged=stage.used[cl.nm]||0,left=Math.max(0,lv-spent0-staged);
+            return <div key={cl.nm} style={{marginBottom:12}}>
+              <div style={{display:"flex",alignItems:"baseline",gap:8,marginBottom:6}}>
+                <span style={{fontFamily:"'Cinzel',serif",fontSize:12,letterSpacing:1,color:"var(--gold-l)",textTransform:"uppercase"}}>{cl.nm}</span>
+                <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.5)"}}>d{sides} · {left}/{lv} left</span>
+              </div>
+              <div style={{display:"flex",flexWrap:"wrap",gap:7}}>
+                {Array.from({length:lv}).map(function(_,i){
+                  var st=i<spent0?"spent":i<spent0+staged?"rolled":"ready";
+                  return <HdDie key={i} sides={sides} state={st} val={st==="rolled"?(stage.rolls[cl.nm]||[])[i-spent0]:null} onClick={function(){roll(cl);}} />;
+                })}
+              </div>
+            </div>;
+          })}
+          {stage.log.length>0&&<div style={{maxHeight:96,overflowY:"auto",margin:"4px 0 12px",padding:"6px 9px",background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,150,42,.15)",borderRadius:3,display:"flex",flexDirection:"column",gap:2}}>
+            {stage.log.map(function(l,i){return <div key={i} style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.8)"}}>{l.cls} d{l.sides}: <b>{l.r.vals.join("+")}</b>{l.r.bonus?<span> {l.r.bonus>0?"+":"−"} {Math.abs(l.r.bonus)}</span>:null} = <b style={{color:"#6fcf85"}}>{l.r.total}</b>{l.r.notes.length>0&&<i style={{color:"rgba(184,154,240,.6)"}}> ({l.r.notes.join(", ")})</i>}</div>;})}
+          </div>}
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,flexWrap:"wrap"}}>
+            <div onClick={function(){setModOpen(true);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,color:"var(--arcane-l)",border:"1px solid rgba(123,79,207,.45)",background:"rgba(123,79,207,.1)",padding:"9px 12px",borderRadius:3,userSelect:"none"}}>⚙ Die modifier{_hdModLabel(mods,c)?" · "+_hdModLabel(mods,c):""}{mods._perm?" ★":""}</div>
+            <div style={{display:"flex",gap:8}}><div style={neutral} onClick={onClose}>Cancel</div><div style={good} onClick={ok}>OK</div></div>
+          </div>
+        </React.Fragment>}
+        {modOpen&&<HdModEditor mods={mods} setMods={setMods} c={c} sides={firstSides} onClose={function(){setModOpen(false);}} />}
+      </div>
+    </div>,document.body);
+}
+// How many of `exp` spent uses/slots/points come back on a short rest, from the ⟳ rest-recharge settings.
+function _srBack(c,rc,sr,srF,max,def,exp){
+  if(exp<=0)return 0;
+  var i=restInfo(c,rc,sr,srF,max,def);
+  if(i.sr>0)return Math.min(exp,i.sr);
+  if(i.tag==="SR")return exp;
+  return 0;
+}
+function applyShortRest(c,st){
+  var patch={},msgs=[];
+  patch.srTaken=(parseInt(c.srTaken)||0)+1;
+  // hit dice + healing
+  var tot=0,parts=[],he=Object.assign({},c.hdExp||{});
+  Object.keys(st.used||{}).forEach(function(n){var k=st.used[n];if(k>0){he[n]=(parseInt(he[n])||0)+k;tot+=k;parts.push(k+" "+(st.hdOf&&st.hdOf[n]||"d6")+(n?" ("+n+")":""));}});
+  if(tot>0){
+    patch.hdExp=he;
+    var max=_hdMax(c),hasCur=(c.hpc!==""&&c.hpc!=null),cur=hasCur?(parseInt(c.hpc)||0):max;
+    var nc=max>0?Math.min(max,cur+st.healed):cur+st.healed;
+    patch.hpc=""+nc;if(max>0)patch.hpDmg=""+Math.max(0,max-nc);
+    if(nc>0&&((c.ds||[]).some(Boolean)||(c.df||[]).some(Boolean))){patch.ds=[false,false,false];patch.df=[false,false,false];}
+    msgs.push("Spent "+tot+" hit di"+(tot===1?"e":"ce")+": "+parts.join(", ")+". Rolled "+st.healed+" HP. HP "+cur+" → "+nc+(max>0?" / "+max:"")+(nc-cur<st.healed?" (capped at max)":"")+".");
+  }
+  // limited features / feats / species features
+  var featMsgs=[];
+  ["feat","fts","spec"].forEach(function(k){
+    var changed=false;
+    var out=(c[k]||[]).map(function(f){
+      if(!f||!f.limited||!f.limits)return f;
+      var fc=false;
+      var lims=f.limits.map(function(l){
+        var e=Math.max(0,parseInt(l.exp)||0),m=_limMax(c,l);
+        var n=_srBack(c,l.recharge,l.srAmt,l.srFormula,m,"Long Rest",e);
+        if(n>0){fc=true;featMsgs.push((f.nm||"Feature")+(l.name?" ("+l.name+")":"")+": +"+n+" use"+(n===1?"":"s")+(e-n<=0?" (all)":""));return Object.assign({},l,{exp:""+(e-n)});}
+        return l;
+      });
+      if(fc){changed=true;return Object.assign({},f,{limits:lims});}
+      return f;
+    });
+    if(changed)patch[k]=out;
+  });
+  if(featMsgs.length)msgs.push("Features: "+featMsgs.join("; ")+".");
+  // spell slots
+  var slotMsgs=[],ns=Object.assign({},c.slotExp||{}),sChanged=false;
+  for(var lv=1;lv<=9;lv++){
+    var sm=parseInt((c.slotMax||{})[lv])||0,se=Math.min(sm,Math.max(0,parseInt((c.slotExp||{})[lv])||0));
+    var sn=_srBack(c,(c.slotRc||{})[lv],(c.slotSr||{})[lv],(c.slotSrF||{})[lv],sm,"Long Rest",se);
+    if(sn>0){ns[lv]=""+(se-sn);sChanged=true;slotMsgs.push("level "+lv+" +"+sn);}
+  }
+  if(sChanged){patch.slotExp=ns;msgs.push("Spell slots: "+slotMsgs.join(", ")+".");}
+  // spell / sorcery points
+  var pm=parseInt(c.spellPtsMax)||0,pu=Math.max(0,parseInt(c.spellPtsUsed)||0);if(pm>0)pu=Math.min(pm,pu);
+  var pn=_srBack(c,c.sptRc,c.sptSr,c.sptSrF,pm,"Long Rest",pu);
+  if(pn>0){patch.spellPtsUsed=pu-pn>0?""+(pu-pn):"";msgs.push("Spell / sorcery points: +"+pn+(pu-pn<=0?" (all)":"")+".");}
+  // exploit dice
+  var xm=parseInt(c.exploitDice)||0,xe=Math.max(0,parseInt(c.exploitDiceExp)||0);if(xm>0)xe=Math.min(xm,xe);
+  var xn=_srBack(c,c.exRc,c.exSr,c.exSrF,xm,"Short Rest",xe);
+  if(xn>0){patch.exploitDiceExp=""+(xe-xn);msgs.push("Exploit dice: +"+xn+(xe-xn<=0?" (all)":"")+".");}
+  if(!featMsgs.length&&!sChanged&&pn<=0&&xn<=0)msgs.push("Nothing needed restoring on a short rest.");
+  return {patch:patch,msgs:msgs};
+}
+function LongRestResult({msgs,onClose,title,bad,note}){
+  return ReactDOM.createPortal(
+    <div onClick={onClose} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.72)",zIndex:100003,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid "+(bad?"rgba(201,74,42,.6)":"rgba(74,156,92,.5)"),borderRadius:4,padding:"20px 22px",maxWidth:440,width:"100%",maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+        <div style={{fontFamily:"'Cinzel',serif",fontSize:14,letterSpacing:2,color:bad?"#e07060":"#6fcf85",marginBottom:12,textTransform:"uppercase"}}>{title||"☾ Long rest complete"}</div>
+        <div style={{display:"flex",flexDirection:"column",gap:8,marginBottom:18}}>
+          {msgs.map(function(m,i){return <div key={i} style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"var(--parch)",lineHeight:1.45}}>• {m}</div>;})}
+        </div>
+        {!bad&&<div style={{display:"flex",gap:10,alignItems:"flex-start",marginBottom:18,padding:"9px 11px",background:"rgba(201,150,42,.08)",border:"1px solid rgba(201,150,42,.35)",borderRadius:3}}>
+          <span style={{flex:"0 0 auto",fontSize:20,lineHeight:1,color:"#e0a93a"}}>⚠</span>
+          <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.85)",lineHeight:1.4}}>{note||"Don't forget to apply anything your features grant after a long rest, such as Inspiration or temporary hit points."}</span>
+        </div>}
+        <div style={{display:"flex",justifyContent:"flex-end"}}><div onClick={onClose} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1,textTransform:"uppercase",padding:"9px 22px",borderRadius:2,userSelect:"none",border:"1px solid rgba(74,156,92,.6)",color:"#6fcf85",background:"rgba(74,156,92,.12)"}}>OK</div></div>
+      </div>
+    </div>,document.body);
 }
 function CompactFeatureRow({name,sub,cost,limited,lims,onAdjust,onRestore,border,onOpen,onDelete,ph,dkey,di,s}){
   return (
@@ -11042,10 +11588,10 @@ function CompactFeatureRow({name,sub,cost,limited,lims,onAdjust,onRestore,border
       {!sub&&<span style={{flex:"1 0 8px"}} />}
       {limited&&(lims&&lims.length>0?lims.map(function(l){
         var bs=function(col,bd){return {cursor:"pointer",background:"transparent",border:"1px solid "+bd,color:col,fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,lineHeight:1,padding:0,width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,touchAction:"manipulation"};};
-        return <span key={l.li} onClick={function(e){e.stopPropagation();}} title={(l.name?l.name+": ":"")+l.rem+" of "+l.max+" uses left"+(l.rc?" ("+(l.rc==="SR"?"short":"long")+" rest)":"")}
+        return <span key={l.li} onClick={function(e){e.stopPropagation();}} title={(l.name?l.name+": ":"")+l.rem+" of "+l.max+" uses left"+(l.sr>0?" (regains "+l.sr+" on a short rest, all on a long rest)":l.rc?" ("+(l.rc==="SR"?"short":"long")+" rest)":"")+(l.lr!=null&&!isNaN(l.lr)?" — returns after "+l.lr+" more long rest"+(l.lr===1?"":"s"):"")}
           style={{display:"inline-flex",alignItems:"center",gap:6,flexShrink:0,whiteSpace:"nowrap"}}>
           <button style={bs("rgba(201,74,42,.7)","rgba(201,74,42,.3)")} onClick={function(e){e.stopPropagation();onAdjust&&onAdjust(l.li,-1);}} title="Use one">−</button>
-          <span style={{fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:700,letterSpacing:.5,color:l.max<=0?"rgba(232,213,176,.4)":l.rem>l.max*0.6?"#4a9c5c":l.rem>l.max*0.3?"#c9962a":"#c94a2a",minWidth:34,textAlign:"center"}}>{l.rem}/{l.max}{l.rc?" "+l.rc:""}</span>
+          <span style={{fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:700,letterSpacing:.5,color:l.max<=0?"rgba(232,213,176,.4)":l.rem>l.max*0.6?"#4a9c5c":l.rem>l.max*0.3?"#c9962a":"#c94a2a",minWidth:34,textAlign:"center"}}>{l.rem}/{l.max}{l.sr>0?<span style={{fontSize:10,fontWeight:600,letterSpacing:0,color:"rgba(201,150,42,.85)"}}>{" +"+l.sr+" SR · all LR"}</span>:(l.rc?" "+l.rc:"")}{l.lr!=null&&!isNaN(l.lr)?" ⏳"+l.lr:""}</span>
           <button style={bs("rgba(74,156,92,.7)","rgba(74,156,92,.3)")} onClick={function(e){e.stopPropagation();onAdjust&&onAdjust(l.li,1);}} title="Regain one">+</button>
         </span>;
       }):<span title="Limited (set max uses in the expanded card)" style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"var(--ember)",border:"1px solid rgba(201,74,42,.5)",padding:"1px 6px",borderRadius:8,flexShrink:0}}>Limited</span>)}
@@ -11295,7 +11841,7 @@ function SpeciesFeaturesSection({c,s,q}){
           const key="spec-"+i;
           const dsOpen=(c.dsOpen&&c.dsOpen[key])!==false;
           if(!dsOpen) return <CompactFeatureRow key={i} name={f.nm} sub={speciesSourceText(f)} limited={!!f.limited} lims={limitStates(f,c)} onAdjust={function(li,d){upd(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){upd(i,"limits",(f.limits||[]).map(function(l){return {...l,exp:"0"};}));}} cost={f.cost==null?"":f.cost} border="rgba(201,150,42,.5)" dkey="spec" di={i} s={s} ph="Unnamed feature"
-            onOpen={function(){s("dsOpen",Object.assign({},c.dsOpen||{},{[key]:true}));}} onDelete={function(){window.__confirm("Delete this species feature?",function(){s("spec",list.filter(function(_,j){return j!==i;}));});}} />;
+            onOpen={function(){s("dsOpen",Object.assign({},c.dsOpen||{},{[key]:true}));}} onDelete={function(){window.__confirm("Delete this species feature?",function(){_delAt(s,"spec",list,i,"spec-");});}} />;
           return (
             <div key={i} data-dkey="spec" data-di={i} style={{background:"rgba(0,0,0,.22)",border:"1px solid rgba(201,150,42,.12)",borderLeft:"2px solid rgba(201,150,42,.5)",padding:"8px 10px",gridColumn:wideFeature(f)?"1 / -1":undefined}}>
               <div style={{display:"flex",gap:8,alignItems:"flex-end"}}>
@@ -11313,7 +11859,7 @@ function SpeciesFeaturesSection({c,s,q}){
                 </div>
                 <button onClick={function(){upd(i,"limited",!f.limited);}} title="Toggle limited use tracking"
                   style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",padding:"3px 7px",flexShrink:0,cursor:"pointer",transition:"all .2s",marginBottom:2,background:f.limited?"rgba(201,74,42,.2)":"transparent",border:"1px solid "+(f.limited?"rgba(201,74,42,.6)":"rgba(201,150,42,.2)"),color:f.limited?"var(--ember)":"rgba(232,213,176,.3)"}}>{f.limited?"Limited":"+ Limit"}</button>
-                <button className="db" onClick={function(){window.__confirm("Delete this species feature?",function(){s("spec",list.filter(function(_,j){return j!==i;}));});}}>x</button>
+                <button className="db" onClick={function(){window.__confirm("Delete this species feature?",function(){_delAt(s,"spec",list,i,"spec-");});}}>x</button>
               </div>
               {f.limited&&(function(){
                 var lims=f.limits&&f.limits.length?f.limits:[{name:"",uses:"",exp:"",die:"NO",recharge:""}];
@@ -12053,7 +12599,7 @@ function CompendiumPage({c,s}){
       </React.Fragment>)}
       {crAdd&&(
         <div onClick={function(){setCrAdd(null);}}
-          style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+          style={{position:"fixed",top:0,left:0,right:0,bottom:0,height:"100dvh",boxSizing:"border-box",background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
           <div onClick={function(e){e.stopPropagation();}}
             style={{background:"#1a1410",border:"1px solid rgba(123,79,207,.5)",borderRadius:4,padding:"22px 26px",maxWidth:400,boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
             <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--arcane-l)",marginBottom:10}}>Add {crAdd.entry.name} as a {crAdd.tag}</div>
@@ -12088,7 +12634,7 @@ function CompendiumPage({c,s}){
       {/* Confirm add modal */}
       {confirmAdd&&(
         <div onClick={function(){setConfirmAdd(null);}}
-          style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+          style={{position:"fixed",top:0,left:0,right:0,bottom:0,height:"100dvh",boxSizing:"border-box",background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
           <div onClick={function(e){e.stopPropagation();}}
             style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,padding:"22px 26px",maxWidth:380,boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
             <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--gold-l)",marginBottom:10}}>Add to {kind==="spells"?"Spell List":kind==="feats"?"Feats":kind==="exploits"?"Exploit List":"Inventory"}?</div>
@@ -12134,7 +12680,7 @@ function CompendiumPage({c,s}){
       )}
       {confirmAddAll&&kind==="spells"&&(
         <div onClick={function(){setConfirmAddAll(false);}}
-          style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+          style={{position:"fixed",top:0,left:0,right:0,bottom:0,height:"100dvh",boxSizing:"border-box",background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
           <div onClick={function(e){e.stopPropagation();}}
             style={{background:"#1a1410",border:"1px solid rgba(123,79,207,.5)",borderRadius:4,padding:"22px 26px",maxWidth:400,boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
             <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--arcane-l)",marginBottom:10}}>Add All {totalResults} Spell{totalResults===1?"":"s"} to Spell List?</div>
@@ -12164,7 +12710,7 @@ function CompendiumPage({c,s}){
       )}
       {confirmAddAll&&kind==="exploits"&&(
         <div onClick={function(){setConfirmAddAll(false);}}
-          style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+          style={{position:"fixed",top:0,left:0,right:0,bottom:0,height:"100dvh",boxSizing:"border-box",background:"rgba(0,0,0,.7)",zIndex:100000,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
           <div onClick={function(e){e.stopPropagation();}}
             style={{background:"#1a1410",border:"1px solid rgba(201,74,42,.5)",borderRadius:4,padding:"22px 26px",maxWidth:400,boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
             <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"#e07060",marginBottom:10}}>Add All {totalResults} Exploit{totalResults===1?"":"s"} to Exploit List?</div>
@@ -12193,7 +12739,7 @@ function CompendiumPage({c,s}){
         </div>
       )}
       {weightPrompt&&(
-        <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.7)",zIndex:100002,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+        <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,height:"100dvh",boxSizing:"border-box",background:"rgba(0,0,0,.7)",zIndex:100002,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
           <div onClick={function(e){e.stopPropagation();}}
             style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,padding:"22px 26px",maxWidth:360,boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
             <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--gold-l)",marginBottom:10}}>Confirm Item Weight</div>
@@ -12212,9 +12758,9 @@ function CompendiumPage({c,s}){
       )}
       {skippedInfo&&(
         <div onClick={function(){setSkippedInfo(null);}}
-          style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.7)",zIndex:100001,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+          style={{position:"fixed",top:0,left:0,right:0,bottom:0,height:"100dvh",boxSizing:"border-box",background:"rgba(0,0,0,.7)",zIndex:100001,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
           <div onClick={function(e){e.stopPropagation();}}
-            style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,padding:"22px 26px",maxWidth:420,maxHeight:"70vh",overflowY:"auto",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+            style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,padding:"22px 26px",maxWidth:420,maxHeight:"100%",overflowY:"auto",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
             <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--gold-l)",marginBottom:10}}>{(function(){var w=kind==="exploits"?"Exploit":"Spell";return skippedInfo.names.length===1?(w+" Already in List"):(skippedInfo.names.length+" "+w+"s Already in List");})()}</div>
             <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.6)",marginBottom:14,lineHeight:1.6}}>
               The following {kind==="exploits"?(skippedInfo.names.length===1?"exploit was":"exploits were"):(skippedInfo.names.length===1?"spell was":"spells were")} not added because {skippedInfo.names.length===1?"it already exists":"they already exist"} under <span style={{color:"var(--gold-l)",fontWeight:600}}>{skippedInfo.cls?skippedInfo.cls:(kind==="exploits"?"Other / Unassigned":"Other Spells")}</span>:
@@ -12233,7 +12779,7 @@ function CompendiumPage({c,s}){
       )}
       {lightbox&&(
         <div onClick={function(){setLightbox(null);}}
-          style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.9)",zIndex:100005,display:"flex",alignItems:"center",justifyContent:"center",padding:20,cursor:"zoom-out"}}>
+          style={{position:"fixed",top:0,left:0,right:0,bottom:0,height:"100dvh",boxSizing:"border-box",background:"rgba(0,0,0,.9)",zIndex:100005,display:"flex",alignItems:"center",justifyContent:"center",padding:20,cursor:"zoom-out"}}>
           <img src={lightbox} alt="" onClick={function(e){e.stopPropagation();setLightbox(null);}}
             style={{maxWidth:"95vw",maxHeight:"95vh",objectFit:"contain",borderRadius:4,boxShadow:"0 8px 50px rgba(0,0,0,.9)",cursor:"zoom-out"}} />
         </div>
@@ -13158,9 +13704,9 @@ function CreaturesPage({c,s}){
 
     {/* Markdown statblock import modal */}
     {mdModal&&ReactDOM.createPortal(
-      <div style={{position:"fixed",inset:0,zIndex:10001,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.8)"}}
+      <div style={{position:"fixed",inset:0,height:"100dvh",boxSizing:"border-box",zIndex:10001,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.8)"}}
         onClick={function(){setMdModal(false);}}>
-        <div style={{background:"#1a1208",border:"1px solid rgba(201,150,42,.4)",padding:"22px 26px",minWidth:340,maxWidth:680,width:"94vw",maxHeight:"90vh",overflowY:"auto",boxShadow:"0 8px 40px rgba(0,0,0,.9)"}}
+        <div style={{background:"#1a1208",border:"1px solid rgba(201,150,42,.4)",padding:"22px 26px",minWidth:340,maxWidth:680,width:"94vw",maxHeight:"100%",overflowY:"auto",boxShadow:"0 8px 40px rgba(0,0,0,.9)"}}
           onClick={function(e){e.stopPropagation();}}>
           <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:2,color:"var(--gold-l)",textTransform:"uppercase",marginBottom:4,borderBottom:"1px solid rgba(201,150,42,.15)",paddingBottom:8}}>
             Import Statblock from Markdown
@@ -13213,7 +13759,7 @@ function CreaturesPage({c,s}){
       var abl=tfStatModal.abl;
       var currentVal=tfCr.stats&&tfCr.stats[abl]!=null?tfCr.stats[abl]:"";
       return ReactDOM.createPortal(
-        <div style={{position:"fixed",inset:0,zIndex:10000,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.78)"}}
+        <div style={{position:"fixed",inset:0,height:"100dvh",boxSizing:"border-box",zIndex:10000,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.78)"}}
           onClick={function(){setTfStatModal(null);}}>
           <div style={{background:"#1a1208",border:"1px solid rgba(201,74,42,.4)",padding:"22px 28px",minWidth:260,maxWidth:360,width:"90vw",boxShadow:"0 8px 40px rgba(0,0,0,.9)"}}
             onClick={function(e){e.stopPropagation();}}>
@@ -13353,9 +13899,9 @@ function CreaturesPage({c,s}){
         :Object.assign({},sp);
       var cycle=function(current){return !current?"prof":current==="prof"?"expert":null;};
       return ReactDOM.createPortal(
-        <div style={{position:"fixed",inset:0,zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.78)"}}
+        <div style={{position:"fixed",inset:0,height:"100dvh",boxSizing:"border-box",zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.78)"}}
           onClick={function(){setSkillModal(null);}}>
-          <div style={{background:"#1a1208",border:"1px solid rgba(201,150,42,.35)",padding:"20px 24px",minWidth:320,maxWidth:480,width:"92vw",maxHeight:"88vh",overflowY:"auto",boxShadow:"0 8px 40px rgba(0,0,0,.9)"}}
+          <div style={{background:"#1a1208",border:"1px solid rgba(201,150,42,.35)",padding:"20px 24px",minWidth:320,maxWidth:480,width:"92vw",maxHeight:"100%",overflowY:"auto",boxShadow:"0 8px 40px rgba(0,0,0,.9)"}}
             onClick={function(e){e.stopPropagation();}}>
             <div style={{fontFamily:"'Cinzel',serif",fontSize:12,letterSpacing:2,color:"rgba(201,150,42,.8)",textTransform:"uppercase",marginBottom:4,borderBottom:"1px solid rgba(201,150,42,.15)",paddingBottom:8}}>
               Skill Proficiencies — {cr.nm||"Creature"}
@@ -13430,7 +13976,7 @@ function CreaturesPage({c,s}){
 
 function ConfirmModal({message,onYes,onNo,confirmLabel}){
   return ReactDOM.createPortal(
-    <div style={{position:"fixed",inset:0,zIndex:99999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.8)"}} onClick={onNo}>
+    <div style={{position:"fixed",inset:0,height:"100dvh",boxSizing:"border-box",zIndex:99999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.8)"}} onClick={onNo}>
       <div style={{background:"#1a1208",border:"1px solid rgba(201,74,42,.4)",padding:"22px 28px",minWidth:280,maxWidth:400,width:"90vw",boxShadow:"0 8px 40px rgba(0,0,0,.9)"}} onClick={function(e){e.stopPropagation();}}>
         <div style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1,color:"rgba(232,213,176,.7)",marginBottom:18,lineHeight:1.6,whiteSpace:"pre-line"}}>{message||"Are you sure you want to delete this?"}</div>
         <div style={{display:"flex",gap:10,justifyContent:"flex-end"}}>
@@ -13451,6 +13997,27 @@ function App(){
   const s=(k,v)=>setC(function(prev){const next={...prev,[k]:typeof v==="function"?v(prev[k]):v};if(window.__characterAutoSave)setTimeout(function(){window.__characterAutoSave(next);},100);return next;});
   const [hiddenTabs,setHiddenTabs]=useState(function(){try{var h=JSON.parse(localStorage.getItem('_ht'));return Array.isArray(h)?h:[];}catch(e){return [];}});
   const [showTabMgr,setShowTabMgr]=useState(false);
+  const [lrFlow,setLrFlow]=useState(false);
+  const [srFlow,setSrFlow]=useState(false);
+  const [lrRes,setLrRes]=useState(null);
+  const [lrToast,setLrToast]=useState(null);
+  window.__longRest=function(){
+    const dead=(parseInt(c.exhaustion)||0)>=6||(c.df||[]).filter(Boolean).length>=3;
+    if(dead)setLrRes({title:"☾ Long rest",msgs:["You cannot take a long rest while dead."],bad:true});else setLrFlow(true);
+  };
+  window.__shortRest=function(){
+    const dead=(parseInt(c.exhaustion)||0)>=6||(c.df||[]).filter(Boolean).length>=3;
+    if(dead)setLrRes({title:"☀ Short rest",msgs:["You cannot take a short rest while dead."],bad:true});else setSrFlow(true);
+  };
+  React.useEffect(function(){
+    let patch={},msgs=[];
+    ["feat","fts","spec"].forEach(function(k){const r=syncLrCounters(c[k],c);if(r.changed){patch[k]=r.list;msgs=msgs.concat(r.msgs);}});
+    if(Object.keys(patch).length){
+      setC(function(prev){const next=Object.assign({},prev,patch);if(window.__characterAutoSave)setTimeout(function(){window.__characterAutoSave(next);},100);return next;});
+      if(msgs.length)setLrToast(msgs.join(" · "));
+    }
+  },[c.feat,c.fts,c.spec]);
+  React.useEffect(function(){if(!lrToast)return;const t=setTimeout(function(){setLrToast(null);},5000);return function(){clearTimeout(t);};},[lrToast]);
   const savedRolls=c.savedRolls||[];
   const saveSRApp=function(updater){s("savedRolls",function(prev){return updater(Array.isArray(prev)?prev:[]);});};
 
@@ -13518,6 +14085,19 @@ function App(){
   return (
     <>
       <style>{CSS}</style>
+      {lrFlow&&<LongRestFlow hasHD={_lrClasses(c).length>0} exLv={Math.min(6,Math.max(0,parseInt(c.exhaustion)||0))} items={lrItemList(c)} onClose={function(){setLrFlow(false);}} onFinish={function(hdMode,exRem,selIds){
+        setLrFlow(false);
+        const r=applyLongRest(c,hdMode,exRem,selIds);
+        setC(function(prev){const next=Object.assign({},prev,r.patch);if(window.__characterAutoSave)setTimeout(function(){window.__characterAutoSave(next);},100);return next;});
+        setLrRes(r.msgs);}} />}
+      {srFlow&&<ShortRestFlow c={c} onClose={function(){setSrFlow(false);}} onFinish={function(stage){
+        setSrFlow(false);
+        const r=applyShortRest(c,stage);
+        if(stage.savePerm!==undefined)r.patch.srHdMod=stage.savePerm;
+        setC(function(prev){const next=Object.assign({},prev,r.patch);if(window.__characterAutoSave)setTimeout(function(){window.__characterAutoSave(next);},100);return next;});
+        setLrRes({title:"☀ Short rest complete",msgs:r.msgs,note:"Don't forget to apply anything your features grant on a short rest, such as Inspiration, temporary hit points or removing exhaustion levels."});}} />}
+      {lrRes&&<LongRestResult msgs={Array.isArray(lrRes)?lrRes:lrRes.msgs} note={Array.isArray(lrRes)?null:lrRes.note} title={Array.isArray(lrRes)?null:lrRes.title} bad={!Array.isArray(lrRes)&&lrRes.bad} onClose={function(){setLrRes(null);}} />}
+      {lrToast&&ReactDOM.createPortal(<div onClick={function(){setLrToast(null);}} style={{position:"fixed",top:((document.getElementById("save-bar")||{}).offsetHeight||48)+8,left:"50%",transform:"translateX(-50%)",zIndex:100002,maxWidth:"min(92vw,560px)",boxSizing:"border-box",background:"linear-gradient(145deg,#1d1608,#120d05)",border:"1px solid rgba(201,150,42,.5)",borderRadius:3,padding:"8px 14px",fontFamily:"'EB Garamond',serif",fontSize:14,color:"var(--gold-l)",boxShadow:"0 4px 20px rgba(0,0,0,.7)",cursor:"pointer"}}>⏳ {lrToast}</div>,document.body)}
       {confirmState.open&&<ConfirmModal
         message={confirmState.message}
         confirmLabel={confirmState.confirmLabel}
@@ -13634,7 +14214,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.21.19</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.25.0</div>
 
 </script>
 </body>
