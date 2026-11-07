@@ -6982,9 +6982,9 @@ You perform a special religious ceremony that is infused with magic. When you ca
 **Components:** V  
 **Duration:** Instantaneous  
 
-You create chains of ice around a creature you can see within range. The target must make a Dexterity saving throw. On a failed save, it takes 1d10 Cold damage and its Speed is halved until the end of its next turn. On a successful save, it takes half as much damage only.
+You create chains of ice around a creature you can see within range. The target must make a Dexterity saving throw. On a failed save, it takes 1d12 Cold damage and its Speed is halved until the end of its next turn. On a successful save, it takes half as much damage only.
 
-***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d10 for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d12 for each slot level above 1st.
 
 #### Chaos Bolt
 *1st-level Evocation*  
@@ -8869,7 +8869,7 @@ If you command the servant to perform a task that would move it more than 60 fee
 
 Dark energy surges through your veins, bolstering your vitality. For the duration, your Hit Point maximum increases by 10, and you gain the same number of Hit Points. In addition, whenever you regain Hit Points, you regain an extra 1d6 Hit Points. When the spell ends, your Hit Point maximum returns to normal, and your current Hit Points are reduced if they exceed the new maximum.
 
-***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the extra healing increases by 1d6 for each slot level above 1st.
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the Hit Point Maximum increases by 5 and the extra healing increases by 1d6 for each slot level above 1st.
 \column
 
 #### Violent Updraft
@@ -9867,11 +9867,14 @@ On subsequent turns, the target can make a Wisdom saving throw at the end of eac
 **Components:** V, S  
 **Duration:** 1 minute  
 
-You curse one creature within range with excruciating pain. The target must make a Constitution saving throw. On a failed save, it takes 1d4 Psychic damage and is cursed for the duration. On a successful save, the spell ends.
+You curse one creature within range with excruciating pain. The target makes a Constitution saving throw; the spell's damage starts at 1d4 Psychic damage. 
 
-At the end of each of its turns, the cursed target takes Psychic damage and repeats the saving throw, ending the curse on a success. On a failed save, the damage die increases by one step (1d4 to 1d6, 1d6 to 1d8, 1d8 to 1d10, or 1d10 to 1d12, the maximum).
+On a failed save, the target takes the spell's damage, and the spell's damage die increases: from 1d4 to 1d6, 1d6 to 1d8, 1d8 to 1d10, or 1d10 to 1d12 (the maximum). 
 
-***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the starting damage die increases by one step for each slot level above 2nd (to a maximum of 1d12).
+On a successful save, the target takes the spell's damage, and the effect ends. The target repeats the save at the end of each of its turns.
+
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the target takes an additional 1d4 damage initially for each slot level above 2nd.
+
 \column
 #### Dancing Object
 *2nd-level Transmutation*  
@@ -10067,7 +10070,7 @@ You touch one willing creature and imbue it with the power to spew magical energ
 **Components:** V, S  
 **Duration:** Instantaneous  
 
-You exhale verdant healing magic. Each creature of your choice in a 15-foot Cone originating from you regains 2d6 Hit Points. This spell has no effect on undead or constructs.
+You exhale verdant healing magic. Each creature of your choice in a 15-foot Cone originating from you regains 2d6 Hit Points. 
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 3rd level or higher, the healing increases by 2d6 for each slot level above 2nd.
 
