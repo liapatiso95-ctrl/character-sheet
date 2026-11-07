@@ -7458,8 +7458,21 @@ function SpellPage({c,s,from,to}){
     const hasSpellsHere=(c.sp[l]||[]).length>0;
     if(l===0||l<=classMax||hasSpellsHere) allLvls.push(l);
   }
-  const updSpCls=(i,field,val)=>{const a=spCls.map(function(x){return Object.assign({},x);});a[i][field]=val;s("spellClasses",a);};
-  const delSpCls=(i)=>s("spellClasses",spCls.filter((_,j)=>j!==i));
+  const updSpCls=(i,field,val)=>{const a=spCls.map(function(x){return Object.assign({},x);});
+    if(field==="nm"){
+      const old=a[i].nm||a[i]._prev||"";
+      if(val===""){ if(old)a[i]._prev=old; }
+      else { delete a[i]._prev; if(old&&old!==val){ const ns={};Object.keys(c.sp||{}).forEach(function(k){ns[k]=(c.sp[k]||[]).map(function(x){return (x.cls||"")===old?Object.assign({},x,{cls:val}):x;});});s("sp",ns); } }
+    }
+    a[i][field]=val;s("spellClasses",a);};
+  const [delCls,setDelCls]=React.useState(null);
+  const [mvRes,setMvRes]=React.useState(null);
+  const countIn=(name)=>Object.keys(c.sp||{}).reduce(function(t,k){return t+(c.sp[k]||[]).filter(function(x){return (x.cls||"")===name;}).length;},0);
+  const delSpCls=(i,target)=>{
+    const name=spCls[i].nm||"";
+    if(name){const r=_moveClassItems(c.sp,name,target||"",_spSame);s("sp",r.map);if(r.skipped.length)setMvRes({names:r.skipped,cls:target});}
+    s("spellClasses",spCls.filter((_,j)=>j!==i));
+  };
 
   const spExhPen=Math.min(5,Math.max(0,parseInt(c.exhaustion)||0))*-2;
   const clsDC=(sc)=>{const a=sc.abl||"INT";const mod=getMod(c,a);const bon=sc.dcBonusFormula?computeBonusFromFormula(sc.dcBonusFormula,c):(parseInt((sc.dcBonus||"").replace("+",""))||0);const dcPen=c.exhAffectAllDC||c.exhAffectSpellDC?spExhPen:0;return ""+(8+pb+mod+bon+dcPen);};
@@ -7612,7 +7625,8 @@ function SpellPage({c,s,from,to}){
                 <button onClick={function(){updSpCls(i,"open",false);}} title="Close" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(184,154,240,.55)",color:"rgba(184,154,240,.55)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={true} /></button>
                 <input value={sc.nm||""} onChange={function(e){updSpCls(i,"nm",e.target.value);}} placeholder="Class name..."
                   style={{flex:1,background:"transparent",border:"none",borderBottom:"1px solid rgba(123,79,207,.5)",color:"var(--arcane-l)",fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:600,padding:"2px 4px",outline:"none"}} />
-                <button className="db" onClick={function(){window.__confirm("Delete this spellcasting class?",function(){delSpCls(i);});}}>x</button>
+                <button className="db" onClick={function(){const nm=sc.nm||"";const n=nm?countIn(nm):0;if(n>0)setDelCls(i);else window.__confirm("Delete this spellcasting class?",function(){delSpCls(i);});}}>x</button>
+                {delCls===i&&<ClassDeleteDialog kind="spells" clsName={sc.nm||""} count={countIn(sc.nm||"")} targets={spCls.filter(function(o,j){return j!==i&&(o.nm||"");}).map(function(o){return o.nm;})} onCancel={function(){setDelCls(null);}} onConfirm={function(t){setDelCls(null);delSpCls(i,t);}} />}
               </div>
               <div style={{display:"flex",gap:10,alignItems:"flex-end",flexWrap:"wrap",marginBottom:10}}>
                 <div style={{display:"flex",flexDirection:"column",gap:3}}>
@@ -7687,6 +7701,7 @@ function SpellPage({c,s,from,to}){
         })}
         </div>
         <button className="arb" onClick={addSpCls} style={{marginTop:4}}>+ Add Spellcasting Class</button>
+        {mvRes&&<ClassMoveResult kind="spells" cls={mvRes.cls} names={mvRes.names} onClose={function(){setMvRes(null);}} />}
       </div>
 
       {/* Shared Spell Points — shown above 1st level spells */}
@@ -8054,8 +8069,21 @@ function ExploitPage({c,s}){
   const borderCols={"1":"rgba(184,154,240,.35)","2":"rgba(123,79,207,.35)","3":"rgba(201,150,42,.35)","4":"rgba(201,74,42,.35)","5":"rgba(232,50,50,.35)"};
   const exCls=c.exploitClasses||[];
   const addExCls=()=>s("exploitClasses",[...exCls,{nm:"",abl:"STR",dcBonus:"",dcBonusFormula:null,open:true}]);
-  const updExCls=(i,field,val)=>{const a=exCls.map(function(x){return Object.assign({},x);});a[i][field]=val;s("exploitClasses",a);};
-  const delExCls=(i)=>s("exploitClasses",exCls.filter((_,j)=>j!==i));
+  const updExCls=(i,field,val)=>{const a=exCls.map(function(x){return Object.assign({},x);});
+    if(field==="nm"){
+      const old=a[i].nm||a[i]._prev||"";
+      if(val===""){ if(old)a[i]._prev=old; }
+      else { delete a[i]._prev; if(old&&old!==val){ const ns={};Object.keys(c.expl||{}).forEach(function(k){ns[k]=(c.expl[k]||[]).map(function(x){return (x.cls||"")===old?Object.assign({},x,{cls:val}):x;});});s("expl",ns); } }
+    }
+    a[i][field]=val;s("exploitClasses",a);};
+  const [delCls,setDelCls]=React.useState(null);
+  const [mvRes,setMvRes]=React.useState(null);
+  const countIn=(name)=>Object.keys(c.expl||{}).reduce(function(t,k){return t+(c.expl[k]||[]).filter(function(x){return (x.cls||"")===name;}).length;},0);
+  const delExCls=(i,target)=>{
+    const name=exCls[i].nm||"";
+    if(name){const r=_moveClassItems(c.expl,name,target||"",_exSame);s("expl",r.map);if(r.skipped.length)setMvRes({names:r.skipped,cls:target});}
+    s("exploitClasses",exCls.filter((_,j)=>j!==i));
+  };
   const exExhPen=Math.min(5,Math.max(0,parseInt(c.exhaustion)||0))*-2;
   const clsDC=(ec)=>{const mod=getMod(c,ec.abl||"STR");const bon=ec.dcBonusFormula?computeBonusFromFormula(ec.dcBonusFormula,c):(parseInt((ec.dcBonus||"").replace("+",""))||0);const dcPen=c.exhAffectAllDC?exExhPen:0;return ""+(8+pb+mod+bon+dcPen);};
   const classNames=exCls.map(function(ec){return ec.nm||"";}).filter(function(n){return n;});
@@ -8102,7 +8130,8 @@ function ExploitPage({c,s}){
                 <button onClick={function(){updExCls(i,"open",false);}} title="Close" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(224,112,96,.6)",color:"rgba(224,112,96,.6)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={true} /></button>
                 <input value={ec.nm||""} onChange={function(e){updExCls(i,"nm",e.target.value);}} placeholder="Class name..."
                   style={{flex:1,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,74,42,.5)",color:"#e07060",fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:600,padding:"2px 4px",outline:"none"}} />
-                <button className="db" onClick={function(){window.__confirm("Delete this exploit class?",function(){delExCls(i);});}}>x</button>
+                <button className="db" onClick={function(){const nm=ec.nm||"";const n=nm?countIn(nm):0;if(n>0)setDelCls(i);else window.__confirm("Delete this exploit class?",function(){delExCls(i);});}}>x</button>
+                {delCls===i&&<ClassDeleteDialog kind="exploits" clsName={ec.nm||""} count={countIn(ec.nm||"")} targets={exCls.filter(function(o,j){return j!==i&&(o.nm||"");}).map(function(o){return o.nm;})} onCancel={function(){setDelCls(null);}} onConfirm={function(t){setDelCls(null);delExCls(i,t);}} />}
               </div>
               <div style={{display:"flex",gap:10,alignItems:"flex-end",flexWrap:"wrap"}}>
                 <div style={{display:"flex",flexDirection:"column",gap:3}}>
@@ -8130,6 +8159,7 @@ function ExploitPage({c,s}){
         })}
         </div>
         <button className="arb" onClick={addExCls} style={{marginTop:4,borderColor:"rgba(201,74,42,.35)",color:"#e07060"}}>+ Add Exploit Class</button>
+        {mvRes&&<ClassMoveResult kind="exploits" cls={mvRes.cls} names={mvRes.names} onClose={function(){setMvRes(null);}} />}
 
         {/* Shared exploit dice strip — below classes */}
         {!c.exDiceOpen?<div onClick={function(e){if(e.target.closest("[data-keep]")) return;s("exDiceOpen",true);}} title="Click to open" style={{cursor:"pointer",display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",background:"rgba(0,0,0,.2)",border:"1px solid rgba(201,74,42,.2)",padding:"6px 12px",borderRadius:2,marginTop:12}}>
@@ -10943,6 +10973,60 @@ function CompactItemRow({it,dsrc,i,hold,onOpen,onDelete,onChargeUpdate,onMsg,onO
   );
 }
 // Clickable chevron: ">" when closed, "^" when open (drawn with borders so it renders crisply)
+// ── Class deletion helpers (spells / exploits): ask to move items into another class ──
+function ClassDeleteDialog({kind,clsName,count,targets,onCancel,onConfirm}){
+  const [tg,setTg]=React.useState(targets.length?targets[0]:"");
+  const noun=kind==="exploits"?(count===1?"exploit":"exploits"):(count===1?"spell":"spells");
+  const bs={cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"8px 16px",borderRadius:2,userSelect:"none"};
+  return ReactDOM.createPortal(
+    <div onClick={function(e){e.stopPropagation();onCancel();}} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.7)",zIndex:100001,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,padding:"20px 22px",maxWidth:420,width:"100%",maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+        <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--gold-l)",marginBottom:10}}>Delete class "{clsName}"</div>
+        <div style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgba(232,213,176,.75)",marginBottom:12,lineHeight:1.5}}>This class has {count} {noun}. Move {count===1?"it":"them"} to another class, or {count===1?"it":"they"} will be deleted.</div>
+        <select value={tg} onChange={function(e){setTg(e.target.value);}} style={{width:"100%",boxSizing:"border-box",background:"#0d0a08",color:"var(--parch)",border:"1px solid rgba(201,150,42,.35)",fontFamily:"'EB Garamond',serif",fontSize:15,padding:"8px 8px",marginBottom:16}}>
+          {targets.map(function(t){return <option key={t} value={t}>Move to {t}</option>;})}
+          <option value="">Delete the {noun}</option>
+        </select>
+        <div style={{display:"flex",justifyContent:"flex-end",gap:10,flexWrap:"wrap"}}>
+          <div onClick={onCancel} style={Object.assign({},bs,{border:"1px solid rgba(232,213,176,.25)",color:"rgba(232,213,176,.6)"})}>Cancel</div>
+          <div onClick={function(){onConfirm(tg);}} style={Object.assign({},bs,{border:"1px solid rgba(201,74,42,.6)",color:"#e07060",background:"rgba(201,74,42,.12)"})}>{tg?"Move & delete class":"Delete class & "+noun}</div>
+        </div>
+      </div>
+    </div>,document.body);
+}
+function ClassMoveResult({kind,cls,names,onClose}){
+  const w=kind==="exploits"?"Exploit":"Spell";
+  return ReactDOM.createPortal(
+    <div onClick={function(e){e.stopPropagation();onClose();}} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.7)",zIndex:100001,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,padding:"20px 22px",maxWidth:420,width:"100%",maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
+        <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--gold-l)",marginBottom:10}}>{names.length===1?(w+" Already in List"):(names.length+" "+w+"s Already in List")}</div>
+        <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.6)",marginBottom:14,lineHeight:1.6}}>
+          The following {kind==="exploits"?(names.length===1?"exploit was":"exploits were"):(names.length===1?"spell was":"spells were")} not moved because {names.length===1?"it already exists":"they already exist"} under <span style={{color:"var(--gold-l)",fontWeight:600}}>{cls}</span>:
+        </div>
+        <div style={{display:"flex",flexDirection:"column",gap:3,marginBottom:18,paddingLeft:4}}>
+          {names.map(function(nm,i){return <div key={i} style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"var(--parch)"}}>• {nm||"(unnamed)"}</div>;})}
+        </div>
+        <div style={{display:"flex",justifyContent:"flex-end"}}>
+          <div onClick={onClose} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"8px 18px",borderRadius:2,userSelect:"none",border:"1px solid rgba(201,150,42,.5)",color:"var(--gold-l)",background:"rgba(201,150,42,.12)"}}>OK</div>
+        </div>
+      </div>
+    </div>,document.body);
+}
+function _spNorm(x){return (x||"").toString().trim().toLowerCase();}
+function _spSame(a,b){return _spNorm(a.nm)===_spNorm(b.nm)&&_spNorm(a.sc)===_spNorm(b.sc)&&_spNorm(a.ti)===_spNorm(b.ti)&&_spNorm(a.rng)===_spNorm(b.rng)&&_spNorm(a.cmp)===_spNorm(b.cmp)&&_spNorm(a.dur)===_spNorm(b.dur)&&(!!a.conc)===(!!b.conc)&&(!!a.ritual)===(!!b.ritual)&&_spNorm(a.cls)===_spNorm(b.cls);}
+function _exSame(a,b){return _spNorm(a.nm)===_spNorm(b.nm)&&_spNorm(a.cls)===_spNorm(b.cls);}
+// Remove class `name` items from a {level:[...]} map; move to `target` (skipping duplicates) or delete when target is "".
+function _moveClassItems(map,name,target,same){
+  const out={},skipped=[];
+  Object.keys(map||{}).forEach(function(k){
+    const arr=map[k]||[];const res=arr.filter(function(x){return (x.cls||"")!==name;});
+    if(target){arr.filter(function(x){return (x.cls||"")===name;}).forEach(function(m){
+      const cand=Object.assign({},m,{cls:target});
+      if(res.some(function(o){return same(o,cand);}))skipped.push(m.nm);else res.push(cand);});}
+    out[k]=res;
+  });
+  return {map:out,skipped:skipped};
+}
 function Chev({open}){
   return <span style={{display:"inline-block",width:7,height:7,borderRight:"2px solid currentColor",borderBottom:"2px solid currentColor",transform:open?"rotate(-135deg) translate(-1px,-1px)":"rotate(-45deg)",marginLeft:open?0:-2,marginTop:open?3:0,pointerEvents:"none"}} />;
 }
@@ -13550,7 +13634,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.21.17</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.21.19</div>
 
 </script>
 </body>
