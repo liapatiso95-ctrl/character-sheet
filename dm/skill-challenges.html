@@ -928,6 +928,39 @@ setFl("snowstorm",[
 [0,"Perception","The character spots a wind-scoured cairn, the dark line of a tree wall, a thread of chimney smoke, or the amber blink of a distant window."],
 [0,"Survival","The character keeps the wind on their left cheek, follows the slope of the ground, and steers the party around ice-skinned ponds, hidden crevasses and wind tunnels."]]);
 
+/* ---------- Added in chat: your own challenge ---------- */
+C({id:"last-rites",b:"Custom",name:"Last Rites",tags:["magic","survival"],cx:2,scale:"Each round is about 20 minutes. The whole disposal takes hours.",
+fl:"The beast has stopped moving, but the air around it hasn’t. A faint glow seeps from its hide and beads on the stone like sweat. Whatever you do, you have to do it here, and before the glow wins.",
+setup:"A magical creature is dying or has just died, and the party deals with its remains right where it lies. Nothing is moved. The body holds a charge of raw magic, and if it is left as it is, that charge pools into a zone of concentrated magic. The party must contain the leak, unravel the stored energy and remove the remains, so nothing is left behind. Stage 1 begins as the creature dies or right after.",
+notes:["Advance to the next stage after 2 successes in the current one, or when the party chooses to move on.","Let failures show up in the fiction: a ward flaring, the body slumping, a spade striking something that hums.","Harder: raise every DC one tier, or raise the Complexity to 3 (8 successes). Easier: allow 4 failures.","The strip’s Failures stepper lets you change the number of failures allowed."],
+haz:{n:"Seeping magic",stat:"Constitution",dc:"m",t:"Raw magic seeps from the remains every round and tugs at everyone nearby.",pass:"No effect.",fail:["hd:1"]},
+quick:[
+{l:"Dispel Magic (Stage 2: +1 success)",s:1,st:1,once:1,t:"Treat it as a 6th-level effect."},
+{l:"Disintegrate on the body (Stage 3: +1 success)",s:1,st:2,once:1,t:"The remains are gone without a trace."},
+{l:"Absorb Elements / Protection from Energy",e:["adv:Hazard"],once:1,t:"One character has advantage on their next hazard save."},
+{l:"Gentle Repose",e:["hazdc:-1"],once:1,t:"The body stops leaking while the spell lasts."},
+{l:"Warded space: Magic Circle or Hallow (Stage 3)",e:["advAll:Arcana / Nature,Athletics,Investigation,Religion"],st:2,once:1,t:"Advantage on every Stage 3 check for the rest of the challenge."}],
+stages:[
+{n:"Stage 1: Contain the leak",adv:{s:2},intro:"Goal: slow the magic bleeding out of the body and mark out a safe working area.",skills:[
+K("Arcana","m","Bind the leaking energy back into the body.",{ok:["adv:Hazard"],bad:["hazNext:1"]}),
+K("Medicine","m","Confirm the creature is truly dead, or ease its last moments, and seal wounds that vent magic.",{ok:["hazdc:-1"],bad:["hd:1"]}),
+K("Nature","e","Know how this kind of creature stores its power, and what dissolves, absorbs or smothers it.",{ok:["adv:Survival,Arcana"]}),
+K("Religion","e","Speak a rite that quiets the remains and gives the energy somewhere to go.",{cap:2,bad:["dis:*"]})]},
+{n:"Stage 2: Unravel the magic",adv:{s:2},intro:"Goal: draw out and neutralize the stored energy before the body is touched.",skills:[
+K("Arcana","h","Pull the energy out thread by thread and ground it. This is the best way to do the job safely.",{bad:["text:A burst of magic hits everyone nearby. Each character makes the hazard save at once (it doesn’t count toward the challenge)"]}),
+K("Investigation","m","Find where the magic is gathering (the heart, the horn, the marrow) and which part to deal with first.",{ok:["adv:Arcana"]}),
+K("Survival","m","Read the site (damp ground, bare stone, nearby water) and use it to soak up or carry off the energy.",{bad:["hazNext:1"]}),
+K("Persuasion / Intimidation","e","Only if the creature is still alive and can understand. Calm it, or convince it to release its power willingly.",{bad:["hazNext:1"]})]},
+{n:"Stage 3: Remove the remains",intro:"Goal: destroy, bury or dissolve what is left on the spot so nothing remains.",skills:[
+K("Athletics","m","Dig, break up or heap over the remains in place.",{bad:["hd:1"]}),
+K("Arcana / Nature","h","Burn, dissolve or consume the body with fire, acid, salt or ritual.",{bad:["text:The remains flare. Each character makes the hazard save at once (it doesn’t count toward the challenge)"]}),
+K("Investigation","m","Check that no trace remains: stray scales, pooled essence, a glowing patch of ground.",{ok:["adv:*"],bad:["text:The DM notes what was missed, such as a scrap of hide or a stain that glows faintly at night"]}),
+K("Religion","e","Lay the final rite or ward so the magic cannot gather here again.",{cap:1})]}],
+out:{total:"The remains are gone and the ground is clean. The party also salvages one useful component, such as a drop of essence, a scale or a feather, worth a minor magic item or a potion ingredient.",
+ok:"The body is disposed of, but it costs the party. Every character loses 1 Hit Die, and the spot gives off a faint shimmer for a day. Nothing dangerous remains, but you may leave a rumor or a curious witness.",
+fail:"The body can’t be disposed of in time and its magic escapes. A small zone of concentrated magic forms, about 15 ft radius, around the remains. Every character gains 1 level of exhaustion and the party must retreat. This isn’t a dead end: they can return later to calm the zone, seal it, or deal with whoever found it first.",
+okFx:["hdAll:1"],failFx:["exhAll:1"]}});
+
 (function(){
 'use strict';
 /* =====================================================================
@@ -1534,6 +1567,7 @@ function strip(){
 
 /* ---------- Text tab ---------- */
 function srcHtml(c){
+  if(c.id==="last-rites")return"Created for your campaign in this chat.";
   if(CUSTOM_SRC[c.id])return"Your original artifact, <a href=\"https://claude.ai/artifact/"+CUSTOM_SRC[c.id]+"\" target=\"_blank\" rel=\"noopener\">open it</a>. This page keeps all the rules and trims some of the surrounding prose.";
   const p={"1":"Challenge Accepted - Skill Challenges.pdf","2":"Challenge Accepted 2.pdf"};
   const l=c.b.split(" + ").map(x=>p[x]).filter(Boolean).map(x=>"<b>"+esc(x)+"</b>");
