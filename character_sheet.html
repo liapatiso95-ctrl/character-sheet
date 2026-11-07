@@ -7940,6 +7940,8 @@ function SpellPage({c,s,from,to}){
           var cnt=(c.sp[lv]||[]).length;
           var tMax=lv>0?getSlotMax(lv):0,tExp=getSlotExp(lv),tRem=Math.max(0,tMax-tExp);
           var tCol=tRem>tMax*0.6?"#4a9c5c":tRem>tMax*0.3?"#c9962a":"#c94a2a";
+          var tRi=tMax>0?restInfo(c,(c.slotRc||{})[lv]||"",(c.slotSr||{})[lv]||"",(c.slotSrF||{})[lv]||null,tMax,"Long Rest"):null;
+          var tSr=tRi?(tRi.sr>0?"+"+tRi.sr+" SR":tRi.tag==="SR"?"SR":""):"";
           return <button key={lv} onClick={function(){setActiveLv(lv);}}
             style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",padding:"7px 12px",cursor:"pointer",borderRadius:2,transition:"all .2s",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:5,
               background:active?"linear-gradient(135deg,rgba(123,79,207,.3),rgba(201,150,42,.15))":"rgba(20,14,8,.8)",
@@ -7952,7 +7954,7 @@ function SpellPage({c,s,from,to}){
               border:"1px solid "+(active?"rgba(184,154,240,.4)":"rgba(184,154,240,.12)")}}>{cnt}</span></span>
             {tMax>0&&<span onClick={function(e){e.stopPropagation();}} title={"Level "+lv+" spell slots left / max"} style={{display:"inline-flex",alignItems:"center",gap:4,letterSpacing:0,cursor:"default"}}>
               <span onClick={function(e){e.stopPropagation();setSlotExp(lv,""+Math.min(tMax,tExp+1));}} title="Use a slot" style={{cursor:"pointer",fontSize:13,fontWeight:700,color:"rgba(201,74,42,.85)",border:"1px solid rgba(201,74,42,.35)",width:20,height:20,display:"inline-flex",alignItems:"center",justifyContent:"center",borderRadius:2,lineHeight:1,background:"rgba(201,74,42,.06)"}}>−</span>
-              <span style={{fontSize:12,fontWeight:700,color:tCol,minWidth:30,textAlign:"center"}}>{tRem}/{tMax}</span>
+              <span style={{fontSize:12,fontWeight:700,color:tCol,minWidth:30,textAlign:"center"}}>{tRem}/{tMax}{tSr&&<span style={{fontSize:9,fontWeight:600,letterSpacing:.5,color:"rgba(201,150,42,.85)",marginLeft:4}}>{tSr}</span>}</span>
               <span onClick={function(e){e.stopPropagation();setSlotExp(lv,""+Math.max(0,tExp-1));}} title="Restore a slot" style={{cursor:"pointer",fontSize:13,fontWeight:700,color:"rgba(74,156,92,.9)",border:"1px solid rgba(74,156,92,.4)",width:20,height:20,display:"inline-flex",alignItems:"center",justifyContent:"center",borderRadius:2,lineHeight:1,background:"rgba(74,156,92,.07)"}}>+</span>
             </span>}
           </button>;
@@ -10918,7 +10920,7 @@ function limitStates(f,c){
   (f.limits||[]).forEach(function(l,li){
     var u=_limMax(c,l);if(isNaN(u)) return;
     var e=Math.min(Math.max(parseInt(l.exp)||0,0),u);
-    out.push({li:li,rem:u-e,max:u,rc:/short/i.test(l.recharge||"")?"SR":/long/i.test(l.recharge||"")?"LR":"",name:l.name||"",lr:(l.lrLeft!=null&&l.lrLeft!==""&&e>0)?parseInt(l.lrLeft):null,sr:limShortRegain(l,c)});
+    out.push({li:li,rem:u-e,max:u,rc:/short/i.test(l.recharge||"")?"SR":(/long/i.test(l.recharge||"")||!String(l.recharge||"").trim())?"LR":"",name:l.name||"",lr:(l.lrLeft!=null&&l.lrLeft!==""&&e>0)?parseInt(l.lrLeft):null,sr:limShortRegain(l,c)});
   });
   return out;
 }
@@ -14214,7 +14216,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.25.0</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.25.1</div>
 
 </script>
 </body>
