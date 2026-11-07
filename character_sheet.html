@@ -633,6 +633,11 @@ const CSS = `
     white-space:pre-wrap;
     animation:tipIn .12s ease-out;
   }
+  @keyframes fxBg{0%{opacity:0}15%{opacity:1}80%{opacity:1}100%{opacity:0}}
+  @keyframes fxDie{0%{opacity:0;transform:scale(1.35);letter-spacing:.1em;filter:blur(10px)}25%{opacity:1;filter:blur(0)}100%{opacity:1;transform:scale(1);letter-spacing:.38em}}
+  @keyframes fxLive{0%{opacity:0;transform:scale(.7);filter:blur(12px)}30%{opacity:1;transform:scale(1.05);filter:blur(0)}100%{opacity:1;transform:scale(1)}}
+  @keyframes fxRays{0%{transform:translate(-50%,-50%) scale(.2) rotate(0);opacity:0}25%{opacity:.9}100%{transform:translate(-50%,-50%) scale(2.2) rotate(40deg);opacity:0}}
+  @keyframes fxLine{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
   @keyframes tipIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
   @keyframes rollFlash{0%{opacity:0;transform:scale(.55)}12%{opacity:1;transform:scale(1.1)}24%{transform:scale(1)}72%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.94)}}
   @keyframes toastPop{0%{opacity:0;transform:translateY(-16px) scale(.96)}8%{opacity:1;transform:translateY(0) scale(1)}88%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.98)}}
@@ -1414,9 +1419,23 @@ function Page1({c,s}){
   const passivePerc=10+skbNum({n:"Perception",a:"WIS"})+(c.percAdv?5:0);
   const passiveIns=10+skbNum({n:"Insight",a:"WIS"})+(c.insAdv?5:0);
   const passiveInv=10+skbNum({n:"Investigation",a:"INT"})+(c.invAdv?5:0);
+  const [fx,setFx]=React.useState(null);
+  const [hpEdit,setHpEdit]=React.useState(false);
+  const dsMax=c.hpAutoCalc?(calcMaxHP()||0):(parseInt(c.hpx)||0);
+  const dsCur=(c.hpc!==""&&c.hpc!=null)?(parseInt(c.hpc)||0):dsMax;
+  const dsOff=dsCur>0;
+  React.useEffect(function(){if(!fx)return;const t=setTimeout(function(){setFx(null);},fx==="died"?5200:4600);return function(){clearTimeout(t);};},[fx]);
 
   return (
     <div>
+      {fx&&ReactDOM.createPortal(
+        <div onClick={function(){setFx(null);}} style={{position:"fixed",inset:0,height:"100dvh",zIndex:300000,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",overflow:"hidden",animation:"fxBg "+(fx==="died"?5.2:4.6)+"s ease forwards",background:fx==="died"?"radial-gradient(ellipse at center,rgba(40,0,0,.78) 0%,rgba(0,0,0,.94) 75%)":"radial-gradient(ellipse at center,rgba(255,236,170,.28) 0%,rgba(20,14,4,.82) 75%)"}}>
+          {fx==="live"&&<div style={{position:"absolute",left:"50%",top:"50%",width:"140vmax",height:"140vmax",borderRadius:"50%",background:"repeating-conic-gradient(from 0deg,rgba(255,225,140,.30) 0deg 6deg,transparent 6deg 20deg)",WebkitMaskImage:"radial-gradient(circle,#000 0%,transparent 60%)",maskImage:"radial-gradient(circle,#000 0%,transparent 60%)",animation:"fxRays 4.2s ease-out forwards"}} />}
+          <div style={{position:"relative",width:"100%",textAlign:"center",padding:"36px 18px",boxSizing:"border-box",background:fx==="died"?"linear-gradient(90deg,transparent,rgba(0,0,0,.85) 20%,rgba(0,0,0,.85) 80%,transparent)":"none"}}>
+            <div style={{fontFamily:"'Cinzel',serif",fontWeight:700,textTransform:"uppercase",fontSize:fx==="died"?"clamp(38px,13vw,120px)":"clamp(24px,6.6vw,80px)",lineHeight:1.15,paddingLeft:"0.2em",color:fx==="died"?"#a31515":"#ffe9a8",textShadow:fx==="died"?"0 0 24px rgba(200,20,20,.55),0 2px 4px #000":"0 0 28px rgba(255,214,110,.9),0 0 70px rgba(255,190,60,.55),0 2px 4px rgba(0,0,0,.6)",animation:(fx==="died"?"fxDie 4.4s cubic-bezier(.2,.7,.2,1)":"fxLive 2.4s ease-out")+" forwards"}}>{fx==="died"?"You Died":"You came back to life"}</div>
+            <div style={{height:2,width:"min(80%,520px)",margin:"14px auto 0",transformOrigin:"center",background:fx==="died"?"linear-gradient(90deg,transparent,#7a1010,transparent)":"linear-gradient(90deg,transparent,#e8c56a,transparent)",animation:"fxLine 1.6s ease-out .4s both"}} />
+          </div>
+        </div>,document.body)}
       <div className="orn">Character</div>
       <div className="sh">Identity</div>
       <div className="thc">
@@ -1758,45 +1777,63 @@ function Page1({c,s}){
 
       <div className="sh">Hit Points</div>
       <div style={{display:"flex",gap:20,flexWrap:"wrap",alignItems:"flex-start"}}>
-        <div style={{textAlign:"center"}}>
-          <label className="fl">Max HP</label>
-          <input className="hpi" style={{color:"#c94a2a",opacity:c.hpAutoCalc?0.6:1}} value={c.hpAutoCalc?(calcMaxHP()!==null?""+calcMaxHP():""):c.hpx||""} onChange={function(e){if(!c.hpAutoCalc){s("hpx",e.target.value);}}} readOnly={!!c.hpAutoCalc} placeholder="0" />
-          <div style={{marginTop:6,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}>
-            <div
-              style={{width:28,height:14,borderRadius:7,background:c.hpAutoCalc?"#c94a2a":"rgba(0,0,0,.4)",border:"1px solid "+(c.hpAutoCalc?"#e07060":"rgba(201,74,42,.35)"),cursor:"pointer",transition:"background .2s",position:"relative",flexShrink:0}}
-              onClick={function(){s("hpAutoCalc",!c.hpAutoCalc);}}
-              title="Auto-calculate Max HP from classes and CON"
-            >
-              <div style={{position:"absolute",top:2,left:c.hpAutoCalc?14:2,width:8,height:8,borderRadius:"50%",background:"#fff",transition:"left .2s"}} />
+        {(function(){
+          const maxVal=c.hpAutoCalc?(calcMaxHP()||0):(parseInt(c.hpx)||0);
+          const hasCur=hpEdit||(c.hpc!==""&&c.hpc!=null&&c.hpc!==undefined);
+          const cur=hasCur?(parseInt(c.hpc)||0):maxVal;
+          const tmpHp=parseInt(c.hpt)||0;
+          const pct=maxVal>0?Math.max(0,Math.min(1,cur/maxVal)):0;
+          const down=maxVal>0&&cur<=0;
+          const blood=maxVal>0&&!down&&pct<=0.5;
+          const crit=maxVal>0&&!down&&pct<=0.25;
+          const col=maxVal<=0?"#c94a2a":down?"#8a2418":crit?"#d83a2a":blood?"#e08a2a":"#4a9c5c";
+          const label=down?"Down":(crit||blood)?"Bloodied":"";
+          const clrDs=function(nv){if(nv>0&&(c.df||[]).filter(Boolean).length>=3)setFx("live");if(nv>0&&((c.ds||[]).some(Boolean)||(c.df||[]).some(Boolean))){s("ds",[false,false,false]);s("df",[false,false,false]);}};
+          const setCur=function(v){const nv=Math.max(0,v);s("hpc",""+nv);clrDs(nv);if(maxVal>0)s("hpDmg",""+Math.max(0,maxVal-nv));};
+          const amt=parseInt(c.hpAmt)||0;
+          const applyDmg=function(){
+            if(amt<=0)return;
+            const fromTemp=Math.min(tmpHp,amt);
+            const rest=amt-fromTemp;
+            if(fromTemp>0)s("hpt",fromTemp>=tmpHp?"":""+(tmpHp-fromTemp));
+            if(rest>0)setCur(cur-rest);
+            s("hpAmt","");
+          };
+          const applyHeal=function(){
+            if(amt<=0)return;
+            setCur(maxVal>0?Math.min(maxVal,cur+amt):cur+amt);
+            s("hpAmt","");
+          };
+          const bb={fontFamily:"'Cinzel',serif",fontSize:20,fontWeight:700,width:44,height:40,cursor:"pointer",borderRadius:3,lineHeight:1,flexShrink:0,background:"rgba(0,0,0,.3)"};
+          return <div style={{flex:"1 1 280px",minWidth:240,maxWidth:460}}>
+            <div style={{position:"relative",height:34,borderRadius:4,background:"rgba(0,0,0,.45)",border:"2px solid "+col,overflow:"hidden",boxShadow:"0 0 12px "+col+"44"}}>
+              <div style={{position:"absolute",left:0,top:0,bottom:0,width:(pct*100)+"%",background:"linear-gradient(180deg,"+col+","+col+"bb)",transition:"width .3s, background .3s"}} />
+              <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Cinzel',serif",fontSize:11,fontWeight:700,letterSpacing:3,textTransform:"uppercase",color:"#fff",textShadow:"0 1px 3px rgba(0,0,0,.9)"}}>{label}</div>
             </div>
-            <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:c.hpAutoCalc?"#e07060":"rgba(232,213,176,.3)"}}>Auto</span>
-          </div>
-        </div>
-        <div style={{textAlign:"center"}}>
-          <label className="fl">Damage Taken</label>
-          <input className="hpi" style={{color:"#c94a2a"}} value={c.hpDmg||""} onChange={function(e){
-            const raw=e.target.value;
-            s("hpDmg",raw);
-            // Auto-update current HP from damage
-            const maxVal=c.hpAutoCalc?(calcMaxHP()||0):parseInt(c.hpx)||0;
-            if(maxVal>0){const dmg=parseInt(raw)||0;s("hpc",""+Math.max(0,maxVal-dmg));}
-          }} placeholder="0" />
-        </div>
-        <div style={{textAlign:"center"}}>
-          <label className="fl">Current HP</label>
-          {(function(){
-            const maxVal=c.hpAutoCalc?(calcMaxHP()||0):parseInt(c.hpx)||0;
-            const cur=parseInt(c.hpc)||0;
-            const col=maxVal>0?(cur<=0?"#c94a2a":cur<maxVal*0.3?"#c9962a":"#4a9c5c"):"#c94a2a";
-            return <input className="hpi" style={{color:col}} value={c.hpc||""} onChange={function(e){
-              const raw=e.target.value;
-              s("hpc",raw);
-              // Auto-update damage taken from current HP
-              const maxVal2=c.hpAutoCalc?(calcMaxHP()||0):parseInt(c.hpx)||0;
-              if(maxVal2>0){const cur2=parseInt(raw)||0;s("hpDmg",""+Math.max(0,maxVal2-cur2));}
-            }} placeholder="0" />;
-          })()}
-        </div>
+            <div style={{display:"flex",alignItems:"baseline",justifyContent:"center",gap:4,marginTop:6}}>
+              <input className="hpi" style={{color:col,width:70,fontSize:30}} inputMode="numeric" onFocus={function(){setHpEdit(true);}} onBlur={function(){setHpEdit(false);if((c.hpc===""||c.hpc==null)&&hasCur){s("hpc","0");if(maxVal>0)s("hpDmg",""+maxVal);}}} value={hasCur?(c.hpc||""):(maxVal>0?""+maxVal:"")} onChange={function(e){
+                const raw=e.target.value;s("hpc",raw);clrDs(parseInt(raw)||0);
+                if(maxVal>0)s("hpDmg",""+Math.max(0,maxVal-(parseInt(raw)||0)));
+              }} placeholder="0" title="Current HP" />
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:26,color:"rgba(232,213,176,.4)"}}>/</span>
+              <input className="hpi" style={{color:"#c94a2a",width:70,fontSize:30,opacity:c.hpAutoCalc?0.6:1}} inputMode="numeric" title="Max HP" value={c.hpAutoCalc?(calcMaxHP()!==null?""+calcMaxHP():""):c.hpx||""} onChange={function(e){if(!c.hpAutoCalc){s("hpx",e.target.value);}}} readOnly={!!c.hpAutoCalc} placeholder="0" />
+              <div style={{display:"flex",alignItems:"center",gap:5,marginLeft:10}} title="Auto-calculate Max HP from classes and CON">
+                <div style={{width:28,height:14,borderRadius:7,background:c.hpAutoCalc?"#c94a2a":"rgba(0,0,0,.4)",border:"1px solid "+(c.hpAutoCalc?"#e07060":"rgba(201,74,42,.35)"),cursor:"pointer",transition:"background .2s",position:"relative",flexShrink:0}} onClick={function(){s("hpAutoCalc",!c.hpAutoCalc);}}>
+                  <div style={{position:"absolute",top:2,left:c.hpAutoCalc?14:2,width:8,height:8,borderRadius:"50%",background:"#fff",transition:"left .2s"}} />
+                </div>
+                <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:c.hpAutoCalc?"#e07060":"rgba(232,213,176,.3)"}}>Auto</span>
+              </div>
+            </div>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:8,marginTop:8}}>
+              <button onClick={applyDmg} title="Damage (temp HP first)" style={Object.assign({},bb,{border:"1px solid rgba(201,74,42,.6)",color:"#e07060"})}>−</button>
+              <input value={c.hpAmt||""} inputMode="numeric" placeholder="X" onChange={function(e){s("hpAmt",e.target.value.replace(/[^0-9]/g,""));}}
+                onKeyDown={function(e){if(e.key==="Enter")applyDmg();}}
+                style={{width:70,height:40,boxSizing:"border-box",textAlign:"center",fontFamily:"'Cinzel',serif",fontSize:18,background:"rgba(0,0,0,.3)",border:"1px solid rgba(201,150,42,.35)",borderRadius:3,color:"var(--gold-l)",outline:"none"}} title="Amount of damage or healing" />
+              <button onClick={applyHeal} title="Heal" style={Object.assign({},bb,{border:"1px solid rgba(74,156,92,.6)",color:"#6fcf85"})}>+</button>
+              <button onClick={function(){if(maxVal>0)setCur(maxVal);}} title="Restore all HP" style={Object.assign({},bb,{border:"1px solid rgba(74,156,92,.6)",color:"#6fcf85",fontSize:22,marginLeft:6})}>↻</button>
+            </div>
+          </div>;
+        })()}
         <div style={{textAlign:"center"}}>
           <label className="fl">Temp HP</label>
           <input className="hpi" style={{color:"#2a8c9c"}} value={c.hpt||""} onChange={function(e){s("hpt",e.target.value);}} placeholder="0" />
@@ -1857,12 +1894,15 @@ function Page1({c,s}){
               </div>
             </div>;
           })()}
-          <label className="fl" style={{marginTop:10}}>Death Saves</label>
-          <div className="ds">
+          <div style={{display:"flex",alignItems:"center",gap:8,marginTop:10}}>
+            <label className="fl">Death Saves</label>
+            {(c.df||[]).filter(Boolean).length>=3?<span style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,color:"#c94a2a",fontWeight:700,animation:"pulse 1s infinite"}}>DEAD</span>:(c.ds||[]).filter(Boolean).length>=3?<span style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,color:"#4a9c5c",fontWeight:700}}>STABLE</span>:null}
+          </div>
+          <div className="ds" style={dsOff?{opacity:.4}:null} title={dsOff?"Death saves only apply at 0 HP":undefined}>
             <span className="dsl">S</span>
-            {[0,1,2].map(i=><input key={i} type="checkbox" className="dck suc" checked={!!c.ds[i]} onChange={e=>{const a=[...c.ds];a[i]=e.target.checked;s("ds",a);}} />)}
+            {[0,1,2].map(i=><input key={i} type="checkbox" disabled={dsOff} className="dck suc" checked={!!c.ds[i]} onChange={e=>{const n=c.ds.filter(Boolean).length;const m=i<n?n-1:Math.min(3,n+1);s("ds",[0,1,2].map(j=>j<m));}} />)}
             <span className="dsl" style={{marginLeft:6}}>F</span>
-            {[0,1,2].map(i=><input key={i} type="checkbox" className="dck fal" checked={!!c.df[i]} onChange={e=>{const a=[...c.df];a[i]=e.target.checked;s("df",a);}} />)}
+            {[0,1,2].map(i=><input key={i} type="checkbox" disabled={dsOff} className="dck fal" checked={!!c.df[i]} onChange={e=>{const n=c.df.filter(Boolean).length;const m=i<n?n-1:Math.min(3,n+1);s("df",[0,1,2].map(j=>j<m));if(m>=3&&n<3)setFx("died");}} />)}
           </div>
           {/* Exhaustion */}
           <div style={{marginTop:12}}>
@@ -1874,7 +1914,7 @@ function Page1({c,s}){
               {[1,2,3,4,5,6].map(function(lv){
                 const active=exhLv>=lv;
                 const isDeath=lv===6;
-                return <div key={lv} onClick={function(){s("exhaustion",exhLv===lv?lv-1:lv);}}
+                return <div key={lv} onClick={function(){if(lv===6&&exhLv!==6)setFx("died");else if(exhLv===6&&lv<=6&&dsCur>0)setFx("live");s("exhaustion",exhLv===lv?lv-1:lv);}}
                   style={{width:22,height:22,borderRadius:3,border:"1px solid "+(active?(isDeath?"#c94a2a":"rgba(201,74,42,.7)"):"rgba(201,74,42,.25)"),background:active?(isDeath?"#c94a2a":"rgba(201,74,42,.35)"):"rgba(0,0,0,.2)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",transition:"all .15s",flexShrink:0}}>
                   <span style={{fontFamily:"'Cinzel',serif",fontSize:10,color:active?"#fff":"rgba(201,74,42,.4)",fontWeight:700}}>{lv}</span>
                 </div>;
@@ -13510,7 +13550,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.21.5</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.21.17</div>
 
 </script>
 </body>
