@@ -758,7 +758,7 @@ Their hair, worn long but in simple styles, is usually black, gray, or brown, th
 **Speed.** Your base walking speed is 30 feet. A dwarf that wears Heavy Armor without meeting its Strength requirement has their speed reduced only by 5 feet. ***(1 point)***   
 **Creature Type.** You are a Humanoid.  
 **Darkvision. *(3 points)*** You can see in dim light within 60 feet of you as if it were bright light and in darkness as if it were dim light. You discern colors in that darkness as shades of gray.  
-**Dwarven Resilience. *(5 points)*** You have advantage on saving throws against poison, and you have resistance against poison damage.  
+**Dwarven Resilience. *(5 points)*** You have Resistance to Poison damage. You also have Advantage on saving throws you make to avoid or end the Poisoned condition.  
 **Subspecies.** Choose one subspecies from the ones presented below. You gain the subspecies's traits.
 
 ### Hill/Mountain Dwarf
@@ -1869,7 +1869,6 @@ Thri-kreen speak by clacking their mandibles and waving their antennae, indicati
 **Creature Type. *(1 point)*** You are a Monstrosity.  
 **Size.** Your size is Medium or Small. You choose the size when you select this species.  
 **Speed.** Your base walking speed is 30 feet.  
-**Creature Type.** You are a Humanoid.  
 **Chameleon Carapace. *(4 points)*** While you aren't wearing armor, your carapace gives you a base Armor Class of 13 + your Dexterity modifier. As an action, you can change the color of your carapace to match the color and texture of your surroundings, giving you advantage on Dexterity (Stealth) checks made to hide in those surroundings.  
 **Darkvision. *(3 points)*** You can see in dim light within 60 feet of yourself as if it were bright light, and in darkness as if it were dim light. You discern colors in that darkness only as shades of gray.  
 **Secondary Arms. *(3 points)*** You have two slightly smaller secondary arms below your primary pair of arms. The secondary arms can manipulate an object, open or close a door or container, pick up or set down a Tiny object, or wield a weapon that has the light property.  
