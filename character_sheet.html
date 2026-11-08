@@ -66,6 +66,12 @@ html.light-theme,html.light-theme input,html.light-theme select,html.light-theme
 </div>
 <div id="root"></div>
 <script>
+// Keep the page below the fixed top bar even when the bar wraps onto several rows (phones)
+(function(){var b=document.getElementById('save-bar'),r=document.getElementById('root');
+function f(){r.style.paddingTop=Math.max(50,b.offsetHeight+4)+'px';}
+f();if(window.ResizeObserver)new ResizeObserver(f).observe(b);window.addEventListener('resize',f);})();
+</script>
+<script>
 var LS='dnd5e_char_v1';
 var __fileHandle=null; // remembers the file handle for quick re-save (Chrome/Edge)
 
@@ -14254,7 +14260,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.26.2</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.26.3</div>
 
 </script>
 </body>
