@@ -370,11 +370,25 @@ window.__characterLoad=function(def){
       pending=st;clearTimeout(timer);timer=setTimeout(push,10000);
     }
     busy=false;
-    if(pending&&S.on){clearTimeout(timer);timer=setTimeout(function(){push();},1500);}
+    if(pending&&S.on){clearTimeout(timer);timer=setTimeout(function(){push();},1000);}
   }
+  // Dice rolled in this sheet's roller go to the room too (the last 10, newest first) so the DM screen can show them.
+  var rollList=[],rollTimer=null;
+  async function pushRolls(){
+    try{var r=await fetch(base()+'/rolls/'+S.id+'.json',{method:'PUT',body:JSON.stringify(rollList)});if(!r.ok)throw new Error('HTTP '+r.status);}
+    catch(e){clearTimeout(rollTimer);rollTimer=setTimeout(pushRolls,3000);}
+  }
+  window.__syncRoll=function(id,inf,isUpdate){
+    if(!S.on||!S.url||!S.room)return;
+    var ix=-1;rollList.forEach(function(x,k){if(x.id===id)ix=k;});
+    if(ix>=0){rollList[ix]={id:id,t:rollList[ix].t,v:(rollList[ix].v||0)+1,label:inf.label,detail:inf.detail,total:inf.total,init:inf.init?1:0};}
+    else rollList.unshift({id:id,t:Date.now(),v:0,label:inf.label,detail:inf.detail,total:inf.total,init:inf.init?1:0});
+    rollList=rollList.slice(0,10);
+    clearTimeout(rollTimer);rollTimer=setTimeout(pushRolls,150);
+  };
   window.__syncNotify=function(state){
     if(!S.on||!S.url||!S.room)return;
-    pending=state;clearTimeout(timer);timer=setTimeout(function(){push();},3000);
+    pending=state;clearTimeout(timer);timer=setTimeout(function(){push();},1000);
   };
   // ── the window ──
   function open(){
@@ -529,6 +543,37 @@ function rollLogSet(updater){
   const next = (typeof updater === "function") ? updater(_rollLog.items) : updater;
   _rollLog.items = Array.isArray(next) ? next.slice(0, 20) : [];
   _rollLog.subs.forEach(function(fn){ try{ fn(_rollLog.items); }catch(e){} });
+}
+// What the DM screen is told about a result: label, "d20(14) + 5  (note)", total. Also used when a die is rerolled.
+function rollSyncInfo(r){
+  var groups=r.groups,bonusN=r.bonus||0,pieces=[],all=[];
+  var gl=(groups&&groups.length)?groups:[{dice:r.dice||[]}];
+  gl.forEach(function(g){
+    var by={},ord=[];
+    (g.dice||[]).forEach(function(d){all.push(d);if(d.flat){bonusN+=(d.val||0);return;}var k="d"+d.sides;if(!by[k]){by[k]=[];ord.push(k);}by[k].push(d.val);});
+    var txt=ord.map(function(k){return by[k].length>1?by[k].length+k+"("+by[k].join(",")+")":k+"("+by[k][0]+")";}).join(" + ");
+    if(txt)pieces.push(txt+((g.dtype&&(""+g.dtype).trim())?" "+(""+g.dtype).trim():""));
+  });
+  var total=all.reduce(function(a,d){return a+(d.val||0);},0)+(r.bonus||0);
+  var det=pieces.join(" + ")+(bonusN>0?" + "+bonusN:bonusN<0?" − "+Math.abs(bonusN):"");
+  if(r.note)det+="  ("+r.note+")";
+  return {label:r.label,detail:det,total:total,init:r.label==="Initiative"};
+}
+var _rollSig=null;
+function rollSyncAll(items){
+  if(!window.__syncRoll)return;
+  var first=(_rollSig===null);if(first)_rollSig={};
+  var seen={};
+  items.slice().reverse().forEach(function(r){
+    var inf=rollSyncInfo(r),sig=inf.detail+"|"+inf.total;
+    seen[r.id]=1;
+    if(_rollSig[r.id]===sig)return;
+    var had=(_rollSig[r.id]!==undefined);
+    _rollSig[r.id]=sig;
+    if(first)return;
+    try{window.__syncRoll(String(r.id),inf,had);}catch(e){}
+  });
+  Object.keys(_rollSig).forEach(function(k){if(!seen[k])delete _rollSig[k];});
 }
 function useRollLog(){
   const [, force] = React.useState(0);
@@ -8558,6 +8603,7 @@ function DiceRollerPage({c,s,savedRolls,saveSRApp}){
   // A roll result is {id, label, dice:[{sides,val}], bonus, note}. Backed by a session
   // store so the log survives tab changes (but resets on a fresh page load).
   const [results,setResults]=useRollLog();
+  React.useEffect(function(){rollSyncAll(results);},[results]);
 
   const flashTimer=React.useRef(null);
   const [flash,setFlash]=us2(null);
@@ -14373,7 +14419,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.27.0</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.29.0</div>
 
 </script>
 </body>
