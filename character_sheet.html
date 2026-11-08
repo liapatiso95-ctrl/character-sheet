@@ -39,6 +39,7 @@ body{margin:0;background:#0d0a08}
 .btn-lr:hover{background:rgba(74,156,92,.25)}
 .btn-sr{background:rgba(42,140,156,.14);border:1px solid rgba(42,140,156,.5);color:#6cc3d1}
 .btn-sr:hover{background:rgba(42,140,156,.28)}
+.btn-sync{background:rgba(56,178,172,.12);border:1px solid rgba(56,178,172,.45);color:#5fd0c8}
 .btn-theme{background:rgba(232,213,176,.08);border:1px solid rgba(232,213,176,.3);color:#e8d5b0}
 .btn-theme:hover{background:rgba(232,213,176,.18)}
 .save-status{font-family:'EB Garamond',serif;font-size:11px;color:rgba(232,213,176,.35);font-style:italic;white-space:nowrap}
@@ -230,6 +231,7 @@ function toggleTheme(){
   applyTheme(t);
 })();
 window.__characterAutoSave=function(state){
+  if(window.__syncNotify){try{window.__syncNotify(state);}catch(e){}}
   window.__lastSaveState=state; // in-memory fallback for Safari
   var toSave=Object.assign({},state);
   var portraitSaved=false;
@@ -311,6 +313,117 @@ window.__characterLoad=function(def){
   ss('New character');
   return def;
 };
+</script>
+<script>
+// ─── Live sync (sends this sheet to the DM screen through a shared Firebase Realtime Database) ───
+(function(){
+  var KEY='dnd5e_sync_v1';
+  // Journals, UI state and big images stay on this device.
+  var DROP={portrait:1,savedRolls:1,taH:1,dsOpen:1,secOpen:1,creatures:1,nt1:1,nt2:1,nt3:1,npc:1,locations:1,lore:1,customSections:1,factions:1};
+  var S={url:'',room:'',on:false,id:''};
+  try{S=Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'));}catch(e){}
+  if(!S.id){S.id='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);persist();}
+  var pending=null,timer=null,lastPayload='',status='',thumbSrc='',thumbVal='',busy=false;
+  function persist(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+  function base(){return S.url.replace(/\/+$/,'')+'/rooms/'+encodeURIComponent(S.room.trim());}
+  function cleanUrl(u){u=(u||'').trim();if(!u)return '';if(!/^https?:\/\//i.test(u))u='https://'+u;return u.replace(/\/+$/,'');}
+  function setStatus(m,bad){status=m;var el=document.getElementById('sync-status');if(el){el.textContent=m;el.style.color=bad?'#e07060':'#8fd6a0';}paintBtn();}
+  function paintBtn(){var b=document.getElementById('sync-btn');if(!b)return;var live=S.on&&S.url&&S.room;b.textContent='⇄ Sync'+(live?(/failed/i.test(status)?' ●':' ●'):'');b.style.color=live?(/failed/i.test(status)?'#e07060':'#6fcf85'):'';}
+  function currentState(){
+    var d=null;try{d=localStorage.getItem('dnd5e_char_v1');}catch(e){}
+    var p=null;
+    if(d){try{p=JSON.parse(d);}catch(e){}}
+    if(!p&&window.__lastSaveState)p=window.__lastSaveState;
+    if(!p)return null;
+    if(p.portrait==='__stored_separately__'){try{p.portrait=localStorage.getItem('dnd5e_char_v1_portrait')||'';}catch(e){p.portrait='';}}
+    return p;
+  }
+  function makeThumb(src){
+    return new Promise(function(res){
+      if(!src||src.length<100){res('');return;}
+      var key=src.length+':'+src.slice(-40);
+      if(key===thumbSrc){res(thumbVal);return;}
+      var im=new Image();
+      im.onload=function(){try{var s=96,cv=document.createElement('canvas');cv.width=s;cv.height=s;var cx=cv.getContext('2d');var m=Math.min(im.width,im.height);cx.drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,s,s);thumbVal=cv.toDataURL('image/jpeg',.8);thumbSrc=key;res(thumbVal);}catch(e){res('');}};
+      im.onerror=function(){res('');};
+      im.src=src;
+    });
+  }
+  async function push(force){
+    if(busy){return;}
+    var st=pending||currentState();pending=null;
+    if(!st||!S.on||!S.url||!S.room)return;
+    busy=true;
+    try{
+      var o={};Object.keys(st).forEach(function(k){if(!DROP[k])o[k]=st[k];});
+      o.__thumb=await makeThumb(st.portrait);
+      var payload=JSON.stringify(o);   // stored as one text value so nothing gets dropped by the database
+      if(payload===lastPayload&&!force){setStatus('Up to date '+new Date().toLocaleTimeString());busy=false;return;}
+      var r=await fetch(base()+'/data/'+S.id+'.json',{method:'PUT',body:JSON.stringify(payload)});
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      var r2=await fetch(base()+'/meta/'+S.id+'.json',{method:'PUT',body:JSON.stringify({name:(st.name||'').trim()||'Unnamed',updated:Date.now()})});
+      if(!r2.ok)throw new Error('HTTP '+r2.status);
+      lastPayload=payload;
+      setStatus('Synced '+new Date().toLocaleTimeString());
+    }catch(e){
+      setStatus('Sync failed: '+(e&&e.message?e.message:e)+' - retrying',true);
+      pending=st;clearTimeout(timer);timer=setTimeout(push,10000);
+    }
+    busy=false;
+    if(pending&&S.on){clearTimeout(timer);timer=setTimeout(function(){push();},1500);}
+  }
+  window.__syncNotify=function(state){
+    if(!S.on||!S.url||!S.room)return;
+    pending=state;clearTimeout(timer);timer=setTimeout(function(){push();},3000);
+  };
+  // ── the window ──
+  function open(){
+    if(document.getElementById('sync-ov'))return;
+    var ov=document.createElement('div');ov.id='sync-ov';
+    ov.style.cssText='position:fixed;left:0;top:0;right:0;height:100dvh;z-index:100000;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:12px;box-sizing:border-box';
+    var box=document.createElement('div');
+    box.style.cssText='background:#1a1208;border:1px solid rgba(201,150,42,.5);border-radius:4px;width:min(440px,100%);max-height:calc(100dvh - 24px);overflow:auto;padding:16px;box-sizing:border-box;font-family:"EB Garamond",serif;color:#e8d5b0;box-shadow:0 8px 40px rgba(0,0,0,.9)';
+    var inp='width:100%;box-sizing:border-box;background:rgba(0,0,0,.35);border:1px solid rgba(201,150,42,.35);color:#e8d5b0;font-family:"EB Garamond",serif;font-size:14px;padding:7px 9px;border-radius:2px;outline:none;margin:3px 0 10px';
+    var lab='font-family:Cinzel,serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(232,213,176,.55)';
+    var bt='font-family:Cinzel,serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:7px 12px;cursor:pointer;border-radius:2px;background:rgba(201,150,42,.12);border:1px solid rgba(201,150,42,.5);color:#e8b84b';
+    box.innerHTML=
+      '<div style="font-family:Cinzel,serif;font-size:14px;letter-spacing:1.5px;color:#e8b84b;margin-bottom:4px">⇄ Live sync with the DM</div>'+
+      '<div style="font-size:13px;color:rgba(232,213,176,.65);margin-bottom:12px;line-height:1.35">Sends this character to the DM screen a few seconds after every change. Your sheet keeps saving on this device as usual.</div>'+
+      '<div style="'+lab+'">Database address</div><input id="sync-url" style="'+inp+'" placeholder="https://yourproject-default-rtdb.firebaseio.com" autocapitalize="off" autocomplete="off" spellcheck="false">'+
+      '<div style="'+lab+'">Room code</div><input id="sync-room" style="'+inp+'" placeholder="e.g. DRAGON-42" autocapitalize="off" autocomplete="off" spellcheck="false">'+
+      '<div id="sync-status" style="font-size:13px;min-height:18px;margin-bottom:10px"></div>'+
+      '<div style="display:flex;gap:8px;flex-wrap:nowrap">'+
+        '<button id="sync-go" style="'+bt+'">Start / update</button>'+
+        '<button id="sync-stop" style="'+bt+';background:rgba(201,74,42,.1);border-color:rgba(201,74,42,.45);color:#e07060">Stop</button>'+
+        '<button id="sync-x" style="'+bt+';background:transparent;border-color:rgba(232,213,176,.3);color:#e8d5b0;margin-left:auto">Close</button>'+
+      '</div>';
+    ov.appendChild(box);document.body.appendChild(ov);
+    var u=box.querySelector('#sync-url'),r=box.querySelector('#sync-room');
+    u.value=S.url;r.value=S.room;
+    setStatus(S.on&&S.url&&S.room?(status||'On'):'Off');
+    function close(){ov.remove();}
+    ov.addEventListener('click',function(e){if(e.target===ov)close();});
+    box.querySelector('#sync-x').onclick=close;
+    box.querySelector('#sync-go').onclick=function(){
+      var url=cleanUrl(u.value),room=r.value.trim();
+      if(!url||!room){setStatus('Enter the database address and a room code.',true);return;}
+      S.url=url;S.room=room;S.on=true;persist();u.value=url;
+      setStatus('Connecting...');pending=currentState();clearTimeout(timer);push(true);
+    };
+    box.querySelector('#sync-stop').onclick=function(){S.on=false;persist();clearTimeout(timer);setStatus('Off');};
+  }
+  window.__syncOpen=open;
+  function init(){
+    var bar=document.getElementById('save-bar'),th=document.getElementById('theme-btn');
+    if(bar&&!document.getElementById('sync-btn')){
+      var b=document.createElement('button');b.id='sync-btn';b.className='btn-sync';b.textContent='⇄ Sync';b.onclick=open;
+      bar.insertBefore(b,th||document.getElementById('ss'));
+    }
+    paintBtn();
+    if(S.on&&S.url&&S.room){setTimeout(function(){pending=currentState();push();},4000);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
 </script>
 <script type="text/babel" data-presets="react">
 const { useState } = React;
@@ -14260,7 +14373,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.26.4</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.27.0</div>
 
 </script>
 </body>
