@@ -338,13 +338,13 @@ window.__characterLoad=function(def){
     if(p.portrait==='__stored_separately__'){try{p.portrait=localStorage.getItem('dnd5e_char_v1_portrait')||'';}catch(e){p.portrait='';}}
     return p;
   }
-  function makeThumb(src){
+  function makeThumb(src,ax,ay,sc){
     return new Promise(function(res){
       if(!src||src.length<100){res('');return;}
-      var key=src.length+':'+src.slice(-40);
+      ax=+ax||0;ay=+ay||0;sc=+sc||1;var key=src.length+':'+src.slice(-40)+':'+ax+':'+ay+':'+sc;
       if(key===thumbSrc){res(thumbVal);return;}
       var im=new Image();
-      im.onload=function(){try{var s=96,cv=document.createElement('canvas');cv.width=s;cv.height=s;var cx=cv.getContext('2d');var m=Math.min(im.width,im.height);cx.drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,s,s);thumbVal=cv.toDataURL('image/jpeg',.8);thumbSrc=key;res(thumbVal);}catch(e){res('');}};
+      im.onload=function(){try{var s=96,cv=document.createElement('canvas');cv.width=s;cv.height=s;var cx=cv.getContext('2d');var k=s/84;cx.fillStyle='#000';cx.fillRect(0,0,s,s);cx.translate(s/2+ax*k,s/2+ay*k);cx.scale(sc*k,sc*k);cx.drawImage(im,-im.width/2,-im.height/2);thumbVal=cv.toDataURL('image/jpeg',.8);thumbSrc=key;res(thumbVal);}catch(e){res('');}};
       im.onerror=function(){res('');};
       im.src=src;
     });
@@ -355,7 +355,7 @@ window.__characterLoad=function(def){
     if(ac){opts=Object.assign({},opts,{signal:ac.signal});t=setTimeout(function(){ac.abort();},ms||12000);}
     return fetch(url,opts).then(function(r){clearTimeout(t);return r;},function(e){clearTimeout(t);throw e;});
   }
-  var busySince=0,lastPushAt=0;
+  var busySince=0,lastPushAt=0,lastSent='';
   // The whole sheet is sent each time, so at most one upload every 5 seconds (changes in between are sent together).
   function waitMs(){return Math.max(1000,5000-(Date.now()-lastPushAt));}
   function schedule(ms){clearTimeout(timer);timer=setTimeout(function(){timer=null;push();},ms);}
@@ -366,7 +366,7 @@ window.__characterLoad=function(def){
     busy=true;busySince=Date.now();
     try{
       var o={};Object.keys(st).forEach(function(k){if(!DROP[k])o[k]=st[k];});
-      o.__thumb=await Promise.race([makeThumb(st.portrait),new Promise(function(res){setTimeout(function(){res('');},4000);})]);
+      o.__thumb=await Promise.race([makeThumb(st.portrait,st.avX,st.avY,st.avScale),new Promise(function(res){setTimeout(function(){res('');},4000);})]);
       var payload=JSON.stringify(o);   // stored as one text value so nothing gets dropped by the database
       if(payload===lastPayload&&!force){setStatus('Up to date '+new Date().toLocaleTimeString());busy=false;return;}
       lastPushAt=Date.now();
@@ -375,7 +375,8 @@ window.__characterLoad=function(def){
       var r2=await fetchT(base()+'/meta/'+S.id+'.json',{method:'PUT',body:JSON.stringify({name:(st.name||'').trim()||'Unnamed',updated:Date.now()})},15000);
       if(!r2.ok)throw new Error('HTTP '+r2.status);
       lastPayload=payload;
-      setStatus('Synced '+new Date().toLocaleTimeString());
+      lastSent='Last upload '+new Date().toLocaleTimeString();
+      setStatus(lastSent);
     }catch(e){
       setStatus('Sync failed: '+(e&&e.message?e.message:e)+' - retrying',true);
       if(!pending)pending=st;schedule(10000);
@@ -397,22 +398,6 @@ window.__characterLoad=function(def){
     rollList=rollList.slice(0,10);
     clearTimeout(rollTimer);rollTimer=setTimeout(pushRolls,150);
   };
-  // Safety net: if a change is still waiting (nothing scheduled, or a push got stuck), send it.
-  // Once a second the sheet looks at its own saved copy (a cheap text compare, nothing is sent unless it changed),
-  // so a change can never be missed, and the Sync window shows the sheet is alive like the DM screen does.
-  var lastRaw=null;
-  setInterval(function(){
-    if(!(S.on&&S.url&&S.room))return;
-    var raw=null;try{raw=localStorage.getItem('dnd5e_char_v1');}catch(e){}
-    if(raw!==null&&raw!==lastRaw){
-      if(lastRaw!==null&&!pending){schedule(waitMs());}
-      lastRaw=raw;
-    }
-    if(pending&&(!busy||Date.now()-busySince>=40000)&&!timer){push();}
-    if(!busy&&!pending&&!/failed/i.test(status))setStatus('Checked '+new Date().toLocaleTimeString());
-  },1000);
-  window.addEventListener('online',function(){if(pending)push();});
-  document.addEventListener('visibilitychange',function(){if(!document.hidden&&pending)push();});
   window.__syncNotify=function(state){
     if(!S.on||!S.url||!S.room)return;
     pending=state;schedule(waitMs());
@@ -14443,7 +14428,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.34.0</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.35.0</div>
 
 </script>
 </body>
