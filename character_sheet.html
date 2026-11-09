@@ -4618,6 +4618,10 @@ function _ptip(m){return m.src?"Source: "+m.src+(m.fl?" · floating":" · perman
 // Shared source/floating of a group of items, or null when they differ.
 function _pgrp(p,names){var ms=names.map(function(n){return _pm(p,n);});var f=ms[0];return ms.every(function(m){return m.fl===f.fl&&m.src===f.src;})?f:null;}
 function _pchip(p,n,k,label){var m=_pm(p,n);return {t:_pt(label||n,m),k:k,tip:_ptip(m)};}
+// Tools learned one kind at a time (which instrument, which game, which vehicle): any number of lines, shown on the chip.
+const _KIND_TOOLS={"Musical Instrument":{pl:"Musical Instruments",ph:"Instrument, e.g. Lute"},"Gaming Set":{pl:"Gaming Sets",ph:"Game, e.g. Dragonchess"},"Land and Water Vehicles":{pl:"Land and Water Vehicles",ph:"Vehicle, e.g. Sailing ship"}};
+function _kindLines(m){m=m||{};if(Array.isArray(m.kinds))return m.kinds;return (m.kind||"").split(",").map(function(x){return x.trim();}).filter(Boolean);}
+function _kindLabel(name,m){var l=_kindLines(m).map(function(x){return (x||"").trim();}).filter(Boolean);if(!l.length)return undefined;return (l.length>1?_KIND_TOOLS[name].pl:name)+" ("+l.join(", ")+")";}
 function profChips(kind,p){
   p=p||{};var chips=[];
   if(kind==="armor"){
@@ -4637,7 +4641,7 @@ function profChips(kind,p){
     var ga=(art.length&&art.every(function(n){return tl[n];}))?_pgrp(p,art):null;
     if(ga) chips.push({t:_pt("Artisan's Tools",ga),k:"tool",tip:_ptip(ga)});
     else art.forEach(function(n){if(tl[n]) chips.push(_pchip(p,n,"tool"));});
-    TOOL_DATA.forEach(function(t){if(!_toolIsArtisan(t)&&tl[t.n]){var kd=t.n==="Musical Instrument"?((p.meta&&p.meta[t.n]&&p.meta[t.n].kind)||"").trim():"";chips.push(_pchip(p,t.n,"tool",kd?t.n+" ("+kd+")":undefined));}});
+    TOOL_DATA.forEach(function(t){if(!_toolIsArtisan(t)&&tl[t.n]){chips.push(_pchip(p,t.n,"tool",_KIND_TOOLS[t.n]?_kindLabel(t.n,p.meta&&p.meta[t.n]):undefined));}});
   }
   (p.custom||[]).forEach(function(cu){if((cu||"").trim()) chips.push(_pchip(p,cu,"custom"));});
   return chips;
@@ -4749,14 +4753,22 @@ function ProficiencyPicker({kind,value,onSave,onClose}){
   };
   // Instruments (and the like) are learned one kind at a time: ask which one(s) as soon as it is ticked.
   const kindEd=function(names){
-    var raw=(d.meta&&d.meta[names[0]])||{};
+    var nm=names[0],raw=(d.meta&&d.meta[nm])||{};
+    var lines=_kindLines(raw);if(!lines.length)lines=[""];
+    var save=function(arr){setMeta(names,{kinds:arr,kind:arr.map(function(x){return (x||"").trim();}).filter(Boolean).join(", ")});};
+    var inS={flex:1,minWidth:0,boxSizing:"border-box",background:"rgba(0,0,0,.3)",border:"1px solid rgba("+col+",.5)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"4px 8px",borderRadius:3,outline:"none"};
     return <div style={{padding:"0 0 5px 23px"}}>
-      <input autoFocus={!raw.kind} value={raw.kind||""} onChange={function(e){setMeta(names,{kind:e.target.value});}} placeholder="Which instrument(s)? e.g. Lute, Flute"
-        style={{width:"100%",boxSizing:"border-box",background:"rgba(0,0,0,.3)",border:"1px solid rgba("+col+",.5)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"4px 8px",borderRadius:3,outline:"none"}} />
+      {lines.map(function(ln,i){
+        return <div key={i} style={{display:"flex",alignItems:"center",gap:6,marginBottom:4}}>
+          <input autoFocus={i===0&&!lines.some(function(x){return x;})} value={ln} onChange={function(e){var a=lines.slice();a[i]=e.target.value;save(a);}} placeholder={_KIND_TOOLS[nm].ph} style={inS} />
+          {lines.length>1&&<span onClick={function(){save(lines.filter(function(_,k){return k!==i;}));}} title="Remove this line" style={{cursor:"pointer",color:"rgba(232,213,176,.6)",fontSize:18,lineHeight:1,padding:"4px 8px",flexShrink:0}}>×</span>}
+        </div>;
+      })}
+      <span onClick={function(){save(lines.concat([""]));}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",color:"var(--gold-l)",whiteSpace:"nowrap"}}>+ Add line</span>
     </div>;
   };
   const cell=function(key,names,text,checked,onChange,showMeta){
-    return <div key={key}>{row(key,text,checked,onChange)}{checked&&names.length===1&&names[0]==="Musical Instrument"&&kindEd(names)}{checked&&showMeta!==false&&metaEd(names)}</div>;
+    return <div key={key}>{row(key,text,checked,onChange)}{checked&&names.length===1&&_KIND_TOOLS[names[0]]&&kindEd(names)}{checked&&showMeta!==false&&metaEd(names)}</div>;
   };
   const wl=d.weapons||{},tl=d.tools||{},ll=d.langs||{};
   const visible=function(n){return !ql||n.toLowerCase().indexOf(ql)>=0;};
@@ -14428,7 +14440,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.35.0</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.36.0</div>
 
 </script>
 </body>
