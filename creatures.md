@@ -47,7 +47,7 @@ The Rabbit-Headed Deer was the first creature anyone documented that the Catastr
 | Herdfather Stag | 3 | Herd leader, protector of the young |
 
 **Family rules.**
-- **Thin-Skulled.** Every one of them is vulnerable to Thunder damage (AC drops sharply) and to being Stunned or Deafened.
+- **Thin-Skulled.** Every one of them is weak to Thunder damage and to being Stunned or Deafened.
 - **Ever-Budding Antlers.** They heal when bloodied unless Radiant or Fire damage has stopped the regrowth.
 - **The scream.** Each can scream when badly hurt, a sound uncomfortably like a person's, which frightens non-Monstrosities and rallies other deer.
 - **Unique quirk.** Each has one trick to be discovered: the Herdfather can be lured away by a mimicked fawn's cry.
@@ -80,7 +80,7 @@ The Rabbit-Headed Deer was the first creature anyone documented that the Catastr
 
 ***Startle-Step (1/Day).*** When the deer takes damage, it can teleport, along with anything it is wearing or carrying, up to 15 feet to an unoccupied space it can see. This doesn't provoke opportunity attacks.
 
-***Thin-Skulled.*** The deer has disadvantage on saving throws against being stunned or deafened, and thunder damage against it ignores its natural armor bonus (treat its AC as 10 against thunder attacks).
+***Thin-Skulled.*** The deer has disadvantage on saving throws against being stunned or deafened, and thunder damage against it deals one additional damage per die.
 
 ### Actions
 ***Multiattack.*** The deer makes two attacks: one with its Antlers and one with its Hooves. It can't make both attacks unless it has taken damage this encounter or an ally or fawn is within 30 feet of it and threatened — otherwise, it uses only its Hooves to shove a foe away rather than gore it.
@@ -132,7 +132,7 @@ The Rabbit-Headed Deer was the first creature anyone documented that the Catastr
 
 ***Radiant Overload.*** Whenever the deer takes Radiant damage, it must succeed on a DC 13 Constitution saving throw or have the Stunned condition until the end of its next turn, its overloaded body briefly unable to process the further influx of power.
 
-***Thin-Skulled.*** The deer has disadvantage on saving throws against being stunned or deafened, and thunder damage against it ignores its natural armor bonus (treat its AC as 11 against thunder attacks).
+***Thin-Skulled.*** The deer has disadvantage on saving throws against being stunned or deafened, and thunder damage against it deals one additional damage per die.
 
 ### Actions
 ***Multiattack.*** The deer makes two attacks, using Antlers and Hooves in any combination. If the deer has fewer than half its Hit Points remaining, it can use Frenzied Bite in place of either attack.
@@ -180,8 +180,7 @@ The Rabbit-Headed Deer was the first creature anyone documented that the Catastr
 
 ***Calf-Call.*** A creature within 60 feet that mimics a distressed fawn's cry as an Action, and succeeds on a DC 14 Charisma (Performance) or Wisdom (Survival) check, draws the Herdfather's full attention. On its next turn, the Herdfather must spend its movement approaching the sound, and it can't take the Attack action unless a creature is within its reach.
 
-***Thin-Skulled.*** The Herdfather has Disadvantage on saving throws against being Stunned or Deafened, and its AC is 10 against attacks that deal Thunder damage.
-
+***Thin-Skulled.*** The deer has disadvantage on saving throws against being stunned or deafened, and thunder damage against it deals one additional damage per die.
 ### Actions
 ***Multiattack.*** The Herdfather makes one Antlers attack and one Hooves attack.
 
