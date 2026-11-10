@@ -306,7 +306,6 @@ With these words, I bid you welcome, dear reader, to the pages of this spellbook
   - #### [{{ Quick Clothier}}{{ 93}}](#p93)
   - #### [{{ Ray of Sickness}}{{ 93}}](#p93)
   - #### [{{ Rotting Curse}}{{ 93}}](#p93)
-  - #### [{{ Rune Strike}}{{ 93}}](#p93)
   - #### [{{ Sanctuary}}{{ 94}}](#p94)
   - #### [{{ Scourge Strike}}{{ 94}}](#p94)
   - #### [{{ Searing Smite}}{{ 94}}](#p94)
@@ -1782,7 +1781,6 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Moonfire}}{{ 91}}](#p91)
 - [{{ Protection from Evil and Good}}{{ 92}}](#p92)
 - [{{ Purify Food and Drink}}{{ 92}}](#p92)
-- [{{ Rune Strike}}{{ 93}}](#p93)
 - [{{ Sanctuary}}{{ 94}}](#p94)
 - [{{ Scourge Strike}}{{ 94}}](#p94)
 - [{{ Shadow Word: Pain}}{{ 95}}](#p95)
@@ -2618,7 +2616,6 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Living Flame}}{{ 89}}](#p89)
 - [{{ Protection from Evil and Good}}{{ 92}}](#p92)
 - [{{ Purify Food and Drink}}{{ 92}}](#p92)
-- [{{ Rune Strike}}{{ 93}}](#p93)
 - [{{ Scourge Strike}}{{ 94}}](#p94)
 - [{{ Searing Smite}}{{ 94}}](#p94)
 - [{{ Shield of Faith}}{{ 95}}](#p95)
@@ -8416,18 +8413,6 @@ You inflict a rotting decay on a creature, causing it to begin to rot. For the d
 | 4th          | 8 hours     | 
 | 5th          | 24 hours     | 
 | 7th+         | Until dispelled     | 
-
-#### Rune Strike
-*1st-level Evocation*  
-**Classes:** Cleric, Paladin  
-**Casting Time:** On Hit  
-**Range:** Self  
-**Components:** V  
-**Duration:** Instantaneous  
-
-When you hit a target with a melee weapon attack or an Unarmed Strike, you can channel runic power into the blow. The target takes an extra 2d8 Necrotic damage. The damage increases by 1d8 if the target is a Celestial.
-
-***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.
 
 
 
