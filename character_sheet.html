@@ -11050,7 +11050,7 @@ function parseSpeciesMd(text){
       if(pi===0){
         // flavor text = everything before the first #### heading / first trait
         var cut=chunk.search(/^#### |^\*\*[^*\n]+?\.[^\n]*?\*\*/m);
-        blurb=_cleanSpeciesText(cut<0?chunk:chunk.slice(0,cut)).split(/\n\s*\n/)[0]||"";
+        blurb=_cleanSpeciesText(cut<0?chunk:chunk.slice(0,cut)).trim();
       }
       if(feats.length) groups.push({label:label,feats:feats});
     });
@@ -11066,7 +11066,7 @@ function parseSpeciesMd(text){
       }
       delete f._ref;delete f._refAdd;delete f._own;
     });
-    out[name.toLowerCase()]={name:name,key:name.toLowerCase(),blurb:blurb,groups:groups};
+    out[name.toLowerCase()]={name:name,key:name.toLowerCase(),blurb:blurb,stats:"",lore:blurb,groups:groups};
   });
   return out;
 }
@@ -11188,11 +11188,11 @@ function convertSpeciesJson(races,subraces,fluff){
     });
     if(!groups.length) return;
     var fd=fl[key(r.name,r.source)]||fl[r.name.toLowerCase()];
-    var lore=fd&&Array.isArray(fd.entries)?fd.entries.filter(function(x){return typeof x==="string";}).map(function(x){return strip5eTags(x).trim();})[0]||"":"";
+    var lore=fd&&Array.isArray(fd.entries)?flatten5eEntries(fd.entries,[]).join("\n\n").trim():"";
     var stats=_spStats(r);
-    var blurb=[stats,lore].filter(Boolean).join("\n");
+    var blurb=[stats?"*"+stats+"*":"",lore].filter(Boolean).join("\n\n");
     var k=dn.toLowerCase();
-    if(!out[k]) out[k]={name:dn,key:k,blurb:blurb,groups:groups,source:r.source||""};
+    if(!out[k]) out[k]={name:dn,key:k,blurb:blurb,stats:stats,lore:lore,groups:groups,source:r.source||""};
   });
   return out;
 }
@@ -12085,6 +12085,7 @@ function SpeciesPanel({c,s}){
   const [fl,setFl]=React.useState(SPECIES_FILTER_EMPTY);
   const [open,setOpen]=React.useState({});
   const [openF,setOpenF]=React.useState({});
+  const [loreOpen,setLoreOpen]=React.useState({});
   const inputStyle={background:"rgba(0,0,0,.35)",border:"1px solid rgba(201,150,42,.25)",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:14,padding:"6px 10px",outline:"none",borderRadius:2};
   const list=(cache.status==="ready"&&cache.data)?Object.values(cache.data):[];
   const nq=fl.name.trim();
@@ -12110,7 +12111,7 @@ function SpeciesPanel({c,s}){
       <div style={{display:"flex",gap:8,marginBottom:10,alignItems:"center",flexWrap:"wrap"}}>
                 <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.4)"}}>{shown.length} species ·</span>
         <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.4)"}}>
-          Chosen: <span style={{color:(cur.length&&(speciesTotalCost(cur)<SPECIES_COST_MIN||speciesTotalCost(cur)>SPECIES_COST_MAX))?"var(--ember)":"var(--gold-l)"}}>{speciesTotalCost(cur)}</span> pts · target {SPECIES_COST_MIN}–{SPECIES_COST_MAX}
+          Chosen: <span style={{color:"var(--gold-l)"}}>{speciesTotalCost(cur)}</span> pts
         </span>
       </div>
       <div style={{position:"relative"}}>
@@ -12132,7 +12133,16 @@ function SpeciesPanel({c,s}){
             </div>
             {isOpen&&(
               <div style={{marginTop:8}}>
-                {sp.blurb&&<div style={{fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.5)",lineHeight:1.5,marginBottom:10,whiteSpace:"pre-line"}}>{sp.blurb}</div>}
+                {sp.stats&&<div style={{fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.5)",lineHeight:1.5,marginBottom:6}}>{sp.stats}</div>}
+                {sp.lore&&(function(){
+                  var parts=sp.lore.split(/\n\s*\n/),first=parts[0],rest=parts.slice(1).join("\n\n").trim(),lo=!!loreOpen[sp.key];
+                  var ls={fontFamily:"'EB Garamond',serif",fontSize:13.5,color:"rgba(232,213,176,.6)",lineHeight:1.5};
+                  return <div style={{marginBottom:10}}>
+                    <div style={ls}><Markdown text={first} /></div>
+                    {rest&&lo&&<div style={Object.assign({marginTop:4},ls)}><Markdown text={rest} /></div>}
+                    {rest&&<div onClick={function(){var o=Object.assign({},loreOpen);o[sp.key]=!lo;setLoreOpen(o);}} style={{cursor:"pointer",display:"inline-block",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:"var(--gold)",padding:"4px 0"}}>{lo?"▴ Less lore":"▾ More lore"}</div>}
+                  </div>;
+                })()}
                 {sp.groups.map(function(g){
                   var costed=g.feats;
                   var gTotal=costed.reduce(function(a,f){return a+f.cost;},0);
@@ -12180,6 +12190,69 @@ function SpeciesPanel({c,s}){
   );
 }
 
+// ─── SpeciesNameInput — autofill a species feature from the Species compendium ─
+// Offers every trait whose name contains what was typed; picking one fills name, text, cost and the species it comes from.
+function SpeciesNameInput({value, onChange, onAutofill, placeholder, style}){
+  const cache=useSpeciesCompendium();
+  const [open,setOpen]=React.useState(false);
+  const [rect,setRect]=React.useState(null);
+  const inputRef=React.useRef(null);
+  const pickingRef=React.useRef(false);
+  const updateRect=React.useCallback(function(){
+    if(inputRef.current){var r=inputRef.current.getBoundingClientRect();setRect({left:r.left,top:r.bottom,width:r.width});}
+  },[]);
+  var matches=[];
+  if(cache.status==="ready"&&cache.data&&(value||"").length>=2){
+    var q=(value||"").toLowerCase(),pre=[],sub=[];
+    Object.values(cache.data).forEach(function(sp){
+      sp.groups.forEach(function(g){
+        g.feats.forEach(function(f){
+          var n=f.name.toLowerCase(),i=n.indexOf(q);
+          if(i<0) return;
+          var m={sp:sp,g:g,f:f};
+          if(i===0) pre.push(m); else sub.push(m);
+        });
+      });
+    });
+    matches=pre.concat(sub).slice(0,12);
+  }
+  React.useEffect(function(){
+    if(!open) return;
+    updateRect();
+    function onMove(){updateRect();}
+    window.addEventListener("scroll",onMove,true);window.addEventListener("resize",onMove);
+    return function(){window.removeEventListener("scroll",onMove,true);window.removeEventListener("resize",onMove);};
+  },[open,updateRect]);
+  function apply(m){pickingRef.current=false;setOpen(false);onAutofill(m);}
+  return (
+    <div style={{position:"relative",display:"flex",alignItems:"center",width:"100%"}}>
+      <AutoGrowName inputRef={inputRef} value={value||""} onChange={onChange}
+        onFocus={function(){updateRect();setOpen(true);}}
+        onBlur={function(){if(!pickingRef.current) setOpen(false);}}
+        placeholder={placeholder} style={style} />
+      {open&&matches.length>0&&rect&&(
+        <div onMouseDown={function(){pickingRef.current=true;}} onMouseUp={function(){pickingRef.current=false;}}
+          style={{position:"fixed",top:rect.top,left:rect.left,zIndex:99999,background:"#1a1208",border:"1px solid rgba(201,150,42,.4)",boxShadow:"0 4px 24px rgba(0,0,0,.9)",minWidth:Math.max(rect.width,220),maxWidth:360,maxHeight:280,overflowY:"auto"}}>
+          {matches.map(function(m,idx){
+            var multi=m.sp.groups.length>1;
+            return (
+              <div key={m.sp.key+"|"+m.g.label+"|"+m.f.name+idx} onClick={function(){apply(m);}}
+                style={{padding:"6px 10px",cursor:"pointer",borderBottom:"1px solid rgba(201,150,42,.08)"}}>
+                <div style={{display:"flex",alignItems:"baseline",gap:8}}>
+                  <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"var(--gold-l)",fontWeight:600,flex:1}}>{m.f.name}</span>
+                  {m.f.hasCost&&<span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(232,213,176,.55)",whiteSpace:"nowrap"}}>{m.f.cost+" pt"+(m.f.cost===1?"":"s")}</span>}
+                </div>
+                <div style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,.4)"}}>{m.sp.name+(multi&&m.g.label!=="General Traits"?" · "+m.g.label:"")}</div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+// ──────────────────────────────────────────────────────────────────────────────
+
 function SpeciesFeaturesSection({c,s,q}){
   useSpeciesHeritageSync(c,s);
   const list=c.spec||[];
@@ -12187,7 +12260,7 @@ function SpeciesFeaturesSection({c,s,q}){
   const open=(c.secOpen||{}).spec!==false;
   const showList=open||!!sq;
   const total=speciesTotalCost(list);
-  const bad=list.length>0&&(total<SPECIES_COST_MIN||total>SPECIES_COST_MAX);
+  const bad=false; // the points are only counted here; no target range is shown
   const upd=function(i,k,v){var a=list.slice();a[i]=Object.assign({},a[i],{[k]:v});s("spec",a);};
   const tip="Species features should be in the range "+SPECIES_COST_MIN+"-"+SPECIES_COST_MAX;
   const col=bad?"201,74,42":"201,150,42";
@@ -12195,11 +12268,9 @@ function SpeciesFeaturesSection({c,s,q}){
     <div style={{marginTop:28}}>
       <SecHead label="Species Features" open={open||!!sq} onToggle={function(){s("secOpen",Object.assign({},c.secOpen||{},{spec:!open}));}} summary={list.length+" feature"+(list.length===1?"":"s")+" · "+total+" pts"+(bad?" ⚠":"")} />
       <div className="fc" style={{borderLeftColor:bad?"var(--ember)":"var(--gold)",background:bad?"rgba(201,74,42,.08)":undefined,borderColor:bad?"rgba(201,74,42,.45)":undefined}}>
-        <div title={bad?tip:"Total feature cost of your species ("+SPECIES_COST_MIN+"-"+SPECIES_COST_MAX+")"}
-          style={{display:"flex",alignItems:"center",gap:12,marginBottom:list.length?10:0,cursor:bad?"help":"default"}}>
-          <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(232,213,176,.45)"}}>Feature Cost</span>
-          <span style={{fontFamily:"'Cinzel',serif",fontSize:20,fontWeight:600,color:bad?"var(--ember)":"var(--gold-l)",border:"1px solid rgba("+col+",.5)",padding:"2px 14px",borderRadius:2,background:"rgba("+col+",.08)"}}>{total}</span>
-          <span style={{fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:bad?"var(--ember)":"rgba(232,213,176,.35)"}}>{bad?(total<SPECIES_COST_MIN?"Below ":"Above ")+"the "+SPECIES_COST_MIN+"–"+SPECIES_COST_MAX+" range":"range "+SPECIES_COST_MIN+"–"+SPECIES_COST_MAX}</span>
+        <div style={{display:"flex",alignItems:"baseline",gap:6,marginBottom:list.length?8:0}}>
+          <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(232,213,176,.3)"}}>Feature cost</span>
+          <span style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:"rgba(232,213,176,.45)"}}>{total} pts</span>
         </div>
         {showList&&list.length===0&&<div style={{fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.35)",marginTop:6}}>No species features yet — add them from the Species tab in the Compendium, or add one manually.</div>}
         {showList&&<div className="fgrid" style={{marginBottom:6}}>{list.map(function(f,i){
@@ -12213,7 +12284,8 @@ function SpeciesFeaturesSection({c,s,q}){
               <div className="fh-row" style={{display:"flex",gap:8,alignItems:"flex-end"}}>
                   <button onClick={function(){var nd=Object.assign({},c.dsOpen||{});nd[key]=!dsOpen;s("dsOpen",nd);}} title="Close" style={{background:"rgba(201,150,42,.12)",border:"1px solid rgba(201,150,42,.45)",color:"var(--gold-l)",cursor:"pointer",fontSize:16,fontWeight:700,padding:0,width:26,height:22,lineHeight:1,fontFamily:"'Cinzel',serif",borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,alignSelf:"center",touchAction:"manipulation"}}><Chev open /></button>
                 <div className="fh-name" style={{flex:1}}>
-                  <AutoGrowName value={f.nm||""} onChange={function(e){upd(i,"nm",e.target.value);}} placeholder="Feature name..."
+                  <SpeciesNameInput value={f.nm||""} onChange={function(e){upd(i,"nm",e.target.value);}} placeholder="Feature name..."
+                    onAutofill={function(m){var a=list.slice();a[i]=Object.assign({},a[i],{sp:m.sp.name,grp:m.g.label,nm:m.f.name,ds:m.f.desc,cost:m.f.cost});s("spec",a);}}
                     style={{marginBottom:0,width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.2)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:600,letterSpacing:1,outline:"none",padding:"2px 0 4px"}} />
                   <input type="text" value={speciesSourceText(f)} onChange={function(e){var pr=parseSpeciesSource(e.target.value);var a=list.slice();a[i]=Object.assign({},a[i],pr);s("spec",a);}} placeholder="Species it comes from…" title="Species this feature comes from (editable)"
                     style={{width:"100%",display:"block",background:"transparent",border:"none",color:"rgba(232,213,176,.4)",fontFamily:"'EB Garamond',serif",fontSize:11,fontWeight:400,letterSpacing:0,lineHeight:1.2,outline:"none",padding:0,margin:"2px 0 0",borderBottom:"none"}} />
@@ -14580,7 +14652,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.37.0</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v2.38.0</div>
 
 </script>
 </body>
