@@ -52,90 +52,93 @@ A Guide to all Sapient Species for the World's Greatest Rolplaying Game
   - [{{ Metallic Dragonborn}}{{ 17}}](#p17)
   - [{{ Ravenite Dragonborn}}{{ 18}}](#p18)
 - #### [{{ Dryad}}{{ 19}}](#p19)
-- #### [{{ Dwarf}}{{ 20}}](#p20)
-  - [{{ Hill/Mountain Dwarf}}{{ 20}}](#p20)
-  - [{{ Duergar}}{{ 20}}](#p20)
-- #### [{{ Elf}}{{ 21}}](#p21)
-  - [{{ Astral Elf}}{{ 21}}](#p21)
-  - [{{ Avariel}}{{ 21}}](#p21)
-  - [{{ Drow}}{{ 21}}](#p21)
-  - [{{ Eladrin}}{{ 22}}](#p22)
-  - [{{ High Elf}}{{ 22}}](#p22)
-  - [{{ Pallid Elf}}{{ 22}}](#p22)
-  - [{{ Sea Elf}}{{ 23}}](#p23)
-  - [{{ Shadar-Kai}}{{ 23}}](#p23)
-  - [{{ Snow Elf}}{{ 23}}](#p23)
-  - [{{ Wood Elf}}{{ 23}}](#p23)
-- #### [{{ Fairy}}{{ 24}}](#p24)
-  - [{{ Pixie Variant}}{{ 24}}](#p24)
-  - [{{ Sprite Variant}}{{ 24}}](#p24)
-- #### [{{ Firbolg}}{{ 25}}](#p25)
-- #### [{{ Genasi}}{{ 26}}](#p26)
-  - [{{ Air Genasi}}{{ 26}}](#p26)
-  - [{{ Earth Genasi}}{{ 26}}](#p26)
-  - [{{ Fire Genasi}}{{ 26}}](#p26)
-  - [{{ Water Genasi}}{{ 27}}](#p27)
-  - [{{ Dust Para-Genasi}}{{ 27}}](#p27)
-  - [{{ Ice Para-Genasi}}{{ 27}}](#p27)
-  - [{{ Magma Para-Genasi}}{{ 27}}](#p27)
-  - [{{ Ooze Para-Genasi}}{{ 28}}](#p28)
-  - [{{ Steam Para-Genasi}}{{ 28}}](#p28)
-  - [{{ Smoke Para-Genasi}}{{ 28}}](#p28)
-- #### [{{ Giff}}{{ 29}}](#p29)
-- #### [{{ Gith}}{{ 30}}](#p30)
-  - [{{ Githyanki}}{{ 30}}](#p30)
-  - [{{ Githzerai}}{{ 30}}](#p30)
-- #### [{{ Gnoll}}{{ 31}}](#p31)
-- #### [{{ Gnome}}{{ 32}}](#p32)
-  - [{{ Deep Gnome}}{{ 32}}](#p32)
-  - [{{ Forest Gnome}}{{ 32}}](#p32)
-  - [{{ Rock Gnome}}{{ 32}}](#p32)
-- #### [{{ Goblin}}{{ 33}}](#p33)
-- #### [{{ Goliath}}{{ 34}}](#p34)
-- #### [{{ Grung}}{{ 34}}](#p34)
-- #### [{{ Hadozee}}{{ 35}}](#p35)
-- #### [{{ Half-Troll}}{{ 35}}](#p35)
-- #### [{{ Halfling}}{{ 36}}](#p36)
-  - [{{ Ghostwise Halfling}}{{ 36}}](#p36)
-  - [{{ Lightfoot Halfling}}{{ 36}}](#p36)
-  - [{{ Lotusden Halfling}}{{ 36}}](#p36)
-  - [{{ Stout Halfling}}{{ 36}}](#p36)
-- #### [{{ Haregon}}{{ 37}}](#p37)
-- #### [{{ Harpy}}{{ 38}}](#p38)
-- #### [{{ Hexblood}}{{ 39}}](#p39)
-- #### [{{ Hobgoblin}}{{ 40}}](#p40)
-- #### [{{ Human}}{{ 41}}](#p41)
-- #### [{{ Kalashtar}}{{ 41}}](#p41)
-- #### [{{ Kender}}{{ 42}}](#p42)
-- #### [{{ Kenku}}{{ 42}}](#p42)
-- #### [{{ Kobold}}{{ 43}}](#p43)
-- #### [{{ Kuo-Toa}}{{ 43}}](#p43)
-- #### [{{ Leonin}}{{ 44}}](#p44)
-- #### [{{ Lizardfolk}}{{ 45}}](#p45)
-- #### [{{ Locathah}}{{ 45}}](#p45)
-- #### [{{ Loxodon}}{{ 46}}](#p46)
-- #### [{{ Lupin}}{{ 46}}](#p46)
-- #### [{{ Medusa}}{{ 47}}](#p47)
-- #### [{{ Merfolk}}{{ 48}}](#p48)
-- #### [{{ Minotaur}}{{ 48}}](#p48)
-- #### [{{ Orc}}{{ 49}}](#p49)
-- #### [{{ Owlin}}{{ 49}}](#p49)
-- #### [{{ Plasmoid}}{{ 50}}](#p50)
-- #### [{{ Reborn}}{{ 51}}](#p51)
-- #### [{{ Satyr}}{{ 52}}](#p52)
-- #### [{{ Sahuagin}}{{ 52}}](#p52)
-- #### [{{ Shifter}}{{ 53}}](#p53)
-- #### [{{ Siren}}{{ 54}}](#p54)
-- #### [{{ Tabaxi}}{{ 55}}](#p55)
-- #### [{{ Thri-kreen}}{{ 55}}](#p55)
-- #### [{{ Tiefling}}{{ 56}}](#p56)
-- #### [{{ Tortle}}{{ 57}}](#p57)
-- #### [{{ Triton}}{{ 57}}](#p57)
-- #### [{{ Vedalken}}{{ 58}}](#p58)
-- #### [{{ Verdan}}{{ 59}}](#p59)
-- #### [{{ Warforged}}{{ 60}}](#p60)
-- #### [{{ Yuan-Ti}}{{ 61}}](#p61)
+- #### [{{ Duskling}}{{ 20}}](#p20)
+- #### [{{ Dwarf}}{{ 21}}](#p21)
+  - [{{ Hill/Mountain Dwarf}}{{ 21}}](#p21)
+  - [{{ Duergar}}{{ 21}}](#p21)
+- #### [{{ Elf}}{{ 22}}](#p22)
+  - [{{ Astral Elf}}{{ 22}}](#p22)
+  - [{{ Avariel}}{{ 22}}](#p22)
+  - [{{ Drow}}{{ 22}}](#p22)
+  - [{{ Eladrin}}{{ 23}}](#p23)
+  - [{{ High Elf}}{{ 23}}](#p23)
+  - [{{ Pallid Elf}}{{ 23}}](#p23)
+  - [{{ Sea Elf}}{{ 24}}](#p24)
+  - [{{ Shadar-Kai}}{{ 24}}](#p24)
+  - [{{ Snow Elf}}{{ 24}}](#p24)
+  - [{{ Wood Elf}}{{ 24}}](#p24)
+- #### [{{ Fairy}}{{ 25}}](#p25)
+  - [{{ Pixie Variant}}{{ 25}}](#p25)
+  - [{{ Sprite Variant}}{{ 25}}](#p25)
+- #### [{{ Firbolg}}{{ 26}}](#p26)
+- #### [{{ Genasi}}{{ 27}}](#p27)
+  - [{{ Air Genasi}}{{ 27}}](#p27)
+  - [{{ Earth Genasi}}{{ 27}}](#p27)
+  - [{{ Fire Genasi}}{{ 27}}](#p27)
+  - [{{ Water Genasi}}{{ 28}}](#p28)
+  - [{{ Dust Para-Genasi}}{{ 28}}](#p28)
+  - [{{ Ice Para-Genasi}}{{ 28}}](#p28)
+  - [{{ Magma Para-Genasi}}{{ 28}}](#p28)
+  - [{{ Ooze Para-Genasi}}{{ 29}}](#p29)
+  - [{{ Steam Para-Genasi}}{{ 29}}](#p29)
+  - [{{ Smoke Para-Genasi}}{{ 29}}](#p29)
+- #### [{{ Giff}}{{ 30}}](#p30)
+- #### [{{ Gith}}{{ 31}}](#p31)
+  - [{{ Githyanki}}{{ 31}}](#p31)
+  - [{{ Githzerai}}{{ 31}}](#p31)
+- #### [{{ Gnoll}}{{ 32}}](#p32)
+- #### [{{ Gnome}}{{ 33}}](#p33)
+  - [{{ Deep Gnome}}{{ 33}}](#p33)
+  - [{{ Forest Gnome}}{{ 33}}](#p33)
+  - [{{ Rock Gnome}}{{ 33}}](#p33)
+- #### [{{ Goblin}}{{ 34}}](#p34)
+- #### [{{ Goliath}}{{ 35}}](#p35)
+- #### [{{ Grung}}{{ 35}}](#p35)
+- #### [{{ Hadozee}}{{ 36}}](#p36)
+- #### [{{ Half-Troll}}{{ 36}}](#p36)
+- #### [{{ Halfling}}{{ 37}}](#p37)
+  - [{{ Ghostwise Halfling}}{{ 37}}](#p37)
+  - [{{ Lightfoot Halfling}}{{ 37}}](#p37)
+  - [{{ Lotusden Halfling}}{{ 37}}](#p37)
+  - [{{ Stout Halfling}}{{ 37}}](#p37)
+- #### [{{ Haregon}}{{ 38}}](#p38)
+- #### [{{ Harpy}}{{ 39}}](#p39)
+- #### [{{ Hexblood}}{{ 40}}](#p40)
+- #### [{{ Hobgoblin}}{{ 41}}](#p41)
+- #### [{{ Human}}{{ 42}}](#p42)
+- #### [{{ Kalashtar}}{{ 42}}](#p42)
+- #### [{{ Kender}}{{ 43}}](#p43)
+- #### [{{ Kenku}}{{ 43}}](#p43)
+- #### [{{ Kobold}}{{ 44}}](#p44)
+- #### [{{ Kuo-Toa}}{{ 44}}](#p44)
+- #### [{{ Leonin}}{{ 45}}](#p45)
+- #### [{{ Lizardfolk}}{{ 46}}](#p46)
+- #### [{{ Locathah}}{{ 46}}](#p46)
+- #### [{{ Loxodon}}{{ 47}}](#p47)
+- #### [{{ Lupin}}{{ 47}}](#p47)
+- #### [{{ Medusa}}{{ 48}}](#p48)
+- #### [{{ Merfolk}}{{ 49}}](#p49)
+- #### [{{ Minotaur}}{{ 49}}](#p49)
+- #### [{{ Orc}}{{ 50}}](#p50)
+- #### [{{ Owlin}}{{ 50}}](#p50)
+- #### [{{ Plasmoid}}{{ 51}}](#p51)
+- #### [{{ Reborn}}{{ 52}}](#p52)
+- #### [{{ Satyr}}{{ 53}}](#p53)
+- #### [{{ Sahuagin}}{{ 53}}](#p53)
+- #### [{{ Shifter}}{{ 54}}](#p54)
+- #### [{{ Siren}}{{ 55}}](#p55)
+- #### [{{ Tabaxi}}{{ 56}}](#p56)
+- #### [{{ Thri-kreen}}{{ 56}}](#p56)
+- #### [{{ Tiefling}}{{ 57}}](#p57)
+- #### [{{ Tortle}}{{ 58}}](#p58)
+- #### [{{ Triton}}{{ 58}}](#p58)
+- #### [{{ Vedalken}}{{ 59}}](#p59)
+- #### [{{ Verdan}}{{ 60}}](#p60)
+- #### [{{ Warforged}}{{ 61}}](#p61)
+- #### [{{ Yuan-Ti}}{{ 62}}](#p62)
 }}
+
+
 
 
 
@@ -742,8 +745,39 @@ Dryads are mystical fey creatures deeply connected to the forests they inhabit. 
 **Tree Stride. *(3 points)*** Once per turn as a bonus action, you may enter a tree at least one size larger than you and emerge from another tree within range. To do this, expend 10 or more feet of your movement (in 5-foot increments). You then emerge from another tree within a number of feet equal to twice the movement you expended. You emerge 5 feet from the tree in an unoccupied space of your choice.  
 **Bound to the Forest. *(-2 points)*** Your spirit is bound to a single tree. Your appearance resembles that of the tree, changing with the seasons as your tree does. If the tree takes damage, you take the same amount of damage. If the tree becomes sick, you suffer effects similar to the tree. If your tree dies or is uprooted, you die instantly. If you die, your tree also withers and dies.
 
+\page
+{{pageNumber,auto}}
+## Duskling
+Dusklings are planar travelers who left the Feywild to settle in the forested lands of the Outer Planes and the Material Plane. The magic of the Feywild still runs through them, letting them suffuse their own bodies and minds with magical effects. Few of them think of this as spellcasting. To a duskling, it is simply something inside them, like a muscle they learn to flex.
 
+Dusklings are sturdy and a little taller than most elves, with pointed ears and a somewhat feral look. Their skin is blue-gray, and their wild, scraggly hair runs from deep blue through slate gray to black. Their eyes are dark blue, emerald, or violet. Most stand about 5 feet tall, though they range from around 4 to 7 feet.
 
+Dusklings are nomads. Their tribes live in migratory communities, following the herds of livestock they tend and moving on when the pasture or other resources run out. Duskling elders lead through approachable councils rather than orders, and dusklings are slow to bow to anyone who rules by force. Young dusklings play daring games of leaping, racing, and dodging that push them to find and use their inner powers.
+
+Roll on the Duskling Herd Tales table or choose an entry that you like to decide why you left your tribe.
+
+| d6  | Why You Left the Herd                                                        |
+|-----|------------------------------------------------------------------------------|
+| 1   | You leapt a gorge no one else dared to, and kept running.                    |
+| 2   | Your tribe's elders sent you to find fresh pastures, and you never turned back. |
+| 3   | You grew tired of being told how the herd should move and who should lead it. |
+| 4   | A rival tribe scattered your herd, and you are searching for what remains.   |
+| 5   | A stranger's tale of far-off cities made the forests feel too small.         |
+| 6   | You are chasing the edge of dusk, where the Feywild's magic feels strongest. |
+
+\column
+#### Traits
+**Age.** Dusklings reach adulthood around age 20 and can live up to 150 years.  
+**Size.** Your size is Medium, about 4 to 7 feet tall.  
+**Speed.** Your base walking speed is 30 feet.  
+**Creature Type. *(1 point)*** You are a Fey.  
+**Darkvision. *(3 points)*** You can see in dim light within 60 feet of you as if it were bright light and in darkness as if it were dim light. You discern colors in that darkness only as shades of gray.  
+**Enhanced Jump. *(1 point)*** You add 2 feet to the distance you can leap with a running high jump and 10 feet to the distance you can leap with a running long jump.  
+**Dusk Veil. *(3 points)*** You have proficiency in the Stealth skill. In addition, you can attempt to hide even when you are only lightly obscured by dim light or shadow.  
+**Inner Magic. *(10 points)*** You have magic inside you that you can manipulate to enhance your physical or mental attributes. When you finish a long rest, choose one of the following benefits, which lasts until you choose a different one. As a bonus action, you can switch to a different benefit. You can switch benefits a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.
+- **Ardor.** You have advantage on Charisma ability checks and on saving throws to avoid or end the frightened condition on yourself.
+- **Mobility.** Your speed increases by 10 feet, and climbing and swimming don't cost you extra movement.
+- **Vigor.** You gain a number of temporary hit points equal to your proficiency bonus, and you have advantage on Strength (Athletics) and Dexterity (Acrobatics) checks.
 \page
 {{pageNumber,auto}}
 ## Dwarf
@@ -752,6 +786,7 @@ Bold and hardy, dwarves are known as skilled warriors, miners, and workers of st
 Dwarven skin ranges from deep brown to a paler hue tinged with red, but the most common shades are light brown or deep tan, like certain tones of earth.
 
 Their hair, worn long but in simple styles, is usually black, gray, or brown, though paler dwarves often have red hair. Male dwarves value their beards highly and groom them carefully.
+
 #### General Traits
 **Age.** Dwarves mature at a similar rate to humans, reaching adulthood around the age of 50. They can live to be over 400 years old, with some reaching even greater ages.  
 **Size.** Your size is Medium.  
