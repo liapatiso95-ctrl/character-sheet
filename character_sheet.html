@@ -813,19 +813,20 @@ var _ADJ0={d:0,x:[],o:false};
 function _adjParse(txt){
   var f=/^\s*([+-]?)\s*(\d+)\s*$/.exec(txt||"");           // a fixed number: "3", "+3", "-2"
   if(f){var v=parseInt(f[2],10);if(!v||v>999)return null;return {n:0,s:0,b:f[1]==="-"?-v:v};}
-  var m=/^\s*(\d*)\s*d\s*(\d+)\s*(?:([+-])\s*(\d+))?\s*$/i.exec(txt||"");if(!m)return null; // dice, optionally with a fixed number: "1d6", "2d8+3"
+  var m=/^\s*([+-]?)\s*(\d*)\s*d\s*(\d+)\s*(?:([+-])\s*(\d+))?\s*$/i.exec(txt||"");if(!m)return null; // dice, optionally signed and with a fixed number: "1d6", "2d8+3", "-1d4"
+  var neg=m[1]==="-";m=[m[0],m[2],m[3],m[4],m[5]];
   var n=m[1]===""?1:parseInt(m[1],10),sd=parseInt(m[2],10);
   if(!(n>=1&&n<=40)||!(sd>=2&&sd<=100))return null;
   var b=m[4]?parseInt(m[4],10):0;
-  return {n:n,s:sd,b:m[3]==="-"?-b:b};
+  var o={n:n,s:sd,b:m[3]==="-"?-b:b};if(neg)o.neg=true;return o;
 }
-function _adjLbl(x){return (x.n?x.n+"d"+x.s+(x.b?(x.b>0?"+":"")+x.b:""):(x.b>0?"+":"")+x.b);}
-function _adjDie(n,sd){var a=[];for(var i=0;i<n;i++)a.push({sides:sd,val:Math.floor(Math.random()*sd)+1,extra:true});return a;}
+function _adjLbl(x){return (x.n?(x.neg?"-":"+")+x.n+"d"+x.s+(x.b?(x.b>0?"+":"")+x.b:""):(x.b>0?"+":"")+x.b);}
+function _adjDie(n,sd,neg){var a=[];for(var i=0;i<n;i++){var v=Math.floor(Math.random()*sd)+1;var d={sides:sd,val:neg?-v:v,extra:true};if(neg)d.neg=true;a.push(d);}return a;}
 // extra dice as their own groups (highlighted in the result and logged with an "extra dice" note)
 function _adjGroups(adj,type,sides,step){
   var g=[];if(!adj)return g;
   if(adj.d>0)g.push({label:"+"+(adj.d*step)+"d"+sides,dtype:type||"",dice:_adjDie(adj.d*step,sides),modNotes:["extra dice"]});
-  (adj.x||[]).forEach(function(x){var dice=x.n?_adjDie(x.n,x.s):[];if(x.b)dice.push({sides:0,val:x.b,flat:true});g.push({label:(x.n?"+":"")+_adjLbl(x),dtype:x.type||type||"",dice:dice,modNotes:[x.n?"extra dice":"extra bonus"]});});
+  (adj.x||[]).forEach(function(x){var dice=x.n?_adjDie(x.n,x.s,x.neg):[];if(x.b)dice.push({sides:0,val:x.b,flat:true});g.push({label:_adjLbl(x),dtype:x.type||type||"",dice:dice,modNotes:[x.n?"extra dice":"extra bonus"]});});
   return g;
 }
 // change the dice count of the first "NdS" in a string
@@ -854,14 +855,14 @@ function AdjExtras({adj,set}){
   var up=function(p){set(Object.assign({},adj,p));};
   var addX=function(){
     var r=_adjParse(txt);if(!r){setBad(true);return;}
-    up({x:(adj.x||[]).concat([{n:r.n,s:r.s,b:r.b,type:type}]),o:false});setTxt("");setBad(false);
+    up({x:(adj.x||[]).concat([{n:r.n,s:r.s,b:r.b,neg:r.neg,type:type}]),o:false});setTxt("");setBad(false);
   };
   if(!adj.o&&!(adj.x&&adj.x.length)) return null;
   return <span className="adjc" onClick={function(e){e.stopPropagation();}} style={{display:"inline-flex",alignItems:"center",flexWrap:"wrap",gap:4}}>
     {(adj.x||[]).map(function(x,i){return <span key={i} title="Extra dice for the next roll — tap to remove" onClick={function(){up({x:adj.x.filter(function(_,j){return j!==i;})});}}
-      style={{fontFamily:"'Cinzel',serif",fontSize:10,padding:"2px 7px",borderRadius:10,cursor:"pointer",border:"1px solid rgba(232,184,75,.6)",background:"rgba(232,184,75,.12)",color:"var(--gold-l)",whiteSpace:"nowrap"}}>{x.n?"+":""}{_adjLbl(x)}{x.type?" "+x.type:""} ×</span>;})}
+      style={{fontFamily:"'Cinzel',serif",fontSize:10,padding:"2px 7px",borderRadius:10,cursor:"pointer",border:"1px solid rgba(232,184,75,.6)",background:"rgba(232,184,75,.12)",color:"var(--gold-l)",whiteSpace:"nowrap"}}>{_adjLbl(x)}{x.type?" "+x.type:""} ×</span>;})}
     {adj.o&&<span style={{display:"inline-flex",alignItems:"center",gap:4,flexWrap:"wrap"}}>
-      <input autoFocus value={txt} placeholder="1d6 or 3" title="Dice (1d6, 2d8+3) or a fixed number (3, -2)" onChange={function(e){setTxt(e.target.value);setBad(false);}} onKeyDown={function(e){if(e.key==="Enter")addX();}}
+      <input autoFocus value={txt} placeholder="1d6 or 3" title="Dice (1d6, 2d8+3, -1d4) or a fixed number (3, -2)" onChange={function(e){setTxt(e.target.value);setBad(false);}} onKeyDown={function(e){if(e.key==="Enter")addX();}}
         style={{width:74,height:22,boxSizing:"border-box",textAlign:"center",fontFamily:"'Cinzel',serif",fontSize:12,background:"rgba(0,0,0,.35)",border:"1px solid "+(isBad?"#c94a2a":"rgba(201,150,42,.4)"),borderRadius:4,color:"var(--gold-l)",outline:"none"}} />
       <select value={type} onChange={function(e){setType(e.target.value);}} title="Damage type of the extra dice (blank = same as the roll)"
         style={{height:22,maxWidth:96,boxSizing:"border-box",fontFamily:"'Cinzel',serif",fontSize:10,background:"rgba(0,0,0,.45)",border:"1px solid rgba(201,150,42,.3)",borderRadius:4,color:"rgba(232,213,176,.8)",outline:"none"}}>
@@ -930,14 +931,14 @@ function _rmApply(ctx,groups){
     if(!G.length) return;
     var tag=m.nm||"modifier",cr=_rmCore(m);
     if(cr) G.forEach(function(g){
-      var real=g.dice.filter(function(d){return !d.flat;}),flats=g.dice.filter(function(d){return d.flat;});
+      var real=g.dice.filter(function(d){return !d.flat&&!d.neg;}),flats=g.dice.filter(function(d){return d.flat;});
       if(!real.length) return;
       var res=core.applyModsToDice(real,cr,real[0].sides||20);
       g.dice=res.dice.concat(flats);g.modNotes=g.modNotes.concat(res.modNotes.map(function(x){return x+" ("+tag+")";}));
     });
     var g0=G[0],val=_rmFlat(m),xd=_adjParse(m.dice);
     if(val){g0.dice.push({sides:0,val:val,flat:true});g0.modNotes.push((val>0?"+":"−")+Math.abs(val)+" "+tag);}
-    if(xd){if(xd.n)g0.dice=g0.dice.concat(_adjDie(xd.n,xd.s));if(xd.b)g0.dice.push({sides:0,val:xd.b,flat:true});g0.modNotes.push((xd.n?"+":"")+_adjLbl(xd)+" "+tag);}
+    if(xd){if(xd.n)g0.dice=g0.dice.concat(_adjDie(xd.n,xd.s,xd.neg));if(xd.b)g0.dice.push({sides:0,val:xd.b,flat:true});g0.modNotes.push(_adjLbl(xd)+" "+tag);}
     spent.push(m);
   });
   var gone=spent.filter(function(m){return m.once;});
@@ -999,7 +1000,7 @@ function RollModPanel({c,s}){
           <option value="" style={{background:"#1a1208"}}>no ability</option>
           {["STR","DEX","CON","INT","WIS","CHA"].map(function(a){return <option key={a} value={a} style={{background:"#1a1208"}}>{a} mod</option>;})}
         </select>
-        <input value={m.dice||""} placeholder="+dice / number" onChange={function(e){P({dice:e.target.value});}} title="Extra dice (1d4 for Bless, 2d6+3) or a fixed number" style={Object.assign({},inp,{width:96})} />
+        <input value={m.dice||""} placeholder="+dice / number" onChange={function(e){P({dice:e.target.value});}} title="Extra dice (1d4 for Bless, -1d4 for Bane, 2d6+3) or a fixed number" style={Object.assign({},inp,{width:96})} />
       </div>
       <details style={{marginTop:6}}><summary style={Object.assign({},mini,{cursor:"pointer"})}>Dice effects (turn / reroll / explode){_rmCore(m)?" ●":""}</summary>
         <div style={row}><span onClick={function(){T("turn",{on:!(m.turn&&m.turn.on)});}} style={chk(m.turn&&m.turn.on)} /><span style={mini}>TURN ANY</span>
@@ -1016,7 +1017,7 @@ function RollModPanel({c,s}){
         <span style={seg(!!m.once)} onClick={function(){P({once:true});}} title="Applies to the next roll it fits, then disappears">Once</span>
         <span style={seg(!m.once)} onClick={function(){P({once:false});}} title="Saved on the character and applied every time">Permanent</span>
         <span style={{flex:1}} />
-        <span onClick={function(){del(m);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(224,112,96,.8)",textTransform:"uppercase"}}>Delete</span>
+        <span onClick={function(){window.__confirm("Delete the modifier \""+(m.nm||"Modifier")+"\"? You can also just switch it off with the circle on the left.",function(){del(m);});}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"rgba(224,112,96,.8)",textTransform:"uppercase"}}>Delete</span>
         <span onClick={function(){setEdit(null);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,color:"var(--gold-l)",textTransform:"uppercase",marginLeft:8}}>Done</span>
       </div>
     </div>;
@@ -1033,7 +1034,7 @@ function RollModPanel({c,s}){
         <div style={{display:"flex",alignItems:"center",gap:8,padding:"5px 8px",borderRadius:5,border:"1px solid rgba(201,150,42,"+(m.off?".12":".3")+")",background:"rgba(0,0,0,.2)",opacity:m.off?.55:1}}>
           <span onClick={function(){save(m,{off:!m.off});}} title={m.off?"Off — tap to turn on":"On — tap to turn off"} style={Object.assign({},chk(!m.off),{background:!m.off?"var(--gold)":"transparent",borderColor:"rgba(201,150,42,.6)"})} />
           <div style={{flex:1,minWidth:0,cursor:"pointer"}} onClick={function(){setEdit(open?null:m.id);}}>
-            <div style={{fontFamily:"'Cinzel',serif",fontSize:12,color:"var(--gold-l)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{m.nm||"Modifier"} <span style={{color:"rgba(232,213,176,.8)"}}>{_rmSummary(m)}</span></div>
+            <div style={{fontFamily:"'Cinzel',serif",fontSize:12,color:"var(--gold-l)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{m.nm||"Modifier"} <span style={{color:"rgba(232,213,176,.8)"}}>{_rmSummary(m)}</span>{m.off&&<span style={{marginLeft:6,fontSize:9,letterSpacing:1,textTransform:"uppercase",color:"rgba(224,112,96,.85)"}}>off</span>}</div>
             <div style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:"rgba(232,213,176,.5)"}}>{_rmScope(m)} · {m.once?"once":"permanent"}</div>
           </div>
           <EditPencil on={open} onClick={function(){setEdit(open?null:m.id);}} />
@@ -1185,7 +1186,7 @@ function SpellRollBar({name,desc,lv,charLv,abl,modVal,atkVal,exDie,secKey,noAtk}
         </div>
       </div>, document.body)}
     {last&&<span style={{fontFamily:"'Cinzel',serif",fontSize:12,color:"var(--gold-l)"}}>{last.type?last.type+": ":""}{last.total}
-      <span style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:"rgba(232,213,176,.5)",marginLeft:5}}>({last.vals.join("+")}{last.bonus?(last.bonus>0?"+":"−")+Math.abs(last.bonus):""}{(last.xv&&last.xv.length>0)&&<span style={{color:"var(--gold-l)",fontWeight:700}}>{" + "+last.xv.join("+")}</span>}{(last.xf&&last.xf.length>0)&&<span style={{color:"#6ec6e8",fontWeight:700}}>{last.xf.map(function(v,i){return (v<0?" − ":" + ")+Math.abs(v);}).join("")}</span>})</span></span>}
+      <span style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:"rgba(232,213,176,.5)",marginLeft:5}}>({last.vals.join("+")}{last.bonus?(last.bonus>0?"+":"−")+Math.abs(last.bonus):""}{(last.xv&&last.xv.length>0)&&<span style={{color:"var(--gold-l)",fontWeight:700}}>{last.xv.map(function(v,i){return (v<0?" − ":(i||true?" + ":""))+Math.abs(v);}).join("")}</span>}{(last.xf&&last.xf.length>0)&&<span style={{color:"#6ec6e8",fontWeight:700}}>{last.xf.map(function(v,i){return (v<0?" − ":" + ")+Math.abs(v);}).join("")}</span>})</span></span>}
   </div>;
 }
 // d20 + total bonus for a saving throw / skill check; goes to the roll log (and the DM screen) like spell rolls.
@@ -11756,8 +11757,8 @@ function _parseSpeciesTraits(chunk){
     var d=_cleanSpeciesText(cur.lines.join("\n"));
     // Cost written at the end of the paragraph: ***(1 point)***
     if(!cur.hasCost){
-      var m=d.match(/\*{2,3}\(\s*(\d+)\s*points?\s*\)\*{2,3}/i);
-      if(m){cur.cost=parseInt(m[1]);cur.hasCost=true;cur._own=cur.cost;d=d.replace(m[0],"").replace(/[ \t]+\n/g,"\n").trim();}
+      var m=d.match(/\*{2,3}\(\s*([-−–]?\d+)\s*points?\s*\)\*{2,3}/i);
+      if(m){cur.cost=parseInt(m[1].replace(/[−–]/,"-"));cur.hasCost=true;cur._own=cur.cost;d=d.replace(m[0],"").replace(/[ \t]+\n/g,"\n").trim();}
     }
     cur.desc=d;delete cur.lines;
     feats.push(cur);cur=null;
@@ -11772,8 +11773,8 @@ function _parseSpeciesTraits(chunk){
       var nm=tm[1].trim(),costTxt=tm[2]||"";
       cur={name:nm,desc:"",cost:0,hasCost:false,lines:[(m[2]||"").trim()]};
       if(costTxt){
-        var nums=[],re=/(\d+)\s*points?/gi,mm;
-        while((mm=re.exec(costTxt))) nums.push(parseInt(mm[1]));
+        var nums=[],re=/([-−–]?\d+)\s*points?/gi,mm;
+        while((mm=re.exec(costTxt))) nums.push(parseInt(mm[1].replace(/[−–]/,"-")));
         var rf=costTxt.match(/\(\s*([A-Za-z' ]+?)\s*\+\s*(\d+)\s*points?/i);
         if(rf){cur._ref=rf[1];cur._refAdd=parseInt(rf[2]);cur.hasCost=true;}
         else if(nums.length){cur.cost=nums.reduce(function(a,b){return a+b;},0);cur.hasCost=true;cur._own=cur.cost;}
@@ -12853,8 +12854,8 @@ function SpeciesFilterBar({f,setF,inputStyle}){
       <input value={f.name} onChange={function(e){set("name",e.target.value);}} placeholder="Name contains..." style={Object.assign({},inputStyle,{flex:"1 1 180px",minWidth:140})} />
       <input value={f.trait} onChange={function(e){set("trait",e.target.value);}} placeholder="Trait contains..." style={Object.assign({},inputStyle,{flex:"1 1 150px",minWidth:120})} />
       <input value={f.desc} onChange={function(e){set("desc",e.target.value);}} placeholder="Description contains..." style={Object.assign({},inputStyle,{flex:"1 1 170px",minWidth:130})} />
-      <input value={f.costMin} onChange={function(e){set("costMin",e.target.value.replace(/[^\d.]/g,""));}} placeholder="Min pts" title="Minimum trait cost" style={num} />
-      <input value={f.costMax} onChange={function(e){set("costMax",e.target.value.replace(/[^\d.]/g,""));}} placeholder="Max pts" title="Maximum trait cost" style={num} />
+      <input value={f.costMin} onChange={function(e){set("costMin",e.target.value.replace(/[^\d.-]/g,""));}} placeholder="Min pts" title="Minimum trait cost" style={num} />
+      <input value={f.costMax} onChange={function(e){set("costMax",e.target.value.replace(/[^\d.-]/g,""));}} placeholder="Max pts" title="Maximum trait cost" style={num} />
       <div onClick={function(){setHelp(!help);}} title="How to write complex search queries"
         style={{flexShrink:0,width:24,height:24,borderRadius:"50%",border:"1px solid rgba(123,79,207,.5)",color:"var(--arcane)",background:help?"rgba(123,79,207,.2)":"rgba(123,79,207,.08)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'EB Garamond',serif",fontSize:14,fontWeight:700,userSelect:"none"}}>?</div>
       <div onClick={function(){if(active)setF(SPECIES_FILTER_EMPTY);}} title="Clear all species filters"
@@ -13110,7 +13111,7 @@ function SpeciesFeaturesSection({c,s,q}){
                   style={{display:isEd?undefined:"none",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",padding:"3px 7px",flexShrink:0,cursor:"pointer",transition:"all .2s",marginBottom:2,background:f.limited?"rgba(201,74,42,.2)":"transparent",border:"1px solid "+(f.limited?"rgba(201,74,42,.6)":"rgba(201,150,42,.2)"),color:f.limited?"var(--ember)":"rgba(232,213,176,.3)"}}>{f.limited?"Limited":"+ Limit"}</button>
                 <EditPencil on={isEd} onClick={function(){ed.toggle(key);}} />
                 <button className="db" onClick={function(){window.__confirm("Delete this species feature?",function(){_delAt(s,"spec",list,i,"spec-");});}}>x</button>
-              </div>):<FeatViewHead name={f.nm} sub={speciesSourceText(f)} tag={parseFloat(f.cost)>0?f.cost+" pt":""} onClose={function(){var nd=Object.assign({},c.dsOpen||{});nd[key]=false;s("dsOpen",nd);}} right={<React.Fragment><EditPencil on={isEd} onClick={function(){ed.toggle(key);}} /><button className="db" onClick={function(){window.__confirm("Delete this species feature?",function(){_delAt(s,"spec",list,i,"spec-");});}}>x</button></React.Fragment>} />}
+              </div>):<FeatViewHead name={f.nm} sub={speciesSourceText(f)} tag={(parseFloat(f.cost)||0)!==0?f.cost+" pt":""} onClose={function(){var nd=Object.assign({},c.dsOpen||{});nd[key]=false;s("dsOpen",nd);}} right={<React.Fragment><EditPencil on={isEd} onClick={function(){ed.toggle(key);}} /><button className="db" onClick={function(){window.__confirm("Delete this species feature?",function(){_delAt(s,"spec",list,i,"spec-");});}}>x</button></React.Fragment>} />}
               {f.limited&&!isEd&&<div data-keep="1" className="stk" style={{marginTop:6,marginBottom:4,padding:"4px 0",background:"#17110a"}}><LimitChips lims={limitStates(f,c)} onAdjust={function(li,d){upd(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){upd(i,"limits",(f.limits||[]).map(function(l){return Object.assign({},l,{exp:"0"});}));}} /></div>}
               {f.limited&&isEd&&(function(){
                 var lims=f.limits&&f.limits.length?f.limits:[{name:"",uses:"",exp:"",die:"NO",recharge:""}];
@@ -15339,6 +15340,38 @@ function UseTracker({rem,max,onUse,onBack,title}){
     <button type="button" aria-label="Get one back" disabled={rem>=max} onClick={onBack} style={b("rgba(74,156,92,.6)",rem>=max)}>+</button>
   </span>;
 }
+// Death saving throw: a plain d20, and at 0 HP it fills the death-save boxes on the Character tab
+function _deathBon(c){return (c.svBonusFormula?computeBonusFromFormula(c.svBonusFormula,c):(parseInt((c.svBonus||"").replace("+",""))||0))+_exhPenOf(c);}
+function DeathSaveRow({c,s}){
+  var bon=_deathBon(c);
+  var fl=useFlash(),flash=fl[0],show=fl[1];
+  var cnt=function(a){return (a||[]).filter(Boolean).length;};
+  var ns=cnt(c.ds),nf=cnt(c.df);
+  var max=_stripMaxHP(c),hasCur=(c.hpc!==""&&c.hpc!=null);
+  var cur=hasCur?(parseInt(c.hpc)||0):max;
+  var go=function(e){
+    e.stopPropagation();
+    var r=checkRollNow("Death Save",bon,"sav"),d=r.d20,note="";
+    if(cur>0||max<=0&&!hasCur){note="not at 0 HP";}
+    else if(nf>=3){note="already dead";}
+    else if(ns>=3){note="already stable";}
+    else if(d===20){s("hpc","1");if(max>0)s("hpDmg",""+Math.max(0,max-1));s("ds",[false,false,false]);s("df",[false,false,false]);note="regain 1 HP";}
+    else if(d===1){var m=Math.min(3,nf+2);s("df",[0,1,2].map(function(j){return j<m;}));note="2 failures";}
+    else if(r.total<10){var m2=Math.min(3,nf+1);s("df",[0,1,2].map(function(j){return j<m2;}));note="1 failure";}
+    else{var m3=Math.min(3,ns+1);s("ds",[0,1,2].map(function(j){return j<m3;}));note="1 success";}
+    show({total:r.total,label:"Death Save ("+d+(bon?(bon>0?"+":"-")+Math.abs(bon):"")+")"+(note?" — "+note:""),crit:d===20,fumble:d===1});
+  };
+  return <div style={{display:"inline-flex",alignItems:"center",gap:6,minWidth:150,flex:"1 1 150px",padding:"2px 0"}}>
+    <button type="button" className="rbtn" onClick={go} title={"Roll a death save (d20"+(bon?(bon>0?"+":"-")+Math.abs(bon):"")+"). At 0 HP: natural 1 = 2 failures, natural 20 = regain 1 HP, otherwise total under 10 = failure, 10 or more = success"}
+      style={{background:"transparent",border:"none",padding:0,margin:0,cursor:"pointer",display:"inline-flex",alignItems:"center",flexShrink:0,lineHeight:0}}>
+      <DieIcon sides={20} color="#e8c26a" size={20} />
+    </button>
+    <FlashPop flash={flash} />
+    <span style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"var(--parch)",flex:1,minWidth:0}}>Death</span>
+    {bon!==0&&<span style={{fontFamily:"'Cinzel',serif",fontSize:12,color:"var(--gold-l)"}}>{(bon>0?"+":"−")+Math.abs(bon)}</span>}
+    <span title="Death saves on the Character tab" style={{fontFamily:"'Cinzel',serif",fontSize:11,color:"rgba(232,213,176,.55)",whiteSpace:"nowrap"}}><span style={{color:"#4a9c5c"}}>{"S "+ns}</span>{" · "}<span style={{color:"#c94a2a"}}>{"F "+nf}</span></span>
+  </div>;
+}
 function CheckRow({label,name,bonus,sec}){
   return <div style={{display:"inline-flex",alignItems:"center",gap:6,minWidth:150,flex:"1 1 150px",padding:"2px 0"}}>
     <CheckRollBtn label={label} bonus={bonus} sec={sec} />
@@ -15542,9 +15575,10 @@ function QuickRollPanel({c,s:setS,shut,setShut}){
     {!isShut("x")&&<div style={{display:"flex",flexWrap:"wrap",gap:"4px 14px",padding:"2px 0"}}>
       {["STR","DEX","CON","INT","WIS","CHA"].map(function(a){return <CheckRow key={a} label={a+" Check"} name={a} bonus={_checkTotal(c,a)} sec="chk" />;})}
     </div>}
-    {Head({k:"v",t:"Saving Throws",n:6})}
+    {Head({k:"v",t:"Saving Throws",n:7})}
     {!isShut("v")&&<div style={{display:"flex",flexWrap:"wrap",gap:"4px 14px",padding:"2px 0"}}>
       {["STR","DEX","CON","INT","WIS","CHA"].map(function(a){return <CheckRow key={a} label={a+" Save"} name={a} bonus={_saveTotal(c,a)} sec="sav" />;})}
+      <DeathSaveRow c={c} s={setS} />
     </div>}
     {Head({k:"k",t:"Skills",n:_SKILLS.length})}
     {!isShut("k")&&<div style={{display:"flex",flexWrap:"wrap",gap:"4px 14px",padding:"2px 0"}}>
@@ -15921,7 +15955,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v3.7.0</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v3.11.0</div>
 
 </script>
 </body>
