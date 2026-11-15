@@ -702,7 +702,10 @@ You can use your Breath Weapon a number of times equal to your proficiency bonus
 
 **Draconic Resistance. *(3 points)*** You have resistance to the damage type associated with your Chromatic Ancestry.
 
-**Chromatic Warding. *(4 points)*** Starting at 5th level, as a bonus action, you can channel your draconic energy to protect yourself. For 1 minute, you become immune to the damage type associated with your Chromatic Ancestry. Once you use this trait, you can't do so again until you finish a long rest.
+**Chromatic Manifestation. *(4 points)*** When you reach character level 5, the dragon blood in your veins awakens, and your ancestry takes physical form. Choose one of the following benefits. Once chosen, it cannot be changed.
+
+- ***Chromatic Warding.*** As a Bonus Action, you call on your ancestry, and your scales shimmer with the hue of your draconic lineage as your body hardens against its element. For 1 minute, you become immune to the damage type associated with your Chromatic Ancestry. Once you use this trait, you can't do so again until you finish a long rest.
+- ***Draconic Flight.*** As a Bonus Action, you let your ancestry unfurl, and a pair of spectral wings made of the same energy as your Breath Weapon sprouts from your back. They last for 10 minutes or until you retract them (no action required) or have the Incapacitated condition. While they last, you have a Fly Speed equal to your Speed. Once you use this trait, you can't use it again until you finish a long rest.
 
 \page
 {{pageNumber,auto}}
@@ -744,15 +747,6 @@ You can use your Forceful Presence a number of times equal to your proficiency b
 
 **Draconic Resistance. *(3 points)*** You have resistance to the damage type associated with your Draconic Ancestry.
 
-
-{{note
-##### Chromatic & Metallic Dragonborn Trait Replacement
-You can replace the **Metallic Breath Weapon** or **Chromatic Warding** traits with the following trait, if you so choose:
-
-**Draconic Flight. *(4 points)*** When you reach character level 5, you can channel draconic magic to give yourself temporary flight. As a Bonus Action, you sprout spectral wings on your back that last for 10 minutes or until you retract the wings (no action required) or have the Incapacitated condition.
-
-During that time, you have a Fly Speed equal to your Speed. Your wings appear to be made of the same energy as your Breath Weapon. Once you use this trait, you can’t use it again until you finish a Long Rest.
-}}
 \page
 {{pageNumber,auto}}
 
@@ -811,21 +805,14 @@ You can use your Breath Weapon a number of times equal to your proficiency bonus
 
 **Darkvision. *(3 points)*** You can see in dim light within 60 feet of you as if it were bright light and in darkness as if it were dim light. You discern colors in that darkness as shades of gray.
 
-**Metallic Breath Weapon. *(4 points)*** At 5th level, you gain a second breath weapon. When you take the Attack action on your turn, you can replace one of your attacks with an exhalation in a 15-foot cone. The save DC for this breath is 8 + your Constitution modifier + your proficiency bonus. Whenever you use this trait, choose one:  
-- **Enervating Breath.** Each creature in the cone must succeed on a Constitution saving throw or become incapacitated until the start of your next turn.  
-- **Repulsion Breath.** Each creature in the cone must succeed on a Strength saving throw or be pushed 20 feet away from you and be knocked prone.  
+**Metallic Manifestation. *(4 points)*** When you reach character level 5, the dragon blood in your veins awakens, and your ancestry takes physical form. Choose one of the following benefits. Once chosen, it cannot be changed.
 
-Once you use your Metallic Breath Weapon, you can't do so again until you finish a long rest.
+- ***Metallic Breath Weapon.*** You gain a second breath weapon, a gift of your metallic ancestry. When you take the Attack action on your turn, you can replace one of your attacks with an exhalation in a 15-foot cone. The save DC for this breath is 8 + your Constitution modifier + your proficiency bonus. Whenever you use this trait, choose one of the following breaths:
+  - ***Enervating Breath.*** A sapping exhalation washes over your foes. Each creature in the cone must succeed on a Constitution saving throw or become incapacitated until the start of your next turn.
+  - ***Repulsion Breath.*** A thunderous blast of force rolls out from you. Each creature in the cone must succeed on a Strength saving throw or be pushed 20 feet away from you and be knocked prone.
 
-
-{{note
-##### Chromatic & Metallic Dragonborn Trait Replacement
-You can replace the **Metallic Breath Weapon** or **Chromatic Warding** traits with the following trait, if you so choose:
-
-**Draconic Flight. *(4 points)*** When you reach character level 5, you can channel draconic magic to give yourself temporary flight. As a Bonus Action, you sprout spectral wings on your back that last for 10 minutes or until you retract the wings (no action required) or have the Incapacitated condition.
-
-During that time, you have a Fly Speed equal to your Speed. Your wings appear to be made of the same energy as your Breath Weapon. Once you use this trait, you can’t use it again until you finish a Long Rest.
-}}
+  Once you use your Metallic Breath Weapon, you can't do so again until you finish a long rest.
+- ***Draconic Flight.*** As a bonus action, you let your ancestry unfurl, and a pair of spectral wings made of the same energy as your Breath Weapon sprouts from your back. They last for 10 minutes or until you retract them (no action required) or have the Incapacitated condition. While they last, you have a Fly Speed equal to your Speed. Once you use this trait, you can't use it again until you finish a long rest.
 \page
 {{pageNumber,auto}}
 
