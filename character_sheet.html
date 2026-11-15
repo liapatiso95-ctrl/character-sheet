@@ -77,6 +77,19 @@ if(n&&getComputedStyle(n).position==='sticky')nh=n.offsetHeight;
 document.documentElement.style.setProperty('--stk',(sh+40+nh+2)+'px');}
 function q(){if(!raf)raf=requestAnimationFrame(g);}
 window.addEventListener('resize',q);window.addEventListener('scroll',q,{passive:true});document.addEventListener('click',function(){setTimeout(q,60);});setTimeout(q,800);})();
+// Name bar that follows you down a long description inside table rows (CSS sticky can't work there: the tables scroll sideways)
+(function(){var raf=0;
+function run(){raf=0;var root=document.documentElement,stk=parseFloat(getComputedStyle(root).getPropertyValue('--stk'))||92;
+var pins=[].slice.call(document.querySelectorAll('.stk'));
+[].slice.call(document.querySelectorAll('[data-jstk]')).forEach(function(el){
+  var host=el.parentElement;if(!host)return;if(getComputedStyle(host).position==='static')host.style.position='relative';
+  var r=host.getBoundingClientRect(),off=stk;
+  pins.forEach(function(p){var pr=p.getBoundingClientRect();if(pr.height>0&&Math.abs(pr.top-stk)<3&&p.parentElement&&p.parentElement.contains(host)&&!p.contains(host))off=Math.max(off,pr.bottom+1);});
+  var y=off-r.top,H=26;
+  if(y>6&&r.bottom-off>H+12){el.style.display='flex';el.style.top=Math.min(y,r.height-H-2)+'px';}else el.style.display='none';
+});}
+function q(){if(!raf)raf=requestAnimationFrame(run);}
+window.addEventListener('scroll',q,{passive:true});window.addEventListener('resize',q);document.addEventListener('click',function(){setTimeout(q,80);});setInterval(q,1200);})();
 </script>
 <script>
 var LS='dnd5e_char_v1';
@@ -372,6 +385,7 @@ window.__characterLoad=function(def){
     busy=true;busySince=Date.now();
     try{
       var o={};Object.keys(st).forEach(function(k){if(!DROP[k])o[k]=st[k];});
+      try{if(window.__qrBuild){var _q=window.__qrBuild(st);if(_q&&_q.length)o.__qr=_q;}}catch(e){}
       o.__thumb=await Promise.race([makeThumb(st.portrait,st.avX,st.avY,st.avScale),new Promise(function(res){setTimeout(function(){res('');},4000);})]);
       var payload=JSON.stringify(o);   // stored as one text value so nothing gets dropped by the database
       if(payload===lastPayload&&!force){setStatus('Up to date '+new Date().toLocaleTimeString());busy=false;return;}
@@ -558,6 +572,7 @@ const _rollLog = { items: [], subs: new Set() };
 const _compMem = { kind: null, byKind: {} };
 function rollLogGet(){ return _rollLog.items; }
 function rollLogSet(updater){
+  if(window.__qrCap){try{var _e=(typeof updater==="function"?updater([]):updater)[0];if(_e)window.__qrCap(_e);}catch(x){}return;}
   const next = (typeof updater === "function") ? updater(_rollLog.items) : updater;
   _rollLog.items = Array.isArray(next) ? next.slice(0, 20) : [];
   _rollLog.subs.forEach(function(fn){ try{ fn(_rollLog.items); }catch(e){} });
@@ -909,6 +924,7 @@ function _rmTypes(m){
 function _rmScope(m){
   var secs=_rmSecs(m),ty=_rmTypes(m);
   var w=secs.length?secs.map(function(k){return _RM_SEC[k]||k;}).join(" + "):"Every section";
+  if(m.cls&&m.cls.length) w+=" · "+m.cls.join(" + ");
   return w+(ty.length?" · "+ty.join(" + ")+" damage":(m.on==="d20"?" · d20 rolls":m.on==="dmg"?" · damage":""));
 }
 // Apply every matching mod to the groups of one roll. ctx={sec,kind:"d20"|"dmg"}; groups=[{dtype,dice,modNotes}].
@@ -921,6 +937,7 @@ function _rmApply(ctx,groups){
   mods.forEach(function(m){
     var G,secs=_rmSecs(m),ty=_rmTypes(m).map(function(x){return x.toLowerCase();});
     if(secs.length&&secs.indexOf(ctx.sec)<0) return;
+    var mcl=m.cls||[];if(mcl.length&&(!ctx.cls||mcl.indexOf(ctx.cls)<0)) return;
     if(ty.length){
       if(ctx.kind!=="dmg") return;
       G=out.filter(function(g){return ty.indexOf((g.dtype||"").toLowerCase())>=0;});
@@ -942,7 +959,7 @@ function _rmApply(ctx,groups){
     spent.push(m);
   });
   var gone=spent.filter(function(m){return m.once;});
-  if(gone.length){_rm.once=_rm.once.filter(function(m){return gone.indexOf(m)<0;});_rmNotify();}
+  if(gone.length&&!window.__qrDry){_rm.once=_rm.once.filter(function(m){return gone.indexOf(m)<0;});_rmNotify();}
   return out;
 }
 function RollModPanel({c,s}){
@@ -983,6 +1000,14 @@ function RollModPanel({c,s}){
         <span onClick={function(){P({secs:[]});}} style={seg(_rmSecs(m).length===0)} title="No section ticked = every section">All</span>
         {Object.keys(_RM_SEC).map(function(k){var on=_rmSecs(m).indexOf(k)>=0;return <span key={k} onClick={function(){var cur=_rmSecs(m);P({secs:on?cur.filter(function(x){return x!==k;}):cur.concat([k])});}} style={seg(on)}>{_RM_SEC[k]}</span>;})}
       </div>
+      {(function(){var cn=[];(c.spellClasses||[]).concat(c.exploitClasses||[]).forEach(function(x){var n=(x&&x.nm||"").trim();if(n&&cn.indexOf(n)<0)cn.push(n);});
+        if(!cn.length&&!(m.cls&&m.cls.length)) return null;
+        var cur=m.cls||[];
+        return <div style={row}><span style={lbl}>Class</span>
+          <span onClick={function(){P({cls:[]});}} style={seg(cur.length===0)} title="No class ticked = spells and exploits of any class">Any</span>
+          {cn.map(function(n){var on=cur.indexOf(n)>=0;return <span key={n} onClick={function(){P({cls:on?cur.filter(function(x){return x!==n;}):cur.concat([n])});}} style={seg(on)}>{n}</span>;})}
+          <span style={{fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,.45)"}}>only that class's spells / exploits</span>
+        </div>;})()}
       <div style={row}><span style={lbl}>Dmg types</span>
         <span onClick={function(){P({types:[]});}} style={seg(_rmTypes(m).length===0)} title="No type ticked = any damage type">Any</span>
         {_DMG_TYPES.concat(["healing"]).map(function(d){var D=d.charAt(0).toUpperCase()+d.slice(1),cur=_rmTypes(m),on=cur.indexOf(D)>=0;return <span key={d} onClick={function(){P({types:on?cur.filter(function(x){return x!==D;}):cur.concat([D])});}} style={seg(on)}>{D}</span>;})}
@@ -1079,7 +1104,7 @@ function CustomRollBtn({c,sr}){
 }
 // character + setter of the app, refreshed every render (lets module-level roll helpers read sheet data)
 var _rmCtx={c:null,s:null};
-function spellRollNow(name,r,modVal,adj,sec){
+function spellRollNow(name,r,modVal,adj,sec,cls){
   adj=adj||_ADJ0;
   var step=r.per||1;
   var n=Math.max(1,r.n+(adj.d<0?adj.d*step:0));
@@ -1089,7 +1114,7 @@ function spellRollNow(name,r,modVal,adj,sec){
   var flatB=(r.b||0)+(r.mod?(mv||0):0);
   if(flatB) dice.push({sides:0,val:flatB,flat:true});
   var groups=[{label:n+"d"+r.s,dtype:r.type,dice:dice,modNotes:[]}].concat(_adjGroups(adj,r.type,r.s,step));
-  groups=_rmApply({sec:sec||"spl",kind:"dmg"},groups);
+  groups=_rmApply({sec:sec||"spl",kind:"dmg",cls:cls||""},groups);
   dice=groups[0].dice;
   var id=Date.now()+Math.random();
   if(_rollSig===null) rollSyncAll(rollLogGet());
@@ -1138,7 +1163,7 @@ function RollBtn({sides,main,sub,color,onClick,adj,setAdj,minD,maxD}){
   </span>;
 }
 // One damage/healing roll button of a spell or exploit, with the dice stepper (− / +) and the "+d" extra-dice chip.
-function SpellRollItem({r,name,abl,modVal,sec,onRolled}){
+function SpellRollItem({r,name,abl,modVal,sec,cls,onRolled}){
   var st=React.useState(_ADJ0),adj=st[0],setAdj=st[1];
   var step=r.per||1,col=_RT_COL[r.type]||"#e8c26a";
   var shown=r.n+adj.d*step;
@@ -1147,11 +1172,11 @@ function SpellRollItem({r,name,abl,modVal,sec,onRolled}){
   var minD=-Math.floor((r.n-1)/step);
   var sub=(r.type||"Roll")+(r.per?" · "+(adj.d+1)+" spent":"");
   return <span style={{display:"inline-flex",alignItems:"center",flexWrap:"wrap",gap:4}}>
-    <RollBtn sides={r.s} color={col} main={main} sub={sub} onClick={function(){var res=spellRollNow(name,r,modVal,adj,sec);setAdj(_ADJ0);onRolled(res);}} adj={adj} setAdj={setAdj} minD={minD} maxD={maxD} />
+    <RollBtn sides={r.s} color={col} main={main} sub={sub} onClick={function(){var res=spellRollNow(name,r,modVal,adj,sec,cls);setAdj(_ADJ0);onRolled(res);}} adj={adj} setAdj={setAdj} minD={minD} maxD={maxD} />
     <AdjExtras adj={adj} set={setAdj} />
   </span>;
 }
-function SpellRollBar({name,desc,lv,charLv,abl,modVal,atkVal,exDie,secKey,noAtk}){
+function SpellRollBar({name,desc,lv,charLv,abl,modVal,atkVal,exDie,secKey,noAtk,cls}){
   const SK=secKey||(exDie?"exp":"spl");
   const rolls=React.useMemo(function(){return parseSpellRolls(desc,lv===0,charLv).concat(exDie?parseExploitRolls(desc,exDie):[]);},[desc,lv,charLv,exDie]);
   const hasAtk=React.useMemo(function(){return !noAtk&&_spellHasAtk(desc);},[desc,noAtk]);
@@ -1161,7 +1186,7 @@ function SpellRollBar({name,desc,lv,charLv,abl,modVal,atkVal,exDie,secKey,noAtk}
   React.useEffect(function(){return function(){if(ftimer.current)clearTimeout(ftimer.current);};},[]);
   if(!rolls.length&&!hasAtk) return null;
   const rollAtk=function(){
-    var v=atkVal||0,lbl=(name||"Spell")+" – Spell Attack",r=checkRollNow(lbl,v,SK);
+    var v=atkVal||0,lbl=(name||"Spell")+" – Spell Attack",r=checkRollNow(lbl,v,SK,cls);
     setLast({type:"Attack",total:r.total,vals:[r.d20],bonus:r.total-r.d20});
     var fid=Date.now()+Math.random();if(ftimer.current)clearTimeout(ftimer.current);
     setFlash({id:fid,total:r.total,label:lbl,crit:r.d20===20,fumble:r.d20===1});
@@ -1170,7 +1195,7 @@ function SpellRollBar({name,desc,lv,charLv,abl,modVal,atkVal,exDie,secKey,noAtk}
   return <div className="spell-rolls" style={{display:"flex",flexWrap:"wrap",alignItems:"center",gap:6,borderTop:"1px solid rgba(201,150,42,.18)",marginTop:6,paddingTop:6}}>
     {hasAtk&&<RollBtn sides={20} color={_RT_COL.Attack} main={(atkVal>=0?"+":"−")+Math.abs(atkVal||0)} sub="Spell Attack" onClick={rollAtk} />}
     {rolls.map(function(r,ri){
-      return <SpellRollItem key={ri} r={r} name={name} abl={abl} modVal={modVal} sec={SK} onRolled={function(res){
+      return <SpellRollItem key={ri} r={r} name={name} abl={abl} modVal={modVal} sec={SK} cls={cls} onRolled={function(res){
           setLast({ri:ri,type:r.type,total:res.total,vals:res.vals,xv:res.xv,xf:res.xf,bonus:res.bonus});
           var fid=Date.now()+Math.random();if(ftimer.current)clearTimeout(ftimer.current);
           setFlash({id:fid,total:res.total,label:(name||"Spell")+(r.type?" – "+r.type:""),type:r.type,typeBreak:res.tb});
@@ -1190,10 +1215,10 @@ function SpellRollBar({name,desc,lv,charLv,abl,modVal,atkVal,exDie,secKey,noAtk}
   </div>;
 }
 // d20 + total bonus for a saving throw / skill check; goes to the roll log (and the DM screen) like spell rolls.
-function checkRollNow(label,bonus,sec){
+function checkRollNow(label,bonus,sec,cls){
   var d20={sides:20,val:Math.floor(Math.random()*20)+1},dice=[d20];
   if(bonus) dice.push({sides:0,val:bonus,flat:true});
-  var groups=_rmApply({sec:sec||"",kind:"d20"},[{label:"1d20",dtype:"",dice:dice,modNotes:[]}]);
+  var groups=_rmApply({sec:sec||"",kind:"d20",cls:cls||""},[{label:"1d20",dtype:"",dice:dice,modNotes:[]}]);
   dice=groups[0].dice;
   var id=Date.now()+Math.random();
   if(_rollSig===null) rollSyncAll(rollLogGet());
@@ -1542,12 +1567,12 @@ function CheckRollBtn({label,bonus,sec}){
   </React.Fragment>;
 }
 // Attack roll (d20 + the attack bonus shown in the row)
-function AtkRollBtn({name,total,sec}){
+function AtkRollBtn({name,total,sec,cls}){
   var fl=useFlash(),flash=fl[0],show=fl[1];
   return <React.Fragment>
     <RollBtn sides={20} color={_RT_COL.Attack} main={(total>=0?"+":"−")+Math.abs(total)} sub="Attack" onClick={function(e){
       if(e&&e.stopPropagation)e.stopPropagation();
-      var lbl=(name||"Attack")+" – Atk",r=checkRollNow(lbl,total,sec||"atk");
+      var lbl=(name||"Attack")+" – Atk",r=checkRollNow(lbl,total,sec||"atk",cls);
       show({total:r.total,label:lbl+" ("+r.d20+(total?(total>0?"+":"-")+Math.abs(total):"")+")",crit:r.d20===20,fumble:r.d20===1});}} />
     <FlashPop flash={flash} />
   </React.Fragment>;
@@ -4279,7 +4304,7 @@ function Page2({c,s}){
                 it.showDesc&&<tr key={i+"b"} onClick={function(e){if(isEdI("att-"+i,it))return;lineClick(e,()=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],showDesc:!it.showDesc};s("attuned_inv",a);});}} style={{borderBottom:"1px solid rgba(201,150,42,.1)"}}>
                   <td style={{textAlign:"center",verticalAlign:"top",padding:"2px 2px 0"}}><EditPencil on={isEdI("att-"+i,it)} onClick={()=>ed.toggle("att-"+i)} /></td><td></td><td></td>
                   <td colSpan={6} style={{padding:"2px 4px 6px"}}>
-                    <div><MdField ro={!isEdI("att-"+i,it)} value={it.desc||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],desc:e.target.value};s("attuned_inv",a);}} placeholder="Item description..."
+                    <JStk name={it.nm} /><div><MdField ro={!isEdI("att-"+i,it)} value={it.desc||""} onChange={e=>{const a=[...(c.attuned_inv||[])];a[i]={...a[i],desc:e.target.value};s("attuned_inv",a);}} placeholder="Item description..."
                       style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 4px"}} /></div>
                     <ChargeTracker it={it} onUpdate={function(ch){const a=[...(c.attuned_inv||[])];a[i]={...a[i],charges:ch||undefined};s("attuned_inv",a);}} />
                   </td>
@@ -4352,7 +4377,7 @@ function Page2({c,s}){
                 it.showDesc&&<tr key={i+"b"} onClick={function(e){if(isEdI("inv-"+i,it))return;lineClick(e,()=>ui("inv",i,"showDesc",!it.showDesc));}} style={{borderBottom:"1px solid rgba(123,79,207,.1)"}}>
                   <td style={{textAlign:"center",verticalAlign:"top",padding:"2px 2px 0"}}><EditPencil on={isEdI("inv-"+i,it)} onClick={()=>ed.toggle("inv-"+i)} /></td><td></td><td></td>
                   <td colSpan={6} style={{padding:"2px 4px 6px"}}>
-                    <div><MdField ro={!isEdI("inv-"+i,it)} value={it.desc||""} onChange={e=>ui("inv",i,"desc",e.target.value)} placeholder="Item description..."
+                    <JStk name={it.nm} /><div><MdField ro={!isEdI("inv-"+i,it)} value={it.desc||""} onChange={e=>ui("inv",i,"desc",e.target.value)} placeholder="Item description..."
                       style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 4px"}} /></div>
                     <ChargeTracker it={it} onUpdate={function(ch){ui("inv",i,"charges",ch||undefined);}} />
                   </td>
@@ -4502,7 +4527,7 @@ function Page2({c,s}){
                     it.showDesc&&<tr key={i+"b"} onClick={function(e){if(isEdI("bag"+bag.id+"-"+i,it))return;lineClick(e,()=>{const a=[...bagInv];a[i]={...a[i],showDesc:!it.showDesc};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));});}} style={{borderBottom:"1px solid rgba(123,79,207,.1)"}}>
                       <td style={{textAlign:"center",verticalAlign:"top",padding:"2px 2px 0"}}><EditPencil on={isEdI("bag"+bag.id+"-"+i,it)} onClick={()=>ed.toggle("bag"+bag.id+"-"+i)} /></td><td></td><td></td>
                       <td colSpan={6} style={{padding:"2px 4px 6px"}}>
-                        <div><MdField ro={!isEdI("bag"+bag.id+"-"+i,it)} value={it.desc||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],desc:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="Item description..."
+                        <JStk name={it.nm} /><div><MdField ro={!isEdI("bag"+bag.id+"-"+i,it)} value={it.desc||""} onChange={e=>{const a=[...bagInv];a[i]={...a[i],desc:e.target.value};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} placeholder="Item description..."
                           style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 4px"}} /></div>
                         <ChargeTracker it={it} onUpdate={function(ch){const a=[...bagInv];a[i]={...a[i],charges:ch||undefined};s("bags",bags.map(b=>b.id===bag.id?{...b,inv:a}:b));}} />
                       </td>
@@ -6484,7 +6509,7 @@ function Page3({c,s}){
                   <button inert={ro} onClick={()=>updFeat(i,"limited",!limited)} title="Toggle limited use tracking"
                     style={{display:isEd?undefined:"none",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",padding:"3px 7px",flexShrink:0,cursor:"pointer",transition:"all .2s",marginTop:2,background:limited?"rgba(201,74,42,.2)":"transparent",border:"1px solid "+(limited?"rgba(201,74,42,.6)":"rgba(201,150,42,.2)"),color:limited?"var(--ember)":"rgba(232,213,176,.3)"}}>{limited?"Limited":"+ Limit"}</button>
                 </div>):<FeatViewHead name={f.nm} sub={f.src} onClose={function(){const nd={...(c.dsOpen||{}),[dsKey]:false};s("dsOpen",nd);}} />}
-                {limited&&!isEd&&<div data-keep="1" className="stk" style={{marginBottom:6,padding:"4px 0",background:"#17110a"}}><LimitChips lims={limitStates(f,c)} onAdjust={function(li,d){updFeat(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){updFeat(i,"limits",(f.limits||[]).map(function(l){return {...l,exp:"0"};}));}} /></div>}
+                {limited&&!isEd&&<div data-keep="1" className="stk" style={{top:"calc(var(--stk,92px) + var(--fhh,40px))",marginBottom:6,padding:"4px 0",background:"#17110a"}}><LimitChips lims={limitStates(f,c)} onAdjust={function(li,d){updFeat(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){updFeat(i,"limits",(f.limits||[]).map(function(l){return {...l,exp:"0"};}));}} /></div>}
                 {limited&&isEd&&(
                   <div data-keep="1" style={{marginBottom:8}}>
                     {limits.map(function(lim,li){return <LimitBlock key={li} lim={lim} idx={li} c={c} onChange={function(li2,f2,v){updFeatLim(i,li2,f2,v);}} onDelete={function(li2){delFeatLim(i,li2);}} isOnly={limits.length===1} />;})}</div>
@@ -6553,7 +6578,7 @@ function Page3({c,s}){
                   <button inert={ro} onClick={()=>updFts(i,"limited",!limited)} title="Toggle limited use tracking"
                     style={{display:isEd?undefined:"none",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",padding:"3px 7px",flexShrink:0,cursor:"pointer",transition:"all .2s",marginBottom:2,background:limited?"rgba(201,74,42,.2)":"transparent",border:"1px solid "+(limited?"rgba(201,74,42,.6)":"rgba(201,150,42,.2)"),color:limited?"var(--ember)":"rgba(232,213,176,.3)"}}>{limited?"Limited":"+ Limit"}</button>
                 </div>):<FeatViewHead name={f.nm} sub={f.src} tag={f.lv?"Lv "+f.lv:""} onClose={function(){const nd={...(c.dsOpen||{}),[dsKey]:false};s("dsOpen",nd);}} />}
-                {limited&&!isEd&&<div data-keep="1" className="stk" style={{marginBottom:6,padding:"4px 0",background:"#17110a"}}><LimitChips lims={limitStates(f,c)} onAdjust={function(li,d){updFts(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){updFts(i,"limits",(f.limits||[]).map(function(l){return {...l,exp:"0"};}));}} /></div>}
+                {limited&&!isEd&&<div data-keep="1" className="stk" style={{top:"calc(var(--stk,92px) + var(--fhh,40px))",marginBottom:6,padding:"4px 0",background:"#17110a"}}><LimitChips lims={limitStates(f,c)} onAdjust={function(li,d){updFts(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){updFts(i,"limits",(f.limits||[]).map(function(l){return {...l,exp:"0"};}));}} /></div>}
                 {limited&&isEd&&(
                   <div data-keep="1" style={{marginBottom:8}}>
                     {limits.map(function(lim,li){return <LimitBlock key={li} lim={lim} idx={li} c={c} onChange={function(li2,f2,v){updFtsLim(i,li2,f2,v);}} onDelete={function(li2){delFtsLim(i,li2);}} isOnly={limits.length===1} />;})}</div>
@@ -9091,13 +9116,14 @@ function SpellPage({c,s,from,to}){
         <td style={{textAlign:"center",verticalAlign:"top",padding:"2px 2px 0"}}><EditPencil on={isEd} onClick={()=>ed.toggle(ek)} /></td>
         {lv>0&&!(group&&group.sc&&group.sc.known)&&<td></td>}
         <td colSpan={lv>0&&!(group&&group.sc&&group.sc.known)?11:10} style={{paddingBottom:6,paddingTop:0}}>
+          <JStk name={sp.nm} />
           <div><MdField ro={ro!==undefined} value={sp.nt||""} onChange={e=>us(lv,i,"nt",e.target.value)} placeholder="Description..."
             style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 0"}} /></div>
           {(function(){
             var scs=c.spellClasses||[];
             var sc0=(group&&group.sc)||scs.find(function(x){return x.nm&&x.nm===sp.cls;})||(scs.length===1?scs[0]:null);
             var ab=sc0?(sc0.abl||"INT"):"";
-            return <SpellRollBar name={sp.nm} desc={sp.nt} lv={lv} charLv={charLv} abl={ab} modVal={ab?getMod(c,ab):0} atkVal={sc0?(parseInt(clsAtk(sc0))||0):0} />;})()}
+            return <SpellRollBar cls={sc0?sc0.nm:""} name={sp.nm} desc={sp.nt} lv={lv} charLv={charLv} abl={ab} modVal={ab?getMod(c,ab):0} atkVal={sc0?(parseInt(clsAtk(sc0))||0):0} />;})()}
         </td>
       </tr>
     ];
@@ -9863,6 +9889,7 @@ function ExploitPage({c,s}){
                           </tr>,
                           ex.showDesc&&<tr key={i+"b"} style={{borderBottom:"1px solid rgba(123,79,207,.1)"}}>
                             <td colSpan={hasUsed?7:6} style={{padding:"2px 4px 6px"}}>
+                              <JStk name={ex.nm} />
                               <div style={{display:"flex",alignItems:"baseline",gap:4,padding:"0 4px 3px"}}>
                                 <span style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:"rgba(201,74,42,.75)",fontStyle:"italic",whiteSpace:"nowrap"}}>Prerequisites:</span>
                                 <TipInput value={ex.prereq||""} onChange={e=>ue(deg,i,"prereq",e.target.value)} placeholder="none"
@@ -9874,7 +9901,7 @@ function ExploitPage({c,s}){
                                 var ec=exCls.find(function(x){return x.nm&&x.nm===ex.cls;})||(exCls.length===1?exCls[0]:null);
                                 var ab=ec?(ec.abl||"STR"):"";
                                 var cl=(c.classes||[]).reduce(function(t,k){return t+(parseInt(k.lv)||0);},0)||1;
-                                return <SpellRollBar name={ex.nm} desc={ex.desc} lv={1} charLv={cl} abl={ab} modVal={ab?getMod(c,ab):0} atkVal={ec?Math.round(_clsAtkVal(c,ec)):0} exDie={c.exploitDie||"d4"} />;
+                                return <SpellRollBar cls={ec?ec.nm:""} name={ex.nm} desc={ex.desc} lv={1} charLv={cl} abl={ab} modVal={ab?getMod(c,ab):0} atkVal={ec?Math.round(_clsAtkVal(c,ec)):0} exDie={c.exploitDie||"d4"} />;
                               })()}
                             </td>
                           </tr>
@@ -12733,8 +12760,11 @@ function LimitChips({lims,onAdjust,onRestore}){
       }):<span title="Limited (set max uses in the expanded card)" style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"var(--ember)",border:"1px solid rgba(201,74,42,.5)",padding:"1px 6px",borderRadius:8,flexShrink:0}}>Limited</span>)}
   </div>;
 }
+function JStk({name}){
+  return <div data-jstk="1" style={{display:"none",position:"absolute",left:0,right:0,top:0,height:26,boxSizing:"border-box",zIndex:4,alignItems:"center",padding:"0 8px",background:"#17110a",borderBottom:"1px solid rgba(201,150,42,.35)",boxShadow:"0 4px 6px -4px rgba(0,0,0,.8)",pointerEvents:"none",fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:600,letterSpacing:.5,color:"var(--gold-l)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{name||"Untitled"}</div>;
+}
 function FeatViewHead({name,sub,tag,onClose,right}){
-  return <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:6}}>
+  return <div className="stk" ref={function(el){if(el&&el.parentElement)el.parentElement.style.setProperty("--fhh",(el.offsetHeight+6)+"px");}} style={{display:"flex",alignItems:"center",gap:8,marginBottom:6,background:"#17110a",padding:"2px 0"}}>
     <button type="button" onClick={function(e){e.stopPropagation();onClose();}} title="Close"
       style={{background:"rgba(201,150,42,.12)",border:"1px solid rgba(201,150,42,.45)",color:"var(--gold-l)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><Chev open={true} /></button>
     <div style={{flex:1,minWidth:0}}>
@@ -13112,7 +13142,7 @@ function SpeciesFeaturesSection({c,s,q}){
                 <EditPencil on={isEd} onClick={function(){ed.toggle(key);}} />
                 <button className="db" onClick={function(){window.__confirm("Delete this species feature?",function(){_delAt(s,"spec",list,i,"spec-");});}}>x</button>
               </div>):<FeatViewHead name={f.nm} sub={speciesSourceText(f)} tag={(parseFloat(f.cost)||0)!==0?f.cost+" pt":""} onClose={function(){var nd=Object.assign({},c.dsOpen||{});nd[key]=false;s("dsOpen",nd);}} right={<React.Fragment><EditPencil on={isEd} onClick={function(){ed.toggle(key);}} /><button className="db" onClick={function(){window.__confirm("Delete this species feature?",function(){_delAt(s,"spec",list,i,"spec-");});}}>x</button></React.Fragment>} />}
-              {f.limited&&!isEd&&<div data-keep="1" className="stk" style={{marginTop:6,marginBottom:4,padding:"4px 0",background:"#17110a"}}><LimitChips lims={limitStates(f,c)} onAdjust={function(li,d){upd(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){upd(i,"limits",(f.limits||[]).map(function(l){return Object.assign({},l,{exp:"0"});}));}} /></div>}
+              {f.limited&&!isEd&&<div data-keep="1" className="stk" style={{top:"calc(var(--stk,92px) + var(--fhh,40px))",marginTop:6,marginBottom:4,padding:"4px 0",background:"#17110a"}}><LimitChips lims={limitStates(f,c)} onAdjust={function(li,d){upd(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){upd(i,"limits",(f.limits||[]).map(function(l){return Object.assign({},l,{exp:"0"});}));}} /></div>}
               {f.limited&&isEd&&(function(){
                 var lims=f.limits&&f.limits.length?f.limits:[{name:"",uses:"",exp:"",die:"NO",recharge:""}];
                 return <div data-keep="1" style={{marginTop:6,marginBottom:4}}>
@@ -15342,6 +15372,40 @@ function UseTracker({rem,max,onUse,onBack,title}){
 }
 // Death saving throw: a plain d20, and at 0 HP it fills the death-save boxes on the Character tab
 function _deathBon(c){return (c.svBonusFormula?computeBonusFromFormula(c.svBonusFormula,c):(parseInt((c.svBonus||"").replace("+",""))||0))+_exhPenOf(c);}
+// Quick-roll list for the DM screen: render the Quick roll panel off-screen, press every roll button once with
+// logging switched to "capture", and keep each button's section path and dice recipe (modifiers already applied).
+function buildQuickRecipe(c){
+  var host=document.createElement("div");host.style.cssText="position:fixed;left:-9999px;top:0;width:640px;visibility:hidden;pointer-events:none";
+  document.body.appendChild(host);
+  var pc=_rmCtx.c,ps=_rmCtx.s,out=[],cur=null,root=null;
+  try{
+    _rmCtx.c=c;window.__qrDry=true;window.__qrCap=function(e){cur=e;};
+    root=ReactDOM.createRoot(host);
+    var allOpen=new Proxy({},{get:function(){return false;}});
+    ReactDOM.flushSync(function(){root.render(<QuickRollPanel c={c} s={function(){}} shut={allOpen} setShut={function(){}} />);});
+    var h="",g="",l="";
+    Array.prototype.forEach.call(host.querySelectorAll("[data-qh],[data-qg],[data-ql],button.rbtn"),function(el){
+      if(el.hasAttribute("data-qh")){h=el.getAttribute("data-qh");g="";l="";return;}
+      if(el.hasAttribute("data-qg")){g=el.getAttribute("data-qg");l="";return;}
+      if(el.hasAttribute("data-ql")){l=el.getAttribute("data-ql");return;}
+      cur=null;try{el.click();}catch(e){}
+      if(!cur)return;
+      var e=cur;cur=null;
+      var gs=(e.groups&&e.groups.length?e.groups:[{dice:e.dice||[],dtype:""}]).map(function(gr){
+        return {t:gr.dtype||"",d:(gr.dice||[]).map(function(d){return d.flat?{f:d.val}:{s:d.sides,x:d.extra?1:0,n:d.neg?1:0};}),m:gr.modNotes&&gr.modNotes.length?gr.modNotes.slice(0,4):undefined};
+      });
+      out.push({h:h,g:g,l:l,n:e.label,r:gs,b:e.bonus||0});
+    });
+  }catch(e){out=[];}
+  finally{
+    window.__qrCap=null;window.__qrDry=false;
+    try{if(root)ReactDOM.flushSync(function(){root.unmount();});}catch(e){}
+    _rmCtx.c=pc;_rmCtx.s=ps;
+    if(host.parentNode)host.parentNode.removeChild(host);
+  }
+  return out;
+}
+window.__qrBuild=function(c){try{return buildQuickRecipe(c);}catch(e){return null;}};
 function DeathSaveRow({c,s}){
   var bon=_deathBon(c);
   var fl=useFlash(),flash=fl[0],show=fl[1];
@@ -15438,7 +15502,7 @@ function QuickRollPanel({c,s:setS,shut,setShut}){
   }).filter(function(g){return g.list.length>0;});
   var Head=function(p){
     var closed=isShut(p.k);
-    return <div onClick={function(){var n=Object.assign({},shut);n[p.k]=closed?false:true;setShut(n);}} style={{display:"flex",alignItems:"center",gap:8,cursor:"pointer",userSelect:"none",margin:"8px 0 4px",paddingBottom:3,borderBottom:"1px solid rgba(201,150,42,.2)"}}>
+    return <div data-qh={p.t} onClick={function(){var n=Object.assign({},shut);n[p.k]=closed?false:true;setShut(n);}} style={{display:"flex",alignItems:"center",gap:8,cursor:"pointer",userSelect:"none",margin:"8px 0 4px",paddingBottom:3,borderBottom:"1px solid rgba(201,150,42,.2)"}}>
       <span style={{display:"inline-block",width:6,height:6,borderRight:"2px solid var(--gold-l)",borderBottom:"2px solid var(--gold-l)",transform:closed?"rotate(-45deg)":"rotate(45deg) translate(-1px,-1px)",flexShrink:0}} />
       <span style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:2,textTransform:"uppercase",color:"var(--gold-l)"}}>{p.t}</span>
       <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(232,213,176,.45)"}}>{p.n}</span>
@@ -15462,7 +15526,7 @@ function QuickRollPanel({c,s:setS,shut,setShut}){
       return <div key={"sa"+i} style={{padding:"4px 0",borderTop:(wp.length||i)?"1px solid rgba(201,150,42,.08)":"none"}}>
         <div><span style={nm}>{sc.nm}</span><span style={tag}>Spell attack</span></div>
         <div style={{display:"flex",flexWrap:"wrap",alignItems:"center",gap:6,marginTop:4}}>
-          <AtkRollBtn name={sc.nm+" Spell Attack"} total={Math.round(_clsAtkVal(c,sc))||0} sec="spl" />
+          <AtkRollBtn name={sc.nm+" Spell Attack"} total={Math.round(_clsAtkVal(c,sc))||0} sec="spl" cls={sc.nm} />
         </div>
       </div>;
     })}
@@ -15476,7 +15540,7 @@ function QuickRollPanel({c,s:setS,shut,setShut}){
       var multi=spGroups.length>1,gsc=g.sc,gdc=gsc?_spDC(c,gsc):null;
       var glv=spLevels.filter(function(l){return g.list.some(function(x){return x.lv===l;})||(gi===0&&l>0&&(parseInt((c.slotMax||{})[l])||0)>0);});
       return <div key={"sg"+gi}>
-      {multi&&<div style={{display:"flex",alignItems:"center",flexWrap:"wrap",gap:"2px 10px",margin:"8px 0 0",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:"var(--arcane-l)"}}>
+      {multi&&<div data-qg={(gsc?(gsc.nm||"Spells"):"Other spells")+(gdc!=null?"  ·  Save DC "+gdc:"")+(gsc?"  ·  Atk "+(Math.round(_clsAtkVal(c,gsc))>=0?"+":"−")+Math.abs(Math.round(_clsAtkVal(c,gsc))):"")} style={{display:"flex",alignItems:"center",flexWrap:"wrap",gap:"2px 10px",margin:"8px 0 0",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:"var(--arcane-l)"}}>
         <span>{gsc?(gsc.nm||"Spells"):"Other spells"}</span>
         {gdc!=null&&<span style={{color:"var(--gold-l)",fontWeight:700}}>{"Save DC "+gdc}</span>}
         {gsc&&<span style={{color:"var(--gold-l)",fontWeight:700}}>{"Atk "+(Math.round(_clsAtkVal(c,gsc))>=0?"+":"−")+Math.abs(Math.round(_clsAtkVal(c,gsc)))}</span>}
@@ -15485,7 +15549,7 @@ function QuickRollPanel({c,s:setS,shut,setShut}){
       var list=g.list.filter(function(x){return x.lv===lv;}),mx=lv>0?(parseInt((c.slotMax||{})[lv])||0):0,ex=lv>0?(parseInt((c.slotExp||{})[lv])||0):0;
       var lk=multi?"sl_"+gi+"_"+lv:"sl_"+lv,lopen=!isShut(lk);
       return <div key={"sl"+lv}>
-        <div onClick={function(){tgl(lk);}} style={{position:"sticky",top:0,zIndex:5,background:"#120d09",display:"flex",alignItems:"center",gap:8,flexWrap:"wrap",margin:"6px 0 2px",padding:"3px 0 2px",borderBottom:"1px dotted rgba(201,150,42,.2)",cursor:"pointer",userSelect:"none"}}>
+        <div data-ql={(lv===0?"Cantrips":"Level "+lv)+(gdc!=null?"  ·  DC "+gdc:"")} onClick={function(){tgl(lk);}} style={{position:"sticky",top:0,zIndex:5,background:"#120d09",display:"flex",alignItems:"center",gap:8,flexWrap:"wrap",margin:"6px 0 2px",padding:"3px 0 2px",borderBottom:"1px dotted rgba(201,150,42,.2)",cursor:"pointer",userSelect:"none"}}>
           <QChev open={lopen} />
           <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.8,textTransform:"uppercase",color:"rgba(232,213,176,.75)"}}>{lv===0?"Cantrips":"Level "+lv}</span>
           <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(232,213,176,.4)"}}>{list.length}</span>
@@ -15498,7 +15562,7 @@ function QuickRollPanel({c,s:setS,shut,setShut}){
           var ab=x.sc?(x.sc.abl||"INT"):"";
           return <div key={"s"+lv+"_"+i} style={{padding:"4px 0",borderTop:i?"1px solid rgba(201,150,42,.08)":"none"}}>
             <div><span style={nm}>{x.sp.nm}</span></div>
-            <SpellRollBar name={x.sp.nm} desc={x.sp.nt} lv={x.lv} charLv={charLv} abl={ab} modVal={ab?getMod(c,ab):0} atkVal={x.sc?Math.round(_clsAtkVal(c,x.sc)):0} />
+            <SpellRollBar cls={x.sc?x.sc.nm:""} name={x.sp.nm} desc={x.sp.nt} lv={x.lv} charLv={charLv} abl={ab} modVal={ab?getMod(c,ab):0} atkVal={x.sc?Math.round(_clsAtkVal(c,x.sc)):0} />
           </div>;
         })}
       </div>;
@@ -15520,14 +15584,14 @@ function QuickRollPanel({c,s:setS,shut,setShut}){
     {!isShut("e")&&exGroups.map(function(eg,egi){
       var emulti=exGroups.length>1;
       return <div key={"eg"+egi}>
-      {emulti&&<div style={{display:"flex",alignItems:"center",flexWrap:"wrap",gap:"2px 10px",margin:"8px 0 0",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:"var(--arcane-l)"}}>
+      {emulti&&<div data-qg={(eg.ec?(eg.ec.nm||"Exploits"):"Other exploits")+(eg.ec?"  ·  Save DC "+_exDC(c,eg.ec):"")} style={{display:"flex",alignItems:"center",flexWrap:"wrap",gap:"2px 10px",margin:"8px 0 0",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:"var(--arcane-l)"}}>
         <span>{eg.ec?(eg.ec.nm||"Exploits"):"Other exploits"}</span>
         {eg.ec&&<span style={{color:"var(--gold-l)",fontWeight:700}}>{"Save DC "+_exDC(c,eg.ec)}</span>}
       </div>}
       {[1,2,3,4,5].filter(function(d){return eg.list.some(function(x){return x.deg===d;});}).map(function(deg){
       var dk=emulti?"dg_"+egi+"_"+deg:"dg_"+deg,dopen=!isShut(dk),dn=eg.list.filter(function(x){return x.deg===deg;}).length;
       return <div key={"dg"+deg}>
-        <div onClick={function(){tgl(dk);}} style={{display:"flex",alignItems:"center",gap:8,margin:"6px 0 2px",paddingBottom:2,borderBottom:"1px dotted rgba(201,150,42,.2)",cursor:"pointer",userSelect:"none"}}>
+        <div data-ql={"Degree "+deg} onClick={function(){tgl(dk);}} style={{display:"flex",alignItems:"center",gap:8,margin:"6px 0 2px",paddingBottom:2,borderBottom:"1px dotted rgba(201,150,42,.2)",cursor:"pointer",userSelect:"none"}}>
           <QChev open={dopen} />
           <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.8,textTransform:"uppercase",color:"rgba(232,213,176,.75)"}}>{"Degree "+deg}</span>
           <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(232,213,176,.4)"}}>{dn}</span>
@@ -15536,7 +15600,7 @@ function QuickRollPanel({c,s:setS,shut,setShut}){
           var ab=x.ec?(x.ec.abl||"STR"):"";
           return <div key={"e"+deg+"_"+i} style={{padding:"4px 0",borderTop:i?"1px solid rgba(201,150,42,.08)":"none"}}>
             <div><span style={nm}>{x.ex.nm}</span></div>
-            <SpellRollBar name={x.ex.nm} desc={x.ex.desc} lv={1} charLv={charLv} abl={ab} modVal={ab?getMod(c,ab):0} atkVal={x.ec?Math.round(_clsAtkVal(c,x.ec)):0} exDie={c.exploitDie||"d4"} />
+            <SpellRollBar cls={x.ec?x.ec.nm:""} name={x.ex.nm} desc={x.ex.desc} lv={1} charLv={charLv} abl={ab} modVal={ab?getMod(c,ab):0} atkVal={x.ec?Math.round(_clsAtkVal(c,x.ec)):0} exDie={c.exploitDie||"d4"} />
           </div>;
         })}
       </div>;
@@ -15548,7 +15612,7 @@ function QuickRollPanel({c,s:setS,shut,setShut}){
     {!isShut("f")&&feats.map(function(x){
       var f=x.f,lims=limitStates(f,c);
       return <div key={x.k+x.i} style={{borderTop:"1px solid rgba(201,150,42,.08)",padding:"0 0 4px"}}>
-        <div style={{position:"sticky",top:0,zIndex:4,background:"#120d09",display:"flex",alignItems:"center",flexWrap:"wrap",gap:"2px 10px",padding:"4px 0 2px"}}>
+        <div data-ql={f.nm} style={{position:"sticky",top:0,zIndex:4,background:"#120d09",display:"flex",alignItems:"center",flexWrap:"wrap",gap:"2px 10px",padding:"4px 0 2px"}}>
           <span style={nm}>{f.nm}</span>
           <span style={{flex:1}} />
           {f.limited&&lims.map(function(l){
@@ -15588,7 +15652,7 @@ function QuickRollPanel({c,s:setS,shut,setShut}){
     {!isShut("c")&&crGroups.map(function(gr){
       var gk="cg_"+gr.tag,gopen=!gr.tag||!isShut(gk);
       return <div key={gk}>
-      {gr.tag&&<div onClick={function(){var n=Object.assign({},shut);n[gk]=gopen?true:false;setShut(n);}} style={{display:"flex",alignItems:"center",gap:7,cursor:"pointer",userSelect:"none",margin:"6px 0 2px 6px",paddingBottom:2,borderBottom:"1px dotted rgba(184,154,240,.25)"}}>
+      {gr.tag&&<div data-qg={gr.label} onClick={function(){var n=Object.assign({},shut);n[gk]=gopen?true:false;setShut(n);}} style={{display:"flex",alignItems:"center",gap:7,cursor:"pointer",userSelect:"none",margin:"6px 0 2px 6px",paddingBottom:2,borderBottom:"1px dotted rgba(184,154,240,.25)"}}>
         <span style={{display:"inline-block",width:5,height:5,borderRight:"2px solid var(--arcane-l)",borderBottom:"2px solid var(--arcane-l)",transform:gopen?"rotate(45deg) translate(-1px,-1px)":"rotate(-45deg)",flexShrink:0}} />
         <span style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.8,textTransform:"uppercase",color:"var(--arcane-l)"}}>{gr.label}</span>
         <span style={{fontFamily:"'Cinzel',serif",fontSize:9,color:"rgba(232,213,176,.45)"}}>{gr.list.length}</span>
@@ -15596,7 +15660,7 @@ function QuickRollPanel({c,s:setS,shut,setShut}){
       {gopen&&gr.list.map(function(cr){
       var key="c_"+cr.id,open=!isShut(key),atks=open?_crAttacks(c,cr):[];
       return <div key={cr.id} style={{padding:"2px 0 2px 10px"}}>
-        <div onClick={function(){var n=Object.assign({},shut);n[key]=open?true:false;setShut(n);}} style={{display:"flex",alignItems:"center",gap:8,cursor:"pointer",userSelect:"none",padding:"3px 0"}}>
+        <div data-ql={cr.nm} onClick={function(){var n=Object.assign({},shut);n[key]=open?true:false;setShut(n);}} style={{display:"flex",alignItems:"center",gap:8,cursor:"pointer",userSelect:"none",padding:"3px 0"}}>
           <span style={{display:"inline-block",width:5,height:5,borderRight:"2px solid var(--arcane-l)",borderBottom:"2px solid var(--arcane-l)",transform:open?"rotate(45deg) translate(-1px,-1px)":"rotate(-45deg)",flexShrink:0}} />
           <span style={{fontFamily:"'EB Garamond',serif",fontSize:14,fontWeight:600,color:"var(--parch)"}}>{cr.nm}</span>
           <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"var(--arcane-l)"}}>{cr.tag||""}</span>
@@ -15955,7 +16019,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v3.11.0</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v3.14.0</div>
 
 </script>
 </body>
