@@ -123,7 +123,7 @@ A Collection of DnD 5e Feats
   - #### [{{ Necromancy Adept}}{{ 17}}](#p17)
   - #### [{{ Observant}}{{ 17}}](#p17)
   - #### [{{ Overwhelming Strength}}{{ 17}}](#p17)
-  - #### [{{ Paralysing Cold}}{{ 17}}](#p17)
+  - #### [{{ Penetrating Cold}}{{ 17}}](#p17)
   - #### [{{ Piercer}}{{ 17}}](#p17)
   - #### [{{ Poisoner}}{{ 17}}](#p17)
   - #### [{{ Polearm Master}}{{ 18}}](#p18)
@@ -605,7 +605,7 @@ Your mind is so clear and focused that spells sometimes leave you with power to 
 
 **Ability Score Increase.** Increase your Intelligence score by 1, to a maximum of 20.
 
-**Clearcasting.** When you score a Critical Hit with a spell's attack roll, you can take a Reaction to cast a cantrip with a casting time of an action.
+**Surge of Clarity.** Once per turn, when you score a Critical Hit with a spell's attack roll, or when you cast a spell that deals Force damage and roll the maximum on any of its damage dice, you can cast a cantrip with a casting time of an action as part of the same action used to cast that spell. You can use this benefit a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
 
 **Force Adept.** When you roll damage for a spell you cast that deals Force damage, you can treat any 1 on a damage die as a 2.
 
@@ -1569,14 +1569,14 @@ Your sheer physical might dwarfs that of nearly all other mortal creatures. You 
 
 **Mighty Presence.** You count as one size larger for the purposes of your carrying capacity, the weight that you can push, pull, lift, or drag, and for the size of creatures that you can attempt to grapple.  
 
-### Paralysing Cold
+### Penetrating Cold
 You pour winter's bite into your magic, freezing foes where they stand. You gain the following benefits.
 
 **Ability Score Increase.** Increase your Intelligence score by 1, to a maximum of 20.
 
 **Cold Mastery.** Spells you cast ignore Resistance to Cold damage.
 
-**Frostbite.** When you deal Cold damage to a creature that has the Restrained condition, the creature takes extra Cold damage. To determine the extra damage, roll a number of d4s equal to your Proficiency Bonus and add them together.
+**Frostbite.** When you deal Cold damage to a creature that has the Restrained condition, the creature takes extra Cold damage. To determine the extra damage, roll a number of d4s equal to your Proficiency Bonus and add them together. A creature can only take this extra damage once per turn.
 
 ### Piercer
 
