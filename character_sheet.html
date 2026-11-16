@@ -9629,6 +9629,7 @@ function SpellPage({c,s,from,to}){
 function ExploitPage({c,s}){
   const {useState:ues}=React;
   const [activeDeg,setActiveDeg]=ues(1); // active exploit-degree subtab
+  const ed=useEditSet(); // exploits open read-only like spells; the pencil switches editing on
   const [exSearch,setExSearch]=ues("");
   const [exSearchAll,setExSearchAll]=ues(false);
   const exq=exSearch.trim().toLowerCase();
@@ -9871,32 +9872,34 @@ function ExploitPage({c,s}){
                     <tbody>
                       {sortItems(group.exploits.map(function(item){return {...item.ex,__i:item.i};}),exploitSorts[deg+"-"+gi]||null,"ex"+deg+"-"+gi).map(function(sorted){
                         const ex=sorted.item; const i=sorted.item.__i;
+                        const ek="ex-"+deg+"-"+i, isEd=ed.has(ek,!(ex.nm||"").trim(),(ex.nm||"").trim()?!!ex.showDesc:undefined), ro=isEd?undefined:"";
                         return [
-                          <tr key={i+"a"} style={{opacity:(hasUsed&&ex.used)?0.45:1,transition:"opacity .2s"}}>
+                          <tr key={i+"a"} onClick={isEd?undefined:function(e){lineClick(e,function(){ue(deg,i,"showDesc",!ex.showDesc);});}} style={{opacity:(hasUsed&&ex.used)?0.45:1,transition:"opacity .2s"}}>
                             <td style={{textAlign:"center",verticalAlign:"middle",padding:"0 2px"}}><button onClick={()=>ue(deg,i,"showDesc",!ex.showDesc)} title="Show / hide description"
                               style={{background:ex.showDesc?"rgba(201,74,42,.15)":"transparent",border:"1px solid rgba(201,74,42,"+(ex.showDesc?".55":".3")+")",color:ex.showDesc?"#e07060":"rgba(224,112,96,.6)",cursor:"pointer",fontSize:16,fontWeight:700,padding:0,width:26,height:22,lineHeight:1,fontFamily:"'Cinzel',serif",borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",touchAction:"manipulation"}}><Chev open={!!ex.showDesc} /></button></td>
-                            <td><ExploitNameInput value={ex.nm||""} degree={deg}
+                            <td data-ro={ro}><ExploitNameInput value={ex.nm||""} degree={deg}
                               onChange={e=>ue(deg,i,"nm",e.target.value)}
                               onAutofill={function(ex2){const cp={...c.expl};cp[deg]=[...(cp[deg]||[])];cp[deg][i]={...cp[deg][i],nm:ex2.name,uses:ex2.cost||cp[deg][i].uses||"",exec:ex2.execution||"",prereq:ex2.prereq||"",desc:ex2.desc||"",showDesc:ex2.desc?true:cp[deg][i].showDesc};s("expl",cp);}}
                               placeholder="Exploit name..." style={{width:"100%",background:"transparent",border:"none",color:col,fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px",fontWeight:600}} /></td>
-                            <td><TipInput value={ex.uses||""} onChange={e=>ue(deg,i,"uses",e.target.value)} placeholder="1 die" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px"}} /></td>
-                            <td><TipInput value={ex.exec||""} onChange={e=>ue(deg,i,"exec",e.target.value)} placeholder="1 action" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px"}} /></td>
+                            <td data-ro={ro}><TipInput value={ex.uses||""} onChange={e=>ue(deg,i,"uses",e.target.value)} placeholder="1 die" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px"}} /></td>
+                            <td data-ro={ro}><TipInput value={ex.exec||""} onChange={e=>ue(deg,i,"exec",e.target.value)} placeholder="1 action" style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px"}} /></td>
                             {hasUsed&&<td style={{textAlign:"center"}}>
                               <div style={{width:14,height:14,borderRadius:2,border:"1px solid "+(ex.used?col:"rgba(201,74,42,.3)"),background:ex.used?col:"rgba(0,0,0,.35)",cursor:"pointer",display:"inline-block",transition:"all .15s"}} onClick={()=>ue(deg,i,"used",!ex.used)} title="Mark as used" />
                             </td>}
-                            <td><TipInput value={ex.nt||""} onChange={e=>ue(deg,i,"nt",e.target.value)} placeholder="note..." style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px"}} /></td>
+                            <td data-ro={ro}><TipInput value={ex.nt||""} onChange={e=>ue(deg,i,"nt",e.target.value)} placeholder="note..." style={{width:"100%",background:"transparent",border:"none",color:"var(--parch)",fontFamily:"'EB Garamond',serif",fontSize:13,outline:"none",padding:"3px 4px"}} /></td>
                             <td><button className="db" onClick={()=>window.__confirm("Delete this exploit?",()=>de(deg,i))}>x</button></td>
                           </tr>,
-                          ex.showDesc&&<tr key={i+"b"} style={{borderBottom:"1px solid rgba(123,79,207,.1)"}}>
-                            <td colSpan={hasUsed?7:6} style={{padding:"2px 4px 6px"}}>
+                          ex.showDesc&&<tr key={i+"b"} onClick={isEd?undefined:function(e){lineClick(e,function(){ue(deg,i,"showDesc",false);});}} style={{borderBottom:"1px solid rgba(123,79,207,.1)"}}>
+                            <td style={{textAlign:"center",verticalAlign:"top",padding:"2px 2px 0"}}><EditPencil on={isEd} onClick={()=>ed.toggle(ek)} /></td>
+                            <td colSpan={hasUsed?6:5} style={{padding:"2px 4px 6px"}}>
                               <JStk name={ex.nm} />
-                              <div style={{display:"flex",alignItems:"baseline",gap:4,padding:"0 4px 3px"}}>
+                              <div data-ro={ro} style={{display:"flex",alignItems:"baseline",gap:4,padding:"0 4px 3px"}}>
                                 <span style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:"rgba(201,74,42,.75)",fontStyle:"italic",whiteSpace:"nowrap"}}>Prerequisites:</span>
                                 <TipInput value={ex.prereq||""} onChange={e=>ue(deg,i,"prereq",e.target.value)} placeholder="none"
                                   style={{flex:1,background:"transparent",border:"none",color:"rgba(201,74,42,.75)",fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",outline:"none",padding:0}} />
                               </div>
-                              <MdField value={ex.desc||""} onChange={e=>ue(deg,i,"desc",e.target.value)} placeholder="Describe what this exploit does..."
-                                style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 4px"}} />
+                              <div><MdField ro={ro!==undefined} value={ex.desc||""} onChange={e=>ue(deg,i,"desc",e.target.value)} placeholder="Describe what this exploit does..."
+                                style={{width:"100%",background:"transparent",border:"none",color:"rgba(232,213,176,.65)",fontFamily:"'EB Garamond',serif",fontSize:13,lineHeight:1.5,outline:"none",padding:"2px 4px"}} /></div>
                               {(function(){
                                 var ec=exCls.find(function(x){return x.nm&&x.nm===ex.cls;})||(exCls.length===1?exCls[0]:null);
                                 var ab=ec?(ec.abl||"STR"):"";
@@ -12722,7 +12725,11 @@ function applyShortRest(c,st){
   var xm=parseInt(c.exploitDice)||0,xe=Math.max(0,parseInt(c.exploitDiceExp)||0);if(xm>0)xe=Math.min(xm,xe);
   var xn=_srBack(c,c.exRc,c.exSr,c.exSrF,xm,"Short Rest",xe);
   if(xn>0){patch.exploitDiceExp=""+(xe-xn);msgs.push("Exploit dice: +"+xn+(xe-xn<=0?" (all)":"")+".");}
-  if(!featMsgs.length&&!sChanged&&pn<=0&&xn<=0)msgs.push("Nothing needed restoring on a short rest.");
+  // exploits marked "used" (U tick) are ready again after a short rest too
+  var exUsedS=0,newExplS=Object.assign({},c.expl||{});
+  [3,4,5].forEach(function(deg){newExplS[deg]=(newExplS[deg]||[]).map(function(ex){if(ex&&ex.used){exUsedS++;return Object.assign({},ex,{used:false});}return ex;});});
+  if(exUsedS>0){patch.expl=newExplS;msgs.push("Exploits ready again: "+exUsedS+".");}
+  if(!featMsgs.length&&!sChanged&&pn<=0&&xn<=0&&exUsedS<=0)msgs.push("Nothing needed restoring on a short rest.");
   return {patch:patch,msgs:msgs};
 }
 function LongRestResult({msgs,onClose,title,bad,note}){
@@ -16019,7 +16026,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v3.14.0</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v3.15.0</div>
 
 </script>
 </body>
