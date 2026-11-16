@@ -3,11 +3,11 @@
 Reference data for the character sheet and the DM screen.
 Each entry is a `####` heading, optional `**Field:** value` lines, a blank line, then the text.
 The `**Tag:**` field decides which reference panel an entry belongs to.
-Rule and Condition entries become clickable wherever their name appears in text. Optional fields:
+Rule, Condition and Tool entries become clickable wherever their name appears in text. Optional fields:
 `**Link:** no` (never link) or `**Link:** yes` (link an entry of another tag),
 `**Also:** a, b` (other spellings that link to the entry),
-`**Match:** exact` (only as capitalised here), `any` (any letter case) or `action` (only before the word "action").
-By default one-word names match `exact`, longer names `any`, and Action entries `action`.
+`**Match:** exact` (only as capitalised here), `any` (any letter case), `action` (only before the word "action") or `mid` (capitalised, but not as the first word of a sentence unless "action" follows).
+By default one-word names match `exact`, longer names `any`, and Action entries `mid`.
 
 ## Conditions
 
@@ -314,16 +314,6 @@ By default one-word names match `exact`, longer names `any`, and Action entries 
 **Weight:** 4 lb.
 **Cost:** 10 GP
 
-#### Double-Bladed Scimitar
-**Tag:** Weapon
-**Group:** Martial Melee
-**Damage:** 2d4 Slashing
-**Properties:** Special*, Two-Handed
-**Mastery:** Graze
-**Weight:** 6 lb.
-**Cost:** 100 GP
-**Special:** *Special. If you attack with a double-bladed scimitar as part of the Attack action on your turn, you can use a bonus action immediately after to make a melee attack with it. This attack deals 1d4 slashing damage on a hit, instead of 2d4.
-
 #### Flail
 **Tag:** Weapon
 **Group:** Martial Melee
@@ -582,11 +572,6 @@ A Two-Handed weapon requires two hands when you attack with it.
 **Tag:** Weapon Property
 
 A Versatile weapon can be used with one or two hands. A damage value in parentheses appears with the property. The weapon deals that damage when used with two hands to make a melee attack.
-
-#### Special
-**Tag:** Weapon Property
-
-The weapon has special rules described in its own entry (e.g., the Double-Bladed Scimitar).
 
 ## Weapon Mastery
 
@@ -1692,6 +1677,46 @@ The glossary uses the following conventions:
 
 An ability check is a D20 Test that represents using one of the six abilities—or a specific skill associated with an ability—to overcome a challenge.
 
+An ability check represents a creature using talent and training to try to overcome a challenge, such as forcing open a stuck door, picking a lock, entertaining a crowd, or deciphering a cipher. The GM and the rules often call for an ability check when a creature attempts something other than an attack that has a chance of meaningful failure. When the outcome is uncertain and narratively interesting, the dice determine the result.
+
+**Ability Modifier**
+
+An ability check is named for the ability modifier it uses: a Strength check, an Intelligence check, and so on. Different ability checks are called for in different situations, depending on which ability is most relevant. See the Ability Check Examples table for examples of each check’s use.
+
+**Ability Check Examples**
+
+| Ability | Make a Check To … |
+|---|---|
+| Strength | Lift, push, pull, or break something |
+| Dexterity | Move nimbly, quickly, or quietly |
+| Constitution | Push your body beyond normal limits |
+| Intelligence | Reason or remember |
+| Wisdom | Notice things in the environment or in creatures’ behavior |
+| Charisma | Influence, entertain, or deceive |
+
+**Proficiency Bonus**
+
+Add your Proficiency Bonus to an ability check when the GM determines that a skill or tool proficiency is relevant to the check and you have that proficiency. For example, if a rule refers to a Strength (Acrobatics or Athletics) check, you can add your Proficiency Bonus to the check if you have proficiency in the Acrobatics or Athletics skill. See “Proficiency” later in “Playing the Game” for more information about skill and tool proficiencies.
+
+**Difficulty Class**
+
+The Difficulty Class of an ability check represents the task’s difficulty. The more difficult the task, the higher its DC. The rules provide DCs for certain checks, but the GM ultimately sets them. The Typical Difficulty Classes table presents a range of possible DCs for ability checks.
+
+**Typical Difficulty Classes**
+
+| Task Difficulty | DC |
+|---|---|
+| Very easy | 5 |
+| Easy | 10 |
+| Medium | 15 |
+| Hard | 20 |
+| Very hard | 25 |
+| Nearly impossible | 30 |
+
+Ability checks can be key in determining the outcome of a social interaction. Your roleplaying efforts can alter an NPC’s attitude, but there might still be an element of chance if the GM wants dice to play a role in determining an NPC’s response to you. In such situations, the GM will typically ask you to take the Influence action.
+
+Pay attention to your skill proficiencies when thinking of how you will interact with an NPC; use an approach that relies on your group’s skill proficiencies. For example, if the group needs to trick a guard into letting them into a castle, the Rogue who is proficient in Deception should lead the discussion.
+
 #### Ability Score and Modifier
 **Tag:** Rule
 **Link:** no
@@ -1716,6 +1741,56 @@ On your turn, you can take one action. Choose which action to take from those be
 - Search
 - Study
 - Utilize
+
+When you do something other than moving or communicating, you typically take an action. The Action table lists the game’s main actions, which are defined in more detail in “Rules Glossary.”
+
+**Actions**
+
+| Action | Summary |
+|---|---|
+| Attack | Attack with a weapon or an Unarmed Strike. |
+| Dash | For the rest of the turn, give yourself extra movement equal to your Speed. |
+| Disengage | Your movement doesn’t provoke Opportunity Attacks for the rest of the turn. |
+| Dodge | Until the start of your next turn, attack rolls against you have Disadvantage, and you make Dexterity saving throws with Advantage. You lose this benefit if you have the Incapacitated condition or if your Speed is 0. |
+| Help | Help another creature’s ability check or attack roll, or administer first aid. |
+| Hide | Make a Dexterity (Stealth) check. |
+| Influence | Make a Charisma (Deception, Intimidation, Performance, or Persuasion) or Wisdom (Animal Handling) check to alter a creature’s attitude. |
+| Magic | Cast a spell, use a magic item, or use a magical feature. |
+| Ready | Prepare to take an action in response to a trigger you define. |
+| Search | Make a Wisdom (Insight, Medicine, Perception, or Survival) check. |
+| Study | Make an Intelligence (Arcana, History, Investigation, Nature, or Religion) check. |
+| Utilize | Use a nonmagical object. |
+
+**Skills**
+
+| Skill | Ability | Example Uses |
+|---|---|---|
+| Acrobatics | Dexterity | Stay on your feet in a tricky situation, or perform an acrobatic stunt. |
+| Animal Handling | Wisdom | Calm or train an animal, or get an animal to behave in a certain way. |
+| Arcana | Intelligence | Recall lore about spells, magic items, and the planes of existence. |
+| Athletics | Strength | Jump farther than normal, stay afloat in rough water, or break something. |
+| Deception | Charisma | Tell a convincing lie, or wear a disguise convincingly. |
+| History | Intelligence | Recall lore about historical events, people, nations, and cultures. |
+| Insight | Wisdom | Discern a person’s mood and intentions. |
+| Intimidation | Charisma | Awe or threaten someone into doing what you want. |
+| Investigation | Intelligence | Find obscure information in books, or deduce how something works. |
+| Medicine | Wisdom | Diagnose an illness, or determine what killed the recently slain. |
+| Nature | Intelligence | Recall lore about terrain, plants, animals, and weather. |
+| Perception | Wisdom | Using a combination of senses, notice something that’s easy to miss. |
+| Performance | Charisma | Act, tell a story, perform music, or dance. |
+| Persuasion | Charisma | Honestly and graciously convince someone of something. |
+| Religion | Intelligence | Recall lore about gods, religious rituals, and holy symbols. |
+| Sleight of Hand | Dexterity | Pick a pocket, conceal a handheld object, or perform legerdemain. |
+| Stealth | Dexterity | Escape notice by moving quietly and hiding behind things. |
+| Survival | Wisdom | Follow tracks, forage, find a trail, or avoid natural hazards. |
+
+Player characters and monsters can also do things not covered by these actions. Many class features and other abilities provide additional action options, and you can improvise other actions. When you describe an action not detailed elsewhere in the rules, the Game Master tells you whether that action is possible and what kind of D20 Test you need to make, if any.
+
+**One Thing at a Time**
+
+The game uses actions to govern how much you can do at one time. You can take only one action at a time. This principle is most important in combat, as explained in “Combat” later in “Playing the Game.”
+
+Actions can come up in other situations, too: in a social interaction, you can try to Influence a creature or use the Search action to read the creature’s body language, but you can’t do both at the same time. And when you’re exploring a dungeon, you can’t simultaneously use the Search action to look for traps and use the Help action to aid another character who’s trying to open a stuck door (with the Utilize action).
 
 #### Advantage
 **Tag:** Rule
@@ -1771,9 +1846,16 @@ Your base AC calculation is 10 plus your Dexterity modifier. If a rule gives you
 
 Armor training allows you to use armor of a certain category without the following drawbacks. If you wear Light, Medium, or Heavy armor and lack training with it, you have Disadvantage on any D20 Test that involves Strength or Dexterity, and you can’t cast spells. If you use a Shield and lack training with it, you don’t gain its AC bonus.
 
+Anyone can don armor or hold a Shield, but only those with training can use them effectively, as explained below. A character’s class and other features determine the character’s armor training. A monster has training with any armor in its stat block.
+
+**Shield**
+
+You gain the Armor Class benefit of a Shield only if you have training with it.
+
 #### Attack
 **Tag:** Rule
 **Type:** Action
+**Match:** action
 
 When you take the Attack action, you can make one attack roll with a weapon or an Unarmed Strike.
 
@@ -1787,6 +1869,44 @@ When you take the Attack action, you can make one attack roll with a weapon or a
 
 An attack roll is a D20 Test that represents making an attack with a weapon, an Unarmed Strike, or a spell.
 
+An attack roll determines whether an attack hits a target. An attack roll hits if the roll equals or exceeds the target’s Armor Class. Attack rolls usually occur in battle, described in “Combat” later in “Playing the Game,” but the GM might also ask for an attack roll in other situations, such as an archery competition.
+
+**Ability Modifier**
+
+The Attack Roll Abilities table shows which ability modifier to use for different types of attack rolls.
+
+**Attack Roll Abilities**
+
+| Ability | Attack Type |
+|---|---|
+| Strength | Melee attack with a weapon or an Unarmed Strike (see “Rules Glossary”) |
+| Dexterity | Ranged attack with a weapon |
+| Varies | Spell attack (the ability used is determined by the spellcaster’s spellcasting feature, as explained in “Spells”) |
+
+Some features let you use different ability modifiers from those listed. For example, the Finesse property (see “Equipment”) lets you use Strength or Dexterity with a weapon that has that property.
+
+**Proficiency Bonus**
+
+You add your Proficiency Bonus to your attack roll when you attack using a weapon you have proficiency with, as well as when you attack with a spell. See “Proficiency” later in “Playing the Game” for more information about weapon proficiencies.
+
+**Armor Class**
+
+A creature’s Armor Class represents how well the creature avoids being wounded in combat. The AC of a character is determined at character creation (see “Character Creation”), whereas the AC of a monster appears in its stat block.
+
+**Calculating AC.** All creatures start with the same base AC calculation:
+
+**Base AC** = 10 + the creature’s Dexterity modifier
+
+A creature’s AC can then be modified by armor, magic items, spells, and more.
+
+**Only One Base AC.** Some spells and class features give characters a different way to calculate their AC. A character with multiple features that give different ways to calculate AC must choose which one to use; only one base calculation can be in effect for a creature.
+
+**Rolling 20 or 1**
+
+If you roll a 20 on the d20 (called a “natural 20”) for an attack roll, the attack hits regardless of any modifiers or the target’s AC. This is called a Critical Hit (see “Combat” later in “Playing the Game”).
+
+If you roll a 1 on the d20 (a “natural 1”) for an attack roll, the attack misses regardless of any modifiers or the target’s AC.
+
 #### Attitude
 **Tag:** Rule
 **Link:** no
@@ -1797,6 +1917,20 @@ A monster has a starting attitude toward a player character: Friendly, Hostile, 
 **Tag:** Rule
 
 Some magic items require a creature to form a bond—called Attunement—with them before the creature can use an item’s magical properties. A creature can have Attunement with no more than three magic items at a time.
+
+Some magic items require a creature to form a bond—called Attunement—with them before the creature can use an item’s magical properties. Without becoming attuned to an item that requires Attunement, you gain only its nonmagical benefits unless its description states otherwise. For example, a magic Shield that requires Attunement provides the benefits of a normal Shield if you aren’t attuned to it, but none of its magical properties.
+
+**Attune during a Short Rest**
+
+Attuning to an item requires you to spend a Short Rest focused on only that item while being in physical contact with it (this can’t be the same Short Rest used to learn the item’s properties). This focus can take the form of weapon practice (for a Weapon), meditation (for a Wand), or some other appropriate activity. If the Short Rest is interrupted, the Attunement attempt fails. Otherwise, at the end of the Short Rest, you’re attuned to the magic item and can access its full magical capabilities.
+
+**No More Than Three Items**
+
+You can be attuned to no more than three magic items at a time. Any attempt to attune to a fourth item fails; you must end your Attunement to an item first. Additionally, you can’t attune to more than one copy of an item. For example, you can’t attune to more than one *Ring of Protection* at a time.
+
+**Ending Attunement**
+
+Your Attunement to an item ends if you no longer satisfy the prerequisites for Attunement, if the item has been more than 100 feet away for at least 24 hours, if you die, or if another creature attunes to the item. You can also voluntarily end Attunement by spending another Short Rest focused on the item unless the item is cursed.
 
 #### Blindsight
 **Tag:** Rule
@@ -1813,6 +1947,12 @@ A creature is Bloodied while it has half its Hit Points or fewer remaining.
 **Link:** no
 
 A Bonus Action is a special action that you can take on the same turn that you take an action. You can’t take more than one Bonus Action on a turn, and you have a Bonus Action to take only if a rule explicitly says so.
+
+Various class features, spells, and other abilities let you take an additional action on your turn called a Bonus Action. The Cunning Action feature, for example, allows a Rogue to take a Bonus Action. You can take a Bonus Action only when a special ability, a spell, or another feature of the game states that you can do something as a Bonus Action. You otherwise don’t have a Bonus Action to take.
+
+You can take only one Bonus Action on your turn, so you must choose which Bonus Action to use if you have more than one available.
+
+You choose when to take a Bonus Action during your turn unless the Bonus Action’s timing is specified. Anything that deprives you of your ability to take actions also prevents you from taking a Bonus Action.
 
 #### Breaking Objects
 **Tag:** Rule
@@ -1849,6 +1989,8 @@ Objects can be harmed by attacks and by some spells, using the rules below. If a
 **Damage Threshold.** Big objects, such as castle walls, often have extra resilience represented by a damage threshold.
 
 **No Ability Scores.** An object lacks ability scores unless a rule assigns scores to the object. Without ability scores, an object can’t make ability checks, and it fails all saving throws.
+
+As an action, you can automatically break or otherwise destroy a fragile, nonmagical object, such as a glass container or a piece of paper. If you try to damage something more resilient, the GM might use the rules on breaking objects in “Rules Glossary.”
 
 #### Bright Light
 **Tag:** Rule
@@ -1962,6 +2104,18 @@ A Cone’s point of origin isn’t included in the area of effect unless its cre
 
 Cover provides a degree of protection to a target behind it. There are three degrees of cover, each of which provides a different benefit to a target: Half Cover (+2 bonus to AC and Dexterity saving throws), Three-Quarters Cover (+5 bonus to AC and Dexterity saving throws), and Total Cover (can’t be targeted directly). If behind more than one degree of cover, a target benefits only from the most protective degree.
 
+Walls, trees, creatures, and other obstacles can provide cover, making a target more difficult to harm. As detailed in the Cover table, there are three degrees of cover, each of which gives a different benefit to a target.
+
+A target can benefit from cover only when an attack or other effect originates on the opposite side of the cover. If a target is behind multiple sources of cover, only the most protective degree of cover applies; the degrees aren’t added together. For example, if a target is behind a creature that gives Half Cover and a tree trunk that gives Three-Quarters Cover, the target has Three-Quarters Cover.
+
+**Cover**
+
+| Degree | Benefit to Target | Offered By … |
+|---|---|---|
+| Half | +2 bonus to AC and Dexterity saving throws | Another creature or an object that covers at least half of the target |
+| Three-Quarters | +5 bonus to AC and Dexterity saving throws | An object that covers at least three-quarters of the target |
+| Total | Can’t be targeted directly | An object that covers the whole target |
+
 #### Crawling
 **Tag:** Rule
 
@@ -2002,6 +2156,8 @@ The types don’t have rules themselves, but some rules in the game affect creat
 
 If you roll a 20 on the d20 for an attack roll, you score a Critical Hit, and the attack hits regardless of any modifiers or the target’s AC. A Critical Hit lets you roll extra dice for the attack’s damage against the target. Roll all of the attack’s damage dice twice and add them together. Then add any relevant modifiers.
 
+When you score a Critical Hit, you deal extra damage. Roll the attack’s damage dice twice, add them together, and add any relevant modifiers as normal. For example, if you score a Critical Hit with a Dagger, roll 2d4 for the damage rather than 1d4, and add your relevant ability modifier. If the attack involves other damage dice, such as from the Rogue’s Sneak Attack feature, you also roll those dice twice.
+
 #### Cube
 **Tag:** Rule
 **Type:** Area of Effect
@@ -2017,6 +2173,38 @@ A Cube’s point of origin isn’t included in the area of effect unless its cre
 
 Some game effects curse a creature or an object. The effect that confers a curse defines what the curse does. Curses can be removed by the *Remove Curse* and *Greater Restoration* spells or other magic that explicitly ends curses.
 
+A curse typically takes one of the forms detailed below.
+
+**Bestow Curse**
+
+The simplest curses are created by the *Bestow Curse* spell. The effects of such curses are limited and can be ended by the *Remove Curse* spell.
+
+*Bestow Curse* provides useful benchmarks for gauging the potency of other curses. A curse that lasts for 1 minute equates to a level 3 spell, while one that lasts until dispelled equates to a level 9 spell.
+
+**Cursed Creatures**
+
+Some monsters are associated with curses, whether as part of their origins or due to their ability to spread curses—werewolves being a prime example. You decide how a spell like *Remove Curse* affects a creature with accursed origins. For example, you might decide that a mummy was created through a curse and it can be destroyed permanently only by casting *Remove Curse* on its corpse.
+
+**Cursed Magic Items**
+
+Cursed magic items are created deliberately or originate as the result of supernatural events. Such items are detailed in “Magic Items.”
+
+**Narrative Curses**
+
+A curse might manifest during an adventure when a creature’s violation of a taboo warrants supernatural punishment, such as breaking a vow, defiling a tomb, or murdering an innocent. Such a curse can have any effects you design, or it might be a customized version of another type of curse discussed in this section.
+
+A creature affected by such a curse should know why they’re being punished and be able to learn how to end their curse, likely by symbolically righting the wrong they committed. How a spell like *Remove Curse* affects a curse that’s part of your adventure is up to you—the spell might merely suppress the effects of the curse for a time. Regardless, narrative curses should feel like rare, potent magic rooted in the lore of your campaign.
+
+**Environmental Curses**
+
+Some locations are so suffused with evil that anyone who lingers there is burdened with a curse. Demonic Possession is one example of an environmental curse.
+
+**Demonic Possession.** Demonic Possession arises from the chaos and evil of the Abyss and commonly besets creatures that interact with demonic objects or linger in desecrated locations, where demonic spirits await victims.
+
+A creature that becomes the target of Demonic Possession must succeed on a DC 15 Charisma saving throw or be possessed by a bodiless demonic entity. Whenever the possessed creature rolls a 1 on a D20 Test, the demonic entity takes control of the creature and determines the creature’s behavior thereafter. At the end of each of the possessed creature’s later turns, the creature makes a DC 15 Charisma saving throw, regaining control of itself on a success.
+
+After finishing a Long Rest, a creature with Demonic Possession makes a DC 15 Charisma saving throw. On a successful save, the effect ends on the creature. A *Dispel Evil and Good* spell or any magic that removes a curse also ends the effect on it.
+
 #### Cylinder
 **Tag:** Rule
 **Type:** Area of Effect
@@ -2031,6 +2219,19 @@ A Cylinder’s point of origin is included in the area of effect.
 
 D20 Tests encompass the three main d20 rolls of the game: ability checks, attack rolls, and saving throws. If something in the game affects D20 Tests, it affects all three of these rolls. The GM determines whether a D20 Test is warranted in a given circumstance.
 
+When the outcome of an action is uncertain, the game uses a d20 roll to determine success or failure. These rolls are called D20 Tests, and they come in three kinds: ability checks, saving throws, and attack rolls. They follow these steps:
+
+**4: Roll 1d20.** You always want to roll high. If the roll has Advantage or Disadvantage (described later in “Playing the Game”), you roll two d20s, but you use the number from only one of them—the higher one if you have Advantage or the lower one if you have Disadvantage.
+
+**5: Add Modifiers.** Add these modifiers to the number rolled on the d20:
+
+- **The Relevant Ability Modifier.** “Playing the Game” and “Rules Glossary” explain which ability modifiers to use for various D20 Tests.
+- **Your Proficiency Bonus If Relevant.** Each creature has a Proficiency Bonus, a number added when making a D20 Test that uses something, such as a skill, in which the creature has proficiency. See “Proficiency” later in “Playing the Game.”
+
+- **Circumstantial Bonuses and Penalties.** A class feature, a spell, or another rule might give a bonus or penalty to the die roll.
+
+**6: Compare the Total to a Target Number.** If the total of the d20 and its modifiers equals or exceeds the target number, the D20 Test succeeds. Otherwise, it fails. The Game Master determines target numbers and tells players whether their rolls are successful. The target number for an ability check or a saving throw is called a Difficulty Class (DC). The target number for an attack roll is called an Armor Class (AC), which appears on a character sheet or in a stat block (see “Rules Glossary”).
+
 #### Damage
 **Tag:** Rule
 **Link:** no
@@ -2042,6 +2243,10 @@ Damage represents harm that causes a creature or an object to lose Hit Points.
 **Link:** no
 
 A damage roll is a die roll, adjusted by any applicable modifiers, that deals damage to a target.
+
+Each weapon, spell, and damaging monster ability specifies the damage it deals. You roll the damage dice, add any modifiers, and deal the damage to your target. If there’s a penalty to the damage, it’s possible to deal 0 damage but not negative damage.
+
+When attacking with a weapon, you add your ability modifier—the same modifier used for the attack roll—to the damage roll. A spell tells you which dice to roll for damage and whether to add any modifiers. Unless a rule says otherwise, you don’t add your ability modifier to a fixed damage amount that doesn’t use a roll, such as the damage of a Blowgun. See “Equipment” for weapons’ damage dice and “Spells” for spells’ damage dice.
 
 #### Damage Threshold
 **Tag:** Rule
@@ -2071,6 +2276,8 @@ Attacks and other harmful effects deal different types of damage. Damage types h
 | Radiant | Holy energy, searing radiation |
 | Slashing | Claws, cutting objects |
 | Thunder | Concussive sound |
+
+Each instance of damage has a type, like Fire or Slashing. Damage types are listed in “Rules Glossary” and have no rules of their own, but other rules, such as Resistance, rely on damage types.
 
 #### Darkness
 **Tag:** Rule
@@ -2105,6 +2312,16 @@ If the creature returns to life, the revival effect determines the creature’s 
 
 A player character must make a Death Saving Throw (also called a Death Save) if they start their turn with 0 Hit Points.
 
+Whenever you start your turn with 0 Hit Points, you must make a Death Saving Throw to determine whether you creep closer to death or hang on to life. Unlike other saving throws, this one isn’t tied to an ability score. You’re in the hands of fate now.
+
+**Three Successes/Failures.** Roll 1d20. If the roll is 10 or higher, you succeed. Otherwise, you fail. A success or failure has no effect by itself. On your third success, you become Stable (see “Stabilizing a Character” below). On your third failure, you die.
+
+The successes and failures don’t need to be consecutive; keep track of both until you collect three of a kind. The number of both is reset to zero when you regain any Hit Points or become Stable.
+
+**Rolling a 1 or 20.** When you roll a 1 on the d20 for a Death Saving Throw, you suffer two failures. If you roll a 20 on the d20, you regain 1 Hit Point.
+
+**Damage at 0 Hit Points.** If you take any damage while you have 0 Hit Points, you suffer a Death Saving Throw failure. If the damage is from a Critical Hit, you suffer two failures instead. If the damage equals or exceeds your Hit Point maximum, you die.
+
 #### Dehydration
 **Tag:** Rule
 **Type:** Hazard
@@ -2135,6 +2352,10 @@ A space is Difficult Terrain if the space contains any of the following or somet
 - Liquid that’s between shin- and waist-deep
 - A narrow opening sized for a creature one size smaller than you
 - A slope of 20 degrees or more
+
+Combatants are often slowed down by Difficult Terrain. Low furniture, rubble, undergrowth, steep stairs, snow, and shallow bogs are examples of Difficult Terrain.
+
+Every foot of movement in Difficult Terrain costs 1 extra foot, even if multiple things in a space count as Difficult Terrain.
 
 #### Difficulty Class
 **Tag:** Rule
@@ -2245,11 +2466,21 @@ A creature can grapple another creature. Characters typically grapple by using a
 
 A hazard is an environmental danger.
 
+Monsters are the main perils characters face, but other dangers await. “Rules Glossary” defines the following hazards:
+
+- Burning
+- Dehydration
+- Falling
+- Malnutrition
+- Suffocation
+
 #### Healing
 **Tag:** Rule
 **Link:** no
 
 Healing is how you regain Hit Points.
+
+Hit Points can be restored by magic, such as the *Cure Wounds* spell or a *Potion of Healing*, or by a Short or Long Rest (see “Rules Glossary”). When you receive healing, add the restored Hit Points to your current Hit Points. Your Hit Points can’t exceed your Hit Point maximum, so any Hit Points regained in excess of the maximum are lost. For example, if you receive 8 Hit Points of healing and have 14 Hit Points and a Hit Point maximum of 20, you regain 6 Hit Points, not 8.
 
 #### Heavily Obscured
 **Tag:** Rule
@@ -2272,6 +2503,14 @@ When you take the Help action, you do one of the following.
 If you (a player character) have Heroic Inspiration, you can expend it to reroll any die immediately after rolling it, and you must use the new roll.
 
 If you gain Heroic Inspiration but already have it, it’s lost unless you give it to a player character who lacks it.
+
+Sometimes the GM or a rule gives you Heroic Inspiration. If you have Heroic Inspiration, you can expend it to reroll any die immediately after rolling it, and you must use the new roll.
+
+**Only One at a Time.** You can never have more than one instance of Heroic Inspiration. If something gives you Heroic Inspiration and you already have it, you can give it to a player character in your group who lacks it.
+
+**Gaining Heroic Inspiration.** Your GM can give you Heroic Inspiration for a variety of reasons. Typically, GMs award it when you do something particularly heroic, in character, or entertaining. It’s a reward for making the game more fun for everyone playing.
+
+Other rules might allow your character to gain Heroic Inspiration independent of the GM’s decision. For example, Human characters start each day with Heroic Inspiration.
 
 #### Hide
 **Tag:** Rule
@@ -2302,6 +2541,12 @@ Hit Point Dice, or Hit Dice for short, help determine a player character’s Hit
 
 Hit Points (HP) are a measure of how difficult it is to kill or destroy a creature or an object. Damage reduces Hit Points, and healing restores them. You can’t have more Hit Points than your Hit Point maximum, and you can’t have less than 0.
 
+Hit Points represent durability and the will to live. Creatures with more Hit Points are more difficult to kill. Your Hit Point maximum is the number of Hit Points you have when uninjured. Your current Hit Points can be any number from that maximum down to 0, which is the lowest Hit Points can go.
+
+Whenever you take damage, subtract it from your Hit Points. Hit Point loss has no effect on your capabilities until you reach 0 Hit Points.
+
+If you have half your Hit Points or fewer, you’re Bloodied, which has no game effect on its own but which might trigger other game effects.
+
 #### Hostile
 **Tag:** Rule
 **Type:** Attitude
@@ -2327,6 +2572,8 @@ If an illusion manifests in space, the illusion is insubstantial and weightless,
 
 If you have Immunity to a damage type or a condition, it doesn’t affect you in any way.
 
+Some creatures and objects have Immunity to certain damage types and conditions. Immunity to a damage type means you don’t take damage of that type, and Immunity to a condition means you aren’t affected by it.
+
 #### Improvised Weapons
 **Tag:** Rule
 **Also:** Improvised Weapon
@@ -2340,6 +2587,8 @@ An improvised weapon is an object wielded as a makeshift weapon, such as broken 
 **Range.** If you throw the weapon, it has a normal range of 20 feet and a long range of 60 feet.
 
 **Weapon Equivalents.** If an improvised weapon resembles a Simple or Martial weapon, the GM may say it functions as that weapon and uses that weapon’s rules. For example, the GM could treat a table leg as a Club.
+
+If you use an object—such as a table leg, frying pan, or bottle—as a makeshift weapon, see “Improvised Weapons” in “Rules Glossary.” Also see those rules if you wield a weapon in an unusual way, such as using a Ranged weapon to make a melee attack.
 
 #### Indifferent
 **Tag:** Rule
@@ -2377,6 +2626,14 @@ Initiative determines the order of turns during combat. The combat rules in “P
 
 Sometimes a GM might have combatants use their Initiative scores instead of rolling Initiative. Your Initiative score equals 10 plus your Dexterity modifier. If you have Advantage on Initiative rolls, increase your Initiative score by 5. If you have Disadvantage on those rolls, decrease that score by 5.
 
+Initiative determines the order of turns during combat. When combat starts, every participant rolls Initiative; they make a Dexterity check that determines their place in the Initiative order. The GM rolls for monsters. For a group of identical creatures, the GM makes a single roll, so each member of the group has the same Initiative.
+
+**Surprise.** If a combatant is surprised by combat starting, that combatant has Disadvantage on their Initiative roll. For example, if an ambusher starts combat while hidden from a foe who is unaware that combat is starting, that foe is surprised.
+
+**Initiative Order.** A combatant’s check total is called their Initiative count, or Initiative for short. The GM ranks the combatants, from highest to lowest Initiative. This is the order in which they act during each round. The Initiative order remains the same from round to round.
+
+**Ties.** If a tie occurs, the GM decides the order among tied monsters, and the players decide the order among tied characters. The GM decides the order if the tie is between a monster and a player character.
+
 #### Jumping
 **Tag:** Rule
 
@@ -2388,6 +2645,8 @@ When you jump, you make either a Long Jump (horizontal) or a High Jump (vertical
 When you would reduce a creature to 0 Hit Points with a melee attack, you can instead reduce the creature to 1 Hit Point. The creature then has the Unconscious condition and starts a Short Rest.
 
 The creature remains Unconscious until it regains any Hit Points or until someone uses an action to administer first aid to it, which requires a successful DC 10 Wisdom (Medicine) check.
+
+When you would reduce a creature to 0 Hit Points with a melee attack, you can instead reduce the creature to 1 Hit Point and give it the Unconscious condition. It then starts a Short Rest, at the end of which that condition ends on it. The condition ends early if the creature regains any Hit Points or if someone takes an action to administer first aid to it, making a successful DC 10 Wisdom (Medicine) check.
 
 #### Lightly Obscured
 **Tag:** Rule
@@ -2443,6 +2702,7 @@ You can resume a Long Rest immediately after an interruption. If you do so, the 
 #### Magic
 **Tag:** Rule
 **Type:** Action
+**Match:** action
 
 When you take the Magic action, you cast a spell that has a casting time of an action or use a feature or magic item that requires a Magic action to be activated. If you cast a spell that has a casting time of 1 minute or longer, you must take the Magic action on each turn of that casting, and you must maintain Concentration while you do so. If your Concentration is broken, the spell fails, but you don’t expend a spell slot.
 
@@ -2500,6 +2760,12 @@ A space is occupied if a creature is in it or if it is completely filled by obje
 
 You can make an Opportunity Attack when a creature that you can see leaves your reach using its action, its Bonus Action, its Reaction, or one of its speeds. To make the Opportunity Attack, take a Reaction to make one melee attack with a weapon or an Unarmed Strike against the provoking creature. The attack occurs right before the creature leaves your reach.
 
+Combatants watch for enemies to drop their guard. If you move heedlessly past your foes, you put yourself in danger by provoking an Opportunity Attack.
+
+**Avoiding Opportunity Attacks.** You can avoid provoking an Opportunity Attack by taking the Disengage action. You also don’t provoke an Opportunity Attack when you Teleport or when you are moved without using your movement, action, Bonus Action, or Reaction. For example, you don’t provoke an Opportunity Attack if an explosion hurls you out of a foe’s reach or if you fall past an enemy.
+
+**Making an Opportunity Attack.** You can make an Opportunity Attack when a creature that you can see leaves your reach. To make the attack, take a Reaction to make one melee attack with a weapon or an Unarmed Strike against that creature. The attack occurs right before it leaves your reach.
+
 #### Passive Perception
 **Tag:** Rule
 
@@ -2530,17 +2796,48 @@ Some effects cause a creature to be possessed by another creature or entity. A p
 
 If you have proficiency with something, you can add your Proficiency Bonus to any D20 Test you make using that thing. A creature might have proficiency in a skill or saving throw or with a weapon or tool.
 
+Characters and monsters are good at various things. Some are skilled with many weapons, while others can use only a few. Some are better at understanding people’s motives, and others are better at unlocking the secrets of the multiverse. All creatures have a Proficiency Bonus, which reflects the impact that training has on the creature’s capabilities. A character’s Proficiency Bonus increases as the character gains levels (described in “Character Creation”). A monster’s Proficiency Bonus is based on its Challenge Rating (see “Rules Glossary”). The Proficiency Bonus table shows how the bonus is determined.
+
+This bonus is applied to a D20 Test when the creature has proficiency in a skill, in a saving throw, or with an item that the creature uses to make the D20 Test. The bonus is also used for spell attacks and for calculating the DC of saving throws for spells.
+
+**Proficiency Bonus**
+
+| Level or CR | Bonus |
+|---|---|
+| Up to 4 | +2 |
+| 5–8 | +3 |
+| 9–12 | +4 |
+| 13–16 | +5 |
+| 17–20 | +6 |
+| 21–24 | +7 |
+| 25–28 | +8 |
+| 29–30 | +9 |
+
+**The Bonus Doesn’t Stack**
+
+Your Proficiency Bonus can’t be added to a die roll or another number more than once. For example, if a rule allows you to make a Charisma (Deception or Persuasion) check, you add your Proficiency Bonus if you’re proficient in either skill, but you don’t add it twice if you’re proficient in both skills.
+
+Occasionally, a Proficiency Bonus might be multiplied or divided (doubled or halved, for example) before being added. For example, the Expertise feature (see “Rules Glossary”) doubles the Proficiency Bonus for certain ability checks. Whenever the bonus is used, it can be multiplied only once and divided only once.
+
 #### Reach
 **Tag:** Rule
 **Link:** no
 
 A creature has a reach of 5 feet unless a rule says otherwise.
 
+A creature has a 5-foot reach and can thus attack targets within 5 feet when making a melee attack. Certain creatures have melee attacks with a reach greater than 5 feet, as noted in their descriptions.
+
 #### Reaction
 **Tag:** Rule
 **Link:** no
 
 A Reaction is a special action taken in response to a trigger defined in the Reaction’s description. You can take a Reaction on another creature’s turn, and if you take it on your turn, you can do so even if you also take an action, a Bonus Action, or both. Once you take a Reaction, you can’t take another one until the start of your next turn. The Opportunity Attack is a Reaction available to all creatures.
+
+Certain special abilities, spells, and situations allow you to take a special action called a Reaction. A Reaction is an instant response to a trigger of some kind, which can occur on your turn or on someone else’s. The Opportunity Attack, described later in “Playing the Game,” is the most common type of Reaction.
+
+When you take a Reaction, you can’t take another one until the start of your next turn. If the reaction interrupts another creature’s turn, that creature can continue its turn right after the Reaction.
+
+In terms of timing, a Reaction takes place immediately after its trigger unless the Reaction’s description says otherwise.
 
 #### Ready
 **Tag:** Rule
@@ -2582,6 +2879,33 @@ Save is another name for a saving throw.
 **Link:** no
 
 A saving throw—also called a save—represents an attempt to avoid or resist a threat. You normally make a saving throw only when a rule requires you to do so, but you can decide to fail the save without rolling. The result of a save is detailed in the effect that allowed it. If a target is forced to make a save and lacks the ability score used by it, the target automatically fails.
+
+A saving throw—also called a save—represents an attempt to evade or resist a threat, such as a fiery explosion, a blast of poisonous gas, or a spell trying to invade your mind. You don’t normally choose to make a save; you must make one because your character or a monster (if you’re the GM) is at risk. A save’s result is detailed in the effect that caused it.
+
+If you don’t want to resist the effect, you can choose to fail the save without rolling.
+
+**Ability Modifier**
+
+Saving throws are named for the ability modifiers they use: a Constitution saving throw, a Wisdom saving throw, and so on. Different saving throws are used to resist different kinds of effects, as shown on the Saving Throw Examples table.
+
+**Saving Throw Examples**
+
+| Ability | Make a Save To … |
+|---|---|
+| Strength | Physically resist direct force |
+| Dexterity | Dodge out of harm’s way |
+| Constitution | Endure a toxic hazard |
+| Intelligence | Recognize an illusion as fake |
+| Wisdom | Resist a mental assault |
+| Charisma | Assert your identity |
+
+**Proficiency Bonus**
+
+You add your Proficiency Bonus to your saving throw if you have proficiency in that kind of save. See “Proficiency” later in “Playing the Game.”
+
+**Difficulty Class**
+
+The Difficulty Class for a saving throw is determined by the effect that causes it or by the GM. For example, if a spell forces you to make a save, the DC is determined by the caster’s spellcasting ability and Proficiency Bonus. Monster abilities that call for saves specify the DC.
 
 #### Search
 **Tag:** Rule
@@ -2798,6 +3122,26 @@ The description of a teleportation effect tells you if you must see the teleport
 
 Temporary Hit Points are granted by certain effects and act as a buffer against losing real Hit Points.
 
+Some spells and other effects confer Temporary Hit Points, which are a buffer against losing actual Hit Points, as explained below.
+
+**Lose Temporary Hit Points First**
+
+If you have Temporary Hit Points and take damage, those points are lost first, and any leftover damage carries over to your Hit Points. For example, if you have 5 Temporary Hit Points and take 7 damage, you lose those points and then lose 2 Hit Points.
+
+**Duration**
+
+Temporary Hit Points last until they’re depleted or you finish a Long Rest (see “Rules Glossary”).
+
+**They Don’t Stack**
+
+Temporary Hit Points can’t be added together. If you have Temporary Hit Points and receive more of them, you decide whether to keep the ones you have or to gain the new ones. For example, if a spell grants you 12 Temporary Hit Points when you already have 10, you can have 12 or 10, not 22.
+
+**They’re Not Hit Points or Healing**
+
+Temporary Hit Points can’t be added to your Hit Points, healing can’t restore them, and receiving Temporary Hit Points doesn’t count as healing. Because Temporary Hit Points aren’t Hit Points, a creature can be at full Hit Points and receive Temporary Hit Points.
+
+If you have 0 Hit Points, receiving Temporary Hit Points doesn’t restore you to consciousness. Only true healing can save you.
+
 #### Tremorsense
 **Tag:** Rule
 
@@ -2857,8 +3201,1588 @@ If you have Vulnerability to a damage type, damage of that type is doubled again
 
 A weapon is an object that is in the Simple or Martial weapon category.
 
+The Weapons table in this section shows the game’s main weapons. The table lists the cost and weight of each weapon, as well as the following details:
+
+**Category.** Every weapon falls into a category: Simple or Martial. Weapon proficiencies are usually tied to one of these categories. For example, you might have proficiency with Simple weapons.
+
+**Melee or Ranged.** A weapon is classified as either Melee or Ranged. A Melee weapon is used to attack a target within 5 feet, whereas a Ranged weapon is used to attack at a greater distance.
+
+**Damage.** The table lists the amount of damage a weapon deals when an attacker hits with it as well as the type of that damage.
+
+**Properties.** Any properties a weapon has are listed in the Properties column. Each property is defined in the “Properties” section.
+
+**Mastery.** Each weapon has a mastery property, which is defined in the “Mastery Properties” section. To use that property, you must have a feature that lets you use it.
+
 #### Weapon Attack
 **Tag:** Rule
 **Link:** no
 
 A weapon attack is an attack roll made with a weapon.
+
+## Playing the Game
+
+From the “Playing the Game” chapter of the SRD 5.2.1 (attribution statement under “Rules Glossary” above).
+
+#### Rhythm of Play
+**Tag:** Rule
+**Type:** Playing the Game
+
+The three main pillars of D&D play are social interaction, exploration, and combat. Whichever one you’re experiencing, the game unfolds according to this basic pattern:
+
+**1: The Game Master Describes a Scene.** The GM tells the players where their adventurers are and what’s around them (how many doors lead out of a room, what’s on a table, and so on).
+
+**2: The Players Describe What Their Characters Do.** Typically, the characters stick together as they travel through a dungeon or another environment. Sometimes different adventurers do different things: one adventurer might search a treasure chest while a second examines a mysterious symbol engraved on a wall and a third keeps watch for monsters. Outside combat, the GM ensures that every character has a chance to act and decides how to resolve their activity. In combat, the characters take turns.
+
+**3: The GM Narrates the Results of the Adventur- ers’ Actions.** Sometimes resolving a task is easy. If an adventurer walks across a room and tries to open a door, the GM might say the door opens and describe what lies beyond. But the door might be locked, the floor might hide a trap, or some other circumstance might make it challenging for an adventurer to complete a task. In those cases, the GM might ask the player to roll a die to help determine what happens. Describing the results often leads to another decision point, which brings the game back to step 1.
+
+This pattern holds during every game session (each time you sit down to play D&D), whether the adventurers are talking to a noble, exploring a ruin, or fighting a dragon. In certain situations—particularly combat—the action is more structured, and everyone takes turns.
+
+#### The Six Abilities
+**Tag:** Rule
+**Type:** Playing the Game
+
+All creatures—characters and monsters—have six abilities that measure physical and mental characteristics, as shown on the Ability Descriptions table.
+
+**Ability Descriptions**
+
+| Ability | Score Measures … |
+|---|---|
+| Strength | Physical might |
+| Dexterity | Agility, reflexes, and balance |
+| Constitution | Health and stamina |
+| Intelligence | Reasoning and memory |
+| Wisdom | Perceptiveness and mental fortitude |
+| Charisma | Confidence, poise, and charm |
+
+**Ability Scores**
+
+Each ability has a score from 1 to 20, although some monsters have a score as high as 30. The score represents the magnitude of an ability. The Ability Scores table summarizes what the scores mean.
+
+**Ability Scores**
+
+| Score | Meaning |
+|---|---|
+| 1 | This is the lowest a score can normally go. If an effect reduces a score to 0, that effect explains what happens. |
+| 2–9 | This represents a weak capability. |
+| 10–11 | This represents the human average. |
+| 12–19 | This represents a strong capability. |
+| 20 | This is the highest an adventurer’s score can go unless a feature says otherwise. |
+| 21–29 | This represents an extraordinary capability. |
+| 30 | This is the highest a score can go. |
+
+**Ability Modifiers**
+
+Each ability has a modifier that you apply whenever you make a D20 Test with that ability (explained in “D20 Tests”). An ability modifier is derived from its score, as shown in the Ability Modifiers table.
+
+**Ability Modifiers**
+
+| Score | Modifier |
+|---|---|
+| 1 | −5 |
+| 2–3 | −4 |
+| 4–5 | −3 |
+| 6–7 | −2 |
+| 8–9 | −1 |
+| 10–11 | +0 |
+| 12–13 | +1 |
+| 14–15 | +2 |
+| 16–17 | +3 |
+| 18–19 | +4 |
+| 20–21 | +5 |
+| 22–23 | +6 |
+| 24–25 | +7 |
+| 26–27 | +8 |
+| 28–29 | +9 |
+| 30 | +10 |
+
+#### Advantage/Disadvantage
+**Tag:** Rule
+**Type:** D20 Tests
+**Link:** no
+
+Sometimes a D20 Test is modified by Advantage or Disadvantage. Advantage reflects the positive circumstances surrounding a d20 roll, while Disadvantage reflects negative circumstances.
+
+You usually acquire Advantage or Disadvantage through the use of special abilities and actions. The GM can also decide that circumstances grant Advantage or impose Disadvantage.
+
+**Roll Two D20s**
+
+When a roll has either Advantage or Disadvantage, roll a second d20 when you make the roll. Use the higher of the two rolls if you have Advantage, and use the lower roll if you have Disadvantage. For example, if you have Disadvantage and roll an 18 and a 3, use the 3. If you instead have Advantage and roll those numbers, use the 18.
+
+**They Don’t Stack**
+
+If multiple situations affect a roll and they all grant Advantage on it, you still roll only two d20s. Similarly, if multiple situations impose Disadvantage on a roll, you roll only two d20s.
+
+If circumstances cause a roll to have both Advantage and Disadvantage, the roll has neither of them, and you roll one d20. This is true even if multiple circumstances impose Disadvantage and only one grants Advantage or vice versa. In such a situation, you have neither Advantage nor Disadvantage.
+
+**Interactions with Rerolls**
+
+When you have Advantage or Disadvantage and something in the game lets you reroll or replace the d20, you can reroll or replace only one die, not both. You choose which one.
+
+For example, if you have Heroic Inspiration (see the sidebar below) and roll a 3 and an 18 on an ability check that has Advantage or Disadvantage, you could expend your Heroic Inspiration to reroll one of those dice, not both of them.
+
+#### Skill Proficiencies
+**Tag:** Rule
+**Type:** Proficiency
+
+Most ability checks involve using a skill, which represents a category of things creatures try to do with an ability check. The descriptions of the actions you take (see “Actions” later in “Playing the Game”) specify which skill applies if you make an ability check for that action, and many other rules note when a skill is relevant. The GM has the ultimate say on whether a skill is relevant in a situation.
+
+If a creature is proficient in a skill, the creature applies its Proficiency Bonus to ability checks involving that skill. Without proficiency in a skill, a creature can still make ability checks involving that skill but doesn’t add its Proficiency Bonus. For example, if a character tries to climb a cliff, the GM might ask for a Strength (Athletics) check. If the character has Athletics proficiency, the character adds their Proficiency Bonus to the Strength check. If the character lacks that proficiency, they make the check without adding their Proficiency Bonus.
+
+**Skill List**
+
+The skills are shown on the Skills table, which notes example uses for each skill proficiency as well as the ability check the skill most often applies to.
+
+**Determining Skills**
+
+A character’s starting skill proficiencies are determined at character creation, and a monster’s skill proficiencies appear in its stat block.
+
+#### Saving Throw Proficiencies
+**Tag:** Rule
+**Type:** Proficiency
+
+Proficiency in a saving throw lets a character add their Proficiency Bonus to saves that use a particular ability. For example, proficiency in Wisdom saves lets you add your Proficiency Bonus to your Wisdom saves. Some monsters also have saving throw proficiencies, as noted in their stat blocks.
+
+Each class gives proficiency in at least two saving throws, representing that class’s training in evading or resisting certain threats. Wizards, for example, are proficient in Intelligence and Wisdom saves; they train to resist mental assault.
+
+#### Equipment Proficiencies
+**Tag:** Rule
+**Type:** Proficiency
+
+A character gains proficiency with various weapons and tools from their class and background. There are two categories of equipment proficiency:
+
+**Weapons.** Anyone can wield a weapon, but proficiency makes you better at wielding it. If you have proficiency with a weapon, you add your Proficiency Bonus to attack rolls you make with it.
+
+**Tools.** If you have proficiency with a tool, you can add your Proficiency Bonus to any ability check you make that uses the tool. If you have proficiency in the skill that’s also used with that check, you have Advantage on the check too. This means you can benefit from both skill proficiency and tool proficiency on the same ability check.
+
+#### Social Interaction
+**Tag:** Rule
+**Type:** Playing the Game
+
+During their adventures, player characters meet many different people and face some monsters that would rather talk than fight. In those situations, it’s time for social interaction, which takes many forms. For example, you might try to convince a burglar to confess to wrongdoing or try to flatter a guard. The Game Master assumes the roles of any nonplayer characters who are participating.
+
+An NPC’s attitude toward your character is Friendly, Indifferent, or Hostile, as defined in “Rules Glossary.” Friendly NPCs are predisposed to help, and Hostile ones are inclined to hinder.
+
+Social interactions progress in two ways: through roleplaying and ability checks.
+
+#### Roleplaying
+**Tag:** Rule
+**Type:** Social Interaction
+**Link:** no
+
+Roleplaying is, literally, the act of playing out a role. In this case, it’s you as a player determining how your character thinks, acts, and talks. Roleplaying is part of every aspect of the game, and it comes to the fore during social interactions.
+
+As you roleplay, consider whether you prefer an active approach or a descriptive approach.
+
+The GM uses an NPC’s personality and your character’s actions and attitudes to determine how an NPC reacts. A cowardly bandit might buckle under threats of imprisonment. A stubborn merchant refuses to help if the characters badger her. A vain dragon laps up flattery.
+
+When interacting with an NPC, pay attention to the GM’s portrayal of the NPC’s personality. You might be able to learn an NPC’s goals and then use that information to influence the NPC.
+
+If you offer NPCs something they want or play on their sympathies, fears, or goals, you can form friendships, ward off violence, or learn a key piece of information. On the other hand, if you insult a proud warrior or speak ill of a noble’s allies, your efforts to convince or deceive will likely fail.
+
+#### Exploration
+**Tag:** Rule
+**Type:** Playing the Game
+**Link:** no
+
+Exploration involves delving into places that are dangerous and full of mystery. The rules in this section detail some of the ways adventurers interact with the environment in such places.
+
+#### Adventuring Equipment
+**Tag:** Rule
+**Type:** Exploration
+**Link:** no
+
+As adventurers explore, their equipment can help them in many ways. For example, they can reach out-of-the-way places with a Ladder, perceive things they wouldn’t otherwise notice with a Torch or another light source, bypass locked doors and containers with Thieves’ Tools, and create obstacles for pursuers with Caltrops.
+
+See “Equipment” for rules on many items that are useful on adventures. The items in the“Tools” and “Adventuring Gear” sections are especially useful. The weapons in “Equipment” can also be used for more than battle; you could use a Quarterstaff, for example, to push a sinister-looking button that you’re reluctant to touch.
+
+#### Vision and Light
+**Tag:** Rule
+**Type:** Exploration
+
+Some adventuring tasks—such as noticing danger, hitting an enemy, and targeting certain spells—are affected by sight, so effects that obscure vision can hinder you, as explained below.
+
+**Obscured Areas**
+
+An area might be Lightly or Heavily Obscured. In a Lightly Obscured area—such as an area with Dim Light, patchy fog, or moderate foliage—you have Disadvantage on Wisdom (Perception) checks that rely on sight.
+
+A Heavily Obscured area—such as an area with Darkness, heavy fog, or dense foliage—is opaque. You have the Blinded condition (see “Rules Glossary”) when trying to see something there.
+
+**Light**
+
+The presence or absence of light determines the category of illumination in an area, as defined below.
+
+**Bright Light.** Bright Light lets most creatures see normally. Even gloomy days provide Bright Light, as do torches, lanterns, fires, and other sources of illumination within a specific radius.
+
+**Dim Light.** Dim Light, also called shadows, creates a Lightly Obscured area. An area of Dim Light is usually a boundary between Bright Light and surrounding Darkness. The soft light of twilight and dawn also counts as Dim Light. A full moon might bathe the land in Dim Light.
+
+**Darkness.** Darkness creates a Heavily Obscured area. Characters face Darkness outdoors at night (even most moonlit nights), within the confines of an unlit dungeon, or in an area of magical Darkness.
+
+**Special Senses**
+
+Some creatures have special senses that help them perceive things in certain situations. “Rules Glossary” defines the following special senses:
+
+- Blindsight
+- Darkvision
+- Tremorsense
+- Truesight
+
+#### Hiding
+**Tag:** Rule
+**Type:** Exploration
+**Link:** no
+
+Adventurers and monsters often hide, whether to spy on one another, sneak past a guardian, or set an ambush. The Game Master decides when circumstances are appropriate for hiding. When you try to hide, you take the Hide action.
+
+#### Interacting with Objects
+**Tag:** Rule
+**Type:** Exploration
+
+Interacting with objects is often simple to resolve. The player tells the GM that their character is doing something, such as moving a lever or opening a door, and the GM describes what happens. Sometimes, however, rules govern what you can do with an object, as detailed in the following sections.
+
+**What Is an Object?**
+
+For the purpose of the rules, an object is a discrete, inanimate item like a window, door, sword, book, table, chair, or stone. It isn’t a building or a vehicle, which are composed of many objects.
+
+**Time-Limited Object Interactions**
+
+When time is short, such as in combat, interactions with objects are limited: one free interaction per turn. That interaction must occur during a creature’s movement or action. Any additional interactions require the Utilize action, as explained in “Combat” later in “Playing the Game.”
+
+**Finding Hidden Objects**
+
+When your character searches for hidden things, such as a secret door or a trap, the GM typically asks you to make a Wisdom (Perception) check, provided you describe the character searching in the hidden object’s vicinity. On a success, you find the object, other important details, or both.
+
+If you describe your character searching nowhere near a hidden object, a Wisdom (Perception) check won’t reveal the object, no matter the check’s total.
+
+**Carrying Objects**
+
+You can usually carry your gear and treasure without worrying about the weight of those objects. If you try to haul an unusually heavy object or a massive number of lighter objects, the GM might require you to abide by the rules for carrying capacity in “Rules Glossary.”
+
+#### Marching Order
+**Tag:** Rule
+**Type:** Playing the Game
+
+The adventurers should establish a marching order while they travel, whether indoors or outdoors. A marching order makes it easier to determine which characters are affected by traps, which ones can spot hidden enemies, and which ones are the closest to those enemies if a fight breaks out. You can change your marching order outside combat and record the order any way you like: write it down, for example, or arrange miniatures to show it.
+
+#### Travel
+**Tag:** Rule
+**Type:** Exploration
+**Link:** no
+
+During an adventure, the characters might travel long distances on trips that could take hours or days. The GM can summarize this travel without calculating exact distances or travel times, or the GM might have you use the travel pace rules below.
+
+If you need to know how fast you can move when every second matters, see the movement rules in “Combat” later in “Playing the Game.”
+
+**Vehicles**
+
+Travelers in wagons, carriages, or other land vehicles choose a pace as normal. Characters in a waterborne vessel are limited to the speed of the vessel, and they don’t choose a travel pace. Depending on the vessel and the size of the crew, ships might be able to travel for up to 24 hours per day. “Equipment” includes vehicles for sale.
+
+#### Travel Pace
+**Tag:** Rule
+**Type:** Playing the Game
+
+While traveling outside combat, a group can move at a Fast, Normal, or Slow pace, as shown on the Travel Pace table. The table states how far the party can move in a period of time; if riding horses or other mounts, the group can move twice that distance for 1 hour, after which the mounts need a Short or Long Rest before they can move at that increased pace again (see “Equipment” for a selection of mounts for sale). “Gameplay Toolbox” has rules that affect which pace you can choose in certain types of terrain.
+
+**Travel Pace**
+
+| Pace | Distance per Minute | Distance per Hour | Distance per Day |
+|---|---|---|---|
+| Fast | 400 feet | 4 miles | 30 miles |
+| Normal | 300 feet | 3 miles | 24 miles |
+| Slow | 200 feet | 2 miles | 18 miles |
+
+Each travel pace has a game effect, as defined below.
+
+**Fast.** Traveling at a Fast pace imposes Disadvantage on a traveler’s Wisdom (Perception or Survival) and Dexterity (Stealth) checks.
+
+**Normal.** Traveling at a Normal pace imposes Disadvantage on Dexterity (Stealth) checks.
+
+**Slow.** Traveling at a Slow pace grants Advantage on Wisdom (Perception or Survival) checks.
+
+A group of characters can travel overland at a Normal, Fast, or Slow pace, as described in “Playing the Game.” During any journey stage, the predominant terrain determines the characters’ maximum travel pace, as shown in the Maximum Pace column of the Travel Terrain table. Certain factors can affect a group’s travel pace.
+
+**Good Roads**
+
+The presence of a good road increases the group’s maximum pace by one step (from Slow to Normal or from Normal to Fast).
+
+**Slower Travelers**
+
+The group must move at a Slow pace if any group member’s Speed is reduced to half or less of normal.
+
+**Extended Travel**
+
+Characters can push themselves to travel for more than 8 hours per day, at the risk of tiring. At the end of each additional hour of travel beyond 8 hours, each character must succeed on a Constitution saving throw or gain 1 Exhaustion level. The DC is 10 plus 1 for each hour past 8 hours.
+
+**Special Movement**
+
+If a party can travel at a high Speed for an extended time, as with a spell such as *Wind Walk* or a magic item such as a *Carpet of Flying*, translate the party’s Speed into travel rates using these rules:
+
+**Miles per hour** = Speed ÷ 10
+
+**Miles per day** (Normal pace) = Miles per hour × number of hours traveled (typically 8)
+
+**Fast pace** = Miles per day × 1⅓ (round down)
+
+**Slow pace** = Miles per day × 2/3 (round down)
+
+If the characters are flying or their special movement allows them to ignore Difficult Terrain, they can move at a Fast pace regardless of the terrain.
+
+**Vehicles**
+
+Characters traveling in a vehicle use the vehicle’s speed in miles per hour (as shown in “Equipment”) to determine their rate of travel, and they don’t choose a travel pace.
+
+#### Playing on a Grid
+**Tag:** Rule
+**Type:** Playing the Game
+
+If you play using a square grid and miniatures or other tokens, follow these rules.
+
+**Squares.** Each square represents 5 feet.
+
+**Speed.** Rather than moving foot by foot, move square by square on the grid, using your Speed in 5-foot segments. You can translate your Speed into squares by dividing it by 5. For example, a Speed of 30 feet translates into 6 squares. If you use a grid often, consider writing your Speed in squares on your character sheet.
+
+**Entering a Square.** To enter a square, you must have enough movement left to pay for entering. It costs 1 square of movement to enter an unoccupied square that’s adjacent to your space (orthogonally or diagonally adjacent). A square of Difficult Terrain costs 2 squares to enter. Other effects might make a square cost even more.
+
+**Corners.** Diagonal movement can’t cross the corner of a wall, a large tree, or another terrain feature that fills its space.
+
+**Ranges.** To determine the range on a grid between two things—whether creatures or objects—count squares from a square adjacent to one of them and stop counting in the space of the other one. Count by the shortest route.
+
+#### Combat
+**Tag:** Rule
+**Type:** Playing the Game
+**Link:** no
+
+Adventurers encounter many dangerous monsters and nefarious villains. In those moments, combat often breaks out.
+
+#### The Order of Combat
+**Tag:** Rule
+**Type:** Combat
+
+A typical combat encounter is a clash between two sides: a flurry of weapon swings, feints, parries, footwork, and spellcasting. The game organizes combat into a cycle of rounds and turns. A round represents about 6 seconds in the game world. During a round, each participant in a battle takes a turn. The order of turns is determined at the beginning of combat when everyone rolls Initiative. Once everyone has taken a turn, the fight continues to the next round if neither side is defeated.
+
+**Combat Step by Step**
+
+Combat unfolds in these steps:
+
+**1: Establish Positions.** The Game Master determines where all the characters and monsters are located. Given the adventurers’ marching order or their stated positions in the room or other location, the GM figures out where the adversaries are—how far away and in what direction.
+
+**2: Roll Initiative.** Everyone involved in the combat encounter rolls Initiative, determining the order of combatants’ turns.
+
+**3: Take Turns.** Each participant in the battle takes a turn in Initiative order. When everyone involved in the combat has had a turn, the round ends. Repeat this step until the fighting stops.
+
+**Your Turn**
+
+On your turn, you can move a distance up to your Speed and take one action. You decide whether to move first or take your action first.
+
+The main actions you can take are listed in “Actions” earlier in “Playing the Game.” A character’s features and a monster’s stat block also provide action options. “Movement and Position” later in “Playing the Game” gives the rules for movement.
+
+**Communicating.** You can communicate however you are able—through brief utterances and gestures—as you take your turn. Doing so uses neither your action nor your move.
+
+Extended communication, such as a detailed explanation of something or an attempt to persuade a foe, requires an action. The Influence action is the main way you try to influence a monster.
+
+**Interacting with Things.** You can interact with one object or feature of the environment for free, during either your move or action. For example, you could open a door during your move as you stride toward a foe.
+
+If you want to interact with a second object, you need to take the Utilize action. Some magic items and other special objects always require an action to use, as stated in their descriptions.
+
+The GM might require you to use an action for any of these activities when it needs special care or when it presents an unusual obstacle. For instance, the GM might require you to take the Utilize action to open a stuck door or turn a crank to lower a drawbridge.
+
+**Doing Nothing on Your Turn.** You can forgo moving, taking an action, or doing anything at all on your turn. If you can’t decide what to do, consider taking the defensive Dodge action or the Ready action to delay acting.
+
+**Ending Combat**
+
+Combat ends when one side or the other is defeated, which can mean the creatures are killed or knocked out or have surrendered or fled. Combat can also end when both sides agree to end it.
+
+#### Unseen Attackers and Targets
+**Tag:** Rule
+**Type:** Playing the Game
+
+When you make an attack roll against a target you can’t see, you have Disadvantage on the roll. This is true whether you’re guessing the target’s location or targeting a creature you can hear but not see. If the target isn’t in the location you targeted, you miss.
+
+When a creature can’t see you, you have Advantage on attack rolls against it.
+
+If you are hidden when you make an attack roll, you give away your location when the attack hits or misses.
+
+#### Movement and Position
+**Tag:** Rule
+**Type:** Combat
+
+On your turn, you can move a distance equal to your Speed or less. Or you can decide not to move.
+
+Your movement can include climbing, crawling, jumping, and swimming (each explained in “Rules Glossary”). These different modes of movement can be combined with your regular movement, or they can constitute your entire move.
+
+However you’re moving with your Speed, you deduct the distance of each part of your move from it until it is used up or until you are done moving, whichever comes first.
+
+A character’s Speed is determined during character creation. A monster’s Speed is noted in the monster’s stat block. See “Rules Glossary” for more about Speed as well as about special speeds, such as a Climb Speed, Fly Speed, or Swim Speed.
+
+**Breaking Up Your Move**
+
+You can break up your move, using some of its movement before and after any action, Bonus Action, or Reaction you take on the same turn. For example, if you have a Speed of 30 feet, you could go 10 feet, take an action, and then go 20 feet.
+
+**Dropping Prone**
+
+On your turn, you can give yourself the Prone condition (see “Rules Glossary”) without using an action or any of your Speed, but you can’t do so if your Speed is 0.
+
+**Creature Size**
+
+A creature belongs to a size category, which determines the width of the square space the creature occupies on a map, as shown on the Creature Size and Space table. That table lists the sizes from smallest (Tiny) to largest (Gargantuan). A creature’s space is the area that it effectively controls in combat and the area it needs to fight effectively.
+
+A character’s size is determined by species, and a monster’s size is specified in the monster’s stat block.
+
+**Creature Size and Space**
+
+| Size | Space (Feet) | Space (Squares) |
+|---|---|---|
+| Tiny | 2½ by 2½ feet | 4 per square |
+| Small | 5 by 5 feet | 1 square |
+| Medium | 5 by 5 feet | 1 square |
+| Large | 10 by 10 feet | 4 squares (2 by 2) |
+| Huge | 15 by 15 feet | 9 squares (3 by 3) |
+| Gargantuan | 20 by 20 feet | 16 squares (4 by 4) |
+
+**Moving around Other Creatures**
+
+During your move, you can pass through the space of an ally, a creature that has the Incapacitated condition (see “Rules Glossary”), a Tiny creature, or a creature that is two sizes larger or smaller than you.
+
+Another creature’s space is Difficult Terrain for you unless that creature is Tiny or your ally.
+
+You can’t willingly end a move in a space occupied by another creature. If you somehow end a turn in a space with another creature, you have the Prone condition (see “Rules Glossary”) unless you are Tiny or are of a larger size than the other creature.
+
+#### Making an Attack
+**Tag:** Rule
+**Type:** Combat
+**Link:** no
+
+When you take the Attack action, you make an attack. Some other actions, Bonus Actions, and Reactions also let you make an attack. Whether you strike with a Melee weapon, fire a Ranged weapon, or make an attack roll as part of a spell, an attack has the following structure:
+
+**1: Choose a Target.** Pick a target within your attack’s range: a creature, an object, or a location.
+
+**2: Determine Modifiers.** The GM determines whether the target has Cover (see the next section) and whether you have Advantage or Disadvantage against the target. In addition, spells, special abilities, and other effects can apply penalties or bonuses to your attack roll.
+
+**3: Resolve the Attack.** Make the attack roll, as detailed earlier in “Playing the Game.” On a hit, you roll damage unless the particular attack has rules that specify otherwise. Some attacks cause special effects in addition to or instead of damage.
+
+#### Ranged Attacks
+**Tag:** Rule
+**Type:** Combat
+**Link:** no
+
+When you make a ranged attack, you fire a bow, hurl an axe, or otherwise send projectiles to strike a foe at a distance. Many spells also involve making a ranged attack.
+
+**Range**
+
+You can make ranged attacks only against targets within a specified range. If a ranged attack, such as one made with a spell, has a single range, you can’t attack a target beyond this range. Some ranged attacks, such as those made with a Longbow, have two ranges. The smaller number is the normal range, and the larger number is the long range. Your attack roll has Disadvantage when your target is beyond normal range, and you can’t attack a target beyond long range.
+
+**Ranged Attacks in Close Combat**
+
+Aiming a ranged attack is more difficult when a foe is next to you. When you make a ranged attack roll with a weapon, a spell, or some other means, you have Disadvantage on the roll if you are within 5 feet of an enemy who can see you and doesn’t have the Incapacitated condition (see “Rules Glossary”).
+
+#### Melee Attacks
+**Tag:** Rule
+**Type:** Combat
+**Link:** no
+
+A melee attack allows you to attack a target within your reach. A melee attack typically uses a handheld weapon or an Unarmed Strike. Many monsters make melee attacks with claws, teeth, or other body parts. A few spells also involve melee attacks.
+
+#### Mounted Combat
+**Tag:** Rule
+**Type:** Combat
+
+A willing creature that is at least one size larger than a rider and that has an appropriate anatomy can serve as a mount, using the following rules.
+
+**Mounting and Dismounting**
+
+During your move, you can mount a creature that is within 5 feet of you or dismount. Doing so costs an amount of movement equal to half your Speed (round down). For example, if your Speed is 30 feet, you spend 15 feet of movement to mount a horse.
+
+**Controlling a Mount**
+
+You can control a mount only if it has been trained to accept a rider. Domesticated horses, mules, and similar creatures have such training.
+
+The Initiative of a controlled mount changes to match yours when you mount it. It moves on your turn as you direct it, and it has only three action options during that turn: Dash, Disengage, and Dodge. A controlled mount can move and act even on the turn that you mount it.
+
+In contrast, an independent mount—one that lets you ride but ignores your control—retains its place in the Initiative order and moves and acts as it likes.
+
+**Falling Off**
+
+If an effect is about to move your mount against its will while you’re on it, you must succeed on a DC 10 Dexterity saving throw or fall off, landing with the Prone condition (see “Rules Glossary”) in an unoccupied space within 5 feet of the mount.
+
+While mounted, you must make the same save if you’re knocked Prone or the mount is.
+
+#### Resting
+**Tag:** Rule
+**Type:** Playing the Game
+**Link:** no
+
+Adventurers can’t spend every hour adventuring. They need rest. Any creature can take hour-long Short Rests in the midst of a day and an 8-hour Long Rest to end it. Regaining Hit Points is one of the main benefits of a rest. “Rules Glossary” provides the rules for Short and Long Rests.
+
+#### Underwater Combat
+**Tag:** Rule
+**Type:** Combat
+
+A fight underwater follows these rules.
+
+**Impeded Weapons**
+
+When making a melee attack roll with a weapon underwater, a creature that lacks a Swim Speed has Disadvantage on the attack roll unless the weapon deals Piercing damage.
+
+A ranged attack roll with a weapon underwater automatically misses a target beyond the weapon’s normal range, and the attack roll has Disadvantage against a target within normal range.
+
+**Fire Resistance**
+
+Anything underwater has Resistance to Fire damage (explained in “Damage and Healing”).
+
+#### Damage and Healing
+**Tag:** Rule
+**Type:** Playing the Game
+
+Injury and death are frequent threats, as detailed in the following rules.
+
+#### Saving Throws and Damage
+**Tag:** Rule
+**Type:** Damage and Healing
+
+Damage dealt via saving throws uses these rules.
+
+**Damage against Multiple Targets**
+
+When you create a damaging effect that forces two or more targets to make saving throws against it at the same time, roll the damage once for all the targets. For example, when a wizard casts *Fireball*, the spell’s damage is rolled once for all creatures caught in the blast.
+
+**Half Damage**
+
+Many saving throw effects deal half damage (round down) to a target when the target succeeds on the saving throw. The halved damage is equal to half the damage that would be dealt on a failed save.
+
+#### Resistance and Vulnerability
+**Tag:** Rule
+**Type:** Damage and Healing
+
+Some creatures and objects have Resistance or Vulnerability to certain damage types. If you have Resistance to a damage type, damage of that type is halved against you (round down). If you have Vulnerability to a damage type, damage of that type is doubled against you. For example, if you have Resistance to Cold damage, such damage is halved against you, and if you have Vulnerability to Fire damage, such damage is doubled against you.
+
+**No Stacking**
+
+Multiple instances of Resistance or Vulnerability that affect the same damage type count as only one instance. For example, if you have Resistance to Necrotic damage as well as Resistance to all damage, Necrotic damage is reduced by half against you.
+
+**Order of Application**
+
+Modifiers to damage are applied in the following order: adjustments such as bonuses, penalties, or multipliers are applied first; Resistance is applied second; and Vulnerability is applied third.
+
+For example, a creature has Resistance to all damage and Vulnerability to Fire damage, and it’s within a magical aura that reduces all damage by 5. If it takes 28 Fire damage, the damage is first reduced by 5 (to 23), then halved for the creature’s Resistance (and rounded down to 11), then doubled for its Vulnerability (to 22).
+
+#### Dropping to 0 Hit Points
+**Tag:** Rule
+**Type:** Damage and Healing
+
+When a creature drops to 0 Hit Points, it either dies outright or falls unconscious, as explained below.
+
+**Instant Death**
+
+Here are the main ways a creature can die instantly.
+
+**Monster Death.** A monster dies the instant it drops to 0 Hit Points, although a Game Master can ignore this rule for an individual monster and treat it like a character.
+
+**Hit Point Maximum of 0.** A creature dies if its Hit Point maximum reaches 0. Certain effects drain life energy, reducing a creature’s Hit Point maximum.
+
+**Massive Damage.** When damage reduces a character to 0 Hit Points and damage remains, the character dies if the remainder equals or exceeds their Hit Point maximum. For example, if your character has a Hit Point maximum of 12, currently has 6 Hit Points, and takes 18 damage, the character drops to 0 Hit Points, but 12 damage remains. The character then dies, since 12 equals their Hit Point maximum.
+
+**Character Demise**
+
+If your character dies, others might find a magical way to revive your character, such as with the *Raise Dead* spell. Or talk with the GM about making a new character to join the group. “Rules Glossary” has more information on being dead.
+
+**Falling Unconscious**
+
+If you reach 0 Hit Points and don’t die instantly, you have the Unconscious condition (see “Rules Glossary”) until you regain any Hit Points, and you now face making Death Saving Throws (see below).
+
+**Stabilizing a Character**
+
+You can take the Help action to try to stabilize a creature with 0 Hit Points, which requires a successful DC 10 Wisdom (Medicine) check.
+
+A Stable creature doesn’t make Death Saving Throws even though it has 0 Hit Points, but it still has the Unconscious condition. If the creature takes damage, it stops being Stable and starts making Death Saving Throws again. A Stable creature that isn’t healed regains 1 Hit Point after 1d4 hours.
+
+#### Selling Equipment
+**Tag:** Rule
+**Type:** Playing the Game
+
+Equipment fetches half its cost when sold. In contrast, trade goods and valuables—like gems and art objects—retain their full value in the marketplace. “Magic Items” has prices for magic items.
+
+
+## Equipment
+
+From the “Equipment” chapter of the SRD 5.2.1 (attribution statement under “Rules Glossary” above).
+
+#### Coins
+**Tag:** Rule
+**Type:** Equipment
+**Link:** no
+
+Characters often find coins on their adventures and can spend those coins in shops, inns, and other businesses. Coins come in different denominations based on the relative worth of their material. The Coin Values table lists coins and how much they’re worth relative to the Gold Piece, which is the game’s main coin. For example, 100 Copper Pieces are worth 1 Gold Piece.
+
+A coin weighs about a third of an ounce, so fifty coins weigh a pound.
+
+**Coin Values**
+
+| Coin | Value in GP |
+|---|---|
+| Copper Piece (CP) | 1/100 |
+| Silver Piece (SP) | 1/10 |
+| Electrum Piece (EP) | 1/2 |
+| Gold Piece (GP) | 1 |
+| Platinum Piece (PP) | 10 |
+
+#### Weapon Proficiency
+**Tag:** Rule
+**Type:** Weapons
+
+Anyone can wield a weapon, but you must have proficiency with it to add your Proficiency Bonus to an attack roll you make with it. A player character’s features can provide weapon proficiencies. A monster is proficient with any weapon in its stat block.
+
+#### Properties
+**Tag:** Rule
+**Type:** Weapons
+**Link:** no
+
+Here are definitions of the properties in the Properties column of the Weapons table.
+
+#### Mastery Properties
+**Tag:** Rule
+**Type:** Weapons
+
+Each weapon has a mastery property, which is usable only by a character who has a feature, such as Weapon Mastery, that unlocks the property for the character. The properties are defined below.
+
+#### Armor
+**Tag:** Rule
+**Type:** Equipment
+**Link:** no
+
+The Armor table lists the game’s main armor. The table includes the cost and weight of armor, as well as the following details:
+
+**Category.** Every type of armor falls into a category: Light, Medium, or Heavy. The category determines how long it takes to don or doff the armor (as shown in the table).
+
+**Armor Class (AC).** The table’s Armor Class column tells you what your base AC is when you wear a type of armor. For example, if you wear Leather Armor, your base AC is 11 plus your Dexterity modifier, whereas your AC is 16 in Chain Mail.
+
+**Strength.** If the table shows a Strength score in the Strength column for an armor type, that armor reduces the wearer’s speed by 10 feet unless the wearer has a Strength score equal to or higher than the listed score.
+
+**Stealth.** If the table shows “Disadvantage” in the Stealth column for an armor type, the wearer has Disadvantage on Dexterity (Stealth) checks.
+
+**One at a Time**
+
+A creature can wear only one suit of armor at a time and wield only one Shield at a time.
+
+#### Tools
+**Tag:** Rule
+**Type:** Equipment
+**Link:** no
+
+A tool helps you make specialized ability checks, craft certain items, or both. A tool’s description includes the tool’s cost and weight, as well as the following entries:
+
+**Ability.** This entry lists the ability to use when making an ability check with the tool.
+
+**Utilize.** This entry lists things you can do with the tool when you take the Utilize action. You can do one of those things each time you take the action. This entry also provides the DC for the action.
+
+**Craft.** This entry lists what, if anything, you can craft with the tool. For crafting rules, see “Crafting Nonmagical Items,” “Brewing Potions of Healing,” and “Scribing Spell Scrolls” later in “Equipment.”
+
+**Variants.** This entry appears if the tool has variants, which are listed. Each requires a separate proficiency.
+
+#### Tool Proficiency
+**Tag:** Rule
+**Type:** Tools
+
+If you have proficiency with a tool, add your Proficiency Bonus to any ability check you make that uses the tool. If you have proficiency in a skill that’s used with that check, you have Advantage on the check too.
+
+Your features might give you proficiency with a tool. A monster has proficiency with any tool in its stat block.
+
+#### Artisan’s Tools
+**Tag:** Rule
+**Type:** Tools
+
+Artisan’s Tools are each focused on crafting items and pursuing a trade. Each of these tools requires a separate proficiency.
+
+#### Adventuring Gear
+**Tag:** Rule
+**Type:** Equipment
+**Link:** no
+
+The Adventuring Gear table in this section includes gear that adventurers often find useful. These items are described here in alphabetical order, with an item’s price appearing after its name.
+
+#### Mounts and Vehicles
+**Tag:** Rule
+**Type:** Equipment
+
+A mount can help you move more quickly through the wilderness, but its primary purpose is to carry gear that would otherwise slow you down. The Mounts and Other Animals table shows each animal’s carrying capacity. See “Monsters” for the animals’ stat blocks.
+
+**Mounts and Cargo**
+
+An animal pulling a carriage, cart, chariot, sled, or wagon can move weight up to five times its base carrying capacity, including the weight of the vehicle. If multiple animals pull the same vehicle, add their carrying capacities together.
+
+**Barding**
+
+Barding is armor designed for a mount. Any type of armor on the Armor table in “Equipment” can be purchased as barding. The cost is four times the normal cost, and it weighs twice as much.
+
+**Saddles**
+
+A saddle comes with a bit, a bridle, reins, and any other equipment needed to use the saddle. A Military Saddle gives Advantage on any ability check you make to remain mounted. An Exotic Saddle is required for riding an aquatic or a flying mount.
+
+**Mounts and Other Animals**
+
+| Item | Carrying Capacity | Cost |
+|---|---|---|
+| Camel | 450 lb. | 50 GP |
+| Elephant | 1,320 lb. | 200 GP |
+| Horse, Draft | 540 lb. | 50 GP |
+| Horse, Riding | 480 lb. | 75 GP |
+| Mastiff | 195 lb. | 25 GP |
+| Mule | 420 lb. | 8 GP |
+| Pony | 225 lb. | 30 GP |
+| Warhorse | 540 lb. | 400 GP |
+
+**Tack, Harness, and Drawn Vehicles**
+
+| Item | Weight | Cost |
+|---|---|---|
+| Carriage | 600 lb. | 100 GP |
+| Cart | 200 lb. | 15 GP |
+| Chariot | 100 lb. | 250 GP |
+| Feed per day | 10 lb. | 5 CP |
+| **Saddle** |  |  |
+| Exotic | 40 lb. | 60 GP |
+| Military | 30 lb. | 20 GP |
+| Riding | 25 lb. | 10 GP |
+| Sled | 300 lb. | 20 GP |
+| Stabling per day | — | 5 SP |
+| Wagon | 400 lb. | 35 GP |
+
+**Large Vehicles**
+
+The Airborne and Waterborne Vehicles table provides statistics for various types of large vehicles. The following notes apply.
+
+**Speed**
+
+A ship sailing against a strong wind moves at half speed. In a dead calm (no wind), waterborne ships can’t move under sail and must be rowed. Keelboats and Rowboats are used on lakes and rivers. If going downstream, add the speed of the current (typically 3 miles per hour) to the speed of the vehicle. These vehicles can’t be rowed against any significant current, but they can be pulled upstream by draft animals on the shores. A Rowboat can be carried and weighs 100 pounds.
+
+**Crew**
+
+A ship larger than a Keelboat or Rowboat needs a crew of skilled hirelings (see “Hirelings” later in “Equipment”) to function. The minimum number of skilled hirelings needed to crew a ship depends on the type of ship, as shown in the table.
+
+**Passengers**
+
+The table lists the number of Small and Medium passengers the ship can accommodate using hammocks. A ship outfitted with private accommodations can carry one-fifth as many passengers. A passenger usually pays 5 SP per day for a hammock, but prices can vary from ship to ship. A small private cabin usually costs 2 GP per day.
+
+**Damage Threshold**
+
+If a vehicle has a damage threshold (see “Rules Glossary”), it’s noted in the table.
+
+**Ship Repair**
+
+Repairs to a damaged ship can be made while the vessel is berthed. Repairing 1 Hit Point of damage requires 1 day and costs 20 GP for materials and labor. If the repairs are made in a location where supplies and skilled labor are abundant, such as a city shipyard, the repair time and cost are halved.
+
+#### Lifestyle Expenses
+**Tag:** Rule
+**Type:** Equipment
+
+Lifestyle expenses summarize the cost of living in a fantasy world. They cover lodging, food, equipment maintenance, and other necessities.
+
+At the start of each week or month (GM’s choice), choose a lifestyle below—Wretched, Squalid, Poor, Modest, Comfortable, Wealthy, or Aristocratic—and pay the price to sustain that lifestyle.
+
+Lifestyles have no inherent consequences, but the GM might take them into account when determining risks or how others perceive your character.
+
+**Wretched (Free)**
+
+You survive via chance and charity. You’re often exposed to natural dangers as a result of sleeping outside.
+
+**Squalid (1 SP per Day)**
+
+You spend the bare minimum for your necessities. You might be exposed to unhealthy conditions and opportunistic criminals.
+
+**Poor (2 SP per Day)**
+
+You spend frugally for your necessities.
+
+**Modest (1 GP per Day)**
+
+You support yourself at an average level.
+
+**Comfortable (2 GP per Day)**
+
+You spend modestly for your necessities and enjoy a few luxuries.
+
+**Wealthy (4 GP per Day)**
+
+You’re accustomed to the finer things in life and might have servants.
+
+**Aristocratic (10 GP per Day)**
+
+You pay for the best and might have a staff that supports your lifestyle. Others notice your wealth and might encourage you to share it, either legally or otherwise.
+
+#### Food, Drink, and Lodging
+**Tag:** Rule
+**Type:** Equipment
+
+The Food, Drink, and Lodging table gives prices for food and a single night’s lodging. Prices for daily lodging and meals are included in your lifestyle’s expenses.
+
+**Food, Drink, and Lodging**
+
+| Item | Cost |
+|---|---|
+| Ale (mug) | 4 CP |
+| Bread (loaf) | 2 CP |
+| Cheese (wedge) | 1 SP |
+| **Inn Stay per Day** |  |
+| Squalid | 7 CP |
+| Poor | 1 SP |
+| Modest | 5 SP |
+| Comfortable | 8 SP |
+| Wealthy | 2 GP |
+| Aristocratic | 4 GP |
+| **Meal** |  |
+| Squalid | 1 CP |
+| Poor | 2 CP |
+| Modest | 1 SP |
+| Comfortable | 2 SP |
+| Wealthy | 3 SP |
+| Aristocratic | 6 SP |
+| **Wine (bottle)** |  |
+| Common | 2 SP |
+| Fine | 10 GP |
+
+**Airborne and Waterborne Vehicles**
+
+| Ship | Speed | Crew | Passengers | Cargo (Tons) | AC | HP | Damage Threshold | Cost |
+|---|---|---|---|---|---|---|---|---|
+| Airship | 8 mph | 10 | 20 | 1 | 13 | 300 | — | 40,000 GP |
+| Galley | 4 mph | 80 | — | 150 | 15 | 500 | 20 | 30,000 GP |
+| Keelboat | 1 mph | 1 | 6 | 1/2 | 15 | 100 | 10 | 3,000 GP |
+| Longship | 3 mph | 40 | 150 | 10 | 15 | 300 | 15 | 10,000 GP |
+| Rowboat | 1½ mph | 1 | 3 | — | 11 | 50 | — | 50 GP |
+| Sailing Ship | 2 mph | 20 | 20 | 100 | 15 | 300 | 15 | 10,000 GP |
+| Warship | 2½ mph | 60 | 60 | 200 | 15 | 500 | 20 | 25,000 GP |
+
+#### Hirelings
+**Tag:** Rule
+**Type:** Equipment
+**Link:** no
+
+Skilled hirelings include anyone hired to perform a service that involves a proficiency (including weapon, tool, or skill): a mercenary, an artisan, a scribe, or the like. The pay shown on the Hirelings table is a minimum; some expert hirelings require more pay. Untrained hirelings are hired for work that requires no particular proficiencies; they include laborers and porters.
+
+**Hirelings**
+
+| Service | Cost |
+|---|---|
+| Skilled hireling | 2 GP per day |
+| Untrained hireling | 2 SP per day |
+| Messenger | 2 CP per mile |
+
+#### Spellcasting Services
+**Tag:** Rule
+**Type:** Equipment
+
+Most settlements contain individuals who are willing to cast spells in exchange for payment. If a spell has expensive components, add the cost of those components to the cost listed in the Spellcasting Services table. The higher the level of a desired spell, the harder it is to find someone to cast it.
+
+**Spellcasting Services**
+
+| Spell Level | Availability | Cost |
+|---|---|---|
+| Cantrip | Village, town, or city | 30 GP |
+| 1 | Village, town, or city | 50 GP |
+| 2 | Village, town, or city | 200 GP |
+| 3 | Town or city only | 300 GP |
+| 4–5 | Town or city only | 2,000 GP |
+| 6–8 | City only | 20,000 GP |
+| 9 | City only | 100,000 GP |
+
+#### Magic Items
+**Tag:** Rule
+**Type:** Equipment
+**Link:** no
+
+Adventures hold the promise—but not a guarantee—of finding magic items. Hundreds of magic items are detailed in “Magic Items” later in this document. Here’s what you need to know about using magic items.
+
+#### Identifying a Magic Item
+**Tag:** Rule
+**Type:** Magic Items
+
+Some magic items are indistinguishable from their nonmagical counterparts, while others are conspicuously magical. Handling a magic item is enough to give you a sense that it is extraordinary, but learning a magic item’s properties isn’t automatic.
+
+The *Identify* spell is the fastest way to reveal an item’s properties. Alternatively, you can focus on one magic item during a Short Rest while being in physical contact with the item. At the end of the rest, you learn its properties and how to use them (but not any curse the item might bear).
+
+Sometimes a magic item carries a clue to its properties. The command word to activate a ring might be etched inside the band, or a feathered design might hint that it’s a *Ring of Feather Falling*.
+
+Wearing or experimenting with an item can also offer hints about its properties. In the specific case of Potions, a little taste is enough to tell the taster what a potion does. Other items might require more experimentation. For example, if your character puts on a *Ring of Swimming*, the GM might say, “Your movement feels strangely fluid.” Perhaps you then dive into a river to see what happens. The GM would then say you swim unexpectedly well.
+
+#### Wearing and Wielding Items
+**Tag:** Rule
+**Type:** Magic Items
+
+Using a magic item’s properties might mean wearing or wielding it. A magic item meant to be worn must be donned in the intended fashion: boots go on feet, gloves on hands, hats and helmets on a head, and rings on a finger. Magic armor must be donned, a Shield strapped to the arm, a cloak fastened about the shoulders. A weapon must be held.
+
+In most cases, a magic item that’s meant to be worn can fit a creature regardless of size or build. Magic garments are made to be easily adjustable, or they magically adjust themselves to the wearer.
+
+**Multiple Items of the Same Kind**
+
+You can’t wear more than one of certain magic items. You can’t normally wear more than one pair of footwear, one pair of gloves or gauntlets, one pair of bracers, one suit of armor, one item of headwear, or one cloak. The GM might make exceptions.
+
+**Paired Items**
+
+Items that come in pairs—such as boots, bracers, gauntlets, and gloves—impart their benefits only if both items of the pair are worn. For example, a character wearing a *Boot of Striding and Springing* on one foot and a *Boot of Elvenkind* on the other foot gains no benefit from either.
+
+#### Crafting Nonmagical Items
+**Tag:** Rule
+**Type:** Equipment
+
+To craft a nonmagical item, you need tools, raw materials, and time, each of which is detailed below. If you meet the requirements, you make the item, and you can use it or sell it at its normal price.
+
+**Tools**
+
+The “Tools” section of “Equipment” lists which tools are required to make certain items. The GM assigns required tools for items not listed there.
+
+You must use the required tool to make an item and have proficiency with that tool. Anyone who helps you must also have proficiency with it.
+
+**Raw Materials**
+
+To make an item, you need raw materials worth half its purchase cost (round down). For example, you need 750 GP of raw materials to make Plate Armor, which sells for 1,500 GP. The GM determines whether appropriate raw materials are available.
+
+**Time**
+
+To determine how many days (working 8 hours a day) it takes to make an item, divide its purchase cost in GP by 10 (round a fraction up to a day). For example, you need 5 days to make a Heavy Crossbow, which sells for 50 GP.
+
+If an item requires multiple days, the days needn’t be consecutive.
+
+Characters can combine their efforts to shorten the crafting time. Divide the time needed to create an item by the number of characters working on it. Normally, only one other character can assist you, but the GM might allow more assistants.
+
+#### Brewing Potions of Healing
+**Tag:** Rule
+**Type:** Equipment
+
+A character who has proficiency with the Herbalism Kit can create a *Potion of Healing*. Doing so requires using that kit and 25 GP of raw material over the course of 1 day (8 hours of work).
+
+#### Scribing Spell Scrolls
+**Tag:** Rule
+**Type:** Equipment
+
+A spellcaster can transfer a spell to a scroll and create a *Spell Scroll*, using the rules below.
+
+**Time and Cost**
+
+Scribing a scroll takes an amount of time and money based on the level of the spell, as shown in the Spell Scroll Costs table. For each day of inscription, you must work for 8 hours. If a scroll requires multiple days, those days needn’t be consecutive.
+
+**Prerequisites for the Scribe**
+
+To scribe a scroll, you must have proficiency in the Arcana skill or with Calligrapher’s Supplies and have the spell prepared on each day of the inscription. You must also have at hand any Material components required by the spell; if the spell consumes its Material components, they are consumed only when you complete the scroll. The scroll’s spell uses your spell save DC and spell attack bonus.
+
+**Cantrips**
+
+If the scribed spell is a cantrip, the version on the scroll works as if the caster were your level.
+
+**Spell Scroll Costs**
+
+| Spell Level | Time | Cost |
+|---|---|---|
+| Cantrip | 1 day | 15 GP |
+| 1 | 1 day | 25 GP |
+| 2 | 3 days | 100 GP |
+| 3 | 5 days | 150 GP |
+| 4 | 10 days | 1,000 GP |
+| 5 | 25 days | 1,500 GP |
+| 6 | 40 days | 10,000 GP |
+| 7 | 50 days | 12,500 GP |
+| 8 | 60 days | 15,000 GP |
+| 9 | 120 days | 50,000 GP |
+
+
+## Gameplay Toolbox
+
+From the “Gameplay Toolbox” chapter of the SRD 5.2.1 (attribution statement under “Rules Glossary” above).
+
+#### Creating a Background
+**Tag:** Rule
+**Type:** Gameplay Toolbox
+
+A character’s background represents what the character did prior to becoming an adventurer. Creating a unique background or customizing an existing one can reflect the particular theme of your campaign or elements of your world. You can also create a background to help a player craft the story they have in mind for their character.
+
+This section describes, step by step, how you can create backgrounds tailored for your world and the heroes in it.
+
+**1: Choose Abilities**
+
+Choose three abilities that seem appropriate for the background:
+
+**Strength or Dexterity.** These abilities are ideal for a background involving physical exertion.
+
+**Constitution.** This ability is ideal for a background that involves endurance or long hours of activity.
+
+**Travel Terrain**
+
+| Terrain | Maximum Pace | Encounter Distance | Foraging DC | Navigation DC | Search DC |
+|---|---|---|---|---|---|
+| Arctic | Fast* | 6d6 × 10 feet | 20 | 10 | 10 |
+| Coastal | Normal | 2d10 × 10 feet | 10 | 5 | 15 |
+| Desert | Normal | 6d6 × 10 feet | 20 | 10 | 10 |
+| Forest | Normal | 2d8 × 10 feet | 10 | 15 | 15 |
+| Grassland | Fast | 6d6 × 10 feet | 15 | 5 | 15 |
+| Hill | Normal | 2d10 × 10 feet | 15 | 10 | 15 |
+| Mountain | Slow | 4d10 × 10 feet | 20 | 15 | 20 |
+| Swamp | Slow | 2d8 × 10 feet | 10 | 15 | 20 |
+| Underdark | Normal | 2d6 × 10 feet | 20 | 10 | 20 |
+| Urban | Normal | 2d6 × 10 feet | 20 | 15 | 15 |
+| Waterborne | Special† | 6d6 × 10 feet | 15 | 10 | 15 |
+
+*Appropriate equipment (such as skis) is necessary to keep up a Fast pace in Arctic terrain.
+
+†Characters’ rate of travel while waterborne depends on the vehicle carrying them; see “Vehicles.”
+
+**Intelligence or Wisdom.** One or both abilities are ideal for a background that focuses on cerebral or spiritual matters.
+
+**Charisma.** This ability is ideal for a background that involves performance or social interaction.
+
+**2: Choose a Feat**
+
+Choose one feat from the Origin category. See “Origin Feats” for examples of Origin feats.
+
+**3: Choose Skill Proficiencies**
+
+Choose two skills appropriate for the background. There needn’t be a relationship between the skill proficiencies a background grants and the ability scores it increases.
+
+**4: Choose a Tool Proficiency**
+
+Choose one tool used in the practice of the background or often associated with it.
+
+**5: Choose Equipment**
+
+Assemble a package of equipment worth 50 GP (including unspent gold). Don’t include Martial weapons or armor, as characters get them from their class choices.
+
+#### Curses and Magical Contagions
+**Tag:** Rule
+**Type:** Gameplay Toolbox
+
+A curse is a magical burden that lasts for a specified time or until it is ended by some means. A magical contagion is an adverse effect of magical origin that is contagious by definition.
+
+The following sections discuss curses and magical contagions in detail.
+
+#### Magical Contagions
+**Tag:** Rule
+**Type:** Curses and Magical Contagions
+
+Alchemists, potion brewers, and areas of wild magic are credited with creating the first magical contagions. An outbreak of such a contagion can form the basis of an adventure as characters search for a cure and try to stop the contagion’s spread.
+
+**Rest and Recuperation**
+
+If a creature infected with a magical contagion spends 3 days recuperating—engaging in no activities that would interrupt a Long Rest—the creature makes a DC 15 Constitution saving throw at the end of the recuperation period. On a successful save, the creature has Advantage on saving throws to fight off the magical contagion for the next 24 hours.
+
+**Example Contagions**
+
+The following examples show how magical contagions can work. Feel free to alter the saving throw DCs, effects, and other characteristics of these contagions to suit your campaign.
+
+**Cackle Fever**
+
+*Magical Contagion* Cheaply made potions and elixirs are sometimes tainted by Cackle Fever, which affects Humanoids only (gnomes are strangely immune). A creature suffers the following effects 1d4 days after infection:
+
+**Fever.** The creature gains 1 Exhaustion level, which lasts until the contagion ends on the creature.
+
+**Uncontrollable Laughter.** While the creature has the Exhaustion condition, the creature makes a DC 13 Constitution saving throw each time it takes damage other than Psychic damage. On a failed save, the creature takes 5 (1d10) Psychic damage and has the Incapacitated condition as it laughs uncontrollably. At the end of each of its turns, the creature repeats the save, ending the effect on itself on a success. After 1 minute, it succeeds automatically. **Fighting the Contagion.** At the end of each Long Rest, an infected creature makes a DC 13 Constitution saving throw. After the creature succeeds on three of these saves, the contagion ends on it, and the creature is immune to Cackle Fever for 1 year.
+
+**Spreading the Contagion.** Any Humanoid (other than a gnome) that starts its turn within a 10-foot Emanation originating from a creature infected with Cackle Fever must succeed on a DC 10 Constitution saving throw or also become infected with the contagion. On a successful save, the Humanoid can’t catch the contagion from that particular infected creature for the next 24 hours.
+
+**Sewer Plague**
+
+*Magical Contagion* Fouled potions and alchemical waste can give rise to Sewer Plague, which incubates in sewers and refuse heaps and is sometimes transmitted by creatures that dwell in such areas, including otyughs and rats. Any Humanoid that is wounded by a creature that carries the contagion or that comes into contact with contaminated filth or offal must succeed on a DC 11 Constitution saving throw or become infected with Sewer Plague. A creature suffers the following effects 1d4 days after infection:
+
+**Fatigue.** The creature gains 1 Exhaustion level.
+
+**Weakness.** While the creature has any Exhaustion levels, it regains only half the normal number of Hit Points from spending Hit Point Dice.
+
+**Restlessness.** While the creature has any Exhaustion levels, finishing a Long Rest neither restores lost Hit Points nor reduces the creature’s Exhaustion level. **Fighting the Contagion.** Daily at dawn, an infected creature makes a DC 11 Constitution saving throw. On a failed save, the creature gains 1 Exhaustion level as its fatigue worsens. On a successful save, the creature’s Exhaustion level decreases by 1. If the creature’s Exhaustion level is reduced to 0, the contagion ends on the creature.
+
+**Sight Rot**
+
+*Magical Contagion* Any Beast or Humanoid that drinks water tainted by Sight Rot must succeed on a DC 15 Constitution saving throw or have the Blinded condition until the contagion ends.
+
+**Fighting the Contagion.** Magic such as a *Heal* or *Lesser Restoration* spell ends the contagion immediately. A character who is proficient with an Herbalism Kit can use it to create one dose of nonmagical ointment, which takes 1 hour. When applied to the eyes of a creature suffering from Sight Rot, the ointment suppresses the contagion on that creature for 24 hours. If the contagion is suppressed in this way for a total of 72 hours (requiring three doses and applications of the ointment), the contagion ends on the creature.
+
+**Spreading the Contagion.** Any Humanoid that makes skin contact with a creature infected with Sight Rot must succeed on a DC 15 Constitution saving throw or also become infected with the contagion. On a successful save, the Humanoid can’t catch the contagion from that particular infected creature for the next 24 hours.
+
+#### Deep Water
+**Tag:** Rule
+**Type:** Environmental Effects
+
+Swimming through deep water (more than 100 feet deep) presents additional challenges because of the water’s pressure and cold temperature. After each hour of swimming in deep water, a creature that lacks a Swim Speed must succeed on a DC 10 Constitution saving throw or gain 1 Exhaustion level.
+
+#### Extreme Cold
+**Tag:** Rule
+**Type:** Environmental Effects
+
+When the temperature is 0 degrees Fahrenheit or lower, a creature exposed to the extreme cold must succeed on a DC 10 Constitution saving throw at the end of each hour or gain 1 Exhaustion level. Creatures that have Resistance or Immunity to Cold damage automatically succeed on the save.
+
+#### Extreme Heat
+**Tag:** Rule
+**Type:** Environmental Effects
+
+When the temperature is 100 degrees Fahrenheit or higher, a creature exposed to the extreme heat and without access to drinkable water must succeed on a Constitution saving throw at the end of each hour or gain 1 Exhaustion level. The DC is 5 for the first hour and increases by 1 for each additional hour. Creatures wearing Medium or Heavy armor have Disadvantage on the save. Creatures that have Resistance or Immunity to Fire damage automatically succeed on the save.
+
+#### Frigid Water
+**Tag:** Rule
+**Type:** Environmental Effects
+
+A creature can be immersed in frigid water for a number of minutes equal to its Constitution score before suffering any ill effects. Each additional minute spent in frigid water requires the creature to succeed on a DC 10 Constitution saving throw or gain 1 Exhaustion level. Creatures with Resistance or Immunity to Cold damage automatically succeed on the save, as do creatures that are naturally adapted to living in ice-cold water.
+
+#### Heavy Precipitation
+**Tag:** Rule
+**Type:** Environmental Effects
+
+Everything within an area of heavy rain or heavy snowfall is Lightly Obscured, and creatures in the area have Disadvantage on all Wisdom (Perception) checks. Heavy rain also extinguishes open flames.
+
+#### High Altitude
+**Tag:** Rule
+**Type:** Environmental Effects
+
+Traveling at altitudes of 10,000 feet or higher above sea level is taxing for most creatures because of the reduced amount of oxygen in the air. Each hour such a creature spends traveling at high altitude counts as 2 hours for the purpose of determining how long that creature can travel (see “Travel Pace”).
+
+Creatures can become acclimated to a high altitude by spending 30 days or more at this elevation. Creatures can’t become acclimated to elevations above 20,000 feet unless they are native to such environments.
+
+#### Slippery Ice
+**Tag:** Rule
+**Type:** Environmental Effects
+
+Slippery ice is Difficult Terrain. A creature that moves onto slippery ice for the first time on a turn or starts its turn there must succeed on a DC 10 Dexterity saving throw or have the Prone condition.
+
+#### Strong Wind
+**Tag:** Rule
+**Type:** Environmental Effects
+
+Strong wind imposes Disadvantage on ranged attack rolls with weapons. It also extinguishes open flames and disperses fog. A flying creature in a strong wind must land at the end of its turn or fall.
+
+A strong wind in a desert can create a sandstorm that imposes Disadvantage on Wisdom (Perception) checks.
+
+#### Thin Ice
+**Tag:** Rule
+**Type:** Environmental Effects
+
+Thin ice has a weight tolerance of 3d10 × 10 pounds per 10-foot-square area. Whenever the total weight on an area of thin ice exceeds its tolerance, the ice in that area breaks. All creatures on broken ice fall through. Below the ice is frigid water (see “Frigid Water” above).
+
+#### Fear and Mental Stress
+**Tag:** Rule
+**Type:** Gameplay Toolbox
+
+Due to the nature of their vocation, adventurers tend to be less susceptible to fear and mental stress than common folk. Whereas a farmer might flee in terror from a bear or an apparition, adventurers are made of sterner stuff. That said, certain creatures and game effects can terrify or fray the mind of even the most stalwart adventurer.
+
+If you plan to use any of these rules, discuss them with your players at the start of the campaign.
+
+**Fear Effects**
+
+Whenever the characters encounter something that is supernaturally frightful, use the Frightened condition as the baseline effect. Fear effects typically require a Wisdom saving throw, with a save DC based on how terrifying the situation is. The Sample Fear DCs table provides some examples.
+
+**Sample Fear DCs**
+
+| Example | Save DC |
+|---|---|
+| When the characters open a sarcophagus, a harmless yet terrifying apparition appears. | 10 |
+| A character triggers a magical trap that creates an illusory manifestation of that character’s worst fears, visible only to that character. | 15 |
+| A portal to the Abyss opens, revealing a nightmarish realm of torment and slaughter. | 20 |
+
+Typically, a Frightened creature repeats the saving throw at the end of each of its turns, ending the effect on itself on a success.
+
+At your discretion, a Frightened creature might be subject to other effects as long as the Frightened condition lasts. Consider these examples:
+
+- The Frightened creature must take the Dash action on each of its turns and uses its movement to get farther away from the source of its fear.
+- Attack rolls against the Frightened creature have Advantage.
+
+- The Frightened creature can do only one of the following on each of its turns: move, take an action, or take a Bonus Action.
+
+**Mental Stress Effects**
+
+When a character is subjected to an effect that causes intense mental stress, Psychic damage is the best way to emulate that effect.
+
+The Sample Mental Stress Effects table provides a few examples of such effects, with suggested saving throw DCs and damage. Mental stress can usually be resisted with a successful Wisdom save, but sometimes an Intelligence or Charisma save is more appropriate. On a successful save, a character might take half as much damage instead of no damage, at your discretion.
+
+**Sample Mental Stress Effects**
+
+| Example | Save DC | Psychic Damage |
+|---|---|---|
+| A character ingests a hallucinogenic substance that distorts the character’s perception of reality. | 10 | 1d6 |
+| A character touches a fiendish idol that tears at the character’s mind, threatening to shatter it. | 15 | 3d6 |
+| A magical trap flings a character into the Far Realm until the end of that character’s next turn. | 20 | 9d6 |
+
+**Prolonged Effects**
+
+Exposure to mental stress can cause prolonged effects. Consider the following possibilities.
+
+**Short-Term Effects.** The character has the Frightened, Incapacitated, or Stunned condition for 1d10 minutes. This condition might be accompanied by alarming behavior or hallucinations. These effects can be suppressed with the *Calm Emotions* spell or removed by the *Lesser Restoration* spell.
+
+**Long-Term Effects.** The character has Disadvantage on some or all ability checks for 1d10 × 10 hours, stemming from an unwillingness or inability to exert a particular set of abilities. The character might feel enervated and unable to exert much Strength, for example, or become so suspicious of others that Charisma checks are more difficult. These effects can be suppressed with the *Calm Emotions* spell or removed by the *Lesser Restoration* spell.
+
+**Indefinite Effects.** An indefinite effect is a long-term effect (see above) that lasts until removed by a *Greater Restoration* spell. It can be suppressed by a *Calm Emotions* spell.
+
+#### Poison
+**Tag:** Rule
+**Type:** Gameplay Toolbox
+**Link:** no
+
+Given their insidious and deadly nature, poisons are a favorite tool among assassins and evil creatures.
+
+Poisons come in the following four types:
+
+**Contact.** Contact poison can be smeared on an object and remains potent until it is touched or washed off. A creature that touches contact poison with exposed skin suffers its effects.
+
+**Ingested.** A creature must swallow an entire dose of ingested poison to suffer its effects. The dose can be delivered in food or a liquid. You may decide that a partial dose has a reduced effect, such as allowing Advantage on the saving throw or dealing only half as much damage on a failed save.
+
+**Inhaled.** Poisonous powders and gases take effect when inhaled. Blowing the powder or releasing the gas subjects creatures in a 5-foot Cube to its effect. The resulting cloud dissipates immediately afterward. Holding one’s breath is ineffective against inhaled poisons, as they affect nasal membranes, tear ducts, and other parts of the body.
+
+**Injury.** Injury poison can be applied as a Bonus Action to a weapon, a piece of ammunition, or similar object. The poison remains potent until delivered through a wound or washed off. A creature that takes Piercing or Slashing damage from an object coated with the poison is exposed to its effects.
+
+**Purchasing Poison**
+
+In some settings, laws prohibit the possession and use of poison, but an illicit dealer or unscrupulous apothecary might keep a hidden stash. Characters with criminal contacts might be able to acquire poison easily. Other characters might have to make extensive inquiries and pay bribes before they acquire the poison they seek.
+
+**Harvesting Poison**
+
+A character can attempt to harvest poison from a venomous creature that is dead or has the Incapacitated condition. The effort takes 1d6 minutes, after which the character makes a DC 20 Intelligence (Nature) check using a Poisoner’s Kit. On a successful check, the character harvests enough poison for a single dose, and no additional poison can be harvested from that creature. On a failed check, the character is unable to extract any poison. If the character fails the check by 5 or more, the character is subjected to the creature’s poison.
+
+**Sample Poisons**
+
+Example poisons are detailed here in alphabetical order. Each poison’s description includes the suggested price for a single dose of the poison, its type (contact, ingested, inhaled, or injury), and a description of the poison’s debilitating effects.
+
+**Assassin’s Blood (150 GP)**
+
+*Ingested Poison* A creature subjected to Assassin’s Blood makes a DC 10 Constitution saving throw. On a failed save, the creature takes 6 (1d12) Poison damage and has the Poisoned condition for 24 hours. On a successful save, the creature takes half as much damage only.
+
+**Burnt Othur Fumes (500 GP)**
+
+*Inhaled Poison* A creature subjected to Burnt Othur Fumes must succeed on a DC 13 Constitution saving throw or take 10 (3d6) Poison damage, and it must repeat the save at the start of each of its turns. On each successive failed save, the creature takes 3 (1d6) Poison damage. After three successful saves, the poison ends.
+
+**Crawler Mucus (200 GP)**
+
+*Contact Poison* A creature subjected to Crawler Mucus must succeed on a DC 13 Constitution saving throw or have the Poisoned condition for 1 minute. The creature also has the Paralyzed condition while Poisoned in this way. The creature repeats the save at the end of each of its turns, ending the effect on itself on a success.
+
+**Essence of Ether (300 GP)**
+
+*Inhaled Poison* A creature subjected to Essence of Ether must succeed on a DC 15 Constitution saving throw or have the Poisoned condition for 8 hours. The creature also has the Unconscious condition while Poisoned in this way. The creature wakes up if it takes damage or if another creature takes an action to shake it awake.
+
+**Malice (250 GP)**
+
+*Inhaled Poison* A creature subjected to Malice must succeed on a DC 15 Constitution saving throw or have the Poisoned condition for 1 hour. The creature also has the Blinded condition while Poisoned in this way.
+
+**Midnight Tears (1,500 GP)**
+
+*Ingested Poison* A creature that ingests Midnight Tears suffers no effect until the stroke of midnight. Any effect that ends the Poisoned condition neutralizes this poison. If the poison hasn’t been neutralized before midnight, the creature makes a DC 17 Constitution saving throw, taking 31 (9d6) Poison damage on a failed save or half as much damage on a successful one.
+
+**Oil of Taggit (400 GP)**
+
+*Contact Poison* A creature subjected to Oil of Taggit must succeed on a DC 13 Constitution saving throw or have the Poisoned condition for 24 hours. The creature also has the Unconscious condition while Poisoned in this way. It wakes up if it takes damage.
+
+**Pale Tincture (250 GP)**
+
+*Ingested Poison* A creature subjected to Pale Tincture must succeed on a DC 16 Constitution saving throw or take 3 (1d6) Poison damage and have the Poisoned condition. The Poisoned creature repeats the save every 24 hours, taking 3 (1d6) Poison damage on a failed save. The damage the poison deals can’t be healed by any means while the creature remains Poisoned. After seven successful saves against the poison, the creature is no longer Poisoned.
+
+**Purple Worm Poison (2,000 GP)**
+
+*Injury Poison* A creature subjected to Purple Worm Poison makes a DC 21 Constitution saving throw, taking 35 (10d6) Poison damage on a failed save or half as much damage on a successful one.
+
+**Serpent Venom (200 GP)**
+
+*Injury Poison* A creature subjected to Serpent Venom must succeed on a DC 11 Constitution saving throw, taking 10 (3d6) Poison damage on a failed save or half as much damage on a successful one.
+
+**Spider’s Sting (200 GP)**
+
+*Injury Poison* A creature subjected to Spider’s Sting must succeed on a DC 13 Constitution saving throw or have the Poisoned condition for 1 hour. If the creature fails the save by 5 or more, the creature also has the Unconscious condition while Poisoned in this way. The creature wakes up if it takes damage or if another creature takes an action to shake it awake.
+
+**Torpor (600 GP)**
+
+*Ingested Poison* A creature subjected to Torpor poison must succeed on a DC 15 Constitution saving throw or have the Poisoned condition for 4d6 hours. The creature’s Speed is halved while the creature is Poisoned in this way.
+
+**Truth Serum (150 GP)**
+
+*Ingested Poison* A creature subjected to Truth Serum must succeed on a DC 11 Constitution saving throw or have the Poisoned condition for 1 hour. The Poisoned creature can’t knowingly communicate a lie.
+
+**Wyvern Poison (1,200 GP)**
+
+*Injury Poison* A creature subjected to Wyvern Poison makes a DC 14 Constitution saving throw, taking 24 (7d6) Poison damage on a failed save or half as much damage on a successful one.
+
+#### Traps
+**Tag:** Rule
+**Type:** Gameplay Toolbox
+**Link:** no
+
+Traps should be used sparingly, lest they lose their charm. A hidden pit can be a fun surprise, but too many traps in an adventure can lead players to become overly cautious, which slows down the game.
+
+The best traps are fleeting distractions that skilled characters can overcome in a short amount of time or deadly puzzles that require quick thinking and teamwork to overcome. Traps that are undetectable and inescapable are rarely fun.
+
+**Parts of a Trap**
+
+The description of a trap includes the following parts after the trap’s name:
+
+**Severity and Levels.** A trap is designated as a nuisance or as deadly for characters of certain levels. A nuisance trap is unlikely to seriously harm characters of the indicated levels, whereas a deadly trap can grievously damage characters of the indicated levels.
+
+**Trigger.** Traps are often set to go off when a creature enters an area or touches an object. Examples of triggers include stepping on a pressure plate, crossing a trip wire, turning a doorknob, or using the wrong key in a lock.
+
+**Duration.** Some traps have durations expressed in rounds, minutes, or hours. Others specify that their effects last until the trap is destroyed or dispelled. If a trap’s duration is instantaneous, its effect is resolved instantly. If a trap resets after activating, that fact is noted in this entry. A trap is otherwise inert after activation.
+
+Use caution when introducing a trap to characters of a level lower than the trap’s level range. A trap that is a nuisance at one level range could be deadly to characters of a lower level range.
+
+**Example Traps**
+
+Traps are presented in alphabetical order.
+
+**Collapsing Roof**
+
+*Deadly Trap (Levels 1–4)*
+
+**Trigger:** A creature crosses a trip wire
+
+**Duration:** Instantaneous
+
+This trap uses a trip wire to collapse an unstable section of ceiling. The trip wire is 3 inches off the ground and stretches between two weak supports that topple when the trip wire is pulled.
+
+The first creature that crosses the trip wire causes the supports to topple and the unstable section of ceiling to collapse. Each creature beneath the unstable section of ceiling must succeed on a DC 13 Dexterity saving throw, taking 11 (2d10) Bludgeoning damage on a failed save or half as much damage on a successful one. Rubble from the collapse turns the trapped area into Difficult Terrain.
+
+**Detect and Disarm.** As a Search action, a creature can examine the trapped area and make a DC 11 Wisdom (Perception) check, detecting the trip wire and the unstable section of ceiling on a successful check. Once detected, the trip wire can be easily cut or avoided (no ability check required).
+
+**At Higher Levels.** You can scale the trap for higher levels by increasing the damage and the save DC, as shown in the following table.
+
+| Levels | Bludgeoning Damage | Save DC |
+|---|---|---|
+| 5–10 | 22 (4d10) | 15 |
+| 11–16 | 55 (10d10) | 17 |
+| 17–20 | 99 (18d10) | 19 |
+
+**Falling Net**
+
+*Nuisance Trap (Levels 1–4)*
+
+**Trigger:** A creature crosses a trip wire
+
+**Duration:** Instantaneous
+
+A falling net trap uses a trip wire to release a weighted, 10-foot-square Net suspended from the ceiling. The trip wire is 3 inches off the ground and stretches between two columns or trees.
+
+The first creature that crosses the trip wire causes the Net to fall on it. The target must succeed on a DC 10 Dexterity saving throw or have the Restrained condition until it escapes. The target succeeds automatically if it’s Huge or larger. A creature can take an action to make a DC 10 Strength (Athletics) check, freeing itself or another creature within its reach from the Net on a successful check.
+
+**Detect and Disarm.** As a Search action, a creature can examine the trapped area and make a DC 11 Wisdom (Perception) check, detecting the trip wire and the suspended Net on a successful check. Once detected, the trip wire can be easily cut or avoided (no ability check required).
+
+**Destroy the Net.** Reducing the Net to 0 Hit Points frees any creature trapped in it (see “Adventuring Gear” for the Net’s statistics).
+
+**Set the Trap.** A creature that has Thieves’ Tools and all the trap’s components (including a Net) can try to set a falling net trap, doing so with a successful DC 13 Dexterity (Sleight of Hand) check. Each attempt to set this trap takes 10 minutes.
+
+**At Higher Levels.** You can scale the trap for higher levels by increasing the weight of the Net, which increases the save DC and the DC of the Strength (Athletics) check as follows: DC 12 at levels 5–10, DC 14 at levels 11–16, or DC 16 at levels 17–20.
+
+**Fire-Casting Statue**
+
+*Deadly Trap (Levels 1–4)*
+
+**Trigger:** A creature moves onto a pressure plate
+
+**Duration:** Instantaneous, and the trap resets at the start of the next turn
+
+When a creature moves onto this trap’s pressure plate for the first time on a turn or starts its turn there, a nearby statue exhales a 15-foot Cone of magical flame. The statue can look like anything, such as a dragon or a wizard. Each creature in the Cone must succeed on a DC 15 Dexterity saving throw, taking 11 (2d10) Fire damage on a failed save or half as much damage on a successful one.
+
+**Detect and Disarm.** A *Detect Magic* spell reveals an aura of Evocation magic around the statue. As a Search action, a creature within 5 feet of the statue can examine it and make a DC 10 Wisdom (Perception) check, detecting a tiny glyph on the statue on a successful check. Once the glyph is found, a character can take a Study action to examine it and make a DC 15 Intelligence (Arcana) check, ascertaining that the glyph means “fire” on a successful check. As an action, a character can use a sharp tool to deface the glyph, which disarms the trap.
+
+As a Search action, a creature can examine the section of floor that forms the pressure plate and make a DC 15 Wisdom (Perception) check, detecting the pressure plate on a successful check. Wedging an Iron Spike or similar object under the pressure plate prevents the trap from triggering.
+
+**At Higher Levels.** You can scale the trap for higher levels by increasing the damage and the area of effect, as shown in the following table.
+
+| Levels | Fire Damage | Area of Effect |
+|---|---|---|
+| 5–10 | 22 (4d10) | 30-foot Cone |
+| 11–16 | 55 (10d10) | 60-foot Cone |
+| 17–20 | 99 (18d10) | 120-foot Cone |
+
+**Hidden Pit**
+
+*Nuisance Trap (Levels 1–4)*
+
+**Trigger:** A creature moves onto the pit’s lid
+
+**Duration:** Instantaneous
+
+This 10-foot-deep pit has a hinged lid constructed from material identical to the surrounding floor. When a creature moves onto the lid, it swings open like a trapdoor, causing the creature to fall into the pit. The lid remains open thereafter.
+
+A creature that falls into the pit takes 3 (1d6) Bludgeoning damage from the fall.
+
+**Detect and Disarm.** As a Study action, a creature can examine the section of floor that forms the pit’s lid and make a DC 15 Intelligence (Investigation) check, detecting the pit on a successful check. Once the pit is detected, an Iron Spike or a similar object can be wedged between the pit’s lid and the surrounding floor to prevent the lid from opening, thereby making it safe to cross. The cover can also be held shut using *Arcane Lock* or similar magic. **Escape.** A creature needs a Climb Speed, climbing gear, or magic such as *Spider Climb* to scale the pit’s smooth walls. You can make the pit easier to escape by adding cracks in the walls big enough to serve as handholds and footholds.
+
+**At Higher Levels.** You can scale the trap for higher levels by increasing the pit’s depth and damage, as shown in the following table.
+
+| Levels | Pit Depth | Bludgeoning Damage |
+|---|---|---|
+| 5–10 | 30 feet | 10 (3d6) |
+| 11–16 | 60 feet | 21 (6d6) |
+| 17–20 | 120 feet | 42 (12d6) |
+
+**Poisoned Darts**
+
+*Deadly Trap (Levels 1–4)*
+
+**Trigger:** A creature moves onto a pressure plate
+
+**Duration:** Instantaneous, and the trap resets at the start of the next turn if it has activated fewer than three times
+
+When a creature moves onto this trap’s pressure plate for the first time on a turn, poisoned darts shoot from tubes embedded in the surrounding walls. The holes that house these tubes are obscured by dust and cobwebs or skillfully hidden amid bas-reliefs, murals, or frescoes.
+
+Each creature in the darts’ path must succeed on a DC 13 Dexterity saving throw or be struck by 1d3 darts, taking 3 (1d6) Poison damage per dart.
+
+**Detect and Disarm.** As a Search action, a creature can examine the walls and make a DC 15 Wisdom (Perception) check, detecting the holes on a successful check. Plugging all the holes with wax, cloth, or detritus prevents the darts from firing.
+
+As a Search action, a creature can examine the section of floor that forms the pressure plate and make a DC 15 Wisdom (Perception) check, detecting the pressure plate on a successful check. Wedging an Iron Spike or a similar object under the pressure plate prevents the trap from triggering.
+
+**At Higher Levels.** You can scale the trap for higher levels by increasing each dart’s Poison damage as follows: 7 (2d6) at levels 5–10, 14 (4d6) at levels 11–16, or 24 (7d6) at levels 17–20.
+
+**Poisoned Needle**
+
+*Nuisance Trap (Levels 1–4)*
+
+**Trigger:** A creature opens the trap’s lock improperly or fails to disarm the trap
+
+**Duration:** Instantaneous
+
+A poisoned needle is hidden in a lock. When a creature opens the lock with any object other than the proper key, the needle springs out and stabs the creature. The creature makes a DC 11 Constitution saving throw. On a failed save, the creature takes 5 (1d10) Poison damage and has the Poisoned condition for 1 hour. On a successful save, the creature takes half as much damage only.
+
+**Avoid.** The trap doesn’t trigger if the lock is opened using a *Knock* spell or similar magic.
+
+**Detect and Disarm.** As a Search action, a creature can examine the trapped lock and make a DC 15 Wisdom (Perception) check, detecting the needle on a successful check. Once the trap is detected, a character can take an action to try to disarm the trap, doing so with a successful DC 15 Dexterity (Sleight of Hand) check. On a failed check, the creature triggers the trap.
+
+**At Higher Levels.** You can scale the trap for higher levels by increasing the damage and the save DC, as shown in the following table.
+
+| Levels | Poison Damage | Save DC |
+|---|---|---|
+| 5–10 | 11 (2d10) | 13 |
+| 11–16 | 22 (4d10) | 15 |
+| 17–20 | 55 (10d10) | 17 |
+
+**Rolling Stone**
+
+*Deadly Trap (Levels 11–16) or Nuisance Trap (Levels 17–20)*
+
+**Trigger:** A creature moves onto a pressure plate
+
+**Duration:** Until the stone stops rolling
+
+When a creature moves onto a hidden pressure plate, a 5-foot-radius orb of solid stone is released from a secret compartment and begins to roll. The stone and all creatures nearby roll Initiative; the stone gets a +8 bonus on its Initiative roll.
+
+On its turn, the stone moves 60 feet in one direction, changing course if redirected by an obstacle. The stone can move through creatures’ spaces, and creatures can move through the stone’s space, treating it as Difficult Terrain. Whenever the stone enters a creature’s space for the first time on a turn or a creature enters the stone’s space while the stone is rolling, that creature must succeed on a DC 15 Dexterity saving throw or take 55 (10d10) Bludgeoning damage and have the Prone condition.
+
+The stone stops when it hits a wall or similar barrier. It can’t go around corners, but creative dungeon builders incorporate curving turns into nearby passages that allow the stone to keep moving.
+
+**Detect and Disarm.** As a Study action, a creature can examine the section of floor that forms the pressure plate and make a DC 15 Intelligence (Investigation) check, deducing the pressure plate’s function on a successful check. Wedging an Iron Spike or a similar object under the pressure plate prevents the trap from triggering. **Destroy the Stone.** The stone is a Large object that has AC 17, HP 100, a Damage Threshold of 10, and Immunity to Poison and Psychic damage.
+
+**Slow the Stone.** As an action, a creature can try to slow down the stone with a DC 20 Strength (Athletics) check. If the check is successful, the distance the stone moves on its turn is reduced by 15 feet. If that distance drops to 0, it stops moving and is no longer a threat.
+
+**Spiked Pit**
+
+*Deadly Trap (Levels 1–4)*
+
+**Trigger:** A creature moves onto the pit’s lid
+
+**Duration:** Instantaneous
+
+A 10-foot-deep pit has a hinged lid constructed from material identical to the surrounding floor. When a creature moves onto the lid, it swings open like a trapdoor, causing the creature to fall into the pit, which has sharpened wooden or metal spikes at the bottom. The lid remains open thereafter.
+
+A creature that falls into the pit lands at the bottom and takes 3 (1d6) Bludgeoning damage from the fall plus 9 (2d8) Piercing damage from the spikes.
+
+**Detect and Disarm.** As a Study action, a creature can examine the section of floor that forms the pit’s lid and make a DC 15 Intelligence (Investigation) check, detecting the pit on a successful check. Once the hidden pit is detected, an Iron Spike or a similar object can be wedged between the pit’s lid and the surrounding floor to prevent the lid from opening, thereby making it safe to cross. The cover can also be held shut using an *Arcane Lock* spell or similar magic.
+
+**Escape.** A creature needs a Climb Speed, climbing gear, or magic such as a *Spider Climb* spell to scale the pit’s smooth walls. You can make the pit easier to escape by adding cracks in the walls big enough to serve as handholds and footholds.
+
+**At Higher Levels.** You can scale the trap for higher levels by increasing the pit’s depth and damage, as shown in the following table.
+
+| Levels | Pit Depth | Damage |
+|---|---|---|
+| 5–10 | 30 feet | 10 (3d6) Bludgeoning plus 13 (3d8) Piercing |
+| 11–16 | 60 feet | 21 (6d6) Bludgeoning plus 36 (8d8) Piercing |
+| 17–20 | 120 feet | 42 (12d6) Bludgeoning plus 57 (13d8) Piercing |
+
+#### Combat Encounters
+**Tag:** Rule
+**Type:** Gameplay Toolbox
+**Link:** no
+
+The following features can make a combat encounter more interesting or challenging:
+
+**Changes in Elevation.** Terrain features that provide a change of elevation (such as stacks of empty crates, ledges, and balconies) reward clever positioning and encourage characters to jump, climb, fly, or teleport.
+
+**Defensive Positions.** Enemies in hard-to-reach locations or defensive positions force characters who normally attack at range to move around.
+
+**Mixed Monster Groups.** When different types of monsters work together, they can combine their abilities—just like characters with different classes and origins. A diverse force is more powerful.
+
+**Reasons to Move.** Use features that encourage characters and their enemies to move around, such as chandeliers, kegs of gunpowder or oil, and rolling stone traps.
+
+**Combat Encounter Difficulty**
+
+Use the following guidelines to create a combat encounter of a desired level of difficulty.
+
+**Step 1: Choose a Difficulty**
+
+Three categories describe the range of encounter difficulty:
+
+**Low Difficulty.** An encounter of low difficulty is likely to have one or two scary moments for the players, but their characters should emerge victorious with no casualties. One or more of them might need to use healing resources, however. As a rough guideline, a single monster generally presents a low-difficulty challenge for a party of four characters whose level equals the monster’s Challenge Rating.
+
+**Moderate Difficulty.** Absent healing and other resources, an encounter of moderate difficulty could go badly for the adventurers. Weaker characters might get taken out of the fight, and there’s a slim chance that one or more characters might die.
+
+**High Difficulty.** A high-difficulty encounter could be lethal for one or more characters. To survive it, the characters will need smart tactics, quick thinking, and maybe even a little luck.
+
+**Step 2: Determine Your XP Budget**
+
+Using the XP Budget per Character table, cross-reference the party’s level with the desired encounter difficulty. Multiply the number in the table by the number of characters in the party to get your XP budget for the encounter.
+
+**XP Budget per Character**
+
+| Party’s Level | Low | Moderate | High |
+|---|---|---|---|
+| 1 | 50 | 75 | 100 |
+| 2 | 100 | 150 | 200 |
+| 3 | 150 | 225 | 400 |
+| 4 | 250 | 375 | 500 |
+| 5 | 500 | 750 | 1,100 |
+| 6 | 600 | 1,000 | 1,400 |
+| 7 | 750 | 1,300 | 1,700 |
+| 8 | 1,000 | 1,700 | 2,100 |
+| 9 | 1,300 | 2,000 | 2,600 |
+| 10 | 1,600 | 2,300 | 3,100 |
+| 11 | 1,900 | 2,900 | 4,100 |
+| 12 | 2,200 | 3,700 | 4,700 |
+| 13 | 2,600 | 4,200 | 5,400 |
+| 14 | 2,900 | 4,900 | 6,200 |
+| 15 | 3,300 | 5,400 | 7,800 |
+| 16 | 3,800 | 6,100 | 9,800 |
+| 17 | 4,500 | 7,200 | 11,700 |
+| 18 | 5,000 | 8,700 | 14,200 |
+| 19 | 5,500 | 10,700 | 17,200 |
+| 20 | 6,400 | 13,200 | 22,000 |
+
+**Step 3: Spend Your Budget**
+
+Every creature has an XP value in its stat block. When you add a creature to your combat encounter, deduct its XP from your XP budget to determine how many XP you have left to spend. Spend as much of your XP budget as you can without going over. It’s OK if you have a few unspent XP left over. Examples are given below:
+
+**Example 1.** A low-difficulty encounter for four level 1 characters has an XP budget of 50 × 4, for a total of 200 XP. With that, you could build any of the following encounters:
+
+- 1 **Bugbear Warrior** (200 XP)
+- 2 **Giant Wasps** (100 XP each), for 200 XP total
+
+- 6 **Giant Rats** (25 XP each), for 150 XP total
+
+**Example 2.** A moderate-difficulty encounter for five level 3 characters has an XP budget of 225 × 5, for a total of 1,125 XP. With that, you could build either of these encounters:
+
+- 2 **Druids** (450 XP each) and 9 **Stirges** (25 XP each), for 1,125 XP total
+- 1 **Wight** (700 XP), 1 **Warhorse Skeleton** (100 XP), and 6 **Skeletons** (50 XP each), for 1,100 XP total
+
+**Example 3.** A high-difficulty encounter for six level 15 characters has an XP budget of 7,800 × 6, for a total of 46,800 XP. With that, you could build this encounter:
+
+- 2 **Adult Red Dragons** (18,000 XP each) and 2 **Fire Giants** (5,000 XP each), for 46,000 XP total
+
+**Troubleshooting**
+
+When creating and running combat encounters, keep the following in mind.
+
+**Many Creatures**
+
+The more creatures in an encounter, the higher the risk that a lucky streak on their part could deal more damage to the characters than you expect. If your encounter includes more than two creatures per character, include fragile creatures that can be defeated quickly. This guideline is especially important for characters of level 1 or 2.
+
+**Adjustments**
+
+A player’s absence might warrant removing creatures from an encounter to keep it at the intended difficulty. Also, die rolls and other factors can result in an encounter being easier or harder than intended. You can adjust an encounter on the fly, such as by having creatures flee (making the encounter easier) or adding reinforcements (making the encounter harder).
+
+**CR 0 Creatures**
+
+Creatures that have a CR of 0, particularly ones that are worth 0 XP, should be used sparingly. If you want to include many CR 0 critters in an encounter, use swarms instead.
+
+**Number of Stat Blocks**
+
+The best combat encounters often pair one kind of creature with another, such as fire giants paired with hell hounds. Be mindful of the number of stat blocks you need to run the encounter. Referencing more than two or three stat blocks for a single encounter can be daunting, particularly if the creatures are complex.
+
+**Powerful Creatures**
+
+If your combat encounter includes a creature whose CR is higher than the party’s level, be aware that such a creature might deal enough damage with a single action to take out one or more characters. For example, an **Ogre** (CR 2) can kill a level 1 Wizard with a single blow.
+
+**Unusual Features**
+
+If a monster has a feature that lower-level characters can’t easily overcome, consider not adding that monster to an encounter for characters whose level is lower than the monster’s Challenge Rating.
