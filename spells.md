@@ -1451,6 +1451,8 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 }}
 
 \page
+{{pageNumber,auto}}
+
 ### Bard Spell List
 
 {{toc,wide
@@ -1465,6 +1467,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Mending}}{{ 56}}](#p56)
 - [{{ Message}}{{ 56}}](#p56)
 - [{{ Mind Sliver}}{{ 56}}](#p56)
+- [{{ Minor Curse}}{{ 57}}](#p57)
 - [{{ Minor Illusion}}{{ 57}}](#p57)
 - [{{ Prestidigitation}}{{ 58}}](#p58)
 - [{{ Resistance}}{{ 59}}](#p59)
@@ -1481,6 +1484,8 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Awaken Rope}}{{ 68}}](#p68)
 - [{{ Bane}}{{ 68}}](#p68)
 - [{{ Beast Bond}}{{ 69}}](#p69)
+- [{{ Befuddling Curse}}{{ 69}}](#p69)
+- [{{ Binding Curse}}{{ 69}}](#p69)
 - [{{ Blade Mirage}}{{ 69}}](#p69)
 - [{{ Cause Fear}}{{ 71}}](#p71)
 - [{{ Ceremony}}{{ 71}}](#p71)
@@ -1660,6 +1665,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - **5th Level Spells**
 - [{{ Animate Objects}}{{ 238}}](#p238)
 - [{{ Awaken}}{{ 239}}](#p239)
+- [{{ Curse of Impotence}}{{ 245}}](#p245)
 - [{{ Dominate Person}}{{ 249}}](#p249)
 - [{{ Dream}}{{ 249}}](#p249)
 - [{{ Dream Flight}}{{ 249}}](#p249)
@@ -1681,6 +1687,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Skill Empowerment}}{{ 267}}](#p267)
 - [{{ Sonic Shriek}}{{ 267}}](#p267)
 - [{{ Sudden Hazards}}{{ 270}}](#p270)
+- [{{ Swapping Curse}}{{ 273}}](#p273)
 - [{{ Synaptic Static}}{{ 273}}](#p273)
 - [{{ Telepathic Bond}}{{ 274}}](#p274)
 - [{{ Teleportation Circle}}{{ 274}}](#p274)
@@ -1754,6 +1761,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Guidance}}{{ 53}}](#p53)
 - [{{ Light}}{{ 55}}](#p55)
 - [{{ Mending}}{{ 56}}](#p56)
+- [{{ Minor Curse}}{{ 57}}](#p57)
 - [{{ Resistance}}{{ 59}}](#p59)
 - [{{ Sacred Flame}}{{ 60}}](#p60)
 - [{{ Spare the Dying}}{{ 61}}](#p61)
@@ -1763,6 +1771,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 :
 - **1st Level Spells**
 - [{{ Bane}}{{ 68}}](#p68)
+- [{{ Binding Curse}}{{ 69}}](#p69)
 - [{{ Bless}}{{ 70}}](#p70)
 - [{{ Ceremony}}{{ 71}}](#p71)
 - [{{ Command}}{{ 73}}](#p73)
@@ -1781,6 +1790,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Moonfire}}{{ 91}}](#p91)
 - [{{ Protection from Evil and Good}}{{ 92}}](#p92)
 - [{{ Purify Food and Drink}}{{ 92}}](#p92)
+- [{{ Rotting Curse}}{{ 93}}](#p93)
 - [{{ Sanctuary}}{{ 94}}](#p94)
 - [{{ Scourge Strike}}{{ 94}}](#p94)
 - [{{ Shadow Word: Pain}}{{ 95}}](#p95)
@@ -1887,6 +1897,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Circle of Power}}{{ 241}}](#p241)
 - [{{ Commune}}{{ 241}}](#p241)
 - [{{ Contagion}}{{ 243}}](#p243)
+- [{{ Curse of Impotence}}{{ 245}}](#p245)
 - [{{ Dawn}}{{ 247}}](#p247)
 - [{{ Dispel Evil and Good}}{{ 248}}](#p248)
 - [{{ Flame Strike}}{{ 252}}](#p252)
@@ -1897,6 +1908,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Holy Weapon}}{{ 255}}](#p255)
 - [{{ Insect Plague}}{{ 255}}](#p255)
 - [{{ Invoke Celestial (Conjure Celestial)}}{{ 256}}](#p256)
+- [{{ Killing Curse}}{{ 257}}](#p257)
 - [{{ Legend Lore}}{{ 257}}](#p257)
 - [{{ Life Link}}{{ 258}}](#p258)
 - [{{ Life Support}}{{ 258}}](#p258)
@@ -2725,6 +2737,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 :
 - **1st Level Spells**
 - [{{ Alarm}}{{ 66}}](#p66)
+- [{{ Befuddling Curse}}{{ 69}}](#p69)
 - [{{ Catapult}}{{ 71}}](#p71)
 - [{{ Cause Fear}}{{ 71}}](#p71)
 - [{{ Charm Person}}{{ 72}}](#p72)
@@ -2856,6 +2869,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Life Link}}{{ 258}}](#p258)
 - [{{ Mislead}}{{ 259}}](#p259)
 - [{{ Modify Memory}}{{ 259}}](#p259)
+- [{{ Swapping Curse}}{{ 273}}](#p273)
 }}
 \page
 {{pageNumber,auto}}
@@ -3128,6 +3142,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Impact}}{{ 54}}](#p54)
 - [{{ Infestation}}{{ 54}}](#p54)
 - [{{ Magic Stone}}{{ 56}}](#p56)
+- [{{ Minor Curse}}{{ 57}}](#p57)
 - [{{ Mold Earth}}{{ 57}}](#p57)
 - [{{ Otherworldly Grasp}}{{ 57}}](#p57)
 - [{{ Poison Spray}}{{ 58}}](#p58)
@@ -3157,6 +3172,8 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Bad Blood}}{{ 68}}](#p68)
 - [{{ Bane}}{{ 68}}](#p68)
 - [{{ Beast Bond}}{{ 69}}](#p69)
+- [{{ Befuddling Curse}}{{ 69}}](#p69)
+- [{{ Binding Curse}}{{ 69}}](#p69)
 - [{{ Bless}}{{ 70}}](#p70)
 - [{{ Bramble Binding}}{{ 70}}](#p70)
 - [{{ Buzzing Bee}}{{ 70}}](#p70)
@@ -3198,6 +3215,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Nauseating Poison}}{{ 91}}](#p91)
 - [{{ Protection from Evil and Good}}{{ 92}}](#p92)
 - [{{ Ray of Sickness}}{{ 93}}](#p93)
+- [{{ Rotting Curse}}{{ 93}}](#p93)
 - [{{ Sanctuary}}{{ 94}}](#p94)
 - [{{ Scourge Strike}}{{ 94}}](#p94)
 - [{{ Sense Blood}}{{ 94}}](#p94)
@@ -3375,6 +3393,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Commune with Nature}}{{ 241}}](#p241)
 - [{{ Contact Other Plane}}{{ 242}}](#p242)
 - [{{ Contagion}}{{ 243}}](#p243)
+- [{{ Curse of Impotence}}{{ 245}}](#p245)
 - [{{ Dawn}}{{ 247}}](#p247)
 - [{{ Dispel Evil and Good}}{{ 248}}](#p248)
 - [{{ Dream}}{{ 249}}](#p249)
@@ -3385,6 +3404,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Freedom of the Winds}}{{ 252}}](#p252)
 - [{{ Greater Absorb Elements}}{{ 253}}](#p253)
 - [{{ Insect Plague}}{{ 255}}](#p255)
+- [{{ Killing Curse}}{{ 257}}](#p257)
 - [{{ Life Link}}{{ 258}}](#p258)
 - [{{ Maelstrom}}{{ 258}}](#p258)
 - [{{ Mooncloak}}{{ 259}}](#p259)
@@ -3394,6 +3414,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Skill Empowerment}}{{ 267}}](#p267)
 - [{{ Spirit Lantern}}{{ 268}}](#p268)
 - [{{ Spiritual Sundering}}{{ 268}}](#p268)
+- [{{ Swapping Curse}}{{ 273}}](#p273)
 - [{{ Tornado}}{{ 275}}](#p275)
 - [{{ Void Eruption}}{{ 276}}](#p276)
 - [{{ Waves of Exhaustion}}{{ 279}}](#p279)
@@ -3839,6 +3860,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Immolation}}{{ 255}}](#p255)
 - [{{ Insect Plague}}{{ 255}}](#p255)
 - [{{ Invoke Dragon (Conjure Dragon)}}{{ 256}}](#p256)
+- [{{ Killing Curse}}{{ 257}}](#p257)
 - [{{ Mooncloak}}{{ 259}}](#p259)
 - [{{ Pressure Cutter}}{{ 261}}](#p261)
 - [{{ Pyroclastic Lance}}{{ 261}}](#p261)
@@ -4021,6 +4043,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Mage Hand}}{{ 55}}](#p55)
 - [{{ Message}}{{ 56}}](#p56)
 - [{{ Mind Sliver}}{{ 56}}](#p56)
+- [{{ Minor Curse}}{{ 57}}](#p57)
 - [{{ Minor Illusion}}{{ 57}}](#p57)
 - [{{ Otherworldly Grasp}}{{ 57}}](#p57)
 - [{{ Prehensile Hair}}{{ 58}}](#p58)
@@ -4038,6 +4061,8 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Armor of Agathys}}{{ 67}}](#p67)
 - [{{ Arms of Hadar}}{{ 67}}](#p67)
 - [{{ Bane}}{{ 68}}](#p68)
+- [{{ Befuddling Curse}}{{ 69}}](#p69)
+- [{{ Binding Curse}}{{ 69}}](#p69)
 - [{{ Cause Fear}}{{ 71}}](#p71)
 - [{{ Charm Person}}{{ 72}}](#p72)
 - [{{ Command}}{{ 73}}](#p73)
@@ -4065,6 +4090,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Longstrider}}{{ 89}}](#p89)
 - [{{ Minor Drain}}{{ 91}}](#p91)
 - [{{ Protection from Evil and Good}}{{ 92}}](#p92)
+- [{{ Rotting Curse}}{{ 93}}](#p93)
 - [{{ Sanctuary}}{{ 94}}](#p94)
 - [{{ Shadow Bind}}{{ 95}}](#p95)
 - [{{ Shadow Word: Pain}}{{ 95}}](#p95)
@@ -4158,12 +4184,12 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Speak with Dead}}{{ 188}}](#p188)
 - [{{ Spectral Passage}}{{ 188}}](#p188)
 - [{{ Spirit Shroud}}{{ 189}}](#p189)
-- [{{ Thunder Step}}{{ 196}}](#p196)
-- [{{ Vampiric Blade}}{{ 197}}](#p197)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
+- [{{ Thunder Step}}{{ 196}}](#p196)
+- [{{ Vampiric Blade}}{{ 197}}](#p197)
 - [{{ Vampiric Touch}}{{ 197}}](#p197)
 - [{{ Wither}}{{ 200}}](#p200)
 :
@@ -4179,6 +4205,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Dimension Door}}{{ 208}}](#p208)
 - [{{ Distorted Distance}}{{ 209}}](#p209)
 - [{{ Divination}}{{ 209}}](#p209)
+- [{{ Divine Shield}}{{ 209}}](#p209)
 - [{{ Eldritch Tentacles}}{{ 210}}](#p210)
 - [{{ Elemental Bane}}{{ 211}}](#p211)
 - [{{ Exsanguinate}}{{ 211}}](#p211)
@@ -4202,6 +4229,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Cloudkill}}{{ 241}}](#p241)
 - [{{ Contact Other Plane}}{{ 242}}](#p242)
 - [{{ Contagion}}{{ 243}}](#p243)
+- [{{ Curse of Impotence}}{{ 245}}](#p245)
 - [{{ Destructive Wave}}{{ 247}}](#p247)
 - [{{ Devouring Darkness}}{{ 247}}](#p247)
 - [{{ Dispel Evil and Good}}{{ 248}}](#p248)
@@ -4213,6 +4241,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Geas}}{{ 252}}](#p252)
 - [{{ Greater Absorb Elements}}{{ 253}}](#p253)
 - [{{ Hold Monster}}{{ 254}}](#p254)
+- [{{ Killing Curse}}{{ 257}}](#p257)
 - [{{ Life Link}}{{ 258}}](#p258)
 - [{{ Planar Binding}}{{ 261}}](#p261)
 - [{{ Regal Presence}}{{ 262}}](#p262)
@@ -4221,6 +4250,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Skill Empowerment}}{{ 267}}](#p267)
 - [{{ Spirit Lantern}}{{ 268}}](#p268)
 - [{{ Spiritual Sundering}}{{ 268}}](#p268)
+- [{{ Swapping Curse}}{{ 273}}](#p273)
 - [{{ Void Eruption}}{{ 276}}](#p276)
 - [{{ Wall of Light}}{{ 278}}](#p278)
 - [{{ Waves of Exhaustion}}{{ 279}}](#p279)
@@ -4254,6 +4284,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Mage Hand}}{{ 55}}](#p55)
 - [{{ Magic Stone}}{{ 56}}](#p56)
 - [{{ Mind Sliver}}{{ 56}}](#p56)
+- [{{ Minor Curse}}{{ 57}}](#p57)
 - [{{ Minor Illusion}}{{ 57}}](#p57)
 - [{{ Otherworldly Grasp}}{{ 57}}](#p57)
 - [{{ Poison Spray}}{{ 58}}](#p58)
@@ -4277,6 +4308,8 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Arms of Hadar}}{{ 67}}](#p67)
 - [{{ Bad Blood}}{{ 68}}](#p68)
 - [{{ Bane}}{{ 68}}](#p68)
+- [{{ Befuddling Curse}}{{ 69}}](#p69)
+- [{{ Binding Curse}}{{ 69}}](#p69)
 - [{{ Cause Fear}}{{ 71}}](#p71)
 - [{{ Charm Person}}{{ 72}}](#p72)
 - [{{ Comprehend Languages}}{{ 73}}](#p73)
@@ -4307,6 +4340,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Nauseating Poison}}{{ 91}}](#p91)
 - [{{ Protection from Evil and Good}}{{ 92}}](#p92)
 - [{{ Ray of Sickness}}{{ 93}}](#p93)
+- [{{ Rotting Curse}}{{ 93}}](#p93)
 - [{{ Sense Blood}}{{ 94}}](#p94)
 - [{{ Shadow Bind}}{{ 95}}](#p95)
 - [{{ Shadow Word: Pain}}{{ 95}}](#p95)
@@ -4383,12 +4417,12 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Time Skip}}{{ 150}}](#p150)
 - [{{ Time Trap}}{{ 150}}](#p150)
 - [{{ Uncertain Footing}}{{ 151}}](#p151)
-- [{{ Vicious Hound}}{{ 152}}](#p152)
-- [{{ Vicious Vapors}}{{ 152}}](#p152)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
+- [{{ Vicious Hound}}{{ 152}}](#p152)
+- [{{ Vicious Vapors}}{{ 152}}](#p152)
 - [{{ Warp Sense}}{{ 153}}](#p153)
 :
 - **3rd Level Spells**
@@ -4508,6 +4542,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Burial Barrage}}{{ 240}}](#p240)
 - [{{ Contact Other Plane}}{{ 242}}](#p242)
 - [{{ Contagion}}{{ 243}}](#p243)
+- [{{ Curse of Impotence}}{{ 245}}](#p245)
 - [{{ Danse Macabre}}{{ 246}}](#p246)
 - [{{ Deglove Creature}}{{ 247}}](#p247)
 - [{{ Devouring Darkness}}{{ 247}}](#p247)
@@ -4522,6 +4557,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Hold Monster}}{{ 254}}](#p254)
 - [{{ Infernal Calling}}{{ 255}}](#p255)
 - [{{ Insect Plague}}{{ 255}}](#p255)
+- [{{ Killing Curse}}{{ 257}}](#p257)
 - [{{ Legend Lore}}{{ 257}}](#p257)
 - [{{ Life Link}}{{ 258}}](#p258)
 - [{{ Mislead}}{{ 259}}](#p259)
@@ -4534,6 +4570,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Spiritual Sundering}}{{ 268}}](#p268)
 - [{{ Storm of Radiance}}{{ 269}}](#p269)
 - [{{ Sudden Hazards}}{{ 270}}](#p270)
+- [{{ Swapping Curse}}{{ 273}}](#p273)
 - [{{ Synaptic Static}}{{ 273}}](#p273)
 - [{{ Teleportation Circle}}{{ 274}}](#p274)
 - [{{ Void Eruption}}{{ 276}}](#p276)
@@ -4682,6 +4719,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Mending}}{{ 56}}](#p56)
 - [{{ Message}}{{ 56}}](#p56)
 - [{{ Mind Sliver}}{{ 56}}](#p56)
+- [{{ Minor Curse}}{{ 57}}](#p57)
 - [{{ Minor Illusion}}{{ 57}}](#p57)
 - [{{ Mold Earth}}{{ 57}}](#p57)
 - [{{ Poison Spray}}{{ 58}}](#p58)
@@ -4712,6 +4750,8 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Awaken Rope}}{{ 68}}](#p68)
 - [{{ Azure Strike}}{{ 68}}](#p68)
 - [{{ Bad Blood}}{{ 68}}](#p68)
+- [{{ Befuddling Curse}}{{ 69}}](#p69)
+- [{{ Binding Curse}}{{ 69}}](#p69)
 - [{{ Blade Mirage}}{{ 69}}](#p69)
 - [{{ Burning Hands}}{{ 70}}](#p70)
 - [{{ Buzzing Bee}}{{ 70}}](#p70)
@@ -4777,6 +4817,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Protection from Evil and Good}}{{ 92}}](#p92)
 - [{{ Quick Clothier}}{{ 93}}](#p93)
 - [{{ Ray of Sickness}}{{ 93}}](#p93)
+- [{{ Rotting Curse}}{{ 93}}](#p93)
 - [{{ Sense Blood}}{{ 94}}](#p94)
 - [{{ Shadow Bind}}{{ 95}}](#p95)
 - [{{ Shadow Word: Pain}}{{ 95}}](#p95)
@@ -4801,12 +4842,12 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Water Blast}}{{ 102}}](#p102)
 - [{{ Witch Bolt}}{{ 102}}](#p102)
 :
-- **2nd Level Spells**
-- [{{ Air Bubble}}{{ 103}}](#p103)
 }}
 \page
 {{pageNumber,auto}}
 {{toc,wide
+- **2nd Level Spells**
+- [{{ Air Bubble}}{{ 103}}](#p103)
 - [{{ Alacrity}}{{ 103}}](#p103)
 - [{{ Alter Self}}{{ 104}}](#p104)
 - [{{ Animate Object}}{{ 105}}](#p105)
@@ -5157,6 +5198,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Control Winds}}{{ 243}}](#p243)
 - [{{ Create Construct}}{{ 244}}](#p244)
 - [{{ Creation}}{{ 245}}](#p245)
+- [{{ Curse of Impotence}}{{ 245}}](#p245)
 - [{{ Danse Macabre}}{{ 246}}](#p246)
 - [{{ Dawn}}{{ 247}}](#p247)
 - [{{ Devouring Darkness}}{{ 247}}](#p247)
@@ -5179,6 +5221,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Infernal Calling}}{{ 255}}](#p255)
 - [{{ Invoke Dragon (Conjure Dragon)}}{{ 256}}](#p256)
 - [{{ Invoke Giant (Conjure Giant)}}{{ 256}}](#p256)
+- [{{ Killing Curse}}{{ 257}}](#p257)
 - [{{ Legend Lore}}{{ 257}}](#p257)
 - [{{ Life Link}}{{ 258}}](#p258)
 - [{{ Mislead}}{{ 259}}](#p259)
@@ -5205,6 +5248,7 @@ On a turn, you can expend only one spell slot to cast a spell. This rule means y
 - [{{ Storm of Radiance}}{{ 269}}](#p269)
 - [{{ Sudden Hazards}}{{ 270}}](#p270)
 - [{{ Summon Dragon}}{{ 271}}](#p271)
+- [{{ Swapping Curse}}{{ 273}}](#p273)
 - [{{ Synaptic Static}}{{ 273}}](#p273)
 - [{{ Telekinesis}}{{ 274}}](#p274)
 - [{{ Telepathic Bond}}{{ 274}}](#p274)
@@ -5463,7 +5507,7 @@ You generate a partially magical, partially alchemical Sphere and hurl it at a p
 **Components:** V, S  
 **Duration:** 1 round  
 
-You create a pulse of arcane energy in a 10-foot Emanation originating from yourself. Each creature of your choice within this area must succeed on a Constitution saving throw or take 1d8 Force damage, and its Speed is reduced by 10 feet (to a minimum of 0 feet) until the end of your next turn.
+You create a pulse of arcane energy in a 10-foot Emanation originating from yourself. Every creature within this area must succeed on a Constitution saving throw or take 1d8 Force damage, and its Speed is reduced by 10 feet (to a minimum of 0 feet) until the end of your next turn.
 
 ***Cantrip Upgrade.*** The spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).
 
@@ -5983,7 +6027,7 @@ You assault the mind a creature within range with a torrent of psionic power. Ma
 
 #### Minor Curse
 *Enchantment cantrip*  
-**Classes:** None  
+**Classes:** Bard, Cleric, Shaman, Vessel, Warlock, Wizard  
 **Casting Time:** Action  
 **Range:** 30 feet  
 **Components:** V, S  
@@ -6785,7 +6829,7 @@ You establish a telepathic link with one beast you touch that is friendly to you
 
 #### Befuddling Curse
 *1st-level Enchantment*  
-**Classes:** None  
+**Classes:** Bard, Psion, Shaman, Vessel, Warlock, Wizard  
 **Casting Time:** Action  
 **Range:** 60 feet  
 **Components:** V, S, M (something from the target creature, such as blood, hair, or scales, which the spell consumes)  
@@ -6810,7 +6854,7 @@ Each time the creature interacts with, attacks, or is attacked by a swapped targ
 
 #### Binding Curse
 *1st-level Enchantment*  
-**Classes:** None    
+**Classes:** Bard, Cleric, Shaman, Vessel, Warlock, Wizard  
 **Casting Time:** Action  
 **Range:** 60 feet  
 **Components:** V, S, M (something from the target creature, such as blood, hair, or scales, which the spell consumes)  
@@ -7679,7 +7723,7 @@ Freezing cold blasts from your fingertips in a 15-foot Cone.  Each creature in t
 **Components:** V, S  
 **Duration:** Instantaneous  
 
-You unleash a burst of frost, creating a 15-foot Emanation originating from you. Each creature of your choice in the Emanation must make a Constitution saving throw. On a failed save, a creature takes 2d6 Cold damage and has the Restrained condition until the end of your next turn. On a successful save, a creature takes half as much damage only.
+You unleash a burst of frost, creating a 15-foot Emanation originating from you. Every creature in the Emanation must make a Constitution saving throw. On a failed save, a creature takes 2d6 Cold damage and has the Restrained condition until the end of your next turn. On a successful save, a creature takes half as much damage only.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.
 
@@ -8396,7 +8440,7 @@ You shoot a greenish ray at a creature within range. Make a ranged spell attack 
 
 #### Rotting Curse
 *1st-level Necromancy*  
-**Classes:** None  
+**Classes:** Cleric, Shaman, Vessel, Warlock, Wizard  
 **Casting Time:** Action  
 **Range:** 60 feet  
 **Components:** V, S, M (something from the target creature, such as blood, hair, or scales, which the spell consumes)  
@@ -8729,9 +8773,9 @@ If you move more than 100 feet from the disk (typically because it can't move ar
 **Components:** V, S  
 **Duration:** Instantaneous  
 
-You create a spectral glaive and hurl it at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d8 Slashing damage plus 1d8 Acid, Cold, Fire, Lightning, or Necrotic damage (your choice when you cast the spell), and the glaive ricochets to a different target of your choice within 30 feet of the target. Make a new attack roll and damage roll against the new target.
+You create a spectral glaive and hurl it at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 Slashing damage plus 1d10 Acid, Cold, Fire, Lightning, or Necrotic damage (your choice when you cast the spell), and the glaive ricochets to a different target of your choice within 30 feet of the target. Make a new attack roll and damage roll against the new target.
 
-***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the elemental damage increases by 1d8 for each slot level above 1st. The glaive can ricochet a maximum number of times equal to the level of the slot expended, and a creature can be targeted only once by each casting of this spell.
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 2nd level or higher, the elemental damage increases by 1d10 for each slot level above 1st. The glaive can ricochet a maximum number of times equal to the level of the slot expended, and a creature can be targeted only once by each casting of this spell.
 
 #### Thunder Punch
 *1st-level Evocation*  
@@ -12492,7 +12536,7 @@ You return to the other plane at the start of your next turn and when the spell 
 **Components:** V, S, M (a dragon's scale)  
 **Duration:** Concentration, up to 1 minute  
 
-Choose a willing creature you can see within range. Five explosive scales form on the target, granting it a +1 bonus to AC for the duration. If a creature hits the target with a melee attack roll before the spell ends, a scale explodes, and the attacking creature must make a Dexterity saving throw or take 2d8 Fire damage. The spell ends early if the target has no explosive scales.
+Choose a willing creature you can see within range. Five explosive scales form on the target, granting it a +2 bonus to AC for the duration. If a creature hits the target with a melee attack roll before the spell ends, a scale explodes, and the attacking creature must make a Dexterity saving throw or take 2d8 Fire damage. The spell ends early if the target has no explosive scales.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the number of explosive scales that form on the target increases by one for each slot level above 3rd.
 
@@ -12848,7 +12892,7 @@ If any of this spell's area overlaps with an area of darkness created by a spell
 
 You surge with infernal power and sprout hard, jagged spikes. You gain a +2 bonus to AC for the duration, and when a creature within 5 feet of you hits you with a melee attack roll, it takes 5 Piercing damage.
 
-***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the bonus to AC increases by 1 for every two slot levels above 3rd, and the Piercing damage increases by 5 for each slot level above 3rd.
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the bonus to AC increases by 1 and the Piercing damage increases by 5 for every two slot levels above 3rd.
 
 #### Dimensional Anchor
 *3rd-level Conjuration*  
@@ -12955,9 +12999,9 @@ You touch a weapon and enhance it with elemental power. Choose one of the follow
 
 You conjure a spectral bulb that sprouts from the ground in an unoccupied space that you can see within range. The bulb lasts for the duration.
 
-The bulb emits healing magic in a 10-foot Emanation at the end of each of your turns. Allies of your choice in the Emanation regain 5 Hit Points. The bulb vanishes when it restores a total of 20 Hit Points. This spell has no effect on undead or constructs.
+The bulb emits healing magic in a 10-foot Emanation at the end of each of your turns. Allies of your choice in the Emanation regain 5 Hit Points. The bulb vanishes when it restores a total of 40 Hit Points. This spell has no effect on undead or constructs.
 
-***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the total Hit Points the bulb can restore increases by 5 for each slot level above 3rd.
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the total Hit Points the bulb can restore increases by 20 for each slot level above 3rd.
 
 #### Enemies Abound
 *3rd-level Enchantment*  
@@ -13462,7 +13506,7 @@ Uttering an incantation, you draw on infernal or void magic to transform yoursel
 
 ***Vengeance.*** You have a +2 bonus to AC, and your Hit Point maximum and current Hit Points increase by 5 for the duration. When the spell ends, your Hit Point maximum returns to normal, and your current Hit Points are reduced if they exceed the new maximum.
 
-***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can choose one additional benefit for every two slot levels above 3rd (two benefits with a 5th level slot, three benefits with a 7th level slot). The extra damage of Havoc increases by 1d6 and the Hit Points granted by Vengeance increase by 5 for each slot level above 3rd.
+***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, you can choose one additional benefit for every slot level above 3rd.
 
 
 \page
@@ -13917,9 +13961,9 @@ This spell channels vitality into plants. The casting time you use determines wh
 **Casting Time:** Action  
 **Range:** 60 feet  
 **Components:** V, M (a pinch of powdered silver)  
-**Duration:** 1 minute  
+**Duration:** 10 minutes  
 
-You place a holy ward on one willing creature within range. The next time that creature takes damage, the ward activates, and the creature regains Hit Points equal to 1d8 plus your spellcasting ability modifier. The ward then jumps to another ally of your choice within 30 feet of the warded creature, with the same effect. If no ally is in range, the spell ends, and it ends after the ward has healed five times. This spell has no effect on undead or constructs.
+You place a holy ward on one willing creature within range. The next time that creature takes damage, the ward activates, and the creature regains Hit Points equal to 1d8 plus your spellcasting ability modifier. The ward then jumps to another ally of your choice within 30 feet of the warded creature, with the same effect. If no ally is in range, the spell ends, and it ends after the ward has healed five times.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the ward can heal one additional time for each slot level above 3rd.
 
@@ -14048,7 +14092,7 @@ While dancing, the target must use all its movement to dance without leaving its
 **Components:** V  
 **Duration:** Concentration, up to 1 minute  
 
-One creature you can see within range regains 3d8 Hit Points. For the duration, the target regains 1d8 Hit Points at the start of each of your turns. This spell has no effect on undead or constructs.
+One creature you can see within range regains 3d8 Hit Points. For the duration, the target regains 1d8 Hit Points at the start of each of your turns.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the initial healing increases by 1d8.
 
@@ -14212,7 +14256,7 @@ A creature can repeat this saving throw at the end of each of its turns, ending 
 **Components:** V, S  
 **Duration:** Instantaneous  
 
-You cut a hole in the fabric of reality, sending a bolt of cosmic matter toward a creature within range. Make a ranged spell attack against the target, which gains no benefit from Half Cover or Three-Quarters Cover. On a hit, the target takes 6d6 Force damage. If you roll a 6 on a d6 for this spell, you can roll another d6 and add it to the damage. When you cast this spell, the maximum number of these extra d6s you can add equals your spellcasting ability modifier.
+You cut a hole in the fabric of reality, sending a bolt of cosmic matter toward a creature within range. Make a ranged spell attack against the target, which gains no benefit from Half Cover or Three-Quarters Cover. On a hit, the target takes 8d6 Force damage. If you roll a 6 on a d6 for this spell, you can roll another d6 and add it to the damage. When you cast this spell, the maximum number of these extra d6s you can add equals your spellcasting ability modifier.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.
 
@@ -15198,7 +15242,7 @@ One creature you can see within range makes a Wisdom saving throw. It does so wi
 **Components:** V  
 **Duration:** Instantaneous  
 
-You channel dark energy into a cataclysmic blast that fills a 20-foot-radius Sphere centered on a point you can see within range. Each creature of your choice within the Sphere must make a Constitution saving throw, taking 4d12 Force damage on a failed save or half as much damage on a successful one.
+You channel dark energy into a cataclysmic blast that fills a 20-foot-radius Sphere centered on a point you can see within range. Each creature of your choice within the Sphere must make a Constitution saving throw, taking 5d12 Force damage on a failed save or half as much damage on a successful one.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the damage increases by 1d12 for each slot level above 4th.
 
@@ -15452,7 +15496,7 @@ If you cast the spell more than once before finishing a Long Rest, there is a cu
 
 #### Divine Shield
 *4th-level Abjuration*  
-**Classes:** Paladin  
+**Classes:** Paladin, Vessel  
 **Casting Time:** Reaction, which you take when you take damage  
 **Range:** Self  
 **Components:** V  
@@ -16865,7 +16909,7 @@ As part of casting the spell, you can form a circle on the ground with the blood
 **Components:** V, S  
 **Duration:** Instantaneous  
 
-The target reduces the damage taken by 4d8. At the end of each of the target's turns, the target loses 1d8 Hit Points until it has lost a total of 4d8 Hit Points (roll these 4d8 separately from the damage reduction). This loss can't be reduced or prevented in any way, but any healing the target receives ends the remaining loss.
+The target reduces the damage taken by 6d8. At the end of each of the target's turns, the target loses 1d8 Hit Points until it has lost a total of 6d8 Hit Points (roll these 6d8 separately from the damage reduction). This loss can't be reduced or prevented in any way, but any healing the target receives ends the remaining loss.
 
 ***At Higher Levels.*** When you cast this spell using a Spell Slot of 5th level or higher, the damage reduction and the total Hit Points the target can lose each increase by 1d8 for each slot level above 4th.
 
@@ -17490,7 +17534,7 @@ Using any material created by this spell as another spell's material component c
 \column
 #### Curse of Impotence
 *5th-level Enchantment*  
-**Classes:** None  
+**Classes:** Bard, Cleric, Shaman, Vessel, Warlock, Wizard  
 **Casting Time:** Action  
 **Range:** 60 feet  
 **Components:** V, S, M (something from the target creature (such as blood, hair, or scales) which the spell consumes)  
@@ -17728,7 +17772,7 @@ If you have a body part, lock of hair, clipping from a nail, or similar portion 
 
 You draw on the magic of dragons and the dreaming wild. For the duration, you gain the following benefits.
 
-***Healing Presence.*** When you move within 5 feet of a creature, you can restore 5d4 Hit Points to that creature. A creature can regain these Hit Points only once per turn. This has no effect on undead or constructs.
+***Healing Presence.*** When you move within 5 feet of a creature, you can restore 5d4 Hit Points to that creature. A creature can regain these Hit Points only once per turn.
 
 ***Wings.*** You sprout spectral wings from your back if you don't already have wings. You have a Fly Speed of 60 feet and can hover. In addition, your movement doesn't provoke Opportunity Attacks.
 
@@ -18123,7 +18167,7 @@ Grasping the material component of this spell, you conjure a portion of a Storm 
 
 #### Killing Curse
 *5th-level Necromancy*  
-**Classes:** None  
+**Classes:** Cleric, Shaman, Sorcerer, Vessel, Warlock, Wizard  
 **Casting Time:** Action  
 **Range:** 60 feet  
 **Components:** V, S, M (something from the target creature (such as blood, hair, or scales) which the spell consumes)  
@@ -19066,7 +19110,7 @@ ___
 
 #### Swapping Curse
 *5th-level Enchantment*  
-**Classes:** None  
+**Classes:** Bard, Psion, Shaman, Vessel, Warlock, Wizard  
 **Casting Time:** Action  
 **Range:** 60 feet  
 **Components:** V, S, M (something from each creature (such blood, hair, or scales) the spell is targeting, which the spell consumes.)  
@@ -21825,7 +21869,7 @@ You shape-shift into a Tree of Life form that resembles a treant. In this form, 
 
 ***Tree Form.*** You become Large. Your Speed becomes 10 feet and can't be reduced, and Difficult Terrain doesn't cost you extra movement.
 
-***Bark Skin.*** You gain a +2 bonus to Armor Class and 10 Temporary Hit Points.
+***Bark Skin.*** You gain a +2 bonus to Armor Class and 20 Temporary Hit Points.
 
 ***Condition Immunity.*** You gain Immunity to the Paralyzed and Restrained conditions. You can't be shape-shifted against your will.
 
@@ -21961,7 +22005,7 @@ You transform into a spectral, angelic form that grants you the following benefi
 
 ***Spectral Form.*** You have Resistance to Bludgeoning, Piercing, Radiant, and Slashing damage.
 
-***Holy Empowerment.*** Whenever you cast a spell using a Spell Slot that restores Hit Points to one or more creatures or deals Radiant damage, determine the spell's effects as if you had used a Spell Slot 2 levels higher than the Spell Slot you used to cast it (maximum of 9th level).
+***Holy Empowerment.*** Whenever you cast a spell using a Spell Slot that restores Hit Points to one or more creatures or deals Radiant or Necrotic damage, determine the spell's effects as if you had used a Spell Slot 2 levels higher than the Spell Slot you used to cast it (maximum of 9th level).
 \page
 {{pageNumber,auto}}
 
