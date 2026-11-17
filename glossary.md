@@ -1794,7 +1794,6 @@ Actions can come up in other situations, too: in a social interaction, you can t
 
 #### Advantage
 **Tag:** Rule
-**Link:** no
 
 If you have Advantage on a D20 Test, roll two d20s, and use the higher roll. A roll can’t be affected by more than one Advantage, and Advantage and Disadvantage on the same roll cancel each other.
 
@@ -2370,7 +2369,6 @@ An area with Dim Light is Lightly Obscured.
 
 #### Disadvantage
 **Tag:** Rule
-**Link:** no
 
 If you have Disadvantage on a D20 Test, roll two d20s and use the lower roll. A roll can’t be affected by more than one Disadvantage, and Advantage and Disadvantage on the same roll cancel each other.
 
@@ -3298,7 +3296,6 @@ Each ability has a modifier that you apply whenever you make a D20 Test with tha
 #### Advantage/Disadvantage
 **Tag:** Rule
 **Type:** D20 Tests
-**Link:** no
 
 Sometimes a D20 Test is modified by Advantage or Disadvantage. Advantage reflects the positive circumstances surrounding a d20 roll, while Disadvantage reflects negative circumstances.
 
@@ -4293,6 +4290,26 @@ The following examples show how magical contagions can work. Feel free to alter 
 **Fighting the Contagion.** Magic such as a *Heal* or *Lesser Restoration* spell ends the contagion immediately. A character who is proficient with an Herbalism Kit can use it to create one dose of nonmagical ointment, which takes 1 hour. When applied to the eyes of a creature suffering from Sight Rot, the ointment suppresses the contagion on that creature for 24 hours. If the contagion is suppressed in this way for a total of 72 hours (requiring three doses and applications of the ointment), the contagion ends on the creature.
 
 **Spreading the Contagion.** Any Humanoid that makes skin contact with a creature infected with Sight Rot must succeed on a DC 15 Constitution saving throw or also become infected with the contagion. On a successful save, the Humanoid can’t catch the contagion from that particular infected creature for the next 24 hours.
+
+#### Environmental Effects
+**Tag:** Rule
+**Type:** Gameplay Toolbox
+**Also:** Environmental Effect
+
+The following are environmental effects:
+
+- Dead Magic Zone
+- Deep Water
+- Extreme Cold
+- Extreme Heat
+- Frigid Water
+- Heavy Precipitation
+- High Altitude
+- Planar Effects
+- Slippery Ice
+- Strong Wind
+- Thin Ice
+- Wild Magic Zone
 
 #### Deep Water
 **Tag:** Rule
