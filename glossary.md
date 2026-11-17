@@ -1673,7 +1673,6 @@ The glossary uses the following conventions:
 
 #### Ability Check
 **Tag:** Rule
-**Link:** no
 
 An ability check is a D20 Test that represents using one of the six abilities—or a specific skill associated with an ability—to overcome a challenge.
 
@@ -2223,7 +2222,6 @@ A Cylinder’s point of origin is included in the area of effect.
 
 #### D20 Test
 **Tag:** Rule
-**Link:** no
 
 D20 Tests encompass the three main d20 rolls of the game: ability checks, attack rolls, and saving throws. If something in the game affects D20 Tests, it affects all three of these rolls. The GM determines whether a D20 Test is warranted in a given circumstance.
 
