@@ -4090,6 +4090,8 @@ Most settlements contain individuals who are willing to cast spells in exchange 
 
 Adventures hold the promise—but not a guarantee—of finding magic items. Hundreds of magic items are detailed in “Magic Items” later in this document. Here’s what you need to know about using magic items.
 
+Magic items are gleaned from the hoards of felled monsters or discovered in long-lost vaults. Such items grant capabilities a character could rarely have otherwise, or they complement their owner’s capabilities in wondrous ways.
+
 #### Identifying a Magic Item
 **Tag:** Rule
 **Type:** Magic Items
@@ -4786,3 +4788,699 @@ If your combat encounter includes a creature whose CR is higher than the party�
 **Unusual Features**
 
 If a monster has a feature that lower-level characters can’t easily overcome, consider not adding that monster to an encounter for characters whose level is lower than the monster’s Challenge Rating.
+
+## Dungeon Master’s Guide (2024)
+
+From the Dungeon Master’s Guide (2024). This material is not part of the SRD 5.2.1.
+
+#### Brown Mold
+**Tag:** Rule
+**Type:** Hazard
+**Source:** DMG'24 p76
+
+*Deadly Hazard (Levels 5–10) or Nuisance Hazard (Levels 11–16)*
+
+Brown mold resembles a furry, light-brown carpet. This fungus feeds on warmth, drawing heat from anything around itself. One patch of brown mold covers a 10-foot square, and the temperature within 30 feet of it is always frigid.
+
+When a creature enters a space within 5 feet of the mold for the first time on a turn or starts its turn there, the creature makes a DC 12 Constitution saving throw, taking 22 (4d10) Cold damage on a failed save or half as much damage on a successful one.
+
+Brown mold has Immunity to Fire damage, and any source of fire brought within 5 feet of it causes the mold to instantly expand across a surface and toward the fire, creating a new patch that covers a 10-foot square. A patch of brown mold exposed to an effect that deals any amount of Cold damage is destroyed instantly.
+
+#### Dead Magic Zone
+**Tag:** Rule
+**Type:** Environmental Effects
+**Source:** DMG'24 p68
+
+A dead magic zone is an area where the fabric of magic is torn. The effect is the same as the Antimagic Field spell, except that it is permanent and typically covers an area no more than 300 feet in diameter.
+
+#### Fireball Fungus
+**Tag:** Rule
+**Type:** Hazard
+**Source:** DMG'24 p76
+
+*Deadly Hazard (Levels 5–10)*
+
+A fireball fungus is a Small, inanimate mushroom that can grow anywhere fungi are found in abundance. Its luminous, orange cap sheds Bright Light in a 15-foot radius and Dim Light for an additional 15 feet.
+
+A fireball fungus has AC 10, HP 6, and Immunity to Psychic damage. When it drops to 0 Hit Points, the fungus explodes as if a Fireball spell (save DC 15) had been centered on it.
+
+**At Higher Levels.** The explosion of a fireball fungus causes other fireball fungi in the area of effect to explode as well. You can scale the hazard for higher levels by adding one additional fungus at levels 11–16 or three additional fungi at levels 17–20.
+
+#### Foraging
+**Tag:** Rule
+**Type:** Exploration
+**Link:** no
+**Source:** DMG'24 p40
+
+Characters without water and Rations can stave off dehydration and malnutrition by gathering food and water as they travel. A foraging character makes a Wisdom (Survival) check once per journey stage (or once per day if a stage is shorter than a day). The DC is determined by the abundance of food and water in the region, as shown in the Foraging DC column of the Travel Terrain table. If multiple characters forage, each character makes a separate check.
+
+A foraging character finds nothing on a failed check. On a successful check, roll 1d6 and add the character’s Wisdom modifier to determine how much food (in pounds) the character finds per day of the journey stage, then repeat the roll for water (in gallons).
+
+#### Green Slime
+**Tag:** Rule
+**Type:** Hazard
+**Source:** DMG'24 p76
+
+*Nuisance Hazard (Levels 1–4)*
+
+Acidic green slime devours flesh, organic material, and metal on contact. Bright green, wet, and sticky, it clings to walls, floors, and ceilings in patches.
+
+One patch of green slime covers a 5-foot square. Green slime has Blindsight with a range of 30 feet, and it drops from walls and ceilings when it detects movement below itself. Beyond that, it can’t move. A creature aware of the slime’s presence can avoid being struck by it with a successful DC 10 Dexterity saving throw.
+
+A creature that comes in contact with green slime takes 5 (1d10) Acid damage. The creature takes the damage again at the start of each of its turns until the slime is scraped off (requiring an action) or destroyed. Against wood or metal, green slime deals 11 (2d10) Acid damage each round, and any nonmagical wood or metal item used to scrape off the green slime is destroyed.
+
+Direct sunlight or any amount of Cold, Fire, or Radiant damage destroys a patch of green slime.
+
+#### Inferno
+**Tag:** Rule
+**Type:** Hazard
+**Link:** no
+**Source:** DMG'24 p76
+
+*Deadly Hazard (Levels 5–10) or Nuisance Hazard (Levels 11–16)*
+
+Whenever an uncontrolled fire spreads, it can create an inferno that quickly engulfs creatures, objects, and vegetation.
+
+An inferno consists of at least four contiguous 10-foot Cubes of fire. Each of the inferno’s 10-foot Cubes can be doused with 10 gallons of water. Exposure to a strong wind for 1 minute causes the inferno to grow, adding 1d4 new 10-foot Cubes to its volume. An inferno deprived of fuel burns itself out after 1d10 minutes.
+
+An inferno damages any vegetation or object that isn’t being worn or carried that it touches, dealing 22 (4d10) Fire damage immediately and again at the end of each minute. Any creature that enters the inferno for the first time on a turn or starts its turn there takes 22 (4d10) Fire damage and is burning.
+
+#### Navigation
+**Tag:** Rule
+**Type:** Exploration
+**Link:** no
+**Source:** DMG'24 p40
+
+If the characters aren’t following an established path or traveling with a landmark in sight, they risk getting lost. Here are some circumstances that can cause a group to lose its way:
+
+- Branching passages underground
+- Horizon-obscuring terrain, such as dense forest
+- Obscuring weather, such as heavy rain or fog
+- Traveling at night
+- Traveling at sea while unable to see the sky or any familiar land
+
+Let the players know when the characters are at risk of getting lost, then have the characters choose one of their number to make a Wisdom (Survival) check against a DC appropriate to the terrain, as shown in the Navigation DC column of the Travel Terrain table. Another member of the group can take the Help action to assist this check as normal.
+
+If the check fails, the party goes off course. You decide what this looks like: they might follow the wrong branch of a river, orient themselves to the wrong mountain peak on the horizon, or get turned around in the forest. As a baseline, assume that getting lost extends the length of the current journey stage by 1d6 × 10 percent. It might also affect subsequent stages of the journey.
+
+#### Perception and Encounters
+**Tag:** Rule
+**Type:** Exploration
+**Source:** DMG'24 p34
+
+If the characters encounter another group of creatures and neither side is being stealthy, the two groups automatically notice each other once they are within sight or hearing range of one another. The Audible Distance table can help you determine the hearing range, and the following sections address visibility. If one group tries to hide from the other, use the rules in the Player’s Handbook.
+
+**Audible Distance**
+
+| Noise | Distance |
+|---|---|
+| Trying to be quiet | 2d6 × 5 feet |
+| Normal noise level | 2d6 × 10 feet |
+| Very loud | 2d6 × 50 feet |
+
+**Visibility Outdoors.** When traveling outdoors, most characters can see about 2 miles in any direction on a clear day, except where obstructions block their view. That range increases to 40 miles if they are atop a mountain or a tall hill or are otherwise able to look down on the area from a height. Lightly Obscured conditions reduce visibility: rain reduces maximum visibility to 1 mile, and fog reduces it to between 100 and 300 feet.
+
+Outdoor terrain determines the distance at which characters encounter other creatures. The Travel Terrain table (see “Travel” below) gives suggested encounter distances for different types of terrain.
+
+**Visibility at Sea.** From a ship’s crow’s nest, a lookout can see things up to 10 miles away, assuming clear skies and a relatively calm sea. Overcast skies reduce that distance by half. Lightly Obscured conditions reduce visibility just as they do on land.
+
+**Visibility Underwater.** Visibility underwater depends on water clarity and the available light. Use the Underwater Encounter Distance table to determine the encounter distances underwater.
+
+**Underwater Encounter Distance**
+
+| Visibility | Encounter Distance |
+|---|---|
+| Clear water, Bright Light | 60 feet |
+| Clear water, Dim Light | 30 feet |
+| Murky water or Darkness | 10 feet |
+
+#### Planar Effects
+**Tag:** Rule
+**Type:** Environmental Effects
+**Source:** DMG'24 p69
+
+Certain planes of existence—and areas on the Material Plane affected by them—have supernatural effects on creatures within them. Several examples are presented below. See chapter 6 for more information about the planes of existence.
+
+**Acheronian Bloodlust.** The plane of Acheron rewards a creature for harming other creatures by imbuing it with the strength to keep fighting. While in Acheron or a region under its influence, a creature gains Temporary Hit Points equal to half its Hit Point maximum whenever it reduces another creature to 0 Hit Points.
+
+**Arcadian Vitality.** On the plane of Arcadia and in regions where its influence is felt, creatures benefit from supernatural vitality, which grants them Immunity the Frightened and Poisoned conditions.
+
+**Blessed Beneficence.** On the plane of Mount Celestia and in regions where its influence is felt, creatures are blessed by the pervasive beneficence of the plane. Creatures other than Fiends and Undead gain the benefit of the Bless spell as long as they remain in an area of blessed beneficence. In addition, such a creature that finishes a Long Rest in the area gains the benefit of a Lesser Restoration spell.
+
+**Gehennan Cruelty.** On the plane of Gehenna and in regions where its influence is felt, creatures are driven to loathe helping one another. Whenever a creature subject to Gehennan cruelty casts a spell, including a spell that restores Hit Points or removes a condition other than Invisible, the caster must succeed on a DC 10 Charisma saving throw, or the spell fails and is wasted.
+
+**Winds of Pandemonium.** The winds of Pandemonium are common in Pandemonium and regions where its influence is felt, including parts of the Underdark. A creature makes a DC 10 Wisdom saving throw after each hour spent among the howling winds. On a failed save, the creature gains 1 Exhaustion level. The winds can’t increase a creature’s Exhaustion level above 3. Finishing a Long Rest doesn’t reduce a creature’s Exhaustion level unless the creature can somehow escape the winds.
+
+#### Poisonous Gas
+**Tag:** Rule
+**Type:** Hazard
+**Source:** DMG'24 p77
+
+*Nuisance Hazard (Levels 1–4)*
+
+Poisonous gas is usually encountered in an enclosed space, such as a sewer or sealed tomb. The gas fills as much space as it can, up to a maximum of ten 10-foot Cubes. The transparent gas carries a foul odor. The gas is continuously or periodically replenished by some natural or magical source, though a strong wind disperses the gas for 1 minute.
+
+Any creature that enters poisonous gas for the first time on a turn or starts its turn there makes a DC 12 Constitution saving throw, taking 5 (1d10) Poison damage on a failed save or half as much damage on a successful one. Creatures in the gas also have Disadvantage on Death Saving Throws.
+
+**At Higher Levels.** You can scale the hazard for higher levels by increasing the Poison damage and the save DC, as shown in the following table.
+
+| Levels | Poison Damage | Save DC |
+|---|---|---|
+| 5–10 | 11 (2d10) | 14 |
+| 11–16 | 22 (4d10) | 16 |
+| 17–20 | 55 (10d10) | 18 |
+
+#### Quicksand Pit
+**Tag:** Rule
+**Type:** Hazard
+**Source:** DMG'24 p77
+
+*Nuisance Hazard (Levels 1–4)*
+
+A quicksand pit is 10 feet deep and covers the ground in a 10-foot square. A creature that enters the area sinks 1d4 + 1 feet into the quicksand and has the Restrained condition. At the start of each of the creature’s turns, it sinks another 1d4 feet. As long as the creature isn’t completely submerged in quicksand, it can take an action to try to escape, doing so with a successful Strength (Athletics) check (DC 10 plus the number of feet the creature has sunk into the quicksand). A creature that is completely submerged in quicksand has Total Cover and the Blinded condition and risks suffocation.
+
+A creature can pull another creature within its reach out of a quicksand pit by taking an action and succeeding on a Strength (Athletics) check (DC 5 plus the number of feet the creature has sunk into the quicksand).
+
+**At Higher Levels.** You can scale this hazard for higher levels by making the pit deeper and increasing the number of feet a creature sinks at the start of each of its turns, as shown in the following table.
+
+| Levels | Pit Depth | Sinking Rate |
+|---|---|---|
+| 5–10 | 15 feet | 1d6 feet |
+| 11–16 | 20 feet | 1d8 feet |
+| 17–20 | 30 feet | 1d10 feet |
+
+#### Razorvine
+**Tag:** Rule
+**Type:** Hazard
+**Source:** DMG'24 p78
+
+*Nuisance Hazard (Levels 1–4)*
+
+Razorvine is a plant that grows in wild tangles and hedges. It also clings to the sides of buildings and other surfaces as ivy does. A 10-foot-high, 10-foot-wide, 5-foot-thick wall or hedge of razorvine has AC 11; HP 25; and Immunity to Bludgeoning, Piercing, and Psychic damage.
+
+When a creature comes into contact with razorvine for the first time on a turn, the creature must succeed on a DC 10 Dexterity saving throw or take 5 (1d10) Slashing damage from the bladelike thorns.
+
+#### River Styx
+**Tag:** Rule
+**Type:** Hazard
+**Source:** DMG'24 p78
+
+*Nuisance Hazard (Levels 11–16)*
+
+The River Styx courses through the Lower Planes. Tasting or touching its waters can shatter a creature’s intellect and personality, as well as strip away its memories. Certain Fiends are immune to the river’s effects.
+
+Unless immune to the river’s effects, a creature that drinks from the Styx, enters the river, or starts its turn in the river makes a DC 20 Intelligence saving throw. On a failed save, the creature takes 19 (3d12) Psychic damage and can’t cast spells or take the Magic action for 30 days. An affected creature can drink from the Styx and swim in its waters without suffering any additional effects.
+
+The effect can be ended only by the Greater Restoration, Heal, or Wish spell. If the effect isn’t ended after 30 days, the effect becomes permanent and the creature loses all its memories. At that point, nothing short of a Wish spell or divine intervention can undo the effect.
+
+Water taken from the River Styx loses its potency after 24 hours, becoming a harmless, foul-tasting liquid. Arcanaloths, night hags, and other fell creatures might know rituals that can prolong the water’s potency, at your discretion.
+
+#### Rockslide
+**Tag:** Rule
+**Type:** Hazard
+**Source:** DMG'24 p78
+
+*Deadly Hazard (Levels 1–4)*
+
+When a rockslide occurs, every creature in its path makes a DC 15 Dexterity saving throw. On a failed save, a creature takes 11 (2d10) Bludgeoning damage, has the Prone condition, and moves with the rockslide. On a successful save, a creature takes half as much damage only.
+
+When the rockslide stops, its space becomes Difficult Terrain, and all Prone creatures in its space are buried under rocks and debris. A creature buried in this way has the Restrained condition and has Total Cover. As an action, a creature can try to crawl out from under the rock pile. If the creature succeeds on a DC 15 Strength (Athletics) check, it is no longer Restrained; instead, it has the Prone condition and is atop the rock pile. If the check fails, the creature remains buried and gains 1 Exhaustion level.
+
+A creature that has neither the Incapacitated nor the Restrained condition can spend 1 minute freeing another creature buried by the rockslide.
+
+**At Higher Levels.** You can scale this hazard for higher levels by increasing the Bludgeoning damage as follows: 22 (4d10) at levels 5–10, 55 (10d10) at levels 11–16, and 99 (18d10) at levels 17–20.
+
+#### Tracking
+**Tag:** Rule
+**Type:** Exploration
+**Link:** no
+**Source:** DMG'24 p41
+
+A specific instance of searching on a journey is when adventurers choose their path by following the tracks of other creatures. To track, one or more trackers must succeed on a Wisdom (Survival) check. You might require trackers to make a new check in any of the following circumstances:
+
+- **Resting.** The trackers resume tracking after finishing a Short or Long Rest.
+- **Shifting Weather or Terrain.** The weather or terrain changes in a way that makes tracking harder.
+- **Terrain Obstacle.** The trail crosses a river or similar obstacle that allows no tracks.
+
+The DC for the check depends on how well the ground shows signs of a creature’s passage. No roll is necessary in situations where the tracks are obvious, such as following an army along a muddy road. Spotting tracks on bare rock is more challenging unless the creature being tracked leaves a distinct trail. Additionally, the passage of time often makes tracks harder to follow. In a situation where there is no trail to follow, you can rule that tracking is impossible.
+
+Use the Search DC column of the Travel Terrain table as a starting point for setting the DC for tracking. If you prefer, you can choose a DC based on your assessment of the difficulty—higher if days have elapsed since the creature passed, lower if the creature is leaving an obvious trail such as blood. You can also grant Advantage on the check if there’s more than one set of tracks to follow or Disadvantage if the trail passes through a busy area.
+
+On a failed check, the character loses the trail but can attempt to find it again by carefully searching the area. It takes 10 minutes to find a trail in a confined area, such as a series of caverns, or 1 hour outdoors.
+
+#### Vicious Vine
+**Tag:** Rule
+**Type:** Hazard
+**Source:** DMG'24 p78
+
+*Nuisance Hazard (Levels 1–4)*
+
+Vicious vines are animated by magic. They often cling to doorways, archways, walls, and statuary. Until a vicious vine moves, there’s nothing to distinguish it from an inanimate vine.
+
+Each vicious vine has AC 11; HP 16; and Immunity to Bludgeoning, Piercing, and Psychic damage. When a creature enters a space within 5 feet of the vine for the first time on a turn or starts its turn there, the vine tries to coil around that creature. The target must succeed on a DC 12 Dexterity saving throw or have the Grappled condition (escape DC 12). While Grappled in this way, the target takes 5 (1d10) Necrotic damage from the vine’s life-draining thorns at the start of each of the target’s turns. The vine can grapple only one creature at a time.
+
+As an Influence action, a character under the effect of a Speak with Plants spell or similar magic can try to persuade the vine to release its victim, doing so with a successful DC 10 Charisma (Persuasion) check. A creature released by the vine in this way won’t be attacked by that vine again for the next 24 hours.
+
+**At Higher Levels.** You can scale the hazard for higher levels by increasing the Necrotic damage, the save DC, and the escape DC, as shown in the following table.
+
+| Levels | Necrotic Damage | Save/Escape DC |
+|---|---|---|
+| 5–10 | 11 (2d10) | 14 |
+| 11–16 | 22 (4d10) | 16 |
+| 17–20 | 55 (10d10) | 18 |
+
+#### Weather
+**Tag:** Rule
+**Type:** Exploration
+**Link:** no
+**Source:** DMG'24 p38
+
+During each stage of the characters’ journey, you can determine what the weather is like by rolling on the Weather table, adjusting for the terrain and season as appropriate. Roll 1d20 three times to determine the temperature, the wind, and the precipitation.
+
+Weather has no significant game effect most of the time, but see “Environmental Effects” in chapter 3 for the effects of extreme weather. Adding weather details to your descriptions of the characters’ journey can make it more memorable.
+
+**Weather**
+
+| 1d20 | Temperature | Wind | Precipitation |
+|---|---|---|---|
+| 1-14 | Normal for the season | None | None |
+| 15-17 | 1d4 × 10 degrees Fahrenheit colder | Light | Light rain or light snowfall |
+| 18-20 | 1d4 × 10 degrees Fahrenheit hotter | Strong | Heavy rain or heavy snowfall |
+
+#### Webs
+**Tag:** Rule
+**Type:** Hazard
+**Link:** no
+**Source:** DMG'24 p79
+
+*Nuisance Hazard (Levels 1–4)*
+
+Giant spiders weave thick, sticky webs across passages and at the bottom of pits to snare prey. These web-filled areas are Difficult Terrain.
+
+A creature that enters a web-filled area for the first time on a turn or starts its turn there must succeed on a DC 12 Dexterity saving throw or have the Restrained condition. As an action, a creature Restrained by the webs can try to escape from them, doing so with a successful DC 12 Strength (Athletics) or Dexterity (Acrobatics) check.
+
+Each 10-foot Cube of webs has AC 10; HP 15; Vulnerability to Fire damage; and Immunity to Piercing, Poison, and Psychic damage.
+
+#### Wild Magic Zone
+**Tag:** Rule
+**Type:** Environmental Effects
+**Source:** DMG'24 p69
+
+A past magical disaster or uncontrolled surge of power in a particular place can cause the fabric of magic to unravel, creating a wild magic zone. In such an area, which is typically no more than 300 feet in diameter, magic behaves unpredictably.
+
+Whenever a creature expends a spell slot to cast a spell in a wild magic zone, roll 1d20. If you roll a 20 on the die, roll on the Wild Magic Surge table in the Player’s Handbook to create a magical effect.
+
+Fear and Mental Stress
+p70
+Due to the nature of their vocation, adventurers tend to be less susceptible to fear and mental stress than common folk. Whereas a farmer might flee in terror from a bear or an apparition, adventurers are made of sterner stuff. That said, certain creatures and game effects can terrify or fray the mind of even the most stalwart adventurer.
+
+If you plan to use any of these rules, discuss them with your players at the start of the campaign. See “Ensuring Fun for All” in chapter 1.
+
+Fear Effects
+p70
+Whenever the characters encounter something that is supernaturally frightful, use the Frightened condition as the baseline effect. Fear effects typically require a Wisdom saving throw, with a save DC set based on how terrifying the situation is. The Sample Fear DCs table provides some examples.
+
+Sample Fear DCs
+
+| Example | Save DC |
+|---|---|
+| When the characters open a sarcophagus, a harmless yet terrifying apparition appears. | 10 |
+| A character triggers a magical trap that creates an illusory manifestation of that character’s worst fears, visible only to that character. | 15 |
+| A portal to the Abyss opens, revealing a nightmarish realm of torment and slaughter. | 20 |
+
+Typically, a Frightened creature repeats the saving throw at the end of each of its turns, ending the effect on itself on a success.
+
+At your discretion, a Frightened creature might be subject to other effects as long as the Frightened condition lasts. Consider these examples:
+
+The Frightened creature must take the Dash action on each of its turns and uses its movement to get farther away from the source of its fear.
+Attack rolls against the Frightened creature have Advantage.
+The Frightened creature can do only one of the following on each of its turns: move, take an action, or take a Bonus Action.
+Mental Stress Effects
+p70
+When a character is subjected to an effect that causes intense mental stress, Psychic damage is the best way to emulate that effect.
+
+The Sample Mental Stress Effects table provides a few examples of such effects, with suggested saving throw DCs and damage. Mental stress can usually be resisted with a successful Wisdom save, but sometimes an Intelligence or Charisma save is more appropriate. On a successful save, a character might take half as much damage instead of no damage, at your discretion.
+
+Sample Mental Stress Effects
+
+| Example | Save DC | Psychic Damage |
+|---|---|---|
+| A character ingests a hallucinogenic substance that distorts the character’s perception of reality. | 10 | 1d6 |
+| A character touches a fiendish idol that tears at the character’s mind, threatening to shatter it. | 15 | 3d6 |
+| A magical trap flings a character into the Far Realm until the end of that character’s next turn. | 20 | 9d6 |
+
+Prolonged Effects
+p70
+Exposure to mental stress can cause prolonged effects. Consider the following possibilities.
+
+Short-Term Effects. The character has the Frightened, Incapacitated, or Stunned condition for 1d10 minutes. This condition might be accompanied by alarming behavior or hallucinations. These effects can be suppressed with the Calm Emotions spell or removed by the Lesser Restoration spell.
+
+Long-Term Effects. The character has Disadvantage on some or all ability checks for 1d10 × 10 hours, stemming from an unwillingness or inability to exert a particular set of abilities. The character might feel enervated and unable to exert much Strength, for example, or become so suspicious of others that Charisma checks are more difficult. These effects can be suppressed with the Calm Emotions spell or removed by the Lesser Restoration spell.
+
+Indefinite Effects. An indefinite effect is a long-term effect (see above) that lasts until removed by a Greater Restoration spell. It can be suppressed by a Calm Emotions spell.
+
+#### Yellow Mold
+**Tag:** Rule
+**Type:** Hazard
+**Source:** DMG'24 p79
+
+*Deadly Hazard (Levels 1–4) or Nuisance Hazard (Levels 5–10)*
+
+Yellow mold grows in dark places, and one patch covers a 5-foot square. If touched, the mold ejects a cloud of spores that fills a 10-foot Cube. Any creature in that area must succeed on a DC 15 Constitution saving throw or take 11 (2d10) Poison damage and have the Poisoned condition for 1 minute. While Poisoned in this way, the creature takes 5 (1d10) Poison damage at the start of each of its turns. The creature repeats the save at the end of each of its turns, ending the effect on itself on a success.
+
+Direct sunlight or any amount of Fire damage destroys a patch of yellow mold.
+
+## Magic Items
+
+From the “Magic Items” chapter of the SRD 5.2.1 (attribution statement under “Rules Glossary” above).
+
+#### Magic Item Categories
+**Tag:** Rule
+**Type:** Magic Items
+
+Every magic item belongs to a category. The Magic Item Categories table lists the nine categories and provides examples. Rules for the categories appear after the table.
+
+**Magic Item Categories**
+
+| Category | Examples |
+|---|---|
+| Armor | +1 Leather Armor, +1 Shield |
+| Potions | Potion of Healing |
+| Rings | Ring of Invisibility |
+| Rods | Immovable Rod |
+| Scrolls | Spell Scroll |
+| Staffs | Staff of Striking |
+| Wands | Wand of Fireballs |
+| Weapons | +1 Ammunition, +1 Longsword |
+| Wondrous Items | Bag of Holding, Boots of Elvenkind |
+
+**Armor**
+
+An item in the Armor category is typically a magical version of armor from “Equipment.” Unless an armor’s description notes otherwise, the armor must be worn for its magic to function.
+
+Some suits of magic armor specify the type of armor they are, such as Chain Mail or Plate Armor. If no type is specified, choose the type or determine it randomly.
+
+**Potions**
+
+An item in the Potion category might be a magical brew that must be imbibed or an oil that must be applied to a creature or an object. A typical potion consists of 1 ounce of liquid in a vial.
+
+**Using a Potion.** Potions are consumable items. Drinking a potion or administering it to another creature requires a Bonus Action. Applying an oil might take longer as specified in its description. Once used, a potion takes effect immediately, and it is used up.
+
+**Mixing Potions.** A character might drink one potion while still under the effects of another or pour several potions into a single container. The strange ingredients used in creating potions can result in unpredictable interactions. When a character mixes two potions together, roll on the Potion Miscibility table. If more than two are combined, roll again for each subsequent potion, combining the results. Unless the effects are immediately obvious, reveal them only when they become evident.
+
+**Potion Miscibility**
+
+| 1d100 | Result |
+|---|---|
+| 01 | Both potions lose their effects, and the mixture creates a magical explosion in a 5-foot-radius Sphere centered on itself. Each creature in that area takes 4d10 Force damage. |
+| 02–08 | Both potions lose their effects, and the mixture becomes an ingested poison of your choice (see “Poison” in “Gameplay Toolbox”). |
+| 09–15 | Both potions lose their effects. |
+| 16–25 | One potion loses its effect. |
+| 26–35 | Both potions work, but with their numerical effects and durations halved. If a potion has no numerical effect and no duration, it instead loses its effect. |
+| 36–90 | Both potions work normally. |
+| 91–99 | Both potions work, but the numerical effects and duration of one potion are doubled. If neither potion has anything to double in this way, they work normally. |
+| 00 | Only one potion works, but its effects are permanent. Choose the simplest effect to make permanent or the one that seems the most fun. For example, a Potion of Healing might increase the drinker’s Hit Point maximum by 2d4 + 2, or a Potion of Invisibility might give the drinker the Invisible condition indefinitely. At your discretion, a Dispel Magic spell or similar magic might end this lasting effect. |
+
+**Rings**
+
+For its magic to function, an item in the Ring category must be worn on a finger or a similar digit unless its description notes otherwise.
+
+**Rods**
+
+An item in the Rod category is a scepter usually made of metal, wood, or bone. A typical rod weighs 2 to 5 pounds.
+
+Unless its description notes otherwise, a rod can be used as an Arcane Focus.
+
+**Scrolls**
+
+An item in the Scroll category is a roll of paper or parchment, sometimes attached to wooden rods and typically kept safe in a tube of ivory, jade, leather, metal, or wood. The most prevalent scroll is the *Spell Scroll*, a spell stored in written form.
+
+**Using a Scroll.** Scrolls are consumable items. Unleashing the magic in a scroll requires the user to read the scroll. When its magic has been invoked, the scroll can’t be used again. Its words fade, or it crumbles into dust.
+
+Any creature that can understand a written language can read a scroll and attempt to activate it unless its description notes otherwise.
+
+**Staffs**
+
+Items in the Staff category vary widely in appearance: some are of nearly equal diameter throughout and smooth, others are gnarled and twisted, some are made of wood, and others are composed of polished metal or crystal. A staff weighs between 2 and 7 pounds and serves well as a walking stick or cane.
+
+Unless its description notes otherwise, a staff can be used as a nonmagical Quarterstaff and an Arcane Focus.
+
+**Wands**
+
+An item in the Wand category is typically 12 to 15 inches long and crafted of metal, bone, or wood. It is tipped with metal, crystal, stone, or some other material.
+
+Unless its description notes otherwise, a wand can be used as an Arcane Focus.
+
+**Weapons**
+
+A magic weapon is typically a magical version of a weapon from “Equipment.” Some magic weapons specify the type of weapon they are in their descriptions, such as a Longsword or Longbow. If no weapon type is specified, you may choose the type or determine it randomly.
+
+**Ammunition.** If a magic weapon has the Ammunition property, ammunition fired from it is considered magical for the purpose of any rule that cares whether a weapon is magical or not.
+
+**Wondrous Items**
+
+Wondrous Items include wearable items such as boots, belts, capes, amulets, brooches, and circlets. Bags, carpets, figurines, horns, musical instruments, and more also fall into this category.
+
+#### Magic Item Rules
+**Tag:** Rule
+**Type:** Magic Items
+
+Rules for identifying, attuning to, and using magic items appear in “Equipment.” Additional rules are presented below.
+
+**Attunement Prerequisites.** If a magic item has a class prerequisite, a creature must be a member of that class to attune to the item. If a creature must be a spellcaster to attune to an item, the creature qualifies if it can cast at least one spell using its traits or features, not by using a magic item or the like.
+
+**Items Made for Specific Creatures.** Magic items that are meant to be worn tend to magically adjust themselves to the wearer. However, you can decide that a magic item doesn’t adjust its size to fit any wearer. For example, a particular armorer might make items usable only by folk who are sized and shaped like dwarves.
+
+**Unusual Anatomy.** Use your discretion to decide whether a creature can wear an item not made for its anatomy. A ring placed on a tentacle might work, but a yuan-ti with a snakelike tail instead of legs can’t wear magic boots.
+
+**Paired Items.** You can allow exceptions to the rule that paired items must both be worn. For example, a character with only one arm might be able to use a single *Glove of Missile Snaring* so long as the matching glove is on their person.
+
+#### Magic Item Rarity
+**Tag:** Rule
+**Type:** Magic Items
+
+Every magic item has a rarity, which provides a rough measure of an item’s power relative to other magic items. The rarities are shown in the Magic Item Rarities and Values table.
+
+Common magic items, such as a *Potion of Healing*, are the most plentiful. Artifacts, such as the *Dragon Orb*, are priceless, unique, and difficult to acquire.
+
+**Magic Item Values by Rarity**
+
+Common magic items can often be bought in a town or city. Uncommon and Rare magic items are usually found only in cities, and rarer magic items might be sold only in wondrous locations, such as a city on another plane of existence. If you allow characters to buy and sell magic items in your campaign, rarity can help you set prices for those items. Gold Piece values are provided in the Magic Item Rarities and Values table, though a seller might ask for a service rather than coin as payment.
+
+If a magic item incorporates an item that has a purchase cost in “Equipment” (such as a weapon or a suit of armor), add that item’s cost to the magic item’s value. For example, *+1 Armor* (Plate Armor) has a value of 5,500 GP, which is the sum of a Rare magic item’s value (4,000 GP) and the cost of Plate Armor (1,500 GP).
+
+**Magic Item Rarities and Values**
+
+| Rarity | Value* |
+|---|---|
+| Common | 100 GP |
+| Uncommon | 400 GP |
+| Rare | 4,000 GP |
+| Very Rare | 40,000 GP |
+| Legendary | 200,000 GP |
+| Artifact | Priceless |
+
+(*) Halve the value for a consumable item other than a Spell Scroll. The value of a Spell Scroll is double what it costs to scribe the scroll (as specified in the “Scribing Spell Scrolls” section of “Equipment”).
+
+#### Activating a Magic Item
+**Tag:** Rule
+**Type:** Magic Items
+
+It usually takes a Magic action to activate a magic item. The item’s user might also need to do something special. The description of each item category or individual item details how an item is activated. Certain items use the following rules for their activation.
+
+**Command Word**
+
+A command word is a word or short phrase that must be spoken or signed for an item to work. Spoken command words must be audible and fail to work in areas where all sound is suppressed, as in the area of the *Silence* spell.
+
+**Consumable Items**
+
+Some items are consumed—used up, in other words—when they are activated. A *Potion of Healing* must be swallowed, for example, while the writing vanishes from a scroll when it is read. Once used, a consumable item loses its magic.
+
+**Spells Cast from Items**
+
+Some magic items allow the user to cast a spell from the item. The spell is cast at the lowest possible spell and caster level, doesn’t expend any of the user’s spell slots, and requires no components unless the item’s description notes otherwise. The spell uses its normal casting time, range, and duration, and the user of the item must concentrate if the spell requires Concentration. Many items, such as Potions, bypass the casting of a spell and confer the spell’s effects with its usual duration. Certain items make exceptions to these rules, changing the casting time, duration, or other parts of a spell.
+
+A magic item may require the user to use their own spellcasting ability when casting a spell from the item. If the user has more than one spellcasting ability, the user chooses which one to use with the item. If the user doesn’t have a spellcasting ability, their spellcasting ability modifier is +0 for the item, and the user’s Proficiency Bonus applies.
+
+**Charges**
+
+Some magic items have charges that must be expended to activate their properties. The number of charges an item has remaining is revealed when the *Identify* spell is cast on it. A creature attuned to an item knows how many charges the item has and how many it regains.
+
+#### The Next Dawn
+**Tag:** Rule
+**Type:** Magic Items
+
+Magic items often have charges or properties that recharge at the next dawn or some other specified time. If such an item is on a world or plane of existence where the specified event doesn’t occur, the GM determines when the item recharges.
+
+#### Cursed Items
+**Tag:** Rule
+**Type:** Magic Items
+**Also:** Cursed Item
+
+A magic item’s description specifies whether it bears a curse. Most methods of identifying items, including the *Identify* spell, fail to reveal such a curse.
+
+Attunement to a cursed item can’t be ended voluntarily unless the curse is broken first, such as with a *Remove Curse* spell.
+
+#### Magic Item Resilience
+**Tag:** Rule
+**Type:** Magic Items
+
+A magic item is at least as durable as a nonmagical item of its kind. Most magic items, other than Potions and Scrolls, have Resistance to all damage.
+
+An Artifact can be destroyed only in some special way. Otherwise, it is impervious to damage. Learning how to destroy an Artifact usually requires research or the completion of a quest.
+
+#### Crafting Magic Items
+**Tag:** Rule
+**Type:** Magic Items
+
+“Equipment” contains rules on brewing *Potions of Healing* and scribing *Spell Scrolls*. To create other magic items, follow the rules below. In these rules, “you” refers to the character crafting the magic item.
+
+**Arcana Proficiency**
+
+To craft a magic item, you and any assistants must have proficiency in the Arcana skill.
+
+**Tools**
+
+The Magic Item Tools table lists which tool is required to make a magic item of each category. You must use the required tool to make an item and have proficiency with that tool. Any assistants must also have proficiency with it. For more information on the tools, see “Equipment.”
+
+**Magic Item Tools**
+
+| Item Category | Required Tool |
+|---|---|
+| Armor | Leatherworker’s Tools, Smith’s Tools, or Weaver’s Tools depending on the kind of armor as noted in the tools’ descriptions |
+| Potion | Alchemist’s Supplies or Herbalism Kit |
+| Ring | Jeweler’s Tools |
+| Rod | Woodcarver’s Tools |
+| Scroll | Calligrapher’s Supplies |
+| Staff | Woodcarver’s Tools |
+| Wand | Woodcarver’s Tools |
+| Weapon | Leatherworker’s Tools, Smith’s Tools, or Woodcarver’s Tools depending on the kind of weapon as noted in the tools’ descriptions |
+| Wondrous Item | Tinker’s Tools or the tool required to make the nonmagical item on which the magic item is based |
+
+**Spells**
+
+If a magic item allows its user to cast any spells from it, you must have all those spells prepared every day you spend crafting the item.
+
+**Time and Cost**
+
+Crafting a magic item takes an amount of time and money based on the item’s rarity as shown in the Magic Item Crafting Time and Cost table.
+
+**Work per Day.** For each day of crafting, you must work for 8 hours. If an item requires multiple days, those days needn’t be consecutive.
+
+**Assistants.** Characters can combine their efforts to shorten the crafting time. Divide the time needed to create an item by the number of characters working on it. Normally, only one other character can assist you, but the GM might allow more assistants.
+
+**Raw Materials.** The cost in the table represents the raw materials needed to make a magic item. The GM determines whether appropriate raw materials are available. In a city, there is a 75 percent chance that the materials are available, and in any other settlement, that chance is 25 percent. If materials aren’t available, you must wait at least 7 days before checking on the availability again.
+
+If a magic item incorporates an item that has a purchase cost (such as a weapon or a suit of armor), you must also pay that entire cost or craft that item using the rules in “Equipment.” For example, to make *+1 Armor* (Plate Armor), you must pay 3,500 GP or pay 2,000 GP and craft the armor.
+
+**Magic Item Crafting Time and Cost**
+
+| Item Rarity | Time* | Cost* |
+|---|---|---|
+| Common | 5 days | 50 GP |
+| Uncommon | 10 days | 200 GP |
+| Rare | 50 days | 2,000 GP |
+| Very Rare | 125 days | 20,000 GP |
+| Legendary | 250 days | 100,000 GP |
+
+(*) The time and cost are halved for a consumable item other than a Spell Scroll, whose crafting time and cost are given in “Equipment.”
+
+#### Sentient Magic Items
+**Tag:** Rule
+**Type:** Magic Items
+**Also:** Sentient Magic Item, Sentient Item, Sentient Items
+
+Some magic items have sentience and personality. Such an item might be possessed, haunted by the spirit of a previous owner, or self-aware thanks to the magic used to create it. A sentient item might be a cherished ally to its wielder or a continual thorn in the side.
+
+Most sentient items are weapons, but other kinds of items can manifest sentience. Single-use items such as potions and scrolls are never sentient.
+
+The GM controls sentient magic items and their activated properties. A bearer who maintains a good relationship with the item can access those properties. If the relationship is strained, a conflict can ensue (see “Conflict” below).
+
+**Sentient Magic Item Traits**
+
+When you make a sentient magic item, you create the item’s persona much as you would create an NPC, with these exceptions.
+
+**Abilities**
+
+A sentient magic item has Intelligence, Wisdom, and Charisma scores. Choose the item’s abilities, or determine them randomly as follows: roll 4d6 for each one, dropping the lowest roll and totaling the rest.
+
+**Alignment**
+
+A sentient magic item has an alignment. Its creator or nature might suggest an alignment. Otherwise, pick an alignment or roll on the Sentient Item’s Alignment table.
+
+**Communication**
+
+A sentient item communicates by sharing its emotions, broadcasting its thoughts telepathically, or speaking aloud. You can choose how it communicates or roll on the Sentient Item’s Communication table.
+
+**Senses**
+
+A sentient item can perceive its surroundings out to a limited range. You can choose its senses or roll on the Sentient Item’s Senses table.
+
+**Special Purpose**
+
+You can give a sentient item an objective it pursues, perhaps to the exclusion of all else. As long as the wielder’s use of the item aligns with that special purpose, the item remains cooperative. Deviating from this course might cause conflict between the wielder and the item (see “Conflict” below). You can pick a special purpose or roll on the Sentient Item’s Special Purpose table.
+
+**Sentient Item’s Alignment**
+
+| 1d100 | Alignment |
+|---|---|
+| 01–15 | Lawful Good |
+| 16–35 | Neutral Good |
+| 36–50 | Chaotic Good |
+| 51–63 | Lawful Neutral |
+| 64–73 | Neutral |
+| 74–85 | Chaotic Neutral |
+| 86–89 | Lawful Evil |
+| 90–96 | Neutral Evil |
+| 97–00 | Chaotic Evil |
+
+**Sentient Item’s Communication**
+
+| 1d10 | Communication |
+|---|---|
+| 1–6 | The item communicates by transmitting emotion to the creature carrying or wielding it. |
+| 7–9 | The item speaks one or more languages. |
+| 10 | The item speaks one or more languages. In addition, the item can communicate telepathically with any creature that carries or wields it. |
+
+**Sentient Item’s Senses**
+
+| 1d4 | Senses |
+|---|---|
+| 1 | Hearing and standard vision out to 30 feet |
+| 2 | Hearing and standard vision out to 60 feet |
+| 3 | Hearing and standard vision out to 120 feet |
+| 4 | Hearing and Darkvision out to 120 feet |
+
+**Sentient Item’s Special Purpose**
+
+| 1d10 | Special Purpose |
+|---|---|
+| 1 | **Aligned.** The item seeks to defeat or destroy those of a diametrically opposed alignment. Such an item is never Neutral. |
+| 2 | **Bane.** The item seeks to thwart or destroy creatures of a particular type, such as Constructs, Fiends, or Undead. |
+| 3 | **Creator Seeker.** The item seeks its creator and wants to understand why it was created. |
+| 4 | **Destiny Seeker.** The item believes it and its bearer have key roles to play in future events. |
+| 5 | **Destroyer.** The item craves destruction and goads its user to fight arbitrarily. |
+| 6 | **Glory Seeker.** The item seeks renown as the greatest magic item in the world by winning fame or notoriety for its user. |
+| 7 | **Lore Seeker.** The item craves knowledge or is determined to solve a mystery, learn a secret, or unravel a cryptic prophecy. |
+| 8 | **Protector.** The item seeks to defend a particular kind of creature, such as elves or werewolves. |
+| 9 | **Soulmate Seeker.** The item seeks another sentient magic item, perhaps one that is similar to itself. |
+| 10 | **Templar.** The item seeks to defend the servants and interests of a particular deity. |
+
+**Conflict**
+
+When the bearer of a sentient item acts in a manner opposed to the item’s alignment or purpose, conflict can arise. When such a conflict occurs, the item’s bearer makes a Charisma saving throw (DC 12 plus the item’s Charisma modifier). On a failed save, the item makes one or more of the following demands:
+
+**Chase My Dreams.** The item demands that its bearer pursue the item’s goals to the exclusion of all other goals.
+
+**Get Rid of It.** The item demands that its bearer dispose of anything the item finds repugnant.
+
+**It’s Time for a Change.** The item demands to be given to someone else.
+
+**Keep Me Close.** The item insists on being carried or worn at all times.
+
+If its bearer refuses to comply with the item’s demands, the item can do any of the following:
+
+- Make it impossible for its bearer to attune to it.
+- Suppress one or more of its activated properties.
+
+- Attempt to take control of its bearer, whereupon the bearer makes a Charisma saving throw (DC 12 plus the item’s Charisma modifier). On a failed save, the bearer has the Charmed condition for 1d12 hours. While Charmed in this way, the bearer must try to follow the item’s commands. If the bearer takes damage, it repeats the save, ending the effect on a success. Whether or not the attempt to control its bearer succeeds, the item can’t use this power again until the next dawn.
