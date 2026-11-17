@@ -2015,6 +2015,7 @@ A cantrip is a level 0 spell, which is cast without a spell slot.
 
 #### Carrying Capacity
 **Tag:** Rule
+**Also:** Encumbrance
 
 Your size and Strength score determine the maximum weight in pounds that you can carry, as shown in the Carrying Capacity table. The table also shows the maximum weight you can drag, lift, or push.
 
@@ -2029,6 +2030,14 @@ While dragging, lifting, or pushing weight in excess of the maximum weight you c
 | Large | Str. × 30 lb. | Str. × 60 lb. |
 | Huge | Str. × 60 lb. | Str. × 120 lb. |
 | Gargantuan | Str. × 120 lb. | Str. × 240 lb. |
+
+**Variant: Encumbrance**
+
+The rules for lifting and carrying are intentionally simple. Here is a variant if you are looking for more detailed rules for determining how a character is hindered by the weight of equipment. When you use this variant, ignore the Strength column of the Armor table in chapter 5.
+
+If you carry weight in excess of 5 times your Strength score, you are encumbered, which means your speed drops by 10 feet.
+
+If you carry weight in excess of 10 times your Strength score, up to your maximum carrying capacity, you are instead heavily encumbered, which means your speed drops by 20 feet and you have disadvantage on ability checks, attack rolls, and saving throws that use Strength, Dexterity, or Constitution.
 
 #### Challenge Rating
 **Tag:** Rule
