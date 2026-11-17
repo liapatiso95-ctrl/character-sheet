@@ -338,7 +338,7 @@ window.__characterLoad=function(def){
 (function(){
   var KEY='dnd5e_sync_v1';
   // Journals, UI state and big images stay on this device.
-  var DROP={portrait:1,savedRolls:1,taH:1,dsOpen:1,secOpen:1,creatures:1,nt1:1,nt2:1,nt3:1,npc:1,locations:1,lore:1,customSections:1,factions:1,cal:1,calEvents:1};
+  var DROP={portrait:1,savedRolls:1,taH:1,dsOpen:1,secOpen:1,creatures:1,nt1:1,nt2:1,nt3:1,npc:1,locations:1,lore:1,customSections:1,factions:1,cal:1,calEvents:1,dmCal:1,dmSessHide:1,dmEvents:1};
   var S={url:'',room:'',on:false,id:''};
   try{S=Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'));}catch(e){}
   if(!S.id){S.id='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);persist();}
@@ -348,6 +348,7 @@ window.__characterLoad=function(def){
   function cleanUrl(u){u=(u||'').trim();if(!u)return '';if(!/^https?:\/\//i.test(u))u='https://'+u;return u.replace(/\/+$/,'');}
   function setStatus(m,bad){status=m;var el=document.getElementById('sync-status');if(el){el.textContent=m;el.style.color=bad?'#e07060':'#8fd6a0';}paintBtn();}
   function paintBtn(){var b=document.getElementById('sync-btn');if(!b)return;var live=S.on&&S.url&&S.room;b.textContent='⇄ Sync'+(live?(/failed/i.test(status)?' ●':' ●'):'');b.style.color=live?(/failed/i.test(status)?'#e07060':'#6fcf85'):'';}
+  window.__syncLive=function(){return !!(S.on&&S.url&&S.room);};
   function currentState(){
     var d=null;try{d=localStorage.getItem('dnd5e_char_v1');}catch(e){}
     var p=null;
@@ -404,6 +405,38 @@ window.__characterLoad=function(def){
     busy=false;
     if(pending&&S.on){schedule(waitMs());}
   }
+  // DM -> player: HP changes the DM made to this character (damage / heal / adjust). Each one is applied once, then deleted from the room
+  // (the deletion tells the DM it arrived). Applied ids are also kept here, so a reload can never apply the same change twice.
+  var dmBusy=false,DMOPS='dnd5e_char_v1_dmops';
+  function dmDone(){try{var a=JSON.parse(localStorage.getItem(DMOPS)||'[]');return Array.isArray(a)?a:[];}catch(e){return [];}}
+  async function pollDm(){
+    if(dmBusy||!S.on||!S.url||!S.room||!S.id||!window.__dmHpApply)return;
+    dmBusy=true;
+    try{
+      var r=await fetchT(base()+'/dm/hp/'+S.id+'.json?_='+Date.now(),{cache:'no-store'},8000);
+      var o=r.ok?await r.json():null;if(!o||typeof o!=='object')o={};
+      var done=dmDone(),ids=Object.keys(o);
+      var fresh=ids.filter(function(k){return done.indexOf(k)<0&&o[k]&&typeof o[k]==='object';}).sort(function(a,b){return (o[a].t||0)-(o[b].t||0);});
+      if(fresh.length){
+        done=done.concat(fresh).slice(-100);try{localStorage.setItem(DMOPS,JSON.stringify(done));}catch(e){}
+        window.__dmHpApply(fresh.map(function(k){return {id:k,k:o[k].k,n:o[k].n};}));
+      }
+      for(var i=0;i<ids.length;i++){await fetchT(base()+'/dm/hp/'+S.id+'/'+encodeURIComponent(ids[i])+'.json',{method:'DELETE'},8000);}
+    }catch(e){}
+    try{
+      // The DM's calendar (names, weekdays, year suffix and the current date/time). Kept apart from this sheet's own calendar.
+      if(window.__dmCalApply){var rc=await fetchT(base()+'/dm/cal.json?_='+Date.now(),{cache:'no-store'},8000);if(rc.ok){var oc=await rc.json();if(oc&&typeof oc==='object')window.__dmCalApply(oc);}}
+    }catch(e){}
+    try{
+      // Sessions the DM ticked for sync (title, number and in-world dates only).
+      if(window.__dmSessApply){var rs=await fetchT(base()+'/dm/sessions.json?_='+Date.now(),{cache:'no-store'},8000);if(rs.ok){var os=await rs.json();window.__dmSessApply(os&&typeof os==='object'?os:{});}}
+    }catch(e){}
+    try{
+      // Events the DM ticked for sync (title, date and notes). Read-only here, kept apart from this sheet's own events.
+      if(window.__dmEvApply){var re=await fetchT(base()+'/dm/events.json?_='+Date.now(),{cache:'no-store'},8000);if(re.ok){var oe=await re.json();window.__dmEvApply(oe&&typeof oe==='object'?oe:{});}}
+    }catch(e){}finally{dmBusy=false;}
+  }
+  setInterval(pollDm,3000);
   // Dice rolled in this sheet's roller go to the room too (the last 10, newest first) so the DM screen can show them.
   var rollList=[],rollTimer=null;
   async function pushRolls(){
@@ -456,7 +489,7 @@ window.__characterLoad=function(def){
       S.url=url;S.room=room;S.on=true;persist();u.value=url;
       setStatus('Connecting...');pending=currentState();clearTimeout(timer);push(true);
     };
-    box.querySelector('#sync-stop').onclick=function(){S.on=false;persist();clearTimeout(timer);setStatus('Off');};
+    box.querySelector('#sync-stop').onclick=function(){S.on=false;persist();clearTimeout(timer);setStatus('Off');if(window.__forceRender)window.__forceRender();};
   }
   window.__syncOpen=open;
   function init(){
@@ -4730,9 +4763,10 @@ function JournalEntry({cfg,it,i,k,ed,onUpd,onDel,onToggle,dflt}){
       {badge}
       <div style={{flex:1,minWidth:0}}>
         {isEd
-          ?<input className="fi" value={it[cfg.t]||""} onChange={function(e){onUpd(cfg.t,e.target.value);}} placeholder={cfg.tp} style={{fontFamily:"'Cinzel',serif",fontSize:13,color:"var(--gold-l)",marginBottom:4}} />
+          ?(it.dm?<div title="Set by the DM" style={{fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"var(--gold-l)",marginBottom:4}}>{title||"Untitled"}</div>:<input className="fi" value={it[cfg.t]||""} onChange={function(e){onUpd(cfg.t,e.target.value);}} placeholder={cfg.tp} style={{fontFamily:"'Cinzel',serif",fontSize:13,color:"var(--gold-l)",marginBottom:4}} />)
           :<div style={{fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"var(--gold-l)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{title||"Untitled"}</div>}
-        {!isEd&&(subTxt||dispo)&&<div style={{display:"flex",alignItems:"center",gap:7,minWidth:0}}>
+        {!isEd&&(subTxt||dispo||it.dm)&&<div style={{display:"flex",alignItems:"center",gap:7,minWidth:0}}>
+          {it.dm&&<span title="Sent by the DM" style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1.5,textTransform:"uppercase",padding:"1px 7px",borderRadius:9,background:"rgba(123,79,207,.2)",border:"1px solid rgba(184,154,240,.5)",color:"rgb(184,154,240)",flexShrink:0}}>DM</span>}
           {dispo&&<span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1.5,textTransform:"uppercase",padding:"1px 7px",borderRadius:9,background:_J_DISPO[dispo].bg,border:"1px solid "+_J_DISPO[dispo].bd,color:_J_DISPO[dispo].c,flexShrink:0}}>{dispo}</span>}
           {subTxt&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.55)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{subTxt}</span>}
         </div>}
@@ -4751,11 +4785,12 @@ function JournalEntry({cfg,it,i,k,ed,onUpd,onDel,onToggle,dflt}){
         ?<div>
           {cfg.s&&<input className="fi" value={it[cfg.s]||""} onChange={function(e){onUpd(cfg.s,e.target.value);}} placeholder={cfg.sp} style={{marginBottom:6}} />}
           {cfg.session&&<div style={{display:"flex",gap:8,marginBottom:6,flexWrap:"wrap"}}>
-            <input className="fi" type="number" min="0" value={it.sn==null?"":it.sn} onChange={function(e){onUpd("sn",e.target.value);}} placeholder="Session #" style={{width:96,flex:"0 0 96px"}} />
+            <input className="fi" type="number" min="0" value={it.sn==null?"":it.sn} onChange={function(e){onUpd("sn",e.target.value);}} placeholder="Session #" disabled={!!it.dm} style={{width:96,flex:"0 0 96px"}} />
             <input className="fi" type="date" value={it.dt||""} onChange={function(e){onUpd("dt",e.target.value);}} style={{width:150,flex:"0 0 150px"}} />
           </div>}
           {cfg.ev&&window.__cal&&<CalEventFields it={it} onUpd={onUpd} />}
-          {cfg.session&&window.__cal&&<CalSessionFields it={it} onUpd={onUpd} />}
+          {cfg.session&&window.__cal&&!it.dm&&<CalSessionFields it={it} onUpd={onUpd} />}
+          {cfg.session&&it.dm&&<div style={{fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:"rgba(184,154,240,.7)",marginBottom:6}}>Title, number and in-world dates come from the DM. The notes below are yours.</div>}
           {cfg.dispo&&<div style={{display:"flex",gap:6,marginBottom:6,flexWrap:"wrap"}}>
             {["ally","enemy","neutral"].map(function(d){var a=dispo===d,D=_J_DISPO[d];
               return <span key={d} onClick={function(){onUpd("ty",d);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",padding:"3px 10px",borderRadius:9,userSelect:"none",background:a?D.bg:"rgba(0,0,0,.2)",border:"1px solid "+(a?D.bd:"rgba(201,150,42,.15)"),color:a?D.c:"rgba(232,213,176,.3)"}}>{d}</span>;})}
@@ -4770,7 +4805,7 @@ function JournalEntry({cfg,it,i,k,ed,onUpd,onDel,onToggle,dflt}){
 }
 
 // A whole journal list: entries (pinned first), NPC filter chips, empty state, add button.
-function JournalSection({cfg,listKey,items,pred,onUpd,onDel,onToggle,onAdd,extraTop,extraRows}){
+function JournalSection({cfg,listKey,items,pred,onUpd,onDel,onToggle,onAdd,extraTop,extraRows,ghosts}){
   const ed=useEditSet();
   const [flt,setFlt]=React.useState("all");
   var rows=(items||[]).map(function(it,i){return {it:it,i:i};});
@@ -4791,7 +4826,7 @@ function JournalSection({cfg,listKey,items,pred,onUpd,onDel,onToggle,onAdd,extra
   if(cfg.timeline){
     var K=window.__cal?window.__cal.key:null;
     var groups=ex.map(function(r){return {r:r,kids:[]};}),loose=[];
-    shown.forEach(function(x){
+    shown.concat((ghosts||[]).map(function(g){return {it:g,i:-1,ghost:true};})).forEach(function(x){
       var k=K?K(x.it):Infinity,home=null;
       if(!x.it.pin&&k!==Infinity) groups.forEach(function(g){if(k>=g.r.k0&&k<=g.r.k1&&(!home||g.r.k0>home.r.k0))home=g;});
       if(home) home.kids.push(x); else loose.push(x);
@@ -4806,7 +4841,7 @@ function JournalSection({cfg,listKey,items,pred,onUpd,onDel,onToggle,onAdd,extra
       return a.g&&!b.g?-1:(b.g&&!a.g?1:0);
     });
   } else feed=shown.map(function(x){return {x:x};});
-  var empty=(items||[]).length===0&&ex.length===0;
+  var empty=(items||[]).length===0&&ex.length===0&&!(ghosts&&ghosts.length);
   return <div>
     {extraTop}
     {cfg.dispo&&!empty&&<div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:12}}>
@@ -4819,6 +4854,7 @@ function JournalSection({cfg,listKey,items,pred,onUpd,onDel,onToggle,onAdd,extra
     {!empty&&feed.length===0&&<div style={{textAlign:"center",padding:"14px 0",fontFamily:"'EB Garamond',serif",fontSize:14,fontStyle:"italic",color:"rgba(232,213,176,.4)"}}>Nothing matches.</div>}
     {(function(){
       var entry=function(x,compact){
+        if(x.ghost)return <CalDmEventRow key={"gh"+x.it.sid} it={x.it} compact={compact} />;
         return <JournalEntry key={x.i} cfg={cfg} it={x.it} i={x.i} k={"jn-"+listKey+"-"+x.i} ed={ed} dflt={compact?false:undefined}
           onUpd={function(f,v){onUpd(x.i,f,v);}} onDel={function(){window.__confirm("Delete this "+cfg.single+"?",function(){ed.clear("jn-"+listKey+"-");onDel(x.i);});}} onToggle={compact?function(){onUpd(x.i,"showDesc",x.it.showDesc===undefined?true:x.it.showDesc===false);}:function(){onToggle(x.i);}} />;
       };
@@ -4975,6 +5011,21 @@ function CalSessionRow({it,i,n}){
     </div>
   </div>;
 }
+// A read-only event from the DM, shown in the player's timeline (kept apart from the player's own events).
+function CalDmEventRow({it,compact}){
+  var cal=window.__cal,body=(it.tx||"").trim();
+  return <div className="jc" style={{borderLeft:"3px solid rgba(74,156,92,.55)"}}>
+    <div style={{display:"flex",alignItems:"center",gap:10}}>
+      <div style={{width:32,height:32,borderRadius:"50%",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",background:"radial-gradient(circle at 35% 30%, rgba(74,156,92,.33), rgba(0,0,0,.35))",border:"1px solid rgba(74,156,92,.55)",color:"rgba(124,201,138,.95)"}}><JIcon name="cal" size={16} /></div>
+      <div style={{flex:1,minWidth:0}}>
+        <div style={{fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,color:"var(--gold-l)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{it.ti||"Untitled"}</div>
+        <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,.55)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{cal?cal.evSub(it):""}</div>
+      </div>
+      <span title="Sent by the DM" style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1.5,textTransform:"uppercase",padding:"1px 7px",borderRadius:9,background:"rgba(74,156,92,.15)",border:"1px solid rgba(74,156,92,.5)",color:"#7cc98a",flexShrink:0}}>DM</span>
+    </div>
+    {body&&<div style={{marginTop:8,paddingLeft:42,fontFamily:"'EB Garamond',serif",fontSize:14,lineHeight:1.5,color:"var(--parch)"}}>{compact?<div style={{fontStyle:"italic",color:"rgba(232,213,176,.5)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{_jPreview(body)}</div>:<Markdown text={body} />}</div>}
+  </div>;
+}
 function CampaignCalendar({c,s,children,onAddEvent}){
   const cal=window.__cal,cfg=cal.cfg,now=cal.now;
   const [view,setView]=React.useState(null);
@@ -4987,7 +5038,9 @@ function CampaignCalendar({c,s,children,onAddEvent}){
   const setNow=function(nv){setCal({now:Object.assign({h:now.h,mi:now.mi},calNorm(cfg,nv))});};
   const adv=function(mins){setCal({now:calAdd(cfg,now,mins)});};
   const evs=c.calEvents||[];
-  const byDay={};evs.forEach(function(e){if(e.y==null)return;var k=e.y+"|"+e.p+"|"+e.d;(byDay[k]=byDay[k]||[]).push(e);});
+  const dmEv=(window.__syncLive&&window.__syncLive())?(c.dmEvents||[]):[];
+  const byDay={};evs.concat(dmEv.map(function(e){return Object.assign({},e,{dm:true});})).forEach(function(e){if(e.y==null)return;var k=e.y+"|"+e.p+"|"+e.d;(byDay[k]=byDay[k]||[]).push(e);});
+  const ssDay={};(c.nt1||[]).forEach(function(x){var a=x&&x.cs;if(!a||a.y==null)return;var k=a.y+"|"+a.p+"|"+a.d;(ssDay[k]=ssDay[k]||[]).push(x);});
   const vw=view||{y:now.y,p:now.p};
   const vps=calYearPeriods(cfg,vw.y);
   var vi=vps.findIndex(function(p){return p.id===vw.p;});if(vi<0)vi=0;
@@ -5004,6 +5057,7 @@ function CampaignCalendar({c,s,children,onAddEvent}){
   const card={background:"rgba(0,0,0,.25)",border:"1px solid rgba(201,150,42,.15)",padding:"10px 14px",marginBottom:12};
   const hd={fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(232,213,176,.45)"};
   const tb=function(label,fn,title){return <button key={label} type="button" title={title} onClick={fn} style={{flex:"1 1 0",minWidth:0,fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:.5,textTransform:"uppercase",padding:"7px 2px",cursor:"pointer",borderRadius:2,background:"rgba(20,14,8,.8)",border:"1px solid rgba(201,150,42,.3)",color:"var(--gold-l)",whiteSpace:"nowrap"}}>{label}</button>;};
+  const fol=!!window.__calFollow;
   const wkDay=calWeekday(cfg,now);
   const addNowEvent=function(){var t=qn.trim();if(!t)return;onAddEvent(Object.assign({ti:t,tx:""},now));setQn("");};
   // ── settings helpers
@@ -5012,11 +5066,12 @@ function CampaignCalendar({c,s,children,onAddEvent}){
   const small={fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",cursor:"pointer",borderRadius:2,userSelect:"none",padding:"3px 7px",border:"1px solid rgba(201,150,42,.3)",background:"transparent",color:"var(--gold-l)"};
   return <div>
     <div style={card}>
-      <div style={hd}>Now</div>
+      <div style={hd}>Now{fol&&<span title="The calendar and the date come from the DM while sync is on" style={{marginLeft:8,padding:"1px 7px",borderRadius:9,border:"1px solid rgba(184,154,240,.5)",background:"rgba(123,79,207,.2)",color:"rgb(184,154,240)",fontSize:8,letterSpacing:1.5}}>Following DM</span>}</div>
       <div style={{display:"flex",alignItems:"baseline",gap:12,flexWrap:"wrap",margin:"4px 0 10px"}}>
         <span style={{fontFamily:"'Cinzel',serif",fontSize:20,fontWeight:700,color:"var(--gold-l)"}}>{calFmt(cfg,now)}</span>
         <span style={{fontFamily:"'EB Garamond',serif",fontSize:15,fontStyle:"italic",color:"rgba(232,213,176,.7)"}}>{(wkDay!=null?cfg.week[wkDay]+" day · ":"")+calTime(now)+" · "+calPhase(now)}</span>
       </div>
+      {!fol&&<div>
       <div style={{display:"flex",gap:6,marginBottom:6}}>
         {tb("+10 min",function(){adv(10);})}{tb("+1 hour",function(){adv(60);})}{tb("+8 hours",function(){adv(480);},"Long rest")}{tb("+1 day",function(){adv(1440);})}{tb("+1 week",function(){adv(1440*W);},"One week of the calendar")}
       </div>
@@ -5024,6 +5079,7 @@ function CampaignCalendar({c,s,children,onAddEvent}){
         {tb("−10 min",function(){adv(-10);})}{tb("−1 hour",function(){adv(-60);})}{tb("−8 hours",function(){adv(-480);})}{tb("−1 day",function(){adv(-1440);})}{tb(setOpen?"Close":"Set…",function(){setSetOpen(!setOpen);},"Set the date and time directly")}
       </div>
       {setOpen&&<CalDateEdit withTime value={now} onChange={function(nv){setNow(nv);}} />}
+      </div>}
       <div style={{display:"flex",gap:8,alignItems:"center"}}>
         <input className="fi" value={qn} onChange={function(e){setQn(e.target.value);}} onKeyDown={function(e){if(e.key==="Enter"){e.preventDefault();addNowEvent();}}} placeholder="Log an event now; Enter adds it at this date and time" style={{flex:1,background:"rgba(0,0,0,.3)",border:"1px solid rgba(74,156,92,.35)",borderRadius:2,padding:"7px 10px"}} />
         <button type="button" className="arb" onClick={addNowEvent} style={{margin:0,flexShrink:0}}>Add</button>
@@ -5042,16 +5098,17 @@ function CampaignCalendar({c,s,children,onAddEvent}){
       <div style={{display:"grid",gridTemplateColumns:"repeat("+W+",minmax(0,1fr))",gap:3}}>
         {cells.map(function(d,i){
           if(d==null)return <div key={"b"+i} />;
-          var evn=(byDay[vw.y+"|"+vp.id+"|"+d]||[]).length,today=isNow(d),sl=isSel(d);
-          return <div key={d} onClick={function(){setSel({y:vw.y,p:vp.id,d:d});}} title={evn?evn+" event"+(evn===1?"":"s"):""}
+          var evn=(byDay[vw.y+"|"+vp.id+"|"+d]||[]).length,ssn=(ssDay[vw.y+"|"+vp.id+"|"+d]||[]).length,today=isNow(d),sl=isSel(d);
+          return <div key={d} onClick={function(){setSel({y:vw.y,p:vp.id,d:d});}} title={(evn?evn+" event"+(evn===1?"":"s"):"")+(evn&&ssn?" · ":"")+(ssn?(ssn===1?"a session starts":ssn+" sessions start"):"")}
             style={{cursor:"pointer",minHeight:34,borderRadius:2,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:2,userSelect:"none",fontFamily:"'Cinzel',serif",fontSize:11,
               background:today?"var(--gold)":"rgba(0,0,0,.3)",color:today?"#1a1410":"var(--parch)",border:"1px solid "+(sl?"var(--gold-l)":"rgba(201,150,42,.15)"),boxShadow:sl?"0 0 0 1px var(--gold-l)":"none"}}>
-            {d}<span style={{width:5,height:5,borderRadius:"50%",background:evn?(today?"#1a1410":"rgba(74,156,92,.9)"):"transparent"}} /></div>;
+            {d}<span style={{display:"flex",gap:3}}><span style={{width:5,height:5,borderRadius:"50%",background:evn?(today?"#1a1410":"rgba(74,156,92,.9)"):"transparent"}} /><span style={{width:5,height:5,borderRadius:"50%",background:ssn?(today?"#1a1410":"rgb(184,154,240)"):"transparent"}} /></span></div>;
         })}
       </div>
       {sel&&<div style={{marginTop:10,paddingTop:8,borderTop:"1px solid rgba(201,150,42,.15)"}}>
         <div style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"var(--gold-l)",marginBottom:4}}>{calFmt(cfg,sel,true)}</div>
-        {(byDay[sel.y+"|"+sel.p+"|"+sel.d]||[]).map(function(e,i){return <div key={i} style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"var(--parch)"}}>{(e.h!=null?calTime(e)+" · ":"")+(e.ti||"Untitled")}</div>;})}
+        {(ssDay[sel.y+"|"+sel.p+"|"+sel.d]||[]).map(function(x,i){return <div key={"s"+i} style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgb(184,154,240)"}}>{"Session "+(x.sn||"")+(x.ti?" · "+x.ti:"")+" starts"}</div>;})}
+        {(byDay[sel.y+"|"+sel.p+"|"+sel.d]||[]).map(function(e,i){return <div key={i} style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"var(--parch)"}}>{(e.dm?"DM · ":"")+(e.h!=null?calTime(e)+" · ":"")+(e.ti||"Untitled")}</div>;})}
         <div style={{display:"flex",gap:8,marginTop:6,flexWrap:"wrap"}}>
           <button type="button" className="arb" style={{margin:0}} onClick={function(){setNow(Object.assign({},sel));}}>Set as today</button>
           <button type="button" className="arb" style={{margin:0}} onClick={function(){onAddEvent({ti:"",tx:"",y:sel.y,p:sel.p,d:sel.d});}}>+ Event here</button>
@@ -5060,7 +5117,7 @@ function CampaignCalendar({c,s,children,onAddEvent}){
     </div>
     <div className="sh"><JIcon name="cal" size={15} /> Timeline</div>
     {children}
-    <div style={{marginTop:18}}>
+    {!fol&&<div style={{marginTop:18}}>
       <button type="button" className="arb" onClick={function(){setCfgOpen(!cfgOpen);}}>{cfgOpen?"− Calendar settings":"+ Calendar settings"}</button>
       {cfgOpen&&<div style={Object.assign({},card,{marginTop:10})}>
         <div style={{display:"flex",gap:10,flexWrap:"wrap",marginBottom:8}}>
@@ -5089,7 +5146,7 @@ function CampaignCalendar({c,s,children,onAddEvent}){
         </div>
         <div style={{fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,.4)",marginTop:8,lineHeight:1.4}}>Days: how many days the month has. Fest: a festival day with no weekday. Leap: the period only exists in years divisible by that number (Shieldmeet: 4).</div>
       </div>}
-    </div>
+    </div>}
   </div>;
 }
 
@@ -5126,8 +5183,10 @@ function Page4({c,s}){
     window.__jnNames=L;
   })();
   // In-world calendar: config and current date (defaults to Harptos), read by the date fields and the session notes
-  var calCfg=_calCfg(c),calNow=calNorm(calCfg,Object.assign({y:1492,p:calCfg.periods[0].id,d:1,h:8,mi:0},(c.cal&&c.cal.now)||{}));
-  window.__cal=_calApi(calCfg,calNow);
+  // While sync is on and the DM has shared a calendar, it replaces this sheet's own (shown read-only).
+  var calFol=(window.__syncLive&&window.__syncLive()&&c.dmCal&&c.dmCal.cfg)?c.dmCal:null,calSrc=calFol||c.cal;
+  var calCfg=_calCfg({cal:calSrc}),calNow=calNorm(calCfg,Object.assign({y:1492,p:calCfg.periods[0].id,d:1,h:8,mi:0},(calSrc&&calSrc.now)||{}));
+  window.__cal=_calApi(calCfg,calNow);window.__calFollow=!!calFol;
   const addCalEvent=function(row){s("calEvents",function(prev){return [...(prev||[]),row];});};
   // Follow a link: switch to the entry's section, open it, scroll to it and flash it.
   window.__jnGo=function(ref){
@@ -5208,7 +5267,7 @@ function Page4({c,s}){
           <SectionRail accent="184,154,240" label={pr[1]} onExpand={()=>setAllDesc(key,true)} onCollapse={()=>setAllDesc(key,false)} />
           <div className="sh"><JIcon name={cfg.icon} size={15} /> {pr[1]}</div>
           <JournalSection cfg={cfg} listKey={key} items={c[key]} pred={function(it){return jPred(it);}}
-            onUpd={(i,f,v)=>ui(key,i,f,v)} onDel={(i)=>di(key,i)} onToggle={(i)=>toggleDesc(key,i)}
+            onUpd={(i,f,v)=>ui(key,i,f,v)} onDel={(i)=>{var it0=(c[key]||[])[i];if(key==="nt1"&&it0&&it0.dm&&it0.sid)s("dmSessHide",function(p){return (p||[]).concat([it0.sid]);});di(key,i);}} onToggle={(i)=>toggleDesc(key,i)}
             extraTop={key==="nt1"?<SessionQuickNote items={c.nt1} onAppend={quickSession} />:null}
             onAdd={function(items,ed){
               if(key==="nt1"){
@@ -5228,6 +5287,7 @@ function Page4({c,s}){
         <div className="sh"><JIcon name="cal" size={15} /> Calendar</div>
         <CampaignCalendar c={c} s={s} onAddEvent={addCalEvent}>
           <JournalSection cfg={_JCFG.ev} listKey="calEvents" items={c.calEvents} pred={function(it){return jPred(it);}}
+            ghosts={((window.__syncLive&&window.__syncLive())?(c.dmEvents||[]):[]).filter(function(e){return jPred(e);})}
             extraRows={(c.nt1||[]).map(function(it,i){return {it:it,i:i};}).filter(function(x){return ((x.it.cs&&x.it.cs.y!=null)||(x.it.ce&&x.it.ce.y!=null))&&jPred(x.it);}).map(function(x){var cl=window.__cal,a=(x.it.cs&&x.it.cs.y!=null)?x.it.cs:x.it.ce,b=(x.it.ce&&x.it.ce.y!=null)?x.it.ce:a,k0=cl.key(a),k1=cl.key(b)+(b.h==null?1439:0);if(k1<k0)k1=k0;return {k0:k0,k1:k1,node:<CalSessionRow key={"sr"+x.i} it={x.it} i={x.i} />};})}
             onUpd={(i,f,v)=>ui("calEvents",i,f,v)} onDel={(i)=>di("calEvents",i)} onToggle={(i)=>toggleDesc("calEvents",i)}
             onAdd={function(){addCalEvent(Object.assign({ti:"",tx:""},calNow));}} />
@@ -13613,7 +13673,6 @@ function SpeciesPanel({c,s}){
     <div>
       <SpeciesFilterBar f={fl} setF={setFl} inputStyle={inputStyle} />
       <div style={{display:"flex",gap:8,marginBottom:10,alignItems:"center",flexWrap:"wrap"}}>
-                <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.4)"}}>{shownAll.length} species ·</span>
         <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,.4)"}}>
           Chosen: <span style={{color:"var(--gold-l)"}}>{speciesTotalCost(cur)}</span> pts
         </span>
@@ -15973,6 +16032,41 @@ function _hpFormula(c){
 }
 function _stripMaxHP(c){return c.hpAutoCalc?(_hpFormula(c)||0):(parseInt(c.hpx)||0);}
 // Damage / heal using the amount in c.hpAmt (temp HP absorbs damage first). Shared by the Character tab and the strip.
+// Sessions from the DM: each becomes a normal session note (so it shows in the list, timeline and calendar) tagged dm:true.
+// Only title, number and in-world dates are the DM's; the notes text is always the player's. Returns a new list, or null if nothing changed.
+function _dmSessMerge(list,items,hide){
+  list=Array.isArray(list)?list:[];items=items||{};hide=hide||[];
+  var ch=false,have={},out=list.map(function(it){
+    if(!it||!it.sid)return it;
+    have[it.sid]=1;var d=items[it.sid];
+    if(!d){if(it.dm){ch=true;var n=Object.assign({},it);delete n.dm;return n;}return it;}
+    if(hide.indexOf(it.sid)>=0)return it;
+    var n2=Object.assign({},it,{dm:true,ti:d.ti||"",sn:d.sn==null?"":d.sn});
+    if(d.cs)n2.cs=d.cs;else delete n2.cs;
+    if(d.ce)n2.ce=d.ce;else delete n2.ce;
+    if(JSON.stringify(n2)!==JSON.stringify(it)){ch=true;return n2;}
+    return it;
+  });
+  Object.keys(items).forEach(function(sid){
+    if(have[sid]||hide.indexOf(sid)>=0)return;var d=items[sid];if(!d)return;
+    var n={ti:d.ti||"",sn:d.sn==null?"":d.sn,tx:"",dm:true,sid:sid,showDesc:true};if(d.cs)n.cs=d.cs;if(d.ce)n.ce=d.ce;out.push(n);ch=true;
+  });
+  return ch?out:null;
+}
+// One HP change from the DM, as a patch of sheet fields (same rules as the damage / heal buttons: temp HP first, floor 0, cap at max).
+function _dmHpOpPatch(c,op){
+  if(op&&op.k==="temp"){var tn=Math.max(0,parseInt(op.n)||0),told=parseInt(c.hpt)||0;if(tn===told)return null;return {p:{hpt:tn>0?""+tn:""},msg:"DM set your temp HP to "+tn+" (was "+told+")"};}
+  var n=parseInt(op&&op.n)||0;if(!n)return null;
+  var max=_stripMaxHP(c),hasCur=(c.hpc!==""&&c.hpc!=null&&c.hpc!==undefined),cur=hasCur?(parseInt(c.hpc)||0):max,tmp=parseInt(c.hpt)||0,p={},nv=cur;
+  if(op.k==="dmg"){n=Math.abs(n);var ft=Math.min(tmp,n),rest=n-ft;if(ft>0)p.hpt=ft>=tmp?"":""+(tmp-ft);nv=Math.max(0,cur-rest);}
+  else if(op.k==="heal"){n=Math.abs(n);nv=max>0?Math.min(max,cur+n):cur+n;}
+  else if(op.k==="adj"){nv=Math.max(0,max>0?Math.min(max,cur+n):cur+n);}
+  else return null;
+  p.hpc=""+nv;if(max>0)p.hpDmg=""+Math.max(0,max-nv);
+  if(nv>0&&((c.ds||[]).some(Boolean)||(c.df||[]).some(Boolean))){p.ds=[false,false,false];p.df=[false,false,false];}
+  var msg=op.k==="dmg"?"DM: "+n+" damage (HP "+cur+" \u2192 "+nv+")":op.k==="heal"?"DM healed "+n+" (HP "+cur+" \u2192 "+nv+")":"DM changed your HP: "+cur+" \u2192 "+nv;
+  return {p:p,msg:msg};
+}
 function _hpApply(c,s,kind,onLive){
   var amt=parseInt(c.hpAmt)||0; if(amt<=0)return;
   var max=_stripMaxHP(c);
@@ -16502,6 +16596,36 @@ function App(){
     }
   },[c.feat,c.fts,c.spec]);
   React.useEffect(function(){if(!lrToast)return;const t=setTimeout(function(){setLrToast(null);},5000);return function(){clearTimeout(t);};},[lrToast]);
+  const cLatest=React.useRef(c);cLatest.current=c;
+  // Called by the sync code with HP changes the DM sent; uses the newest state, saves like any other edit, and shows a notice.
+  window.__dmHpApply=function(ops){
+    var msgs=[],probe=cLatest.current;
+    ops.forEach(function(op){var r=_dmHpOpPatch(probe,op);if(r){probe=Object.assign({},probe,r.p);msgs.push(r.msg);}});
+    if(!msgs.length)return;
+    setC(function(prev){
+      var next=prev;ops.forEach(function(op){var r=_dmHpOpPatch(next,op);if(r)next=Object.assign({},next,r.p);});
+      if(next===prev)return prev;
+      if(window.__characterAutoSave)setTimeout(function(){window.__characterAutoSave(next);},100);
+      return next;
+    });
+    setLrToast(msgs.join(" · "));
+  };
+  // The DM's calendar arrives here and is kept in c.dmCal (never in c.cal, so this sheet's own calendar is untouched and comes back when sync is off).
+  window.__dmCalApply=function(o){
+    if(!o||!o.cfg||!Array.isArray(o.cfg.periods)||!o.cfg.periods.length||!Array.isArray(o.cfg.week)||!o.cfg.week.length||!o.now)return;
+    var cur=cLatest.current.dmCal;if(cur&&cur.v===o.v)return;
+    s("dmCal",{cfg:o.cfg,now:o.now,v:o.v});
+  };
+  window.__dmSessApply=function(o){
+    var items=(o&&o.items&&typeof o.items==='object')?o.items:{},cur=cLatest.current;
+    if(!_dmSessMerge(cur.nt1,items,cur.dmSessHide))return;
+    s("nt1",function(prev){return _dmSessMerge(prev,items,cLatest.current.dmSessHide)||prev;});
+  };
+  window.__dmEvApply=function(o){
+    var items=(o&&o.items&&typeof o.items==='object')?o.items:{},list=Object.keys(items).sort().map(function(k){var d=items[k]||{};return {sid:k,ti:d.ti||"",tx:d.tx||"",y:d.y,p:d.p,d:d.d,h:d.h,mi:d.mi};});
+    var cur=cLatest.current.dmEvents||[];if(JSON.stringify(cur)===JSON.stringify(list))return;
+    s("dmEvents",list);
+  };
   const savedRolls=c.savedRolls||[];
   const saveSRApp=function(updater){s("savedRolls",function(prev){return updater(Array.isArray(prev)?prev:[]);});};
 
@@ -16691,7 +16815,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v3.24.0</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v3.30.0</div>
 
 </script>
 </body>
