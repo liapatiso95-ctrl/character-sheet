@@ -262,7 +262,7 @@ If all the above requirements are met, the result of the process is an item of t
 #### Hiding
 **Tag:** Rule
 **Link:** yes
-**Also:** Hidden
+**Also:** Hidden, Hide
 
 Being hidden means you have successfully concealed your presence from one or more creatures. The environment, shadows, or distractions might conceal you, allowing you to move undetected through dangerous areas or gain the upper hand in combat.
 
