@@ -262,7 +262,7 @@ If all the above requirements are met, the result of the process is an item of t
 #### Hiding
 **Tag:** Rule
 **Link:** yes
-**Also:** Hidden, Hide
+**Also:** Hidden
 
 Being hidden means you have successfully concealed your presence from one or more creatures. The environment, shadows, or distractions might conceal you, allowing you to move undetected through dangerous areas or gain the upper hand in combat.
 
@@ -713,3 +713,8 @@ A creature who tries and fails to cast a spell from a spell scroll must make a D
 **Tag:** Rule
 
 While worn, armor does not count toward a character's carrying capacity. Armor that is carried but not worn weighs normally.
+
+#### Choosing Languages
+**Tag:** Language Note
+
+Your character begins play knowing at least two languages: One language from the Standard Languages Table, and one language from either the Standard or Rare Languages tables. The character knows additional languages equal to their Intelligence ability score modifier at 1st level. A character does not learn languages retroactively when they raise their Intelligence ability score modifier.
