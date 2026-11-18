@@ -499,13 +499,26 @@ When you take the Attack action on your turn, you can replace one attack with an
 
 If a character counterspells a counterspell, they must make an ability check using their Spellcasting ability modifier to avoid magic going awry. The DC equals 10 + the level of the counterspell counterspelled. On a failure, the character rolls on the Wild Magic Table.
 
-#### Deadly Critical hits
+#### Critical Hit
 **Tag:** Rule
 
-Using this rule, if you land a critical hit, you do not roll all of the attack’s damage dice twice and add them together. Instead, your attack deals maximum damage and you also roll the attack's damage dice normally, and add those two amounts together. For example, a critical hit with a longsword deals 1d8+8+str modifier damage. Additionally, the creature can forgo rolling the dice (dealing only maximum damage) to inflict a random lingering injury.
+If you roll a 20 on the d20 for an attack roll, you score a Critical Hit, and the attack hits regardless of any modifiers or the target’s AC. A Critical Hit lets you roll extra dice for the attack’s damage against the target.
 
-#### Dextrous Jumping
+When you score a Critical Hit, you deal extra damage. Your attack deals maximum damage and you also roll the attack's damage dice normally, and add those two amounts together. For example, a critical hit with a longsword deals 1d8+8+str modifier damage. Additionally, the creature can forgo rolling the dice (dealing only maximum damage) to inflict a random lingering injury.
+
+#### Dextrous Jumping (Long Jump)
 **Tag:** Rule
+**Addition to:** Long Jump
+
+**Dextrous Jumping**
+
+You can calculate your Jumping distance using your Dexterity modifier, instead of your strength modifier, if you have a feature that allows you to make unarmed strikes using your Dexterity modifier.
+
+#### Dextrous Jumping (High Jump)
+**Tag:** Rule
+**Addition to:** High Jump
+
+**Dextrous Jumping**
 
 You can calculate your Jumping distance using your Dexterity modifier, instead of your strength modifier, if you have a feature that allows you to make unarmed strikes using your Dexterity modifier.
 
@@ -514,24 +527,31 @@ You can calculate your Jumping distance using your Dexterity modifier, instead o
 
 While performing, you can try to distract one humanoid you can see who can see and hear you. Make a Charisma (Performance) check contested by the humanoid's Wisdom (Insight) check. If your check succeeds, you grab the humanoid's attention enough that it makes Wisdom (Perception) and Intelligence (Investigation) checks with disadvantage until you stop performing.
 
-#### Diving
+#### Falling
 **Tag:** Rule
-**Link:** no
 
-When a character dives into water from a great height, the DM may choose to have the character make a Dexterity (acrobatics) or Dexterity (athletics) check to reduce the damage from the fall. A successful skill chekc reduces the damage to 0. If the character fails the check by 5 or less, they take half damage. On a failure greater than 5, the character takes damage as normal.
+A creature that falls takes 1d6 Bludgeoning damage at the end of the fall for every 10 feet it fell, to a maximum of 20d6. When the creature lands, it has the Prone condition unless it avoids taking any damage from the fall.
+
+**Diving**
+
+When a character dives into water from a great height, the DM may choose to have the character make a Dexterity (Acrobatics) or Dexterity (Athletics) check to reduce the damage from the fall. A successful skill check reduces the damage to 0. If the character fails the check by 5 or less, they take half damage. On a failure greater than 5, the character takes damage as normal.
+
+A dive from 15 feet or less into deep water requires no check and causes no damage. Diving into shallow water or onto hidden obstacles is not covered by this rule, and the DM should treat it as a normal fall.
 
 **Diving Table**
 
 |Diving DC|Height|
 |:----:|:-------------|
-|10 |25 ft|
-|15 |50 ft|
-|20 |100 ft|
-|25 |150 ft|
-|30 |200 ft |
+|5     |16–20 ft|
+|10    |21–40 ft|
+|15    |41–60 ft|
+|20    |61–90 ft|
+|25    |91–130 ft|
+|30    |131–200 ft|
 
-#### Drowning and Suffocating
+#### Suffocation
 **Tag:** Rule
+**Also:** Drowning, Drowning and Suffocating
 
 These drowning rules aim for a more realistic underwater fight:
 
@@ -607,6 +627,9 @@ If a Wizard can be taught spells by another wizard and can write them into their
 
 #### Recalling Details and Information
 **Tag:** Rule
+**Addition to:** Study
+
+**Recalling Details and Information**
 
 If a character tries to recall details of something they have seen or heard in the past, they make an Intelligence ability check. A Wisdom ability check may be required for spatial details. The DC to correctly remember the info is as follows:
 
@@ -643,6 +666,9 @@ If the creature is common in the world, or in the character's area of origin, re
 
 #### Researching Magic Item Formulas
 **Tag:** Rule
+**Addition to:** Crafting Magic Items
+
+**Researching Magic Item Formulas**
 
 Using this rule, characters can try to research magic item formulas. To do so, they must spend time and gold depending on the rarity of the item they want to make. Afterwards, they must succeed on an Intelligence (Arcana) check, as shown on the table below. If they succeed, they produce a formula for the creation of the desired magic item. If they fail, they make some progress, but have to spend again half the time and cost required and make the check again. The DM gives the most common or obvious formula depending on the character's background and experiences. Multiple characters can research on the same formula. If they do so, each additional character reduces the time cost by two workweeks, but the time cost can never be reduced lower than half. The character with the highest Arcana modifier makes the final check.
 
@@ -658,8 +684,11 @@ Using this rule, characters can try to research magic item formulas. To do so, t
 
 Alternatively, a character can try to find a usage for a material gathered from or offered by a creature. In that case, the character makes an Intelligence (Arcana) ability check and consults the Rarity by CR table below. If the character succeeds on the check, they know one magic item that can be created from this material and can choose to start researching the formula using the material at hand on the experiments, spending only half the necessary time and gold stated in the rule above. However, if the character fails the Arcana DC to research the formula, the material is wasted.
 
-#### Spellcasting Focuses and Somatic Components
+#### Somatic Components
 **Tag:** Rule
+**Addition to:** Spellcasting Focus
+
+**Somatic Components**
 
 A character can perform the somatic components of spells with a hand that holds a spellcasting focus, even if the spell in question does not have material components. The character is then considered to having used the focus for that casting.
 
@@ -711,8 +740,11 @@ A creature who tries and fails to cast a spell from a spell scroll must make a D
 
 #### Weightless Worn Armor
 **Tag:** Rule
+**Addition to:** Carrying Capacity
 
-While worn, armor does not count toward a character's carrying capacity. Armor that is carried but not worn weighs normally.
+**Weightless Worn Armor**
+
+While worn, armor does not count toward a character's carrying capacity. Armor that is carried but not worn weighs normally.
 
 #### Choosing Languages
 **Tag:** Language Note
