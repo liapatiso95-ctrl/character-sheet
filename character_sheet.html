@@ -346,8 +346,8 @@ window.__characterLoad=function(def){
   function persist(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
   function base(){return S.url.replace(/\/+$/,'')+'/rooms/'+encodeURIComponent(S.room.trim());}
   function cleanUrl(u){u=(u||'').trim();if(!u)return '';if(!/^https?:\/\//i.test(u))u='https://'+u;return u.replace(/\/+$/,'');}
-  function setStatus(m,bad){status=m;var el=document.getElementById('sync-status');if(el){el.textContent=m;el.style.color=bad?'#e07060':'#8fd6a0';}paintBtn();}
-  function paintBtn(){var b=document.getElementById('sync-btn');if(!b)return;var live=S.on&&S.url&&S.room;b.textContent='⇄ Sync'+(live?(/failed/i.test(status)?' ●':' ●'):'');b.style.color=live?(/failed/i.test(status)?'#e07060':'#6fcf85'):'';}
+  function setStatus(m,bad){status=m;var el=document.getElementById('sync-status');if(el){el.textContent=m;el.style.color=(bad||/failed/i.test(m))?'#ffa591':'#8fd6a0';}paintBtn();}
+  function paintBtn(){var b=document.getElementById('sync-btn');if(!b)return;var live=S.on&&S.url&&S.room;b.textContent='⇄ Sync'+(live?(/failed/i.test(status)?' ●':' ●'):'');b.style.color=live?(/failed/i.test(status)?'#ffa591':'#6fcf85'):'';}
   window.__syncLive=function(){return !!(S.on&&S.url&&S.room);};
   function currentState(){
     var d=null;try{d=localStorage.getItem('dnd5e_char_v1');}catch(e){}
@@ -461,20 +461,21 @@ window.__characterLoad=function(def){
     var ov=document.createElement('div');ov.id='sync-ov';
     ov.style.cssText='position:fixed;left:0;top:0;right:0;height:100dvh;z-index:100000;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:12px;box-sizing:border-box';
     var box=document.createElement('div');
-    box.style.cssText='background:#1a1208;border:1px solid rgba(201,150,42,.5);border-radius:4px;width:min(440px,100%);max-height:calc(100dvh - 24px);overflow:auto;padding:16px;box-sizing:border-box;font-family:"EB Garamond",serif;color:#e8d5b0;box-shadow:0 8px 40px rgba(0,0,0,.9)';
+    box.style.cssText='background:#1a1208;border:1px solid rgba(56,178,172,.5);border-radius:4px;width:min(440px,100%);max-height:calc(100dvh - 24px);overflow:auto;padding:16px;box-sizing:border-box;font-family:"EB Garamond",serif;color:#e8d5b0;box-shadow:0 8px 40px rgba(0,0,0,.9)';
     var inp='width:100%;box-sizing:border-box;background:rgba(0,0,0,.35);border:1px solid rgba(201,150,42,.35);color:#e8d5b0;font-family:"EB Garamond",serif;font-size:14px;padding:7px 9px;border-radius:2px;outline:none;margin:3px 0 10px';
     var lab='font-family:Cinzel,serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(232,213,176,0.85)';
-    var bt='font-family:Cinzel,serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:7px 12px;cursor:pointer;border-radius:2px;background:rgba(201,150,42,.12);border:1px solid rgba(201,150,42,.5);color:#e8b84b';
+    var bt0='font-family:Cinzel,serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;cursor:pointer;border-radius:2px;white-space:nowrap';
+    function bt(col,txt){return bt0+';background:rgba('+col+',.12);border:1px solid rgba('+col+',.5);color:rgba('+txt+',.95)';}
     box.innerHTML=
-      '<div style="font-family:Cinzel,serif;font-size:14px;letter-spacing:1.5px;color:#e8b84b;margin-bottom:4px">⇄ Live sync with the DM</div>'+
+      '<div style="font-family:Cinzel,serif;font-size:14px;letter-spacing:1.5px;color:#5fd0c8;margin-bottom:4px">⇄ Live sync with the DM</div>'+
       '<div style="font-size:13px;color:rgba(232,213,176,0.88);margin-bottom:12px;line-height:1.35">Sends this character to the DM screen a few seconds after every change. Your sheet keeps saving on this device as usual.</div>'+
       '<div style="'+lab+'">Database address</div><input id="sync-url" style="'+inp+'" placeholder="https://yourproject-default-rtdb.firebaseio.com" autocapitalize="off" autocomplete="off" spellcheck="false">'+
       '<div style="'+lab+'">Room code</div><input id="sync-room" style="'+inp+'" placeholder="e.g. DRAGON-42" autocapitalize="off" autocomplete="off" spellcheck="false">'+
       '<div id="sync-status" style="font-size:13px;min-height:18px;margin-bottom:10px"></div>'+
       '<div style="display:flex;gap:8px;flex-wrap:nowrap">'+
-        '<button id="sync-go" style="'+bt+'">Start / update</button>'+
-        '<button id="sync-stop" style="'+bt+';background:rgba(255,165,145,0.84);border-color:rgba(255,165,145,0.9);color:#ffa591">Stop</button>'+
-        '<button id="sync-x" style="'+bt+';background:transparent;border-color:rgba(232,213,176,0.76);color:#e8d5b0;margin-left:auto">Close</button>'+
+        '<button id="sync-go" style="'+bt('56,178,172','130,230,225')+'">Start / update</button>'+
+        '<button id="sync-stop" style="'+bt('201,74,42','255,165,145')+'">Stop</button>'+
+        '<button id="sync-x" style="'+bt('232,213,176','232,213,176')+';margin-left:auto">Close</button>'+
       '</div>';
     ov.appendChild(box);document.body.appendChild(ov);
     var u=box.querySelector('#sync-url'),r=box.querySelector('#sync-room');
@@ -16862,7 +16863,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(235,195,100,0.84);user-select:none">D&D 5e Character Record · v3.33.1</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(235,195,100,0.84);user-select:none">D&D 5e Character Record · v3.33.2</div>
 
 </script>
 </body>
