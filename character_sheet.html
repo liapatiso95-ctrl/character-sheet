@@ -6827,7 +6827,7 @@ function _glossMerge(off,house){
     var addV=h.f["addition to"],varV=h.f["variant to"];
     var isAdd=h.f.hasOwnProperty("addition to"),isVar=!isAdd&&h.f.hasOwnProperty("variant to");
     var at=String(isAdd?addV:varV||"").trim();
-    var tn=(!at||/^(yes|true)$/i.test(at))?(isAdd?hn:""):at.toLowerCase();
+    var tn=(isAdd||isVar)?((!at||/^(yes|true)$/i.test(at))?(isAdd?hn:""):at.toLowerCase()):hn;
     delete h.f["addition to"];delete h.f["variant to"];
     var i=-1;
     if(tn)off.some(function(o,k){if(o.name.toLowerCase()===tn&&(!ht||o.tag.toLowerCase()===ht)){i=k;return true;}return false;});
@@ -16886,7 +16886,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(235,195,100,0.84);user-select:none">D&D 5e Character Record · v3.35.0</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(235,195,100,0.84);user-select:none">D&D 5e Character Record · v3.35.1</div>
 
 </script>
 </body>

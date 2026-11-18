@@ -259,10 +259,10 @@ If all the above requirements are met, the result of the process is an item of t
 |30-34| You spend one fourth the basic time required to make the item|
 |35+| You spend one fifth the basic time required to make the item|
 
-#### Hiding
+#### Hide
 **Tag:** Rule
 **Link:** yes
-**Also:** Hidden
+**Also:** Hidden, Hiding
 
 Being hidden means you have successfully concealed your presence from one or more creatures. The environment, shadows, or distractions might conceal you, allowing you to move undetected through dangerous areas or gain the upper hand in combat.
 
