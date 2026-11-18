@@ -5110,7 +5110,7 @@ function CampaignCalendar({c,s,children,onAddEvent}){
         {(ssDay[sel.y+"|"+sel.p+"|"+sel.d]||[]).map(function(x,i){return <div key={"s"+i} style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgb(184,154,240)"}}>{"Session "+(x.sn||"")+(x.ti?" · "+x.ti:"")+" starts"}</div>;})}
         {(byDay[sel.y+"|"+sel.p+"|"+sel.d]||[]).map(function(e,i){return <div key={i} style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"var(--parch)"}}>{(e.dm?"DM · ":"")+(e.h!=null?calTime(e)+" · ":"")+(e.ti||"Untitled")}</div>;})}
         <div style={{display:"flex",gap:8,marginTop:6,flexWrap:"wrap"}}>
-          <button type="button" className="arb" style={{margin:0}} onClick={function(){setNow(Object.assign({},sel));}}>Set as today</button>
+          {!fol&&<button type="button" className="arb" style={{margin:0}} onClick={function(){setNow(Object.assign({},sel));}}>Set as today</button>}
           <button type="button" className="arb" style={{margin:0}} onClick={function(){onAddEvent({ti:"",tx:"",y:sel.y,p:sel.p,d:sel.d});}}>+ Event here</button>
         </div>
       </div>}
@@ -16815,7 +16815,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v3.30.0</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(201,150,42,.35);user-select:none">D&D 5e Character Record · v3.30.1</div>
 
 </script>
 </body>
