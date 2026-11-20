@@ -44,6 +44,10 @@ body{margin:0;background:#0d0a08}
 .btn-theme:hover{background:rgba(232,213,176,.18)}
 .save-status{font-family:'EB Garamond',serif;font-size:11px;color:rgba(232,213,176,0.78);font-style:italic;white-space:nowrap}
 #root{padding-top:50px}
+.sb-dd{position:relative}
+.sb-panel{display:none;position:absolute;top:calc(100% + 4px);left:0;z-index:9100;flex-direction:column;gap:6px;min-width:160px;padding:8px;background:#120d09;border:1px solid rgba(201,150,42,.35);border-radius:3px;box-shadow:0 6px 18px rgba(0,0,0,.6)}
+.sb-dd.open .sb-panel{display:flex}
+.sb-panel button{text-align:left;white-space:nowrap}
 /* Light theme: invert the whole page, then double-invert images so they render normally.
    Applied to the root element so full-screen (inset:0) modals still cover the viewport. */
 html.light-theme{filter:invert(1) hue-rotate(180deg) contrast(1.1)}
@@ -56,12 +60,22 @@ html.light-theme,html.light-theme input,html.light-theme select,html.light-theme
 <body>
 <div id="save-bar">
   <span class="sb-title">D&amp;D 5e</span>
-  <button class="btn-save" onclick="saveToFile()">&#8659; Save JSON</button>
-  <button class="btn-load" onclick="document.getElementById('fi').click()">&#8657; Load JSON</button>
-  <button class="btn-new" onclick="newCharacter()">+ New</button>
-  <button class="btn-sr" id="sr-btn" onclick="window.__shortRest&&window.__shortRest()">&#9788; Short Rest</button>
-  <button class="btn-lr" id="lr-btn" onclick="window.__longRest&&window.__longRest()">&#9790; Long Rest</button>
-  <button class="btn-theme" id="theme-btn" onclick="toggleTheme()">&#9790; Light</button>
+  <div class="sb-dd">
+    <button type="button" class="sb-trig btn-save" aria-haspopup="true" aria-expanded="false" onclick="sbToggle(this)">&#9776; File <span aria-hidden="true">&#9662;</span></button>
+    <div class="sb-panel" role="group" aria-label="File">
+      <button class="btn-save" onclick="saveToFile()">&#8659; Save JSON</button>
+      <button class="btn-load" onclick="document.getElementById('fi').click()">&#8657; Load JSON</button>
+      <button class="btn-new" onclick="newCharacter()">+ New character</button>
+      <button class="btn-theme" id="theme-btn" onclick="toggleTheme()">&#9790; Light</button>
+    </div>
+  </div>
+  <div class="sb-dd">
+    <button type="button" class="sb-trig btn-lr" aria-haspopup="true" aria-expanded="false" onclick="sbToggle(this)">&#9790; Rest <span aria-hidden="true">&#9662;</span></button>
+    <div class="sb-panel" role="group" aria-label="Rest">
+      <button class="btn-sr" id="sr-btn" onclick="window.__shortRest&&window.__shortRest()">&#9788; Short Rest</button>
+      <button class="btn-lr" id="lr-btn" onclick="window.__longRest&&window.__longRest()">&#9790; Long Rest</button>
+    </div>
+  </div>
   <input type="file" id="fi" accept=".json" style="display:none" onchange="loadFromFile(event)">
   <span class="save-status" id="ss">Loading...</span>
 </div>
@@ -74,7 +88,7 @@ f();if(window.ResizeObserver)new ResizeObserver(f).observe(b);window.addEventLis
 // Offset for in-tab sticky headers: below the top bar, the HP strip and (on phones) the sticky tab nav
 (function(){var raf=0;function g(){raf=0;var b=document.getElementById('save-bar'),sh=b?b.offsetHeight:50,n=document.querySelector('.nav'),nh=0;
 if(n&&getComputedStyle(n).position==='sticky')nh=n.offsetHeight;
-document.documentElement.style.setProperty('--stk',(sh+40+nh+2)+'px');}
+var cr=document.querySelector('.chiprow'),ch=cr?cr.offsetHeight+8:0;document.documentElement.style.setProperty('--stkc',(sh+40+nh)+'px');document.documentElement.style.setProperty('--stk',(sh+40+nh+ch+2)+'px');}
 function q(){if(!raf)raf=requestAnimationFrame(g);}
 window.addEventListener('resize',q);window.addEventListener('scroll',q,{passive:true});document.addEventListener('click',function(){setTimeout(q,60);});setTimeout(q,800);})();
 // Name bar that follows you down a long description inside table rows (CSS sticky can't work there: the tables scroll sideways)
@@ -95,6 +109,10 @@ window.addEventListener('scroll',q,{passive:true});window.addEventListener('resi
 var LS='dnd5e_char_v1';
 var __fileHandle=null; // remembers the file handle for quick re-save (Chrome/Edge)
 
+function sbClose(){[].forEach.call(document.querySelectorAll('.sb-dd.open'),function(d){d.classList.remove('open');var t=d.querySelector('.sb-trig');if(t)t.setAttribute('aria-expanded','false');});}
+function sbToggle(t){var d=t.parentElement,was=d.classList.contains('open');sbClose();if(!was){d.classList.add('open');t.setAttribute('aria-expanded','true');}}
+document.addEventListener('click',function(e){var inPanel=e.target.closest&&e.target.closest('.sb-panel button');if(inPanel)setTimeout(sbClose,0);else if(!(e.target.closest&&e.target.closest('.sb-dd')))sbClose();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')sbClose();});
 function getSaveData(){
   // Try localStorage first, fall back to last known in-memory state
   var data=null;
@@ -497,7 +515,7 @@ window.__characterLoad=function(def){
     var bar=document.getElementById('save-bar'),th=document.getElementById('theme-btn');
     if(bar&&!document.getElementById('sync-btn')){
       var b=document.createElement('button');b.id='sync-btn';b.className='btn-sync';b.textContent='⇄ Sync';b.onclick=open;
-      bar.insertBefore(b,th||document.getElementById('ss'));
+      bar.insertBefore(b,document.getElementById('ss'));
     }
     paintBtn();
     if(S.on&&S.url&&S.room){setTimeout(function(){pending=currentState();push();},4000);}
@@ -1820,7 +1838,12 @@ const CSS = `
   .divider{display:flex;align-items:center;gap:12px;margin:10px auto;max-width:400px}
   .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
   .divider span{color:var(--gold-l);font-size:16px}
-  .nav{display:flex;justify-content:center;gap:4px;margin-bottom:28px;flex-wrap:wrap}
+  .nav{display:flex;justify-content:safe center;gap:4px;margin:0 auto 12px;max-width:960px;box-sizing:border-box;flex-wrap:nowrap;overflow-x:auto;position:sticky;top:calc(var(--sbh,50px) + 40px);z-index:50;padding:6px 8px;background:rgba(13,10,8,.96);scrollbar-width:none}
+  .nb{flex-shrink:0;white-space:nowrap}
+  .nav[data-fr]{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent)}
+  .nav[data-fl]{-webkit-mask-image:linear-gradient(90deg,transparent,#000 36px);mask-image:linear-gradient(90deg,transparent,#000 36px)}
+  .nav[data-fl][data-fr]{-webkit-mask-image:linear-gradient(90deg,transparent,#000 36px,#000 calc(100% - 36px),transparent);mask-image:linear-gradient(90deg,transparent,#000 36px,#000 calc(100% - 36px),transparent)}
+  @media(min-width:521px){.nav{padding:3px 8px}}
   .nb{font-family:'Cinzel',serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:10px 16px;background:rgba(20,14,8,.8);border:1px solid rgba(201,150,42,.25);color:#a08c5a;cursor:pointer;transition:all .25s;clip-path:polygon(8px 0%,calc(100% - 8px) 0%,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0% calc(100% - 8px),0% 8px)}
   .nb:hover{border-color:rgba(201,150,42,.6);color:var(--gold-l);background:rgba(123,79,207,.1)}
   .nb.act{background:linear-gradient(135deg,rgba(123,79,207,.3),rgba(201,150,42,.15));border-color:var(--gold);color:var(--gold-l)}
@@ -1965,6 +1988,16 @@ const CSS = `
   @media(max-width:420px){.hpstrip{gap:4px !important;padding:0 5px !important}.hpstrip .hptl{display:none}.hpstrip .hpamt{width:30px !important;margin:0 2px !important}}
   @media(max-width:360px){.hpstrip{gap:4px !important;padding:0 4px !important}.hpstrip>span:first-child{display:none}}
   .hpq{position:absolute;left:0;right:0;top:100%;margin-top:4px;max-height:60vh;overflow-y:auto;box-sizing:border-box;background:#120d09;border:1px solid rgba(201,150,42,.35);border-radius:4px;padding:6px 10px 10px;box-shadow:0 10px 30px rgba(0,0,0,.7);z-index:52}
+  .chiprow{position:sticky;top:var(--stkc,90px);z-index:49;display:flex;align-items:center;gap:6px;box-sizing:border-box;margin:0 auto 8px;max-width:960px;padding:3px 8px;overflow:hidden;background:#120d09;border:1px solid rgba(201,150,42,.2)}
+  .chips{display:flex;align-items:center;gap:6px;flex:1 1 auto;min-width:0;overflow-x:auto;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chiph{flex:0 0 auto;display:flex;align-items:center;gap:8px;min-height:24px;box-sizing:border-box;padding:2px 8px;border:0;background:transparent;color:rgba(235,195,100,.92);font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;text-align:left}
+  .chiprow.shut .chiph{flex:1 1 auto;min-width:0}
+  .chiph .chipcur{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;color:#f3d98a}
+  .chiph .chipcnt{margin-left:auto;opacity:.75;flex:0 0 auto}
+  .chip{flex:0 0 auto;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-height:24px;box-sizing:border-box;padding:4px 10px;border-radius:12px;border:1px solid rgba(201,150,42,.3);background:transparent;color:rgba(235,195,100,.92);font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;cursor:pointer}
+  .chip.on{background:rgba(201,150,42,.2);border-color:rgba(201,150,42,.75);color:#f3d98a}
+  @media(min-width:521px){.hpstrip{justify-content:center}}
   .hpstrip{position:sticky;top:var(--sbh,50px);z-index:51;display:flex;align-items:center;gap:8px;box-sizing:border-box;height:34px;padding:0 8px;margin:0 auto 6px;max-width:960px;background:#120d09;border:1px solid rgba(201,150,42,.2);border-radius:3px}
 @media(max-width:520px){
     .app{padding-top:10px;overflow-x:clip}
@@ -2871,6 +2904,11 @@ function Page1({c,s}){
   const passiveIns=10+skbNum({n:"Insight",a:"WIS"})+(c.insAdv?5:0);
   const passiveInv=10+skbNum({n:"Investigation",a:"INT"})+(c.invAdv?5:0);
   const [fx,setFx]=React.useState(null);
+  const ui=useUi();
+  const hasV=_hasV;
+  const [wiz,setWiz]=React.useState(false);
+  const [askDc,setAskDc]=React.useState(null);
+  const noCls=!allClasses.some(function(cl){return (cl.nm||"").trim()||String(cl.lv||"").trim()||(cl.sub||"").trim();});
   const [hpEdit,setHpEdit]=React.useState(false);
   const dsMax=c.hpAutoCalc?(calcMaxHP()||0):(parseInt(c.hpx)||0);
   const dsCur=(c.hpc!==""&&c.hpc!=null)?(parseInt(c.hpc)||0):dsMax;
@@ -2904,9 +2942,29 @@ function Page1({c,s}){
       </div>
 
       <div className="sh">Classes</div>
-      {allClasses.map(function(cl,i){
+      {wiz&&ReactDOM.createPortal(<ClassWizard c={c} first={noCls} onClose={function(){setWiz(false);}} onDone={function(d){
+        setWiz(false);
+        var base=(c.classes||[]).filter(function(cl){return (cl.nm||"").trim()||String(cl.lv||"").trim()||(cl.sub||"").trim();});
+        var a=base.concat([{nm:d.nm,lv:"1",hd:d.hd,sub:d.sub,hpBonus:"",dcs:[]}]);
+        s("classes",a);
+        s("cls",a.map(function(x){return (x.nm||"")+(x.lv?" "+x.lv:"");}).filter(function(x){return x.trim();}).join(" / "));
+        var same=function(x){return !x.kind&&String(x.nm||"").trim().toLowerCase()===d.nm.toLowerCase();};
+        if(d.sp&&!(c.spellClasses||[]).some(same))s("spellClasses",(c.spellClasses||[]).concat([{nm:d.nm,abl:d.spA,dcBonus:"",atkBonus:"",maxLv:9,open:false}]));
+        if(d.ex&&!(c.exploitClasses||[]).some(same))s("exploitClasses",(c.exploitClasses||[]).concat([{nm:d.nm,abl:d.exA,dcBonus:"",dcBonusFormula:null,open:false}]));
+      }} />,document.body)}
+      {askDc!=null&&allClasses[askDc]&&ReactDOM.createPortal(<SpellDcAsk c={c} cl={allClasses[askDc]} onClose={function(){setAskDc(null);}}
+        onNo={function(){var i=askDc;setAskDc(null);s("classes",allClasses.map(function(x,xi){return xi===i?Object.assign({},x,{dcs:[...(x.dcs||[]),{nm:"",abl:"INT",bonus:"",bonusFormula:null,isSpell:false}]}):x;}));}}
+        onYes={function(abl){var cl=allClasses[askDc];setAskDc(null);s("spellClasses",(c.spellClasses||[]).concat([{nm:String(cl.nm).trim(),abl:abl,dcBonus:"",atkBonus:"",maxLv:9,open:false}]));}} />,document.body)}
+      {noCls?<div style={{marginBottom:8,background:"rgba(0,0,0,.15)",padding:"14px 12px",borderLeft:"3px solid rgba(201,150,42,.2)",display:"flex",alignItems:"center",gap:12,flexWrap:"wrap"}}>
+        <div style={{flex:"1 1 180px",minWidth:0}}>
+          <div style={{fontFamily:"'Cinzel',serif",fontSize:15,fontWeight:700,color:"rgba(232,213,176,0.9)"}}>No class yet</div>
+          <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,0.85)"}}>Add your class to set up hit dice, spellcasting and more.</div>
+        </div>
+        <button className="arb" onClick={function(){setWiz(true);}}>+ Add your first class</button>
+      </div>:allClasses.map(function(cl,i){
         var updCls=function(field,val){
           var a=allClasses.map(function(x){return Object.assign({},x);});
+          if(field==="sub"){var oldS=(a[i].sub||"").trim(),cN=(a[i].nm||"").trim();if(cN&&oldS&&val&&oldS!==val.trim())s("feat",_renameFeatSrc(c.feat,cN+" ("+oldS+")",cN+" ("+val.trim()+")"));}
           if(field==="nm"){
             var oldN=a[i].nm||a[i]._prev||"";
             if(val===""){if(oldN)a[i]._prev=oldN;}
@@ -2916,6 +2974,46 @@ function Page1({c,s}){
           s("classes",a);
           s("cls",a.map(function(x){return (x.nm||"")+(x.lv?" "+x.lv:"");}).filter(function(x){return x.trim();}).join(" / "));
         };
+        var isE=ed.has("cls-"+i,!(cl.nm||"").trim()&&!String(cl.lv||"").trim()&&!(cl.sub||"").trim());
+        if(!isE){
+          var lvN=parseInt(cl.lv)||0;
+          var lvBtn={width:28,height:28,flex:"0 0 auto",borderRadius:3,border:"1px solid rgba(201,150,42,.35)",background:"rgba(0,0,0,.25)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:16,lineHeight:1,cursor:"pointer",padding:0,display:"inline-flex",alignItems:"center",justifyContent:"center"};
+          var chipS={fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",border:"1px solid rgba(201,150,42,.25)",borderRadius:10,padding:"2px 8px",color:"rgba(235,195,100,0.92)",whiteSpace:"nowrap"};
+          var hpB=c.hpAutoCalc?(parseInt(String(cl.hpBonus||"").replace("+",""))||0):0;
+          var lk=_linkedDC(c,cl);
+          var dcl=(cl.dcs||[]).map(function(dc,di){
+            var dA=dc.abl||"INT";
+            var dB=dc.bonusFormula?computeBonusFromFormula(dc.bonusFormula,c):(parseInt((dc.bonus||"").replace("+",""))||0);
+            var dX=(dc.isSpell?(c.exhAffectAllDC||c.exhAffectSpellDC):c.exhAffectAllDC)?exhPenalty:0;
+            return {k:di,nm:dc.nm||"DC",abl:dA,v:8+pb+getStatMod(dA)+dB+dX,pen:dX<0};
+          });
+          return (
+            <div key={i} style={{marginBottom:8,background:"rgba(0,0,0,.15)",padding:"8px 12px",borderLeft:"3px solid rgba(201,150,42,.2)"}}>
+              <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap"}}>
+                <div style={{flex:"1 1 140px",minWidth:0}}>
+                  <div style={{fontFamily:"'Cinzel',serif",fontSize:16,fontWeight:700,color:cl.nm?"var(--gold-l)":"rgba(232,213,176,0.76)",lineHeight:1.2,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{cl.nm||"Unnamed class"}</div>
+                  {cl.sub&&<div style={{fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,0.88)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{cl.sub}</div>}
+                </div>
+                <span style={chipS} title="Hit die">{cl.hd||"d6"}</span>
+                <div style={{display:"flex",alignItems:"center",gap:6}} role="group" aria-label={(cl.nm||"Class")+" level"}>
+                  <button type="button" style={Object.assign({},lvBtn,{opacity:lvN>1?1:.35})} disabled={lvN<=1} aria-label="Lower level" title="Lower level" onClick={function(){updCls("lv",String(Math.max(1,lvN-1)));}}>{"\u2212"}</button>
+                  <div style={{minWidth:40,textAlign:"center",lineHeight:1}}>
+                    <div style={{fontFamily:"'Cinzel',serif",fontSize:7,letterSpacing:1,color:"rgba(235,195,100,0.85)",textTransform:"uppercase"}}>Level</div>
+                    <div style={{fontFamily:"'Cinzel',serif",fontSize:20,fontWeight:700,color:"var(--parch)"}}>{lvN||"\u2013"}</div>
+                  </div>
+                  <button type="button" style={Object.assign({},lvBtn,{opacity:lvN<20?1:.35})} disabled={lvN>=20} aria-label="Raise level" title="Raise level" onClick={function(){updCls("lv",String(Math.min(20,lvN+1)));}}>+</button>
+                </div>
+                <EditPencil on={false} onClick={function(){ed.toggle("cls-"+i);}} />
+              </div>
+              {(dcl.length>0||hpB!==0||lk.sp||lk.ex)&&<div style={{display:"flex",gap:6,flexWrap:"wrap",marginTop:6}}>
+                {lk.sp&&<span style={Object.assign({},chipS,{color:"rgba(200,175,250,0.95)",borderColor:"rgba(123,79,207,.35)"})} title="Shared with the Spells tab">{"Spell Save DC "}<b style={{fontSize:12,color:"var(--gold-l)"}}>{lk.sp.dc}</b>{" \u00B7 "+(lk.sp.sc.abl||"INT")+_bonTxt(c,lk.sp.sc)}</span>}
+                {lk.ex&&<span style={Object.assign({},chipS,{color:"rgba(255,165,145,0.96)",borderColor:"rgba(201,74,42,.35)"})} title="Shared with the Exploits tab">{"Exploit Save DC "}<b style={{fontSize:12,color:"var(--gold-l)"}}>{lk.ex.dc}</b>{" \u00B7 "+(lk.ex.sc.abl||"STR")+_bonTxt(c,lk.ex.sc)}</span>}
+                {hpB!==0&&<span style={Object.assign({},chipS,{color:"rgba(255,165,145,0.96)",borderColor:"rgba(201,74,42,.3)"})}>{fmtN(hpB)+" HP / level"}</span>}
+                {dcl.map(function(d){return <span key={d.k} style={Object.assign({},chipS,{color:d.pen?"rgba(255,165,145,0.96)":"rgba(200,175,250,0.95)",borderColor:"rgba(123,79,207,.35)"})} title={"8 + proficiency + "+d.abl+" modifier"}>{d.nm+" "}<b style={{fontSize:12,color:d.pen?"rgba(255,165,145,0.96)":"var(--gold-l)"}}>{d.v}</b>{" \u00B7 "+d.abl}</span>;})}
+              </div>}
+            </div>
+          );
+        }
         return (
           <div key={i} style={{marginBottom:8,background:"rgba(0,0,0,.15)",padding:"10px 12px",borderLeft:"3px solid rgba(201,150,42,.2)"}}>
             <div style={{display:"flex",gap:8,alignItems:"flex-end",flexWrap:"wrap"}}>
@@ -2945,9 +3043,11 @@ function Page1({c,s}){
                     style={{textAlign:"center",borderBottomColor:"rgba(201,74,42,.3)",color:"rgba(255,165,145,0.98)"}} />
                 </div>
               )}
+              <div style={{paddingBottom:4}}><EditPencil on={true} onClick={function(){ed.toggle("cls-"+i);}} /></div>
               {allClasses.length>1&&(
                 <button className="db" style={{paddingBottom:6}} onClick={function(){
                   window.__confirm("Delete this class?",function(){
+                    ed.clear("cls-");
                     var a=allClasses.filter(function(_,j){return j!==i;});
                     s("classes",a);
                     s("cls",a.map(function(x){return (x.nm||"")+(x.lv?" "+x.lv:"");}).filter(function(x){return x.trim();}).join(" / "));
@@ -2955,6 +3055,43 @@ function Page1({c,s}){
                 }}>x</button>
               )}
             </div>
+            {/* Spell / exploit DC of this class: the same entry as on the Spells / Exploits tab */}
+            {(function(){
+              var lk=_linkedDC(c,cl),rows=[];
+              if(lk.sp)rows.push({key:"spellClasses",lab:"Spell Save DC",col:"var(--arcane-g)",bd:"rgba(123,79,207,.4)",e:lk.sp,def:"INT"});
+              if(lk.ex)rows.push({key:"exploitClasses",lab:"Exploit Save DC",col:"#ffa591",bd:"rgba(201,74,42,.4)",e:lk.ex,def:"STR"});
+              if(!rows.length)return null;
+              return <div style={{marginTop:8,borderTop:"1px solid rgba(201,150,42,.1)",paddingTop:8}}>
+                {rows.map(function(row){
+                  var upd=function(patch){s(row.key,(c[row.key]||[]).map(function(x,j){return j===row.e.i?Object.assign({},x,patch):x;}));};
+                  var e=row.e.sc;
+                  return <div key={row.key} style={{display:"flex",gap:10,alignItems:"flex-end",flexWrap:"wrap",marginBottom:6}}>
+                    <div style={{flex:"1 1 110px",minWidth:90}}>
+                      <div style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",color:row.col}}>{row.lab}</div>
+                      <div style={{fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",color:"rgba(232,213,176,0.8)"}}>{row.key==="spellClasses"?"same as on the Spells tab":"same as on the Exploits tab"}</div>
+                    </div>
+                    <div style={{display:"flex",flexDirection:"column",gap:2}}>
+                      <label className="fl" style={{fontSize:7}}>Ability</label>
+                      <select value={e.abl||row.def} onChange={function(ev){upd({abl:ev.target.value});}} aria-label={row.lab+" ability"}
+                        style={{background:"rgba(0,0,0,.4)",border:"none",borderBottom:"1px solid "+row.bd,color:row.col,fontFamily:"'Cinzel',serif",fontSize:11,padding:"2px 3px",outline:"none",cursor:"pointer",width:52}}>
+                        {["STR","DEX","CON","INT","WIS","CHA"].map(function(a){return <option key={a} value={a} style={{background:"#1a1208"}}>{a}</option>;})}
+                      </select>
+                    </div>
+                    <div style={{display:"flex",flexDirection:"column",gap:2,alignItems:"center"}}>
+                      <label className="fl" style={{fontSize:7}}>Bonus</label>
+                      <BonusField c={c} value={e.dcBonus||""} formula={e.dcBonusFormula}
+                        onApply={function(total,frm){upd({dcBonus:""+total,dcBonusFormula:frm||null});}}
+                        label={row.lab+" Bonus"}
+                        inputStyle={{width:32,fontSize:11,borderBottom:"1px solid rgba(201,150,42,.2)"}} />
+                    </div>
+                    <div style={{textAlign:"center",minWidth:38}}>
+                      <label className="fl" style={{fontSize:7}}>DC</label>
+                      <div style={{fontFamily:"'Cinzel',serif",fontSize:18,fontWeight:700,color:"var(--gold-l)",lineHeight:1}}>{row.e.dc}</div>
+                    </div>
+                  </div>;
+                })}
+              </div>;
+            })()}
             {/* Save DCs for this class */}
             {(function(){
               var dcs=cl.dcs||[];
@@ -3009,10 +3146,7 @@ function Page1({c,s}){
                     }} style={{cursor:"pointer",color:"rgba(255,165,145,0.88)",fontSize:13,lineHeight:1,alignSelf:"flex-end",paddingBottom:2,userSelect:"none"}}>×</span>
                   </div>;
                 })}
-                <div onClick={function(){
-                  var a=allClasses.map(function(x,xi){return xi===i?Object.assign({},x,{dcs:[...(x.dcs||[]),{nm:"",abl:"INT",bonus:"",bonusFormula:null,isSpell:false}]}):x;});
-                  s("classes",a);
-                }} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:"rgba(235,195,100,0.84)",border:"1px dashed rgba(201,150,42,.15)",padding:"2px 8px",borderRadius:2,display:"inline-block",userSelect:"none",marginTop:2}}>
+                <div onClick={function(){setAskDc(i);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:"rgba(235,195,100,0.84)",border:"1px dashed rgba(201,150,42,.15)",padding:"2px 8px",borderRadius:2,display:"inline-block",userSelect:"none",marginTop:2}}>
                   + Add DC
                 </div>
               </div>;
@@ -3021,7 +3155,7 @@ function Page1({c,s}){
         );
       })}
       <div style={{display:"flex",gap:12,alignItems:"center",marginTop:4,marginBottom:4}}>
-        <button className="arb" onClick={function(){s("classes",[...allClasses,{nm:"",lv:"",hd:"d6",sub:"",hpBonus:"",dcs:[]}]);}}>+ Add Class</button>
+        {!noCls&&<button className="arb" onClick={function(){setWiz(true);}}>+ Add Class</button>}
         {levelFromCls()>0&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:"rgba(232,213,176,0.78)",fontStyle:"italic"}}>Total level {levelFromCls()} - Prof {fmtN(pb)}</span>}
       </div>
 
@@ -3050,7 +3184,7 @@ function Page1({c,s}){
                 </div>
               </div>
               {/* Per-ability check bonus */}
-              <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:1,marginTop:4}}>
+              {!(ui.simple&&!hasV((c.abilCheckBonusPerAbl||{})[st],(c.abilCheckBonusPerAblFormula||{})[st]))&&<div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:1,marginTop:4}}>
                 <span style={{fontFamily:"'Cinzel',serif",fontSize:7,letterSpacing:1,color:"rgba(255,165,145,0.9)",textTransform:"uppercase"}}>Chk+</span>
                 <BonusField c={c}
                   value={(c.abilCheckBonusPerAbl&&c.abilCheckBonusPerAbl[st])||""}
@@ -3058,15 +3192,14 @@ function Page1({c,s}){
                   onApply={(total,frm)=>{s("abilCheckBonusPerAbl",{...(c.abilCheckBonusPerAbl||{}),[st]:""+total});s("abilCheckBonusPerAblFormula",{...(c.abilCheckBonusPerAblFormula||{}),[st]:frm||null});}}
                   label={st+" Check Bonus"}
                   inputStyle={{width:28,fontSize:11,borderBottom:"1px solid rgba(201,74,42,.2)",color:"rgba(255,165,145,0.96)"}} />
-              </div>
+              </div>}
             </div>
           );
         })}
       </div>
 
-      {/* Ability Checks */}
-      <div className="sh">Ability Checks</div>
-      <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",background:"rgba(0,0,0,.18)",border:"1px solid rgba(201,74,42,.15)",padding:"10px 14px",marginBottom:14}}>
+      {/* Ability check bonuses (part of Ability Scores) */}
+      {!(ui.simple&&!hasV(c.abilCheckBonus,c.abilCheckBonusFormula)&&!c.halfProfChecks)&&<div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",background:"rgba(0,0,0,.18)",border:"1px solid rgba(201,74,42,.15)",padding:"10px 14px",marginTop:6,marginBottom:14}}>
         <div style={{display:"flex",flexDirection:"column",gap:2}}>
           <label className="fl" style={{opacity:.6,fontSize:8,color:"rgba(255,165,145,0.95)"}}>Global Check Bonus</label>
           <BonusField c={c} value={c.abilCheckBonus||""} formula={c.abilCheckBonusFormula}
@@ -3079,7 +3212,7 @@ function Page1({c,s}){
           <div style={{width:13,height:13,borderRadius:2,border:"1px solid "+(c.halfProfChecks?"rgba(201,74,42,.8)":"rgba(201,74,42,.3)"),background:c.halfProfChecks?"rgba(201,74,42,.7)":"transparent",flexShrink:0,transition:"all .15s"}} />
           <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:c.halfProfChecks?"rgba(255,165,145,0.98)":"rgba(255,165,145,0.88)"}}>+½↓ Prof to all ability checks that don't already add your proficiency bonus</span>
         </div>
-      </div>
+      </div>}
 
       <div className="sh">Combat</div>
       <div className="cg">
@@ -3185,6 +3318,33 @@ function Page1({c,s}){
             </svg>
           </div>
           <div className="cl" style={{color:c.ins?"var(--gold-l)":"rgba(232,213,176,0.8)"}}>Inspiration</div>
+        </div>
+        {/* Exhaustion */}
+        <div className="cs" style={{gridColumn:"1 / -1"}}>
+          <div style={{display:"flex",gap:6,justifyContent:"center",alignItems:"center",flexWrap:"wrap",minHeight:28}}>
+            {[1,2,3,4,5,6].map(function(lv){
+              const active=exhLv>=lv;
+              const isDeath=lv===6;
+              return <div key={lv} role="button" aria-pressed={active} aria-label={"Exhaustion level "+lv} onClick={function(){const nl=lv<=exhLv?exhLv-1:Math.min(6,exhLv+1);if(nl===6&&exhLv!==6)setFx("died");else if(exhLv===6&&nl<6&&dsCur>0)setFx("live");s("exhaustion",nl);}}
+                style={{width:28,height:28,borderRadius:3,border:"1px solid "+(active?(isDeath?"#c94a2a":"rgba(201,74,42,.7)"):"rgba(201,74,42,.25)"),background:active?(isDeath?"#c94a2a":"rgba(201,74,42,.35)"):"rgba(0,0,0,.2)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",transition:"all .15s",flexShrink:0}}>
+                <span style={{fontFamily:"'Cinzel',serif",fontSize:11,color:active?"#fff":"rgba(255,165,145,0.89)",fontWeight:700}}>{lv}</span>
+              </div>;
+            })}
+          </div>
+          {exhLv>0&&exhLv<6&&<div style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:"rgba(232,213,176,0.81)",fontStyle:"italic",marginTop:6}}>
+            {"-"+(exhLv*2)+" to saves, attacks & checks · -"+(exhLv*5)+"ft speed"}
+          </div>}
+          {(!ui.simple||c.exhAffectSpellDC||c.exhAffectAllDC)&&<div style={{display:"flex",gap:14,marginTop:8,flexWrap:"wrap",justifyContent:"center"}}>
+            <div style={{display:"flex",alignItems:"center",gap:4,cursor:"pointer"}} onClick={function(){s("exhAffectSpellDC",!c.exhAffectSpellDC);}}>
+              <div style={{width:11,height:11,borderRadius:2,border:"1px solid "+(c.exhAffectSpellDC?"rgba(123,79,207,.8)":"rgba(123,79,207,.3)"),background:c.exhAffectSpellDC?"var(--arcane)":"transparent",flexShrink:0,transition:"all .15s"}} />
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:c.exhAffectSpellDC?"var(--arcane-g)":"rgba(232,213,176,0.8)"}}>Affects Spell DCs</span>
+            </div>
+            <div style={{display:"flex",alignItems:"center",gap:4,cursor:"pointer"}} onClick={function(){s("exhAffectAllDC",!c.exhAffectAllDC);}}>
+              <div style={{width:11,height:11,borderRadius:2,border:"1px solid "+(c.exhAffectAllDC?"rgba(201,74,42,.8)":"rgba(201,74,42,.3)"),background:c.exhAffectAllDC?"var(--ember)":"transparent",flexShrink:0,transition:"all .15s"}} />
+              <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:c.exhAffectAllDC?"#ffa591":"rgba(232,213,176,0.8)"}}>Affects All DCs</span>
+            </div>
+          </div>}
+          <div className="cl" style={{color:exhLv>0?"#ffa591":undefined}}>Exhaustion{exhLv===6&&<span style={{marginLeft:8,letterSpacing:2,fontWeight:700,animation:"pulse 1s infinite"}}>DEATH</span>}</div>
         </div>
       </div>
       {/* AC popup - rendered outside .cg so clip-path doesn't clip it */}
@@ -3339,38 +3499,6 @@ function Page1({c,s}){
             <span className="dsl" style={{marginLeft:6}}>F</span>
             {[0,1,2].map(i=><input key={i} type="checkbox" disabled={dsOff} className="dck fal" aria-label={"Death save failure "+(i+1)} checked={!!c.df[i]} onChange={e=>{const n=c.df.filter(Boolean).length;const m=i<n?n-1:Math.min(3,n+1);s("df",[0,1,2].map(j=>j<m));if(m>=3&&n<3)setFx("died");}} />)}
           </div>
-          {/* Exhaustion */}
-          <div style={{marginTop:12}}>
-            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:6}}>
-              <label className="fl">Exhaustion</label>
-              {exhLv===6&&<span style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:2,color:"#ffa591",fontWeight:700,animation:"pulse 1s infinite"}}>DEATH</span>}
-            </div>
-            <div style={{display:"flex",gap:5,alignItems:"center",marginBottom:6}}>
-              {[1,2,3,4,5,6].map(function(lv){
-                const active=exhLv>=lv;
-                const isDeath=lv===6;
-                return <div key={lv} onClick={function(){const nl=lv<=exhLv?exhLv-1:Math.min(6,exhLv+1);if(nl===6&&exhLv!==6)setFx("died");else if(exhLv===6&&nl<6&&dsCur>0)setFx("live");s("exhaustion",nl);}}
-                  style={{width:22,height:22,borderRadius:3,border:"1px solid "+(active?(isDeath?"#c94a2a":"rgba(201,74,42,.7)"):"rgba(201,74,42,.25)"),background:active?(isDeath?"#c94a2a":"rgba(201,74,42,.35)"):"rgba(0,0,0,.2)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",transition:"all .15s",flexShrink:0}}>
-                  <span style={{fontFamily:"'Cinzel',serif",fontSize:10,color:active?"#fff":"rgba(255,165,145,0.89)",fontWeight:700}}>{lv}</span>
-                </div>;
-              })}
-            </div>
-            {exhLv>0&&exhLv<6&&(
-              <div style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,0.81)",fontStyle:"italic",marginBottom:6}}>
-                {"-"+(exhLv*2)+" to saves, attacks & checks · -"+(exhLv*5)+"ft speed"}
-              </div>
-            )}
-            <div style={{display:"flex",gap:10,marginTop:4,flexWrap:"wrap"}}>
-              <div style={{display:"flex",alignItems:"center",gap:4,cursor:"pointer"}} onClick={function(){s("exhAffectSpellDC",!c.exhAffectSpellDC);}}>
-                <div style={{width:11,height:11,borderRadius:2,border:"1px solid "+(c.exhAffectSpellDC?"rgba(123,79,207,.8)":"rgba(123,79,207,.3)"),background:c.exhAffectSpellDC?"var(--arcane)":"transparent",flexShrink:0,transition:"all .15s"}} />
-                <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:c.exhAffectSpellDC?"var(--arcane-g)":"rgba(232,213,176,0.8)"}}>Affects Spell DCs</span>
-              </div>
-              <div style={{display:"flex",alignItems:"center",gap:4,cursor:"pointer"}} onClick={function(){s("exhAffectAllDC",!c.exhAffectAllDC);}}>
-                <div style={{width:11,height:11,borderRadius:2,border:"1px solid "+(c.exhAffectAllDC?"rgba(201,74,42,.8)":"rgba(201,74,42,.3)"),background:c.exhAffectAllDC?"var(--ember)":"transparent",flexShrink:0,transition:"all .15s"}} />
-                <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:c.exhAffectAllDC?"#ffa591":"rgba(232,213,176,0.8)"}}>Affects All DCs</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -3389,7 +3517,7 @@ function Page1({c,s}){
       <div className="tc" style={{marginTop:24,gap:32}}>
         <div>
           <div className="sh">Saving Throws</div>
-          <div style={{display:"flex",gap:10,marginBottom:10,alignItems:"center",flexWrap:"wrap"}}>
+          {!(ui.simple&&!hasV(c.svBonus,c.svBonusFormula))&&<div style={{display:"flex",gap:10,marginBottom:10,alignItems:"center",flexWrap:"wrap"}}>
             <div style={{display:"flex",flexDirection:"column",gap:2}}>
               <label className="fl" style={{opacity:.6,fontSize:8}}>Global Save Bonus</label>
               <BonusField c={c} value={c.svBonus||""} formula={c.svBonusFormula}
@@ -3398,23 +3526,23 @@ function Page1({c,s}){
                 inputStyle={{fontSize:16,width:52,borderBottom:"1px solid rgba(201,150,42,.2)"}} />
             </div>
             <span style={{fontFamily:"'EB Garamond',serif",fontSize:12,color:"rgba(232,213,176,0.8)",marginTop:12,fontStyle:"italic"}}>added to all saves</span>
-          </div>
+          </div>}
           {stats.map(st=>(
             <div key={st} className="skr">
               <input type="checkbox" className="ck" aria-label={st+" saving throw proficiency"} checked={!!c.svp[st]} onChange={e=>s("svp",{...c.svp,[st]:e.target.checked})} />
               <span className="skn" style={{flex:"0 1 auto"}}>{st}</span>
               <CheckRollBtn label={st+" Save"} bonus={svbNum(st)} sec="sav" /><span style={{flex:1}} />
-              <BonusField c={c} value={c.svExtra[st]||""} formula={c.svExtraFormula&&c.svExtraFormula[st]}
+              {!(ui.simple&&!hasV(c.svExtra[st],c.svExtraFormula&&c.svExtraFormula[st]))&&<BonusField c={c} value={c.svExtra[st]||""} formula={c.svExtraFormula&&c.svExtraFormula[st]}
                 onApply={(total,frm)=>{s("svExtra",{...c.svExtra,[st]:""+total});s("svExtraFormula",{...(c.svExtraFormula||{}),[st]:frm||null});}}
                 label={st+" Save Extra"}
                 hideProfFull={true}
-                inputStyle={{width:36,fontSize:11,borderBottom:"1px solid rgba(201,150,42,.2)",marginLeft:4}} />
+                inputStyle={{width:36,fontSize:11,borderBottom:"1px solid rgba(201,150,42,.2)",marginLeft:4}} />}
               <span className="skb">{svb(st)}</span>
             </div>
           ))}
-          <div style={{marginTop:6,paddingTop:4,borderTop:"1px solid rgba(201,150,42,.1)"}}>
+          {!ui.simple&&<div style={{marginTop:6,paddingTop:4,borderTop:"1px solid rgba(201,150,42,.1)"}}>
             <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:"rgba(200,175,250,0.87)",textTransform:"uppercase"}}>checkbox=prof | small field=extra | total shown</span>
-          </div>
+          </div>}
           <div className="pbox" style={{marginTop:10,gap:8}}>
             <div style={{fontFamily:"'Cinzel',serif",fontSize:22,fontWeight:700,color:"var(--gold-l)",minWidth:36,textAlign:"center"}}>{passivePerc}</div>
             <div style={{flex:1}}>
@@ -3451,7 +3579,7 @@ function Page1({c,s}){
         </div>
         <div>
           <div className="sh">Skills</div>
-          <div style={{display:"flex",gap:10,marginBottom:10,alignItems:"center",flexWrap:"wrap"}}>
+          {!(ui.simple&&!hasV(c.skBonus,c.skBonusFormula)&&!c.halfProfSkills)&&<div style={{display:"flex",gap:10,marginBottom:10,alignItems:"center",flexWrap:"wrap"}}>
             <div style={{display:"flex",flexDirection:"column",gap:2}}>
               <label className="fl" style={{opacity:.6,fontSize:8}}>Global Skill Bonus</label>
               <BonusField c={c} value={c.skBonus||""} formula={c.skBonusFormula}
@@ -3464,7 +3592,7 @@ function Page1({c,s}){
               <div style={{width:13,height:13,borderRadius:2,border:"1px solid "+(c.halfProfSkills?"rgba(123,79,207,.8)":"rgba(123,79,207,.3)"),background:c.halfProfSkills?"var(--arcane)":"transparent",flexShrink:0,transition:"all .15s"}} />
               <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:c.halfProfSkills?"var(--arcane-g)":"rgba(200,175,250,0.86)"}}>+½↓ Prof to skills that don't add your proficiency bonus</span>
             </div>
-          </div>
+          </div>}
           <div className="skc">
             {skills.map(sk=>(
               <div key={sk.n} className="skr">
@@ -3492,11 +3620,11 @@ function Page1({c,s}){
                 >
                   {stats.map(st=><option key={st} value={st} style={{background:"#1a1208",color:"#e8d5b0"}}>{st}</option>)}
                 </select>
-                <BonusField c={c} value={c.skExtra[sk.n]||""} formula={c.skExtraFormula&&c.skExtraFormula[sk.n]}
+                {!(ui.simple&&!hasV(c.skExtra[sk.n],c.skExtraFormula&&c.skExtraFormula[sk.n]))&&<BonusField c={c} value={c.skExtra[sk.n]||""} formula={c.skExtraFormula&&c.skExtraFormula[sk.n]}
                   onApply={(total,frm)=>{s("skExtra",{...c.skExtra,[sk.n]:""+total});s("skExtraFormula",{...(c.skExtraFormula||{}),[sk.n]:frm||null});}}
                   label={sk.n+" Extra"}
                   hideProfFull={true}
-                  inputStyle={{width:30,fontSize:10,borderBottom:"1px solid rgba(201,150,42,.15)"}} />
+                  inputStyle={{width:30,fontSize:10,borderBottom:"1px solid rgba(201,150,42,.15)"}} />}
                 <span className="skb">{skb(sk)}</span>
               </div>
             ))}
@@ -6990,7 +7118,7 @@ function GlossPopHost(){
   },[gi]);
   if(gi&&typeof gi==="object"){
     var ch=gi,btn={cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1,textTransform:"uppercase",color:"var(--gold-l)",border:"1px solid rgba(201,150,42,.5)",background:"rgba(201,150,42,.1)",borderRadius:3,padding:"7px 12px",userSelect:"none",whiteSpace:"nowrap"};
-    return <div onClick={function(){setGi(null);}} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.72)",zIndex:100004,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
+    return <div onClick={function(){setGi(null);}} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.72)",zIndex:100020,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
       <div onClick={function(ev){ev.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.5)",borderRadius:4,padding:"16px 18px",maxWidth:420,width:"100%",maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",color:"var(--parch)"}}>
         <div style={{fontFamily:"'Cinzel',serif",fontSize:15,letterSpacing:1,color:"var(--gold-l)",marginBottom:6}}>{ch.title}</div>
         <div style={{fontFamily:"'EB Garamond',serif",fontSize:14,marginBottom:12}}>Which one do you want to see?</div>
@@ -7003,7 +7131,7 @@ function GlossPopHost(){
   var e=gi!=null?_glossCache.entries[gi]:null;
   if(!e)return null;
   var sub=e.f.type||e.f.group||"";
-  return <div onClick={function(){setGi(null);}} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.72)",zIndex:100004,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
+  return <div onClick={function(){setGi(null);}} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.72)",zIndex:100020,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
     <div onClick={function(ev){ev.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.5)",borderRadius:4,padding:"16px 18px",maxWidth:560,width:"100%",maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",color:"var(--parch)"}}>
       <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
         <span style={{flex:"1 1 auto",minWidth:0,fontFamily:"'Cinzel',serif",fontSize:15,letterSpacing:1,color:"var(--gold-l)"}}>{e.name}</span>
@@ -7199,6 +7327,7 @@ function Page3({c,s}){
   const [toolRef,setToolRef]=React.useState(false);
   const [wpnRef,setWpnRef]=React.useState(false);
   const [langRef,setLangRef]=React.useState(false);
+  const [srcPick,setSrcPick]=React.useState(null);
   const secIsOpen=function(k){return (c.secOpen||{})[k]!==false;};
   const toggleSec=function(k){s("secOpen",Object.assign({},c.secOpen||{},{[k]:!secIsOpen(k)}));};
   const updFeat=(i,field,val)=>{const a=[...c.feat];a[i]={...a[i],[field]:val};s("feat",a);};
@@ -7222,7 +7351,12 @@ function Page3({c,s}){
     s("feat",a);
   };
 
-  const updFts=(i,field,val)=>{const a=[...c.fts];a[i]={...a[i],[field]:val};s("fts",a);};
+  const updFts=(i,field,val)=>{const a=[...c.fts];
+    if(field==="nm"){var oldF=(a[i].nm||"").trim(),newF=String(val||"").trim();
+      if(oldF&&newF&&oldF!==newF&&(c.spellClasses||[]).some(function(x){return x.kind==="feat"&&String(x.ft||"").trim().toLowerCase()===oldF.toLowerCase();})){
+        s("spellClasses",(c.spellClasses||[]).map(function(x){return x.kind==="feat"&&String(x.ft||"").trim().toLowerCase()===oldF.toLowerCase()?Object.assign({},x,{nm:newF,ft:newF}):x;}));
+        s("sp",_renameItemCls(c.sp,oldF,newF));}}
+    a[i]={...a[i],[field]:val};s("fts",a);};
   const updFtsLim=(fi,li,field,val)=>{
     const a=[...c.fts];
     const lims=[...(a[fi].limits||[{name:"",uses:"",exp:"",die:"NO",recharge:""}])];
@@ -7264,6 +7398,7 @@ function Page3({c,s}){
       <SectionRail accent="201,150,42" label="Features"
         onExpand={function(){var o=Object.assign({},c.dsOpen||{});(c.feat||[]).forEach(function(_,i){o["feat-"+i]=true;});(c.fts||[]).forEach(function(_,i){o["fts-"+i]=true;});(c.spec||[]).forEach(function(_,i){o["spec-"+i]=true;});s("dsOpen",o);}}
         onCollapse={function(){var o=Object.assign({},c.dsOpen||{});(c.feat||[]).forEach(function(_,i){o["feat-"+i]=false;});(c.fts||[]).forEach(function(_,i){o["fts-"+i]=false;});(c.spec||[]).forEach(function(_,i){o["spec-"+i]=false;});s("dsOpen",o);}} />
+      {srcPick!=null&&ReactDOM.createPortal(<FeatSourceModal c={c} value={((c.feat||[])[srcPick]||{}).src||""} onPick={function(v){updFeat(srcPick,"src",v);setSrcPick(null);}} onClose={function(){setSrcPick(null);}} />,document.body)}
       <SecHead label="Class Features" open={secIsOpen("feat")||!!fq} onToggle={function(){toggleSec("feat");}} summary={(c.feat||[]).length+" feature"+((c.feat||[]).length===1?"":"s")} />
       {(secIsOpen("feat")||!!fq)&&<React.Fragment>
       <div className="fgrid">{ffIdx(c.feat).map(function(x){var f=x.it,i=x.i;
@@ -7286,7 +7421,7 @@ function Page3({c,s}){
                     <AutoGrowName value={f.nm||""} onChange={e=>updFeat(i,"nm",e.target.value)} placeholder="Feature name..." style={{marginBottom:0,width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.2)",color:"var(--gold-l)",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:600,letterSpacing:1,outline:"none",padding:"2px 0 4px"}} />
                   </div>
                   <div inert={ro} style={{flex:1}}>
-                    <input type="text" value={f.src||""} onChange={e=>updFeat(i,"src",e.target.value)} placeholder="Source..." style={{marginBottom:0,width:"100%",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.1)",color:"rgba(232,213,176,0.83)",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",outline:"none",padding:"2px 0 4px"}} />
+                    <button type="button" onClick={function(){setSrcPick(i);}} title="Choose one of your classes or subclasses and a level you have" aria-label={"Source: "+(f.src||"not set")+". Choose"} style={{marginBottom:0,width:"100%",textAlign:"left",cursor:"pointer",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,150,42,.25)",color:f.src?"rgba(232,213,176,0.9)":"rgba(232,213,176,0.7)",fontFamily:"'EB Garamond',serif",fontSize:13,fontStyle:"italic",outline:"none",padding:"2px 0 4px",minHeight:24}}>{f.src||"Source (choose)…"} <span aria-hidden="true" style={{fontSize:9,opacity:.8}}>{"\u25BE"}</span></button>
                   </div>
                   <button inert={ro} onClick={()=>updFeat(i,"limited",!limited)} title="Toggle limited use tracking"
                     style={{display:isEd?undefined:"none",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",padding:"3px 7px",flexShrink:0,cursor:"pointer",transition:"all .2s",marginTop:2,background:limited?"rgba(201,74,42,.2)":"transparent",border:"1px solid "+(limited?"rgba(201,74,42,.6)":"rgba(201,150,42,.2)"),color:limited?"#ffa591":"rgba(232,213,176,0.76)"}}>{limited?"Limited":"+ Limit"}</button>
@@ -7309,6 +7444,7 @@ function Page3({c,s}){
       </React.Fragment>}
 
       <SecHead label="Feats" open={secIsOpen("fts")||!!fq} onToggle={function(){toggleSec("fts");}} summary={(c.fts||[]).length+" feat"+((c.fts||[]).length===1?"":"s")}>
+        {_spChips(c,["feats","both"])}
         {(function(){
           var st=_featCache.status;
           var col=st==="ready"?"rgba(74,156,92,.6)":st==="loading"?"rgba(201,150,42,.5)":"rgba(201,74,42,.5)";
@@ -7328,7 +7464,7 @@ function Page3({c,s}){
         const taKey="fts-ds-"+i;
         const savedH=(c.taH&&c.taH[taKey]);
         const edK="fts-"+i,isEd=ed.has(edK,!(f.nm||"").trim()),ro=isEd?undefined:"";
-        if(!dsOpen) return <CompactFeatureRow key={i} edKey={edK} name={f.nm} sub={f.lv?"Lv "+f.lv:""} limited={limited} lims={limitStates(f,c)} onAdjust={function(li,d){updFts(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){updFts(i,"limits",(f.limits||[]).map(function(l){return {...l,exp:"0"};}));}} border={limited?"var(--ember)":"var(--gold)"} dkey="fts" di={i} s={s} ph="Unnamed feat"
+        if(!dsOpen) return <CompactFeatureRow key={i} edKey={edK} dc={_spChips(c,["feat"],f.nm)} name={f.nm} sub={f.lv?"Lv "+f.lv:""} limited={limited} lims={limitStates(f,c)} onAdjust={function(li,d){updFts(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){updFts(i,"limits",(f.limits||[]).map(function(l){return {...l,exp:"0"};}));}} border={limited?"var(--ember)":"var(--gold)"} dkey="fts" di={i} s={s} ph="Unnamed feat"
           onOpen={function(){s("dsOpen",{...(c.dsOpen||{}),[dsKey]:true});}} onDelete={function(){window.__confirm("Delete this feature?",()=>_delAt(s,"fts",c.fts,i,"fts-"));}} />;
         return (
           <div key={i} className="fc" data-dkey="fts" data-di={i} onClick={isEd?undefined:function(e){lineClick(e,function(){s("dsOpen",{...(c.dsOpen||{}),[dsKey]:false});});}} style={{borderLeftColor:limited?"var(--ember)":"var(--gold)",gridColumn:(wideFeature(f)||(c.fts||[]).length<2)?"1 / -1":undefined}}>
@@ -7359,7 +7495,7 @@ function Page3({c,s}){
                   </div>
                   <button inert={ro} onClick={()=>updFts(i,"limited",!limited)} title="Toggle limited use tracking"
                     style={{display:isEd?undefined:"none",fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",padding:"3px 7px",flexShrink:0,cursor:"pointer",transition:"all .2s",marginBottom:2,background:limited?"rgba(201,74,42,.2)":"transparent",border:"1px solid "+(limited?"rgba(201,74,42,.6)":"rgba(201,150,42,.2)"),color:limited?"#ffa591":"rgba(232,213,176,0.76)"}}>{limited?"Limited":"+ Limit"}</button>
-                </div>):<FeatViewHead name={f.nm} sub={f.src} tag={f.lv?"Lv "+f.lv:""} onClose={function(){const nd={...(c.dsOpen||{}),[dsKey]:false};s("dsOpen",nd);}} />}
+                </div>):<FeatViewHead name={f.nm} sub={f.src} tag={f.lv?"Lv "+f.lv:""} right={_spChips(c,["feat"],f.nm)} onClose={function(){const nd={...(c.dsOpen||{}),[dsKey]:false};s("dsOpen",nd);}} />}
                 {limited&&!isEd&&<div data-keep="1" className="stk" style={{top:"calc(var(--stk,92px) + var(--fhh,40px))",marginBottom:6,padding:"4px 0",background:"#17110a"}}><LimitChips lims={limitStates(f,c)} onAdjust={function(li,d){updFts(i,"limits",adjustLimits(f,li,d,c));}} onRestore={function(){updFts(i,"limits",(f.limits||[]).map(function(l){return {...l,exp:"0"};}));}} /></div>}
                 {limited&&isEd&&(
                   <div data-keep="1" style={{marginBottom:8}}>
@@ -9800,6 +9936,13 @@ function SpellPage({c,s,from,to}){
     a[i][field]=val;s("spellClasses",a);};
   const [delCls,setDelCls]=React.useState(null);
   const [mvRes,setMvRes]=React.useState(null);
+  const [clsPick,setClsPick]=React.useState(null);
+  const [specPick,setSpecPick]=React.useState(false);
+  const [dcModal,setDcModal]=React.useState(false);
+  React.useEffect(function(){ // every visit starts with all DC cards collapsed
+    var a=c.spellClasses||[];if(a.some(function(x){return x&&x.open;}))s("spellClasses",a.map(function(x){return x.open?Object.assign({},x,{open:false}):x;}));
+  },[]);
+    const openSpecEntry=function(sc){var i=spCls.indexOf(sc);setDcModal(true);if(i>=0&&!sc.open)updSpCls(i,"open",true);setTimeout(function(){var el=document.getElementById("spcls-"+i);if(el&&el.scrollIntoView)el.scrollIntoView({behavior:"smooth",block:"center"});},80);};
   const countIn=(name)=>Object.keys(c.sp||{}).reduce(function(t,k){return t+(c.sp[k]||[]).filter(function(x){return (x.cls||"")===name;}).length;},0);
   const delSpCls=(i,target)=>{
     const name=spCls[i].nm||"";
@@ -9942,6 +10085,26 @@ function SpellPage({c,s,from,to}){
           })()}
           
         </div>
+        <div style={{marginBottom:12,background:"rgba(0,0,0,.2)",border:"1px solid rgba(123,79,207,.3)",padding:"8px 12px"}}>
+          <div style={{display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
+            <div style={{flex:"1 1 160px",minWidth:0}}>
+              <div style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:"var(--arcane-g)"}}>Spell save DCs &amp; attack</div>
+              <div style={{fontFamily:"'EB Garamond',serif",fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,0.85)"}}>{spCls.length?"One per class, plus species and feats if you add them.":"Add a DC for a class, your species or a feat to start."}</div>
+            </div>
+            <button id="spec-dc-btn" type="button" className="arb" onClick={function(){setDcModal(true);}} title="Edit your spell DCs, or add a class, species or feat DC" style={{margin:0}}>{spCls.length?"Edit / add DCs":"+ Add a spell DC"}</button>
+          </div>
+          {spCls.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:6,marginTop:8}}>
+            {spCls.map(function(sc,i){return <button key={i} type="button" onClick={function(){openSpecEntry(sc);}} title="Edit this DC" aria-label={(sc.nm||"Class")+" spell save DC "+clsDC(sc)+", spell attack "+clsAtk(sc)+". Edit"}
+              style={{cursor:"pointer",display:"inline-flex",alignItems:"baseline",gap:5,padding:"2px 10px",borderRadius:11,border:"1px solid rgba(123,79,207,.4)",background:"transparent",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:.8,color:"rgba(200,175,250,0.95)",whiteSpace:"nowrap"}}>
+              {(sc.nm||"Class")}<span style={{fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(232,213,176,0.85)"}}>DC</span><b style={{fontSize:13,color:"var(--gold-l)"}}>{clsDC(sc)}</b><span style={{fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(232,213,176,0.85)"}}>Atk</span><b style={{fontSize:13,color:"var(--arcane-g)"}}>{clsAtk(sc)}</b></button>;})}
+          </div>}
+        </div>
+        {dcModal&&ReactDOM.createPortal(<div onClick={function(){setDcModal(false);}} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.72)",zIndex:100003,display:"flex",alignItems:"center",justifyContent:"center",padding:12,boxSizing:"border-box"}}>
+          <div role="dialog" aria-modal="true" aria-label="Spell DCs and attack bonuses" onClick={function(ev){ev.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.5)",borderRadius:4,padding:"14px 14px 12px",maxWidth:640,width:"100%",maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",color:"var(--parch)"}}>
+            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
+              <div style={{fontFamily:"'Cinzel',serif",fontSize:15,letterSpacing:1,color:"var(--gold-l)",flex:1}}>Spell DCs &amp; attack</div>
+              <button type="button" onClick={function(){setDcModal(false);}} style={{cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",color:"var(--gold-l)",border:"1px solid rgba(201,150,42,.5)",background:"rgba(201,150,42,.1)",borderRadius:3,padding:"6px 12px"}}>Close</button>
+            </div>
         <div style={{display:"flex",flexWrap:"wrap",gap:12,marginBottom:10}}>
         {spCls.map(function(sc,i){
           var cantrips=(c.sp[0]||[]).filter(function(sp){return (sp.cls||"")===(sc.nm||"")&&!sp.bonus;}).length;
@@ -9950,7 +10113,7 @@ function SpellPage({c,s,from,to}){
           var bonusSpells=allLvls.filter(function(lv){return lv>0;}).reduce(function(t,lv){return t+(c.sp[lv]||[]).filter(function(sp){return (sp.cls||"")===(sc.nm||"")&&sp.bonus;}).length;},0);
           var prepSpells=allLvls.filter(function(lv){return lv>0;}).reduce(function(t,lv){return t+(c.sp[lv]||[]).filter(function(sp){return (sp.cls||"")===(sc.nm||"")&&sp.prep&&!sp.bonus;}).length;},0);
           if(!sc.open) return (
-            <div key={i} onClick={function(e){if(e.target.closest("[data-keep]")) return;updSpCls(i,"open",true);}} title="Click to open" style={{cursor:"pointer",background:"rgba(0,0,0,.25)",border:"1px solid rgba(123,79,207,.3)",padding:"6px 12px",display:"flex",gap:14,alignItems:"center",flexWrap:"wrap"}}>
+            <div key={i} id={"spcls-"+i} onClick={function(e){if(e.target.closest("[data-keep]")) return;updSpCls(i,"open",true);}} title="Click to open" style={{cursor:"pointer",background:"rgba(0,0,0,.25)",border:"1px solid rgba(123,79,207,.3)",padding:"6px 12px",display:"flex",gap:14,alignItems:"center",flexWrap:"wrap"}}>
               <button onClick={function(){updSpCls(i,"open",true);}} title="Open" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(184,154,240,.55)",color:"rgba(200,175,250,0.9)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={false} /></button>
               <span style={{fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:600,color:"var(--arcane-g)"}}>{sc.nm||"Class"}</span>
               <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,textTransform:"uppercase",color:"rgba(232,213,176,0.8)"}}>Save DC <b style={{fontSize:16,color:"var(--gold-l)",marginLeft:3}}>{clsDC(sc)}</b></span>
@@ -9958,11 +10121,12 @@ function SpellPage({c,s,from,to}){
             </div>
           );
           return (
-            <div key={i} style={{background:"rgba(0,0,0,.25)",border:"1px solid rgba(123,79,207,.3)",padding:"12px 14px",minWidth:220,flex:1,position:"relative"}}>
+            <div key={i} id={"spcls-"+i} style={{background:"rgba(0,0,0,.25)",border:"1px solid rgba(123,79,207,.3)",padding:"12px 14px",minWidth:220,flex:1,position:"relative"}}>
               <div style={{display:"flex",gap:8,alignItems:"center",marginBottom:10}}>
                 <button onClick={function(){updSpCls(i,"open",false);}} title="Close" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(184,154,240,.55)",color:"rgba(200,175,250,0.9)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={true} /></button>
-                <input value={sc.nm||""} onChange={function(e){updSpCls(i,"nm",e.target.value);}} placeholder="Class name..."
-                  style={{flex:1,background:"transparent",border:"none",borderBottom:"1px solid rgba(123,79,207,.5)",color:"var(--arcane-g)",fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:600,padding:"2px 4px",outline:"none"}} />
+                {sc.kind?<div style={{flex:1,minWidth:0,borderBottom:"1px solid rgba(123,79,207,.5)",padding:"2px 4px",fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:600,color:"var(--arcane-g)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{sc.nm} <span style={{fontSize:9,letterSpacing:1,textTransform:"uppercase",fontWeight:400,color:"rgba(232,213,176,0.85)"}}>{_spKindLabel(sc.kind)}</span></div>
+                :<button type="button" onClick={function(){setClsPick(i);}} title="Choose one of your classes" aria-label={"Class: "+(sc.nm||"not chosen")+". Choose"}
+                  style={{flex:1,minWidth:0,textAlign:"left",cursor:"pointer",background:"transparent",border:"none",borderBottom:"1px solid rgba(123,79,207,.5)",color:sc.nm?"var(--arcane-g)":"rgba(200,175,250,0.75)",fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:600,padding:"2px 4px",outline:"none",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{sc.nm||"Choose class…"} <span aria-hidden="true" style={{fontSize:9,opacity:.8}}>{"\u25BE"}</span></button>}
                 <button className="db" onClick={function(){const nm=sc.nm||"";const n=nm?countIn(nm):0;if(n>0)setDelCls(i);else window.__confirm("Delete this spellcasting class?",function(){delSpCls(i);});}}>x</button>
                 {delCls===i&&<ClassDeleteDialog kind="spells" clsName={sc.nm||""} count={countIn(sc.nm||"")} targets={spCls.filter(function(o,j){return j!==i&&(o.nm||"");}).map(function(o){return o.nm;})} onCancel={function(){setDelCls(null);}} onConfirm={function(t){setDelCls(null);delSpCls(i,t);}} />}
               </div>
@@ -10038,7 +10202,14 @@ function SpellPage({c,s,from,to}){
           );
         })}
         </div>
-        <button className="arb" onClick={addSpCls} style={{marginTop:4}}>+ Add Spellcasting Class</button>
+        <div style={{display:"flex",flexWrap:"wrap",gap:8,marginTop:4}}>
+              <button className="arb" onClick={addSpCls} style={{margin:0}}>+ Add Spellcasting Class</button>
+              <button className="arb" onClick={function(){setSpecPick(true);}} style={{margin:0}} title="A spell DC for your species, all feats, or one feat">+ Species / Feats DC</button>
+            </div>
+          </div>
+        </div>,document.body)}
+        {specPick&&ReactDOM.createPortal(<SpecialDCModal c={c} onClose={function(){setSpecPick(false);}} onPick={function(d){setSpecPick(false);s("spellClasses",[...spCls,{nm:d.nm,kind:d.kind,ft:d.ft||"",abl:d.abl,dcBonus:"",atkBonus:"",maxLv:1,known:true,open:false}]);}} />,document.body)}
+        {clsPick!=null&&ReactDOM.createPortal(<ClassPickModal c={c} current={(spCls[clsPick]||{}).nm} title="Spellcasting class" usedNames={spCls.filter(function(_,j){return j!==clsPick;}).map(function(x){return x.nm;})} onPick={function(nm){updSpCls(clsPick,"nm",nm);setClsPick(null);}} onClose={function(){setClsPick(null);}} />,document.body)}
         {mvRes&&<ClassMoveResult kind="spells" cls={mvRes.cls} names={mvRes.names} onClose={function(){setMvRes(null);}} />}
       </div>
 
@@ -10366,6 +10537,8 @@ function SpellPage({c,s,from,to}){
                       <span style={{fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:2,color:"var(--arcane-g)",textTransform:"uppercase"}}>
                       {group.name+" "+(lv===0?"Cantrips":ordinal(lv)+" Spell"+(cnt!==1?"s":""))}
                       </span>
+                      {group.sc&&<button type="button" onClick={function(e){e.stopPropagation();openSpecEntry(group.sc);}} title="Edit this spell DC and attack bonus" aria-label={group.name+" spell save DC "+clsDC(group.sc)+", spell attack "+clsAtk(group.sc)+". Edit"}
+                        style={{cursor:"pointer",display:"inline-flex",alignItems:"baseline",gap:4,padding:"1px 8px",borderRadius:9,border:"1px solid rgba(123,79,207,.4)",background:"transparent",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,textTransform:"uppercase",color:"rgba(200,175,250,0.95)",whiteSpace:"nowrap"}}>{"Save DC "}<b style={{fontSize:12,color:"var(--gold-l)"}}>{clsDC(group.sc)}</b>{" \u00B7 Atk "}<b style={{fontSize:12,color:"var(--arcane-g)"}}>{clsAtk(group.sc)}</b></button>}
                       <span style={{fontFamily:"'EB Garamond',serif",fontSize:11,color:"rgba(232,213,176,0.78)",fontStyle:"italic"}}>
                         {(function(){
                           var bonus=group.spells.filter(function(x){return x.sp.bonus;}).length;
@@ -10438,6 +10611,7 @@ function ExploitPage({c,s}){
     a[i][field]=val;s("exploitClasses",a);};
   const [delCls,setDelCls]=React.useState(null);
   const [mvRes,setMvRes]=React.useState(null);
+  const [clsPick,setClsPick]=React.useState(null);
   const countIn=(name)=>Object.keys(c.expl||{}).reduce(function(t,k){return t+(c.expl[k]||[]).filter(function(x){return (x.cls||"")===name;}).length;},0);
   const delExCls=(i,target)=>{
     const name=exCls[i].nm||"";
@@ -10481,8 +10655,8 @@ function ExploitPage({c,s}){
             <div key={i} style={{background:"rgba(0,0,0,.25)",border:"1px solid rgba(201,74,42,.3)",padding:"12px 14px",minWidth:220,flex:1,position:"relative"}}>
               <div style={{display:"flex",gap:8,alignItems:"center",marginBottom:10}}>
                 <button onClick={function(){updExCls(i,"open",false);}} title="Close" style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(224,112,96,.6)",color:"rgba(255,165,145,0.93)",cursor:"pointer",padding:0,width:26,height:22,borderRadius:2,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0,touchAction:"manipulation"}}><Chev open={true} /></button>
-                <input value={ec.nm||""} onChange={function(e){updExCls(i,"nm",e.target.value);}} placeholder="Class name..."
-                  style={{flex:1,background:"transparent",border:"none",borderBottom:"1px solid rgba(201,74,42,.5)",color:"#ffa591",fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:600,padding:"2px 4px",outline:"none"}} />
+                <button type="button" onClick={function(){setClsPick(i);}} title="Choose one of your classes" aria-label={"Class: "+(ec.nm||"not chosen")+". Choose"}
+                  style={{flex:1,minWidth:0,textAlign:"left",cursor:"pointer",background:"transparent",border:"none",borderBottom:"1px solid rgba(201,74,42,.5)",color:ec.nm?"#ffa591":"rgba(255,165,145,0.75)",fontFamily:"'Cinzel',serif",fontSize:14,fontWeight:600,padding:"2px 4px",outline:"none",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{ec.nm||"Choose class…"} <span aria-hidden="true" style={{fontSize:9,opacity:.8}}>{"\u25BE"}</span></button>
                 <button className="db" onClick={function(){const nm=ec.nm||"";const n=nm?countIn(nm):0;if(n>0)setDelCls(i);else window.__confirm("Delete this exploit class?",function(){delExCls(i);});}}>x</button>
                 {delCls===i&&<ClassDeleteDialog kind="exploits" clsName={ec.nm||""} count={countIn(ec.nm||"")} targets={exCls.filter(function(o,j){return j!==i&&(o.nm||"");}).map(function(o){return o.nm;})} onCancel={function(){setDelCls(null);}} onConfirm={function(t){setDelCls(null);delExCls(i,t);}} />}
               </div>
@@ -10512,6 +10686,7 @@ function ExploitPage({c,s}){
         })}
         </div>
         <button className="arb" onClick={addExCls} style={{marginTop:4,borderColor:"rgba(201,74,42,.35)",color:"#ffa591"}}>+ Add Exploit Class</button>
+        {clsPick!=null&&ReactDOM.createPortal(<ClassPickModal c={c} current={(exCls[clsPick]||{}).nm} title="Exploit class" usedNames={exCls.filter(function(_,j){return j!==clsPick;}).map(function(x){return x.nm;})} onPick={function(nm){updExCls(clsPick,"nm",nm);setClsPick(null);}} onClose={function(){setClsPick(null);}} />,document.body)}
         {mvRes&&<ClassMoveResult kind="exploits" cls={mvRes.cls} names={mvRes.names} onClose={function(){setMvRes(null);}} />}
 
         {/* Shared exploit dice strip — below classes */}
@@ -13018,7 +13193,7 @@ function ClassDeleteDialog({kind,clsName,count,targets,onCancel,onConfirm}){
   const noun=kind==="exploits"?(count===1?"exploit":"exploits"):(count===1?"spell":"spells");
   const bs={cursor:"pointer",fontFamily:"'Cinzel',serif",fontSize:10,letterSpacing:1,textTransform:"uppercase",padding:"8px 16px",borderRadius:2,userSelect:"none"};
   return ReactDOM.createPortal(
-    <div onClick={function(e){e.stopPropagation();onCancel();}} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.7)",zIndex:100001,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
+    <div onClick={function(e){e.stopPropagation();onCancel();}} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.7)",zIndex:100010,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
       <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,padding:"20px 22px",maxWidth:420,width:"100%",maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
         <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--gold-l)",marginBottom:10}}>Delete class "{clsName}"</div>
         <div style={{fontFamily:"'EB Garamond',serif",fontSize:14,color:"rgba(232,213,176,0.92)",marginBottom:12,lineHeight:1.5}}>This class has {count} {noun}. Move {count===1?"it":"them"} to another class, or {count===1?"it":"they"} will be deleted.</div>
@@ -13036,7 +13211,7 @@ function ClassDeleteDialog({kind,clsName,count,targets,onCancel,onConfirm}){
 function ClassMoveResult({kind,cls,names,onClose}){
   const w=kind==="exploits"?"Exploit":"Spell";
   return ReactDOM.createPortal(
-    <div onClick={function(e){e.stopPropagation();onClose();}} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.7)",zIndex:100001,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
+    <div onClick={function(e){e.stopPropagation();onClose();}} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.7)",zIndex:100010,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
       <div onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.4)",borderRadius:4,padding:"20px 22px",maxWidth:420,width:"100%",maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",boxShadow:"0 8px 40px rgba(0,0,0,.8)"}}>
         <div style={{fontFamily:"'Cinzel',serif",fontSize:13,letterSpacing:1,color:"var(--gold-l)",marginBottom:10}}>{names.length===1?(w+" Already in List"):(names.length+" "+w+"s Already in List")}</div>
         <div style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:"rgba(232,213,176,0.86)",marginBottom:14,lineHeight:1.6}}>
@@ -13087,10 +13262,12 @@ function _renameClassRefs(node,oldN,newN){
   }
   return node;
 }
+function _renameEntryNm(arr,o,n){if(!Array.isArray(arr))return arr;var ch=false;var out=arr.map(function(x){if(x&&String(x.nm||"").trim().toLowerCase()===String(o).trim().toLowerCase()){ch=true;return Object.assign({},x,{nm:n});}return x;});return ch?out:arr;}
+function _renameItemCls(map,o,n){if(!map||typeof map!=="object")return map;var ch=false,out={};Object.keys(map).forEach(function(k){var l=map[k];if(Array.isArray(l)){var nl=l.map(function(x){if(x&&(x.cls||"")===o){ch=true;return Object.assign({},x,{cls:n});}return x;});out[k]=nl;}else out[k]=l;});return ch?out:map;}
 function _applyClassRename(c,s,oldN,newN){
   var hd=c.hdExp||{};
   if(Object.prototype.hasOwnProperty.call(hd,oldN)&&!Object.prototype.hasOwnProperty.call(hd,newN)){var nh=Object.assign({},hd);nh[newN]=nh[oldN];delete nh[oldN];s("hdExp",nh);}
-  Object.keys(c).forEach(function(k){if(k==="classes"||k==="hdExp")return;var v=c[k];var r=_renameClassRefs(v,oldN,newN);if(r!==v)s(k,r);});
+  Object.keys(c).forEach(function(k){if(k==="classes"||k==="hdExp")return;var v=c[k];var r=_renameClassRefs(v,oldN,newN);if(k==="feat")r=_renameFeatSrc(r,oldN,newN);if(k==="spellClasses"||k==="exploitClasses")r=_renameEntryNm(r,oldN,newN);if(k==="sp"||k==="expl")r=_renameItemCls(r,oldN,newN);if(r!==v)s(k,r);});
 }
 function Chev({open}){
   return <span style={{display:"inline-block",width:7,height:7,borderRight:"2px solid currentColor",borderBottom:"2px solid currentColor",transform:open?"rotate(-135deg) translate(-1px,-1px)":"rotate(-45deg)",marginLeft:open?0:-2,marginTop:open?3:0,pointerEvents:"none"}} />;
@@ -13552,6 +13729,245 @@ function LimitChips({lims,onAdjust,onRestore}){
 function JStk({name}){
   return <div data-jstk="1" style={{display:"none",position:"absolute",left:0,right:0,top:0,height:26,boxSizing:"border-box",zIndex:4,alignItems:"center",padding:"0 8px",background:"#17110a",borderBottom:"1px solid rgba(201,150,42,.35)",boxShadow:"0 4px 6px -4px rgba(0,0,0,.8)",pointerEvents:"none",fontFamily:"'Cinzel',serif",fontSize:12,fontWeight:600,letterSpacing:.5,color:"var(--gold-l)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{name||"Untitled"}</div>;
 }
+// ---- Add-class wizard (name, subclass, hit die, spellcasting + ability, exploits + ability) ----
+var _CLS_DEFAULTS={barbarian:{hd:"d12"},bard:{hd:"d8",sp:"CHA"},cleric:{hd:"d8",sp:"WIS"},druid:{hd:"d8",sp:"WIS"},fighter:{hd:"d10"},monk:{hd:"d8"},paladin:{hd:"d10",sp:"CHA"},ranger:{hd:"d10",sp:"WIS"},rogue:{hd:"d8"},sorcerer:{hd:"d6",sp:"CHA"},warlock:{hd:"d8",sp:"CHA"},wizard:{hd:"d6",sp:"INT"},artificer:{hd:"d8",sp:"INT"}};
+function ClassWizard({c,first,onDone,onClose}){
+  const [nm,setNm]=React.useState("");
+  const [sub,setSub]=React.useState("");
+  const [hd,setHd]=React.useState("d8");
+  const [sp,setSp]=React.useState(false);
+  const [spA,setSpA]=React.useState("INT");
+  const [ex,setEx]=React.useState(false);
+  const [exA,setExA]=React.useState("STR");
+  const touched=React.useRef({});
+  React.useEffect(function(){var h=function(e){if(e.key==="Escape")onClose();};document.addEventListener("keydown",h);return function(){document.removeEventListener("keydown",h);};},[]);
+  var key=nm.trim().toLowerCase();
+  var dup=(c.classes||[]).some(function(cl){return String(cl.nm||"").trim().toLowerCase()===key;});
+  var ok=!!key&&!dup;
+  function onName(v){
+    setNm(v);var d=_CLS_DEFAULTS[v.trim().toLowerCase()];
+    if(d){if(!touched.current.hd)setHd(d.hd);if(!touched.current.sp){setSp(!!d.sp);if(d.sp)setSpA(d.sp);}}
+  }
+  function submit(){if(!ok)return;onDone({nm:nm.trim(),sub:sub.trim(),hd:hd,sp:sp,spA:spA,ex:ex,exA:exA});}
+  var H="'Cinzel',serif",G="'EB Garamond',serif";
+  var fld={width:"100%",boxSizing:"border-box",background:"rgba(0,0,0,.4)",border:"none",borderBottom:"1px solid rgba(201,150,42,.4)",color:"var(--parch)",fontFamily:G,fontSize:15,padding:"6px 4px",outline:"none"};
+  var lab={display:"block",fontFamily:H,fontSize:9,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(235,195,100,0.92)",marginBottom:2};
+  var btn={cursor:"pointer",fontFamily:H,fontSize:10,letterSpacing:1,textTransform:"uppercase",color:"var(--gold-l)",border:"1px solid rgba(201,150,42,.5)",background:"rgba(201,150,42,.1)",borderRadius:3,padding:"8px 14px",whiteSpace:"nowrap"};
+  var abl=["STR","DEX","CON","INT","WIS","CHA"];
+  var chk=function(id,on,set,text){return <label htmlFor={id} style={{display:"flex",alignItems:"center",gap:8,cursor:"pointer",fontFamily:G,fontSize:15,color:"var(--parch)"}}><input id={id} type="checkbox" checked={on} onChange={function(e){set(e.target.checked);}} style={{width:16,height:16}} />{text}</label>;};
+  var sel=function(v,set,label){return <select value={v} onChange={function(e){set(e.target.value);}} aria-label={label} style={{background:"rgba(0,0,0,.4)",border:"none",borderBottom:"1px solid rgba(201,150,42,.4)",color:"var(--gold-l)",fontFamily:H,fontSize:12,padding:"4px 6px",outline:"none",cursor:"pointer"}}>{abl.map(function(a){return <option key={a} value={a} style={{background:"#1a1208"}}>{a}</option>;})}</select>;};
+  return <div onClick={onClose} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.72)",zIndex:100004,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
+    <form role="dialog" aria-modal="true" aria-label="Add a class" onClick={function(ev){ev.stopPropagation();}} onSubmit={function(e){e.preventDefault();submit();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.5)",borderRadius:4,padding:"16px 18px",maxWidth:420,width:"100%",maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",color:"var(--parch)"}}>
+      <div style={{fontFamily:H,fontSize:15,letterSpacing:1,color:"var(--gold-l)",marginBottom:4}}>{first?"Your first class":"Add a class"}</div>
+      <div style={{fontFamily:G,fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,0.88)",marginBottom:12}}>You can change all of this later with the pencil on the class.</div>
+      <div style={{marginBottom:10}}>
+        <label htmlFor="cw-nm" style={lab}>Class</label>
+        <input id="cw-nm" autoFocus value={nm} onChange={function(e){onName(e.target.value);}} list="cw-list" placeholder="Wizard, Fighter…" autoComplete="off" style={fld} />
+        <datalist id="cw-list">{Object.keys(_CLS_DEFAULTS).map(function(k){return <option key={k} value={k.charAt(0).toUpperCase()+k.slice(1)} />;})}</datalist>
+        {dup&&<div style={{fontFamily:G,fontSize:12,fontStyle:"italic",color:"#ffa591",marginTop:3}}>You already have this class.</div>}
+      </div>
+      <div style={{marginBottom:10}}>
+        <label htmlFor="cw-sub" style={lab}>Subclass (optional)</label>
+        <input id="cw-sub" value={sub} onChange={function(e){setSub(e.target.value);}} placeholder="Evocation…" autoComplete="off" style={fld} />
+      </div>
+      <div style={{marginBottom:12}}>
+        <label htmlFor="cw-hd" style={lab}>Hit die</label>
+        <select id="cw-hd" value={hd} onChange={function(e){touched.current.hd=true;setHd(e.target.value);}} style={{background:"rgba(0,0,0,.4)",border:"none",borderBottom:"1px solid rgba(201,150,42,.4)",color:"var(--parch)",fontFamily:G,fontSize:15,padding:"6px 4px",outline:"none",cursor:"pointer"}}>
+          {["d4","d6","d8","d10","d12"].map(function(h){return <option key={h} value={h} style={{background:"#1a1208"}}>{h}</option>;})}
+        </select>
+      </div>
+      <div style={{display:"flex",alignItems:"center",gap:12,flexWrap:"wrap",marginBottom:8,minHeight:30}}>
+        {chk("cw-sp",sp,function(v){touched.current.sp=true;setSp(v);},"Spellcasting class")}
+        {sp&&<span style={{display:"inline-flex",alignItems:"center",gap:6,fontFamily:H,fontSize:9,letterSpacing:1,textTransform:"uppercase",color:"rgba(200,175,250,0.95)"}}>Ability {sel(spA,setSpA,"Spellcasting ability")}</span>}
+      </div>
+      <div style={{display:"flex",alignItems:"center",gap:12,flexWrap:"wrap",marginBottom:14,minHeight:30}}>
+        {chk("cw-ex",ex,setEx,"Has exploits")}
+        {ex&&<span style={{display:"inline-flex",alignItems:"center",gap:6,fontFamily:H,fontSize:9,letterSpacing:1,textTransform:"uppercase",color:"rgba(255,165,145,0.96)"}}>Ability {sel(exA,setExA,"Exploit ability")}</span>}
+      </div>
+      {(sp||ex)&&<div style={{fontFamily:G,fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,0.82)",marginBottom:12}}>{(sp&&ex?"A spellcasting entry and an exploit entry":sp?"A spellcasting entry":"An exploit entry")+" with its Save DC will be created on the "+(sp&&ex?"Spells and Exploits tabs":sp?"Spells tab":"Exploits tab")+", linked to this class."}</div>}
+      <div style={{display:"flex",gap:8,justifyContent:"flex-end"}}>
+        <button type="button" style={btn} onClick={onClose}>Cancel</button>
+        <button type="submit" disabled={!ok} style={Object.assign({},btn,{opacity:ok?1:.4,cursor:ok?"pointer":"default",background:"rgba(201,150,42,.22)"})}>Add class</button>
+      </div>
+    </form>
+  </div>;
+}
+function SpellDcAsk({c,cl,onYes,onNo,onClose}){
+  var def=(_CLS_DEFAULTS[String(cl.nm||"").trim().toLowerCase()]||{}).sp||"INT";
+  const [abl,setAbl]=React.useState(def);
+  React.useEffect(function(){var h=function(e){if(e.key==="Escape")onClose();};document.addEventListener("keydown",h);return function(){document.removeEventListener("keydown",h);};},[]);
+  var nm=String(cl.nm||"").trim();
+  var has=!!nm&&(c.spellClasses||[]).some(function(x){return !x.kind&&String(x.nm||"").trim().toLowerCase()===nm.toLowerCase();});
+  var H="'Cinzel',serif",G="'EB Garamond',serif";
+  var btn={cursor:"pointer",fontFamily:H,fontSize:10,letterSpacing:1,textTransform:"uppercase",color:"var(--gold-l)",border:"1px solid rgba(201,150,42,.5)",background:"rgba(201,150,42,.1)",borderRadius:3,padding:"8px 14px",whiteSpace:"nowrap"};
+  return <div onClick={onClose} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.72)",zIndex:100010,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
+    <div role="dialog" aria-modal="true" aria-label="Is this a spell save DC?" onClick={function(e){e.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.5)",borderRadius:4,padding:"16px 18px",maxWidth:400,width:"100%",boxSizing:"border-box",color:"var(--parch)"}}>
+      <div style={{fontFamily:H,fontSize:15,letterSpacing:1,color:"var(--gold-l)",marginBottom:6}}>Is this a spell save DC?</div>
+      <div style={{fontFamily:G,fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,0.88)",marginBottom:12}}>{has?(nm+" already has its spell save DC (see the Spells tab). Choose No to add a different DC, such as a class feature DC."):!nm?"Give the class a name first to add its spell save DC. Choose No to add another kind of DC.":"Yes adds it to the Spells tab right away, linked to "+nm+". No adds a different DC, such as a class feature DC."}</div>
+      {!has&&!!nm&&<div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12,fontFamily:H,fontSize:9,letterSpacing:1,textTransform:"uppercase",color:"rgba(235,195,100,0.92)"}}>
+        <label htmlFor="sda-abl">Spellcasting ability</label>
+        <select id="sda-abl" value={abl} onChange={function(e){setAbl(e.target.value);}} style={{background:"rgba(0,0,0,.4)",border:"none",borderBottom:"1px solid rgba(201,150,42,.4)",color:"var(--gold-l)",fontFamily:H,fontSize:12,padding:"4px 6px",outline:"none",cursor:"pointer"}}>
+          {["STR","DEX","CON","INT","WIS","CHA"].map(function(a){return <option key={a} value={a} style={{background:"#1a1208"}}>{a}</option>;})}
+        </select></div>}
+      <div style={{display:"flex",gap:8,justifyContent:"flex-end",flexWrap:"wrap"}}>
+        <button type="button" style={btn} onClick={onClose}>Cancel</button>
+        <button type="button" style={btn} onClick={onNo}>No, other DC</button>
+        <button type="button" disabled={has||!nm} style={Object.assign({},btn,{background:"rgba(201,150,42,.22)",opacity:(has||!nm)?.4:1,cursor:(has||!nm)?"default":"pointer"})} onClick={function(){onYes(abl);}}>Yes, spell DC</button>
+      </div>
+    </div>
+  </div>;
+}
+// ---- Species / feats spellcasting DCs (entries of c.spellClasses with a "kind") ----
+function _spKindLabel(k){return k==="species"?"Species DC":k==="feats"?"Feats DC":k==="both"?"Species + Feats DC":k==="feat"?"Feat DC":"";}
+function _spChips(c,kinds,ft){
+  var key=String(ft||"").trim().toLowerCase();
+  return (c.spellClasses||[]).filter(function(sc){return sc&&sc.kind&&kinds.indexOf(sc.kind)>=0&&(sc.kind!=="feat"||String(sc.ft||"").trim().toLowerCase()===key);}).map(function(sc,i){
+    return <span key={"spdc"+i} title={(sc.nm||"")+" · spellcasting ability "+(sc.abl||"INT")+". Edit it on the Spells tab."} style={{display:"inline-flex",alignItems:"baseline",gap:4,marginLeft:10,padding:"1px 8px",borderRadius:9,border:"1px solid rgba(123,79,207,.4)",fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:1,fontWeight:"normal",textTransform:"uppercase",color:"rgba(200,175,250,0.95)",whiteSpace:"nowrap"}}>{"Spell Save DC "}<b style={{fontSize:12,color:"var(--gold-l)"}}>{_spDC(c,sc)}</b></span>;
+  });
+}
+function SpecialDCModal({c,onPick,onClose}){
+  const [abl,setAbl]=React.useState("INT");
+  const [pickFeat,setPickFeat]=React.useState(false);
+  React.useEffect(function(){var h=function(e){if(e.key==="Escape")onClose();};document.addEventListener("keydown",h);return function(){document.removeEventListener("keydown",h);};},[]);
+  var es=(c.spellClasses||[]).filter(function(x){return x&&x.kind;});
+  var has=function(k){return es.some(function(x){return x.kind===k;});};
+  var anyFeat=has("feat");
+  var feats=(c.fts||[]).map(function(f){return (f&&f.nm||"").trim();}).filter(Boolean);
+  var taken=function(nm){return es.some(function(x){return x.kind==="feat"&&String(x.ft||"").toLowerCase()===nm.toLowerCase();});};
+  var opts=[
+    {k:"species",t:"Species",d:"Spells your species gives you. The DC shows next to Species Features.",off:has("species")||has("both")},
+    {k:"feats",t:"All feats",d:"One DC for every feat. It shows next to the Feats heading.",off:has("feats")||has("both")||anyFeat},
+    {k:"both",t:"Species + all feats together",d:"One DC shared by your species and all your feats. It shows next to both headings.",off:has("species")||has("feats")||has("both")||anyFeat},
+    {k:"feat",t:"A single feat",d:anyFeat||feats.length?"A DC for one feat. It shows next to that feat.":"Add a feat first.",off:has("feats")||has("both")||feats.length===0}
+  ];
+  var H="'Cinzel',serif",G="'EB Garamond',serif";
+  var btn={cursor:"pointer",fontFamily:H,fontSize:10,letterSpacing:1,textTransform:"uppercase",color:"var(--gold-l)",border:"1px solid rgba(201,150,42,.5)",background:"rgba(201,150,42,.1)",borderRadius:3,padding:"7px 12px",whiteSpace:"nowrap"};
+  var row=function(o){return <div key={o.k} role="button" tabIndex={o.off?-1:0} aria-disabled={o.off}
+    onClick={function(){if(o.off)return;if(o.k==="feat")setPickFeat(true);else onPick({kind:o.k,nm:o.k==="species"?"Species":o.k==="feats"?"Feats":"Species & Feats",abl:abl});}}
+    onKeyDown={function(e){if(!o.off&&(e.key==="Enter"||e.key===" ")){e.preventDefault();if(o.k==="feat")setPickFeat(true);else onPick({kind:o.k,nm:o.k==="species"?"Species":o.k==="feats"?"Feats":"Species & Feats",abl:abl});}}}
+    style={{padding:"8px 10px",marginBottom:6,cursor:o.off?"default":"pointer",opacity:o.off?.5:1,border:"1px solid rgba(201,150,42,.25)",background:"rgba(0,0,0,.2)",borderRadius:3}}>
+    <div style={{fontFamily:H,fontSize:13,fontWeight:700,color:"var(--gold-l)"}}>{o.t}{o.off&&o.k!=="feat"?"  ·  not available":""}</div>
+    <div style={{fontFamily:G,fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,0.88)"}}>{o.d}</div>
+  </div>;};
+  return <div onClick={onClose} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.72)",zIndex:100004,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
+    <div role="dialog" aria-modal="true" aria-label="Species and feat spell DC" onClick={function(ev){ev.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.5)",borderRadius:4,padding:"16px 18px",maxWidth:420,width:"100%",maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",color:"var(--parch)"}}>
+      <div style={{fontFamily:H,fontSize:15,letterSpacing:1,color:"var(--gold-l)",marginBottom:4}}>{pickFeat?"Which feat?":"Spell DC for species or feats"}</div>
+      {!pickFeat&&<React.Fragment>
+        <div style={{fontFamily:G,fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,0.88)",marginBottom:10}}>Choose what it covers. Spells you give it are listed under its name on this tab.</div>
+        <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10,fontFamily:H,fontSize:9,letterSpacing:1,textTransform:"uppercase",color:"rgba(235,195,100,0.92)"}}>
+          <label htmlFor="sd-abl">Spellcasting ability</label>
+          <select id="sd-abl" value={abl} onChange={function(e){setAbl(e.target.value);}} style={{background:"rgba(0,0,0,.4)",border:"none",borderBottom:"1px solid rgba(201,150,42,.4)",color:"var(--gold-l)",fontFamily:H,fontSize:12,padding:"4px 6px",outline:"none",cursor:"pointer"}}>
+            {["STR","DEX","CON","INT","WIS","CHA"].map(function(a){return <option key={a} value={a} style={{background:"#1a1208"}}>{a}</option>;})}
+          </select>
+        </div>
+        {opts.map(row)}
+      </React.Fragment>}
+      {pickFeat&&<div>
+        {feats.map(function(nm,i){var t=taken(nm);return <div key={i} role="button" tabIndex={t?-1:0} aria-disabled={t} onClick={function(){if(!t)onPick({kind:"feat",nm:nm,ft:nm,abl:abl});}} onKeyDown={function(e){if(!t&&(e.key==="Enter"||e.key===" ")){e.preventDefault();onPick({kind:"feat",nm:nm,ft:nm,abl:abl});}}}
+          style={{display:"flex",gap:8,padding:"8px 10px",marginBottom:6,cursor:t?"default":"pointer",opacity:t?.5:1,border:"1px solid rgba(201,150,42,.25)",background:"rgba(0,0,0,.2)",borderRadius:3}}>
+          <span style={{fontFamily:H,fontSize:13,fontWeight:700,color:"var(--gold-l)"}}>{nm}</span>{t&&<span style={{marginLeft:"auto",fontFamily:H,fontSize:9,letterSpacing:1,color:"rgba(235,195,100,0.92)"}}>ALREADY ADDED</span>}
+        </div>;})}
+      </div>}
+      <div style={{display:"flex",gap:8,marginTop:14,justifyContent:"flex-end"}}>
+        {pickFeat&&<div style={btn} role="button" tabIndex={0} onClick={function(){setPickFeat(false);}}>Back</div>}
+        <div style={btn} role="button" tabIndex={0} onClick={onClose}>Cancel</div>
+      </div>
+    </div>
+  </div>;
+}
+// Class picker for spellcasting / exploit class entries: only classes you have (never a subclass), each class once
+function ClassPickModal({c,current,usedNames,title,onPick,onClose}){
+  var used=(usedNames||[]).map(function(x){return String(x||"").trim().toLowerCase();});
+  var cur=String(current||"").trim().toLowerCase();
+  var opts=(c.classes||[]).filter(function(cl){return (cl.nm||"").trim();});
+  React.useEffect(function(){var h=function(e){if(e.key==="Escape")onClose();};document.addEventListener("keydown",h);return function(){document.removeEventListener("keydown",h);};},[]);
+  var H="'Cinzel',serif",G="'EB Garamond',serif";
+  var btn={cursor:"pointer",fontFamily:H,fontSize:10,letterSpacing:1,textTransform:"uppercase",color:"var(--gold-l)",border:"1px solid rgba(201,150,42,.5)",background:"rgba(201,150,42,.1)",borderRadius:3,padding:"7px 12px",whiteSpace:"nowrap"};
+  return <div onClick={onClose} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.72)",zIndex:100004,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
+    <div role="dialog" aria-modal="true" aria-label={title} onClick={function(ev){ev.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.5)",borderRadius:4,padding:"16px 18px",maxWidth:420,width:"100%",maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",color:"var(--parch)"}}>
+      <div style={{fontFamily:H,fontSize:15,letterSpacing:1,color:"var(--gold-l)",marginBottom:4}}>{title}</div>
+      <div style={{fontFamily:G,fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,0.88)",marginBottom:12}}>One of your own classes (the Classes section on the Character tab). Its DC and bonuses are shared with that class there.</div>
+      {opts.length===0&&<div style={{fontFamily:G,fontSize:14,marginBottom:12}}>Add a class (with a name) in the Classes section first.</div>}
+      {opts.map(function(cl,i){
+        var nm=cl.nm.trim(),k=nm.toLowerCase(),taken=used.indexOf(k)>=0&&k!==cur,on=k===cur;
+        return <div key={i} role="button" tabIndex={taken?-1:0} aria-disabled={taken} aria-pressed={on}
+          onClick={function(){if(!taken)onPick(nm);}} onKeyDown={function(e){if(!taken&&(e.key==="Enter"||e.key===" ")){e.preventDefault();onPick(nm);}}}
+          style={{display:"flex",alignItems:"baseline",gap:8,padding:"8px 10px",marginBottom:6,cursor:taken?"default":"pointer",opacity:taken?.5:1,border:"1px solid "+(on?"rgba(201,150,42,.75)":"rgba(201,150,42,.25)"),background:on?"rgba(201,150,42,.18)":"rgba(0,0,0,.2)",borderRadius:3}}>
+          <span style={{fontFamily:H,fontSize:13,fontWeight:700,color:on?"#f3d98a":"var(--gold-l)"}}>{nm}</span>
+          {cl.sub&&<span style={{fontFamily:G,fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,0.88)"}}>{cl.sub}</span>}
+          <span style={{marginLeft:"auto",fontFamily:H,fontSize:9,letterSpacing:1,color:"rgba(235,195,100,0.92)"}}>{taken?"ALREADY ADDED":"LEVEL "+(parseInt(cl.lv)||"–")}</span>
+        </div>;
+      })}
+      {current&&!opts.some(function(cl){return cl.nm.trim().toLowerCase()===cur;})&&<div style={{fontFamily:G,fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,0.8)",marginTop:6}}>{"Current: "+current+" (not one of your classes)"}</div>}
+      <div style={{display:"flex",gap:8,marginTop:14,justifyContent:"flex-end"}}>
+        <div style={btn} role="button" tabIndex={0} onClick={onClose}>Cancel</div>
+      </div>
+    </div>
+  </div>;
+}
+// The spellcasting / exploit entry that belongs to a class (matched by name), with its current DC
+function _bonTxt(c,x){var b=x.dcBonusFormula?computeBonusFromFormula(x.dcBonusFormula,c):(parseInt(String(x.dcBonus||"").replace("+",""))||0);return b?" "+(b>0?"+":"\u2212")+Math.abs(b):"";}
+function _linkedDC(c,cl){
+  var k=String((cl&&cl.nm)||"").trim().toLowerCase(),out={};if(!k)return out;
+  (c.spellClasses||[]).some(function(sc,i){if(!sc.kind&&String(sc.nm||"").trim().toLowerCase()===k){out.sp={sc:sc,i:i,dc:_spDC(c,sc)};return true;}return false;});
+  (c.exploitClasses||[]).some(function(ec,i){if(String(ec.nm||"").trim().toLowerCase()===k){out.ex={sc:ec,i:i,dc:_exDC(c,ec)};return true;}return false;});
+  return out;
+}
+// Class feature source: pick one of YOUR classes / subclasses and a level you already have ("Druid 3"), instead of typing free text
+function _srcOptions(c){
+  var out=[];
+  (c.classes||[]).forEach(function(cl){
+    var nm=(cl.nm||"").trim();if(!nm)return;var lv=Math.max(0,Math.min(20,parseInt(cl.lv)||0));
+    out.push({label:nm,src:nm,kind:"Class",lv:lv});
+    var sb=(cl.sub||"").trim();if(sb)out.push({label:nm+" ("+sb+")",src:nm+" ("+sb+")",kind:"Subclass",lv:lv});
+  });
+  return out;
+}
+function _renameFeatSrc(arr,o,n){
+  if(!Array.isArray(arr)||!o||!n||o===n)return arr;var ch=false;
+  var out=arr.map(function(f){if(f&&typeof f.src==="string"){var m=f.src.match(/^(.*) (\d+)$/);if(m&&(m[1]===o||m[1].indexOf(o+" (")===0)){ch=true;return Object.assign({},f,{src:n+m[1].slice(o.length)+" "+m[2]});}}return f;});
+  return ch?out:arr;
+}
+function FeatSourceModal({c,value,onPick,onClose}){
+  var opts=_srcOptions(c);
+  var m=String(value||"").match(/^(.*) (\d+)$/),curLv=m?parseInt(m[2]):0;
+  var start=m?opts.findIndex(function(o){return o.src===m[1];}):-1;
+  const [sel,setSel]=React.useState(start>=0?start:(opts.length===1?0:-1));
+  React.useEffect(function(){var h=function(e){if(e.key==="Escape")onClose();};document.addEventListener("keydown",h);return function(){document.removeEventListener("keydown",h);};},[]);
+  var H="'Cinzel',serif",G="'EB Garamond',serif";
+  var btn={cursor:"pointer",fontFamily:H,fontSize:10,letterSpacing:1,textTransform:"uppercase",color:"var(--gold-l)",border:"1px solid rgba(201,150,42,.5)",background:"rgba(201,150,42,.1)",borderRadius:3,padding:"7px 12px",whiteSpace:"nowrap"};
+  var so=sel>=0?opts[sel]:null;
+  return <div onClick={onClose} style={{position:"fixed",inset:0,height:"100dvh",background:"rgba(0,0,0,.72)",zIndex:100004,display:"flex",alignItems:"center",justifyContent:"center",padding:16,boxSizing:"border-box"}}>
+    <div role="dialog" aria-modal="true" aria-label="Feature source" onClick={function(ev){ev.stopPropagation();}} style={{background:"#1a1410",border:"1px solid rgba(201,150,42,.5)",borderRadius:4,padding:"16px 18px",maxWidth:420,width:"100%",maxHeight:"100%",overflowY:"auto",boxSizing:"border-box",color:"var(--parch)"}}>
+      <div style={{fontFamily:H,fontSize:15,letterSpacing:1,color:"var(--gold-l)",marginBottom:4}}>Where does this feature come from?</div>
+      <div style={{fontFamily:G,fontSize:13,fontStyle:"italic",color:"rgba(232,213,176,0.88)",marginBottom:12}}>Only your own classes and subclasses, up to the level you have.</div>
+      {opts.length===0&&<div style={{fontFamily:G,fontSize:14,marginBottom:12}}>Add a class (with a name) in the Classes section first.</div>}
+      {opts.map(function(o,i){
+        var on=i===sel;
+        return <div key={i} role="button" tabIndex={0} aria-pressed={on} onClick={function(){setSel(i);}} onKeyDown={function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();setSel(i);}}}
+          style={{display:"flex",alignItems:"baseline",gap:8,padding:"8px 10px",marginBottom:6,cursor:"pointer",border:"1px solid "+(on?"rgba(201,150,42,.75)":"rgba(201,150,42,.25)"),background:on?"rgba(201,150,42,.18)":"rgba(0,0,0,.2)",borderRadius:3}}>
+          <span style={{fontFamily:H,fontSize:13,fontWeight:700,color:on?"#f3d98a":"var(--gold-l)"}}>{o.label}</span>
+          <span style={{fontFamily:G,fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,0.88)"}}>{o.kind}</span>
+          <span style={{marginLeft:"auto",fontFamily:H,fontSize:9,letterSpacing:1,color:"rgba(235,195,100,0.92)"}}>{"LEVEL "+(o.lv||"–")}</span>
+        </div>;
+      })}
+      {so&&<div style={{marginTop:10}}>
+        <div style={{fontFamily:H,fontSize:9,letterSpacing:2,textTransform:"uppercase",color:"rgba(235,195,100,0.92)",marginBottom:6}}>{"At which "+so.label+" level?"}</div>
+        {so.lv<1?<div style={{fontFamily:G,fontSize:14}}>{"Set a level for this class in the Classes section first."}</div>
+        :<div style={{display:"flex",flexWrap:"wrap",gap:6}}>
+          {Array.from({length:so.lv}).map(function(_,k){var n=k+1,on=m&&start===sel&&curLv===n;
+            return <button key={n} type="button" aria-pressed={!!on} onClick={function(){onPick(so.src+" "+n);}}
+              style={{width:38,height:34,cursor:"pointer",fontFamily:H,fontSize:13,fontWeight:700,color:on?"#f3d98a":"var(--parch)",border:"1px solid "+(on?"rgba(201,150,42,.75)":"rgba(201,150,42,.3)"),background:on?"rgba(201,150,42,.22)":"rgba(0,0,0,.25)",borderRadius:3}}>{n}</button>;})}
+        </div>}
+      </div>}
+      {value&&start<0&&<div style={{fontFamily:G,fontSize:12,fontStyle:"italic",color:"rgba(232,213,176,0.8)",marginTop:10}}>{"Current: "+value+" (not one of your class levels)"}</div>}
+      <div style={{display:"flex",gap:8,marginTop:14,justifyContent:"flex-end"}}>
+        {value&&<div style={Object.assign({},btn,{color:"rgba(255,165,145,0.96)",borderColor:"rgba(201,74,42,.5)",background:"rgba(201,74,42,.1)"})} role="button" tabIndex={0} onClick={function(){onPick("");}}>Clear</div>}
+        <div style={btn} role="button" tabIndex={0} onClick={onClose}>Cancel</div>
+      </div>
+    </div>
+  </div>;
+}
 function FeatViewHead({name,sub,tag,onClose,right}){
   return <div className="stk" ref={function(el){if(el&&el.parentElement)el.parentElement.style.setProperty("--fhh",(el.offsetHeight+6)+"px");}} style={{display:"flex",alignItems:"center",gap:8,marginBottom:6,background:"#17110a",padding:"2px 0"}}>
     <button type="button" onClick={function(e){e.stopPropagation();onClose();}} title="Close"
@@ -13564,7 +13980,7 @@ function FeatViewHead({name,sub,tag,onClose,right}){
     {right}
   </div>;
 }
-function CompactFeatureRow({name,sub,cost,limited,lims,onAdjust,onRestore,border,onOpen,onDelete,ph,dkey,di,s,edKey}){
+function CompactFeatureRow({dc,name,sub,cost,limited,lims,onAdjust,onRestore,border,onOpen,onDelete,ph,dkey,di,s,edKey}){
   React.useEffect(function(){if(edKey)_edit.set.delete(edKey);},[edKey]);
   return (
     <div className="fcr" data-dkey={dkey} data-di={di} {...(dkey?holdDragProps(dkey,di,s):{})} style={{borderLeftColor:border,...(limited&&lims&&lims.length>1?{flexWrap:"wrap",rowGap:4}:null)}} onClick={onOpen} title="Click to expand · press and hold to drag">
@@ -13574,6 +13990,7 @@ function CompactFeatureRow({name,sub,cost,limited,lims,onAdjust,onRestore,border
         return <button title="Restore all uses" onClick={function(e){e.stopPropagation();if(!full) onRestore();}}
           style={{cursor:"pointer",background:"transparent",border:"1px solid rgba(74,156,92,.35)",color:"rgba(140,225,160,0.96)",fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,lineHeight:1,padding:0,width:22,height:22,display:"inline-flex",alignItems:"center",justifyContent:"center",borderRadius:2,flexShrink:0,touchAction:"manipulation",opacity:full?.4:1}}>↻</button>;})()}
       {sub&&<span style={{fontFamily:"'EB Garamond',serif",fontSize:11,fontStyle:"italic",color:"rgba(232,213,176,0.8)",whiteSpace:"nowrap",flex:"1 0 auto"}}>{sub}</span>}
+      {dc}
       {!sub&&<span style={{flex:"1 0 8px"}} />}
       {limited&&(lims&&lims.length>0?lims.map(function(l,idx){
         var bs=function(col,bd){return {cursor:"pointer",background:"transparent",border:"1px solid "+bd,color:col,fontFamily:"'Cinzel',serif",fontSize:13,fontWeight:700,lineHeight:1,padding:0,width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:2,touchAction:"manipulation"};};
@@ -13903,7 +14320,7 @@ function SpeciesFeaturesSection({c,s,q}){
   const col=bad?"201,74,42":"201,150,42";
   return (
     <div style={{marginTop:28}}>
-      <SecHead label="Species Features" open={open||!!sq} onToggle={function(){s("secOpen",Object.assign({},c.secOpen||{},{spec:!open}));}} summary={list.length+" feature"+(list.length===1?"":"s")+" · "+total+" pts"+(bad?" ⚠":"")} />
+      <SecHead label="Species Features" open={open||!!sq} onToggle={function(){s("secOpen",Object.assign({},c.secOpen||{},{spec:!open}));}} summary={list.length+" feature"+(list.length===1?"":"s")+" · "+total+" pts"+(bad?" ⚠":"")}>{_spChips(c,["species","both"])}</SecHead>
       <div className="fc" style={{borderLeftColor:bad?"var(--ember)":"var(--gold)",background:bad?"rgba(201,74,42,.08)":undefined,borderColor:bad?"rgba(201,74,42,.45)":undefined}}>
         <div style={{display:"flex",alignItems:"baseline",gap:6,marginBottom:list.length?8:0}}>
           <span style={{fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1.5,textTransform:"uppercase",color:"rgba(232,213,176,0.76)"}}>Feature cost</span>
@@ -16056,7 +16473,7 @@ function CreaturesPage({c,s}){
 
 function ConfirmModal({message,onYes,onNo,confirmLabel}){
   return ReactDOM.createPortal(
-    <div style={{position:"fixed",inset:0,height:"100dvh",boxSizing:"border-box",zIndex:99999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.8)"}} onClick={onNo}>
+    <div style={{position:"fixed",inset:0,height:"100dvh",boxSizing:"border-box",zIndex:100010,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.8)"}} onClick={onNo}>
       <div style={{background:"#1a1208",border:"1px solid rgba(201,74,42,.4)",padding:"22px 28px",minWidth:280,maxWidth:400,width:"90vw",boxShadow:"0 8px 40px rgba(0,0,0,.9)"}} onClick={function(e){e.stopPropagation();}}>
         <div style={{fontFamily:"'Cinzel',serif",fontSize:11,letterSpacing:1,color:"rgba(232,213,176,0.9)",marginBottom:18,lineHeight:1.6,whiteSpace:"pre-line"}}>{message||"Are you sure you want to delete this?"}</div>
         <div style={{display:"flex",gap:10,justifyContent:"flex-end"}}>
@@ -16528,6 +16945,76 @@ function QuickRollPanel({c,s:setS,shut,setShut}){
     })}
   </div>;
 }
+// UI preferences (this device only, not part of the character): section chips on/off, simple mode
+var _ui={chips:true,simple:false,chipsOpen:null},_uiL=[];
+try{var _u0=JSON.parse(localStorage.getItem("dnd5e_ui_v1")||"{}");if(_u0&&typeof _u0==="object"){if(_u0.chips===false)_ui.chips=false;if(_u0.simple===true)_ui.simple=true;if(typeof _u0.chipsOpen==="boolean")_ui.chipsOpen=_u0.chipsOpen;}}catch(e){}
+function uiSet(k,v){var n=Object.assign({},_ui);n[k]=v;_ui=n;try{localStorage.setItem("dnd5e_ui_v1",JSON.stringify(_ui));}catch(e){}_uiL.slice().forEach(function(fn){fn();});}
+function useUi(){var st=React.useState(0),f=st[1];React.useEffect(function(){var g=function(){f(function(n){return n+1;});};_uiL.push(g);return function(){_uiL=_uiL.filter(function(x){return x!==g;});};},[]);return _ui;}
+// a bonus field "has a value" if it is not empty / 0 or has a formula (simple mode never hides a field that is doing something)
+function _hasV(v,f){var t=String(v==null?"":v).trim().replace(/^\+/,"");return (t!==""&&t!=="0")||!!f;}
+// Section chips: a pinned row under the tabs that jumps to each section of the current tab (only on tabs that have 3+ sections)
+function _chipLabel(el){
+  var ns=el.childNodes;
+  for(var i=0;i<ns.length;i++){var t=(ns[i].textContent||"").replace(/[\u25BE\u25B8]/g,"").trim();if(t)return t;}
+  return "";
+}
+function _chipEls(){return [].slice.call(document.querySelectorAll(".sheet .si .sh")).filter(function(e){return e.offsetParent!==null;});}
+function SectionChips({pg}){
+  const ui=useUi();
+  const [labels,setLabels]=React.useState([]);
+  const [act,setAct]=React.useState(0);
+  const rowRef=React.useRef(null);
+  const open=ui.chipsOpen==null?window.innerWidth>520:ui.chipsOpen;
+  const actRef=React.useRef(0);actRef.current=act;
+  React.useEffect(function(){var el=rowRef.current;if(!el||!open)return;
+    var h=function(e){if(el.scrollWidth<=el.clientWidth)return;var d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;if(!d)return;var b=el.scrollLeft;el.scrollLeft+=d;if(el.scrollLeft!==b)e.preventDefault();};
+    el.addEventListener("wheel",h,{passive:false});return function(){el.removeEventListener("wheel",h);};},[open,labels.length]);
+  React.useEffect(function(){
+    if(!ui.chips){setLabels(function(p){return p.length?[]:p;});return;}
+    var tm=0,raf=0;
+    function scan(){var ls=_chipEls().map(_chipLabel);setLabels(function(p){return p.join("\u0001")===ls.join("\u0001")?p:ls;});}
+    function later(){clearTimeout(tm);tm=setTimeout(scan,200);}
+    function pos(){
+      raf=0;var els=_chipEls();if(!els.length)return;
+      var stk=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--stk"))||100,a=0;
+      var tops=els.map(function(e){return e.getBoundingClientRect().top;}),best=-1e9,c=[];
+      tops.forEach(function(t){if(t<=stk+10&&t>best)best=t;});
+      if(best>-1e9){tops.forEach(function(t,i){if(t<=stk+10&&t>=best-4)c.push(i);});a=c.indexOf(actRef.current)>=0?actRef.current:c[0];}
+      if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4)a=els.length-1;
+      setAct(function(p){return p===a?p:a;});
+    }
+    function onScroll(){if(!raf)raf=requestAnimationFrame(pos);}
+    var si=document.querySelector(".sheet .si"),mo=null;
+    if(si&&window.MutationObserver){mo=new MutationObserver(later);mo.observe(si,{childList:true,subtree:true});}
+    window.addEventListener("scroll",onScroll,{passive:true});window.addEventListener("resize",onScroll);
+    tm=setTimeout(function(){scan();pos();},150);
+    return function(){clearTimeout(tm);if(raf)cancelAnimationFrame(raf);if(mo)mo.disconnect();window.removeEventListener("scroll",onScroll);window.removeEventListener("resize",onScroll);};
+  },[pg,ui.chips]);
+  const show=ui.chips&&labels.length>=3;
+  React.useEffect(function(){try{window.dispatchEvent(new Event("resize"));}catch(e){}},[show,open]);
+  React.useEffect(function(){
+    var row=rowRef.current;if(!row||!open)return;var b=row.children[act];
+    if(b&&b.offsetLeft!=null){var l=b.offsetLeft-8,r=b.offsetLeft+b.offsetWidth+8;if(l<row.scrollLeft)row.scrollLeft=l;else if(r>row.scrollLeft+row.clientWidth)row.scrollLeft=r-row.clientWidth;}
+  },[act,show,open]);
+  if(!show)return null;
+  function go(i){
+    var els=_chipEls(),el=els[i];if(!el)return;
+    var stk=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--stk"))||100;
+    var y=el.getBoundingClientRect().top+window.scrollY-stk-6;
+    var calm=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({top:Math.max(0,y),behavior:calm?"auto":"smooth"});setAct(i);if(window.innerWidth<=520)uiSet("chipsOpen",false);
+  }
+  return <nav className={open?"chiprow":"chiprow shut"} aria-label="Jump to a section">
+    <button type="button" className="chiph" aria-expanded={open} aria-label={open?"Close the section list":"Open the section list"} title={open?"Close the section list":"Jump to a section"} onClick={function(){uiSet("chipsOpen",!open);}}>
+      <span aria-hidden="true">{open?"\u25B4":"\u25BE"}</span>
+      {!open&&<span className="chipcur">{labels[act]||"Sections"}</span>}
+      {!open&&<span className="chipcnt" aria-hidden="true">{(act+1)+"/"+labels.length}</span>}
+    </button>
+    {open&&<div className="chips" ref={rowRef}>
+      {labels.map(function(l,i){return <button key={i} type="button" className={i===act?"chip on":"chip"} aria-current={i===act?"true":undefined} title={l} onClick={function(){go(i);}}>{l}</button>;})}
+    </div>}
+  </nav>;
+}
 function HpAcStrip({c,s}){
   _rmCtx.c=c;_rmCtx.s=s;
   var op=React.useState(false),open=op[0],setOpen=op[1];
@@ -16646,6 +17133,7 @@ function App(){
   const s=(k,v)=>setC(function(prev){const next={...prev,[k]:typeof v==="function"?v(prev[k]):v};if(window.__characterAutoSave)setTimeout(function(){window.__characterAutoSave(next);},100);return next;});
   const [hiddenTabs,setHiddenTabs]=useState(function(){try{var h=JSON.parse(localStorage.getItem('_ht'));return Array.isArray(h)?h:[];}catch(e){return [];}});
   const [showTabMgr,setShowTabMgr]=useState(false);
+  const uiState=useUi();
   const [lrFlow,setLrFlow]=useState(false);
   const [srFlow,setSrFlow]=useState(false);
   const [lrRes,setLrRes]=useState(null);
@@ -16762,6 +17250,14 @@ function App(){
     }
   };
 
+  React.useEffect(function(){var el=document.querySelector(".nav");if(!el)return;
+    var h=function(e){if(el.scrollWidth<=el.clientWidth)return;var d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;if(!d)return;var b=el.scrollLeft;el.scrollLeft+=d;if(el.scrollLeft!==b)e.preventDefault();};
+    el.addEventListener("wheel",h,{passive:false});
+    var fade=function(){var l=el.scrollLeft>4,rt=el.scrollLeft+el.clientWidth<el.scrollWidth-4;if(l)el.setAttribute("data-fl","1");else el.removeAttribute("data-fl");if(rt)el.setAttribute("data-fr","1");else el.removeAttribute("data-fr");};
+    el.addEventListener("scroll",fade,{passive:true});window.addEventListener("resize",fade);fade();setTimeout(fade,600);
+    return function(){el.removeEventListener("wheel",h);el.removeEventListener("scroll",fade);window.removeEventListener("resize",fade);};},[]);
+  var pgInit=React.useRef(true);
+  React.useEffect(function(){if(pgInit.current){pgInit.current=false;return;}window.scrollTo(0,0);},[pg]);
   React.useEffect(function(){var b=document.querySelector(".nav .nb.act");if(b&&b.parentNode&&b.parentNode.scrollTo){var n=b.parentNode;n.scrollTo({left:b.offsetLeft-n.clientWidth/2+b.clientWidth/2,behavior:"smooth"});}},[pg]);
   return (
     <>
@@ -16851,6 +17347,15 @@ function App(){
                       </div>
                     );
                   })}
+                  <div style={{fontFamily:"'Cinzel',serif",fontSize:9,letterSpacing:2,color:"rgba(235,195,100,0.88)",textTransform:"uppercase",margin:"10px 0 6px"}}>Display</div>
+                  {[["chips","Section bar","The bar under the tabs that jumps to a section (long tabs only)"],["simple","Simple mode","Hide the advanced bonus fields. Any field that holds a value stays visible."]].map(function(o){
+                    var on=!!uiState[o[0]];
+                    return <div key={o[0]} role="checkbox" aria-checked={on} tabIndex={0} title={o[2]} onClick={function(){uiSet(o[0],!on);}} onKeyDown={function(e){if(e.key===" "||e.key==="Enter"){e.preventDefault();uiSet(o[0],!on);}}}
+                      style={{display:"flex",alignItems:"center",gap:8,padding:"5px 0",cursor:"pointer",borderBottom:"1px solid rgba(201,150,42,.07)"}}>
+                      <div style={{width:13,height:13,borderRadius:2,border:"1px solid "+(on?"var(--arcane)":"rgba(184,154,240,.25)"),background:on?"var(--arcane)":"rgba(0,0,0,.3)",flexShrink:0,transition:"all .15s"}} />
+                      <span style={{fontFamily:"'EB Garamond',serif",fontSize:13,color:on?"rgba(232,213,176,0.95)":"rgba(232,213,176,0.76)"}}>{o[1]}</span>
+                    </div>;
+                  })}
                   <div onClick={function(){setShowTabMgr(false);}} style={{marginTop:8,fontFamily:"'Cinzel',serif",fontSize:8,letterSpacing:1,color:"rgba(235,195,100,0.85)",textAlign:"center",cursor:"pointer",paddingTop:6,borderTop:"1px solid rgba(201,150,42,.1)"}}>close</div>
                 </div>
               )}
@@ -16865,6 +17370,7 @@ function App(){
             return <button key={i} className={pg===i?"nb act":"nb"} onClick={()=>setPg(i)}>{lm?<React.Fragment><span className="nb-num">{lm[1]}</span>{lm[2]}</React.Fragment>:p.label}</button>;
           })}
         </nav>
+        <SectionChips pg={pg} />
         <div className="sheet">
           <div className="si">
             {pg===0&&<Page1 c={c} s={s} />}
@@ -16886,7 +17392,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(235,195,100,0.84);user-select:none">D&D 5e Character Record · v3.35.1</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(235,195,100,0.84);user-select:none">D&D 5e Character Record · v4.0.0</div>
 
 </script>
 </body>
