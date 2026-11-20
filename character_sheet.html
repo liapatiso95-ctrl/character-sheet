@@ -81,6 +81,8 @@ html.light-theme,html.light-theme input,html.light-theme select,html.light-theme
 </div>
 <div id="root"></div>
 <script>
+// Viewport width without the scrollbar, so the PC tab bar can sit outside the 960px column and still fit the screen
+(function(){function v(){document.documentElement.style.setProperty('--vw',document.documentElement.clientWidth+'px');}v();window.addEventListener('resize',v);window.addEventListener('load',v);setTimeout(v,500);})();
 // Keep the page below the fixed top bar even when the bar wraps onto several rows (phones)
 (function(){var b=document.getElementById('save-bar'),r=document.getElementById('root');
 function f(){r.style.paddingTop=Math.max(50,b.offsetHeight+4)+'px';document.documentElement.style.setProperty('--sbh',b.offsetHeight+'px');}
@@ -1843,7 +1845,7 @@ const CSS = `
   .nav[data-fr]{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent)}
   .nav[data-fl]{-webkit-mask-image:linear-gradient(90deg,transparent,#000 36px);mask-image:linear-gradient(90deg,transparent,#000 36px)}
   .nav[data-fl][data-fr]{-webkit-mask-image:linear-gradient(90deg,transparent,#000 36px,#000 calc(100% - 36px),transparent);mask-image:linear-gradient(90deg,transparent,#000 36px,#000 calc(100% - 36px),transparent)}
-  @media(min-width:521px){.nav{padding:3px 8px}}
+  @media(min-width:521px){.nav{padding:3px 8px;width:var(--vw,100vw);max-width:none;margin:0 0 12px calc(50% - var(--vw,100vw)/2);box-sizing:border-box}}
   .nb{font-family:'Cinzel',serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:10px 16px;background:rgba(20,14,8,.8);border:1px solid rgba(201,150,42,.25);color:#a08c5a;cursor:pointer;transition:all .25s;clip-path:polygon(8px 0%,calc(100% - 8px) 0%,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0% calc(100% - 8px),0% 8px)}
   .nb:hover{border-color:rgba(201,150,42,.6);color:var(--gold-l);background:rgba(123,79,207,.1)}
   .nb.act{background:linear-gradient(135deg,rgba(123,79,207,.3),rgba(201,150,42,.15));border-color:var(--gold);color:var(--gold-l)}
@@ -17392,7 +17394,7 @@ function App(){
 
 const _root=ReactDOM.createRoot(document.getElementById("root"));_root.render(React.createElement(App));
 </script>
-<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(235,195,100,0.84);user-select:none">D&D 5e Character Record · v4.0.0</div>
+<div style="text-align:center;padding:18px 0 10px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(235,195,100,0.84);user-select:none">D&D 5e Character Record · v4.1.0</div>
 
 </script>
 </body>
