@@ -702,7 +702,7 @@ You can use your Breath Weapon a number of times equal to your proficiency bonus
 
 **Draconic Resistance. *(3 points)*** You have resistance to the damage type associated with your Chromatic Ancestry.
 
-**Chromatic Manifestation.** *(5 points)* When you reach character level 5, the dragon blood in your veins awakens, and your ancestry takes physical form. As a Bonus Action, you can tap into your draconic ancestry, using one of the features below. Once you use a feature, you cannot use either of those features until you finish a Long Rest.
+**Chromatic Manifestation. *(5 points)*** When you reach character level 5, the dragon blood in your veins awakens, and your ancestry takes physical form. As a Bonus Action, you can tap into your draconic ancestry, using one of the features below. Once you use a feature, you cannot use either of those features until you finish a Long Rest.
 
 - ***Chromatic Warding.*** You call on your ancestry, and your scales shimmer with the hue of your draconic lineage as your body hardens against its element. For 1 minute, you become immune to the damage type associated with your Chromatic Ancestry.
 - ***Draconic Flight.*** You let your ancestry unfurl, and a pair of spectral wings made of the same energy as your Breath Weapon sprouts from your back. They last for 10 minutes or until you retract them (no action required) or have the Incapacitated condition. While they last, you have a Fly Speed equal to your Speed.
@@ -739,7 +739,7 @@ You can use your Breath Weapon a number of times equal to your proficiency bonus
 \column
 
 
-***Forceful Presence. (5 points)*** Your commanding presence bends the room to your will, whether you are charming, cajoling, or looming over those who would defy you. When you make a Charisma check or a Charisma saving throw, you can choose to use this trait after you roll the d20 but before you know whether the roll succeeds or fails. When you do, you reroll the die and must use the new roll.
+**Forceful Presence. *(5 points)*** Your commanding presence bends the room to your will, whether you are charming, cajoling, or looming over those who would defy you. When you make a Charisma check or a Charisma saving throw, you can choose to use this trait after you roll the d20 but before you know whether the roll succeeds or fails. When you do, you reroll the die and must use the new roll.
 
 You can use Forceful Presence a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.
 
@@ -805,7 +805,7 @@ You can use your Breath Weapon a number of times equal to your proficiency bonus
 
 **Darkvision. *(3 points)*** You can see in dim light within 60 feet of you as if it were bright light and in darkness as if it were dim light. You discern colors in that darkness as shades of gray.
 
-**Metallic Manifestation.** *(5 points)* When you reach character level 5, the dragon blood in your veins awakens, and your ancestry takes physical form. As a Bonus Action, you can tap into your draconic ancestry, using one of the features below. Once you use a feature, you cannot use either of those features until you finish a Long Rest.
+**Metallic Manifestation. *(5 points)*** When you reach character level 5, the dragon blood in your veins awakens, and your ancestry takes physical form. As a Bonus Action, you can tap into your draconic ancestry, using one of the features below. Once you use a feature, you cannot use either of those features until you finish a Long Rest.
 
 - ***Metallic Breath Weapon.*** You gain a second breath weapon, a gift of your metallic ancestry. You exhale in a 15-foot cone. The save DC for this breath is 8 + your Constitution modifier + your Proficiency Bonus. Whenever you use this trait, choose one of the following breaths:
   - ***Enervating Breath.*** A sapping exhalation washes over your foes. Each creature in the cone must succeed on a Constitution saving throw or have the Incapacitated condition until the start of your next turn.
